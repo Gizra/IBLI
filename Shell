@@ -1,0 +1,245 @@
+
+FUNCTION URL_CALLBACK, status, progress, data
+
+ 
+
+   ; print the info msgs from the url object
+
+   PRINT, status
+
+ 
+
+   ; return 1 to continue, return 0 to cancel
+
+   RETURN, 1
+
+END
+
+
+function eModisShell , settingsFilePath
+
+;; This code runs automatticaly the entire eModis process with the following steps :
+
+;; 1 - check for new data from USGS
+;; 2 - if exists download and extract it.
+;; 3 - create bil file with full temporal data 
+;; 4 - calculate per pixel temporal : mean , std , zNDVI and diagnostics.
+;; 5 - aggregate per administrative regions the zNDVI scores.
+;; 6 - cumulate per administrative region per seasone the aggregated zScores.
+
+
+
+;; Input :
+;;  settingFilePath : a path to a txt file which includes all the nesseceray setting to this code . an example  :
+;; - - - - - - - Example for a settingFile - - - - - - ;;
+;;  WorkingFolder = "c:\IBLI\"
+;;  SUBSET=[ 5300  ,  7200   , 3400   , 4300]
+;; - - - - - - - End of Example - - - - - - - - - -- - ;;
+
+
+;; Output :
+;; The outputs are updated CSV files.
+
+
+;; - - - - Step 0 : Read Input File - - - - 
+
+IF FILE_TEST(settingsFilePath) EQ 0 THEN BEGIN
+    print , 'Could not find the settings File in the path specified . . . '
+    return, 0
+ENDIF
+
+OPENR, lun, settingsFilePath, /GET_LUN
+line = ''
+WHILE NOT EOF(lun) DO BEGIN & $
+  READF, lun, line & $
+  suc = EXECUTE(line)
+  IF suc NE 1 THEN BEGIN
+    print, 'Check your settings file to be in the format requested . . .'
+    return, 0
+  ENDIF 
+ENDWHILE
+; Close the file and free the file unit
+FREE_LUN, lun
+
+IF KEYWORD_SET(WorkingFolder) NE 1 THEN BEGIN
+    print, 'Check your settings file to be in the format requested . . . (Seems like the WorkingFolder was not defined)'
+    return, 0
+ENDIF
+
+
+
+IF KEYWORD_SET(SUBSET) NE 1 THEN BEGIN
+    print, 'Check your settings file to be in the format requested . . . (Seems like the SUBSET was not defined)'
+    return, 0
+ENDIF
+
+If FILE_TEST(WorkingFolder) NE 1 THEN BEGIN 
+print, 'Creating Folder : '+WorkingFolder + '. . .' 
+FILE_MKDIR , WorkingFolder
+ENDIF 
+
+
+rawDataPath = WorkingFolder + 'RAW'
+If FILE_TEST(rawDataPath) NE 1 THEN BEGIN 
+print, 'Creating Folder : '+rawDataPath + '. . .' 
+FILE_MKDIR , rawDataPath
+ENDIF 
+procDataPath = WorkingFolder + 'PRCOESSED'
+If FILE_TEST(procDataPath) NE 1 THEN BEGIN 
+print, 'Creating Folder : '+procDataPath + '. . .' 
+FILE_MKDIR , procDataPath
+ENDIF 
+csvDataPath = WorkingFolder + 'CSV'
+If FILE_TEST(csvDataPath) NE 1 THEN BEGIN 
+print, 'Creating Folder : '+csvDataPath + '. . .' 
+FILE_MKDIR , csvDataPath
+ENDIF 
+
+
+
+;; - - - - Step 0 : Check repository for fullness and new data from USGS - - - - - ;;
+
+CALDAT,SYSTIME(/JULIAN),Month,Day,Year ; Get the current date.
+Year=Year-2000
+Print , ' - - - - Checking For Repository Fullnes - - - - ' ;
+
+;; Step 0.1 : Go from beginning till date and make sure repository is complete - - ;;
+ FOR Y=1,Year DO BEGIN 
+ maxM=12
+ ;IF Y LT 10 THEN ySTR = STRCOMPRESS('0'+STRING(Y),/REMOVE_ALL) ELSE  ySTR=STRCOMPRESS(STRING(Y),/REMOVE_ALL)
+ ySTR = STRMID('0'+STRCOMPRESS(STRING(Y), /REMOVE_ALL), 1,2, /REVERSE_OFFSET) 
+ IF (Y EQ Year) THEN maxM=Month-2
+  FOR M=1,maxM DO BEGIN
+  mSTR = STRMID('0'+STRCOMPRESS(STRING(M), /REMOVE_ALL), 1,2, /REVERSE_OFFSET)  
+  ;IF M LT 10 THEN mSTR = STRCOMPRESS('0'+STRING(M),/REMOVE_ALL) ELSE mSTR = STRCOMPRESS(STRING(M))   
+    TokFile = 1 ; TokFile - binary to indicate fullness of all files in this month
+   FOR S = 6*M-4,6*M,2 DO BEGIN
+      sSTR = STRMID('0'+STRCOMPRESS(STRING(S), /REMOVE_ALL), 1,2, /REVERSE_OFFSET)
+      okFile = FILE_TEST(rawDataPath+'/'+'20'+ySTR+sSTR+'.img')
+      IF NOT(okFile) THEN TokFile = 0 
+  ENDFOR
+  
+  IF (TokFile NE 1) THEN BEGIN ; If you see that one of the files in a month is missing download and extract the entire month bulk zip 
+
+    ; - - - Download Zip File 
+  oUrl = OBJ_NEW('IDLnetUrl')
+  oUrl->SetProperty, CALLBACK_FUNCTION ='Url_Callback'
+  oUrl->SetProperty, VERBOSE = 1
+  oUrl->SetProperty, TIMEOUT = 3600
+  oUrl->SetProperty, url_scheme = 'http'
+  oUrl->SetProperty, URL_HOST = 'earlywarning.usgs.gov'
+  oUrl->SetProperty, URL_PATH = '/ftp2/eMODIS/east/east'+ySTR+mSTR+'.zip'
+    
+  fn = oUrl->Get(FILENAME =rawDataPath+'/east'+ySTR+mSTR+'.zip' )
+  
+   OBJ_DESTROY, oUrl 
+;http://earlywarning.usgs.gov//ftp2/eMODIS/east/east0101.zip
+;http://earlywarning.usgs.gov//ftp2/eMODIS/east/east1402.zip
+;http://earlywarning.usgs.gov//ftp2/eMODIS/east/east1402.zip
+  spawn, 'unzip '+[rawDataPath+'/east'+ySTR+mSTR+'.zip']+' -d '+rawDataPath , /HIDE
+  spawn, 'rm '+rawDataPath+'/*.zip', /HIDE
+  FOR S = 6*M-4,6*M,2 DO BEGIN
+        sSTR = STRMID('0'+STRCOMPRESS(STRING(S), /REMOVE_ALL), 1,2, /REVERSE_OFFSET)
+        IF FILE_TEST(rawDataPath+'/ea'+STRCOMPRESS(STRING(S),/REMOVE_ALL)+ySTR+'.tif') THEN BEGIN
+        NDVIimage = read_tiff(rawDataPath+'/ea'+STRCOMPRESS(STRING(S),/REMOVE_ALL)+ySTR+'.tif',SUB_RECT=SUBSET)
+        OPENW, W1, rawDataPath+'/'+'20'+ySTR+sSTR+'.img', /GET_LUN
+        WRITEU, W1, NDVIimage
+        FREE_LUN, W1
+       
+       CREATE_HEADER , rawDataPath+'/'+'20'+ySTR+sSTR+'.img',SUBSET(2),SUBSET(3),1,'{NDVI}'
+       ENDIF
+  ENDFOR
+  
+  spawn, 'rm '+rawDataPath+'/*.tif', /HIDE
+  spawn, 'rm '+rawDataPath+'/*.tfw', /HIDE
+  
+
+  ENDIF
+  
+  
+ ENDFOR
+ 
+ENDFOR
+Print , ' - - - - The Repository is up to date - - - - ' ;
+
+Print , ' - - - - Updating Last Month New NDVI data - -' ;
+
+;; Step 0.2 :  Update month back from now
+
+curWIY = 6*Month-4+2*((Day-3)/10-1); // WIY = Week In Year
+FOR k=0,-1  DO BEGIN ; ; ; - - - - REMEMBER TO TAKE BACK TO 9 - - - - ; ; ; 
+ toUpdateMonth = curWIY-2*k
+ IF toUpdateMonth LE 0 THEN BEGIN
+    toUpdateMonth= toUpdateMonth+72
+    toUpdateYear = Year - 1
+ ENDIF ELSE BEGIN
+    toUpdateYear = Year
+ ENDELSE
+  
+  
+ ySTR = STRCOMPRESS(string(toUpdateYear),/REMOVE_ALL)
+ mSTR = STRCOMPRESS(string(toUpdateMonth),/REMOVE_ALL)
+  oUrl = OBJ_NEW('IDLnetUrl')
+  oUrl->SetProperty, CALLBACK_FUNCTION ='Url_Callback'
+  oUrl->SetProperty, VERBOSE = 1
+  oUrl->SetProperty, TIMEOUT = 3600
+  oUrl->SetProperty, url_scheme = 'http'
+  oUrl->SetProperty, URL_HOST = 'earlywarning.usgs.gov'
+  oUrl->SetProperty, URL_PATH = '/ftp2/africa/emodis/ea'+mSTR+ySTR+'.zip'
+  fn = oUrl->Get(FILENAME =rawDataPath+'/east'+ySTR+mSTR+'.zip' )
+  spawn, 'unzip '+[rawDataPath+'/east'+ySTR+mSTR+'.zip']+' -d '+rawDataPath , /HIDE
+  spawn, 'rm '+rawDataPath+'/*.zip', /HIDE
+  
+  IF FILE_TEST(rawDataPath+'/ea'+mSTR+ySTR+'m.tif') THEN BEGIN
+        
+        NDVIimage = read_tiff(rawDataPath+'/ea'+mSTR+ySTR+'m.tif',SUB_RECT=SUBSET)
+        OPENW, W1, rawDataPath+'/'+'20'+ySTR+STRMID('0'+mSTR, 1,2, /REVERSE_OFFSET)+'.img', /GET_LUN
+        WRITEU, W1, NDVIimage
+        FREE_LUN, W1
+       
+       CREATE_HEADER ,rawDataPath+'/'+'20'+ySTR+STRMID('0'+mSTR, 1,2, /REVERSE_OFFSET)+'.img',SUBSET(2),SUBSET(3),1,'{NDVI}'
+   ENDIF
+       
+  spawn, 'rm '+rawDataPath+'/*.tif', /HIDE
+  spawn, 'rm '+rawDataPath+'/*.tfw', /HIDE
+  
+ENDFOR
+
+
+Print , ' - - - - new NDVI data is is up to date - - - ' ; 
+ 
+ 
+ 
+ Print, ' - - - - Stacking Temporal NDVI Images - - - - ' ;
+ 
+ fileList = FILE_SEARCH(rawDataPath+'/*.img')
+ bandList=STRMID(FILE_BASENAME(fileList),0,6) 
+ OPENW , 1 ,procDataPath+'\eMODIS_FEWS_Kenya.bil'
+ 
+for i=1,N_ELEMENTS(fileList) do begin
+  OPENR, 2, fileList[i-1]
+  P = BYTARR(3400,4300)
+  READU, 2 , P
+  WRITEU , 1 , P
+  FREE_LUN,2
+  
+  print, string((float(i)/N_ELEMENTS(fileList))*100)+' %  Temporal Stacking Completed . . .'
+endfor
+
+FREE_LUN,1
+
+CREATE_HEADER, procDataPath+'\eMODIS_FEWS_Kenya.bil',SUBSET(2),SUBSET(3),N_ELEMENTS(fileList),'{'+STRJOIN(bandList,', ')+'}'      ; Procedure to generate generic header for each output
+
+print, ' - - - Finished Stacking Temporal Layers - - - ';
+
+   IF (calcNewSTDMEAN EQ 1) THEN BEGIN
+
+        print, ' - - - ReCalculating Temporal Mean,STD,zNDVI and Diagnostics per pixel - - - ';
+        print, ZNORMBIL_8BIT (procDataPath+'\eMODIS_FEWS_Kenya.bil', SUBSET(2), SUBSET(3), N_ELEMENTS(fileList), 10, 1, 1, 396, 0, 100, 200, 5, 102)
+
+   ENDIF
+
+END
+ 
+ 
+

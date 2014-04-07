@@ -215,27 +215,29 @@ Print , ' - - - - new NDVI data is is up to date - - - ' ;
  fileList = FILE_SEARCH(rawDataPath+'/*.img')
  bandList=STRMID(FILE_BASENAME(fileList),0,6) 
  OPENW , 1 ,procDataPath+'\eMODIS_FEWS_Kenya.bil'
- 
+ OPENW , 3 ,procDataPath+'\eMODIS_FEWS_Kenya_2.bil'
 for i=1,N_ELEMENTS(fileList) do begin
   OPENR, 2, fileList[i-1]
-  P = BYTARR(3400,4300)
+  P = BYTARR(SUBSET(2),SUBSET(3))
   READU, 2 , P
   WRITEU , 1 , P
+  WRITEU , 3 , TRANSPOSE(P)
   FREE_LUN,2
   
   print, string((float(i)/N_ELEMENTS(fileList))*100)+' %  Temporal Stacking Completed . . .'
 endfor
 
 FREE_LUN,1
-
+FREE_LUN,3
 CREATE_HEADER, procDataPath+'\eMODIS_FEWS_Kenya.bil',SUBSET(2),SUBSET(3),N_ELEMENTS(fileList),'{'+STRJOIN(bandList,', ')+'}'      ; Procedure to generate generic header for each output
+CREATE_HEADER, procDataPath+'\eMODIS_FEWS_Kenya_2.bil',SUBSET(3),SUBSET(2),N_ELEMENTS(fileList),'{'+STRJOIN(bandList,', ')+'}'      ; Procedure to generate generic header for each output
 
 print, ' - - - Finished Stacking Temporal Layers - - - ';
 
    IF (calcNewSTDMEAN EQ 1) THEN BEGIN
 
         print, ' - - - ReCalculating Temporal Mean,STD,zNDVI and Diagnostics per pixel - - - ';
-        print, ZNORMBIL_8BIT (procDataPath+'\eMODIS_FEWS_Kenya.bil', SUBSET(2), SUBSET(3), N_ELEMENTS(fileList), 10, 1, 1, 396, 0, 100, 200, 5, 102)
+        print, ZNORMBIL_8BIT (procDataPath+'\eMODIS_FEWS_Kenya_2.bil', SUBSET(3), SUBSET(2), N_ELEMENTS(fileList), 10, 1, 1, 396, 0, 100, 200, 5, 102)
 
    ENDIF
 

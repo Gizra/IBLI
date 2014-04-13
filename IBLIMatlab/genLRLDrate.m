@@ -1,17 +1,31 @@
 %% Code to estimate LRLD IBLI Rates
-%% Import NDVI Files
-filepathMain='C:\Users\JoshAsus2\Dropbox\IBLIMatlab\';
-load(strcat(filepathMain,'LRLDbasedata'))
-%Add path to include needed files
-addpath(genpath(strcat(filepathMain,'MatlabFunctionFiles\')));
 
-%% format data
+filepathMain=pwd;% or whatever path the datafiles are in, for example'C:\Users\JoshAsus2\Dropbox\IBLIMatlab';
+LastLRLDyear=2012;% set last season in historical data for season
+LastSRSDyear=2012;% set last season in historical data for season
+sensor='eMODIS'; %set the sensor to use from Anton data
+season='l'; %set season to estimate, 'l' for long, 's' for short
+%Add path to include needed support files
+addpath(genpath(strcat(filepathMain,'\MatlabFunctionFiles\')));
+%specify folder with Anton data, which is hopefully in the main folder path
+datafolderpath='\z-scoring_first_CalibratedSeries\';
+%% Import base NDVI Files for estimation
+if season=='l'
+    load(strcat(filepathMain,'\LRLDbasedata'));
+    
+else
+    load(strcat(filepathMain,'\SRSDbasedata'));
+end
+
+%import ndvi data for model fitting
+[ ndvipost, ndvipre, NDVIname ] = importfileNDVIbase(filepathMain,season,datafolderpath);
+ndvipost=ndvipost.(sensor);
+ndvipre=ndvipre.(sensor);
+
+
+%% format data for estimation.
 W=sparse(queenraw(:,1),queenraw(:,2),queenraw(:,3)); %build weight matrix
 [N,T]=size(MortwMissing);
-xcoordMat=repmat(xyKenya(:,1),1,T);
-ycoordMat=repmat(xyKenya(:,2),1,T);
-xy1=xcoordMat(:);
-xy2=ycoordMat(:);
 MortMissStack=MortwMissing(:);
 iN=eye(N,N); %identity matrix for yields
 trendVec=[1:T]';
@@ -39,14 +53,12 @@ panelinfo.lflag=1; %default
 panelinfo.order =50; %default
 panelinfo.iter =30; %default
 
-%% Construct X's
+% Construct X's for estimaation
 %stack
 preNDVI=ndvipre(:);
 postNDVI=ndvipost(:);
-preNDVImax=ndvipremax(:);
-postNDVImax=ndvipostmax(:);
-%Note for prelim rates, we used district level fixed intercept and variable effects
 
+%Note for prelim rates, we used district level fixed intercept and variable effects
 NDVIvars_D=[matmul(preNDVI,xint_D),matmul(preNDVI.^2,xint_D),matmul(postNDVI,xint_D),...
     matmul(postNDVI.^2,xint_D)];
 
@@ -82,108 +94,74 @@ for i=1:iIter %iterate to find fitted model with missing
             
 end
 
-yNDVIimpact=reshape(((iNT-resC(i).rho*Wt)^-1)*(xC(:,vSpots)*resC(i).beta(vSpots)),N,T);
-yNDVIpreimpact=reshape(((iNT-resC(i).rho*Wt)^-1)*(xC(:,vSpotspre)*resC(i).beta(vSpotspre)),N,T);
-
-yFit=reshape(resC(i).yhat,N,T);
-
-
-%% Run AR models for NDVI
-%Note models investigated indicate autocorrelation between years within a
-%season (but not across seasons)
-%% Run regs
-nAR=size(ndvipostAR,2);
-xintAR=repmat(buildIntercept(DistID,[DistNum,[1:nDists]']),nAR,1);
-
-xAR=[ndvipreAR(:)];
-
-resAR=ols(ndvipostAR(:),[xAR]);
-
-%currentlagndvi is prev yr season obs 
-if firstcontractseason==1
-    
-    rateprendvi=repmat(currentprendvi,nAR,1); %currentprendvi is 2013 LRLD forecast for first contract offer
-    ratendvi=rateprendvi*resAR.beta+resAR.resid;
-
+%% Run rating procedure using all in sample data, unconditional 
+indshiftLRLD=(LastLRLDyear-2002)*2;
+indshiftSRSD=(LastSRSDyear-2001)*2;
+if strcmp(season,'l')
+    %For LRLD we use:
+    indexIN=[42:2:42+indshiftLRLD]; 
 else
-    rateprendvi=ndvipreAR(:);
-    ratendvi=ndvipostAR(:);
+    %For SRSD we use:
+    indexIN=[41:2:41+indshiftSRSD];    
 end
-%Calc conditioned current season ndvi
 
-%build xmatrix for rating
-NDVIvars_Drate=[matmul(rateprendvi,xintAR),matmul(rateprendvi.^2,xintAR),...
-    matmul(ratendvi,xintAR),matmul(ratendvi.^2,xintAR)];
-xCrate=[xintAR,NDVIvars_Drate];
+[ndvipostIN, ndvipreIN,NDVInameIN]=importfileNDVIchoosebase(filepathMain,indexIN, datafolderpath);
+ndvipostIN=ndvipostIN.(sensor);
+ndvipreIN=ndvipreIN.(sensor);
+nIN=size(ndvipostIN,2);
+xintIN=repmat(buildIntercept(DistID,[DistNum,[1:nDists]']),nIN,1);
+rateprendviIN=ndvipreIN(:);
+ratendviIN=ndvipostIN(:);
+NDVIvars_rateIN=[matmul(rateprendviIN,xintIN),matmul(rateprendviIN.^2,xintIN),...
+    matmul(ratendviIN,xintIN),matmul(ratendviIN.^2,xintIN)];
+xCrateIN=[xintIN,NDVIvars_rateIN];
 
 %Estimate final fitted y (mortality)
-yrate=reshape(kron(eye(nAR,nAR),(eye(nDivs,nDivs)-resC(iIter).rho*W)^-1)*(xCrate*resC(iIter).beta),N,nAR);
-trigger=.15;
-premrateorig=mean(max(yrate-trigger,0),2);
-ratetarget=0.03;
-wnot=ones(nDivs,1).*.1;
-opt=optimset('fminunc'); %set ops
-opt.TolFun=.000000001;
-opt.TolX=.000000001;
+yratein=reshape(kron(eye(nIN,nIN),(eye(nDivs,nDivs)-resC(iIter).rho*W)^-1)*(xCrateIN*resC(iIter).beta),N,nIN);
 
-LB=0;
-for i=1:nDivs
-    frate=@(x_)(((mean( max(yrate(i,:)+ones(1,nAR).*x_-trigger,0) ,2)-ratetarget)*100).^2);
-    [wstar(i,1),fval]=fmincon(frate,0.1,[],[],[],[],LB,[],[],opt);
-end
-
-wstar=max(wstar,0);
-
-
-wstar(premrateorig<ratetarget&wstar<.01)=max(wstar(premrateorig<ratetarget&wstar<.01),mean(wstar(premrateorig<ratetarget)));
-wstar=W*wstar.*.3+wstar.*.7;
-wstar(premrateorig>ratetarget)=0;
-adj=repmat(wstar,nAR,1);
-yratein=reshape(kron(eye(nAR,nAR),(eye(nDivs,nDivs)-resC(iIter).rho*W)^-1)*(xCrate*resC(iIter).beta)+adj,N,nAR);
-
+%Estimate post 2001 rate
 rate10insample=mean( max(yratein-.1,0) ,2);
 rate15insample=mean( max(yratein-.15,0) ,2);
-yFit=yratein;
+
 
 %% now do backfill rate using the wstar adjustment and bootstrap
-nAR=size(ndvipostAR,2);
-xintAR=repmat(buildIntercept(DistID,[DistNum,[1:nDists]']),nAR,1);
-xAR=[ndvipreAR(:)];
-resAR=ols(ndvipostAR(:),[xAR]);
-nAR=size(ndvipostAR,2);
-xintAR=repmat(buildIntercept(DistID,[DistNum,[1:nDists]']),nAR,1);
-%bootresid is the residuals provided by anton
-adj=repmat(wstar,nAR,1);
+
+if strcmp(season,'l')
+    %For LRLD we use:
+    indexOUT=2:2:40;
+else
+    %For SRSD we use:
+     indexOUT=3:2:39; 
+end
+
+[ndvipostOUT, ndvipreOUT,NDVInameOUT]=importfileNDVIchoosebase(filepathMain,indexOUT, datafolderpath);
+ndvipostOUT=ndvipostOUT.(sensor);
+ndvipreOUT=ndvipreOUT.(sensor);
+nOUT=size(ndvipostOUT,2);
+xintOUT=repmat(buildIntercept(DistID,[DistNum,[1:nDists]']),nOUT,1);
+
+%bootresid is the residuals provided by anton, already in base data file
+rng('default');
 for i=1:500
-    for j=1:nAR
+    for j=1:nOUT
         bootind=randi(size(bootresid,2),1,1);
         bootsamp(:,j)=bootresid(:,bootind);
         bootsamppre(:,j)=bootresidpre(:,bootind);
     end
-    if firstcontractseason==1
-    
-        rateprendvi=repmat(currentprendvi,nAR,1);
-        ratendvi=rateprendvi*resAR.beta+resAR.resid+bootsamp(:);
-    else
-      ratendvi= ndvipostAR(:)+bootsamp(:);
-      rateprendvi= ndvipreAR(:)+ bootsamppre(:);
-    end
-
-   %build xmatrix for rating plus bootstrap error
-    NDVIvars_Drate=[matmul(rateprendvi,xintAR),matmul(rateprendvi.^2,xintAR),...
-    matmul(ratendvi,xintAR),matmul(ratendvi.^2,xintAR)];
-    xCrate=[xintAR,NDVIvars_Drate];
-
-    yrateout=reshape(kron(eye(nAR,nAR),(eye(nDivs,nDivs)-resC(iIter).rho*W)^-1)*(xCrate*resC(iIter).beta)+adj,N,nAR);
-
+    ratendviOUT= ndvipostOUT(:)+bootsamp(:);
+    rateprendviOUT= ndvipreOUT(:)+ bootsamppre(:);
+    %build xmatrix for rating plus bootstrap error
+    NDVIvars_rateOUT=[matmul(rateprendviOUT,xintOUT),matmul(rateprendviOUT.^2,xintOUT),...
+    matmul(ratendviOUT,xintOUT),matmul(ratendviOUT.^2,xintOUT)];
+    xCrateOUT=[xintOUT,NDVIvars_rateOUT];
+    yrateout=reshape(kron(eye(nOUT,nOUT),(eye(nDivs,nDivs)-resC(iIter).rho*W)^-1)*(xCrateOUT*resC(iIter).beta),N,nOUT);
     rate10outsample(:,i)=mean( max(yrateout-.1,0) ,2);
     rate15outsample(:,i)=mean( max(yrateout-.15,0) ,2);
-    
 end
 
 rate10outsample=mean(rate10outsample,2);
 rate15outsample=mean(rate15outsample,2);
-credfact=.685;
+credfact=1-(1-nIN/(nIN+nOUT))/2;
 rateFinal15=rate15outsample.*(1-credfact)+rate15insample.*credfact;
 rateFinal10=rate10outsample.*(1-credfact)+rate10insample.*credfact;
 
@@ -191,3 +169,20 @@ rateFinal10=rate10outsample.*(1-credfact)+rate10insample.*credfact;
 %writes rates to 108x1 matrix in a csv file for all 108 divisions
 csvwrite(strcat(filepathMain,'\LRLDratefinal15.csv'),rateFinal15); 
 csvwrite(strcat(filepathMain,'\LRLDratefinal10.csv'),rateFinal10); 
+
+%% Calculate final index value and indemnity (% payment)  
+ImportFinalNDVI_LRLD %imports final NDVI preFINAL and postFINAL
+xintFINAL=buildIntercept(DistID,[DistNum,[1:nDists]']);
+ NDVIvars_FINAL=[matmul(preFINAL,xintFINAL),matmul(preFINAL.^2,xintFINAL),...
+    matmul(postFINAL,xintFINAL),matmul(postFINAL.^2,xintFINAL)];
+xFINAL=[xintFINAL  NDVIvars_FINAL];
+
+FinalIndexVal_LRLD=max(0,(eye(nDivs,nDivs)-resC(iIter).rho*W)^-1*(xFINAL*resC(iIter).beta));
+IndemFinal15=max(FinalIndexVal_LRLD-.15,0);
+IndemFinal10=max(FinalIndexVal_LRLD-.10,0);
+
+csvwrite(strcat(filepathMain,'\LRLDfinalIndex.csv'),FinalIndexVal_LRLD);
+csvwrite(strcat(filepathMain,'\LRLDfinalIndem15.csv'),IndemFinal15);
+csvwrite(strcat(filepathMain,'\LRLDfinalIndem10.csv'),IndemFinal10);
+
+clear

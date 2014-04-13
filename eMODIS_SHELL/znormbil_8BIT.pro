@@ -82,7 +82,13 @@ t0 = SYSTIME(1)
 ; Input 
 IF FILE_TEST(fname) EQ 0 THEN RETURN, 1
 OPENR, lun_in, fname, /GET_LUN
+
 line_in = ASSOC(lun_in, BYTARR(ns,nb))
+
+
+
+
+
 
 ; Output
 fname=STRMID(fname,0,STRLEN(fname)-4)
@@ -186,10 +192,17 @@ FOR l=0, nl-1, 1L DO BEGIN
     indFin = WHERE(line_dia NE 200, countFin)
     IF countFin GT 0 THEN BEGIN 
       tmp = line_data[indFin, *]
-      ;line_avg[indFin,p-1] = MEAN(tmp[*, ind], DIMENSION=2, /DOUBLE, /NAN)
-      line_avg[indFin,p-1] = MEAN(tmp[*, ind],  /DOUBLE, /NAN)
-      ;line_sd[indFin,p-1] = STDDEV(tmp[*, ind], DIMENSION=2, /DOUBLE, /NAN)
-      line_sd[indFin,p-1] = STDDEV(tmp[*, ind],  /DOUBLE, /NAN)
+      IF N_ELEMENTS(ind) GT 1 THEN BEGIN
+      line_avg[indFin,p-1] = MEAN(tmp[*, ind], DIMENSION=2, /DOUBLE, /NAN)
+      line_sd[indFin,p-1] = STDDEV(tmp[*, ind], DIMENSION=2, /DOUBLE, /NAN)
+      
+      ENDIF ELSE BEGIN
+      
+      line_avg[indFin,p-1] =tmp[*, ind]
+      line_sd[indFin,p-1] = tmp[*, ind]
+      
+      ENDELSE
+      ;line_sd[indFin,p-1] = STDDEV(tmp[*, ind],  /DOUBLE, /NAN)
     ENDIF
   ENDFOR
   WRITEU, lun_avg, line_avg

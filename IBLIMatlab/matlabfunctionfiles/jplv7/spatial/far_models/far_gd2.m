@@ -1,6 +1,6 @@
 % PURPOSE: An example of using far_g() on a large dataset
 %          1st order spatial autoregressive model
-%                              
+%
 %---------------------------------------------------
 % USAGE: far_gd2
 %---------------------------------------------------
@@ -11,7 +11,7 @@
 clear all;
 load elect.dat;             % load data on votes
 y = log(elect(:,7)./elect(:,8)); % proportion of voters casting votes
-ydev = y - mean(y);         % deviations from the means form 
+ydev = y - mean(y);         % deviations from the means form
 latt = elect(:,5);
 long = elect(:,6);
 clear y;     % conserve on RAM memory

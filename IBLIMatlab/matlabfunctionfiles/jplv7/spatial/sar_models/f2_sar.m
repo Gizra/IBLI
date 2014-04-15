@@ -9,7 +9,7 @@ function llike = f2_sar(parm,y,x,W,detval)
 %         X    = explanatory variables matrix (n x k)
 %         W    = spatial weight matrix
 %         ldet = matrix with [rho log determinant] values
-%                computed in sar.m using one of Kelley Pace's routines  
+%                computed in sar.m using one of Kelley Pace's routines
 % ---------------------------------------------------
 %  RETURNS: a  scalar equal to minus the log-likelihood
 %           function value at the ML parameters
@@ -26,7 +26,7 @@ function llike = f2_sar(parm,y,x,W,detval)
 % San Marcos, TX 78666
 % jlesage@spatial.econometrics.com
 
-n = length(y); 
+n = length(y);
 k = length(parm);
 b = parm(1:k-2,1);
 rho = parm(k-1,1);

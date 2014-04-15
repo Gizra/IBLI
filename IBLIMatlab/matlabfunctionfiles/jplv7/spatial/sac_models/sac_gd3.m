@@ -1,5 +1,5 @@
-% PURPOSE: An example of using sac() on a large data set  
-%          general spatial model                           
+% PURPOSE: An example of using sac() on a large data set
+%          general spatial model
 %---------------------------------------------------
 % USAGE: sac_d2 (see sac_d for a small data set)
 %---------------------------------------------------
@@ -18,7 +18,7 @@ k = 3;
 beta = [1
         -1
         1];
-    
+
 rho = 0.45;
 lam = -.4;
 

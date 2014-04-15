@@ -10,12 +10,12 @@ function [out] = tsdate(beg_yr,beg_mth,freq,nobs)
 %        freq       = 1 for annual, 4 for quarterly 12 for monthly
 %        obsn       = the observation #
 %        cal_struct = a structure returned by cal()
-%     
+%
 % e.g., tsdate(1974,1,12,13) would print: Jan75
 %       tsdate(1974,1,4,13)  would print: Q1-77
 %       tsdate(1974,1,1,13)  would print 1986
 %       out = tsdate(1974,1,12,13) would return a string `Jan75'
-%       
+%
 %       cstr = cal(1974,1,12)
 %       tsdate(cstr,13)      would print Jan75
 % ---------------------------------------------------
@@ -61,21 +61,21 @@ end; % end of switch on nargin
 
 switch freq;
 
-     case 1,      % case of annual series 
+     case 1,      % case of annual series
       if (beg_mth > 1); error('Wrong beg_per argument in tsdate');end;
 
-  ydigit = 'yyyy';  
+  ydigit = 'yyyy';
   d = datenum(beg_yr,12*nobs,1);
   if nargout == 0
    fprintf('%6s \n',datestr(d,ydigit));
   else
    out = datestr(d,ydigit);
   end;
-  
+
      case 4,      % case of quarterly series
-  if (beg_mth > 4); error('Wrong beg_per argument in tsdate');end;      
-      
-  ydigit = 'QQ-YY';  
+  if (beg_mth > 4); error('Wrong beg_per argument in tsdate');end;
+
+  ydigit = 'QQ-YY';
   d = datenum(beg_yr,beg_mth*3+3*nobs-3,1);
   if nargout ==0
    fprintf('%6s \n',datestr(d,ydigit));
@@ -84,16 +84,16 @@ switch freq;
   end;
 
      case 12,      % case of monthly series
-  if (beg_mth > 12); error('Wrong beg_per argument in tsdate');end;      
-            
-  ydigit = 'mmmyy';  
+  if (beg_mth > 12); error('Wrong beg_per argument in tsdate');end;
+
+  ydigit = 'mmmyy';
   d = datenum(beg_yr,beg_mth+nobs-1,1);
   if nargout == 0
    fprintf('%6s \n',datestr(d,ydigit));
   else
    out = datestr(d,ydigit);
   end;
-  
+
       otherwise % how did we get here?
       disp('frequency unknown to tsdate');
 end; % end of switch on freq

@@ -10,7 +10,7 @@ function results = felogit(y,x,ivec,tvec,beta0,c0,maxit,tol);
 % where: y = dependent variable vector (nobs x 1)
 %        x = matrix of covariates (nobs x nvar)
 %            Note: the model does NOT include a common
-%            intercept, instead it includes an effect for 
+%            intercept, instead it includes an effect for
 %            each i.
 %     ivec = (nobs x 1) vector which identifies the unit
 %            (i) associated with each row of y,x (i.e., the
@@ -27,8 +27,8 @@ function results = felogit(y,x,ivec,tvec,beta0,c0,maxit,tol);
 %----------------------------------------------------------------%
 % RETURNS: a structure
 %     results.meth = 'felogit'
-%     results.beta = MLE of beta vector                                      
-%     results.covb = covariance matrix of results.beta (negative 
+%     results.beta = MLE of beta vector
+%     results.covb = covariance matrix of results.beta (negative
 %                    inverse of appropriate block of Hessian, H11)
 %     results.stdb = standard errors of results.beta
 %   results.tstatb = t-stats for results.beta
@@ -41,18 +41,18 @@ function results = felogit(y,x,ivec,tvec,beta0,c0,maxit,tol);
 %     results.nvar = number of covariates
 %        results.y = y vector
 %        results.N = number of units (i)
-%        results.T = maximum number of observations on a single 
+%        results.T = maximum number of observations on a single
 %                    unit (i)
-%       results.n0 = number of units (i) dropped because y_it=0 
+%       results.n0 = number of units (i) dropped because y_it=0
 %                    for all t
-%       results.n1 = number of units (i) dropped because y_it=1 
+%       results.n1 = number of units (i) dropped because y_it=1
 %                    for all t
 %        results.d = sparse design matrix of estimated fixed effects
 %     results.rsqr = McFadden pseudo-R-squared
 %  results.lratio1 = LR test-statistic: no slopes, common intercept
-%  results.lratio2 = LR test-statistic: no heterogeneity (just 
+%  results.lratio2 = LR test-statistic: no heterogeneity (just
 %                    slopes and common intercept)
-%     results.covc = covariance matrix of the estimated fixed effects 
+%     results.covc = covariance matrix of the estimated fixed effects
 %                    (negative inverse of appropriate block of Hessian, H22)
 %     results.stdc = standard errors of estimated fixed effects
 %   results.tstatc = t-stats for estimated fixed effects
@@ -61,27 +61,27 @@ function results = felogit(y,x,ivec,tvec,beta0,c0,maxit,tol);
 %
 %----------------------------------------------------------------%
 % Notes:
-% 1. Data should be sorted by t within i. A future version of 
+% 1. Data should be sorted by t within i. A future version of
 % will check that the data are sorted and sort if required.
-% 2. felogit uses the functions ols() and logit() for computing 
+% 2. felogit uses the functions ols() and logit() for computing
 % starting values and testing, respectively. These functions are
-% part of the Econometrics Toolbox by James P. LeSage, and 
+% part of the Econometrics Toolbox by James P. LeSage, and
 % are available at www.spatial-econometrics.com
-% 3. felogit() uses an algorithm to compute the MLE of the fixed 
-% effects logit model which uses an analytic simplification of the 
-% Newton-Raphson update. Thanks to George Jakubson for showing me 
+% 3. felogit() uses an algorithm to compute the MLE of the fixed
+% effects logit model which uses an analytic simplification of the
+% Newton-Raphson update. Thanks to George Jakubson for showing me
 % this computational trick.
 % 4. Generally speaking, the felogit has been optimized for solving
-% 'moderately large' problems (i.e., nobs = 500,000 and N = 50,000 
-% or so). The multiple clear and pack statements can be removed to 
-% speed up operation in smaller jobs. 
+% 'moderately large' problems (i.e., nobs = 500,000 and N = 50,000
+% or so). The multiple clear and pack statements can be removed to
+% speed up operation in smaller jobs.
 % 5. Estimation can be sped up by commenting out code that computes
-% the covariance of the estimated fixed effects and t-stats for the 
+% the covariance of the estimated fixed effects and t-stats for the
 % estimated fixed effects.
 %----------------------------------------------------------------%
 % See also: prt_felogit, felogit_lik, ols, logit, mm_felogit
 %----------------------------------------------------------------%
-% References: A note on maximum likelihood fixed effects 
+% References: A note on maximum likelihood fixed effects
 %   estimation by George Jakubson, available from sdw9@cornell.edu
 %----------------------------------------------------------------%
 
@@ -109,16 +109,16 @@ for i = 2:nobs;
     it(i,1) = i; % this is original row position index, needed for reassembly in felogitmask
     if ivec(i,1) == ivec(i-1,1)
         ii(i,1) = ii(i-1,1);
-    else 
+    else
         ii(i,1) = ii(i-1,1) + 1;
     end;
 end;
 N = max(ii);
 
-if nargin == 4; maxit = 100; tol = 1e-8; 
-    res = ols(y,x); beta0 = res.beta; 
-    c0 = zeros(N,1); 
-end; 
+if nargin == 4; maxit = 100; tol = 1e-8;
+    res = ols(y,x); beta0 = res.beta;
+    c0 = zeros(N,1);
+end;
 if nargin == 5; maxit = 100; tol = 1e-8; c0 = zeros(N,1); end;
 
 if nargin > 5 % check if beta0 or c0 are empty
@@ -128,7 +128,7 @@ if nargin > 5 % check if beta0 or c0 are empty
     if tmp == 0; c0 = zeros(N,1); end;
 end;
 if nargin == 6; maxit = 100; tol = 1e-8; end;
-if nargin == 7; tol = 1e-8; end;    
+if nargin == 7; tol = 1e-8; end;
 
 if ~isnumeric(ivec); error('Argument ivec must be numeric'); end;
 if ~isnumeric(tvec); error('Argument tvec must be numeric'); end;
@@ -139,7 +139,7 @@ if chk == nobs; error('logit: y-vector contains all ones');
 elseif chk == 0; error('logit: y-vector contains no ones'); end;
 
 % create sparse design matrix
-d = sparse(1:nobs,ii,1); 
+d = sparse(1:nobs,ii,1);
 
 % check for all 1's or all 0's within i -- these observations must be dropped
 % or else the algorithm below tries to set their c_i to +/- infinity
@@ -148,7 +148,7 @@ tmp = d'*y;                                                         % (N x 1) ve
 [i0,junk] = find(tmp==0);                                           % row indices are {i : y_it=0 , all t}
 [i1,junk] = find(tmp==T_i');                                        % row indices are {i : y_it=1 , all t}
 n0 = length(i0); n1 = length(i1);
-tmp = ~ismember(ii,i0) & ~ismember(ii,i1); 
+tmp = ~ismember(ii,i0) & ~ismember(ii,i1);
 tmp2 = ~ismember(1:N,i0) & ~ismember(1:N,i1);
 save tmp y x;                                                       % save a copy of the original data for testing
 
@@ -158,11 +158,11 @@ x = x(logical(tmp),:);
 c0 = c0(logical(tmp2),:);
 d = d(logical(tmp),logical(tmp2));
 disp(['Observations on ' num2str(n0) ' units were dropped because y_it=0 for all t.']);
-disp('The corresponding values of i (from ivec) have been written to the file i0.mat'); 
+disp('The corresponding values of i (from ivec) have been written to the file i0.mat');
 disp(' ');
 savei0 = unique(ivec(logical(ismember(ii,i0)),:)); save i0.mat savei0; clear savei0;
 disp(['Observations on ' num2str(n1) ' units were dropped because y_it=1 for all t.']);
-disp('The corresponding values of i (from ivec) have been written to the file i1.mat'); 
+disp('The corresponding values of i (from ivec) have been written to the file i1.mat');
 disp(' ');
 savei1 = unique(ivec(logical(ismember(ii,i1)),:)); save i1.mat savei1; clear savei1;
 ivec = ivec(logical(tmp),:);
@@ -179,7 +179,7 @@ for it = 2:nobs;
     if ivec(it,1) == ivec(it-1,1)
         ii(it,1) = ii(it-1,1);
         tt(it,1) = tt(it-1,1) + 1;
-    else 
+    else
         ii(it,1) = ii(it-1,1) + 1;
         tt(it,1) = 1;
     end;
@@ -188,8 +188,8 @@ N = max(ii);
 T = max(tt);
 
 % standardize data
-xstd = [1 std(x(:,2:nvar))]; 
-x = x ./ ( ones(nobs,1)*xstd );  
+xstd = [1 std(x(:,2:nvar))];
+x = x ./ ( ones(nobs,1)*xstd );
 beta0 = beta0 .* xstd';
 
 % clean up memory before the update
@@ -201,7 +201,7 @@ pack;
 %  MAXIMUM LIKELIHOOD ESTIMATION OF FIXED EFFECTS LOGIT   %
 %---------------------------------------------------------%
 
-b = beta0; 
+b = beta0;
 c = c0;  clear beta0 c0;
 iter = 0;
 
@@ -258,7 +258,7 @@ lnLr = nobs*(p*log(p) + (1-p)*log(1-p));                             % restricte
 results.lratio1 = -2*(lnLr - results.lik);                           % LR test based on lnLr
 results.rsqr = 1 - (results.lik / lnLr);                             % McFadden pseudo-R^2
 load tmp y x; delete tmp.mat;                                        % reload complete data
-[nobs junk] = size(x); 
+[nobs junk] = size(x);
 x = [ones(nobs,1) x];
 restricted = logit(y,x);                                             % estimate restricted model: no heterogeneity (common intercept)
 results.lratio2 = -2*(restricted.lik - results.lik);                 % LR test based on restricted.lik
@@ -269,9 +269,9 @@ results.lratio2 = -2*(restricted.lik - results.lik);                 % LR test b
    save all.mat; clear; load all.mat H22 H12 H11 N;
    res.covc = -(H22-H12'*(H11\H12))\eye(N);
    res.stdc = sqrt(diag( res.covc ));
-   load all.mat results; 
+   load all.mat results;
    results.tstatc = results.c ./ res.stdc;
-   results.covc = res.covc; results.stdc = res.stdc; 
+   results.covc = res.covc; results.stdc = res.stdc;
    clear res H22 H11; pack;
    load all.mat H_11 H22inv xstd; delete all.mat;
    results.covbc = H_11*H12*H22inv ./ (xstd'*ones(1,N));             % restore original scale
@@ -283,7 +283,7 @@ results.lratio2 = -2*(restricted.lik - results.lik);                 % LR test b
 %---------------------------------------------------------%
 
 function [sb,sc,H11,H12,H22] = felogit_deriv(y,x,d,P,nvar,nobs,N);
-% PURPOSE: Computes gradient and elements of Hessian for the 
+% PURPOSE: Computes gradient and elements of Hessian for the
 % fixed effects logit model;
 % ---------------------------------------------------------
 
@@ -294,13 +294,13 @@ function [sb,sc,H11,H12,H22] = felogit_deriv(y,x,d,P,nvar,nobs,N);
 % Ithaca, NY
 % sdw9@cornell.edu
 
-% the step variable is introduced to tradeoff memory usage 
+% the step variable is introduced to tradeoff memory usage
 % against compute time in large problems
 % the size of crit should be reduced on systems with very little RAM
 crit=12000000;
 if nobs*N < crit
     step = N;
-else 
+else
     step = max( round(crit/nobs) , 1);
 end;
 

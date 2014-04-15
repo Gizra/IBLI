@@ -8,7 +8,7 @@ function prt_eqs(results,vnames,fid)
 %        vnames  = an optional vector of variable names
 %        fid     = file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
-%---------------------------------------------------               
+%---------------------------------------------------
 %                 e.g. vnames = ['y    ',
 %                                'x1   ',  NOTE: fixed width
 %                                'x2   ',        like all MATLAB
@@ -16,7 +16,7 @@ function prt_eqs(results,vnames,fid)
 %                 e.g. fid = fopen('ols.out','wr');
 % --------------------------------------------------
 % SEE ALSO: prt, plt, plt_reg(results)
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -165,7 +165,7 @@ for i=1:neqs;
 end;
 cnames = strvcat(cnames);
 fmt = '%9.4f';
-rnames = strvcat('equation',cnames);          
+rnames = strvcat('equation',cnames);
 ins.fmt = fmt;
 ins.cnames = cnames;
 ins.rnames = rnames;

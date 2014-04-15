@@ -10,12 +10,12 @@ function ylevf = ecmf(y,nlag,nfor,begf,r);
 %                  (defaults to length(y) + 1)
 %              r = # of co-integrating relations to use
 %                  (optional: this will be determined using
-%                  Johansen's trace test at 95%-level if left blank)                                                 
+%                  Johansen's trace test at 95%-level if left blank)
 %-------------------------------------------------------------
 % NOTES: - constant vector automatically included
 %        - x-matrix of exogenous variables not allowed
 %        - error correction variables are automatically
-%          constructed using output from Johansen's ML-estimator               
+%          constructed using output from Johansen's ML-estimator
 %---------------------------------------------------------------
 % RETURNS:
 %  yfor = an nfor x neqs matrix of level forecasts for each equation
@@ -43,9 +43,9 @@ if nargin == 5 % user supplied r-value
     jres = johansen(y(1:nmin,:),0,nlag);
     % recover error correction vectors
     ecvectors = jres.evec;
-    index = jres.ind; 
+    index = jres.ind;
     % construct r-error correction variables
-    x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r); 
+    x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r);
     [nobs2 nx] = size(x);
 elseif nargin == 4 % we have to determine r-value
     jres = johansen(y(1:nmin,:),0,nlag);
@@ -61,10 +61,10 @@ elseif nargin == 4 % we have to determine r-value
     end;
     % recover error correction vectors
     ecvectors = jres.evec;
-    index = jres.ind; 
+    index = jres.ind;
     % construct r error correction variables
-    x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r); 
-    [nobs2 nx] = size(x); 
+    x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r);
+    [nobs2 nx] = size(x);
 else
     error('Wrong # of input arguments to ecmf');
 end;
@@ -116,22 +116,22 @@ xpx = xmat'*xmat;
 for j=1:neqs;
     yvec = dy(nlag+1:nmin,j);
     bhat = (xpx)\(xmat'*yvec);
-    
+
     % save bhat
     bmat(:,j) = bhat;
-end; 
-% end of loop over equations 
+end;
+% end of loop over equations
 
-% given bmat values generate future forecasts 
+% given bmat values generate future forecasts
 
-% 1-step-ahead forecast 
+% 1-step-ahead forecast
 xtrunc = [dy(nmin-(nlag):nmin,:)
     zeros(1,neqs)];
 xfor = mlag(xtrunc,nlag);
 [xend junk] = size(xfor);
 xobs = xfor(xend,:);
 if nx > 0
-    ecterm = y(begf-1,index)*ecvectors(:,1:r); % add ec variables 
+    ecterm = y(begf-1,index)*ecvectors(:,1:r); % add ec variables
     xvec = [xobs ecterm 1];
 else
     xvec = [xobs 1];
@@ -148,14 +148,14 @@ xnew = zeros(nlag+nx+1,neqs);
 
 % 2 through nlag-step-ahead forecasts
 for step=2:nlag;
-    
+
     if step <= nfor;
-        
+
         xnew(1:nlag-step+1,:) = dy(nmin-nlag+step:nmin,:);
         xnew(nlag-step+2:nlag,:) = yfor(1:step-1,:);
         xnew(nlag+1,:) = zeros(1,neqs);
-        
-        
+
+
         xfor = mlag(xnew,nlag);
         [xend junk] = size(xfor);
         xobs = xfor(xend,:);
@@ -166,31 +166,31 @@ for step=2:nlag;
         else
             xvec = [xobs 1];
         end;
-        
-        
+
+
         % loop over equations
         for i=1:neqs;
             bhat = bmat(:,i);
             yfor(step,i) = xvec*bhat; % change forecast
             ylev(step,i) = yfor(step,i) + ylev(step-1,i); % level forecast
         end;
-        
+
     end;
-    
+
 end;
 
 % nlag through nfore-step-ahead forecasts
 for step=nlag:nfor-1;
-    
+
     if step <= nfor;
-        
+
         cnt = step-(nlag-1);
-        
+
         for i=1:nlag;
             xnew(i,:) = yfor(cnt,:);
             cnt = cnt+1;
         end;
-        
+
         xfor = mlag(xnew,nlag);
         [xend junk] = size(xfor);
         xobs = xfor(xend,:);
@@ -201,7 +201,7 @@ for step=nlag:nfor-1;
         else
             xvec = [xobs 1];
         end;
-        
+
         % loop over equations
         for i=1:neqs;
             bhat = bmat(:,i);
@@ -210,9 +210,9 @@ for step=nlag:nfor-1;
             %CRASHES IF nlag==1  :    ylev(step+1,i) = yfor(step+1,i) + ylev(step-1,i); % level forecast
             % BDILLON CHANGED ylev(step-1 to ylev(step....
         end;
-        
+
     end;
-    
+
 end;
 
 % convert 1st difference forecasts to levels
@@ -220,7 +220,7 @@ ylevf = zeros(nfor,neqs);
 % 1-step-ahead forecast
 ylevf(1,:) = yfor(1,:) + y(begf-1,:); % add change to actual from time t;
 % 2-nfor-step-ahead forecasts
-for i=2:nfor % 
+for i=2:nfor %
     ylevf(i,:) = yfor(i,:) + ylevf(i-1,:);
 end;
 

@@ -2,11 +2,11 @@ function  p = hypg_pdf(k,n,K,N)
 % PURPOSE: hypergeometric pdf function
 %---------------------------------------------------
 % USAGE: p = hypg_pdf(k,n,K,N)
-% where: k,n,K,N are parameters 
-% 
+% where: k,n,K,N are parameters
+%
 %---------------------------------------------------
 % RETURNS:
-%        a vector of probabilities from the distribution      
+%        a vector of probabilities from the distribution
 % --------------------------------------------------
 % SEE ALSO: hypg_d, hypg_cdf, hypg_rnd, hypg_inv
 %---------------------------------------------------

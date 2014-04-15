@@ -34,11 +34,11 @@ nf = length(fields);
  end;
 end; % end of for loop
 detval = results.lndet;
- 
+
 nrho = length(detval);
 
 % now scale using all of the vectors of log-marginals
-% we must scale before exponentiating 
+% we must scale before exponentiating
 adj = max(max(lmarginal));
 madj = lmarginal - adj;
 

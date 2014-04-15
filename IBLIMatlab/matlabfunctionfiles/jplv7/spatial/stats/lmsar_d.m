@@ -1,6 +1,6 @@
 % PURPOSE: An example of using lmsar()
 %          to test for spatial error correlation
-%          on a small data set                   
+%          on a small data set
 %---------------------------------------------------
 % USAGE: lmsar_d
 %---------------------------------------------------

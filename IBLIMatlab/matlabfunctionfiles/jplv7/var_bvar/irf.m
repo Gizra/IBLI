@@ -1,7 +1,7 @@
 function [out1,out2]=irf(results,S,odum,Vnames)
 % PURPOSE: Calculates Impulse Response Function for VAR
 %-------------------------------------------------------------
-% USAGE: irf(results,S,odum)   
+% USAGE: irf(results,S,odum)
 %  results structure returned by VARE
 %  S       scalar for number of periods in IRF
 %  odum    dummy variable for type of cov factorizations
@@ -14,7 +14,7 @@ function [out1,out2]=irf(results,S,odum,Vnames)
 %      [S eq_n {psi_i} {irf_i} ] on each line. i = {1,...,N}
 %    out1  is sorted by S then eq.
 %    out2  is sorted by eq then S.  Used to plot IRF.
-%    The psi and irf terms are the impact of shocks to the 
+%    The psi and irf terms are the impact of shocks to the
 %    i-th equation on the n-th equation
 % ------------------------------------------------------------
 % SEE ALSO: VARE
@@ -25,7 +25,7 @@ function [out1,out2]=irf(results,S,odum,Vnames)
 % written by: Mike Cliff, UNC Finance  mcliff@unc.edu
 % CREATED:  12/08/98
 % MODIFIED: 12/18/98
-  
+
 % LeSage fixed the legend and plotting
 
 %============================================================
@@ -39,11 +39,11 @@ if isstruct(results)
   for i = 1:N
     err(:,i) = results(i).resid;
     for j = 1:N
-      temp(:,j) = results(i).beta((j-1)*p+1:j*p);      
+      temp(:,j) = results(i).beta((j-1)*p+1:j*p);
     end
     for k = 1:p
       PHI((k-1)*N+i,:) = temp(k,:);
-    end  
+    end
   end
   omega = err'*err/rows(err);
 else
@@ -56,8 +56,8 @@ end
 %=============================================================
 
 % ----If no variable names supplied --------------------------
-if nargin  == 3 
-  Vnames = [];  
+if nargin  == 3
+  Vnames = [];
   for i=1:N
     Vnames = strvcat(Vnames,['Y' int2str(i)]);
   end
@@ -67,7 +67,7 @@ end
 if strncmp(odum,'o1',1)
   if strcmp(odum,'o1')         % Cholesky of omega = P'*P
     msg=('Orthog. IRF: 1 \sigma changes');
-    P=chol(omega)';     
+    P=chol(omega)';
   elseif strcmp(odum,'o2')     % triangular fact. omega = A*D*A'
     msg=('Orthog. IRF: 1 unit changes');
     Dsr = diag(sqrt(diag(omega)));
@@ -79,7 +79,7 @@ else
 end
 
 % ---- Rearrange PHI: Need 'block' transpose ----------------------
-for i = 1:p  
+for i = 1:p
   PHI2(N*(p-i)+1:N*(p-i+1),:) = PHI((i-1)*N+1:i*N,:)';
 end
 
@@ -105,7 +105,7 @@ out2=sortrows(out1,[2 1]);
 % showing response of equation n to shocks to each variable in turn
 i = 0;
 x=[1:S]';
-plotct = 0;     
+plotct = 0;
 
 for i=1:N;
     plotct = plotct + 1;
@@ -114,7 +114,7 @@ for i=1:N;
     plot(x,plotdata);
     title(msg)
     ylabel(Vnames(plotct,:));
-    xlabel(['Response of all variables to shock in equation ' num2str(plotct)]);    
+    xlabel(['Response of all variables to shock in equation ' num2str(plotct)]);
     legend(Vnames,-1);
     if plotct == N, break,  end
 end

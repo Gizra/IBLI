@@ -1,5 +1,5 @@
 % PURPOSE: A test of the accuracy of max-like estimates
-%          using Anselin's data set on Columbus crime               
+%          using Anselin's data set on Columbus crime
 %---------------------------------------------------
 % USAGE: test_maxlik
 %---------------------------------------------------
@@ -27,10 +27,10 @@ info.lflag = 0; % full lndet calculation
 info.eigs = 0;  % compute eigenvalues
 results3 = sem(y,x,W,info);
 disp('compare to Table 12.6, page 195 in Anselin, 1988')
-prt(results3,vnames);  
+prt(results3,vnames);
 results4 = sdm(y,x,W,info);
 disp('compare to Table 12.8, page 197 in Anselin, 1988')
-prt(results4,vnames);  
+prt(results4,vnames);
 results5 = sar(y,x,W,info);
 disp('compare to Table 12.4, page 193 in Anselin, 1988')
 prt(results5,vnames);

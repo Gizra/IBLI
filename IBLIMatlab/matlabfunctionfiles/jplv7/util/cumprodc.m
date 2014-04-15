@@ -7,7 +7,7 @@ function m=cumprodc(x);
 % RETURNS: m = cumulative product of x elements
 %              by columns
 % -----------------------------------------------------
-             
+
 % written by:
 % James P. LeSage, Dept of Economics
 % Texas State University-San Marcos

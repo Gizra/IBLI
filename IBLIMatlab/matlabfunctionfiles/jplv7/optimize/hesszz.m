@@ -1,5 +1,5 @@
 function stat=hesszz(b,infoz,stat,varargin)
-% PURPOSE: Calculate/update Inverse Hessian 
+% PURPOSE: Calculate/update Inverse Hessian
 % ------------------------------------------------------
 % USAGE: stat=hesszz(b,infoz,stat,varargin)
 % Where: b          = parameter vector fed to func
@@ -7,7 +7,7 @@ function stat=hesszz(b,infoz,stat,varargin)
 %        stat       = status structure from MINZ
 %        varargin   = arguments list passed to func
 % ------------------------------------------------------
-% RETURNS: stat = updated status structure with new 
+% RETURNS: stat = updated status structure with new
 %          inverse Hessian
 % ------------------------------------------------------
 % NOTES: Supports the following search direction algorithms:
@@ -45,7 +45,7 @@ if strcmp(infoz.call,'gmm') | strcmp(infoz.call,'ls')
   m = feval(momt,b,infoz,stat,varargin{1:lvar-wdum});
   M = feval(jake,b,infoz,stat,varargin{1:lvar-wdum});
   if strcmp(infoz.call,'gmm')
-    W = varargin{lvar};    
+    W = varargin{lvar};
   else
     W = eye(rows(M));
   end
@@ -79,8 +79,8 @@ case {'gn','marq'}                 % GN/Marq directions
   end
   Hi = H\eye(k);
 
-case {'dfp','bfgs'}               % DFP/BFGS 
-  if isempty(stat.Hi)              
+case {'dfp','bfgs'}               % DFP/BFGS
+  if isempty(stat.Hi)
     if infoz.H1 == 1, Hi = eye(k); % Initial Hessian
     else, Hi = gnbase\eye(k); end
   else
@@ -92,13 +92,13 @@ case {'dfp','bfgs'}               % DFP/BFGS
       if strcmp(infoz.hess,'bfgs')             % c = [0] for DFP
         c = db/(db'*dG) - Hi0*dG/(dG'*Hi0*dG);
         c = dG'*Hi0*dG*c*c';
-      else 
-        c=zeros(k); 
+      else
+        c=zeros(k);
       end
       Hi = Hi0 + a + b + c;
     else
       Hi = stat.Hi;
-    end    
+    end
   end
 
 otherwise

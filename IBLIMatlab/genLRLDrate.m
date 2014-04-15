@@ -12,7 +12,7 @@ datafolderpath='/z-scoring_first_CalibratedSeries/';
 %% Import base NDVI Files for estimation
 if season=='l'
     load(strcat(filepathMain,'/LRLDbasedata'));
-    
+
 else
     load(strcat(filepathMain,'/SRSDbasedata'));
 end
@@ -32,7 +32,7 @@ trendVec=[1:T]';
 iT=eye(T,T); % %identity matrix for time to create panel weight matrix
 Wt=kron(iT,W); % create panel weight matrix
 iNT=kron(iT,iN);
-iTout=eye(T-1,T-1); 
+iTout=eye(T-1,T-1);
 Wtout=kron(iTout,W);
 iNTout=kron(iTout,iN);
 DIVids=[1:N]'; %108 divs
@@ -42,7 +42,7 @@ div_idmat=repmat(DIVids,T,1); %stack an id matrix for resorting later
 %% Build district and county xint and xtrends
 xint_C=repmat(buildIntercept(DIVids,[DIVids,DIVids]),T,1); %replicate T tilings
 xint_D=repmat(buildIntercept(DistID,[DistNum,[1:nDists]']),T,1); %replicate T tilings
-xtrend_C=buildtrend(DIVids,[DIVids,DIVids],trendVec); 
+xtrend_C=buildtrend(DIVids,[DIVids,DIVids],trendVec);
 xtrend_D=buildtrend(DIVids,[DistNum,[1:nDists]'],trendVec); %build it using the yield div addresses and DivNum match
 
 %% set panel model options
@@ -91,18 +91,18 @@ for i=1:iIter %iterate to find fitted model with missing
             ytemp=max(ytemp,0);
             ytemp(~isnan(MortMissStack))=yinit(~isnan(MortMissStack));
             yfit(:,i+1)=ytemp;
-            
+
 end
 
-%% Run rating procedure using all in sample data, unconditional 
+%% Run rating procedure using all in sample data, unconditional
 indshiftLRLD=(LastLRLDyear-2002)*2;
 indshiftSRSD=(LastSRSDyear-2001)*2;
 if strcmp(season,'l')
     %For LRLD we use:
-    indexIN=[42:2:42+indshiftLRLD]; 
+    indexIN=[42:2:42+indshiftLRLD];
 else
     %For SRSD we use:
-    indexIN=[41:2:41+indshiftSRSD];    
+    indexIN=[41:2:41+indshiftSRSD];
 end
 
 [ndvipostIN, ndvipreIN,NDVInameIN]=importfileNDVIchoosebase(filepathMain,indexIN, datafolderpath);
@@ -131,7 +131,7 @@ if strcmp(season,'l')
     indexOUT=2:2:40;
 else
     %For SRSD we use:
-     indexOUT=3:2:39; 
+     indexOUT=3:2:39;
 end
 
 [ndvipostOUT, ndvipreOUT,NDVInameOUT]=importfileNDVIchoosebase(filepathMain,indexOUT, datafolderpath);
@@ -167,10 +167,10 @@ rateFinal10=rate10outsample.*(1-credfact)+rate10insample.*credfact;
 
 %write rates to output
 %writes rates to 108x1 matrix in a csv file for all 108 divisions
-csvwrite(strcat(filepathMain,'/LRLDratefinal15.csv'),rateFinal15); 
-csvwrite(strcat(filepathMain,'/LRLDratefinal10.csv'),rateFinal10); 
+csvwrite(strcat(filepathMain,'/LRLDratefinal15.csv'),rateFinal15);
+csvwrite(strcat(filepathMain,'/LRLDratefinal10.csv'),rateFinal10);
 
-%% Calculate final index value and indemnity (% payment)  
+%% Calculate final index value and indemnity (% payment)
 ImportFinalNDVI_LRLD %imports final NDVI preFINAL and postFINAL
 xintFINAL=buildIntercept(DistID,[DistNum,[1:nDists]']);
  NDVIvars_FINAL=[matmul(preFINAL,xintFINAL),matmul(preFINAL.^2,xintFINAL),...

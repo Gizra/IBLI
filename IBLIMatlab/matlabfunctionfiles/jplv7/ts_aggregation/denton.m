@@ -10,7 +10,7 @@ function res = denton(Y,x,z,ta,s,d);
 %         res.pred  = Number of extrapolations (=0 in this case)
 %         res.ta    = Type of disaggregation
 %         res.s     = Frequency conversion
-%         res.d     = Degree of differencing 
+%         res.d     = Degree of differencing
 %         res.y     = High frequency estimate
 %         res.et    = Elapsed time
 % -----------------------------------------------------------------------
@@ -22,7 +22,7 @@ function res = denton(Y,x,z,ta,s,d);
 %            ta=2 ---> average (index)
 %            ta=3 ---> last element (stock) ---> interpolation
 %            ta=4 ---> first element (stock) ---> interpolation
-%        s: number of high frequency data points for each low frequency data points 
+%        s: number of high frequency data points for each low frequency data points
 %            s= 4 ---> annual to quarterly
 %            s=12 ---> annual to monthly
 %            s= 3 ---> quarterly to monthly
@@ -35,7 +35,7 @@ function res = denton(Y,x,z,ta,s,d);
 % -----------------------------------------------------------------------
 % SEE ALSO: difonzo, mtd_print, mtd_plot
 % -----------------------------------------------------------------------
-% REFERENCE: Di Fonzo, T. (1994) "Temporal disaggregation of a system of 
+% REFERENCE: Di Fonzo, T. (1994) "Temporal disaggregation of a system of
 % time series when the aggregate is known: optimal vs. adjustment methods",
 % INSEE-Eurostat Workshop on Quarterly National Accounts, Paris, december
 
@@ -163,7 +163,7 @@ y = desvec(y_big,M);
 % Loading the structure
 % -----------------------------------------------------------------------
 
-% Basic parameters 
+% Basic parameters
 
 res.meth = 'Multivariate Denton';
 res.N = N;

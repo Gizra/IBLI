@@ -8,7 +8,7 @@ n = 1000;
 mu = ones(n,1);
 sig = ones(n,1);
 
-left = -1; 
+left = -1;
 right = 3;
 
 x = normt_rnd(mu,sig,left,right);

@@ -2,11 +2,11 @@ function x = gamm_inv(p,a)
 % PURPOSE: returns the inverse of the cdf at p of the gamma(a) distribution
 %---------------------------------------------------
 % USAGE: x = gamm_inv(p,a)
-% where: p = a vector of probabilities 
+% where: p = a vector of probabilities
 %        a = a scalar parameter gamma(a)
 %---------------------------------------------------
 % RETURNS:
-%        a vector x of the quantile at each element of p of the gamma(a) distribution      
+%        a vector x of the quantile at each element of p of the gamma(a) distribution
 % --------------------------------------------------
 % SEE ALSO: gamm_d, gamm_pdf, gamm_rnd, gamm_cdf
 %---------------------------------------------------
@@ -19,7 +19,7 @@ function x = gamm_inv(p,a)
   if (nargin ~= 2)
     error('Wrong # of arguments to gamm_inv');
   end
-  
+
 
 if any(any(abs(2*p-1)>1))
    error('gamm_inv: a probability should be 0<=p<=1')

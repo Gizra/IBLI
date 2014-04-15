@@ -2,14 +2,14 @@ function prt_felogit(results,vnames,fid)
 % PURPOSE: Prints output from felogit function
 %----------------------------------------------------------------%
 % USAGE: prt_felogit(results,vnames,fid)
-% Where: results = a structure returned by a regression 
+% Where: results = a structure returned by a regression
 %        vnames  = optional vector of variable names
 %        fid     = optional file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
 %----------------------------------------------------------------%
 % NOTES:  e.g. vnames = strvcat('y','const','x1','x2');
 %         e.g. fid = fopen('ols.out','wr');
-%  - use prt_felogit(results,[],fid) to print to a file with no 
+%  - use prt_felogit(results,[],fid) to print to a file with no
 %    vnames
 %----------------------------------------------------------------%
 % RETURNS: nothing, just prints the multinomial logit results
@@ -38,7 +38,7 @@ elseif nargin == 3
     nflag = 0;
     [vsize junk] = size(vnames); % user may supply a blank argument for vnames
     if vsize > 0
-        nflag = 1;          
+        nflag = 1;
     end;
 else
     error('Wrong # of arguments to prt_reg');
@@ -65,8 +65,8 @@ if (nflag == 1) % the user supplied variable names
         for i=1:nvar
             Vname = strvcat(Vname,vnames(i+1,:));
         end;
-    end; 
-end; 
+    end;
+end;
 
 % print results
 fprintf(fid,'\n');

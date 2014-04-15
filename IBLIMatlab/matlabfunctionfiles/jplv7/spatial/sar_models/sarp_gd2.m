@@ -1,12 +1,12 @@
-% PURPOSE: An example of using sarp_g() on a large data set   
-%          Gibbs sampling spatial autoregressive probit model                         
+% PURPOSE: An example of using sarp_g() on a large data set
+%          Gibbs sampling spatial autoregressive probit model
 %---------------------------------------------------
 % USAGE: sarp_gd2 (see sarp_gd for a small data set)
 %---------------------------------------------------
 
 %clear all;
 % NOTE a large data set with 3107 observations
-% from Pace and Barry, 
+% from Pace and Barry,
 % load elect.dat;             % load data on votes
 % latt = elect(:,5);
 % long = elect(:,6);
@@ -20,9 +20,9 @@
 
 % W-matrix from Anselin's neigbhorhood crime data set
 % n = 1000;
-% 
+%
 % k = 3;
-% 
+%
 % x = [ones(n,1) randn(n,2)];
  load('x.mat');
  load('W.mat');
@@ -35,28 +35,28 @@ beta = [0
 
 %  latt = rand(n,1);
 %  long = rand(n,1);
-% % 
+% %
 %  W = make_neighborsw(latt,long,6);
 
 [n junk] = size(W);
-IN = eye(n); 
+IN = eye(n);
 % rho = 0.8;  % true value of rho
 sige = 10;
 % k = 3;
-% 
+%
 % x = randn(n,k);
 % x = [ones(n,1) x];
 
 %W = make_neighborsw(latt,long,6);
 vnames = strvcat('voters','const','educ','homeowners');
-% 
+%
 % beta = ones(k+1,1);
 % beta(2:3,1) = -1;
 
 y = (speye(n) - rho*W)\(x*beta) + (speye(n) - rho*W)\randn(n,1);
 ysave = y;
 
-ndraw = 100; 
+ndraw = 100;
 nomit = 0;
 
 

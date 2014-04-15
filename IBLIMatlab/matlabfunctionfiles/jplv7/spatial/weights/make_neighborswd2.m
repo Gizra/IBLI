@@ -1,17 +1,17 @@
 % PURPOSE: An example of using make_neighborsw
 %          a nearest neighbor spatial weight matrix
-%          on a large data set                   
+%          on a large data set
 %---------------------------------------------------
 % USAGE: make_neighborswd2
 %---------------------------------------------------
 
-% A data set for 1980 Presidential election results covering 3,107 
+% A data set for 1980 Presidential election results covering 3,107
 % US counties. From Pace, R. Kelley and Ronald Barry. 1997. ``Quick
 % Computation of Spatial Autoregressive Estimators'',
 % in  Geographical Analysis.
-% 
+%
 %  Variables are:
-%  columns 1-4 are census identifiers 
+%  columns 1-4 are census identifiers
 %  column 5  = lattitude
 %  column 6  = longitude
 %  column 7  = population casting votes
@@ -27,7 +27,7 @@ latt = elect(:,5);
 long = elect(:,6);
 
 
-W2 = make_neighborsw(long,latt,2); 
+W2 = make_neighborsw(long,latt,2);
 
 % 4 neighbors
 W4 = make_neighborsw(long,latt,4);

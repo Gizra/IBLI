@@ -36,7 +36,7 @@ function results=casetti(y,x,xc,yc,option)
 % --------------------------------------------------
 % SEE ALSO: prt, plt, prt_spat()
 %---------------------------------------------------
-% REFERENCES: Casetti, E., (1972) 'Generating Models by the Expansion Method: 
+% REFERENCES: Casetti, E., (1972) 'Generating Models by the Expansion Method:
 % Applications to Geographic Research', Geographical Analysis, Vol. 4, pp. 81-91.
 % Casetti, E., (1992) 'Bayesian Regression and the Expansion Method',
 % Geographical Analysis, Vol. 24, pp. 58-74.
@@ -64,7 +64,7 @@ if nargin == 5 % user options
  exp = 0; ctr = 0; nflag = 0;
   for i=1:nf
     if strcmp(fields{i},'exp')
-        exp = option.exp; 
+        exp = option.exp;
     elseif strcmp(fields{i},'ctr')
         ctr = option.ctr;
     elseif strcmp(fields{i},'norm')

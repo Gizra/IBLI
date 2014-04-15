@@ -31,10 +31,10 @@ Y=[  20499
     102776
     113026
     115573 ];
-  
-% High-frequency data: Spain's Registered exports of goods deflated by 
+
+% High-frequency data: Spain's Registered exports of goods deflated by
 %                      unit value index.
-  
+
 x=[   5162
       5054
       4049
@@ -123,18 +123,18 @@ x=[   5162
      30486
      26153
      29930 ];
-  
+
 % ---------------------------------------------
 % Inputs for td library
 
 % Type of aggregation
-ta=1;   
+ta=1;
 % Minimizing the volatility of d-differenced series
 d=1;
-% Frequency conversion 
-s=4;    
+% Frequency conversion
+s=4;
 % Name of ASCII file for output
-file_sal='td.sal';   
+file_sal='td.sal';
 % Calling the function: output is loaded in a structure called res
 res=denton_uni_prop(Y,x,ta,d,s);
 % Calling printing function

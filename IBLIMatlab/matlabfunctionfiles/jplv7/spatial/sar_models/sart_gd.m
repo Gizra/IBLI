@@ -13,7 +13,7 @@ x= a+(b-a)*rand(n,1);
 
 x = [ones(n,1) x];
 
-beta=[-1 
+beta=[-1
        2];
 
 sigma1= 2;

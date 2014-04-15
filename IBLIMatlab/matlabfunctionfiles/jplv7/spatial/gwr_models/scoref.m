@@ -28,17 +28,17 @@ for iter = 1:n;
    dx = east - east(iter,1);
    dy = north - north(iter,1);
    d = (dx.*dx + dy.*dy);
-   sd = std(sqrt(d)); 
-   if flag == 0,     % Gausian weights 
+   sd = std(sqrt(d));
+   if flag == 0,     % Gausian weights
   wt = stdn_pdf(sqrt(d)/(sd*bdwt));
    elseif flag == 1, % exponential weights
          wt = exp(-d/bdwt);
    end;
    wt(iter,1) = 0.0;
    wt = sqrt(wt);
-   
-   
-% computational trick to speed things up  
+
+
+% computational trick to speed things up
 % use non-zero wt to pull out y,x observations
 nzip = find(wt >= 0.0);
 ys = y(nzip,1).*wt(nzip,1);
@@ -48,7 +48,7 @@ xpxi = invpd(xs'*xs + eye(kk)*(1000*eps)); % prevent singular xpx matrix
 bi = xpxi*xs'*ys;
 % compute predicted values
 yhat = x(iter,:)*bi;
-% compute residuals 
+% compute residuals
 res(iter,1) = y(iter,1) - yhat;
 end; % end of for iter loop
 

@@ -1,6 +1,6 @@
-% PURPOSE: Demonstrate optimization functions 
+% PURPOSE: Demonstrate optimization functions
 %          using the Banana function
-% f(x,y)=-100*(y-x*x)^2-(1-x)^2, starting at [0;1]. 
+% f(x,y)=-100*(y-x*x)^2-(1-x)^2, starting at [0;1].
 
 
 parmx = 0;
@@ -19,7 +19,7 @@ res2 = dfp_min('banana',parm,info);
 res3 = pow_min('banana',parm,info);
 
 % solve using maxlik routine
-info2.method = 'bfgs'; 
+info2.method = 'bfgs';
 res4 = maxlik('banana',parm,info);
 
 in.cnames = strvcat('frpr','dfp','pow','maxlik');

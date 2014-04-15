@@ -1,7 +1,7 @@
-% PURPOSE: An example of using rvarf_g(), 
+% PURPOSE: An example of using rvarf_g(),
 %          Gibbs estimates and forecast using
-%          a vector autoregressive model                                                 
-%          (with random-walk averaging prior)                    
+%          a vector autoregressive model
+%          (with random-walk averaging prior)
 %---------------------------------------------------
 % USAGE: bvarf_gd
 %---------------------------------------------------
@@ -22,13 +22,13 @@ nlag = 2;  % number of lags in var-model
 % prior hyperparameters
 % priors for contiguous variables:  N(w(i,j),sig) for 1st own lag
 %                                  N(  0 ,tau*sig/k) for lag k=2,...,nlag
-%               
-% priors for non-contiguous variables are:  N(w(i,j) ,theta*sig/k) for lag k 
-%  
+%
+% priors for non-contiguous variables are:  N(w(i,j) ,theta*sig/k) for lag k
+%
 % e.g., if y1, y3, y4 are contiguous variables in eq#1, y2 non-contiguous
 %  w(1,1) = 1/3, w(1,3) = 1/3, w(1,4) = 1/3, w(1,2) = 0
-%                                              
-% typical values would be: sig = .1-.3, tau = 4-8, theta = .5-1  
+%
+% typical values would be: sig = .1-.3, tau = 4-8, theta = .5-1
 sig = 0.1;
 tau = 6;
 theta = 0.5;

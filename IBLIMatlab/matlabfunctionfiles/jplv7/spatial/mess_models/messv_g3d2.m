@@ -1,11 +1,11 @@
 % PURPOSE: An example of using messv_g3() on a large data set
-%          Bayesian matrix exponential spatial model                              
+%          Bayesian matrix exponential spatial model
 %---------------------------------------------------
 % USAGE: messv_g3d2 (see messv_g3d for a small data set)
 %---------------------------------------------------
 clear all;
 % NOTE a large data set with 3107 observations
-% from Pace and Barry, 
+% from Pace and Barry,
 % test MCMC sampling on pace and barry data set
 clear all;
 load elect.dat;             % load data on votes

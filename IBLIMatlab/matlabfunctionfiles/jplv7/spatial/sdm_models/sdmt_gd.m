@@ -1,6 +1,6 @@
 % PURPOSE: An example of using sdmt_g() Gibbs sampling
 %          spatial durbin tobit model
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
 % USAGE: sdmt_gd (see also sdmt_gd2 for a large data set)
 %---------------------------------------------------
@@ -13,7 +13,7 @@ latt = anselin(:,4);
 long = anselin(:,5);
 [junk W junk] = xy2cont(latt,long);
 [n junk] = size(W);
-IN = eye(n); 
+IN = eye(n);
 rho = 0.7;  % true value of rho
 sige = 1;
 k = 2;
@@ -22,7 +22,7 @@ beta(1,1) = -1.0;
 beta(2,1) = 1.0;
 
 % generate SAR model
-y = (IN-rho*W)\(x*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige)); 
+y = (IN-rho*W)\(x*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige));
 ysave = y;
 
 res = sdm(ysave,x,W); % maximum likelihood estimates
@@ -44,7 +44,7 @@ prior.trunc = 'left';
 ndraw = 2500;
 nomit = 500;
 
-res0 = sdm_g(ysave,x,W,ndraw,nomit,prior); % MCMC estimates 
+res0 = sdm_g(ysave,x,W,ndraw,nomit,prior); % MCMC estimates
 res0.tflag = 'tstat';                       % based on non-truncated data
 prt(res0);
 

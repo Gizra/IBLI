@@ -1,4 +1,4 @@
-% PURPOSE: An example of using ical()                               
+% PURPOSE: An example of using ical()
 %          to find observation #'s
 %          associated with time-series dates
 %---------------------------------------------------

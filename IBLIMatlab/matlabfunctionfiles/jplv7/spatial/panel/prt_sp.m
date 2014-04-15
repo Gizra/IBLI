@@ -2,14 +2,14 @@ function prt_sp(results,vnames,fid)
 % PURPOSE: Prints output using spatial regression results structures
 %---------------------------------------------------
 % USAGE: prt_sp(results,vnames,fid)
-% Where: results = a structure returned by a spatial panel regression 
+% Where: results = a structure returned by a spatial panel regression
 %        vnames  = an optional vector of variable names
 %        fid     = optional file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
-%--------------------------------------------------- 
+%---------------------------------------------------
 %  NOTES: e.g. vnames = strvcat('y','const','x1','x2');
 %         e.g. fid = fopen('ols.out','wr');
-%  use prt_sp(results,[],fid) to print to a file with no vnames               
+%  use prt_sp(results,[],fid) to print to a file with no vnames
 % --------------------------------------------------
 %  RETURNS: nothing, just prints the spatial panel regression results
 % --------------------------------------------------
@@ -24,7 +24,7 @@ elseif nargin == 3
  nflag = 0;
  [vsize junk] = size(vnames); % user may supply a blank argument
    if vsize > 0
-   nflag = 1;          
+   nflag = 1;
    end;
 else
  error('Wrong # of arguments to prt_sp');
@@ -83,7 +83,7 @@ case {'psem','semsfe','semtfe','semstfe'} % <=================== spatial panel e
 
 % add spatial rho parameter name
     Vname = strvcat(Vname,'spat.aut.');
-    
+
 if (nflag == 1)
 fprintf(fid,'Dependent Variable = %16s \n',vnames(1,:));
 end;
@@ -124,14 +124,14 @@ fprintf(fid,'***************************************************************\n')
 
 bout = [results.beta
         results.rho];
-        
+
 % <=================== end of sem case
 
 case {'psar','sarsfe','sartfe','sarstfe'} % <=================== spatial panel autoregressive models
 
 % add spatial rho parameter name
     Vname = strvcat(Vname,'W*dep.var.');
-    
+
 if (nflag == 1)
 fprintf(fid,'Dependent Variable = %16s \n',vnames(1,:));
 end;
@@ -171,7 +171,7 @@ fprintf(fid,'***************************************************************\n')
 
 bout = [results.beta
         results.rho];
-        
+
 % <=================== end of sar case
 
 otherwise

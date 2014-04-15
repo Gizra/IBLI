@@ -1,5 +1,5 @@
 % Casetti model estimation functions
-%   
+%
 %         bcasetti : computes a heteroscedastic Bayesian variant of Casetti's spatial expansion regression
 %       bcasetti_d : An example of using bcasetti
 %          casetti : computes Casetti's spatial expansion regression

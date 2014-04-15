@@ -1,7 +1,7 @@
 % PURPOSE: An example of Metropolis-Hastings vs. sampling by inversion
 %          using far_g
 %---------------------------------------------------
-% USAGE: far_gd3 
+% USAGE: far_gd3
 %---------------------------------------------------
 
 clear all;
@@ -12,11 +12,11 @@ xc = anselin(:,4);
 yc = anselin(:,5);
 W = make_neighborsw(xc,yc,5); % true model based on 5 nearest neighbors
 [n junk] = size(W);
-In = speye(n); 
+In = speye(n);
 randn('seed',1010);
 rho = 0.7;  % true value of rho
 sige = 0.1;
-y = (In-rho*W)\(randn(n,1)*sqrt(sige)); 
+y = (In-rho*W)\(randn(n,1)*sqrt(sige));
 ydev = y - mean(y);
 vnames = strvcat('y-simulated','W*y');
 

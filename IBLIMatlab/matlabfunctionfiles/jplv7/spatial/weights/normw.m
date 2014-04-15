@@ -5,10 +5,10 @@ function W = normw(W)
 % USAGE: Wout = normw(W)
 % where: W  = (n x n) input weight matrix
 % -------------------------------------------------
-% NOTES: i) some rows can be zero, 
-%        2) the function works for 3-d matrices 
+% NOTES: i) some rows can be zero,
+%        2) the function works for 3-d matrices
 %           If W is a 3D array, sum_k W(i,j,k)=1 for all i,j.
-% ------------------------------------------------- 
+% -------------------------------------------------
 % RETURNS: wout = standardized weight matrix
 % -------------------------------------------------
 

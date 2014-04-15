@@ -8,7 +8,7 @@
 
 clear;
 %carga los datos
-%Debe determinar el rango a partir del archivo de Excel    
+%Debe determinar el rango a partir del archivo de Excel
 rng = 'B2..B195';
 y = wk1read('FinalConsumption',0,0,rng);
 y=trimr(y,1,0);

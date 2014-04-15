@@ -60,6 +60,5 @@ case {2} % change a variable that is in with one that is out
         vinew(choose2) = vout(choose1);
     end
 otherwise
-    disp('error in sample function');    
-end; % end of switch   
-    
+    disp('error in sample function');
+end; % end of switch

@@ -6,7 +6,7 @@ function [cmat,mvec,svec] = ccorr2(x)
 %---------------------------------------------------
 % RETURNS:  cmat = correlation matrix
 %           mvec - vector of means
-%           svec - vector of standard deviations            
+%           svec - vector of standard deviations
 % --------------------------------------------------
 % SEE ALSO: ccorr1, invcorr
 %---------------------------------------------------

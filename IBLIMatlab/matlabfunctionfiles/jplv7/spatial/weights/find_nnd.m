@@ -1,6 +1,6 @@
 % PURPOSE: An example of using find_nn()
-%          finds an index to the nearest neighbors 
-%          demo for a small data set                   
+%          finds an index to the nearest neighbors
+%          demo for a small data set
 %---------------------------------------------------
 % USAGE: find_nnd
 %---------------------------------------------------
@@ -8,7 +8,7 @@
 clear all;
 
 % load Anselin (1988) Columbus neighborhood crime data
-load anselin.dat; 
+load anselin.dat;
 y = anselin(:,1); % neighborhood crime rates
 xc = anselin(:,4);
 yc = anselin(:,5);

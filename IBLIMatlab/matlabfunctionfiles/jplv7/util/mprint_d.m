@@ -1,6 +1,6 @@
-% PURPOSE: demo of mprint() 
-%          formatted matrix printing 
-% 
+% PURPOSE: demo of mprint()
+%          formatted matrix printing
+%
 %---------------------------------------------------
 % USAGE: mprint_d
 %---------------------------------------------------
@@ -8,23 +8,23 @@
 % use all defaults
 tst = randn(4,3);
 fprintf(1,'boring print-out \n');
-mprint(tst); 
+mprint(tst);
 
 % demonstrate wrapping at 80/12 = 6 columns
-tst = randn(4,10); 
+tst = randn(4,10);
 clear in;
 in.fmt = '%12.2f';
 in.rflag = 1;
 fprintf(1,'wrapping demonstration \n');
-mprint(tst,in); 
+mprint(tst,in);
 
 % demonstrate wrapping at 80/20 = 4 columns
-tst = randn(4,10); 
+tst = randn(4,10);
 clear in;
 in.fmt = '%20.2f';
 in.rflag = 1;
 fprintf(1,'wrapping demonstration \n');
-mprint(tst,in); 
+mprint(tst,in);
 
 
 % demonstrate decimal format option
@@ -96,7 +96,7 @@ mprint(tst,in);
 fprintf(1,'narrow format adjustment demo \n');
 fprintf(1,'column headings are: ');
 cnames = strvcat('a123456789','b123456789','c123456789');
-fprintf(1,'%16s %16s %16s \n',cnames(1,:),cnames(2,:),cnames(3,:)); 
+fprintf(1,'%16s %16s %16s \n',cnames(1,:),cnames(2,:),cnames(3,:));
 rnames = strvcat('variables','row1','row2','row3','row4','row5');
 tst = randn(5,3);
 fmt = '%6.3f';
@@ -113,12 +113,12 @@ fprintf(1,'which is spread to match wider column headings \n\n');
 fprintf(1,'narrow format adjustment demo \n');
 fprintf(1,'column headings are: ');
 cnames = strvcat('a12345','b12345','c12345');
-fprintf(1,'%16s %16s %16s \n',cnames(1,:),cnames(2,:),cnames(3,:)); 
+fprintf(1,'%16s %16s %16s \n',cnames(1,:),cnames(2,:),cnames(3,:));
 rnames = strvcat('variables','row1','row2','row3','row4','row5');
 tst = randn(5,3);
 fmt = strvcat('%6.3f','%9.3f','%12.3f');
 fprintf(1,'formats are:         ');
-fprintf(1,'%16s %16s %16s \n',fmt(1,:),fmt(2,:),fmt(3,:)); 
+fprintf(1,'%16s %16s %16s \n',fmt(1,:),fmt(2,:),fmt(3,:));
 clear in;
 in.fmt = fmt;
 in.cnames = cnames;

@@ -11,14 +11,14 @@ load test.dat; % a test data set containing
 % data covers 1982,1 to 1996,5
 
 vnames =  ['il',
-           'in',    
-           'ky',    
-           'mi',    
-           'oh',    
-           'pa',    
-           'tn',    
-           'wv'];    
-     
+           'in',
+           'ky',
+           'mi',
+           'oh',
+           'pa',
+           'tn',
+           'wv'];
+
 y = test;
 
 [nobs neqs] = size(y);
@@ -27,7 +27,7 @@ tight = 0.1;
 decay = 0.1;
 weight = 0.5;
 nlag = 9;
-      
+
    % Estimate using becm
    % let the routine determine co-integrating vectors
    result = becm(y,nlag,tight,weight,decay) ;
@@ -36,4 +36,4 @@ nlag = 9;
    % fid = fopen('becm.out','wr');
    fid = 1;
    prt_var(result,vnames,fid);
-   
+

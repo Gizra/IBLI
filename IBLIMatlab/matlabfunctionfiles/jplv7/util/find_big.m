@@ -14,12 +14,12 @@ function index = find_big(x,number)
 %                      1 2 3 4 5]
 %              and number = 9
 %              index = [1
-%                       2]                                                                              
+%                       2]
 % ---------------------------------------------------------
 % SEE ALSO: find_nzip()
 % ---------------------------------------------------------
 
- 
+
 % written by:
 % James P. LeSage, Dept of Economics
 % Texas State University-San Marcos
@@ -32,7 +32,7 @@ function index = find_big(x,number)
 chk = [];
 for i=1:nvar;
 tst = find(x(:,i) > number);
-chk = [chk 
+chk = [chk
        tst];
 end;
 

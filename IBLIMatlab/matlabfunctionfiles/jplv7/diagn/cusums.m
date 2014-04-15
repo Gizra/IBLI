@@ -1,5 +1,5 @@
 function result = cusums(y,x)
-% PURPOSE: computes cusum-squares test 
+% PURPOSE: computes cusum-squares test
 % ---------------------------------------
 % USAGE: result = cusums(y,x)
 % where:      y = dependent variable (n x 1)

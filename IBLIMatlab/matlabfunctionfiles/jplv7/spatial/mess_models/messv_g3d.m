@@ -3,7 +3,7 @@
 % using Anselin's Columbus crime data
 % this function samples over both rho and #neighbors
 % to produce a joint posterior for all parameters in the model
-%                              
+%
 %---------------------------------------------------
 % USAGE: messv_g3d
 %---------------------------------------------------
@@ -16,7 +16,7 @@ x = [ones(n,1) anselin(:,2:3)];
 xc = anselin(:,4); % x-coordinates
 yc = anselin(:,5); % y-coordinates
 
-vnames = strvcat('crime','constant','income','hvalue');  
+vnames = strvcat('crime','constant','income','hvalue');
 
 
 % do Bayesian MCMC estimate

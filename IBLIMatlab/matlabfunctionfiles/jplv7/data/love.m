@@ -3,7 +3,7 @@
 
 % 39 MBA students in a class at U of Chicago
 % From George and McCullogh (1993 JASA)
-% y = happiness (column 1), 
+% y = happiness (column 1),
 %               10 = happy, 1 = suicidal
 % x1 = money    (column 2)
 %      family income in thousands
@@ -17,7 +17,7 @@
 
 load love.dat;
 [n nvar] = size(love);
-y = love(:,1); 
+y = love(:,1);
 x = [ones(n,1) love(:,2:nvar)];
 
 result = ols(y,x);

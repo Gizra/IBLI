@@ -29,7 +29,7 @@ function result=lmlag(y,x,W)
 % 601 University Drive
 % San Marcos, TX 78666
 %jlesage@spatial-econometrics.com% modified by Shifeng Wang, Dept of Remote Sensing
-% University of Freiburg 
+% University of Freiburg
 % wangsf1013@gmail.com
 
 

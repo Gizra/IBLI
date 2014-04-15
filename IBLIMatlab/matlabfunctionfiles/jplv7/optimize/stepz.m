@@ -72,10 +72,10 @@ while go == 1
       b = (-alpha2*rhs1/alpha^2 + alpha*rhs2/alpha2^2)/(alpha-alpha2);
       if a == 0
         tmpalpha = -slope/(2*b);
-      else 
+      else
         disc = b^2 - 3*a*slope;
         if disc < 0
-          disp('Round off problem in STEP'); 
+          disp('Round off problem in STEP');
           disc = 0;
         end
         tmpalpha = (-b+sqrt(disc))/(3*a);

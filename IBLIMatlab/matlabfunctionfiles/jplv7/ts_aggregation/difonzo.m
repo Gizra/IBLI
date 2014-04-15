@@ -11,7 +11,7 @@ function res = difonzo(Y,x,z,ta,s,type,f);
 %         res.ta    = Type of disaggregation
 %         res.s     = Frequency conversion
 %         res.type  = Model for high frequency innovations
-%         res.beta  = Model parameters 
+%         res.beta  = Model parameters
 %         res.y     = High frequency estimate
 %         res.d_y   = High frequency estimate: std. deviation
 %         res.et    = Elapsed time
@@ -24,7 +24,7 @@ function res = difonzo(Y,x,z,ta,s,type,f);
 %            ta=2 ---> average (index)
 %            ta=3 ---> last element (stock) ---> interpolation
 %            ta=4 ---> first element (stock) ---> interpolation
-%        s: number of high frequency data points for each low frequency data points 
+%        s: number of high frequency data points for each low frequency data points
 %            s= 4 ---> annual to quarterly
 %            s=12 ---> annual to monthly
 %            s= 3 ---> quarterly to monthly
@@ -34,21 +34,21 @@ function res = difonzo(Y,x,z,ta,s,type,f);
 % (*) Optional:
 %        f: 1xM ---> Set the number of high frequency indicators linked to
 %                    each low frequency variable. If f is explicitly included,
-%                    the high frequency indicators should be placed in 
+%                    the high frequency indicators should be placed in
 %                    consecutive columns
 % ----------------------------------------------------------------------------------
-% NOTE: Extrapolation is automatically performed when n>sN. 
+% NOTE: Extrapolation is automatically performed when n>sN.
 %       If n=nz>sN restricted extrapolation is applied.
 %       Finally, if n>nz>sN extrapolation is perfomed in constrained
-%       form in the first nz-sN observatons and in free form in 
+%       form in the first nz-sN observatons and in free form in
 %       the last n-nz observations.
 % ----------------------------------------------------------------------------------
 % LIBRARY: aggreg, dif, vec, desvec
 % ----------------------------------------------------------------------------------
 % SEE ALSO: denton, mtd_print, mtd_plot
 % ----------------------------------------------------------------------------------
-% REFERENCE: Di Fonzo, T.(1990)"The estimation of M disaggregate time 
-% series when contemporaneous and temporal aggregates are known", Review 
+% REFERENCE: Di Fonzo, T.(1990)"The estimation of M disaggregate time
+% series when contemporaneous and temporal aggregates are known", Review
 % of Economics and Statistics, vol. 72, n. 1, p. 178-182.
 
 % written by:
@@ -98,7 +98,7 @@ if (type < 0) | (type > 1)
 end
 
 %--------------------------------------------------------
-%       Checking (and definition) of vector f 
+%       Checking (and definition) of vector f
 
 if (nargin == 6)
     f = ones(1,M);
@@ -169,7 +169,7 @@ while (j <= M)
    xaux = [ones(n,1) x(:,ac(j-1)+1:ac(j-1)+f(j))];
    [a2,b2] = size(xaux);
    [a1,b1] = size(x_diag);
-   x_diag = [ x_diag         zeros(a1,b2) 
+   x_diag = [ x_diag         zeros(a1,b2)
               zeros(a2,b1)   xaux ];
    ac(j) = ac(j-1) + f(j);
    j = j + 1;
@@ -189,7 +189,7 @@ X_diag = H2 * x_diag;
 %
 %
 % It is the result of applying the complete aggregator H
-% (temporal as well as transversal). 
+% (temporal as well as transversal).
 % Lower part of X_e is X_diag.
 
 X_e = H * x_diag;
@@ -218,8 +218,8 @@ Y_e = [ z
 %--------------------------------------------------------
 % The method of di Fonzo requires the previous estimation of VCV
 % matrix SIGMA for the (implied) low frequency model. This
-% preliminary estimation is performed by means of estimating, equation 
-% by equation, the model. Formally, this is equivalent to estimate an 
+% preliminary estimation is performed by means of estimating, equation
+% by equation, the model. Formally, this is equivalent to estimate an
 % unrelated SURE model. Computationally, this is also the applied procedure.
 
 BETA = (X_diag' * X_diag) \ (X_diag' * Y_big); % OLS estimator
@@ -251,10 +251,10 @@ end;
 
 %--------------------------------------------------------
 %       Low frequency VCV matrix V: (n-h1+NM) x (n-h1+NM)
-%       and its generalized inverse 
+%       and its generalized inverse
 
 V = H * v * H';
-Vi = pinv(V);      % Moore-Penrose generalized inverse 
+Vi = pinv(V);      % Moore-Penrose generalized inverse
 
 %--------------------------------------------------------
 %       Generation of distribution filter L: nM x (n-h1+NM)
@@ -294,7 +294,7 @@ d_y = desvec(d_y_big,M);
 % -----------------------------------------------------------------------
 % Loading the structure
 % -----------------------------------------------------------------------
-% Basic parameters 
+% Basic parameters
 
 res.meth = 'Multivariate di Fonzo';
 res.N = N;

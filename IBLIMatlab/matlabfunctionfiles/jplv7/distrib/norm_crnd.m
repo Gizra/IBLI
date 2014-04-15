@@ -6,9 +6,9 @@ function y = norm_crnd(n,epsilon,sigma)
 % where:   n = size of the vector returned
 %        sig = a scalar variance (sigma^2)
 %        eps = scalar 0 < eps < 1
-%---------------------------------------------------      
-% RETURNS: y = random vector of contaminated 
-%              normal random draws 
+%---------------------------------------------------
+% RETURNS: y = random vector of contaminated
+%              normal random draws
 %---------------------------------------------------
 % SEE ALSO: norm_d, norm_rnd, norm_inv, norm_cdf
 %---------------------------------------------------

@@ -23,7 +23,7 @@ function xlag = mlag(x,n,init)
 % San Marcos, TX 78666
 % jlesage@spatial-econometrics.com
 
-if nargin ==1 
+if nargin ==1
 n = 1; % default value
 init = 0;
 elseif nargin == 2

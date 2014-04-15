@@ -2,9 +2,9 @@ function plt_var(results,vnames);
 % PURPOSE: plots VAR model actual vs predicted and residuals
 %---------------------------------------------------
 % USAGE: plt_var(results,vnames);
-% where:  results  = a vare structure 
+% where:  results  = a vare structure
 %          vnames  = an optional vector of variable names
-%---------------------------------------------------               
+%---------------------------------------------------
 %          e.g. vnames = strvcat('y1','y2','x1');
 % --------------------------------------------------
 % SEE ALSO: plt, prt, prt_var

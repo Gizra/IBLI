@@ -1,5 +1,5 @@
-% PURPOSE: An example of using sar_gmm on a simulated large data set   
-%          GM estimation of the spatial autoregressive model                         
+% PURPOSE: An example of using sar_gmm on a simulated large data set
+%          GM estimation of the spatial autoregressive model
 %---------------------------------------------------
 % USAGE: sar_gmmd3 (see sar_gmmd for a small data set)
 %---------------------------------------------------

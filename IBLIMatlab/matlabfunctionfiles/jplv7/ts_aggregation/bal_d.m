@@ -9,7 +9,7 @@ clc; clear all; close all;
 % Unbalanced time series (read columnwise)
 
 y=[120 20 55
-   130 22 66 
+   130 22 66
    190 33 99
    170 35 110 ];
 
@@ -20,7 +20,7 @@ z=[ 210
     300
     310 ];
 
-% Calling balancing function    
+% Calling balancing function
 
 yb = bal(y,z);
 

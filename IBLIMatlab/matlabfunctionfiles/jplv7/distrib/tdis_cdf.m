@@ -2,11 +2,11 @@ function F = tdis_cdf (x, n)
 % PURPOSE: returns cdf at x of the t(n) distribution
 %---------------------------------------------------
 % USAGE: cdf = tdis_cdf(x,n)
-% where: x = a vector 
+% where: x = a vector
 %        n = a scalar parameter with dof
 %---------------------------------------------------
 % RETURNS:
-%        a vector of cdf at each element of x of the t(n) distribution      
+%        a vector of cdf at each element of x of the t(n) distribution
 % --------------------------------------------------
 % SEE ALSO: tdis_inv, tdis_rnd, tdis_pdf, tdis_prb
 %---------------------------------------------------
@@ -28,5 +28,5 @@ F = fdis_cdf(x.^2,1,n);
 iota = ones(nobs,1);
 out = iota-(iota-F)/2;
 F = out + (iota-2*out).*neg;
-    
+
 

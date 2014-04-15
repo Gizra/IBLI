@@ -1,5 +1,5 @@
 function cdf = norm_cdf (x, m, v)
-% PURPOSE: computes the cumulative normal distribution 
+% PURPOSE: computes the cumulative normal distribution
 %          for each component of x with mean m, variance v
 %---------------------------------------------------
 % USAGE: cdf = norm_cdf(x,m,v)
@@ -16,7 +16,7 @@ function cdf = norm_cdf (x, m, v)
 % Updated by James P. Lesage, % jlesage@spatial-econometrics.com 1/7/97
 
   [r, c] = size(x);
-  
+
   if (r*c == 0)
   error('norm_cdf: x must not be empty');
   end;
@@ -29,4 +29,4 @@ function cdf = norm_cdf (x, m, v)
   cdf = zeros(r, 1);
   cdf(1:r,1) = stdn_cdf((x(1:r,1) - m(1:r,1)) ./ sqrt (v(1:r,1)));
 
-  
+

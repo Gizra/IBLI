@@ -2,10 +2,10 @@ function plt_spat(results,vnames)
 % PURPOSE: Plots output using spatial regression results structures
 %---------------------------------------------------
 % USAGE: plt_spat(results,vnames)
-% Where: results = a structure returned by a spatial regression 
+% Where: results = a structure returned by a spatial regression
 %        vnames  = an optional vector of variable names
 %                  e.g. vnames = strvcat('y','constant','x1');
-%--------------------------------------------------- 
+%---------------------------------------------------
 %  RETURNS: nothing, just plots the spatial regression results
 % --------------------------------------------------
 % NOTE: user must supply pause commands, none are in plt_spat function
@@ -14,7 +14,7 @@ function plt_spat(results,vnames)
 %            plt_spat(results2);
 % --------------------------------------------------
 % SEE ALSO: prt, plt
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -120,7 +120,7 @@ if strcmp(results.meth,'sac_g');
 title(['SAC Gibbs', '   Actual vs. Predicted']);
 else
 title(['SAC Tobit Gibbs', '   Actual vs. Predicted']);
-end; 
+end;
 subplot(3,1,2), plot(tt,resid);
 title('Residuals');
 subplot(3,1,3), plot(tt,results.vmean);
@@ -268,7 +268,7 @@ if results.exp == 0 % x-y expansion
    ylabel('coefficient');
    pause;
    end; % end of j-loop over expanded-variables
-  end; 
+  end;
 
  yc = results.yc;
  [ycs yci] = sort(yc);
@@ -326,7 +326,7 @@ dvec = results.dist;
 
 end; % end of if results.exp ==0,1
 
-% Now plot actual vs predicted 
+% Now plot actual vs predicted
 tt=1:nobs;
 clf;
 subplot(2,1,1), plot(tt,results.y,'-',tt,results.yhat,'--');
@@ -359,7 +359,7 @@ subplot(1,1,1);
    end; % end of j-loop over expanded-variables
   end;
 
-% Now plot actual vs predicted 
+% Now plot actual vs predicted
 tt=1:nobs;
 clf;
 subplot(211), plot(tt,results.y,'-',tt,results.yhat,'--');
@@ -378,7 +378,7 @@ yhat = zeros(nobs,1);
 for i=1:nobs;
 yhat(i,1) =  results.x(i,:)*beta(i,:)';
 end;
-e = y - yhat; 
+e = y - yhat;
 subplot(1,1,1);
 
  [nobs nvar] = size(beta);
@@ -401,7 +401,7 @@ subplot(1,1,1);
    end; % end of j-loop over expanded-variables
   end;
 
-% Now plot actual vs predicted 
+% Now plot actual vs predicted
 tt=1:nobs;
 clf;
 subplot(2,1,1), plot(tt,y,'-',tt,yhat,'--');

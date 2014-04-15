@@ -10,7 +10,7 @@ function yqtr = mth2qtr(ymth,flag)
 %---------------------------------------------------
 % NOTES:  the last observation is the actual month or
 %         the average (sum) of the last 2 months in cases where
-%         nobs/3 has a remainder               
+%         nobs/3 has a remainder
 %---------------------------------------------------
 
 % written by:

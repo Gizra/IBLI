@@ -1,18 +1,18 @@
 function prt_panel(result,vnames,fid)
 % PURPOSE: Prints Panel models output
 %----------------------------------------------------------------------------------------
-% USAGE:  prt_panel(result,vnames,fid)        
-%    where: 
+% USAGE:  prt_panel(result,vnames,fid)
+%    where:
 %    		 results = a structure returned by:
 %                      ppooled,pfixed,prandom
 %         vnames  = optional vector of variable names
 %             fid = (optional) file-id for printing to a file
 %                   (defaults to the MATLAB command window)
-%----------------------------------------------------------------------------------------               
+%----------------------------------------------------------------------------------------
 % NOTE: - constant term is added automatically to vnames list
 %       - you may use prt_panel(results,[],fid) to print
-%         output to a file with no vnames                   
-%----------------------------------------------------------------------------------------               
+%         output to a file with no vnames
+%----------------------------------------------------------------------------------------
 
 if nargin < 1; error('wrong # of arguments to prt_panel'); end;
 if nargin > 3; error('wrong # of arguments to prt_panel'); end;
@@ -24,10 +24,10 @@ end;
 nflag = 0;
 if nargin == 1; fid = 1;            end;
 if nargin == 2; nflag = 1; fid = 1; end;
-if nargin == 3; 
+if nargin == 3;
 [vsize junk] = size(vnames); % user may supply a blank argument
    if vsize > 0
-   nflag = 1;          
+   nflag = 1;
    end;
 end;
 
@@ -61,7 +61,7 @@ if (nflag == 1)
 Vname = [];
 
 [namesize namewidth] = size(vnames);
-if namesize ~= nvars + cconst 
+if namesize ~= nvars + cconst
    error('wrong # of vnames in prt_panel');
 end;
 
@@ -119,7 +119,7 @@ end;
 in.rnames = rnames;
 in.fmt = '%16.6f';
 in.fid = fid;
-mprint(tmp,in); 
+mprint(tmp,in);
 
 % ==================== end of case pooled
 
@@ -156,7 +156,7 @@ if nflag == 0  % # no variable names supplied
 elseif (nflag == 1) % user supplies variable names
    Vname = [];
    [namesize namewidth] = size(vnames);
-if namesize ~= nvars + cconst 
+if namesize ~= nvars + cconst
    error('wrong # of vnames in prt_panel');
 end;
 
@@ -164,7 +164,7 @@ end;
    Vname{i} = vnames(i+1,:);
    end;
 
-end; % end of if nflag 
+end; % end of if nflag
 
 % print out results
 in.cnames = strvcat(bstring,tstring,pstring);
@@ -176,7 +176,7 @@ end;
 in.rnames = rnames;
 in.fmt = '%16.6f';
 in.fid = fid;
-mprint(tmp,in); 
+mprint(tmp,in);
 
 % individual intercepts
 
@@ -192,7 +192,7 @@ tmpi = [idin indcomp];
 ini.cnames = strvcat(istring, cpstring);
 ini.fmt = '%16.6f';
 ini.fid = fid;
-mprint(tmpi,ini); 
+mprint(tmpi,ini);
 
 % ==================== end of case fixed
 
@@ -230,7 +230,7 @@ end;
 in.rnames = rnames;
 in.fmt = '%16.6f';
 in.fid = fid;
-mprint(tmp,in); 
+mprint(tmp,in);
 
 % individual intercepts
 
@@ -246,7 +246,7 @@ tmpi = [idin indcomp];
 ini.cnames = strvcat(istring, cpstring);
 ini.fmt = '%16.6f';
 ini.fid = fid;
-mprint(tmpi,ini); 
+mprint(tmpi,ini);
 
 % ==================== end of case Random
 
@@ -254,5 +254,5 @@ otherwise
 error('results structure unknown to prt_panel');
 end;
 
-  
-  
+
+

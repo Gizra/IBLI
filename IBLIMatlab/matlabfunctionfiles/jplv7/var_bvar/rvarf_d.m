@@ -1,13 +1,13 @@
-% PURPOSE: An example of using rvarf(), 
-%          to produce var-model forecasts                                                 
-%          (based on Bayesian Spatial contiguity prior) 
-%              
-% References: LeSage and Krivelyova (1998) 
+% PURPOSE: An example of using rvarf(),
+%          to produce var-model forecasts
+%          (based on Bayesian Spatial contiguity prior)
+%
+% References: LeSage and Krivelyova (1998)
 % ``A Spatial Prior for Bayesian Vector Autoregressive Models'',
 % forthcoming Journal of Regional Science, (on http://www.econ.utoledo.edu)
 % and
 % LeSage and Krivelova (1997) (on http://www.econ.utoledo.edu)
-% ``A Random Walk Averaging Prior for Bayesian Vector Autoregressive Models''            
+% ``A Random Walk Averaging Prior for Bayesian Vector Autoregressive Models''
 %---------------------------------------------------
 % USAGE: rvarf_d
 %---------------------------------------------------
@@ -18,14 +18,14 @@ load test.dat; % a test data set containing
 % data covers 1982,1 to 1996,5
 
 vnames =  ['  il',
-           '  in',    
-           '  ky',    
-           '  mi',    
-           '  oh',    
-           '  pa',    
-           '  tn',    
-           '  wv'];    
-     
+           '  in',
+           '  ky',
+           '  mi',
+           '  oh',
+           '  pa',
+           '  tn',
+           '  wv'];
+
 y = test;
 [nobs neqs] = size(y);
 
@@ -36,13 +36,13 @@ begf = nobs-nfor+1; % beginning forecast period
 % prior hyperparameters
 % priors for contiguous variables:  N(w(i,j),sig) for 1st own lag
 %                                  N(  0 ,tau*sig/k) for lag k=2,...,nlag
-%               
-% priors for non-contiguous variables are:  N(w(i,j) ,theta*sig/k) for lag k 
-%  
+%
+% priors for non-contiguous variables are:  N(w(i,j) ,theta*sig/k) for lag k
+%
 % e.g., if y1, y3, y4 are contiguous variables in eq#1, y2 non-contiguous
 %  w(1,1) = 1/3, w(1,3) = 1/3, w(1,4) = 1/3, w(1,2) = 0
-%                                              
-% typical values would be: sig = .1-.3, tau = 4-8, theta = .5-1  
+%
+% typical values would be: sig = .1-.3, tau = 4-8, theta = .5-1
 sig = 0.1;
 tau = 6;
 theta = 0.5;
@@ -52,7 +52,7 @@ freq = 12;   % monthly data
 % of the states as weights to produce prior means
 
  weight = ones(neqs,neqs); % set everything to contiguous
- 
+
  weight(1,4) = 0.0;  % specify non-contiguous states
  weight(1,5) = 0.0;
  weight(1,6) = 0.0;

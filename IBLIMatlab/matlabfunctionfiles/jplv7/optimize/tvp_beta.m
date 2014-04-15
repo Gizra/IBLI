@@ -9,7 +9,7 @@ function [beta, ferror] =  tvp_beta(parm,y,x)
 % -------------------------------------------------------------
 % RETURNS:   beta = (Txk) matrix of tvp beta estimates
 %          ferror = (Tx2) matrix with forecast error and
-%                         conditional variance        
+%                         conditional variance
 % -------------------------------------------------------------
 
 n = length(y);
@@ -35,7 +35,7 @@ pll = eye(k)*50;
 
 for iter=1:n;
 xt = x(iter,:);
-yt = y(iter,1);     
+yt = y(iter,1);
 betatl = f*betall;
 ptl = f*pll*f' + qq;
 fcast = yt - xt*betatl;

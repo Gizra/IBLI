@@ -3,14 +3,14 @@ function result = tvp(y,x,parm,info)
 %          y(t) = X(t)*B(t) + e(t), e(t) = N(0,sige^2)
 %          B(t) = B(t-1) + v(t),    v(t) = N(0,sigb^2)
 %          optional model variant:  v(t) = N[0,delta*sige^2*inv(X'X)]
-%          (Zellner's g-prior)          
+%          (Zellner's g-prior)
 % -------------------------------------------------------------------
 % USAGE:     result = tvp(y,x,parm,info);
 %        or: result = tvp(y,x,parm); for default options
 % where: y = dependent variable vector
 %        x = explanatory variable matrix
 %     parm =  --- for normal model ---
-%            (k+1)x1 vector of starting values 
+%            (k+1)x1 vector of starting values
 %             parm(1,1)     = sige
 %             parm(2:k+1,1) = sigb vector
 %     parm =  --- for Zellner g-prior model ---
@@ -22,9 +22,9 @@ function result = tvp(y,x,parm,info)
 %   info.v0 = a (kxk) matrix with initial matrix for sigb
 %                (default = eye(k)*1e+5, a diffuse prior)
 %   info.delta = delta (starting value for delta in Zellner g-prior model)
-%                (same as parm(2,1) value)             
-%   info.start = starting observation (default: 2*k+1)  
-%   --- optimization options ---              
+%                (same as parm(2,1) value)
+%   info.start = starting observation (default: 2*k+1)
+%   --- optimization options ---
 %   info.prt   = 1 for printing basic intermediate results (default = 0)
 %              = 2 for printing detailed stuff
 %   info.deriv = Increment in numerical derivs                [.000001]
@@ -33,7 +33,7 @@ function result = tvp(y,x,parm,info)
 %   info.lamda = Minimum eigenvalue of Hessian for Marquardt      [.01]
 %   info.cond  = Tolerance level for condition of Hessian        [1000]
 %   info.btol  = Tolerance for convergence of parm vector        [1e-4]
-%   info.ftol  = Tolerance for convergence of objective function [sqrt(eps)] 
+%   info.ftol  = Tolerance for convergence of objective function [sqrt(eps)]
 %   info.gtol  = Tolerance for convergence of gradient           [sqrt(eps)]
 % -------------------------------------------------------------------
 % RETURNS: a result structure
@@ -42,9 +42,9 @@ function result = tvp(y,x,parm,info)
 %       result.stds   = std of sige estimate
 %       result.delta  = delta estimate (for g-prior model), 0 otherwise
 %       result.stdd   = std of delta estimate (for g-prior model), 0 otherwise
-%       result.sigb   = a (kx1) vector of sig beta estimates      
-%       result.vcov   = a (kxk) var-cov matrix for the sig beta parameters 
-%       result.stdb   = std deviation of sigb estimates      
+%       result.sigb   = a (kx1) vector of sig beta estimates
+%       result.vcov   = a (kxk) var-cov matrix for the sig beta parameters
+%       result.stdb   = std deviation of sigb estimates
 %       result.tstat  = a (k+1) x 1 vector of t-stats for [sige sigb]'
 %       result.beta   = a (start:n x k) matrix of time-varying beta hats
 %       result.ferror = a (start:n x 1) vector of forecast errors
@@ -93,10 +93,10 @@ if ~isstruct(info)
 end;
 % parse options
 fields = fieldnames(info);
-nf = length(fields); 
+nf = length(fields);
   for i=1:nf
     if strcmp(fields{i},'maxit')
-        infoz.maxit = info.maxit; 
+        infoz.maxit = info.maxit;
     elseif strcmp(fields{i},'btol')
         infoz.btol = info.btol;
     elseif strcmp(fields{i},'ftol')
@@ -110,18 +110,18 @@ nf = length(fields);
     elseif strcmp(fields{i},'prt')
         infoz.prt = info.prt;
     elseif strcmp(fields{i},'deriv')
-        infoz.delta = info.deriv;   
+        infoz.delta = info.deriv;
     elseif strcmp(fields{i},'lamda')
-        infoz.lambda = info.lamda;  
+        infoz.lambda = info.lamda;
     elseif strcmp(fields{i},'start')
-        start = info.start;     
+        start = info.start;
     elseif strcmp(fields{i},'b0')
         priorb0 = info.b0;
     elseif strcmp(fields{i},'v0')
-        priorv0 = info.v0; 
+        priorv0 = info.v0;
     elseif strcmp(fields{i},'delta');
     delta = info.delta;
-    dflag = 1;      
+    dflag = 1;
     end;
   end;
 elseif nargin == 3
@@ -130,7 +130,7 @@ else
 error('tvp: Wrong # of input arguments');
 end;
 
-if dflag == 0         
+if dflag == 0
 chk = length(parm);
  if chk ~= k+1
  error('tvp: Wrong # of initial parameter values in parm');
@@ -146,9 +146,9 @@ end;
 
 if dflag == 1 % call likelihood function with delta argument
               % for Zellner g-prior
-oresult = maxlik('tvp_zglike',parm,infoz,y,x,start,priorb0,priorv0); 
+oresult = maxlik('tvp_zglike',parm,infoz,y,x,start,priorb0,priorv0);
 else          % call likelihood function without delta argument
-oresult = maxlik('tvp_like',parm,infoz,y,x,start,priorb0,priorv0); 
+oresult = maxlik('tvp_like',parm,infoz,y,x,start,priorb0,priorv0);
 end;
 niter = oresult.iter;
 like = -oresult.f;
@@ -184,7 +184,7 @@ tstat = tmp./diag(sqrt(inv(vcovt)));
 stdb = tmp(2:k+1,1)./tstat(2:k+1,1);
 end;
 time = oresult.time;
-  
+
 % produce tvp beta hats
 if dflag == 1
 [beta ferror] = tvp_zgfilter(parm1,y,x,start,priorb0,priorv0);
@@ -247,17 +247,17 @@ function [betao, ferroro] =  tvp_filter(parm,y,x,start,priorb0,priorv0)
 %        y = (nx1) data vector
 %        x = (nxk) data matrix
 %    start = # of observation to start the filter (default = 1)
-%    priorb0 = (k x 1) vector with prior b0 values 
+%    priorb0 = (k x 1) vector with prior b0 values
 %              (default = zeros(k,1), diffuse)
 %    priorv0 = (k x k) matrix with prior variance for sigb
 %              (default = eye(k)*1e+5, a diffuse prior)
 % -------------------------------------------------------------
 % NOTE: the filter starts at obs=1, but only returns information
-%       from start onward            
+%       from start onward
 % -------------------------------------------------------------
 % RETURNS:   beta = (start:n x k) matrix of tvp beta estimates
 %          ferror = (start:n x 2) matrix with forecast error and
-%                         conditional variance        
+%                         conditional variance
 % -------------------------------------------------------------
 
 % written by:
@@ -303,7 +303,7 @@ pll = priorv0;
 
 for iter=1:n;
 xt = x(iter,:);
-yt = y(iter,1);     
+yt = y(iter,1);
 betatl = f*betall;
 ptl = f*pll*f' + qq;
 fcast = yt - xt*betatl;
@@ -328,7 +328,7 @@ function [betao, ferroro] =  tvp_zgfilter(parm,y,x,start,priorb0,priorv0)
 %          given maximum likelihood estimates for Zellner g-prior tvp model
 %          y(t) = X(t)*B(t) + e(t), e(t) = N(0,sige^2)
 %          B(t) = B(t-1) + v(t),    v(t) = N[0,delta*sige*inv(X'X)]
-%          (Zellner's g-prior)   
+%          (Zellner's g-prior)
 % -------------------------------------------------------------
 % USAGE: [beta ferror] = tvp_zgfilter(parm,y,x,start,priorb0,priorv0)
 % where: parm = a vector of maximum likelihood estimates
@@ -336,17 +336,17 @@ function [betao, ferroro] =  tvp_zgfilter(parm,y,x,start,priorb0,priorv0)
 %        y = (nx1) data vector
 %        x = (nxk) data matrix
 %    start = # of observation to start the filter (default = 1)
-%    priorb0 = (k x 1) vector with prior b0 values 
+%    priorb0 = (k x 1) vector with prior b0 values
 %              (default = zeros(k,1), diffuse)
 %    priorv0 = (k x k) matrix with prior variance for sigb
 %              (default = eye(k)*1e+5, a diffuse prior)
 % -------------------------------------------------------------
 % NOTE: the filter starts at obs=1, but only returns information
-%       from start onward            
+%       from start onward
 % -------------------------------------------------------------
 % RETURNS:   beta = (start:n x k) matrix of tvp beta estimates
 %          ferror = (start:n x 2) matrix with forecast error and
-%                         conditional variance        
+%                         conditional variance
 % -------------------------------------------------------------
 
 % written by:
@@ -389,7 +389,7 @@ pll = priorv0;
 
 for iter=1:n;
 xt = x(iter,:);
-yt = y(iter,1);     
+yt = y(iter,1);
 betatl = f*betall;
 ptl = f*pll*f' + qq;
 fcast = yt - xt*betatl;

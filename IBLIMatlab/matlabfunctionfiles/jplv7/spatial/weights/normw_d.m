@@ -1,5 +1,5 @@
 % PURPOSE: An example of using normw() to produce a normalized 1st order contiguity matrix
-%          
+%
 %---------------------------------------------------
 % USAGE: normw_d
 %---------------------------------------------------

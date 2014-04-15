@@ -11,7 +11,7 @@ function delta=aggreg_test(Y,y,ta,s,lim);
 %            ta=1 ---> sum (flow)
 %            ta=2 ---> average (index)
 %            ta=3 ---> last element (stock) ---> interpolation
-%        s: number of high frequency data points for each low frequency data points 
+%        s: number of high frequency data points for each low frequency data points
 %            s= 4 ---> annual to quarterly
 %            s=12 ---> annual to monthly
 %            s= 3 ---> quarterly to monthly

@@ -1,24 +1,24 @@
 function results = semip_gc(y,x,W,m,mobs,ndraw,nomit,prior)
 % PURPOSE: C-MEX version of: Bayesian Probit with spatial individual effects:
-%         Y = (Yi, i=1,..,m) with each vector, Yi = (yij:j=1..Ni) consisting of individual 
-%          dichotomous observations in regions i=1..m, defined by yij = Indicator(zij>0), 
+%         Y = (Yi, i=1,..,m) with each vector, Yi = (yij:j=1..Ni) consisting of individual
+%          dichotomous observations in regions i=1..m, defined by yij = Indicator(zij>0),
 %          where latent vector Z = (zij) is given by the linear model:
 %
 %          Z = X*b + del*a + e   with:
 %
-%          x = n x k matrix of explanatory variables [n = sum(Ni: i=1..m)]; 
+%          x = n x k matrix of explanatory variables [n = sum(Ni: i=1..m)];
 %             del = n x m indicator matrix with del(j,i) = 1 iff indiv j is in reg i;
 %          a = (ai: i=1..m) a vector of random regional effects modeled by
 %
 %          a = rho*W*a + U,     U ~ N[0,sige*I_m] ; (I_m = m-square Identity matrix)
 %
-%          and with e ~ N(0,V), V = diag(del*v) where v = (vi:i=1..m). 
+%          and with e ~ N(0,V), V = diag(del*v) where v = (vi:i=1..m).
 %
 %          The priors for the above parameters are of the form:
 %          r/vi ~ ID chi(r), r ~ Gamma(mm,kk)
-%          b ~ N(c,T),  
-%          1/sige ~ Gamma(nu,d0), 
-%          rho ~ Uniform(1/lmin,1/lmax) 
+%          b ~ N(c,T),
+%          1/sige ~ Gamma(nu,d0),
+%          rho ~ Uniform(1/lmin,1/lmax)
 %-----------------------------------------------------------------
 % USAGE: results = semip_gc(y,x,W,m,mobs,ndraw,nomit,prior)
 % where: y = dependent variable vector (nobs x 1) [must be zero-one]
@@ -28,11 +28,11 @@ function results = semip_gc(y,x,W,m,mobs,ndraw,nomit,prior)
 %     mobs = an m x 1 vector containing the # of observations in each
 %            region [= (Ni:i=1..m) above]
 %    ndraw = # of draws
-%    nomit = # of initial draws omitted for burn-in            
+%    nomit = # of initial draws omitted for burn-in
 %    prior = a structure variable with:
-%            prior.beta  = prior means for beta,  (= c above) 
+%            prior.beta  = prior means for beta,  (= c above)
 %                          (default = 0)
-%            prior.bcov  = prior beta covariance , (= T above)  
+%            prior.bcov  = prior beta covariance , (= T above)
 %                          [default = 1e+12*I_k ]
 %            prior.rval  = r prior hyperparameter, default=4
 %            prior.mm     = informative Gamma(mm,kk) prior on r
@@ -40,14 +40,14 @@ function results = semip_gc(y,x,W,m,mobs,ndraw,nomit,prior)
 %            prior.nu    = informative Gamma(nu,d0) prior on sige
 %            prior.d0    = default: nu=0,d0=0 (diffuse prior)
 %            prior.rmin  = (optional) min rho used in sampling (default = 0)
-%            prior.rmax  = (optional) max rho used in sampling (default = 1)  
+%            prior.rmax  = (optional) max rho used in sampling (default = 1)
 %            prior.lflag = 0 for full lndet computation (default = 1, fastest)
 %                        = 1 for MC approx (fast for large problems)
 %                        = 2 for Spline approx (medium speed)
-%            prior.eflag = 0 for no eigenvalue calculations, 
+%            prior.eflag = 0 for no eigenvalue calculations,
 %                        = 1 for eigenvalue bounds on rho
 %            prior.order = order to use with prior.lflag = 1 option (default = 50)
-%            prior.iter  = iters to use with prior.lflag = 1 option (default = 30) 
+%            prior.iter  = iters to use with prior.lflag = 1 option (default = 30)
 %            prior.seed  = a numerical value to seed the random number generator
 %                         (default is to use the system clock which produces
 %                          different results on every run)
@@ -59,7 +59,7 @@ function results = semip_gc(y,x,W,m,mobs,ndraw,nomit,prior)
 %          results.adraw  = a draws (ndraw-nomit x m)
 %          results.amean  = mean of a draws (m x 1)
 %          results.sdraw  = sige draws (ndraw-nomit x 1)
-%          results.vmean  = mean of vi draws (m x 1) 
+%          results.vmean  = mean of vi draws (m x 1)
 %          results.rdraw  = r draws (ndraw-nomit x 1) (if m,k input)
 %          results.bmean  = b prior means, prior.beta from input
 %          results.bstd   = b prior std deviations sqrt(diag(prior.bcov))
@@ -80,24 +80,24 @@ function results = semip_gc(y,x,W,m,mobs,ndraw,nomit,prior)
 %          results.time1  = time for eigenvalue calculation
 %          results.time2  = time for log determinant calculation
 %          results.time3  = time for sampling
-%          results.time   = total time taken 
+%          results.time   = total time taken
 %          results.rmax   = 1/max eigenvalue of W (or rmax if input)
-%          results.rmin   = 1/min eigenvalue of W (or rmin if input)       
-%          results.eflag  = 0 for no eigenvalue calculations, 1 for eigenvalues   
+%          results.rmin   = 1/min eigenvalue of W (or rmin if input)
+%          results.eflag  = 0 for no eigenvalue calculations, 1 for eigenvalues
 %          results.tflag  = 'plevel' (default) for printing p-levels
-%                         = 'tstat' for printing bogus t-statistics 
+%                         = 'tstat' for printing bogus t-statistics
 %          results.prho   = prior for rho (from input)
 %          results.rvar   = prior variance for rho (from input)
 %          results.pflag  = flag for normal prior on rho, =0 diffuse, =1 normal prior
 %          results.lflag  = lflag from input
 %          results.iter   = prior.iter  option from input
 %          results.order  = prior.order option from input
-%          results.limit  = matrix of [rho lower95,logdet approx, upper95] 
-%                           intervals for the case of lflag = 1 
+%          results.limit  = matrix of [rho lower95,logdet approx, upper95]
+%                           intervals for the case of lflag = 1
 %          results.seed   = seed (if input, or zero if not)
 % ----------------------------------------------------
 % NOTES: see c_source/semip folder for source code semip_gcc.c
-%        compile with: mex semip_gcc.c matrixjpl.c randomlib.c   
+%        compile with: mex semip_gcc.c matrixjpl.c randomlib.c
 % If you input a continuous y-vector, no truncated draws are done
 % producing spatial regression estimates with individual effects in place
 % of spatial probit estimates.
@@ -184,7 +184,7 @@ if nargin == 8   % parse input values
  nf = length(fields);
  for i=1:nf
     if strcmp(fields{i},'rval')
-        rval = prior.rval; 
+        rval = prior.rval;
     elseif strcmp(fields{i},'m')
         mm = prior.m;
         kk = prior.k;
@@ -214,7 +214,7 @@ if nargin == 8   % parse input values
        iter = prior.iter; results.iter = iter;
     elseif strcmp(fields{i},'seed');
     seed = prior.seed;
-    seedflag = 1;    
+    seedflag = 1;
     end;
  end;
 
@@ -252,10 +252,10 @@ end;
 end;
 
 if eflag == 1; % Compute eigenvalues
-t0 = clock;  
+t0 = clock;
 opt.tol = 1e-3; opt.disp = 0;
-lambda = eigs(sparse(W),speye(m),1,'SR',opt);  
-rmin = 1/lambda;   
+lambda = eigs(sparse(W),speye(m),1,'SR',opt);
+rmin = 1/lambda;
 rmax = 1;
 time1 = etime(clock,t0);
 end;
@@ -299,7 +299,7 @@ error('semip_gc: unrecognized lflag value on input');
 
 end; % end of different det calculation options
 
-results.rmax = rmax; 
+results.rmax = rmax;
 results.rmin = rmin;
 
 % ====== initializations
@@ -337,11 +337,11 @@ if seedflag == 0
    [bdraw,adraw,pdraw,sdraw,rdraw,vmean,amean,zmean,yhat] = semip_gcc(...
    y,x,W,ndraw,nomit,nsave,n,k,m,mobs,a,nu,d0,rval,mm,kk,detval,ngrid,TI,TIc);
 time3 = etime(clock,t0);
-else 
+else
    [bdraw,adraw,pdraw,sdraw,rdraw,vmean,amean,zmean,yhat] = semip_gcc(...
    y,x,W,ndraw,nomit,nsave,n,k,m,mobs,a,nu,d0,rval,mm,kk,detval,ngrid,TI,TIc,rseed);
 time3 = etime(clock,t0);
-end;    
+end;
 
 time = etime(clock,timet);
 

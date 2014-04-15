@@ -12,12 +12,12 @@ function ylevf = arf(y,nlag,nfor,begf,transf);
 %                = 1, 1st differences used to estimate the model
 %                = freq, seasonal differences used to estimate
 %                = cal-structure growth rates used to estimate
-%                  e.g., cal(1982,1,12) [see cal() function]              
+%                  e.g., cal(1982,1,12) [see cal() function]
 %-------------------------------------------------------------
 % NOTE: constant term included automatically
 %-------------------------------------------------------------
-% RETURNS: 
-%      yfor = an nfor x 1 vector of level forecasts 
+% RETURNS:
+%      yfor = an nfor x 1 vector of level forecasts
 %-------------------------------------------------------------
 % SEE ALSO: ar, plt_ar, prt_ar
 %-------------------------------------------------------------
@@ -86,7 +86,7 @@ iota = trimr(iota,nlag+freq,nobs-begf+1);
 dys = trimr(dy,nlag+freq,nobs-begf+1);
 xlag = trimr(xlag,nlag+freq,nobs-begf+1);
 
-% add constant to x-matrix 
+% add constant to x-matrix
 xmat = [xlag iota];
 
 % end of growth-rates transform case
@@ -104,7 +104,7 @@ iota = trimr(iota,nlag+freq,nobs-begf+1);
 dys = trimr(dy,nlag+freq,nobs-begf+1);
 xlag = trimr(xlag,nlag+freq,nobs-begf+1);
 
-% add constant to x-matrix 
+% add constant to x-matrix
 xmat = [xlag iota];
 
 otherwise  % case of no transformation
@@ -119,7 +119,7 @@ dy   = y;
 xlag = trimr(xlag,nlag,nobs-begf+1);
 iota = trimr(iota,nlag,nobs-begf+1);
 
-% add constant to x-matrix 
+% add constant to x-matrix
 xmat = [xlag iota];
 
 end; % end of data transformation cases
@@ -137,18 +137,18 @@ xpx = xmat'*xmat;
 % pull out each y-vector and run regressions
 for j=1:neqs;
  yvec = dys(:,j);
- bhat = (xpx)\(xmat'*yvec); 
+ bhat = (xpx)\(xmat'*yvec);
  % save bhat
  bmat(:,j) = bhat;
-end; 
+end;
 % end of loop over equations
 
 
-% given bhat estimates, generate future forecasts 
+% given bhat estimates, generate future forecasts
 % These may be levels, 1st-differences, growth rates or seas diff's
 % we worry transforming back to levels later
 
-% 1-step-ahead forecast 
+% 1-step-ahead forecast
 xtrunc = [dy(nmin-nlag:nmin,:)
           zeros(1,neqs)];
 xfor = mlag(xtrunc,nlag);
@@ -201,7 +201,7 @@ cnt = step-(nlag-1);
   xnew(i,:) = yfor(cnt,:);
   cnt = cnt+1;
  end;
- 
+
 xfor = mlag(xnew,nlag);
 [xend junk] = size(xfor);
 xobs = xfor(xend,:);
@@ -228,7 +228,7 @@ ylevf = zeros(nfor,neqs);
 % 1-step-ahead forecast
 ylevf(1,:) = yfor(1,:) + y(begf-1,:); % add change to actual from time t;
 % 2-nfor-step-ahead forecasts
-for i=2:nfor % 
+for i=2:nfor %
 ylevf(i,:) = yfor(i,:) + ylevf(i-1,:);
 end;
 
@@ -267,4 +267,4 @@ ylevf = yfor;
 end;
 
 
-  
+

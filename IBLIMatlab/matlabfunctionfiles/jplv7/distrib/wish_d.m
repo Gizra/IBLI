@@ -1,5 +1,5 @@
 % PURPOSE: demo of random draws from a Wishart distribution
-% 
+%
 %---------------------------------------------------
 % USAGE: wish_d
 %---------------------------------------------------

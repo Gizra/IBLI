@@ -11,8 +11,8 @@ function [rmin,rmax,time2] = sar_eigs(eflag,W,rmin,rmax,n);
 if eflag == 1 % do eigenvalue calculations
 t0 = clock;
 opt.tol = 1e-3; opt.disp = 0;
-lambda = eigs(sparse(W),speye(n),1,'SR',opt);  
-rmin = real(1/lambda);   
+lambda = eigs(sparse(W),speye(n),1,'SR',opt);
+rmin = real(1/lambda);
 rmax = 1.0;
 time2 = etime(clock,t0);
 else % use rmin,rmax arguments from input or defaults -1,1

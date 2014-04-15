@@ -18,7 +18,7 @@ function result = normt_inv(p,mu,sigma2,left,right)
 % Texas State University-San Marcos
 % 601 University Drive
 % San Marcos, TX 78666
-%jlesage@spatial-econometrics.com    
+%jlesage@spatial-econometrics.com
 if nargin ~= 5
 error('normt_inv: Wrong # of arguments');
 end;

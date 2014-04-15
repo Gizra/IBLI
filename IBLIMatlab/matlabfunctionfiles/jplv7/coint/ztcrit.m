@@ -8,15 +8,15 @@ function crit = ztcrit(nobs,p)
 %                 p =  0, for constant term
 %                 p =  1, for constant plus time-trend
 %                 p >  1, for higher order polynomial
-% ---------------------------------------------------------          
+% ---------------------------------------------------------
 % NOTE: only works for p < 5
 %       Computed using 10000 iterations.
-% ---------------------------------------------------------          
+% ---------------------------------------------------------
 % RETURNS: crit = a (6 x 1) vector of critical values:
-%                 [1% 5% 10% 90% 95% 99%] quintiles     
-% ---------------------------------------------------------                                
+%                 [1% 5% 10% 90% 95% 99%] quintiles
+% ---------------------------------------------------------
 % References: Said and Dickey (1984) 'Testing for Unit Roots in
-% Autoregressive Moving Average Models of Unknown Order', 
+% Autoregressive Moving Average Models of Unknown Order',
 % Biometrika, Volume 71, pp. 599-607.
 
 % written by:
@@ -97,21 +97,21 @@ function crit = ztcrit(nobs,p)
   -4.84459   -4.23012   -3.93845   -2.15135   -1.89876   -1.39654
   -5.10571   -4.56846   -4.28913   -2.47637   -2.22517   -1.79586
   -5.39872   -4.86396   -4.58525   -2.78971   -2.56181   -2.14042];
-  
+
   i = round(nobs/50) + 1;
-  
+
   if (nobs < 50)
         i = i - 1 ;
   end;
-       
+
   if (i > 10);
       i = 10;
   end;
-     
+
   if (p > 5)
    crit = zeros(6,1);
   end;
-  
+
   i = (i-1)*7 + p + 2;
-  
+
   crit = zt(i,:)';

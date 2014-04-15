@@ -1,4 +1,4 @@
-% PURPOSE: Examples of using tsprint()                               
+% PURPOSE: Examples of using tsprint()
 %          to print matrices with variable name labels
 %          and row labels for time-series dates
 %---------------------------------------------------

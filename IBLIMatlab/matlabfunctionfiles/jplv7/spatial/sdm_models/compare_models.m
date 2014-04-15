@@ -1,6 +1,6 @@
 % PURPOSE: An example of using sdm_g() sem_g() Gibbs sampling
 %          spatial model comparisons using log marginal posterior
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
 % USAGE: model_compare
 %---------------------------------------------------
@@ -46,9 +46,9 @@ in.rnames = strvcat('Models','sem','sdm');
 mprint(probs,in);
 
 
-% generate an sdm model 
+% generate an sdm model
 n = length(latt);
-IN = eye(n); 
+IN = eye(n);
 rho = 0.7;  % true value of rho
 sige = 10;
 k = 3;
@@ -64,9 +64,9 @@ xsdm = [x Wx];
 beta = [beta
         beta(2:end,1)];
 
-    
+
 % sdm model generated here
-y = (IN-rho*W)\(xsdm*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige)); 
+y = (IN-rho*W)\(xsdm*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige));
 
 clear prior2;
 prior2.novi = 1;   % homoscedastic model
@@ -87,7 +87,7 @@ mprint(probs,in);
 
 
 % sdm model generated here
-y = (IN-rho*W)\(xsdm*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige)); 
+y = (IN-rho*W)\(xsdm*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige));
 
 clear prior2;
 prior2.novi = 1;   % homoscedastic model

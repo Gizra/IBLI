@@ -36,7 +36,7 @@ function results=sempanel_gmm(y,x,W,T,options)
 %         results.rbar          = rbar-squared
 %         results.se            = Standard errors from EGLS
 %         results.nobs          = number of observations
-%         results.nvar          = number of variables 
+%         results.nvar          = number of variables
 %         results.time1         = time for optimization
 %         results.time          = total time taken
 %         results.iter          = # of EGLS iterations taken
@@ -49,7 +49,7 @@ function results=sempanel_gmm(y,x,W,T,options)
 % Model with Autoregressive Disturbances. Journal of Real
 % Estate and Finance Economics,  17, 99-121.
 % Documentation in microsoft word format included in the Econometrics Toolbox
-% GENERALIZED MOMENTS ESTIMATION FOR FLEXIBLE SPATIAL ERROR MODELS:  
+% GENERALIZED MOMENTS ESTIMATION FOR FLEXIBLE SPATIAL ERROR MODELS:
 % A LIBRARY FOR MATLAB, by Shawn Bucholtz
 % ---------------------------------------------------
 
@@ -87,23 +87,23 @@ fields = fieldnames(options);
 nf = length(fields);
  for i=1:nf
     if strcmp(fields{i},'prt')
-        infoz2.prt = options.prt; 
+        infoz2.prt = options.prt;
     elseif strcmp(fields{i},'maxit')
         infoz2.maxit = options.maxit;
     elseif strcmp(fields{i},'iter')
         itflag = options.iter;
     elseif strcmp(fields{i},'btol')
-        infoz2.btol = options.btol;   
+        infoz2.btol = options.btol;
     elseif strcmp(fields{i},'ftol');
         infoz2.ftol = options.ftol;
   end;
  end;
 end;
-    
+
 
 
 results.meth = 'sempanel_gmm';
-time1 = 0; 
+time1 = 0;
 time2 = 0;
 
 timet = clock; % start the clock for overall timing
@@ -158,7 +158,7 @@ un = kron(speye(T),
     [lambdahat,infoz2,stat]=minz(lambdavec,infoz2.func,infoz2,Gn,Gn2);
 
     lambdavec = [lambdahat(1);lambdahat(2)];
-    
+
     %Estimate Parameters using EGLS;
     tmp = speye(n) - lambdahat(1)*sparse(W);
     xs = tmp*x;
@@ -184,15 +184,15 @@ elseif itflag == 0
     Gn2=[(1/n)*e'*e;(1/n)*se'*se;(1/n)*e'*se];
     %Pass arguments to MInZ function;
     [lambdahat,infoz2,stat]=minz(lambdavec,infoz2.func,infoz2,Gn,Gn2);
-    
+
     %Estimate Parameters using EGLS;
     tmp = speye(n) - lambdahat(1)*sparse(W);
     xs = tmp*x;
     ys = tmp*y;
     results.beta = xs\ys;
 
-end;    
-    
+end;
+
 time1 = etime(clock,t0);
 results.iter = iter;
 
@@ -209,7 +209,7 @@ results.lambda=lambdahat(1);
 results.yhat = x*results.beta;
 results.resid = y - results.yhat;
 
-B = speye(n) - results.lambda*sparse(W); 
+B = speye(n) - results.lambda*sparse(W);
 et = B*e;
 epe = et'*et;
 results.sige = (1/n)*epe;
@@ -255,15 +255,15 @@ psi22 = (sigh)*trA2A2/(2*n);
 
 phihat = [psi11 psi12
           psi21 psi22];
-      
+
 % =============================
 JJI = inv(J'*J);
 omega = JJI*J'*phihat*J*JJI;
-     
+
 % =============================
 results.lambdatstat = lambdahat(1)/sqrt(omega/n);
 results.std_rho = sqrt(omega/n);
-    
+
 % R-squared calculation
 sigu = results.sige*n;
 ym = y - mean(y);

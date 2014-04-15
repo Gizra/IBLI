@@ -13,9 +13,9 @@ function pdf = logn_pdf (x, a, v)
 % SEE ALSO: logn_d, logn_pdf, logn_inv, logn_rnd
 % -------------------------------------------------------------
 
-% Written by KH (Kurt.Hornik@ci.tuwien.ac.at) 
+% Written by KH (Kurt.Hornik@ci.tuwien.ac.at)
 % Converted to MATLAB by JP LeSage, % jlesage@spatial-econometrics.com
-   
+
 
   if ~((nargin == 1) | (nargin == 3))
     error('Wrong # of arguments to logn_pdf');
@@ -30,12 +30,12 @@ function pdf = logn_pdf (x, a, v)
 % not work for the special cases (Inf, ...)
 % pdf = (x > 0) ./ x .* normal_pdf (log (x), log (a), v);
 % Hence ...
-  
+
   [retval, x, a, v] = com_size(x, a, v);
   if (retval > 0)
     error('logn_pdf: x, m and v must be of common size or scalars');
   end
-  
+
   [r, c] = size (x);
   s = r * c;
   x = reshape (x, 1, s);
@@ -44,11 +44,11 @@ function pdf = logn_pdf (x, a, v)
   pdf = zeros (1, s);
 
   k = find(isnan(x) | ~(a > 0) | ~(a < Inf) ...
-      | ~(v > 0) | ~(v < Inf)); 
+      | ~(v > 0) | ~(v < Inf));
   if any(k)
     pdf(k) = NaN * ones(1, length (k));
   end
-  
+
   k = find((x > 0) & (x < Inf) & (a > 0) & (a < Inf) ...
       & (v > 0) & (v < Inf));
   if any (k)
@@ -56,4 +56,4 @@ function pdf = logn_pdf (x, a, v)
   end
 
   pdf = reshape(pdf, r, c);
-  
+

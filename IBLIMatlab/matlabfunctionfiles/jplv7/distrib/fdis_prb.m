@@ -39,4 +39,4 @@ tst = tst - 0.0001;
 end;
 y(i,1) = betainc(tst,.5*n,.5*m);
     end;
-end;    
+end;

@@ -15,11 +15,11 @@ function llik = tvp_garch_like(parm,y,x,start,priorb0,priorv0)
 %        start     = # of observation to start at
 %                    (default: 2*k+1)
 %        priorb0 = a (k+1)x1 vector with prior for b0
-%                (default: zeros(k+1,1), a diffuse prior)            
+%                (default: zeros(k+1,1), a diffuse prior)
 %        priorv0 = a (k+1)x(k+1) matrix with prior for sigb
-%                (default: eye(k+1)*1e+5, a diffuse prior)                  
+%                (default: eye(k+1)*1e+5, a diffuse prior)
 % ----------------------------------------------------
-% RETURNS: -log likelihood function value (a scalar)                  
+% RETURNS: -log likelihood function value (a scalar)
 % ----------------------------------------------------
 % REFERENCES: Kim and Nelson (1999)
 % State-Space Models with Regime Switching

@@ -2,19 +2,19 @@ function results = becm(y,nlag,tight,weight,decay,r)
 % PURPOSE: performs Bayesian error correction model estimation
 %          using Minnesota-type prior
 %---------------------------------------------------
-% USAGE: result = becm(y,nlag,tight,weight,deacy,r) 
+% USAGE: result = becm(y,nlag,tight,weight,deacy,r)
 % where:    y    = an (nobs x neqs) matrix of y-vectors in levels
 %           nlag = the lag length
 %          tight = Litterman's tightness hyperparameter
 %         weight = Litterman's weight (matrix or scalar)
-%          decay = Litterman's lag decay = lag^(-decay) 
+%          decay = Litterman's lag decay = lag^(-decay)
 %           r    = # of cointegrating relations to use
 %                  (optional: this will be determined using
-%                  Johansen's trace test at 95%-level if left blank)                                    
+%                  Johansen's trace test at 95%-level if left blank)
 % NOTES: constant vector automatically included
 %         x-matrix of exogenous variables not allowed
 %         error correction variables are automatically
-%         constructed using output from Johansen's ML-estimator 
+%         constructed using output from Johansen's ML-estimator
 %---------------------------------------------------
 % RETURNS a structure
 % results.meth  = 'becm'
@@ -26,11 +26,11 @@ function results = becm(y,nlag,tight,weight,decay,r)
 % results.tight = tightness hyperparameter
 % results.weight= weight matrix or scalar
 % results.decay = lag decay hyperparameter
-% --- the following are referenced by equation # --- 
+% --- the following are referenced by equation # ---
 % results(eq).beta   = bhat for equation eq (includes ec-bhats)
-% results(eq).tstat  = t-statistics 
+% results(eq).tstat  = t-statistics
 % results(eq).tprob  = t-probabilities
-% results(eq).resid  = residuals 
+% results(eq).resid  = residuals
 % results(eq).yhat   = predicted values (levels) (nlag+2:nobs,1)
 % results(eq).dyhat  = predicted values (differenced) (nlag+2:nobs,1)
 % results(eq).y      = actual y-level values (nobs x 1)
@@ -38,10 +38,10 @@ function results = becm(y,nlag,tight,weight,decay,r)
 % results(eq).sige   = e'e/(n-k)
 % results(eq).rsqr   = r-squared
 % results(eq).rbar   = r-squared adjusted
-% ---------------------------------------------------    
-%  SEE ALSO: becmf, ecm, recm, prt_var 
 % ---------------------------------------------------
-%  REFERENCES: James P. LeSage, 
+%  SEE ALSO: becmf, ecm, recm, prt_var
+% ---------------------------------------------------
+%  REFERENCES: James P. LeSage,
 % ``A Comparison of the Forecasting Ability of ECM and VAR Models'',
 %  Review of Economics and Statistics,  1990, Vol 72, number 4, pp. 664-671.
 % ---------------------------------------------------
@@ -79,7 +79,7 @@ error('Negative lag decay in becm');
 end;
 
 [wchk1 wchk2] = size(weight);
-if (wchk1 ~= wchk2) 
+if (wchk1 ~= wchk2)
  error('non-square weight matrix in becm');
 elseif wchk1 > 1
  if wchk1 ~= neqs
@@ -109,9 +109,9 @@ if nargin == 6 % user is specifying the # of error correction terms to
  ecvectors = jres.evec;
    index = jres.ind;
  % construct r-error correction variables
- x = mlag(y(:,index),1)*ecvectors(:,1:r); 
+ x = mlag(y(:,index),1)*ecvectors(:,1:r);
    [nobs2 nx] = size(x);
-   
+
 elseif nargin == 5 % we need to find r
  jres = johansen(y,0,nlag);
  % find r = # significant co-integrating relations using
@@ -128,13 +128,13 @@ elseif nargin == 5 % we need to find r
  ecvectors = jres.evec;
    index = jres.ind;
  % construct r error correction variables
- x = mlag(y(:,index),1)*ecvectors(:,1:r); 
-   [junk nx] = size(x);    
+ x = mlag(y(:,index),1)*ecvectors(:,1:r);
+   [junk nx] = size(x);
 else
  error('Wrong # of arguments to becm');
 end;
 
-% nvar adjusted for constant term 
+% nvar adjusted for constant term
  k = neqs*nlag+nx+1;
  nvar = k;
 
@@ -145,7 +145,7 @@ x = trimr(x,1,0);   % account for differencing
 
 % call BVAR using 1st difference and co-integrating variables
 % call depends on whether we have an x-matrix or not
-if nx ~= 0 
+if nx ~= 0
 results = bvar(dy,nlag,tight,weight,decay,x);
 else
 results = bvar(dy,nlag,tight,weight,decay);

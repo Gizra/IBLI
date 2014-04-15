@@ -6,15 +6,15 @@ function prt_semip(results,vnames,fid)
 %        vnames  = an optional vector of variable names
 %        fid     = optional file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
-%--------------------------------------------------- 
+%---------------------------------------------------
 %  NOTES: e.g. vnames = strvcat('y','const','x1','x2');
 %         e.g. fid = fopen('ols.out','wr');
-%  use prt_semip(results,[],fid) to print to a file with no vnames               
+%  use prt_semip(results,[],fid) to print to a file with no vnames
 % --------------------------------------------------
 %  RETURNS: nothing, just prints the spatial regression results
 % --------------------------------------------------
 % SEE ALSO: prt, plt
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -32,7 +32,7 @@ elseif nargin == 3
  nflag = 0;
  [vsize junk] = size(vnames); % user may supply a blank argument
    if vsize > 0
-   nflag = 1;          
+   nflag = 1;
    end;
 else
  error('Wrong # of arguments to prt_semip');
@@ -73,7 +73,7 @@ switch results.meth
 
 
 case {'semip_g', 'semip_gc'} % <=================== probit regression model with individual effects
-                %                      that follow a spatial AR model 
+                %                      that follow a spatial AR model
 
 nobs = results.nobs;
 nvar = results.nvar;
@@ -103,7 +103,7 @@ Vname = 'Variable';
  end; % end of if-else
 end; % end of nflag issue
 
-  
+
 % find posterior means
 tmp1 = mean(results.bdraw);
 pout = mean(results.pdraw);
@@ -132,7 +132,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 e = y - results.yhat;
 sigu = e'*e;
@@ -153,7 +153,7 @@ fprintf(fid,'r-value            = %6d   \n',results.r);
 else
 fprintf(fid,'mean of rdraws     = %9.4f \n',mean(results.rdraw));
 fprintf(fid,'gam(m,k) prior     = %6d,%6d \n',results.m,results.k);
-end;    
+end;
 fprintf(fid,'Nobs, Nvars        = %6d,%6d \n',results.nobs,results.nvar);
 fprintf(fid,'ndraws,nomit       = %6d,%6d \n',results.ndraw,results.nomit);
 fprintf(fid,'total time in secs = %9.4f   \n',results.time);
@@ -196,7 +196,7 @@ bstring = 'Prior Mean';
 tstring = 'Std Deviation';
 
 tmp = [results.bmean results.bstd];
-    
+
 
 cnames = strvcat(bstring,tstring);
 rnames = vstring;
@@ -217,7 +217,7 @@ fprintf(fid,'      Posterior Estimates \n');
  if strcmp(results.tflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -244,7 +244,7 @@ return;
 % <=================== end of semip_g case
 
 case {'semit_g'} % <=================== regression model with individual effects
-                %                      that follow a spatial AR model 
+                %                      that follow a spatial AR model
 
 nobs = results.nobs;
 nvar = results.nvar;
@@ -274,7 +274,7 @@ Vname = 'Variable';
  end; % end of if-else
 end; % end of nflag issue
 
-  
+
 % find posterior means
 tmp1 = mean(results.bdraw);
 pout = mean(results.pdraw);
@@ -303,7 +303,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 e = y - results.yhat;
 sigu = e'*e;
@@ -324,7 +324,7 @@ fprintf(fid,'r-value            = %6d   \n',results.r);
 else
 fprintf(fid,'mean of rdraws     = %9.4f \n',mean(results.rdraw));
 fprintf(fid,'gam(m,k) prior     = %6d,%6d \n',results.m,results.k);
-end;    
+end;
 fprintf(fid,'Nobs, Nvars        = %6d,%6d \n',results.nobs,results.nvar);
 fprintf(fid,'ndraws,nomit       = %6d,%6d \n',results.ndraw,results.nomit);
 fprintf(fid,'total time in secs = %9.4f   \n',results.time);
@@ -359,7 +359,7 @@ bstring = 'Prior Mean';
 tstring = 'Std Deviation';
 
 tmp = [results.bmean results.bstd];
-    
+
 
 cnames = strvcat(bstring,tstring);
 rnames = vstring;
@@ -379,7 +379,7 @@ fprintf(fid,'      Posterior Estimates \n');
  if strcmp(results.tflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';

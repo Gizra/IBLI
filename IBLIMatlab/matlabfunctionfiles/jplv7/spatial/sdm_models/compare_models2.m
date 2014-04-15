@@ -1,6 +1,6 @@
 % PURPOSE: An example of using sdm_g() Gibbs sampling
 %          to compare various weight matrix specifications
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
 % USAGE: model_compare2
 %---------------------------------------------------
@@ -8,8 +8,8 @@
 clear all;
 
 % W-matrix from Anselin's neigbhorhood crime data set
-load anselin.dat; 
-latt = anselin(:,4); % latitude, longitude coordinates 
+load anselin.dat;
+latt = anselin(:,4); % latitude, longitude coordinates
 long = anselin(:,5); % are all we use here
 
 % create W-matrix based on nearest 3 neighbors
@@ -18,7 +18,7 @@ W3 = make_neighborsw(latt,long,3);
 
 % generate an sdm model based on 4 nearest neighbors
 n = length(latt);
-IN = eye(n); 
+IN = eye(n);
 rho = 0.7;  % true value of rho
 sige = 0.5;
 k = 3;
@@ -35,11 +35,11 @@ beta = [beta
         beta(2:end,1)];
 
 vnames = strvcat('y','constant','x1','x2');
-    
+
 % sdm model generated here
 % based on nearest 4-neighbors W-matrix, (W4 from above)
 
-y = (IN-rho*W3)\(xsdm*beta) + (IN-rho*W3)\(randn(n,1)*sqrt(sige)); 
+y = (IN-rho*W3)\(xsdm*beta) + (IN-rho*W3)\(randn(n,1)*sqrt(sige));
 
 
 % estimate 5 models using W1 to W5 as weight matrices
@@ -51,7 +51,7 @@ nomit = 200;
 
 W1 = make_neighborsw(latt,long,1); % create W-matrix based on nearest 1 neighbor
 results1 = sdm_g(y,x,W1,ndraw,nomit,prior);
-% prt(results1,vnames);            
+% prt(results1,vnames);
 W2 = make_neighborsw(latt,long,2); % create W-matrix based on nearest 2 neighbors
 results2 = sdm_g(y,x,W2,ndraw,nomit,prior);
 % prt(results2,vnames);
@@ -80,10 +80,10 @@ mprint(probs,in);
 
 
 % Now run 5 homoscedastic models
-prior2.rval = 100;      % homoscedastic prior 
+prior2.rval = 100;      % homoscedastic prior
 W1 = make_neighborsw(latt,long,1); % create W-matrix based on nearest 1 neighbor
 results6 = sdm_g(y,x,W1,ndraw,nomit,prior2);
-% prt(results6,vnames);            
+% prt(results6,vnames);
 W2 = make_neighborsw(latt,long,2); % create W-matrix based on nearest 2 neighbors
 results7 = sdm_g(y,x,W2,ndraw,nomit,prior2);
 % prt(results7,vnames);

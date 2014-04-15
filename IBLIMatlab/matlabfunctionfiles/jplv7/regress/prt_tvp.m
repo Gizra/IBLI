@@ -2,19 +2,19 @@ function prt_tvp(results,vnames,fid)
 % PURPOSE: Prints output using tvp() regression results structures
 %---------------------------------------------------
 % USAGE: prt_tvp(results,vnames,fid)
-% Where: results = a structure returned by a regression 
+% Where: results = a structure returned by a regression
 %        vnames  = an optional vector of variable names
 %        fid     = optional file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
-%--------------------------------------------------- 
+%---------------------------------------------------
 %  NOTES: e.g. vnames = strvcat('y','const','x1','x2');
 %         e.g. fid = fopen('ols.out','wr');
-%  use prt_tvp(results,[],fid) to print to a file with no vnames               
+%  use prt_tvp(results,[],fid) to print to a file with no vnames
 % --------------------------------------------------
 %  RETURNS: nothing, just prints the regression results
 % --------------------------------------------------
 % SEE ALSO: prt, plt
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -32,7 +32,7 @@ elseif nargin == 3
  nflag = 0;
  [vsize junk] = size(vnames); % user may supply a blank argument
    if vsize > 0
-   nflag = 1;          
+   nflag = 1;
    end;
 else
  error('Wrong # of arguments to prt_tvp');
@@ -97,12 +97,12 @@ fprintf(fid,'Time in secs   = %9.1f \n',results.time);
 fprintf(fid,'***************************************************************\n');
 % now print coefficient estimates, t-statistics and probabilities
 tout = tdis_prb(results.tstat(2:nvar+1,1),nobs);      % find t-stat probabilities
-tmp = [results.sigb results.stdb results.tstat(2:nvar+1,1) tout];  
+tmp = [results.sigb results.stdb results.tstat(2:nvar+1,1) tout];
 % tmp = matrix to be printed
 % column labels for printing results
 bstring = 'Coeffs (sigb)';
-sstring = 'std dev'; 
-tstring = 't-statistic'; 
+sstring = 'std dev';
+tstring = 't-statistic';
 pstring = 't-probability';
 cnames = strvcat(bstring,sstring,tstring,pstring);
 in.cnames = cnames;
@@ -142,7 +142,7 @@ tmp = [temp results.stdhat results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coeffs (sigb)';
 sstring = 'std dev';
-tstring = 't-statistic'; 
+tstring = 't-statistic';
 pstring = 't-probability';
 cnames = strvcat(bstring,sstring,tstring,pstring);
 in.cnames = cnames;
@@ -194,12 +194,12 @@ fprintf(fid,'Time in secs   = %9.1f \n',results.time);
 fprintf(fid,'***************************************************************\n');
 % now print coefficient estimates, t-statistics and probabilities
 tout = tdis_prb(results.tstat,nobs);      % find t-stat probabilities
-tmp = [results.parm results.stdhat results.tstat tout];  
+tmp = [results.parm results.stdhat results.tstat tout];
 % tmp = matrix to be printed
 % column labels for printing results
 bstring = 'Coeffs';
-sstring = 'std dev'; 
-tstring = 't-statistic'; 
+sstring = 'std dev';
+tstring = 't-statistic';
 pstring = 't-probability';
 cnames = strvcat(bstring,sstring,tstring,pstring);
 in.cnames = cnames;

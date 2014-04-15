@@ -18,10 +18,10 @@ function z = trimr(x,n1,n2)
 % jlesage@spatial-econometrics.com
 
   [n junk] = size(x);
-  if (n1+n2) >= n; 
+  if (n1+n2) >= n;
      error('Attempting to trim too much in trimr');
   end;
-  h1 = n1+1;   
+  h1 = n1+1;
   h2 = n-n2;
   z = x(h1:h2,:);
-  
+

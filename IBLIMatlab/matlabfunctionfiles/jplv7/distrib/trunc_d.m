@@ -1,6 +1,6 @@
 % PURPOSE: demo of truncated normal draws
 %          plots pdf for various truncated normal draws
-% 
+%
 %---------------------------------------------------
 % USAGE: trunc_d
 %---------------------------------------------------
@@ -23,7 +23,7 @@ hist(out);
 title('normal 0,1 left-truncated at zero normal');
 pause;
 
-% generate from -1 < +infinity 
+% generate from -1 < +infinity
 % based on mean 1, variance 2
 in = ones(n,1);
 

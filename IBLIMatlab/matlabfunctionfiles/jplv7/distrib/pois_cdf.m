@@ -4,7 +4,7 @@ function f = pois_cdf(x,lambda)
 %---------------------------------------------------
 % USAGE:     cdf = pois_cdf(x,lambda)
 % where:     x   = variable vector (nx1)
-%         lambda = mean 
+%         lambda = mean
 %
 %---------------------------------------------------
 % Reference: Johnson & Kotz, Discrete Distributions, p 114

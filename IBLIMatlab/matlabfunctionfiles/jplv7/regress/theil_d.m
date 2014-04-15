@@ -25,7 +25,7 @@ Vnames = ['y    ',
           'x2   ',
           'x3   ',
           'x4   '];
-          
+
 res = ols(y,x);
 
 nvar = res.nvar;
@@ -34,11 +34,11 @@ prt(res,Vnames);
 
 % set up prior
 rvec = [ 1.0    % prior means for the coefficients
-         1.0    
-         1.0    
-         1.0    
+         1.0
+         1.0
+         1.0
          1.0];
-        
+
 rmat = eye(nvar);
 bv = 10000.0;
 

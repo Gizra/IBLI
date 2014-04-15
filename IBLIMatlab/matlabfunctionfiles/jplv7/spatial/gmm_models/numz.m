@@ -6,7 +6,7 @@ function  G=numz(b,infoz,stat,varargin)
 %   b:        k-vector of parms
 %   infoz:     structure variable with options for MINZ
 %   stat:     structure variable with status for MINZ
-%   varargin: variable number of arguments needed by function 
+%   varargin: variable number of arguments needed by function
 %               being differentiated (infoz.func or infoz.momt)
 %-----------------------------------------------------------------
 %VERSION: 1.1.1 (9/23/00)
@@ -44,5 +44,5 @@ for i = 1:k
 end
 
 if ~(strcmp(infoz.call,'ls') | strcmp(infoz.call,'gmm'))
-  G = G';  
+  G = G';
 end;

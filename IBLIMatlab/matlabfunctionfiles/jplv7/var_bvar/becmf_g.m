@@ -1,7 +1,7 @@
 function ylevf = becmf_g(y,nlag,nfor,begf,prior,ndraw,nomit,r);
-% PURPOSE: Gibbs sampling forecasts for Bayesian error 
+% PURPOSE: Gibbs sampling forecasts for Bayesian error
 %          correction model using Minnesota-type prior
-%          dy = A(L) DY + E, E = N(0,sige*V), 
+%          dy = A(L) DY + E, E = N(0,sige*V),
 %          V = diag(v1,v2,...vn), r/vi = ID chi(r)/r, r = Gamma(m,k)
 %          c = R A(L) + U, U = N(0,Z), Minnesota prior
 %---------------------------------------------------
@@ -9,30 +9,30 @@ function ylevf = becmf_g(y,nlag,nfor,begf,prior,ndraw,nomit,r);
 % where:    y    = an (nobs x neqs) matrix of y-vectors
 %           nlag = the lag length
 %           nfor = the forecast horizon
-%           begf = the beginning date of the forecast           
+%           begf = the beginning date of the forecast
 %          prior = a structure variable
 %               prior.tight,  Litterman's tightness hyperparameter
 %               prior.weight, Litterman's weight (matrix or scalar)
-%               prior.decay,  Litterman's lag decay = lag^(-decay) 
+%               prior.decay,  Litterman's lag decay = lag^(-decay)
 %               prior.rval, r prior hyperparameter, default=4
 %               prior.m,    informative Gamma(m,k) prior on r
-%               prior.k,    informative Gamma(m,k) prior on r  
+%               prior.k,    informative Gamma(m,k) prior on r
 %          ndraw = # of draws
-%          nomit = # of initial draws omitted for burn-in       
+%          nomit = # of initial draws omitted for burn-in
 %              r = # of co-integrating relations to use
 %                  (optional: this will be determined using
-%                  Johansen's trace test at 95%-level if left blank)   
+%                  Johansen's trace test at 95%-level if left blank)
 %---------------------------------------------------------------
 % NOTES: - constant vector automatically included
 %        - x-matrix of exogenous variables not allowed
 %        - error correction variables are automatically
-%          constructed using output from Johansen's ML-estimator     
-%---------------------------------------------------------------      
+%          constructed using output from Johansen's ML-estimator
+%---------------------------------------------------------------
 % RETURNS:
 %  yfor = an nfor x neqs matrix of level forecasts for each equation
 %---------------------------------------------------------------
 % SEE ALSO: bvarf_g, becm_g, recmf_g, rvarf_g
-%---------------------------------------------------------------                      
+%---------------------------------------------------------------
 % REFERENCES:  LeSage, J.P. Applied Econometrics using MATLAB
 %---------------------------------------------------------------
 
@@ -60,9 +60,9 @@ nx = 0;
  jres = johansen(y(1:nmin,:),0,nlag);
  % recover error correction vectors
  ecvectors = jres.evec;
-        index = jres.ind; 
+        index = jres.ind;
  % construct r-error correction variables
- x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r); 
+ x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r);
    [nobs2 nx] = size(x);
   elseif nargin == 7 % we have to determine r-value
  jres = johansen(y(1:nmin,:),0,nlag);
@@ -78,10 +78,10 @@ nx = 0;
  end;
  % recover error correction vectors
  ecvectors = jres.evec;
-        index = jres.ind; 
+        index = jres.ind;
  % construct r error correction variables
- x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r); 
-   [nobs2 nx] = size(x); 
+ x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r);
+   [nobs2 nx] = size(x);
   else
    error('Wrong # of input arguments to becmf');
   end;
@@ -99,7 +99,7 @@ mm = 0; rval = 4; % rval = 4 is default
 nu = 0; d0 = 0; % default to a diffuse prior on sige
 for i=1:nf
     if strcmp(fields{i},'rval')
-        rval = prior.rval; 
+        rval = prior.rval;
     elseif strcmp(fields{i},'m')
         mm = prior.m;
         kk = prior.k;
@@ -112,9 +112,9 @@ for i=1:nf
         warning('Tightness greater than unity in becmf_g');
         end;
     elseif strcmp(fields{i},'weight')
-        weight = prior.weight;       
+        weight = prior.weight;
        [wchk1 wchk2] = size(weight);
-       if (wchk1 ~= wchk2) 
+       if (wchk1 ~= wchk2)
        error('non-square weight matrix in becmf_g');
        elseif wchk1 > 1
         if wchk1 ~= neqs
@@ -122,10 +122,10 @@ for i=1:nf
         end;
        end;
     elseif strcmp(fields{i},'decay')
-        decay = prior.decay;    
+        decay = prior.decay;
         if decay < 0
         error('Negative lag decay in becmf_g');
-        end;       
+        end;
     end;
 end;
 
@@ -134,7 +134,7 @@ if nlag < 1
 error('Lag length less than 1 in becmf_g');
 end;
 
-% truncate to begf-1 for estimation 
+% truncate to begf-1 for estimation
 ytrunc = y(1:nmin,:);
 
 
@@ -153,8 +153,8 @@ b = mean(result(j).bdraw);
 bmat(:,j) = b';
 end;
 
-% given bmat values generate future forecasts 
-% These are 1st-differences, 
+% given bmat values generate future forecasts
+% These are 1st-differences,
 % we worry about transforming back to levels later
 
 
@@ -165,14 +165,14 @@ dy(:,i) = ytrunc(:,i) - lag(ytrunc(:,i),1);
 end;
 
 
-% 1-step-ahead forecast 
+% 1-step-ahead forecast
 xtrunc = [dy(nmin-nlag:nmin,:)
           zeros(1,neqs)];
 xfor = mlag(xtrunc,nlag);
 [xend junk] = size(xfor);
 xobs = xfor(xend,:);
 if nx > 0
-ecterm = y(begf-1,index)*ecvectors(:,1:r); % add ec variables 
+ecterm = y(begf-1,index)*ecvectors(:,1:r); % add ec variables
 xvec = [xobs ecterm 1];
 else
 xvec = [xobs 1];
@@ -231,7 +231,7 @@ cnt = step-(nlag-1);
   xnew(i,:) = yfor(cnt,:);
   cnt = cnt+1;
  end;
- 
+
 xfor = mlag(xnew,nlag);
 [xend junk] = size(xfor);
 xobs = xfor(xend,:);
@@ -254,13 +254,13 @@ end;
 end;
 
 end;
-  
+
 % convert 1st difference forecasts to levels
 ylevf = zeros(nfor,neqs);
 % 1-step-ahead forecast
 ylevf(1,:) = yfor(1,:) + y(begf-1,:); % add change to actual from time t;
 % 2-nfor-step-ahead forecasts
-for i=2:nfor % 
+for i=2:nfor %
 ylevf(i,:) = yfor(i,:) + ylevf(i-1,:);
 end;
 

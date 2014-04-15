@@ -1,5 +1,5 @@
 function rnd = unif_rnd (n,a,b)
-% PURPOSE: returns a uniform random number between a,b 
+% PURPOSE: returns a uniform random number between a,b
 %---------------------------------------------------
 % USAGE: cdf = unif_rnd(n,a,b)
 % where: a = scalar left limit
@@ -21,7 +21,7 @@ if nargin < 2
 elseif nargin < 3
     b = a;
     a = n;
-    n = 1;   
+    n = 1;
 end
 
 rnd = a + (b - a) .* rand(n, 1);

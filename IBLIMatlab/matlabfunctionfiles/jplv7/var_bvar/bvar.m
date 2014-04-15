@@ -6,7 +6,7 @@ function result = bvar(x,nlag,tight,weight,decay,xx);
 %           nlag = the lag length
 %          tight = Litterman's tightness hyperparameter
 %         weight = Litterman's weight (matrix or scalar)
-%          decay = Litterman's lag decay = lag^(-decay) 
+%          decay = Litterman's lag decay = lag^(-decay)
 %           x    = an optional (nobs x nx) matrix of variables
 % NOTE:  constant vector automatically included
 %---------------------------------------------------
@@ -19,13 +19,13 @@ function result = bvar(x,nlag,tight,weight,decay,xx);
 % results.tight     = overall tightness hyperparameter
 % results.weight    = weight scalar or matrix hyperparameter
 % results.decay     = lag decay hyperparameter
-% --- the following are referenced by equation # --- 
+% --- the following are referenced by equation # ---
 % results(eq).beta  = bhat for equation eq
-% results(eq).tstat = t-statistics 
+% results(eq).tstat = t-statistics
 % results(eq).tprob = t-probabilities
-% results(eq).resid = residuals 
-% results(eq).yhat  = predicted values 
-% results(eq).y     = actual values 
+% results(eq).resid = residuals
+% results(eq).yhat  = predicted values
+% results(eq).y     = actual values
 % results(eq).sige  = e'e/(n-k)
 % results(eq).rsqr  = r-squared
 % results(eq).rbar  = r-squared adjusted
@@ -68,7 +68,7 @@ error('Negative lag decay in bvar');
 end;
 
 [wchk1 wchk2] = size(weight);
-if (wchk1 ~= wchk2) 
+if (wchk1 ~= wchk2)
  error('non-square weight matrix in bvar');
 elseif wchk1 > 1
  if wchk1 ~= nvar

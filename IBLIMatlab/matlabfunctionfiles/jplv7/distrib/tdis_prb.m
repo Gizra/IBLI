@@ -1,5 +1,5 @@
 function y = tdis_prb(x,n)
-% PURPOSE: calculates t-probabilities for elements in x-vector 
+% PURPOSE: calculates t-probabilities for elements in x-vector
 %---------------------------------------------------
 % USAGE: y = tdis_prb(x,n)
 % where: x = vector containing computed t-values
@@ -32,4 +32,4 @@ if length(zip) > 0
 end;
 
 tmp = 1.0 - 0.5*betainc(x2,0.5*n,0.5);
-y = 2*(1-tmp);  
+y = 2*(1-tmp);

@@ -1,6 +1,6 @@
 function out=mprint3(b,se,t,info)
-% PURPOSE: Pretty-prints a set of matrices together by stacking the 
-% (i,j) elements of each.  Allows for separate formatting of 
+% PURPOSE: Pretty-prints a set of matrices together by stacking the
+% (i,j) elements of each.  Allows for separate formatting of
 % each.  Designed to printing parm. est, se and t-stat.
 %---------------------------------------------------------------
 % USAGE: out = mprint3(b,se,t,info)
@@ -34,11 +34,11 @@ function out=mprint3(b,se,t,info)
 if nargin < 4,  info.null = 1; end
 if nargin == 2
   dum2 = 1;
-else 
+else
   if isstruct(t), dum2 = 1;
   else, dum2 = 0; end
 end
-  
+
 [R,C] = size(b);
 if ~isfield(info,'vspc'), info.vspc = 1; end
 if ~isfield(info,'hspc'), info.hspc = 3; end
@@ -49,12 +49,12 @@ if info.ldum == 1
   eol = repmat(' \\',R*(3 - dum2 + info.vspc)-info.vspc,1);
 else
   amp = repmat(' ',R*(3 - dum2 + info.vspc)-info.vspc,info.hspc);
-  eol = repmat(' ',R*(3 - dum2 + info.vspc)-info.vspc,1);  
+  eol = repmat(' ',R*(3 - dum2 + info.vspc)-info.vspc,1);
 end
 
 if ~isfield(info,'bfmt'), info.bfmt = '%7.4f'; end
 if ~isfield(info,'sefmt'), info.sefmt ='(%7.4f)'; end
-if ~isfield(info,'tfmt'), info.tfmt = '%7.2f'; 
+if ~isfield(info,'tfmt'), info.tfmt = '%7.2f';
 end
 
 if rows(info.bfmt) == 1, info.bfmt = repmat(info.bfmt,C,1); end
@@ -68,8 +68,8 @@ if rows(info.tfmt) == 1, info.tfmt = repmat(info.tfmt,C,1); end
 %  BUILD UP OUTPUT
 %======================================================================
 
-for c = 1:C  
-  temp = []; 
+for c = 1:C
+  temp = [];
   for r = 1:R
     b0 = num2str(b(r,c),info.bfmt(c,:));
     se0 = num2str(se(r,c),info.sefmt(c,:));

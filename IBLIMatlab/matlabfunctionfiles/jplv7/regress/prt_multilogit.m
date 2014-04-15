@@ -2,7 +2,7 @@ function prt_multilogit(results,vnames,cnames,fid)
 % PURPOSE: Prints output from multilogit function
 %----------------------------------------------------------------%
 % USAGE: prt_multilogit(results,vnames,cnames,fid)
-% Where: results = a structure returned by a regression 
+% Where: results = a structure returned by a regression
 %        vnames  = optional vector of variable names
 %        cnames  = optional vector of category names for
 %                  dependent variable (ncat+1 x 1), reference
@@ -13,8 +13,8 @@ function prt_multilogit(results,vnames,cnames,fid)
 % NOTES: e.g. vnames = strvcat('y','const','x1','x2');
 %         e.g. cnames = strvcat('cat0','cat1','cat2');
 %         e.g. fid = fopen('ols.out','wr');
-%  use prt_multilogit(results,[],cnames,fid) to print to a file 
-%  with no vnames, similarly for no cnames 
+%  use prt_multilogit(results,[],cnames,fid) to print to a file
+%  with no vnames, similarly for no cnames
 %----------------------------------------------------------------%
 % RETURNS: nothing, just prints the multinomial logit results
 %----------------------------------------------------------------%
@@ -44,13 +44,13 @@ elseif nargin == 4
     nflag = 0;
     cflag = 0;
     [vsize junk] = size(vnames); % user may supply a blank argument for vnames
-    [csize junk] = size(cnames); % or cnames 
+    [csize junk] = size(cnames); % or cnames
     if vsize > 0
-        nflag = 1;          
+        nflag = 1;
     end;
     if csize > 0
         cflag = 1;
-    end;    
+    end;
 else
     error('Wrong # of arguments to prt_reg');
 end;
@@ -76,8 +76,8 @@ if (nflag == 1) % the user supplied variable names
         for i=1:nvar
             Vname = strvcat(Vname,vnames(i+1,:));
         end;
-    end; 
-end; 
+    end;
+end;
 
 % make up some generic category names
 Cname = '';
@@ -96,8 +96,8 @@ if (cflag == 1) % the user supplied category names
         for i=0:ncat
             Cname = strvcat(Cname,cnames(i+1,:));
         end;
-    end; 
-end; 
+    end;
+end;
 [junk w] = size(Cname);
 
 % print results

@@ -1,7 +1,7 @@
 function M=blockdiag(varargin)
 % PURPOSE: Construct a block-diagonal matrix with the inputs on the diagonals.
 % e.g. blockdiag(a,b,c) generates [a 0 0;0 b 0;0 0 c] where the zero-matrices are
-%      of appropiate size. 
+%      of appropiate size.
 %------------------------------------------------------------------------
 % USAGE: M = blockdiag(varargin)
 %
@@ -10,7 +10,7 @@ function M=blockdiag(varargin)
 % of dimensions).
 %------------------------------------------------------------------------
 % RETURNS: M = [a 0 0;0 b 0;0 0 c] where the zero-matrices are
-%                                  of appropiate size. 
+%                                  of appropiate size.
 %------------------------------------------------------------------------
 
 % Written by:Hans.Olsson@dna.lth.se 1997-10-10
@@ -30,16 +30,16 @@ ndmax=max(ndtab);
 % Replace with 'ndmax=2;' for a few extra percent of speed increase.
 
 % FIND SIZES OF INPUTS.
-si=ones(nargin,ndmax); 
+si=ones(nargin,ndmax);
 % Using ones guarantees that trailing matrix dimension have size 1.
 for i=1:nargin
   si(i,1:ndtab(i))=size(varargin{i});
 end;
-  
+
 % FILL IN ZEROS IN OUTPUT.
-M=zeros(sum(si,1)); 
+M=zeros(sum(si,1));
 % Note the 1. Plain 'sum(si)' would fail if only one input to blockdiag.
-  
+
 % FILL IN BLOCKDIAGONALS.
 start=zeros(1,ndmax);
 if (ndmax==2)

@@ -21,24 +21,24 @@ function res = rossi(Y,x,z,ta,s,type);
 %            ta=2 ---> average (index)
 %            ta=3 ---> last element (stock) ---> interpolation
 %            ta=4 ---> first element (stock) ---> interpolation
-%        s: number of high frequency data points for each low frequency data points 
+%        s: number of high frequency data points for each low frequency data points
 %            s= 4 ---> annual to quarterly
 %            s=12 ---> annual to monthly
 %            s= 3 ---> quarterly to monthly
 %        type: univariate temporal disaggregation procedure used to compute
 %        preliminary estimates
 %            type = 1 ---> Fernandez
-%            type = 2 ---> Chow-Lin 
+%            type = 2 ---> Chow-Lin
 %            type = 3 ---> Litterman
 % -----------------------------------------------------------------------
 % LIBRARY: aggreg, vec, desvec, fernandez, chowlin, litterman
 % -----------------------------------------------------------------------
 % SEE ALSO: denton, difonzo, mtd_print, mtd_plot
 % -----------------------------------------------------------------------
-% REFERENCE: Rossi, N. (1982)"A note on the estimation of disaggregate 
-% time series when the aggregate is known", Review of Economics and Statistics, 
+% REFERENCE: Rossi, N. (1982)"A note on the estimation of disaggregate
+% time series when the aggregate is known", Review of Economics and Statistics,
 % vol. 64, n. 4, p. 695-696.
-% Di Fonzo, T. (1994) "Temporal disaggregation of a system of 
+% Di Fonzo, T. (1994) "Temporal disaggregation of a system of
 % time series when the aggregate is known: optimal vs. adjustment methods",
 % INSEE-Eurostat Workshop on Quarterly National Accounts, Paris, december.
 
@@ -51,9 +51,9 @@ function res = rossi(Y,x,z,ta,s,type);
 t0 = clock;
 
 %--------------------------------------------------------
-%       Initial assignment 
+%       Initial assignment
 
-x_ini = x; 
+x_ini = x;
 clear x;
 
 %--------------------------------------------------------
@@ -187,7 +187,7 @@ y = desvec(y_big,M);
 % Loading the structure
 % -----------------------------------------------------------------------
 
-% Basic parameters 
+% Basic parameters
 
 res.meth = 'Multivariate Rossi';
 res.N = N;

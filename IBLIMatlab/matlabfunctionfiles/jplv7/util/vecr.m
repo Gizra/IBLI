@@ -19,11 +19,11 @@ function v = vecr(x)
 
 
   if (nargin ~= 1)
-  error('Wrong # of arguments to vecr'); 
-  end 
-  
+  error('Wrong # of arguments to vecr');
+  end
+
 xt = x';
 v = xt(:);
 
- 
-  
+
+

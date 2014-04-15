@@ -30,18 +30,18 @@ Y=[  20499
     102776
     113026
     115573 ];
-  
+
 % ---------------------------------------------
 % Inputs for td library
 
 % Type of aggregation
-ta=1;   
+ta=1;
 % Minimizing the volatility of d-differenced series
 d=1;
-% Frequency conversion 
-s=12;    
+% Frequency conversion
+s=12;
 % Name of ASCII file for output
-file_sal='td.sal';   
+file_sal='td.sal';
 % Calling the function: output is loaded in a structure called res
 res=bfl(Y,ta,d,s);
 % Calling printing function

@@ -4,7 +4,7 @@ function [N W]=fun(filename)
 % Lee archivos ASC-II de matriz de contiguidad, *.gal, creados en GEODA y
 % los transforma en matrices de contiguidad W (de unos y ceros) y N
 % (estandarizada)
- 
+
 
 
 % Lee tamaño de matriz de contiguidad = max
@@ -16,7 +16,7 @@ max=getn(2,c);
 % define matriz de ceros
 W=zeros(max,max);
 
- 
+
 % repetir max veces el proceso
 for i=1:max
 
@@ -28,11 +28,11 @@ b=getn(2,c);
 c=fgets(fid);
 
 for h=1:b
-    
+
 % getn: funcion que obtiene la posición h de una fila de datos
     j=getn(h,c);
     W(i,j)=1;
-    
+
 end
 
 end

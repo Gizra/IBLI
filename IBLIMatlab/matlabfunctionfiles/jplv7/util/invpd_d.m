@@ -1,4 +1,4 @@
-% PURPOSE: An example of using invpd()                               
+% PURPOSE: An example of using invpd()
 %          a function to mimic Gauss invpd
 %          replaces small eigenvalues with 0.01 values
 %---------------------------------------------------

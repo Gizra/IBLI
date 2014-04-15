@@ -13,7 +13,7 @@ function llik = garch_like(parm,y,x)
 %        parm(k+2) = a1
 %        parm(k+3) = a2
 % ----------------------------------------------------
-% RETURNS: -log likelihood function value (a scalar)                  
+% RETURNS: -log likelihood function value (a scalar)
 % ----------------------------------------------------
 % REFERENCES: Green (2000) Econometric Analysis
 % ----------------------------------------------------

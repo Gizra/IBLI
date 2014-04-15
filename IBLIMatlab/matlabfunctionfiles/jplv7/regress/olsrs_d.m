@@ -23,9 +23,9 @@ evec = randn(nobs,1);
 
 y = x*beta + evec;
 
-% By some theoretical presumptions, 
+% By some theoretical presumptions,
 %the coefficients on the x3 and x4 explanatory variables
-% must sum up to one. 
+% must sum up to one.
 % Given q = R*b, this translates into the following shape of R and q.
 q = 1;
 R = [0 0 0 1 1];

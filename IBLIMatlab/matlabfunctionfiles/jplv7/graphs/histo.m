@@ -6,10 +6,10 @@ function histo(x,N,odd,scale)
 % where:     x = data
 %            m = approximate # of bins
 %          odd = 0,1 for bin placement
-%                Least significant digit of bin width will always be 1, 2 or 5. 
+%                Least significant digit of bin width will always be 1, 2 or 5.
 %         scale = 1 for area normalization to 1 rather than n
 % ------------------------------------------------------------
-% RETURNS: nothing, simply plots 
+% RETURNS: nothing, simply plots
 % ------------------------------------------------------------
 
 %       Anders Holtsberg, 14-12-94

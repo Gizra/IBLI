@@ -1,5 +1,5 @@
 % PURPOSE: An example of using sdm_g() on a large data set
-%          Bayesian heteroscedastic spatial Durbin model                              
+%          Bayesian heteroscedastic spatial Durbin model
 %---------------------------------------------------
 % USAGE: sdm_gd2 (see sdm_gd for a small data set)
 %---------------------------------------------------
@@ -27,7 +27,7 @@ result0 = sdm(y,x,W);
 prt(result0,vnames);
 
 % Gibbs sampling function homoscedastic prior
-prior.novi = 1; % homoscedastic prior 
+prior.novi = 1; % homoscedastic prior
 ndraw = 1200;
 nomit = 200;
 

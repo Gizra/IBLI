@@ -10,7 +10,7 @@ function llike = f2_sem(parm,y,x,W,detval);
 %         W    = spatial weight matrix
 %         ldet = matrix with [rho log determinant] values
 %                computed in sem.m using one of Kelley Pace's routines
-% ---------------------------------------------------                                           
+% ---------------------------------------------------
 %  NOTE: this is really two functions depending
 %        on nargin = 3 or nargin = 4 (see the function)
 % ---------------------------------------------------

@@ -1,5 +1,5 @@
 function results=ols(y,x)
-% PURPOSE: least-squares regression 
+% PURPOSE: least-squares regression
 %---------------------------------------------------
 % USAGE: results = ols(y,x)
 % where: y = dependent variable vector    (nobs x 1)
@@ -34,10 +34,10 @@ function results=ols(y,x)
 % Barry Dillon (CICG Equity)
 % added the 95% confidence intervals on bhat
 
-if (nargin ~= 2); error('Wrong # of arguments to ols'); 
+if (nargin ~= 2); error('Wrong # of arguments to ols');
 else
  [nobs nvar] = size(x); [nobs2 junk] = size(y);
- if (nobs ~= nobs2); error('x and y must have same # obs in ols'); 
+ if (nobs ~= nobs2); error('x and y must have same # obs in ols');
  end;
 end;
 

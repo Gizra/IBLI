@@ -2,19 +2,19 @@ function prt_cas(results,vnames,fid)
 % PURPOSE: Prints output using spatial expansion results structures
 %---------------------------------------------------
 % USAGE: prt_cas(results,vnames,fid)
-% Where: results = a structure returned by spatial expansion 
+% Where: results = a structure returned by spatial expansion
 %        vnames  = an optional vector of variable names
 %        fid     = optional file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
-%--------------------------------------------------- 
+%---------------------------------------------------
 %  NOTES: e.g. vnames = strvcat('y','const','x1','x2');
 %         e.g. fid = fopen('ols.out','wr');
-%  use prt_cas(results,[],fid) to print to a file with no vnames               
+%  use prt_cas(results,[],fid) to print to a file with no vnames
 % --------------------------------------------------
 %  RETURNS: nothing, just prints the spatial expansion results
 % --------------------------------------------------
 % SEE ALSO: prt, plt
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -33,7 +33,7 @@ elseif nargin == 3
  nflag = 0;
  [vsize junk] = size(vnames); % user may supply a blank argument
    if vsize > 0
-   nflag = 1;          
+   nflag = 1;
    end;
 else
  error('Wrong # of arguments to prt_cas');
@@ -64,7 +64,7 @@ end;
  end;
  for i=1:yvar
     tmp = ['y-variable ',num2str(i)];
-    Vname = strvcat(Vname,tmp);    
+    Vname = strvcat(Vname,tmp);
  end;
 
 if (nflag == 1) % the user supplied variable names
@@ -128,7 +128,7 @@ Vname = [];
  end;
  for i=1:yvar
     tmp = ['y-variable ',num2str(i)];
-    Vname = strvcat(Vname,tmp);    
+    Vname = strvcat(Vname,tmp);
  end;
 
 if (nflag == 1) % the user supplied variable names
@@ -255,7 +255,7 @@ end;
  end;
  for i=1:yvar
     tmp = ['y-variable ',num2str(i)];
-    Vname = strvcat(Vname,tmp);    
+    Vname = strvcat(Vname,tmp);
  end;
 
 if (nflag == 1) % the user supplied variable names
@@ -336,7 +336,7 @@ Vname = [];
  end;
  for i=1:yvar
     tmp = ['y-variable ',num2str(i)];
-    Vname = strvcat(Vname,tmp);    
+    Vname = strvcat(Vname,tmp);
  end;
 
 if (nflag == 1) % the user supplied variable names
@@ -483,7 +483,7 @@ end;
  end;
  for i=1:yvar
     tmp = ['y-variable ',num2str(i)];
-    Vname = strvcat(Vname,tmp);    
+    Vname = strvcat(Vname,tmp);
  end;
 
 if (nflag == 1) % the user supplied variable names
@@ -551,7 +551,7 @@ Vname = [];
  end;
  for i=1:yvar
     tmp = ['y-variable ',num2str(i)];
-    Vname = strvcat(Vname,tmp);    
+    Vname = strvcat(Vname,tmp);
  end;
 
 if (nflag == 1) % the user supplied variable names

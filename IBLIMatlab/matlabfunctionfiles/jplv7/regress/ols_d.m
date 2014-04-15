@@ -21,7 +21,7 @@ vnames = strvcat('y-vector','constant','x1',';x2','x3','x4','x5','x6', ...
                  'x7','x8','x9','x10','x11','x12','x13','x14');
 
 % do ols regression
-result = ols(y,x); 
+result = ols(y,x);
 
 % print the output
 prt(result,vnames);

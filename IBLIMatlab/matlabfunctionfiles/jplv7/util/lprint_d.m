@@ -1,6 +1,6 @@
-% PURPOSE: demo of lprint() 
-%          LaTeX table formatted matrix printing 
-% 
+% PURPOSE: demo of lprint()
+%          LaTeX table formatted matrix printing
+%
 %---------------------------------------------------
 % USAGE: lprint_d
 %---------------------------------------------------

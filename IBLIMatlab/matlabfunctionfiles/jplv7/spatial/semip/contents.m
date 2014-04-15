@@ -1,5 +1,5 @@
 % Spatial probit model with spatial autogressive individual effects
-%   
+%
 %          semip_g : Bayesian Probit model with individual effects exhibiting spatial dependence:
 %         semip_gd : An example of using semip_g and semip_gc
 %        semip_gd2 : a comparison of Metropolis-Hastings vs inversion sampling for rho

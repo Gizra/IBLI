@@ -1,7 +1,7 @@
 function like = pr_like(b,y,x)
 % PURPOSE: evaluate probit log-likelihood
 %-----------------------------------------------------
-% USAGE:    like = pr_like(b,y,x,flag) 
+% USAGE:    like = pr_like(b,y,x,flag)
 % where:     b = parameter vector (k x 1)
 %            y = dependent variable vector (n x 1)
 %            x = explanatory variables matrix (n x m)

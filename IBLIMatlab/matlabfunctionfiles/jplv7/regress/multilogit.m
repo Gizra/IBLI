@@ -19,18 +19,18 @@ function results = multilogit(y,x,beta0,maxit,tol);
 % RETURNS: a structure
 %        results.meth = 'multilogit'
 %    results.beta_mat = (nvar x ncat) matrix of beta coefficients:
-%                       [beta_1 beta_2 ... beta_ncat] under the 
+%                       [beta_1 beta_2 ... beta_ncat] under the
 %                       normalization beta_0 = 0
 %    results.beta_vec = (nvar*ncat x 1) vector of beta coefficients:
 %                       [beta_1 ; beta_2 ; ... ; beta_ncat] under
 %                       normalization beta_0 = 0
 %        results.covb = (nvar*ncat x nvar*ncat) covariance matrix
 %                       of results.beta_vec
-%   results.tstat_mat = matrix of t-statistics conformable to 
+%   results.tstat_mat = matrix of t-statistics conformable to
 %                       results.beta_mat
 % results.tstat_vec   = vector of t-statistics conformable to
 %                       results.beta_vec
-%        results.yfit = (nobs x ncat+1) matrix of fitted 
+%        results.yfit = (nobs x ncat+1) matrix of fitted
 %                       probabilities: [P_0 P_1 ... P_ncat]
 %                       where P_j = [P_1j ; P_2j ; ... ; P_nobsj]
 %         results.lik = unrestricted log likelihood
@@ -40,19 +40,19 @@ function results = multilogit(y,x,beta0,maxit,tol);
 %        results.nvar = number of variables
 %        results.ncat = number of categories of dependent variable
 %                       (including the reference category j = 0)
-%       results.count = vector of counts of each value taken by y, i.e., 
+%       results.count = vector of counts of each value taken by y, i.e.,
 %                       count = [#y=0 #y=1 ... #y=ncat]
 %           results.y = y vector
-%      results.lratio = LR test statistic against intercept-only model (all 
+%      results.lratio = LR test statistic against intercept-only model (all
 %                       betas=0), distributed chi-squared with (nvar-1)*ncat
 %                       degrees of freedom
 %        results.rsqr = McFadden pseudo-R^2
-%      
+%
 %-------------------------------------------------------------------------%
-% A NOTE: Since users might prefer results (coefficients and tstats) in 
+% A NOTE: Since users might prefer results (coefficients and tstats) in
 %   either a vector or matrix format, and since there is no single natural
 %   representation for these in the multinomial logit model, the results
-%   structure returns both.  Note that the input arguments require that 
+%   structure returns both.  Note that the input arguments require that
 %   (optional) starting values in matrix (nvar x ncat) format.
 %
 %-------------------------------------------------------------------------%
@@ -64,7 +64,7 @@ function results = multilogit(y,x,beta0,maxit,tol);
 % Simon D. Woodcock
 % CISER / Economics
 % Cornell University
-% Ithaca, NY 
+% Ithaca, NY
 % sdw9@cornell.edu
 
 %---------------------------------------------------------%
@@ -89,7 +89,7 @@ d = d0(:,2:ncat+1);                                         % normalize beta_0 =
 
 if nargin < 3
     beta0 = zeros(nvar,ncat+1);
-else 
+else
     [a b] = size(beta0);
     if a == 0
         beta0 = zeros(nvar,ncat+1);
@@ -173,7 +173,7 @@ end;
 results.covb = -inv(H)./kron(ones(ncat),(xstd'*xstd)); % restore original scale
 stdb = sqrt(diag(results.covb));
 results.tstat_vec = results.beta_vec./stdb;
-for j = 1:ncat                                  
+for j = 1:ncat
     f = (j-1)*nvar + 1;
     l = j*nvar;
     results.tstat_mat(:,j) = results.tstat_vec(f:l,1);
@@ -203,7 +203,7 @@ results.rsqr = 1 - (results.lik / lnLr); % McFadden pseudo-R^2
 %---------------------------------------------------------%
 
 function [g,H] = multilogit_deriv(x,d,P,nvar,ncat,nobs);
-% PURPOSE: Computes gradient and Hessian of multinomial logit 
+% PURPOSE: Computes gradient and Hessian of multinomial logit
 % model
 % ---------------------------------------------------------
 % References: Greene (1997), p.914
@@ -223,12 +223,12 @@ g = x'*tmp;
 % compute Hessian, which has (ncat)^2 blocks of size (nvar x nvar)
 % this algorithm builds each block individually, m&n are block indices
 H = zeros(nvar*ncat);
-for m = 1:ncat; 
+for m = 1:ncat;
     for n = 1:ncat;
         fr = (m-1)*nvar + 1;
         lr = m*nvar;
         fc = (n-1)*nvar + 1;
-        lc = n*nvar;       
+        lc = n*nvar;
         index = (n==m);
         index = repmat(index,nobs,1);
         H(fr:lr,fc:lc) = -( ( x.*( P(:,m)*ones(1,nvar) ) )' * ( x.*( (index-P(:,n))*ones(1,nvar) ) ) ) ;

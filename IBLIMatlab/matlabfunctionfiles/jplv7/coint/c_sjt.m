@@ -10,18 +10,18 @@ function jc = c_sjt(n,p)
 %                 p =  1, for constant plus time-trend
 %                 p >  1  returns no critical values
 % ------------------------------------------------------------
-% RETURNS: a (3x1) vector of percentiles for the trace 
-%          statistic for [90% 95% 99%] 
+% RETURNS: a (3x1) vector of percentiles for the trace
+%          statistic for [90% 95% 99%]
 % ------------------------------------------------------------
 % NOTES: for n > 12, the function returns a (3x1) vector of zeros.
 %        The values returned by the function were generated using
 %        a method described in MacKinnon (1996), using his FORTRAN
-%        program johdist.f                                 
+%        program johdist.f
 % ------------------------------------------------------------
 % SEE ALSO: johansen()
 % ------------------------------------------------------------
-% % References: MacKinnon, Haug, Michelis (1996) 'Numerical distribution 
-% functions of likelihood ratio tests for cointegration', 
+% % References: MacKinnon, Haug, Michelis (1996) 'Numerical distribution
+% functions of likelihood ratio tests for cointegration',
 % Queen's University Institute for Economic Research Discussion paper.
 % -------------------------------------------------------
 
@@ -101,4 +101,3 @@ jcp2 = [   2.7055   3.8415   6.6349
    elseif p == 1
     jc = jcp2(n,:);
    end;
-   

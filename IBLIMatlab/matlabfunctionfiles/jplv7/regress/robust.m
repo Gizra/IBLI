@@ -85,42 +85,42 @@ cnt = cnt+1;
  w = (wparm*ones(nobs,1)./abs(resid));
  wi = find(abs(resid) <= wparm);
  w(wi) = ones(length(wi),1);
- 
+
  case 2 % Ramsay's E function
  w = exp(-wparm*abs(resid));
  wi = find(resid == 0);
  w(wi) = ones(length(wi),1);
- 
+
  case 3 % Andrew's wave function
  w = sin(resid/wparm)./(resid/wparm);
  wi = find(resid == 0);
  w(wi) = ones(length(wi),1);
  wi = find(resid > pi*wparm);
  w(wi) = zeros(length(wi),1);
- 
+
  case 4 % Tukey's biweight
  w = (1 - (resid/wparm).^2).^2;
  wi = find(resid == 0);
  w(wi) = ones(length(wi),1);
  wi = find(abs(resid) > wparm);
  w(wi) = zeros(length(wi),1);
- 
+
  otherwise
  error('incorrect weight function option');
- 
+
  end;
- 
+
 % do weighted least-squares
     ystar = y.*sqrt(w);
     xstar = matmul(x,sqrt(w));
     bhat = inv(xstar'*xstar)*xstar'*ystar;
     resid = y - x*bhat;
-    
-% check for convergence   
-   convg = max(abs(bhat-bhato)./abs(bhato));
-   
 
-end; % end of while loop 
+% check for convergence
+   convg = max(abs(bhat-bhato)./abs(bhato));
+
+
+end; % end of while loop
 
 results.iter = cnt;
 results.weight = w;

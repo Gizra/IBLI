@@ -5,11 +5,11 @@ function pftest(result,vnames,fid);
 %  where: results = a structure returned by vare()
 %         vnames  = an optional variable name vector
 %             fid = file-id for printing results to a file
-%                   (defaults to the MATLAB command window)               
+%                   (defaults to the MATLAB command window)
 %           e.g. vnames = ['y1', VAR variables
-%                          'y2']  
+%                          'y2']
 %           e.g. fid = fopen('ftest.out','wr');
-%----------------------------------------------------                              
+%----------------------------------------------------
 % SEE ALSO: vare() prt_var(), pgranger()
 % ----------------------------------------------------
 
@@ -27,13 +27,13 @@ nflag = 0;
 if nargin == 1;
 nflag = 0;
 fid = 1;
-elseif nargin == 2; 
- nflag = 1; 
-   fid = 1; 
+elseif nargin == 2;
+ nflag = 1;
+   fid = 1;
   [namsiz junk] = size(vnames);
    if namsiz < result(1).neqs
  error('pftest vnames argument is wrong size');
-   end; 
+   end;
 end;
 
 if ~isstruct(result)

@@ -6,7 +6,7 @@ function result = tvp_markov(y,x,parm,info)
 %          R_S1t = R1*b1,1t + R2*b2,2t + R3*b3,2t + R4*b4,2t + ... + Rm*bm,2t
 %          where: ak,jt = 1 if S_kt = j, ak,jt = 0 if S_kt ~= j
 %          k=1,2  j=1,...,m
-%          S_1t, S_2t evolve according to a 1st-order Markov process          
+%          S_1t, S_2t evolve according to a 1st-order Markov process
 % -------------------------------------------------------------------
 % USAGE:     result = tvp_markov(y,x,parm,info);
 %        or: result = tvp(y,x,parm); for default options
@@ -23,7 +23,7 @@ function result = tvp_markov(y,x,parm,info)
 %   info.v0 = a (kxk) matrix with initial period std(B0)
 %                (default = eye(k)*1e+3, a relatively diffuse prior)
 %   info.start = starting observation (default: 1)
-%   --- optimization options ---                                 
+%   --- optimization options ---
 %   info.prt   = 1 for printing basic intermediate results (default = 0)
 %              = 2 for printing detailed stuff
 %   info.delta = Increment in numerical derivs                [.000001]
@@ -32,7 +32,7 @@ function result = tvp_markov(y,x,parm,info)
 %   info.lamda = Minimum eigenvalue of Hessian for Marquardt      [.01]
 %   info.cond  = Tolerance level for condition of Hessian        [1000]
 %   info.btol  = Tolerance for convergence of parm vector        [1e-4]
-%   info.ftol  = Tolerance for convergence of objective function [sqrt(eps)] 
+%   info.ftol  = Tolerance for convergence of objective function [sqrt(eps)]
 %   info.gtol  = Tolerance for convergence of gradient           [sqrt(eps)]
 % -------------------------------------------------------------------
 % NOTES: only works for a 2-state model, i.e., m=2 (see above)
@@ -42,7 +42,7 @@ function result = tvp_markov(y,x,parm,info)
 %       result.meth   = 'tvp_markov'
 %       result.parm   = (k+4) x 1 vector of ML parameter estimates
 %       result.vcov   = (k+4,k+4) matrix with variance-covariance of the ML estimates
-%       result.stdhat = (k+4) x 1 vector with std deviation of estimates             
+%       result.stdhat = (k+4) x 1 vector with std deviation of estimates
 %       result.prob1  = (start:n x 1) vector with probability of state 1
 %       result.prob2  = (start:n x 1) vector with probability of state 2
 %       result.tstat  = a (k+4) x 1 vector of t-stats based on vcov
@@ -51,7 +51,7 @@ function result = tvp_markov(y,x,parm,info)
 %       result.bvar1  = an (start:n x kxk) matrix of time-varying variances for beta1
 %       result.bvar2  = an (start:n x kxk) matrix of time-varying variances for beta2
 %       result.fvar   = an (start:n x 2) conditional variance decompostion
-%                       column1 = forecast error variance due to beta variation, 
+%                       column1 = forecast error variance due to beta variation,
 %                       column2 = forecast error variance due to heteroscedasticity
 %       result.rsqr   = R-squared, based on yhat(start:n)
 %       result.rbar   = R-bar squared, based on yhat(start:n)
@@ -59,7 +59,7 @@ function result = tvp_markov(y,x,parm,info)
 %       result.y      = (nx1) vector of actual values
 %       result.like   = log likelihood (at solution values)
 %       result.iter   = # of iterations taken
-%       result.start  = # of starting observation       
+%       result.start  = # of starting observation
 %       result.time   = time (in seconds) for solution
 % -------------------------------------------------------------------
 % NOTE: to generate tvp betas, probs, etc., based on max-lik parm vector use:
@@ -93,10 +93,10 @@ if ~isstruct(info)
 end;
 % parse options
 fields = fieldnames(info);
-nf = length(fields); 
+nf = length(fields);
   for i=1:nf
     if strcmp(fields{i},'maxit')
-        infoz.maxit = info.maxit; 
+        infoz.maxit = info.maxit;
     elseif strcmp(fields{i},'btol')
         infoz.btol = info.btol;
     elseif strcmp(fields{i},'ftol')
@@ -110,22 +110,22 @@ nf = length(fields);
     elseif strcmp(fields{i},'prt')
         infoz.prt = info.prt;
     elseif strcmp(fields{i},'delta')
-        infoz.delta = info.delta;   
+        infoz.delta = info.delta;
     elseif strcmp(fields{i},'lamda')
-        infoz.lambda = info.lamda;  
+        infoz.lambda = info.lamda;
     elseif strcmp(fields{i},'start')
-        start = info.start; 
+        start = info.start;
     elseif strcmp(fields{i},'b0')
-        priorb0 = info.b0;  
+        priorb0 = info.b0;
     elseif strcmp(fields{i},'v0')
-        priorv0 = info.v0;      
+        priorv0 = info.v0;
     end;
   end;
 end;
 
 b0 = priorb0;
 v0 = priorv0;
-        
+
 if length(parm) ~= 3+k+1
 error('tvp_markov: Wrong # of initial parameter values entered');
 end;
@@ -191,14 +191,14 @@ result.start = start;
 
 
 function result = tvp_markov_filter(parm,y,x,start,b0,v0)
-% PURPOSE: Kalman filtering for Markov-switching TVP model 
+% PURPOSE: Kalman filtering for Markov-switching TVP model
 %          y(t) = X(t)*B(t) + e(t), e(t) = N(0,R_S1t)
 %          B(t) = B(t-1) + v(t),    v(t) = N(0,Q_S2t)
 %          Q_S2t = Q1*a1,1t + Q2*a2,1t + Q3*a3,1t + Q4*a4,1t + ... + Sm*am,1t
 %          R_S1t = R1*b1,1t + R2*b2,2t + R3*b3,2t + R4*b4,2t + ... + Rm*bm,2t
 %          where: ak,jt = 1 if S_kt = j, ak,jt = 0 if S_kt ~= j
 %          k=1,2  j=1,...,m
-%          S_1t, S_2t evolve according to a 1st-order Markov process   
+%          S_1t, S_2t evolve according to a 1st-order Markov process
 % -------------------------------------------------
 % USAGE: result  = tvp_markov_filter(parm,y,x,start,b0,v0)
 % where: parm = a vector with ML parameter estimates
@@ -214,14 +214,14 @@ function result = tvp_markov_filter(parm,y,x,start,b0,v0)
 %        v0 = prior v0 (default: diffuse = 1000)
 % -------------------------------------------------
 % NOTES: 1) the filter starts at obs=1, but only returns information
-%           from start onward     
+%           from start onward
 %        2) only works for a 2-state model, i.e., m=2 (see above)
-%           therefore the x-matrix should not contain lagged dependent variables         
+%           therefore the x-matrix should not contain lagged dependent variables
 % -------------------------------------------------
 % RETURNS: result = a structure variable with fields:
 %          result.p0 = (start:n x 1) probabilities for state0
 %          result.p1 = (start:n x 1) probabilities for state1
-%          result.b0 = (start:n x k) state0 TVP estimates  
+%          result.b0 = (start:n x k) state0 TVP estimates
 %          result.b1 = (start:n x k) state1 TVP estimates
 %          result.v0 = (start:n x kxk) state0 TVP variances
 %          result.v1 = (start:n x kxk) state1 TVP variances
@@ -230,10 +230,10 @@ function result = tvp_markov_filter(parm,y,x,start,b0,v0)
 %       result.fvar = (start:n x 2) vector with forecast error variance
 %       decomposition. Column 1 = conditional variance due to changing beta
 %                      Column 2 = conditional variance due to heterscedasticity
-%       Column 1 = x_t-1 *P_t|t-1 x'_t-1, 
-%                  where: P_t|t_1 = probability weighted sum over both states, 
+%       Column 1 = x_t-1 *P_t|t-1 x'_t-1,
+%                  where: P_t|t_1 = probability weighted sum over both states,
 %       Column 2 =  sig = probability weighted sum over both states,
-%                   
+%
 % -------------------------------------------------
 
 % James P. LeSage, Dept of Economics
@@ -293,7 +293,7 @@ v1s = zeros(n,k,k);
 p0s = zeros(n,1);
 p1s = zeros(n,1);
 fvar = zeros(n,2);
- 
+
 for i=1:n;
 
 H = x(i,:);
@@ -351,7 +351,7 @@ prv11 = vprob(fcast11,ss11)*ppr*prob1;
 prval = prv00+prv01+prv10+prv11; % pr[Yt | Yt-1]
 
 % step 3
-pr00 = prv00/prval; 
+pr00 = prv00/prval;
 pr01 = prv01/prval;
 pr10 = prv10/prval;
 pr11 = prv11/prval;
@@ -411,5 +411,5 @@ result.p1 = p1s(start:n,1);
 result.v0 = v0s(start:n,1);
 result.v1 = v1s(start:n,1);
 result.fvar = fvar(start:n,:);
- 
+
 

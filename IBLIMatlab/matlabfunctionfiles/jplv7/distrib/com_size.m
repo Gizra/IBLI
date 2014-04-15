@@ -34,7 +34,7 @@ ret = 0;
 
 if na == 1 & ka == 1
 aout = ones(n,k)*a;
-else 
+else
  if na ~= n | ka~= k
  ret = 1;
  end;
@@ -55,4 +55,3 @@ end;
 
 
 
- 

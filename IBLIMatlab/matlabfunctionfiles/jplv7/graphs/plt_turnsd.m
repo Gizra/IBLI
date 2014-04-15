@@ -1,6 +1,6 @@
-% PURPOSE: demo of fturns() 
-%          find turning points in time-series 
-% 
+% PURPOSE: demo of fturns()
+%          find turning points in time-series
+%
 %---------------------------------------------------
 % USAGE: fturns_d
 %---------------------------------------------------
@@ -16,7 +16,7 @@ in.eq = 1;
 in.seq = 0;
 % set upturn turning point definition
 %        y(t-4), y(t-3), y(t-2), y(t-1) >= y(t) [seq = 0, but = 4, eq = 1]
-% which is the condition for a upturn if, 
+% which is the condition for a upturn if,
 %        y(t+1) > y(t)  we have an upturn       [aut = 1]
 % else no upturn
 in.but = 4;

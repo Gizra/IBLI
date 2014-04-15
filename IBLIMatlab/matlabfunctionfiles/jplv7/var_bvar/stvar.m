@@ -3,22 +3,22 @@ function results = stvar(y, param, x)
 %---------------------------------------------------
 % USAGE:  result = stvar(y, param, x)
 % where:    y    = an (nobs x neqs) matrix of y-vectors
-%        
+%
 %           y should be fixed from most endogenous to most exogenous
 %
-%           Param is a 1x10 vector that includes the following 
+%           Param is a 1x10 vector that includes the following
 %           information in order:
 %
 %           nlag = the lag length
 %         shockv = variable of y being shocked (column of y)
 %          trans = position of the transition variable in the y matrix
 %         thresh = the threshold value
-%         smooth = the smoothnes parameter                
-%          shock = the standard deviation shocks 
+%         smooth = the smoothnes parameter
+%          shock = the standard deviation shocks
 %            sim = the number of montecarlo simulations
 %          IRper = the number of periods for the impulse response function
 %        history = 0 if choosen period under threshold (1 if not)
-%       translag = the lag of the transition variable  
+%       translag = the lag of the transition variable
 %
 %          param = [nlag shockv trans thresh smooth shock sim IRper history translag]
 %
@@ -34,11 +34,11 @@ function results = stvar(y, param, x)
 %
 %      Bibliography:
 %
-%      The non linear VAR is built on the following structure (reduced form): 
+%      The non linear VAR is built on the following structure (reduced form):
 %
-%      Y(t)=[(A-B(g(t))L]Y(t)+E(t) 
+%      Y(t)=[(A-B(g(t))L]Y(t)+E(t)
 %
-%      where  
+%      where
 %
 %      g(t)=is the logistic form depending on a state variable
 %
@@ -65,8 +65,8 @@ function results = stvar(y, param, x)
 % results.LR        = tests.LR;
 % results.LRpval    = tests.LRpval;
 %
-% take into account that results (for parameters and coefficients are presented in the following order):   
-% 
+% take into account that results (for parameters and coefficients are presented in the following order):
+%
 % y1(t-1), y1(t-2),....y1(t-nlag),y2(t-1)....ynvar(t-nlag),y1(t-1),
 % g*y1(t-2),....g*y1(t-nlag),g*y2(t-1)....g*ynvar(t-nlag)
 %
@@ -77,8 +77,8 @@ function results = stvar(y, param, x)
 %---------------------------------------------------
 %
 % written by:
-% Saki Bigio 
-% Department of Macroeconomic Analysis, 
+% Saki Bigio
+% Department of Macroeconomic Analysis,
 % Banco Central de Reserva del Peru
 % Paul de Beaudiez 530,
 % Lima L27,  PERU
@@ -166,18 +166,18 @@ g=gfunc;
 nx = 0;
 
 %Building the non-linear data matrix
-gy=[]; 
+gy=[];
 ylag=mlag(y,nlag);
 
 for i=1:neqs*nlag;
 gy=[gy g.*ylag(:,i) ];
-end    
+end
 
 if nargin == 3
 gy=[gy x];
-end;  
+end;
 
-%Running the Non-Linear VAR 
+%Running the Non-Linear VAR
 varres=vare2(y,nlag,gy);
 
 %Loading Variables for Impulse Response
@@ -186,21 +186,21 @@ k = varres(1).neqs;
 gy=gy((1+nlag:nobs),:);
 g=g((1+nlag:nobs),:);
 
-%Estimation Coefficients 
+%Estimation Coefficients
 b=[];
-for i=1:neqs          
+for i=1:neqs
     b  = [b varres(i).beta];
 end
 
 %Estimation T-Stats
 tstat=[];
-for i=1:neqs          
+for i=1:neqs
     tstat  = [tstat varres(i).tstat];
 end
 
 %Estimation P-Values
 tprob=[];
-for i=1:neqs          
+for i=1:neqs
     tprob  = [tprob varres(i).tprob];
 end
 
@@ -212,31 +212,31 @@ end
 
 % Recovering Predicted Values
 yhat=[];
-for i=1:neqs          
+for i=1:neqs
     yhat  = [yhat varres(i).yhat];
 end
 
 % Recovering Alligned Actual Values
 yact=[];
-for i=1:neqs          
+for i=1:neqs
     yact  = [yact varres(i).y];
 end
 
 % Recovering R-squared
 rsqr=[];
-for i=1:neqs          
+for i=1:neqs
     rsqr  = [rsqr varres(i).rsqr];
 end
 
 % Recovering Alligned Actual Values
 yact=[];
-for i=1:neqs          
+for i=1:neqs
     yact  = [yact varres(i).y];
 end
 
 % Recovering R-Squared Adjusted
 rbar=[];
-for i=1:neqs          
+for i=1:neqs
     rbar  = [rbar varres(i).rbar];
 end
 
@@ -262,7 +262,7 @@ paths_dif=[];
 
 %Preparing x
 if nargin == 3
-        x=x((nlag+1:nobs),:);    
+        x=x((nlag+1:nobs),:);
 end
 
 %Starting main simulation loop
@@ -270,7 +270,7 @@ for i = 1:sim
 
     %Choosing a Random period that coincides with the relevant history
     junk=randint(1,1,nlag+1, nobs-2*IRper);
-    
+
     if Hist ==1
         while y(junk-translag,trans) < thresh
               junk=randint(1,1,nlag+1, nobs-2*IRper);
@@ -282,21 +282,21 @@ for i = 1:sim
         end
         History=junk;
     end
-        
+
     %Reshufling uncorrelated errors sim times (montecarlo simulations)
     %and fixing size
 
     temp = bootstrp(1,'equal',v);
     vbs = reshape(temp,n,k);
-    
+
     %Fix a given shock because we are using Cholesky decomposition, a direct addition can be
     %done that will be equal to fixing a "shock" sized standard deviation shock
     %(see Hamilton p. 400)
-    
+
     vbss=vbs;
-    vbss(History,shockv)= shock; %???this is only the shock, should we add it to the residual...?  
+    vbss(History,shockv)= shock; %???this is only the shock, should we add it to the residual...?
     vbs(History,shockv)= 0;
-    
+
     %returning dependence to shocks
 
     ebs_  = (C*vbs')';
@@ -306,28 +306,28 @@ for i = 1:sim
     %Setting an auxiliary variable and all complements to rebuild series
     paths=[];
     for i=0:neqs:neqs
-    
-    
+
+
         ebs=eb(:,i+1:i+neqs);
         path = y;
         g_sim=gfunc((1+nlag:nobs),:);
-    
+
         ylag = mlag(y,nlag);
         ymat=ylag(nlag+1:nobs,:);
 
         gy=[];
-        for i=1:neqs*nlag   
-            gy=[gy g_sim.* ymat(:,i)]; 
-        end   
-    
+        for i=1:neqs*nlag
+            gy=[gy g_sim.* ymat(:,i)];
+        end
+
         if nargin == 3
-            gy=[gy x];    
-        end; 
-       
+            gy=[gy x];
+        end;
+
         gy=[ymat gy ones(nobs-nlag,1)];
 
         %Rebuilding series for I-R period
-        for t=History:History+IRper; % (le quitamos 
+        for t=History:History+IRper; % (le quitamos
             path(t,:)= gy(t,:)*b + ebs(t,:);
 
             %updating gy matrix with the values just obtained
@@ -335,7 +335,7 @@ for i = 1:sim
                 ymat(t+1,j*nlag+1:(j+1)*nlag)=rot90(path((t-nlag+1):t,j+1),-1); %check this out (t or t+1)
             end;
 
-            %Updating point t of the G function 
+            %Updating point t of the G function
             g_sim(t) = (1+exp(-smooth*(path(t-translag,trans)-thresh)/standard))^(-1);
 
             %Emptying GY matrix and updating it
@@ -343,27 +343,27 @@ for i = 1:sim
 
             for i=1:neqs*nlag
                 gy=[gy g_sim.*ymat(:,i)];
-            end;    
-        
-            if nargin == 3
-                gy=[gy x];    
             end;
-    
-            gy=[ymat gy ones(nobs-nlag,1)]; 
-    
+
+            if nargin == 3
+                gy=[gy x];
+            end;
+
+            gy=[ymat gy ones(nobs-nlag,1)];
+
         end;
-    
-        path=path((History):(History+IRper),:); 
+
+        path=path((History):(History+IRper),:);
         %store resulting path
         paths=[paths path];
-    
+
     end;
 
     paths_us  = paths(:,1:neqs);
     paths_s   = paths(:,neqs+1:2*neqs);
     paths_dif = [paths_dif paths_s-paths_us];
 
-end;  
+end;
 
 %Reordering main loop's output
 
@@ -431,7 +431,7 @@ function [bootstat, bootsam] = bootstrp(nboot,bootfun,d1,d2,d3,d4,d5,d6,d7,d8,d9
 
 %   Reference:
 %      Efron, Bradley, & Tibshirani, Robert, J.
-%      "An Introduction to the Bootstrap", 
+%      "An Introduction to the Bootstrap",
 %      Chapman and Hall, New York. 1993.
 
 %   B.A. Jones 9-27-95
@@ -473,7 +473,7 @@ end
 % Create index matrix of bootstrap samples.
 bootsam = unidrnd(n,n,nboot);
 
-% Get result of bootfun on actual data and find its size. 
+% Get result of bootfun on actual data and find its size.
 thetafit = eval([bootfun,pstring]);
 [ntheta ptheta] = size(thetafit);
 
@@ -493,7 +493,7 @@ for bootiter = 1:nboot
      else
          eval([dbk,'=',dk,';']);
      end
-     
+
       if k == 3
          pstring = [lp,dbk];
         n = row;
@@ -523,23 +523,23 @@ function results=stvar_tests(y,param,x)
 %---------------------------------------------------
 % USAGE:  result = stvar2(y, param, x)
 % where:    y    = an (nobs x neqs) matrix of y-vectors
-%        
+%
 %           y should be fixed from endog to exog
 %
-%           Param is a 1x9 vector that includes the following 
+%           Param is a 1x9 vector that includes the following
 %           information in order:
 %
 %           nlag = the lag length
 %         shockv = variable of y being shocked (column of y)
 %          trans = position of the transition variable in the y matrix
 %         thresh = the threshold value
-%         smooth = the smoothnes parameter                
-%          shock = the standard deviation shocks 
+%         smooth = the smoothnes parameter
+%          shock = the standard deviation shocks
 %            sim = the number of montecarlo simulations
 %          IRper = the number of periods for the impulse response function
-%        history = the period we want to atart with        
-%      transilag = the lag of the transition variable 
-%          
+%        history = the period we want to atart with
+%      transilag = the lag of the transition variable
+%
 %          param = [nlag shockv trans thresh smooth shock sim IRper history transilag]
 %
 %           (e.g)-> param=[1 2 1 0 1 1 1000 24 30 1]
@@ -558,13 +558,13 @@ function results=stvar_tests(y,param,x)
 % results.neqs = neqs, # of equations
 % results.nlag = nlag, # of lags
 % results.nvar = nlag*neqs+nx+1, # of variables per equation
-% --- the following are referenced by equation # --- 
+% --- the following are referenced by equation # ---
 % results(eq).beta  = bhat for equation eq
-% results(eq).tstat = t-statistics 
+% results(eq).tstat = t-statistics
 % results(eq).tprob = t-probabilities
-% results(eq).resid = residuals 
-% results(eq).yhat  = predicted values 
-% results(eq).y     = actual values 
+% results(eq).resid = residuals
+% results(eq).yhat  = predicted values
+% results(eq).y     = actual values
 % results(eq).sige  = e'e/(n-k)
 % results(eq).rsqr  = r-squared
 % results(eq).rbar  = r-squared adjusted
@@ -572,7 +572,7 @@ function results=stvar_tests(y,param,x)
 % results(eq).ftest = Granger F-tests
 % results(eq).fprob = Granger marginal probabilities
 %---------------------------------------------------
-% SEE ALSO: 
+% SEE ALSO:
 %vare, varf, prt_var, prt_granger, prt_ftests (from LeSage's econometrics
 % toolbox)
 %
@@ -669,16 +669,16 @@ nx = 0;
 
 %Building the non-linear data
 
-gy=[]; 
+gy=[];
 ylag=mlag(y,nlag);
 
 for i=1:neqs*nlag
 gy=[gy g.*ylag(:,i) ];
-end    
+end
 
 if nargin == 3
 gy=[gy x];
-end;  
+end;
 
 %We should fix the first period cause of the lag and SMTV
 varres=vare2(y,nlag,gy);
@@ -689,7 +689,7 @@ k = varres(1).neqs;
 
 %get coefficients %%%%%%Generalize
 b=[];
-for i=1:neqs          
+for i=1:neqs
     b  = [b varres(i).beta];
 end
 
@@ -737,7 +737,7 @@ LR=(nobs-nlag)*(log(det(omega0))-log(det(omega1)));
 LRpval=1-chis_prb(LR,(nlag*neqs^2));
 
 results.omega0=omega0;
-results.omega1=omega1;      
+results.omega1=omega1;
 results.LR=LR;
 results.LRpval=LRpval;
 results.beta=b;
@@ -747,7 +747,7 @@ results.g=g;
 function results = vare2(y,nlag,x)
 % PURPOSE: performs vector autogressive estimation and presents no tests
 %---------------------------------------------------
-% USAGE:  result = vare(y,nlag,x) 
+% USAGE:  result = vare(y,nlag,x)
 % where:    y    = an (nobs x neqs) matrix of y-vectors
 %           nlag = the lag length
 %           x    = optional matrix of variables (nobs x nx)
@@ -759,13 +759,13 @@ function results = vare2(y,nlag,x)
 % results.neqs = neqs, # of equations
 % results.nlag = nlag, # of lags
 % results.nvar = nlag*neqs+nx+1, # of variables per equation
-% --- the following are referenced by equation # --- 
+% --- the following are referenced by equation # ---
 % results(eq).beta  = bhat for equation eq
-% results(eq).tstat = t-statistics 
+% results(eq).tstat = t-statistics
 % results(eq).tprob = t-probabilities
-% results(eq).resid = residuals 
-% results(eq).yhat  = predicted values 
-% results(eq).y     = actual values 
+% results(eq).resid = residuals
+% results(eq).yhat  = predicted values
+% results(eq).y     = actual values
 % results(eq).sige  = e'e/(n-k)
 % results(eq).rsqr  = r-squared
 % results(eq).rbar  = r-squared adjusted
@@ -773,7 +773,7 @@ function results = vare2(y,nlag,x)
 % results(eq).ftest = Granger F-tests
 % results(eq).fprob = Granger marginal probabilities
 %---------------------------------------------------
-% SEE ALSO: varf, prt_var, prt_granger, prt_ftests 
+% SEE ALSO: varf, prt_var, prt_granger, prt_ftests
 %---------------------------------------------------
 
 % written by:
@@ -798,7 +798,7 @@ end;
 % adjust nobs to feed the lags
 nobse = nobs - nlag;
 
-% nvar adjusted for constant term 
+% nvar adjusted for constant term
  k = neqs*nlag + 1 + nx;
  nvar = k;
 
@@ -812,7 +812,7 @@ results(1).nlag = nlag;
 
 
 % form x-matrix
-if nx 
+if nx
 xmat = [xlag(nlag+1:nobs,:) x(nlag+1:nobs,:) ones(nobs-nlag,1)];
 else
 xmat = [xlag(nlag+1:nobs,:) ones(nobs-nlag,1)];
@@ -831,7 +831,7 @@ for j=1:neqs;
       tstat = res.tstat;
       tout = tdis_prb(tstat,nobse-nvar);
  results(j).tprob = tout;          % t-probs
- results(j).resid = res.resid;     % resids 
+ results(j).resid = res.resid;     % resids
     sigu = res.resid'*res.resid;
  results(j).yhat = res.yhat;       % yhats
    results(j).y    = yvec;           % actual y
@@ -881,15 +881,15 @@ b = xtmp\yvec; % using Cholesky solution
 etmp = yvec-xtmp*b;
 sigr = etmp'*etmp;
 % joint F-test for variables r
-ftest(r,1) = ((sigr - sigu)/nlag)/(sigu/(nobse-k)); 
+ftest(r,1) = ((sigr - sigu)/nlag)/(sigu/(nobse-k));
 end;
 
-results(j).ftest = ftest;     
+results(j).ftest = ftest;
 %results(j).fprob = fdis_prb(ftest,nlag,nobse-k);
 
-end; 
-% end of loop over equations 
- 
+end;
+% end of loop over equations
+
 
 
 

@@ -6,10 +6,10 @@ function results = sar(y,x,W,info)
 %  where:  y = dependent variable vector
 %          x = explanatory variables matrix, (with intercept term in first
 %              column if used)
-%          W = standardized contiguity matrix 
+%          W = standardized contiguity matrix
 %       info = an (optional) structure variable with input options:
-%       info.rmin  = (optional) minimum value of rho to use in search (default = -1) 
-%       info.rmax  = (optional) maximum value of rho to use in search (default = +1)    
+%       info.rmin  = (optional) minimum value of rho to use in search (default = -1)
+%       info.rmax  = (optional) maximum value of rho to use in search (default = +1)
 %       info.eig   = 0 for default rmin = -1,rmax = +1, 1 for eigenvalue calculation of these
 %       info.convg = (optional) convergence criterion (default = 1e-8)
 %       info.maxit = (optional) maximum # of iterations (default = 500)
@@ -17,7 +17,7 @@ function results = sar(y,x,W,info)
 %                  = 1 for MC lndet approximation (fast for very large problems)
 %                  = 2 for Spline lndet approximation (medium speed)
 %       info.order = order to use with info.lflag = 1 option (default = 50)
-%       info.iter  = iterations to use with info.lflag = 1 option (default = 30)  
+%       info.iter  = iterations to use with info.lflag = 1 option (default = 30)
 %       info.lndet = a matrix returned by sar, sar_g, sarp_g, etc.
 %                    containing log-determinant information to save time
 %       info.ndraw = 1,000 by default
@@ -42,7 +42,7 @@ function results = sar(y,x,W,info)
 %         results.rbar  = rbar-squared
 %         results.lik   = log likelihood
 %         results.nobs  = # of observations
-%         results.nvar  = # of explanatory variables in x 
+%         results.nvar  = # of explanatory variables in x
 %         results.p     = # of explanatory variables excluding the constant term
 %         results.cflag = 0 for no intercept term, 1 for intercept term
 %         results.y     = y data vector
@@ -58,19 +58,19 @@ function results = sar(y,x,W,info)
 %         results.time2 = time for eigenvalue calculation
 %         results.time3 = time for hessian or information matrix calculation
 %         results.time4 = time for optimization
-%         results.time  = total time taken      
+%         results.time  = total time taken
 %         results.lndet = a matrix containing log-determinant information
 %                          (for use in later function calls to save time)
 %         results.sflag = 1 if this function is being called by sdm(), defaults to 0
 %         results.ndraw = # of draws used for x-impact estimates
 % --------------------------------------------------
-%  NOTES: if you use lflag = 1 or 2, info.rmin will be set = -1 
+%  NOTES: if you use lflag = 1 or 2, info.rmin will be set = -1
 %                                    info.rmax will be set = 1
-%         For n < 1000 you should use lflag = 0 to get exact results                                    
-% --------------------------------------------------  
+%         For n < 1000 you should use lflag = 0 to get exact results
+% --------------------------------------------------
 %  SEE ALSO: prt(results), sac, sem, sdm, sar, far
 % ---------------------------------------------------
-% REFERENCES: LeSage and Pace (2009) Chapter 4 on maximum likelihood estimation 
+% REFERENCES: LeSage and Pace (2009) Chapter 4 on maximum likelihood estimation
 %             of spatial regression models.
 % For lndet information see: Chapter 4
 % For interpretation of direct, indirect and total x-impacts see: Chapter 2
@@ -85,7 +85,7 @@ function results = sar(y,x,W,info)
 % jlesage@spatial-econometrics.com
 
 
-time1 = 0; 
+time1 = 0;
 time2 = 0;
 time3 = 0;
 time4 = 0;
@@ -108,7 +108,7 @@ end;
 results.ndraw = ndraw;
 
 if sflag == 0 % SAR model
-    
+
 % check if the user handled the intercept term okay
     n = length(y);
     if sum(x(:,1)) ~= n
@@ -124,10 +124,10 @@ if sflag == 0 % SAR model
      cflag = 1;
      p = size(x,2)-1;
     end;
-     
+
     results.cflag = cflag;
     results.p = p;
-    
+
     if n1 ~= n2
     error('sar: wrong size weight matrix W');
     elseif n1 ~= n
@@ -137,9 +137,9 @@ if sflag == 0 % SAR model
     if nchk ~= n
     error('sar: wrong size y vector input');
     end;
-    
+
 elseif sflag == 1 % SDM model
-    
+
     if n1 ~= n2
     error('sdm: wrong size weight matrix W');
     elseif n1 ~= n
@@ -149,7 +149,7 @@ elseif sflag == 1 % SDM model
     if nchk ~= n
     error('sdm: wrong size y vector input');
     end;
-end    
+end
 
 % compute eigenvalues or limits
 [rmin,rmax,time2] = sar_eigs(eflag,W,rmin,rmax,n);
@@ -167,7 +167,7 @@ wjjju=rv;
 for jjj=1:maxorderu
     wjjju=W*wjjju;
     tracew(jjj)=mean(mean(rv.*wjjju));
-    
+
 end
 
 traces=[tracew];
@@ -201,7 +201,7 @@ t0 = clock;
 % step 2) maximize concentrated likelihood function;
     options = optimset('fminbnd');
     [prho,liktmp,exitflag,output] = fminbnd('f_sar',rmin,rmax,options,detval,epe0,eped,epe0d,n);
-   
+
 time4 = etime(clock,t0);
 
 if exitflag == 0
@@ -210,10 +210,10 @@ end;
 results.iter = output.iterations;
 
 % step 3) find b,sige maximum likelihood estimates
-results.beta = b0 - prho*bd; 
-results.rho = prho; 
+results.beta = b0 - prho*bd;
+results.rho = prho;
 bhat = results.beta;
-results.sige = (1/n)*(e0-prho*ed)'*(e0-prho*ed); 
+results.sige = (1/n)*(e0-prho*ed)'*(e0-prho*ed);
 sige = results.sige;
 
 e = (e0 - prho*ed);
@@ -231,7 +231,7 @@ if n <= 500
 t0 = clock;
 % asymptotic t-stats based on information matrix
 % (page 80-81 Anselin, 1980)
-B = eye(n) - prho*W; 
+B = eye(n) - prho*W;
 BI = inv(B); WB = W*BI;
 pterm = trace(WB*WB + WB*WB');
 xpx = zeros(nvar+2,nvar+2);               % bhat,bhat
@@ -273,7 +273,7 @@ for iter=1:ndraw;
         end;
     total(iter,:,:)=totale; % a p by ntraces matrix
     direct(iter,:,:)=directe; % a p by ntraces matrix
-    indirect(iter,:,:)=indirecte; % a p by ntraces matrix         
+    indirect(iter,:,:)=indirecte; % a p by ntraces matrix
 end;
 
 time5 = etime(clock,t0);
@@ -320,7 +320,7 @@ for iter=1:ndraw;
         end;
     total(iter,:,:)=totale; % a p by ntraces matrix
     direct(iter,:,:)=directe; % a p by ntraces matrix
-    indirect(iter,:,:)=indirecte; % a p by ntraces matrix         
+    indirect(iter,:,:)=indirecte; % a p by ntraces matrix
 end;
 
 time5 = etime(clock,t0);
@@ -338,13 +338,13 @@ rsqr2 = rsqr2/(n-1.0);
 
 % return stuff
 results.meth = 'sar';
-results.y = y;      
+results.y = y;
 results.total = total;
 results.direct = direct;
 results.indirect = indirect;
-results.nobs = n; 
+results.nobs = n;
 results.nvar = nvar;
-results.rmax = rmax;      
+results.rmax = rmax;
 results.rmin = rmin;
 results.lflag = ldetflag;
 results.order = order;
@@ -361,7 +361,7 @@ results.lndet = detval;
 
 
 function llike = f_sar(rho,detval,epe0,eped,epe0d,n)
-% PURPOSE: evaluates concentrated log-likelihood for the 
+% PURPOSE: evaluates concentrated log-likelihood for the
 %  spatial autoregressive model using sparse matrix algorithms
 % ---------------------------------------------------
 %  USAGE:llike = f_sar(rho,detval,epe0,eped,epe0d,n)
@@ -381,7 +381,7 @@ function llike = f_sar(rho,detval,epe0,eped,epe0d,n)
 % ---------------------------------------------------
 %  RETURNS: a  scalar equal to minus the log-likelihood
 %           function value at the parameter rho
-% ---------------------------------------------------                         
+% ---------------------------------------------------
 %  NOTE: this is really two functions depending
 %        on nargin = 3 or nargin = 4 (see the function)
 %  --------------------------------------------------
@@ -406,7 +406,7 @@ if isempty(index)
 index = 1;
 end;
 
-detm = detval(index,2); 
+detm = detval(index,2);
 
 z = epe0 - 2*rho*epe0d + rho*rho*eped;
 
@@ -429,7 +429,7 @@ function llike = f2_sar(parm,y,x,W,detval)
 %         X    = explanatory variables matrix (n x k)
 %         W    = spatial weight matrix
 %         ldet = matrix with [rho log determinant] values
-%                computed in sar.m using one of Kelley Pace's routines  
+%                computed in sar.m using one of Kelley Pace's routines
 % ---------------------------------------------------
 %  RETURNS: a  scalar equal to minus the log-likelihood
 %           function value at the ML parameters
@@ -446,7 +446,7 @@ function llike = f2_sar(parm,y,x,W,detval)
 % San Marcos, TX 78666
 % jlesage@spatial.econometrics.com
 
-n = length(y); 
+n = length(y);
 k = length(parm);
 b = parm(1:k-2,1);
 rho = parm(k-1,1);
@@ -473,14 +473,14 @@ function [rmin,rmax,convg,maxit,detval,ldetflag,eflag,order,iter,options,ndraw,s
 % PURPOSE: parses input arguments for sar model
 % ---------------------------------------------------
 %  USAGE: [rmin,rmax,convg,maxit,detval,ldetflag,eflag,order,iter,options] = sar_parse(info)
-% where info contains the structure variable with inputs 
+% where info contains the structure variable with inputs
 % and the outputs are either user-inputs or default values
 % ---------------------------------------------------
 
 % set defaults
 options = zeros(1,18); % optimization options for fminbnd
-options(1) = 0; 
-options(2) = 1.e-6; 
+options(1) = 0;
+options(2) = 1.e-6;
 options(14) = 500;
 
 eflag = 0;     % default to not computing eigenvalues
@@ -500,7 +500,7 @@ cflag = 0;
 fields = fieldnames(info);
 nf = length(fields);
 if nf > 0
-    
+
  for i=1:nf
     if strcmp(fields{i},'rmin')
         rmin = info.rmin;  eflag = 0;
@@ -513,7 +513,7 @@ if nf > 0
     elseif strcmp(fields{i},'convg')
         options(2) = info.convg;
     elseif strcmp(fields{i},'maxit')
-        options(14) = info.maxit;  
+        options(14) = info.maxit;
     elseif strcmp(fields{i},'lndet')
     detval = info.lndet;
     ldetflag = -1;
@@ -533,21 +533,21 @@ if nf > 0
         error('sar: unrecognizable lflag value on input');
         end;
     elseif strcmp(fields{i},'order')
-        order = info.order;  
+        order = info.order;
     elseif strcmp(fields{i},'eig')
-        eflag = info.eig;  
+        eflag = info.eig;
     elseif strcmp(fields{i},'iter')
-        iter = info.iter; 
+        iter = info.iter;
      elseif strcmp(fields{i},'ndraw')
-        ndraw = info.ndraw; 
+        ndraw = info.ndraw;
      elseif strcmp(fields{i},'sflag')
-        sflag = info.sflag; 
+        sflag = info.sflag;
     end;
  end;
- 
+
 else, % the user has input a blank info structure
       % so we use the defaults
-end; 
+end;
 
 function [rmin,rmax,time2] = sar_eigs(eflag,W,rmin,rmax,n);
 % PURPOSE: compute the eigenvalues for the weight matrix
@@ -562,8 +562,8 @@ function [rmin,rmax,time2] = sar_eigs(eflag,W,rmin,rmax,n);
 if eflag == 1 % do eigenvalue calculations
 t0 = clock;
 opt.tol = 1e-3; opt.disp = 0;
-lambda = eigs(sparse(W),speye(n),1,'SR',opt);  
-rmin = real(1/lambda);   
+lambda = eigs(sparse(W),speye(n),1,'SR',opt);
+rmin = real(1/lambda);
 rmax = 1.0;
 time2 = etime(clock,t0);
 else % use rmin,rmax arguments from input or defaults -1,1
@@ -576,23 +576,23 @@ function [detval,time1] = sar_lndet(ldetflag,W,rmin,rmax,detval,order,iter);
 % using the user-selected (or default) method
 % ---------------------------------------------------
 %  USAGE: detval = far_lndet(lflag,W,rmin,rmax)
-% where eflag,rmin,rmax,W contains input flags 
+% where eflag,rmin,rmax,W contains input flags
 % and the outputs are either user-inputs or default values
 % ---------------------------------------------------
 
 
 % do lndet approximation calculations if needed
 if ldetflag == 0 % no approximation
-t0 = clock;    
+t0 = clock;
 out = lndetfull(W,rmin,rmax);
 time1 = etime(clock,t0);
 tt=rmin:.001:rmax; % interpolate a finer grid
 outi = interp1(out.rho,out.lndet,tt','spline');
 detval = [tt' outi];
-    
+
 elseif ldetflag == 1 % use Pace and Barry, 1999 MC approximation
 
-t0 = clock;    
+t0 = clock;
 out = lndetmc(order,iter,W,rmin,rmax);
 time1 = etime(clock,t0);
 results.limit = [out.rho out.lo95 out.lndet out.up95];
@@ -620,7 +620,7 @@ elseif ldetflag == -1 % the user fed down a detval matrix
             error('sar: wrong sized lndet input argument');
         elseif n1 == 1
             error('sar: wrong sized lndet input argument');
-        end;          
+        end;
 end;
 
 
@@ -650,21 +650,21 @@ eps = 1e-6;
 
 n = size(x,1);
 fx = feval(f,x,varargin{:});
- 
+
 % Compute the stepsize (h)
 h = eps.^(1/3)*max(abs(x),1e-2);
 xh = x+h;
-h = xh-x;    
+h = xh-x;
 ee = sparse(1:n,1:n,h,n,n);
- 
-% Compute forward step 
+
+% Compute forward step
 g = zeros(n,1);
 for i=1:n
   g(i) = feval(f,x+ee(:,i),varargin{:});
 end
-   
+
 H=h*h';
-% Compute "double" forward step 
+% Compute "double" forward step
 for i=1:n
 for j=i:n
   H(i,j) = (feval(f,x+ee(:,i)+ee(:,j),varargin{:})-g(i)-g(j)+fx)/H(i,j);
@@ -691,22 +691,22 @@ op=ones(p,1);
 trbig=trs(:,op)';
 
     arparmri=rho;
-   
+
     %forming P
     blockbsdm=reshape(beta,p,maxorder1);
-       
+
     %forming G
-    ree=arparmri.^ree1;   
+    ree=arparmri.^ree1;
     reblock=ree(1:maxorder1,1:maxorder1);
     ree(1:maxorder1,1:maxorder1)=reblock-tril(reblock)+(diag(ones(maxorder1,1)));
-    
+
     %forming PG
     pg=blockbsdm*ree;%pg is also the total impacts by order (p by ntrs)
-   
+
     %added contribution for iteration i
     pgtrbig=pg.*trbig;%direct
     pginbig=pg-pgtrbig;%indirect
-    
+
 total = pg;
 direct = pgtrbig;
 indirect = pginbig;
@@ -731,22 +731,22 @@ op=ones(p,1);
 trbig=trs(:,op)';
 
     arparmri=rho;
-   
+
     %forming P
     blockbsdm=reshape(beta,p,maxorder1);
-       
+
     %forming G
-    ree=arparmri.^ree1;   
+    ree=arparmri.^ree1;
     reblock=ree(1:maxorder1,1:maxorder1);
     ree(1:maxorder1,1:maxorder1)=reblock-tril(reblock)+(diag(ones(maxorder1,1)));
-    
+
     %forming PG
     pg=blockbsdm*ree;%pg is also the total impacts by order (p by ntrs)
-   
+
     %added contribution for iteration i
     pgtrbig=pg.*trbig;%direct
     pginbig=pg-pgtrbig;%indirect
-    
+
 total = pg;
 direct = pgtrbig;
 indirect = pginbig;

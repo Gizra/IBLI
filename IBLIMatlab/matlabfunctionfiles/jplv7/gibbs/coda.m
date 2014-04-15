@@ -6,7 +6,7 @@ function result = coda(draws,vnames,info,fid)
 % where: draws = a matrix of MCMC draws (ndraws x nvars)
 %       vnames = (optional) string vector of variable names (nvar x 1)
 %         info = (optional) structure setting input values
-%       info.q = Raftery quantile           (default = 0.025) 
+%       info.q = Raftery quantile           (default = 0.025)
 %       info.r = Raftery level of precision (default = 0.01)
 %       info.s = Raferty probability for r  (default = 0.950)
 %       info.p1 = 1st % of sample for Geweke chi-sqr test (default = 0.2)
@@ -15,7 +15,7 @@ function result = coda(draws,vnames,info,fid)
 % ------------------------------------------------------
 % NOTES: you may supply only some of the info-structure arguments
 %        the remaining ones will take on default values
-% ------------------------------------------------------ 
+% ------------------------------------------------------
 % RETURNS: output to command window if nargout = 0
 %          autocorrelation estimates
 %          Rafterty-Lewis MCMC diagnostics
@@ -59,7 +59,7 @@ function result = coda(draws,vnames,info,fid)
 % J.M. Bernardo, A.P. Dawid, and A.F.M. Smith (eds.) Proceedings of
 % the Fourth Valencia International Meeting on Bayesian Statistics,
 % pp. 169-194, Oxford University Press
-% Also: `Using simulation methods for Bayesian econometric models: 
+% Also: `Using simulation methods for Bayesian econometric models:
 % Inference, development and communication', at: www.econ.umn.edu/~bacc
 % Best, N.G., M.K. Cowles, and S.K. Vines (1995)  CODA: Manual
 % version 0.30. Biostatistics Unit, Cambridge U.K. http://www.mrc-bsu.cam.ac.uk
@@ -91,7 +91,7 @@ if nargin == 4
 nflag = 0;
  [vsize junk] = size(vnames); % user may supply a blank vnames argument
    if vsize > 0
-   nflag = 1; % we have variable names         
+   nflag = 1; % we have variable names
    end;
 fields = fieldnames(info);
 nf = length(fields);
@@ -118,7 +118,7 @@ elseif nargin == 3
 nflag = 0;
  [vsize junk] = size(vnames); % user may supply a blank vnames argument
    if vsize > 0
-   nflag = 1; % we have variable names         
+   nflag = 1; % we have variable names
    end;
 fields = fieldnames(info);
 nf = length(fields);
@@ -150,7 +150,7 @@ elseif nargin == 1
 q = 0.025; r = 0.01; s = 0.95; % set default values
 p1 = 0.2; p2 = 0.5;
 fid = 1;
-    
+
 else
     error('Wrong # of arguments to coda');
 end;
@@ -223,7 +223,7 @@ resapm = apm(res1,res2);
 
 if pflag == 0 % print results to command window
 
-% =======> print SACF diagnostics    
+% =======> print SACF diagnostics
 fprintf(1,'MCMC CONVERGENCE diagnostics \n');
 fprintf(1,'Based on sample size = %10d \n',ndraw);
 fprintf(1,'Autocorrelations within each parameter chain \n');
@@ -247,7 +247,7 @@ in.rnames = rnames;
 
 mprint(aprt,in);
 
-% print results with vnames 
+% print results with vnames
 fprintf(fid,'Raftery-Lewis Diagnostics for each parameter chain \n');
 fprintf(fid,'(q=%6.4f, r=%8.6f, s=%8.6f)\n',q,r,s);
 cstring1 = 'Thin';
@@ -306,7 +306,7 @@ mprint(gout2,in4);
 % =========> print Geweke chi-squared tests
 
 c = '%';
-% print results with vnames 
+% print results with vnames
 fprintf(1,'Geweke Chi-squared test for each parameter chain \n');
 fprintf(1,'First %2.0f%s versus Last %2.0f%s of the sample \n',100*p1,c,100*p2,c);
 clear in;
@@ -322,10 +322,10 @@ gout3 = zeros(4,3);
     gout3(k,2) = resapm(i).nse(k);
     gout3(k,3) = resapm(i).prob(k);
  end;
- 
+
 mprint(gout3,in);
 end;
-    
+
 end; % end of if pflag == 0
 
 if pflag == 1 % return results structure

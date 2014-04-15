@@ -1,12 +1,12 @@
-% PURPOSE: An example of using sart_g() on a large data set   
-%          Gibbs sampling spatial autoregressive tobit model                         
+% PURPOSE: An example of using sart_g() on a large data set
+%          Gibbs sampling spatial autoregressive tobit model
 %---------------------------------------------------
 % USAGE: sart_gd2 (see sart_gd for a small data set)
 %---------------------------------------------------
 
 clear all;
 % NOTE a large data set with 3107 observations
-% from Pace and Barry, 
+% from Pace and Barry,
 load elect.dat;             % load data on votes
 latt = elect(:,5);
 long = elect(:,6);
@@ -29,7 +29,7 @@ ind = find(y < limit);
 y(ind,1) = limit; % censored  values
 
 % do Gibbs sampling estimation
-ndraw = 2500; 
+ndraw = 2500;
 nomit = 500;
 %prior.rval = 4;
 prior.novi = 1;

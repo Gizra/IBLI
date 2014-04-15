@@ -1,31 +1,31 @@
 function results = sem_g(y,x,W,ndraw,nomit,prior)
 % PURPOSE: Bayesian estimates of the spatial error model
 %          y = XB + u, u = rho*W + e
-%          e = N(0,sige*V), V = diag(v1,v2,...vn) 
+%          e = N(0,sige*V), V = diag(v1,v2,...vn)
 %          r/vi = ID chi(r)/r, r = Gamma(m,k)
-%          B = N(c,T), 
-%          1/sige = Gamma(nu,d0), 
-%          rho = Uniform(rmin,rmax), or rho = beta(a1,a2); 
+%          B = N(c,T),
+%          1/sige = Gamma(nu,d0),
+%          rho = Uniform(rmin,rmax), or rho = beta(a1,a2);
 %-------------------------------------------------------------
 % USAGE: results = sem_g(y,x,W,ndraw,nomit,prior)
 % where: y = dependent variable vector (nobs x 1)
 %        x = independent variables matrix (nobs x nvar)
 %        W = spatial weight matrix (standardized, row-sums = 1)
 %    ndraw = # of draws
-%    nomit = # of initial draws omitted for burn-in            
+%    nomit = # of initial draws omitted for burn-in
 %    prior = a structure variable with:
 %            prior.beta  = prior means for beta,   c above (default 0)
 %            priov.bcov  = prior beta covariance , T above (default 1e+12)
-%            prior.novi  = 1 turns off sampling for vi, producing homoscedastic model            
+%            prior.novi  = 1 turns off sampling for vi, producing homoscedastic model
 %            prior.rval  = r prior hyperparameter, default=4
 %            prior.m     = informative Gamma(m,k) prior on r
 %            prior.k     = (default: not used)
 %            prior.nu    = informative Gamma(nu,d0) prior on sige
 %            prior.d0    = default: nu=0,d0=0 (diffuse prior)
 %            prior.a1    = parameter for beta(a1,a2) prior on rho see: 'help beta_prior'
-%            prior.a2    = (default = 1.0, a uniform prior on rmin,rmax) 
+%            prior.a2    = (default = 1.0, a uniform prior on rmin,rmax)
 %            prior.rmin  = (optional) min rho used in sampling (default = -1)
-%            prior.rmax  = (optional) max rho used in sampling (default = +1)  
+%            prior.rmax  = (optional) max rho used in sampling (default = +1)
 %            prior.eigs  = 0 to compute rmin/rmax using eigenvalues, (1 = don't compute default)
 %            prior.lflag = 0 for full lndet computation (default = 1, fastest)
 %                        = 1 for MC approx (fast for large problems)
@@ -33,10 +33,10 @@ function results = sem_g(y,x,W,ndraw,nomit,prior)
 %            prior.dflag = 1 for Metropolis-Hastings sampling for rho (default)
 %                        = 0 for griddy gibbs with univariate numerical integration
 %            prior.order = order to use with prior.lflag = 1 option (default = 50)
-%            prior.iter  = iters to use with prior.lflag = 1 option (default = 30)   
+%            prior.iter  = iters to use with prior.lflag = 1 option (default = 30)
 %            prior.lndet = a matrix returned by sar, sar_g, sarp_g, etc.
 %                          containing log-determinant information to save time
-%            prior.mlog  = 0 for no log-marginal likelihood, 
+%            prior.mlog  = 0 for no log-marginal likelihood,
 %                        = 1 for log-marginal likelihood, default = 1
 %-------------------------------------------------------------
 % RETURNS:  a structure:
@@ -47,7 +47,7 @@ function results = sem_g(y,x,W,ndraw,nomit,prior)
 %          results.bdraw  = bhat draws (ndraw-nomit x nvar)
 %          results.pdraw  = rho  draws (ndraw-nomit x 1)
 %          results.sdraw  = sige draws (ndraw-nomit x 1)
-%          results.vmean  = mean of vi draws (nobs x 1) 
+%          results.vmean  = mean of vi draws (nobs x 1)
 %          results.rdraw  = r draws (ndraw-nomit x 1) (if m,k input)
 %          results.bmean  = b prior means, prior.beta from input
 %          results.bstd   = b prior std deviations sqrt(diag(prior.bcov))
@@ -68,15 +68,15 @@ function results = sem_g(y,x,W,ndraw,nomit,prior)
 %          results.time1  = time for eigenvalue calculation
 %          results.time2  = time for log determinant calcluation
 %          results.time3  = time for sampling
-%          results.time   = total time taken  
+%          results.time   = total time taken
 %          results.rmax   = 1/max eigenvalue of W (or rmax if input)
-%          results.rmin   = 1/min eigenvalue of W (or rmin if input)          
+%          results.rmin   = 1/min eigenvalue of W (or rmin if input)
 %          results.tflag  = 'plevel' (default) for printing p-levels
-%                         = 'tstat' for printing bogus t-statistics 
+%                         = 'tstat' for printing bogus t-statistics
 %          results.lflag  = lflag from input
 %          results.iter   = prior.iter option from input
 %          results.order  = prior.order option from input
-%          results.limit  = matrix of [rho lower95,logdet approx, upper95] 
+%          results.limit  = matrix of [rho lower95,logdet approx, upper95]
 %                           intervals for the case of lflag = 1
 %          results.lndet = a matrix containing log-determinant information
 %                          (for use in later function calls to save time)
@@ -85,21 +85,21 @@ function results = sem_g(y,x,W,ndraw,nomit,prior)
 %                          integrated for model comparison)
 %          results.acc   = acceptance rate for M-H sampling (ndraw x 1) vector
 % --------------------------------------------------------------
-% NOTES: - use either improper prior.rval 
+% NOTES: - use either improper prior.rval
 %          or informative Gamma prior.m, prior.k, not both of them
-% - for n < 1000 you should use lflag = 0 to get exact results  
+% - for n < 1000 you should use lflag = 0 to get exact results
 % - use a1 = 1.0 and a2 = 1.0 for uniform prior on rho
 % --------------------------------------------------------------
 % SEE ALSO: (sem_gd, sem_gd2 demos) prt
 % --------------------------------------------------------------
 % REFERENCES: James P. LeSage, `Bayesian Estimation of Spatial Autoregressive
-%             Models',  International Regional Science Review, 1997 
+%             Models',  International Regional Science Review, 1997
 %             Volume 20, number 1\&2, pp. 113-129.
-% For lndet information see: Ronald Barry and R. Kelley Pace, 
-% "A Monte Carlo Estimator of the Log Determinant of Large Sparse Matrices", 
+% For lndet information see: Ronald Barry and R. Kelley Pace,
+% "A Monte Carlo Estimator of the Log Determinant of Large Sparse Matrices",
 % Linear Algebra and its Applications", Volume 289, Number 1-3, 1999, pp. 41-54.
-% and: R. Kelley Pace and Ronald P. Barry 
-% "Simulating Mixed Regressive Spatially autoregressive Estimators", 
+% and: R. Kelley Pace and Ronald P. Barry
+% "Simulating Mixed Regressive Spatially autoregressive Estimators",
 % Computational Statistics, 1998, Vol. 13, pp. 397-418.
 %----------------------------------------------------------------
 
@@ -161,10 +161,10 @@ elseif junk ~= k
 error('sem_g: prior bcov is wrong');
 end;
 
-V = ones(n,1); in = ones(n,1); % initial value for V   
+V = ones(n,1); in = ones(n,1); % initial value for V
 ys = y.*sqrt(V);
 vi = in;
-          
+
 bsave = zeros(ndraw-nomit,1);    % allocate storage for results
 ssave = zeros(ndraw-nomit,1);
 vmean = zeros(n,1);
@@ -205,17 +205,17 @@ Wx = sparse(W)*x;
 vi = in;
 V = vi;
 
-switch (novi_flag) 
-    
+switch (novi_flag)
+
 case{0} % we do heteroscedastic model
-    
+
 hwait = waitbar(0,'sem\_g: MCMC sampling ...');
-t0 = clock;                  
+t0 = clock;
 iter = 1;
 acc = 0;
           while (iter <= ndraw); % start sampling;
-                  
-          % update beta   
+
+          % update beta
           xs = matmul(sqrt(V),x);
           ys = sqrt(V).*y;;
           Wxs = W*xs;
@@ -225,10 +225,10 @@ acc = 0;
           yss = ys - rho*Wys;
           b = xss'*yss + sige*TIc;
           b0 = AI*b;
-          bhat = norm_rnd(sige*AI) + b0; 
-            
+          bhat = norm_rnd(sige*AI) + b0;
+
           % update sige
-          nu1 = n + 2*nu; 
+          nu1 = n + 2*nu;
           e = yss-xss*bhat;
           ed = e - rho*sparse(W)*e;
           d1 = 2*d0 + ed'*ed;
@@ -236,19 +236,19 @@ acc = 0;
           sige = d1/chi;
 
           % update vi
-          ev = ys - xs*bhat; 
-          %chiv = chis_rnd(n,rval+1);   
+          ev = ys - xs*bhat;
+          %chiv = chis_rnd(n,rval+1);
           chiv = chi2rnd(rval+1,n,1);
           vi = ((ev.*ev/sige) + in*rval)./chiv;
-          V = in./vi; 
-              
+          V = in./vi;
+
           % update rval
-          if mm ~= 0           
-          rval = gamm_rnd(1,1,mm,kk);  
+          if mm ~= 0
+          rval = gamm_rnd(1,1,mm,kk);
           end;
 
 if metflag == 0
-          % update rho using numerical integration          
+          % update rho using numerical integration
           rho = draw_rho(detval,y,x,Wy,Wx,V,n,k,rmin,rmax,rho);
 else
           % update rho using metropolis-hastings
@@ -258,17 +258,17 @@ else
           accept = 0;
           rho2 = rho + cc*randn(1,1);
           while accept == 0
-           if ((rho2 > rmin) & (rho2 < rmax)); 
-           accept = 1;  
+           if ((rho2 > rmin) & (rho2 < rmax));
+           accept = 1;
            else
            rho2 = rho + cc*randn(1,1);
-           end; 
-          end; 
+           end;
+          end;
            rhoy = c_sem(rho2,y,x,bhat,sige,W,detval,V,a1,a2);
           ru = unif_rnd(1,0,1);
           if ((rhoy - rhox) > exp(1)),
           p = 1;
-          else,          
+          else,
           ratio = exp(rhoy-rhox);
           p = min(1,ratio);
           end;
@@ -285,7 +285,7 @@ else
        cc = cc*1.1;
        end;
 end; % end of if metflag
-                                                         
+
     if iter > nomit % if we are past burn-in, save the draws
     bsave(iter-nomit,1:k) = bhat';
     ssave(iter-nomit,1) = sige;
@@ -294,12 +294,12 @@ end; % end of if metflag
 
     if mm~= 0
         rsave(iter-nomit,1) = rval;
-    end;         
     end;
-                    
+    end;
 
-iter = iter + 1; 
-waitbar(iter/ndraw);         
+
+iter = iter + 1;
+waitbar(iter/ndraw);
 end; % end of sampling loop
 close(hwait);
 
@@ -387,53 +387,53 @@ results.r     = rval;
 results.rdraw = 0;
 end;
 
-case{1} % we do homoscedastic model 
-    
+case{1} % we do homoscedastic model
+
 
 hwait = waitbar(0,'sem\_g: MCMC sampling ...');
-t0 = clock;                  
+t0 = clock;
 iter = 1;
 acc = 0;
           while (iter <= ndraw); % start sampling;
-                  
-          % update beta   
+
+          % update beta
           xs = x - rho*Wx;
           AI = inv(xs'*xs + sige*TI);
           ys = y - rho*Wy;
           b = xs'*ys + sige*TIc;
           b0 = AI*b;
-          bhat = norm_rnd(sige*AI) + b0; 
-            
+          bhat = norm_rnd(sige*AI) + b0;
+
           % update sige
-          nu1 = n + 2*nu; 
+          nu1 = n + 2*nu;
           e = (y - x*bhat);
           es = e - rho*W*e;
           d1 = 2*d0 + es'*es;
           chi = chis_rnd(1,nu1);
           sige = d1/chi;
-              
+
 if metflag == 0
-          % update rho using numerical integration          
+          % update rho using numerical integration
           rho = draw_rho(detval,y,x,Wy,Wx,V,n,k,rmin,rmax,rho);
 
-else 
+else
           % update rho using metropolis-hastings
            xb = x*bhat;
            rhox = c_sem(rho,y,x,bhat,sige,W,detval,ones(n,1),a1,a2);
           accept = 0;
           rho2 = rho + cc*randn(1,1);
           while accept == 0
-           if ((rho2 > rmin) & (rho2 < rmax)); 
-           accept = 1;  
+           if ((rho2 > rmin) & (rho2 < rmax));
+           accept = 1;
            else
            rho2 = rho + cc*randn(1,1);
-           end; 
-          end; 
+           end;
+          end;
            rhoy = c_sem(rho2,y,x,bhat,sige,W,detval,ones(n,1),a1,a2);
           ru = unif_rnd(1,0,1);
           if ((rhoy - rhox) > exp(1)),
           p = 1;
-          else,          
+          else,
           ratio = exp(rhoy-rhox);
           p = min(1,ratio);
           end;
@@ -448,21 +448,21 @@ else
        end;
        if acc_rate(iter,1) > 0.6
        cc = cc*1.1;
-       end;       
+       end;
 end; % end of if metflag
-                                                      
+
     if iter > nomit % if we are past burn-in, save the draws
     bsave(iter-nomit,1:k) = bhat';
     ssave(iter-nomit,1) = sige;
     psave(iter-nomit,1) = rho;
     if mm~= 0
         rsave(iter-nomit,1) = rval;
-    end;         
     end;
-                    
+    end;
 
-iter = iter + 1; 
-waitbar(iter/ndraw);         
+
+iter = iter + 1;
+waitbar(iter/ndraw);
 end; % end of sampling loop
 close(hwait);
 
@@ -614,8 +614,8 @@ function cout = c_sem(rho,y,x,b,sige,W,detval,vi,a1,a2);
 %  where:  rho  = spatial autoregressive parameter
 %          y    = dependent variable vector
 %          W    = spatial weight matrix
-%        detval = an (ngrid,2) matrix of values for det(I-rho*W) 
-%                 over a grid of rho values 
+%        detval = an (ngrid,2) matrix of values for det(I-rho*W)
+%                 over a grid of rho values
 %                 detval(:,1) = determinant values
 %                 detval(:,2) = associated rho values
 %          sige = sige value
@@ -638,7 +638,7 @@ index = round((i1+i2)/2);
 if isempty(index)
 index = 1;
 end;
-detm = detval(index,2); 
+detm = detval(index,2);
 
 [n,k] = size(x);
 nmk = (n-k)/2;
@@ -661,9 +661,9 @@ function [nu,d0,rval,mm,kk,rho,sige,rmin,rmax,detval,ldetflag,eflag,order,iter,n
 % PURPOSE: parses input arguments for far, far_g models
 % ---------------------------------------------------
 %  USAGE: [nu,d0,rval,mm,kk,rho,sige,rmin,rmax,detval, ...
-%          ldetflag,eflag,order,iter,novi_flag,c,T,prior_beta,cc,metflag,a1,a2,inform_flag] = 
+%          ldetflag,eflag,order,iter,novi_flag,c,T,prior_beta,cc,metflag,a1,a2,inform_flag] =
 %                           sem_parse(prior,k)
-% where info contains the structure variable with inputs 
+% where info contains the structure variable with inputs
 % and the outputs are either user-inputs or default values
 % ---------------------------------------------------
 
@@ -700,29 +700,29 @@ if nf > 0
     if strcmp(fields{i},'nu')
         nu = prior.nu;
     elseif strcmp(fields{i},'d0')
-        d0 = prior.d0;  
+        d0 = prior.d0;
     elseif strcmp(fields{i},'rval')
-        rval = prior.rval; 
+        rval = prior.rval;
     elseif strcmp(fields{i},'eigs')
         eflag = prior.eigs;
     elseif strcmp(fields{i},'dflag')
         metflag = prior.dflag;
     elseif strcmp(fields{i},'a1')
-       a1 = prior.a1; 
+       a1 = prior.a1;
     elseif strcmp(fields{i},'a2')
-       a2 = prior.a2; 
+       a2 = prior.a2;
     elseif strcmp(fields{i},'m')
         mm = prior.m;
         kk = prior.k;
-        rval = gamm_rnd(1,1,mm,kk);    % initial value for rval   
+        rval = gamm_rnd(1,1,mm,kk);    % initial value for rval
     elseif strcmp(fields{i},'beta')
         c = prior.beta; inform_flag = 1; % flag for informative prior on beta
     elseif strcmp(fields{i},'bcov')
         T = prior.bcov; inform_flag = 1; % flag for informative prior on beta
     elseif strcmp(fields{i},'rmin')
-        rmin = prior.rmin;  
+        rmin = prior.rmin;
     elseif strcmp(fields{i},'rmax')
-        rmax = prior.rmax; 
+        rmax = prior.rmax;
     elseif strcmp(fields{i},'lndet')
     detval = prior.lndet;
     ldetflag = -1;
@@ -732,28 +732,28 @@ if nf > 0
     elseif strcmp(fields{i},'lflag')
         tst = prior.lflag;
         if tst == 0,
-        ldetflag = 0; 
+        ldetflag = 0;
         elseif tst == 1,
-        ldetflag = 1; 
+        ldetflag = 1;
         elseif tst == 2,
-        ldetflag = 2; 
+        ldetflag = 2;
         else
         error('sem_g: unrecognizable lflag value on input');
         end;
     elseif strcmp(fields{i},'order')
-        order = prior.order;  
+        order = prior.order;
     elseif strcmp(fields{i},'iter')
-        iter = prior.iter; 
+        iter = prior.iter;
     elseif strcmp(fields{i},'novi')
         novi_flag = prior.novi;
     elseif strcmp(fields{i},'mlog')
         mlog = prior.mlog;
     end;
  end;
- 
+
 else, % the user has input a blank info structure
       % so we use the defaults
-end; 
+end;
 
 
 function [rmin,rmax,time2] = sem_eigs(eflag,W,rmin,rmax,n);
@@ -769,8 +769,8 @@ function [rmin,rmax,time2] = sem_eigs(eflag,W,rmin,rmax,n);
 if eflag == 0
 t0 = clock;
 opt.tol = 1e-3; opt.disp = 0;
-lambda = eigs(sparse(W),speye(n),1,'SR',opt);  
-rmin = 1/lambda;   
+lambda = eigs(sparse(W),speye(n),1,'SR',opt);
+rmin = 1/lambda;
 rmax = 1;
 time2 = etime(clock,t0);
 else
@@ -783,23 +783,23 @@ function [detval,time1] = sem_lndet(ldetflag,W,rmin,rmax,detval,order,iter);
 % using the user-selected (or default) method
 % ---------------------------------------------------
 %  USAGE: detval = far_lndet(lflag,W,rmin,rmax)
-% where eflag,rmin,rmax,W contains input flags 
+% where eflag,rmin,rmax,W contains input flags
 % and the outputs are either user-inputs or default values
 % ---------------------------------------------------
 
 
 % do lndet approximation calculations if needed
 if ldetflag == 0 % no approximation
-t0 = clock;    
+t0 = clock;
 out = lndetfull(W,rmin,rmax);
 time1 = etime(clock,t0);
 tt=rmin:.001:rmax; % interpolate a finer grid
 outi = interp1(out.rho,out.lndet,tt','spline');
 detval = [tt' outi];
-    
+
 elseif ldetflag == 1 % use Pace and Barry, 1999 MC approximation
 
-t0 = clock;    
+t0 = clock;
 out = lndetmc(order,iter,W,rmin,rmax);
 time1 = etime(clock,t0);
 results.limit = [out.rho out.lo95 out.lndet out.up95];
@@ -827,7 +827,7 @@ elseif ldetflag == -1 % the user fed down a detval matrix
             error('sem_g: wrong sized lndet input argument');
         elseif n1 == 1
             error('sem_g: wrong sized lndet input argument');
-        end;          
+        end;
 end;
 
 function  out = sem_marginal(detval,y,x,Wy,Wx,nobs,nvar,a1,a2)
@@ -849,7 +849,7 @@ function  out = sem_marginal(detval,y,x,Wy,Wx,nobs,nvar,a1,a2)
 %        out.lik = concentrated log-likelihood vector the length of detval
 % -------------------------------------------------------------------------
 % NOTES: works only for homoscedastic SEM model
-% we must feed in ys = sqrt(V)*y, xs = sqrt(V)*X 
+% we must feed in ys = sqrt(V)*y, xs = sqrt(V)*X
 % as well as logdetx = log(xs'*xs) for heteroscedastic model
 % -------------------------------------------------------------------------
 
@@ -883,8 +883,8 @@ end;
 
 % spline interpolate epetmp
 tt=rvec; % interpolate a finer grid
-epe = interp1(rgrid,epetmp,rvec,'spline'); 
-detx = interp1(rgrid,detxtmp,rvec,'spline'); 
+epe = interp1(rgrid,epetmp,rvec,'spline');
+detx = interp1(rgrid,detxtmp,rvec,'spline');
 
 
 bprior = beta_prior(detval(:,1),a1,a2);
@@ -915,7 +915,7 @@ function  out = sem_marginal2(detval,y,x,Wy,Wx,nobs,nvar,a1,a2,c,TI,sige)
 %        out.lik = concentrated log-likelihood vector the length of detval
 % -------------------------------------------------------------------------
 % NOTES: works only for homoscedastic SEM model
-% we must feed in ys = sqrt(V)*y, xs = sqrt(V)*X 
+% we must feed in ys = sqrt(V)*y, xs = sqrt(V)*X
 % as well as logdetx = log(xs'*xs) for heteroscedastic model
 % -------------------------------------------------------------------------
 
@@ -956,10 +956,10 @@ end;
 
 % spline interpolate epetmp
 tt=rvec; % interpolate a finer grid
-epe = interp1(rgrid,epetmp,rvec,'spline'); 
-detx = interp1(rgrid,detxtmp,rvec,'spline'); 
-Q1 = interp1(rgrid,Q1,rvec,'spline'); 
-Q2 = interp1(rgrid,Q2,rvec,'spline'); 
+epe = interp1(rgrid,epetmp,rvec,'spline');
+detx = interp1(rgrid,detxtmp,rvec,'spline');
+Q1 = interp1(rgrid,Q1,rvec,'spline');
+Q2 = interp1(rgrid,Q2,rvec,'spline');
 bprior = beta_prior(detval(:,1),a1,a2);
 % C is a constant of integration that can vary with nvars, so for model
 % comparisions involving different nvars we need to include this

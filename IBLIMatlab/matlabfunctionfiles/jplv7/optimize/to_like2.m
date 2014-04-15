@@ -2,7 +2,7 @@ function like =  to_like2(b,y,x);
 % PURPOSE: evaluate tobit log-likelihood
 %          to demonstrate optimization routines
 %-----------------------------------------------------
-% USAGE:    like = to_like1(b,y,x) 
+% USAGE:    like = to_like1(b,y,x)
 % where:     b = parameter vector (k x 1)
 %            y = dependent variable vector (n x 1)
 %            x = explanatory variables matrix (n x m)
@@ -26,9 +26,8 @@ end;
    beta = b(1:m-1);         % pull out bhat
    sigma = max([b(m) h]);   % pull out sigma
    xb = x*beta;
-   llf1 = -(y-xb).^2./(2*sigma) - .5*log(2*pi*sigma);  
+   llf1 = -(y-xb).^2./(2*sigma) - .5*log(2*pi*sigma);
    xbs = xb./sqrt(sigma); cdf = .5*(1+erf(xbs./sqrt(2)));
    llf2 = log(h+(1-cdf));
    llf = (y > 0).*llf1 + (y <= 0).*llf2;
    like = sum(llf); % scalar result
-   

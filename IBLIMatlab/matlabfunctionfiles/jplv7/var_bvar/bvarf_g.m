@@ -1,7 +1,7 @@
 function ylevf = bvarf_g(y,nlag,nfor,begf,prior,ndraw,nomit,x,transf);
-% PURPOSE: Gibbs sampling forecasts for Bayesian vector 
+% PURPOSE: Gibbs sampling forecasts for Bayesian vector
 %          autoregressive model using Minnesota-type prior
-%          y = A(L) Y + X B + E, E = N(0,sige*V), 
+%          y = A(L) Y + X B + E, E = N(0,sige*V),
 %          V = diag(v1,v2,...vn), r/vi = ID chi(r)/r, r = Gamma(m,k)
 %          c = R A(L) + U, U = N(0,Z), Minnesota prior
 %          diffuse prior on B is used
@@ -10,32 +10,32 @@ function ylevf = bvarf_g(y,nlag,nfor,begf,prior,ndraw,nomit,x,transf);
 % where:    y    = an (nobs x neqs) matrix of y-vectors
 %           nlag = the lag length
 %           nfor = the forecast horizon
-%           begf = the beginning date of the forecast           
+%           begf = the beginning date of the forecast
 %          prior = a structure variable
 %               prior.tight,  Litterman's tightness hyperparameter
 %               prior.weight, Litterman's weight (matrix or scalar)
-%               prior.decay,  Litterman's lag decay = lag^(-decay) 
+%               prior.decay,  Litterman's lag decay = lag^(-decay)
 %               prior.rval, r prior hyperparameter, default=4
 %               prior.m,    informative Gamma(m,k) prior on r
-%               prior.k,    informative Gamma(m,k) prior on r  
+%               prior.k,    informative Gamma(m,k) prior on r
 %          ndraw = # of draws
-%          nomit = # of initial draws omitted for burn-in       
+%          nomit = # of initial draws omitted for burn-in
 %          x     = an optional (nobs x nx) matrix of variables
 %         transf = 0, no data transformation
 %                = 1, 1st differences used to estimate the model
 %                = freq, seasonal differences used to estimate
 %                = cal-structure growth rates used to estimate
-%                  e.g., cal(1982,1,12) [see cal() function]   
+%                  e.g., cal(1982,1,12) [see cal() function]
 %---------------------------------------------------------------
 % NOTE: - use bvarf_g(y,nlag,nfor,begf,prior,ndraw,nomit,[],transf)
 %         for a transformation model with no x's (deterministic variables)
 %       - includes constant term automatically
-%---------------------------------------------------------------      
+%---------------------------------------------------------------
 % RETURNS:
 %  yfor = an nfor x neqs matrix of level forecasts for each equation
 %---------------------------------------------------------------
 % SEE ALSO: bvar_g, becmf_g, recmf_g, rvarf_g
-%---------------------------------------------------------------                      
+%---------------------------------------------------------------
 % REFERENCES:  LeSage, J.P. Applied Econometrics using MATLAB
 %---------------------------------------------------------------
 
@@ -78,14 +78,14 @@ freq = 0;
 else
 error('Wrong # of arguments to bvarf_g');
 end;
-    
+
 fields = fieldnames(prior);
 nf = length(fields);
 mm = 0; rval = 4; % rval = 4 is default
 nu = 0; d0 = 0; % default to a diffuse prior on sige
 for i=1:nf
     if strcmp(fields{i},'rval')
-        rval = prior.rval; 
+        rval = prior.rval;
     elseif strcmp(fields{i},'m')
         mm = prior.m;
         kk = prior.k;
@@ -98,9 +98,9 @@ for i=1:nf
         warning('Tightness greater than unity in bvarf_g');
         end;
     elseif strcmp(fields{i},'weight')
-        weight = prior.weight;       
+        weight = prior.weight;
        [wchk1 wchk2] = size(weight);
-       if (wchk1 ~= wchk2) 
+       if (wchk1 ~= wchk2)
        error('non-square weight matrix in bvarf_g');
        elseif wchk1 > 1
         if wchk1 ~= neqs
@@ -108,10 +108,10 @@ for i=1:nf
         end;
        end;
     elseif strcmp(fields{i},'decay')
-        decay = prior.decay;    
+        decay = prior.decay;
         if decay < 0
         error('Negative lag decay in bvarf_g');
-        end;       
+        end;
     end;
 end;
 
@@ -183,11 +183,11 @@ b = mean(result(j).bdraw);
 bmat(:,j) = b';
 end;
 
-% given bmat values generate future forecasts 
+% given bmat values generate future forecasts
 % These may be levels, 1st-differences, growth rates or seas diff's
 % we worry transforming back to levels later
-    
-% 1-step-ahead forecast 
+
+% 1-step-ahead forecast
 xtrunc = [dy(nmin-nlag:nmin,:)
           zeros(1,neqs)];
 xfor = mlag(xtrunc,nlag);
@@ -246,7 +246,7 @@ cnt = step-(nlag-1);
   xnew(i,:) = yfor(cnt,:);
   cnt = cnt+1;
  end;
- 
+
 xfor = mlag(xnew,nlag);
 [xend junk] = size(xfor);
 xobs = xfor(xend,:);
@@ -266,7 +266,7 @@ end;
 
 end;
 
-  
+
 % we now worry about transforming the forecasts back
 % to levels
 
@@ -278,7 +278,7 @@ ylevf = zeros(nfor,neqs);
 % 1-step-ahead forecast
 ylevf(1,:) = yfor(1,:) + y(begf-1,:); % add change to actual from time t;
 % 2-nfor-step-ahead forecasts
-for i=2:nfor % 
+for i=2:nfor %
 ylevf(i,:) = yfor(i,:) + ylevf(i-1,:);
 end;
 

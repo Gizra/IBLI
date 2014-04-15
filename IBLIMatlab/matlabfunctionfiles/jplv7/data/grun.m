@@ -58,22 +58,22 @@ vname1 = ['I gen motors  ',
           'constant      ',
           'fgm           '
           'cgm           '];
-          
+
 vname2 = ['I chrysler    ',
           'constant      ',
           'fcry          '
           'ccry          '];
 
 vname3 = ['I gen electric',
-          'constant      ',          
+          'constant      ',
           'fge           ',
           'cge           '];
-          
+
 vname4 = ['I westinghouse',
           'constant      ',
           'fwest         '
           'cwest         '];
-          
+
 vname5 = ['I us steel    ',
           'constant      ',
           'fuss          '

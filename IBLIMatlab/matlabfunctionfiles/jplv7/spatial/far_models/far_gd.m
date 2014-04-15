@@ -1,6 +1,6 @@
 % PURPOSE: An example of using far_g() Gibbs sampling
 %          1st-order spatial autoregressive model
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
 % USAGE: far_gd (see also far_gd2 for a large data set)
 %---------------------------------------------------
@@ -13,16 +13,16 @@ xc = anselin(:,4);
 yc = anselin(:,5);
 [j1 W j2] = xy2cont(xc,yc);
 [n junk] = size(W);
-In = speye(n); 
+In = speye(n);
 rho = 0.7;  % true value of rho
 sige = 1;
-y = (In-rho*W)\(randn(n,1)*sqrt(sige)); 
+y = (In-rho*W)\(randn(n,1)*sqrt(sige));
 ydev = y - mean(y);
 vnames = strvcat('y-simulated','y-spatial lag');
 
-% do maximum likelihood for comparison    
-info.rmin = 0; 
-info.rmax = 1; % constrain 0 < rho < 1     
+% do maximum likelihood for comparison
+info.rmin = 0;
+info.rmax = 1; % constrain 0 < rho < 1
 result1 = far(ydev,W,info);
 disp('True value of rho = 0.7');
 prt(result1,vnames);

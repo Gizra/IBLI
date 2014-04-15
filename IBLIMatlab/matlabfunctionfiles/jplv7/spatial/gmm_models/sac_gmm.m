@@ -37,7 +37,7 @@ function results=sac_gmm(y,x,W,M,options)
 %         results.rbar       = rbar-squared
 %         results.se         = Standard errors from EGLS
 %         results.nobs       = number of observations
-%         results.nvar       = number of variables 
+%         results.nvar       = number of variables
 %         results.time1      = time for optimization
 %         results.time2      = total time taken
 % ---------------------------------------------------
@@ -84,19 +84,19 @@ fields = fieldnames(options);
 nf = length(fields);
  for i=1:nf
     if strcmp(fields{i},'prt')
-        infoz2.prt = options.prt; 
+        infoz2.prt = options.prt;
     elseif strcmp(fields{i},'maxit')
         infoz2.maxit = options.maxit;
     elseif strcmp(fields{i},'iter')
         itflag = options.iter;
     elseif strcmp(fields{i},'btol')
-        infoz2.btol = options.btol;   
+        infoz2.btol = options.btol;
     elseif strcmp(fields{i},'ftol');
         infoz2.ftol = options.ftol;
   end;
  end;
 end;
-    
+
 
 
 mwflag = 0;
@@ -106,7 +106,7 @@ if nargin == 3
 end;
 
 results.meth = 'sac_gmm';
-time1 = 0; 
+time1 = 0;
 time2 = 0;
 
 timet = clock; % start the clock for overall timing
@@ -115,7 +115,7 @@ timet = clock; % start the clock for overall timing
 %   where: y      = dependent variable vector (nobs x 1)
 %          yendog = endogenous variables matrix (nobs x g)
 %          xexog  = exogenous variables matrix for this equation
-%          xall   = all exogenous and lagged endogenous variables 
+%          xall   = all exogenous and lagged endogenous variables
 %                   in the system
 %Estimated 2SLS to get a vector of residuals
 [n, nvar]=size(x);
@@ -131,7 +131,7 @@ results.nvar=nvar;
     Wx = sparse(W)*x;
     z = [x Wx W*Wx];
     o1 = tsls(y,Wy,x,z);
-    end;    
+    end;
 
 e=o1.resid;  % 1st step residuals
 
@@ -170,7 +170,7 @@ trMM = sum(sum(M.*M));
     [lambdahat,infoz2,stat]=minz(lambdavec,infoz2.func,infoz2,Gn,Gn2);
 
     lambdavec = [lambdahat(1);lambdahat(2)];
-    
+
     %Estimate Parameters using EGLS;
     tmp = speye(n) - lambdahat(1)*sparse(M);
 
@@ -245,9 +245,9 @@ lam = lambdahat(1);
     rhotstat = o1.tstat(1,1);
     btstat = o1.tstat(2:end,1);
     sige = (o1.resid'*o1.resid)/n;
-    end;    
+    end;
 
-    
+
 % fill-in results structure with EGLS estimates
 
 results.lam =lam;
@@ -257,19 +257,19 @@ results.sige = sige;
 results.tstat = btstat;
 results.rhotstat = rhotstat;
 
-% B = speye(n) - results.lambda*sparse(M); 
+% B = speye(n) - results.lambda*sparse(M);
 % A = speye(n) - results.rho*sparse(W);
 % yhat = A\(x*bhat);
 % e = y - yhat;
 % Be = B*e;
 % epe = Be'*Be;
 % results.sige = (1/n)*epe;
-% 
+%
 % tmp = results.sige*zpzi;
 % results.tstat = results.beta./sqrt(diag(tmp(1:nvar,1:nvar)));
-% 
+%
 % results.rhotstat = results.rho/sqrt(tmp(end,end));
-% 
+%
 sigu = results.sige*n;
 ym = y - mean(y);
 rsqr1 = sigu;

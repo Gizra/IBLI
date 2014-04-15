@@ -1,4 +1,4 @@
-% PURPOSE: demonstrate ols_corc roc 
+% PURPOSE: demonstrate ols_corc roc
 %
 % USAGE: olsc_d
 % -----------------------------------------------
@@ -24,12 +24,12 @@ end;
 yt = y(101:n,1);
 xt = xmat(101:n,:);
 n = n-100; % reset n to reflect truncation
- 
+
 Vnames = ['y    ',
           'cterm',
           'x2   ',
           'x3   '];
-          
+
 % do ols regression
 result = ols(yt,xt);
 prt_reg(result,Vnames);

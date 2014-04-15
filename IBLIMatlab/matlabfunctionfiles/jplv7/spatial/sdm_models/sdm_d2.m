@@ -1,5 +1,5 @@
 % PURPOSE: An example of using sdm() on a large data set
-%          max likelihood spatial Durbin model                              
+%          max likelihood spatial Durbin model
 %---------------------------------------------------
 % USAGE: sdm_d2 (see sdm_d for a small data set)
 %---------------------------------------------------
@@ -8,7 +8,7 @@ clear all;
 % NOTE a large data set with 3107 observations from Pace and Barry
 load elect.dat;             % load data on votes
 y =  log(elect(:,7));
-x0 = log(elect(:,8)); % population 
+x0 = log(elect(:,8)); % population
 x1 = log(elect(:,9));
 x2 = log(elect(:,10));
 x3 = log(elect(:,11));

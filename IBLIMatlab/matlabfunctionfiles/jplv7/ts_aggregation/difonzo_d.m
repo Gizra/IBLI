@@ -33,9 +33,9 @@ Y=[	3450.43125      5274.37125
 		2580.30000      7874.17500
 		2707.97500      8129.25000
 		2783.97500      8554.97500 ];
-  
+
   % High-frequency indicators: simulated series
-  
+
 x=[ 1186.574 1504.082
 	 1238.540 1495.235
 	 1274.279 1483.496
@@ -128,7 +128,7 @@ x=[ 1186.574 1504.082
   1437.800  1745.300
   1501.400  1722.100
   1538.800  1701.500 ];
-  
+
 % High-frequency constraint: simulated series
 
 z=[ 8735.5601
@@ -228,13 +228,13 @@ z=[ 8735.5601
 % Inputs for td library
 
 % Type of aggregation
-ta=2;   
-% Frequency conversion 
-s=4;    
+ta=2;
+% Frequency conversion
+s=4;
 % Model for innovations
 type=1;
 % Name of ASCII file for output
-file_sal='td.sal';   
+file_sal='td.sal';
 
 % Number of high frequency indicators linked to each low frequency
 % aggregate

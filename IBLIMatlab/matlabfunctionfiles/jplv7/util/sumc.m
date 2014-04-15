@@ -8,7 +8,7 @@ function m=sumc(x)
 % -----------------------------------------------------
 % NOTE: a Gauss compatability function
 % -----------------------------------------------------
-             
+
 % written by:
 % James P. LeSage, Dept of Economics
 % Texas State University-San Marcos

@@ -2,12 +2,12 @@ function seq=seqm(a,b,c);
 % PURPOSE: produce a sequence of values
 % -----------------------------------------------------
 % USAGE: y = seqm(a,b,c)
-%  where    a = initial value in sequence 
+%  where    a = initial value in sequence
 %           b = increment
-%           c = number of values in the sequence  
+%           c = number of values in the sequence
 % -----------------------------------------------------
 % RETURNS: a sequence, (a a*b ...(a*b^(c-1)))' in MATLAB notation
-% ----------------------------------------------------- 
+% -----------------------------------------------------
 % NOTE: a Gauss compatability function
 % -----------------------------------------------------
 
@@ -20,7 +20,7 @@ function seq=seqm(a,b,c);
 
 % seqm Gauss eqivalent of seqm(a,b,c)
 seq = zeros(c,1);
-seq(1) = a; 
+seq(1) = a;
 if c>1;
    seq(2) = a*b;
 

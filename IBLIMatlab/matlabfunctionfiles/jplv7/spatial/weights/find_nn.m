@@ -3,14 +3,14 @@ function nnlist = find_nn(xc,yc,m,order)
 %          to each observation and returns an index to these neighboring observations
 % --------------------------------------------------------
 % USAGE: nnindex = find_nn(xc,yc,m)
-%       where: 
+%       where:
 %             xc = x-coordinate for each obs (nobs x 1)
 %             yc = y-coordinate for each obs (nobs x 1)
 %             m  = # of nearest neighbors to be found
 %          order = 1, 2, 3, or 4. (default = 2)
 %                  This limits the extent to search for neighbors to the sum of the delaunay orders
 %                  e.g., delorder=2 limits the search to the delaunay neighbors and the neighbors of neighbors
-%                  Lower values of delorder speed computation and reduce memory. 
+%                  Lower values of delorder speed computation and reduce memory.
 % --------------------------------------------------------
 % RETURNS: an (nobs x m) matrix of indices to the m neighbors
 % --------------------------------------------------------
@@ -19,9 +19,9 @@ function nnlist = find_nn(xc,yc,m,order)
 %        would pull out the nn nearest neighbor observations to
 %        y(i,1), and y(ind,1)/m would represent an avg of these
 %        This function is a fneighbors2 from R. Kelley Pace's spatial
-%        statistics toolbox 
+%        statistics toolbox
 % --------------------------------------------------------
-% SEE ALSO: find_neighbors, make_nnw which constructs a standardized spatial 
+% SEE ALSO: find_neighbors, make_nnw which constructs a standardized spatial
 %           weight matrix based on these Delaunay nearest neighbors
 % --------------------------------------------------------
 

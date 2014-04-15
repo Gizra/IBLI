@@ -3,19 +3,19 @@ function prt_swm(results,vnames,fid)
 %          (switch_em, hmarkov_em)
 %---------------------------------------------------
 % USAGE: prt_swm(results,vnames,fid)
-% Where: results = a structure returned by a switching regression 
+% Where: results = a structure returned by a switching regression
 %        vnames  = an optional vector of variable names
 %        fid     = file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
-%---------------------------------------------------               
+%---------------------------------------------------
 % NOTES:   e.g. vnames = strvcat('y','x1','x2','cterm')
 %           e.g. fid = fopen('ols.out','wr');
-%  use prt_swm(results,[],fid) to print to a file with no vnames               
+%  use prt_swm(results,[],fid) to print to a file with no vnames
 % --------------------------------------------------
 % RETURNS: nothing, just prints the regression results
 % --------------------------------------------------
 % SEE ALSO: plt_reg(results), plt
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -33,7 +33,7 @@ elseif nargin == 3
  nflag = 0;
  [vsize junk] = size(vnames); % user may supply a blank argument
    if vsize > 0
-   nflag = 1;          
+   nflag = 1;
    end;
 else
  error('Wrong # of arguments to prt_swm');
@@ -82,8 +82,8 @@ if (nflag == 1) % the user supplied variable names
 if tst_n ~= nvar+2
  fprintf(fid,'Wrong # of variable names in prt_swm -- check vnames argument \n');
  fprintf(fid,'will use generic variable names \n');
- nflag = 0;   
-else 
+ nflag = 0;
+else
 Vname = [];
 nmax = min(nsize,16); % truncate vnames to 16-characters
 
@@ -277,7 +277,7 @@ for i=1:ntrans
 int.rnames = strvcat(int.rnames,['AR1-test Trans matrix term ',num2str(i)]);
 end;
 
-int.cnames = strvcat('Chi-squared value','marginal prob'); 
+int.cnames = strvcat('Chi-squared value','marginal prob');
 
 mout = [results(1).chisqdwh chis_prb(results(1).chisqdwh,dof)
          results(1).chisqd chis_prb(results(1).chisqd,1)];

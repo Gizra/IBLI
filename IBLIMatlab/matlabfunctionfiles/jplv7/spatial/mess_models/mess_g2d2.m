@@ -1,12 +1,12 @@
 % PURPOSE: An example of using mess_g()
 %          Bayesian matrix exponential spatial model
-%          on a large data set                    
+%          on a large data set
 %---------------------------------------------------
 % USAGE: mess_gd2 (see mess_gd for a small data set)
 %---------------------------------------------------
 
 % NOTE a large data set with 3107 observations
-% from Pace and Barry, 
+% from Pace and Barry,
 % test MCMC sampling on pace and barry data set
 clear all;
 load elect.dat;             % load data on votes
@@ -24,7 +24,7 @@ vnames = strvcat('voters','const','educ','homeowners','income');
 [junk W junk] = xy2cont(latt,long);
 
 % do Monte Carlo generation of an SAR model
-sige = 10; 
+sige = 10;
 randn('seed',0);
 evec = randn(n,1)*sqrt(sige);
 beta = ones(4,1);

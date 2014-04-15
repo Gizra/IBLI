@@ -1,6 +1,6 @@
 % PURPOSE: An example of using sar_g() Gibbs sampling
 %          spatial autoregressive model
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
 % USAGE: sar_gd (see also sar_gd2 for a large data set)
 %---------------------------------------------------
@@ -13,7 +13,7 @@ latt = anselin(:,4);
 long = anselin(:,5);
 [junk W junk] = xy2cont(latt,long);
 [n junk] = size(W);
-IN = eye(n); 
+IN = eye(n);
 rho = 0.7;  % true value of rho
 sige = 0.5;
 k = 3;
@@ -24,7 +24,7 @@ x = [randn(n,k-1)];
 beta(1,1) = -1.0;
 beta(2,1) = 1.0;
 
-y = (IN-rho*W)\(x*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige)); 
+y = (IN-rho*W)\(x*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige));
 
 info.lflag = 0; % don't use Pace-Barry lndet approximation
 result0 = sar(y,x,W,info);
@@ -39,7 +39,7 @@ results.tflag = 'tstat';
 prt(results,vnames);
 
 prior2.lflag = 0; % don't use Pace-Barry lndet approximation
-prior2.rval = 4;  % heteroscedastic model 
+prior2.rval = 4;  % heteroscedastic model
 results2 = sar_g(y,x,W,ndraw,nomit,prior2);
 results2.tflag = 'tstat';
 prt(results2,vnames);
@@ -51,7 +51,7 @@ out = [beta result0.beta b1mean b2mean
        sige result0.sige results.sige results2.sige
        rho result0.rho  results.rho results2.rho
        0 result0.rsqr results.rsqr results2.rsqr];
-   
+
 in.cnames = strvcat('True Values','Max Lik','Bayes homo','Bayes hetero');
 in.rnames = strvcat('Parameters','beta1','beta2','sigma2','rho','r-squared');
 

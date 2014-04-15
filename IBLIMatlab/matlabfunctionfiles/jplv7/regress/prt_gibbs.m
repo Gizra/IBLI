@@ -2,19 +2,19 @@ function prt_gibbs(results,vnames,fid)
 % PURPOSE: Prints output from Gibbs sampler regression models
 %---------------------------------------------------
 % USAGE: prt_gibbs(results,vnames,fid)
-% Where: results = a structure returned by a Gibbs regression 
+% Where: results = a structure returned by a Gibbs regression
 %        vnames  = an optional vector of variable names
 %        fid     = file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
-%---------------------------------------------------               
+%---------------------------------------------------
 %  NOTES:   e.g. vnames = strvcat('y','cterm','x1','x2');
 %           e.g. fid = fopen('ols.out','wr');
-%  use prt_gibbs(results,[],fid) to print to a file with no vnames               
+%  use prt_gibbs(results,[],fid) to print to a file with no vnames
 % --------------------------------------------------
 %  RETURNS: nothing, just prints the regression results
 % --------------------------------------------------
 % SEE ALSO: plt, prt, plt_gibbs
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -32,7 +32,7 @@ elseif nargin == 3
  nflag = 0;
  [vsize junk] = size(vnames); % user may supply a blank argument
    if vsize > 0
-   nflag = 1;          
+   nflag = 1;
    end;
 else
  error('Wrong # of arguments to prt_gibbs');
@@ -57,8 +57,8 @@ end; % end of if nflag == 1
 switch results.meth
 
 case {'ols_g','ols_gf'} % <=================== heteroscedastic linear model
-    
-    
+
+
 % we handle these differently depending on the model
 if ( nflag == 0) %  no variable names supplied, make some up
 Vname = [];
@@ -88,7 +88,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 
 smean = mean(results.sdraw);
@@ -172,7 +172,7 @@ mprint(tmp,in);
 
 
 
-case {'ar_g'} % <=================== autoregressive model 
+case {'ar_g'} % <=================== autoregressive model
 
 y = results.y;
 bhat = mean(results.bdraw);  % calculate means and std deviations
@@ -194,7 +194,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 smean = mean(results.sdraw);
 nobs = results.nobs;
@@ -236,7 +236,7 @@ Vname = [];
  end;
 else
    Vname{1} = 'constant ';
-   lnames{1} = '      ';   
+   lnames{1} = '      ';
  for m=1:ar;
     Vname{m+1} = [vnames(1,:) str2mat([' lag  ',num2str(m)])];
  end;
@@ -260,7 +260,7 @@ in.fmt = '%16.6f';
 in.rnames = rnames;
 in.cnames = cnames;
 in.fid = fid;
-mprint(tmp,in); 
+mprint(tmp,in);
 fprintf(fid,'***************************************************************\n');
 fprintf(fid,'      Posterior Estimates \n');
 % now print coefficient estimates, t-statistics and probabilities
@@ -292,7 +292,7 @@ in.cnames = cnames;
 in.rnames = rnames;
 mprint(tmp,in);
 
-case {'bma_g'} % <=================== Bayesian model averaging 
+case {'bma_g'} % <=================== Bayesian model averaging
 
 % we handle these differently depending on the model
 if ( nflag == 0) %  no variable names supplied, make some up
@@ -326,13 +326,13 @@ out = [results.model(outi,:) results.prob(outi,1)*100 results.visit(outi,1)];
  cnames = strvcat(cnames,Vname{i});
  fmt = strvcat(fmt,'%5d');
  end;
- fmt = strvcat(fmt,'%6.3f');   
- fmt = strvcat(fmt,'%5d');   
+ fmt = strvcat(fmt,'%6.3f');
+ fmt = strvcat(fmt,'%5d');
 cnames = strvcat(cnames,'Prob','Visit');
 
 rnames = 'Model';
 for i=1:nmod;
-    rnames = strvcat(rnames,['model ' num2str(i)]); 
+    rnames = strvcat(rnames,['model ' num2str(i)]);
 end;
 
 min.cnames = cnames;
@@ -381,8 +381,8 @@ in2.cnames = cnames;
 
 mprint(tmp,in2);
 
-case {'probit_g'} % <=================== heteroscedastic probit model    
-    
+case {'probit_g'} % <=================== heteroscedastic probit model
+
 % we handle these differently depending on the model
 if ( nflag == 0) %  no variable names supplied, make some up
 Vname = [];
@@ -410,7 +410,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 nobs = results.nobs;
 nvar = results.nvar;
@@ -485,8 +485,8 @@ in.cnames = cnames;
 in.rnames = rnames;
 mprint(tmp,in);
 
-case {'tobit_g'} % <=================== heteroscedastic tobit model    
-    
+case {'tobit_g'} % <=================== heteroscedastic tobit model
+
 % we handle these differently depending on the model
 if ( nflag == 0) %  no variable names supplied, make some up
 Vname = [];
@@ -514,7 +514,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 nobs = results.nobs;
 nvar = results.nvar;

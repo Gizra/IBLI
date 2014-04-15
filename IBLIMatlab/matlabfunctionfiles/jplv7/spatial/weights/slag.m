@@ -2,11 +2,11 @@ function WW = slag(W,p)
 % PURPOSE: compute spatial lags
 % ---------------------------------------------
 % USAGE: Wp = slag(W,p)
-% where: W = input spatial weight matrix, sparse or full 
+% where: W = input spatial weight matrix, sparse or full
 %            (0,1 or standardized form)
 %        p = lag order (an integer)
 % ---------------------------------------------
-% RETURNS: Wp = W^p spatial lag matrix 
+% RETURNS: Wp = W^p spatial lag matrix
 %               in standardized form with
 %               row-sums of unity
 % ---------------------------------------------
@@ -55,8 +55,8 @@ if ~issparse(W),
   A = A + WW;
  end;
   WW = normw(WW);
- 
-else, % we have a sparse matrix input 
+
+else, % we have a sparse matrix input
  W = (W > 0)*1.0; % unstandardize it
  W = W*1.0;
  WP = W;

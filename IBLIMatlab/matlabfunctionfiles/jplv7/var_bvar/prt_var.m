@@ -1,22 +1,22 @@
 function prt_var(result,vnames,fid)
 % PURPOSE: Prints vector autoregressive models output
 %---------------------------------------------------
-% USAGE:  prt_var(result,vnames,fid)        
-%    where: 
+% USAGE:  prt_var(result,vnames,fid)
+%    where:
 %    results = a structure returned by:
 %                      var,bvar,rvar,ecm,becm,recm
 %         vnames  = optional vector of variable names
 %             fid = (optional) file-id for printing to a file
 %                   (defaults to the MATLAB command window)
-%---------------------------------------------------               
+%---------------------------------------------------
 %                 e.g. vnames = strvcat('y1','y2','x1','x2');
 %                 e.g. fid = fopen('var.out','wr');
-%---------------------------------------------------               
+%---------------------------------------------------
 % NOTE: - constant term is added automatically to vnames list
-%         you need only enter VAR variable names plus deterministic    
+%         you need only enter VAR variable names plus deterministic
 %       - you may use prt_var(results,[],fid) to print
-%         output to a file with no vnames                   
-%---------------------------------------------------               
+%         output to a file with no vnames
+%---------------------------------------------------
 % SEE ALSO: prt, plt
 %---------------------------------------------------
 
@@ -30,10 +30,10 @@ end;
 nflag = 0;
 if nargin == 1; fid = 1;            end;
 if nargin == 2; nflag = 1; fid = 1; end;
-if nargin == 3; 
+if nargin == 3;
 [vsize junk] = size(vnames); % user may supply a blank argument
    if vsize > 0
-   nflag = 1;          
+   nflag = 1;
    end;
 end;
 
@@ -69,7 +69,7 @@ if i < k
    lnames{i} = '      ';
 else
  Vname{i} = 'constant ';
-   lnames{i} = '      ';      
+   lnames{i} = '      ';
 end;
 end;
 
@@ -98,13 +98,13 @@ end;
 
 cnt = 1;
 for i=l:k
-  if i < k 
+  if i < k
    Vname{i} = vnames(neqs+cnt,:);
-   lnames{i} = '      '; 
+   lnames{i} = '      ';
    cnt = cnt+1;
   else
    Vname{i} = 'constant ';
-   lnames{i} = '      ';      
+   lnames{i} = '      ';
   end;
 end;
 
@@ -134,7 +134,7 @@ if i < k
    lnames{i} = '      ';
 else
  Vname{i} = 'constant ';
-   lnames{i} = '      ';      
+   lnames{i} = '      ';
 end;
 end;
 
@@ -158,13 +158,13 @@ end;
 
 cnt = 1;
 for i=l:k
-  if i < k 
+  if i < k
    Vname{i} = str2mat(['ec term ',vnames(cnt,:)]);
-   lnames{i} = '      '; 
+   lnames{i} = '      ';
    cnt = cnt+1;
   else
    Vname{i} = 'constant ';
-   lnames{i} = '      ';      
+   lnames{i} = '      ';
   end;
 end;
 
@@ -218,7 +218,7 @@ end;
 in.rnames = rnames;
 in.fmt = '%16.6f';
 in.fid = fid;
-mprint(tmp,in); 
+mprint(tmp,in);
 
 % print out Granger-Causality test results
 fstring = 'F-value';
@@ -240,7 +240,7 @@ gin.fmt = '%16.6f';
 gin.fid = fid;
 fprintf(fid,' ****** Granger Causality Tests *******\n');
 
-mprint(tmp,gin); 
+mprint(tmp,gin);
 fprintf(fid,'\n');
 end; % end of for j loop over all equations
 
@@ -278,7 +278,7 @@ in.fid = fid;
 fprintf(fid,'Weights matrix \n');
 mprint(tmp,in);
 
-else % print out scalar weight 
+else % print out scalar weight
  fprintf(fid,'Symmetric weights based on ');
  fprintf(fid,'%8.2f \n\n',result(1).weight);
 end;
@@ -345,7 +345,7 @@ in.rnames = rnames;
 in.cnames = strvcat(bstring,tstring,pstring);
 in.fmt = '%16.6f';
 in.fid = fid;
-mprint(tmp,in); 
+mprint(tmp,in);
 
 fprintf(fid,'\n');
 end; % end of for j loop over all equations
@@ -388,7 +388,7 @@ end;
 in.rnames = rnames;
 in.fmt = '%16.6f';
 in.fid = fid;
-mprint(tmp,in); 
+mprint(tmp,in);
 
 % print out Granger-Causality test results
 fstring = 'F-value';
@@ -409,7 +409,7 @@ in.rnames = rnames;
 in.fmt = '%16.6f';
 in.fid = fid;
 fprintf(fid,' ****** Granger Causality Tests *******\n');
-mprint(tmp,in); 
+mprint(tmp,in);
 
 end; % end of for j loop over all equations
 
@@ -533,7 +533,7 @@ end;
 in.rnames = rnames;
 in.fmt = '%16.6f';
 in.fid = fid;
-mprint(tmp,in); 
+mprint(tmp,in);
 
 fprintf(fid,'\n');
 end; % end of for j loop over all equations
@@ -560,5 +560,5 @@ otherwise
 error('results structure unknown to prt_var');
 end;
 
-  
-  
+
+

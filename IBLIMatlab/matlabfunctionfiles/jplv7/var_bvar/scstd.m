@@ -8,7 +8,7 @@ function scale = scstd(y,nobs,nlag,xx)
 %           nobs = # of observations in y
 %---------------------------------------------------
 % RETURNS:
-%  scale = std deviation of the residuals 
+%  scale = std deviation of the residuals
 %---------------------------------------------------
 
 % written by:
@@ -31,7 +31,7 @@ ylag = [ylag ones(nobs,1)];
 if nx == 0
 xmat = ylag(nlag+1:nobs,:);
 elseif nx > 0
-xmat = [ylag(nlag+1:nobs,:) xx(nlag+1:nobs,:)];    
+xmat = [ylag(nlag+1:nobs,:) xx(nlag+1:nobs,:)];
 end;
 yvec = y(nlag+1:nobs,1);
 n = length(yvec);

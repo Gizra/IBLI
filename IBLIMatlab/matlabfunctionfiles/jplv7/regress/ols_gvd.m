@@ -1,7 +1,7 @@
-% PURPOSE: demo of ols_g() 
-%          Gibbs sampling for Bayesian Heteroscedastic 
+% PURPOSE: demo of ols_g()
+%          Gibbs sampling for Bayesian Heteroscedastic
 %          Linear Model
-% 
+%
 %---------------------------------------------------
 % USAGE: ols_gd
 %---------------------------------------------------
@@ -14,13 +14,13 @@ tt = ones(n,1); tt(51:100,1) = [1:50]';
 randn('seed',20201);
 y = x*b + randn(n,1).*sqrt(tt); % heteroscedastic model
 %y = x*b + randn(n,1)*sqrt(sige);  % homoscedastic model
-ndraw = 1100; nomit = 100; % set the number of draws   
+ndraw = 1100; nomit = 100; % set the number of draws
 
 bmean = zeros(k,1);    % diffuse prior b means
-T = eye(k)*1000;     % diffuse prior b variance 
+T = eye(k)*1000;     % diffuse prior b variance
 rval = 4;                   % heteroscedastic prior
 mm=8;                       % informative prior for r-value
-kk=2;  
+kk=2;
 prior.beta = bmean;
 prior.bcov = T;
 %prior.m = mm;         % use proper prior on r-value

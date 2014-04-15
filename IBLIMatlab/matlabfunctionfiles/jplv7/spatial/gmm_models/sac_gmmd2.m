@@ -1,5 +1,5 @@
-% PURPOSE: An example of using sac_gmm on a large data set   
-%          GM estimation of the general spatial model                         
+% PURPOSE: An example of using sac_gmm on a large data set
+%          GM estimation of the general spatial model
 %---------------------------------------------------
 % USAGE: sac_gmmd2 (see sac_gmmd for a small data set)
 %---------------------------------------------------
@@ -28,7 +28,7 @@ vnames = strvcat('voters','const','educ','homeowners','income');
 result = sac(y,x,W,W2); % maximum likelihood estimates
 prt(result,vnames);
 
-options.iter = 1; 
+options.iter = 1;
 result2 = sac_gmm(y,x,W,W2,options);
 prt_gmm(result2,vnames);
 

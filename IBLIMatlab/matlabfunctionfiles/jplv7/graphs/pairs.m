@@ -3,16 +3,16 @@ function  pscatter(X,vnames,plotsymbol,diagonal)
 %---------------------------------------------------
 % USAGE:    pscatter(x,vnames,pltsym,diagon)
 %        or pscatter(x) which relies on defaults
-% where:  
+% where:
 %        x = an nxk matrix with columns containing variables
 %   vnames = a vector of variable names
 %            (default = numeric labels 1,2,3 etc.)
-%   pltsym = a plt symbol 
-%            (default = '.' for npts > 100, 'o' for npts < 100 
+%   pltsym = a plt symbol
+%            (default = '.' for npts > 100, 'o' for npts < 100
 %   diagon = 1 for upper triangle, 2 for lower triangle
 %            (default = both upper and lower)
 %---------------------------------------------------
-% NOTE: uses function histo() 
+% NOTE: uses function histo()
 %---------------------------------------------------
 
 %       Anders Holtsberg, 14-12-94

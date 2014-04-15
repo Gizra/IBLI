@@ -7,7 +7,7 @@ function finv = fdis_inv(p,a,b)
 %        b = denominator dof
 %---------------------------------------------------
 % RETURNS:
-%   a vector x at each element of p from F(a,b) distribution      
+%   a vector x at each element of p from F(a,b) distribution
 % --------------------------------------------------
 % SEE ALSO: fdis_d, fdis_cdf, fdis_rnd, fdis_pdf, fdis_prb
 %---------------------------------------------------

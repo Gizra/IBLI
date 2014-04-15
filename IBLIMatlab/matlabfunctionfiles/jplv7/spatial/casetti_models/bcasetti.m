@@ -3,7 +3,7 @@ function results=bcasetti(y,x,xc,yc,ndraw,nomit,option)
 %          y = X*g + e, e = N(0,sige*V)
 %          g = Zx*b0x + Zy*b0y, for x-y expansion
 %          g = D b0,            for distance expansion
-%          V = diag(v1,v2,...vn), r/vi = ID chi(r)/r,          
+%          V = diag(v1,v2,...vn), r/vi = ID chi(r)/r,
 %---------------------------------------------------
 % USAGE: results = bcasetti(y,x,xc,yc,ndraw,nomit,option)
 % where:       y = dependent variable vector
@@ -39,7 +39,7 @@ function results=bcasetti(y,x,xc,yc,ndraw,nomit,option)
 %        results.dist   = distance vector (if ctr used)
 %        results.exp    = exp input option
 %        results.norm   = norm input option
-%        results.time   = time taken for sampling        
+%        results.time   = time taken for sampling
 % --------------------------------------------------
 % NOTE: assumes x(:,1) contains a constant term
 % --------------------------------------------------
@@ -65,7 +65,7 @@ if nargin == 7 % user options
  exp = 0; ctr = 0; nflag = 0; rval = 4;
   for i=1:nf
     if strcmp(fields{i},'exp')
-        exp = option.exp; 
+        exp = option.exp;
     elseif strcmp(fields{i},'ctr')
         ctr = option.ctr;
     elseif strcmp(fields{i},'norm')
@@ -137,17 +137,17 @@ xpy = xmatv'*yv;
 b0 = xpxi*xpy;
 a = chol(xpxi);
 b0 = sqrt(sige)*a'*randn(nk,1) + b0;
-% update sige 
+% update sige
 e = yv - xmatv*b0;
 chi = chis_rnd(1,nobs);
 t2 = chi/(e'*e);
 sige = 1/t2;
 % update vi
 e = y - xmat*b0;
-chiv = chis_rnd(nobs,rval+1);   
+chiv = chis_rnd(nobs,rval+1);
 vi = ((e.*e./sige) + in*rval)./chiv;
-V = in./vi;   
-% generate expansion estimates  
+V = in./vi;
+% generate expansion estimates
 beta = zeros(nobs,2*(nvar-1));
 yhat = zeros(nobs,1);
 xx = matmul(ones(nobs,nvar-1),xc);
@@ -221,16 +221,16 @@ xpy = xmatv'*yv;
 b0 = xpxi*xpy;
 a = chol(xpxi);
 b0 = sqrt(sige)*a'*randn(length(b0),1) + b0;
-% update sige 
+% update sige
 e = yv - xmatv*b0;
 chi = chis_rnd(1,nobs);
 t2 = chi/(e'*e);
 sige = 1/t2;
 % update vi
 e = y - xmat*b0;
-chiv = chis_rnd(nobs,rval+1);   
+chiv = chis_rnd(nobs,rval+1);
 vi = ((e.*e./sige) + in*rval)./chiv;
-V = in./vi;   
+V = in./vi;
 
 beta = zeros(nobs,(nvar-1));
 yhat = zeros(nobs,1);

@@ -1,6 +1,6 @@
-% PURPOSE: demo of sacf() 
+% PURPOSE: demo of sacf()
 %          sample autocorrelation function estimates
-% 
+%
 %---------------------------------------------------
 % USAGE: sacf_d
 %---------------------------------------------------

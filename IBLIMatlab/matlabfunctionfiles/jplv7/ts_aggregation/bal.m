@@ -12,7 +12,7 @@ function yb = bal(y,z);
 % -----------------------------------------------------------------------
 % SEE ALSO: denton
 % -----------------------------------------------------------------------
-% REFERENCE: di Fonzo, T. (1994) "Temporal disaggregation of a system of 
+% REFERENCE: di Fonzo, T. (1994) "Temporal disaggregation of a system of
 % time series when the aggregate is known: optimal vs. adjustment methods",
 % INSEE-Eurostat Workshop on Quarterly National Accounts, Paris, december
 

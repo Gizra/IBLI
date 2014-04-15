@@ -3,19 +3,19 @@ function results = sar_gv(y,x,W,ndraw,nomit,prior)
 % THIS FUNCTION: estimates the heteroscedasticity parameter r
 %                and returns results in results.rdraw for posterior
 %                inference
-%          y = rho*W*y + XB + e, e = N(0,sige*V), V = diag(v1,v2,...vn) 
+%          y = rho*W*y + XB + e, e = N(0,sige*V), V = diag(v1,v2,...vn)
 %          r/vi = ID chi(r)/r
 %          r = Gamma(delta,2)
-%          B = N(c,T), 
-%          1/sige = Gamma(nu,d0), 
-%          rho = Uniform(rmin,rmax), or rho = beta(a1,a2); 
+%          B = N(c,T),
+%          1/sige = Gamma(nu,d0),
+%          rho = Uniform(rmin,rmax), or rho = beta(a1,a2);
 %-------------------------------------------------------------
 % USAGE: results = sar_gv(y,x,W,ndraw,nomit,prior)
 % where: y = dependent variable vector (nobs x 1)
 %        x = independent variables matrix (nobs x nvar)
 %        W = spatial weight matrix (standardized, row-sums = 1)
 %    ndraw = # of draws
-%    nomit = # of initial draws omitted for burn-in            
+%    nomit = # of initial draws omitted for burn-in
 %    prior = a structure variable with:
 %            prior.beta  = prior means for beta,   c above (default 0)
 %            priov.bcov  = prior beta covariance , T above (default 1e+12)
@@ -23,15 +23,15 @@ function results = sar_gv(y,x,W,ndraw,nomit,prior)
 %            prior.d0    = default: nu=0,d0=0 (diffuse prior)
 %            prior.delta = default: delta = 20
 %            prior.a1    = parameter for beta(a1,a2) prior on rho see: 'help beta_prior'
-%            prior.a2    = (default = 1.0, a uniform prior on rmin,rmax) 
+%            prior.a2    = (default = 1.0, a uniform prior on rmin,rmax)
 %            prior.eig   = 0 for default rmin = -1,rmax = +1, 1 for eigenvalue calculation of these
 %            prior.rmin  = (optional) min rho used in sampling (default = -1)
-%            prior.rmax  = (optional) max rho used in sampling (default = 1)  
+%            prior.rmax  = (optional) max rho used in sampling (default = 1)
 %            prior.lflag = 0 for full lndet computation (default = 1, fastest)
 %                        = 1 for MC approx (fast for large problems)
 %                        = 2 for Spline approx (medium speed)
 %            prior.order = order to use with prior.lflag = 1 option (default = 50)
-%            prior.iter  = iters to use with prior.lflag = 1 option (default = 30) 
+%            prior.iter  = iters to use with prior.lflag = 1 option (default = 30)
 %            prior.lndet = a matrix returned by sar, sar_g, sarp_g, etc.
 %                          containing log-determinant information to save time
 %            prior.logm  = 0 for no log marginal calculation, = 1 for log marginal (default = 1)
@@ -45,13 +45,13 @@ function results = sar_gv(y,x,W,ndraw,nomit,prior)
 %          results.sigma    = posterior mean of sige based on (e'*e)/(n-k)
 %          results.bdraw    = bhat draws (ndraw-nomit x nvar)
 %          results.pdraw    = rho  draws (ndraw-nomit x 1)
-%          results.rdraw    = r draws (ndraw-nomit x 1) 
+%          results.rdraw    = r draws (ndraw-nomit x 1)
 %          results.sdraw    = sige draws (ndraw-nomit x 1)
 %          results.total    = a 3-d matrix (ndraw,nvars-1,ntrs) total x-impacts
 %          results.direct   = a 3-d matrix (ndraw,nvars-1,ntrs) direct x-impacts
 %          results.indirect = a 3-d matrix (ndraw,nvars-1,ntrs) indirect x-impacts
 %                             ntrs defaults to 101 trace terms
-%          results.vmean    = mean of vi draws (nobs x 1) 
+%          results.vmean    = mean of vi draws (nobs x 1)
 %          results.delta  = value of delta (from input)
 %          results.bmean  = b prior means, prior.beta from input
 %          results.bstd   = b prior std deviations sqrt(diag(prior.bcov))
@@ -71,15 +71,15 @@ function results = sar_gv(y,x,W,ndraw,nomit,prior)
 %          results.time1  = time for eigenvalue calculation
 %          results.time2  = time for log determinant calcluation
 %          results.time3  = time for sampling
-%          results.time   = total time taken  
+%          results.time   = total time taken
 %          results.rmax   = 1/max eigenvalue of W (or rmax if input)
-%          results.rmin   = 1/min eigenvalue of W (or rmin if input)          
+%          results.rmin   = 1/min eigenvalue of W (or rmin if input)
 %          results.tflag  = 'plevel' (default) for printing p-levels
-%                         = 'tstat' for printing bogus t-statistics 
+%                         = 'tstat' for printing bogus t-statistics
 %          results.lflag  = lflag from input
 %          results.iter   = prior.iter option from input
 %          results.order  = prior.order option from input
-%          results.limit  = matrix of [rho lower95,logdet approx, upper95] 
+%          results.limit  = matrix of [rho lower95,logdet approx, upper95]
 %                           intervals for the case of lflag = 1
 %          results.lndet = a matrix containing log-determinant information
 %                          (for use in later function calls to save time)
@@ -87,17 +87,17 @@ function results = sar_gv(y,x,W,ndraw,nomit,prior)
 %                          rho values that can be integrated for model comparison)
 %          results.cflag  = 1 for intercept term, 0 for no intercept term
 % --------------------------------------------------------------
-% NOTES: - use either improper prior.rval 
+% NOTES: - use either improper prior.rval
 %          or informative Gamma prior.m, prior.k, not both of them
-% - for n < 1000 you should use lflag = 0 to get exact results  
+% - for n < 1000 you should use lflag = 0 to get exact results
 % - use a1 = 1.0 and a2 = 1.0 for uniform prior on rho
 % - results.mlike can be used for model comparison (see model_compare.m for a demonstration)
 % --------------------------------------------------------------
 % SEE ALSO: (sar_gd, sar_gd2 demos) prt
 % --------------------------------------------------------------
-% REFERENCES: LeSage and Pace (2009) Chapter 5 on Bayesian estimation 
+% REFERENCES: LeSage and Pace (2009) Chapter 5 on Bayesian estimation
 %             of spatial regression models.
-% For lndet information see: Chapter 4 
+% For lndet information see: Chapter 4
 %----------------------------------------------------------------
 
 % written by:
@@ -123,7 +123,7 @@ nobsa = n;
 
 results.nobs  = n;
 results.nvar  = k;
-results.y = y; 
+results.y = y;
 
 n = length(y);
 if sum(x(:,1)) ~= n
@@ -143,7 +143,7 @@ end;
 if nargin == 5
     prior.lflag = 1;
 end;
-  
+
 [nu,d0,rval,mm,kk,rho,sige,rmin,rmax,detval,ldetflag,sflag, ...
 eflag,order,iter,c,T,inform_flag,a1,a2,logmflag,delta] = sar_parse(prior,k);
 
@@ -225,7 +225,7 @@ wjjju=rv;
 for jjj=1:maxorderu
     wjjju=W*wjjju;
     tracew(jjj)=mean(mean(rv.*wjjju));
-    
+
 end
 
 traces=[tracew];
@@ -274,45 +274,45 @@ pswitch = 0;
 acc = 0;
 
 
-    
+
 if sflag == 0
 hwait = waitbar(0,'sar: MCMC sampling ...');
 elseif sflag == 1
 hwait = waitbar(0,'sdm: MCMC sampling ...');
 end;
 
-t0 = clock;                  
+t0 = clock;
 iter = 1;
           while (iter <= ndraw); % start sampling;
-                  
-          % update beta   
+
+          % update beta
           xs = matmul(x,sqrt(V));
           ys = sqrt(V).*y;
           Wys = sqrt(V).*Wy;
-          AI = inv(xs'*xs + sige*TI);         
-          yss = ys - rho*Wys;          
+          AI = inv(xs'*xs + sige*TI);
+          yss = ys - rho*Wys;
           xpy = xs'*yss;
           b = xs'*yss + sige*TIc;
           b0 = AI*b;
-          bhat = norm_rnd(sige*AI) + b0;  
+          bhat = norm_rnd(sige*AI) + b0;
           xb = xs*bhat;
-                    
+
           % update sige
-          nu1 = nobsa + 2*nu; 
+          nu1 = nobsa + 2*nu;
           e = (yss - xb);
           d1 = 2*d0 + e'*e;
           chi = chis_rnd(1,nu1);
           sige = d1/chi;
-          
+
           % update vi
-          ev = ys - rho*Wys - xs*bhat; 
+          ev = ys - rho*Wys - xs*bhat;
           dof = vdraw + 1;
           error2 = ev.*ev;
           tmp = (1/sige)*error2 + vdraw;
-          chiv = chis_rnd(n,dof);   
+          chiv = chis_rnd(n,dof);
           V = chiv./tmp;
 
-          
+
       % we use griddy Gibbs to perform rho-draw
           b0 = (xs'*xs + sige*TI )\(xs'*ys + sige*TIc);
           bd = (xs'*xs + sige*TI)\(xs'*Wys + sige*TIc);
@@ -323,11 +323,11 @@ iter = 1;
           epe0d = ed'*e0;
           logdetx = log(det(xs'*xs + TI));
           rho = draw_rho(detval,epe0,eped,epe0d,n,k,rho,a1,a2,logdetx);
-          
+
                %Random walk Metropolis step for dof
     temp = -log(V) + V;
     nu = 1/vl0 + .5*sum(temp);
-    
+
      vlcan= vdraw +  cc*randn(1,1);
      if vlcan>0
         lpostcan = .5*n*vlcan*log(.5*vlcan) -n*gammaln(.5*vlcan)...
@@ -338,14 +338,14 @@ iter = 1;
      else
         accprob=0;
      end
-     
+
 
 %accept candidate draw with log prob = laccprob, else keep old draw
    if  rand<accprob
        vdraw=vlcan;
        pswitch=pswitch+1;
        acc = acc + 1;
-   end    
+   end
 
       acc_rate(iter,1) = acc/iter;
       % update cc based on std of rho draws
@@ -357,8 +357,8 @@ iter = 1;
        cc = cc*1.1;
        ccsave(iter,1) = cc;
        end;
-   
-   
+
+
 
         % calculate effects estimates
         if sflag == 1
@@ -369,7 +369,7 @@ iter = 1;
         end;
 
 
-          
+
     if iter > nomit % if we are past burn-in, save the draws
         bsave(iter-nomit,1:k) = bhat';
         ssave(iter-nomit,1) = sige;
@@ -379,16 +379,16 @@ iter = 1;
         vmean = vmean + in./V;
         total(iter-nomit,:,:)=totale; % a p by ntraces matrix
         direct(iter-nomit,:,:)=directe; % a p by ntraces matrix
-        indirect(iter-nomit,:,:)=indirecte; % a p by ntraces matrix         
-    
+        indirect(iter-nomit,:,:)=indirecte; % a p by ntraces matrix
+
 
     if mm~= 0
         rsave(iter-nomit,1) = rval;
-    end;         
     end;
-                    
-iter = iter + 1; 
-waitbar(iter/ndraw);         
+    end;
+
+iter = iter + 1;
+waitbar(iter/ndraw);
 end; % end of sampling loop
 close(hwait);
 
@@ -468,7 +468,7 @@ results.d0 = d0;
 results.a1 = a1;
 results.a2 = a2;
 results.tflag = 'plevel';
-results.rmax = rmax; 
+results.rmax = rmax;
 results.rmin = rmin;
 results.lflag = ldetflag;
 results.lndet = detval;
@@ -525,9 +525,9 @@ function [nu,d0,rval,mm,kk,rho,sige,rmin,rmax,detval,ldetflag,sflag,eflag,order,
 % PURPOSE: parses input arguments for sar_g models
 % ---------------------------------------------------
 %  USAGE: [nu,d0,rval,mm,kk,rho,sige,rmin,rmax,detval, ...
-%         ldetflag,eflag,mflag,order,iter,novi_flag,c,T,inform_flag,a1,a2,logmflag = 
+%         ldetflag,eflag,mflag,order,iter,novi_flag,c,T,inform_flag,a1,a2,logmflag =
 %                           sar_parse(prior,k)
-% where info contains the structure variable with inputs 
+% where info contains the structure variable with inputs
 % and the outputs are either user-inputs or default values
 % ---------------------------------------------------
 
@@ -565,15 +565,15 @@ if nf > 0
     if strcmp(fields{i},'nu')
         nu = prior.nu;
     elseif strcmp(fields{i},'d0')
-        d0 = prior.d0;  
+        d0 = prior.d0;
     elseif strcmp(fields{i},'delta')
-        delta = prior.delta; 
+        delta = prior.delta;
     elseif strcmp(fields{i},'logm')
-       logmflag = prior.logm; 
+       logmflag = prior.logm;
     elseif strcmp(fields{i},'a1')
-       a1 = prior.a1; 
+       a1 = prior.a1;
     elseif strcmp(fields{i},'a2')
-       a2 = prior.a2; 
+       a2 = prior.a2;
     elseif strcmp(fields{i},'beta')
         c = prior.beta; inform_flag = 1; % flag for informative prior on beta
     elseif strcmp(fields{i},'bcov')
@@ -592,18 +592,18 @@ if nf > 0
     elseif strcmp(fields{i},'lflag')
         tst = prior.lflag;
         if tst == 0,
-        ldetflag = 0; 
+        ldetflag = 0;
         elseif tst == 1,
-        ldetflag = 1; 
+        ldetflag = 1;
         elseif tst == 2,
-        ldetflag = 2; 
+        ldetflag = 2;
         else
         error('sar_g: unrecognizable lflag value on input');
         end;
     elseif strcmp(fields{i},'order')
-        order = prior.order;  
+        order = prior.order;
     elseif strcmp(fields{i},'iter')
-        iter = prior.iter; 
+        iter = prior.iter;
     elseif strcmp(fields{i},'dflag')
         metflag = prior.dflag;
     elseif strcmp(fields{i},'eig')
@@ -613,10 +613,10 @@ if nf > 0
     end;
  end;
 
- 
+
 else, % the user has input a blank info structure
       % so we use the defaults
-end; 
+end;
 
 function [rmin,rmax,time2] = sar_eigs(eflag,W,rmin,rmax,n);
 % PURPOSE: compute the eigenvalues for the weight matrix
@@ -631,8 +631,8 @@ function [rmin,rmax,time2] = sar_eigs(eflag,W,rmin,rmax,n);
 if eflag == 1 % compute eigenvalues
 t0 = clock;
 opt.tol = 1e-3; opt.disp = 0;
-lambda = eigs(sparse(W),speye(n),1,'SR',opt);  
-rmin = 1/real(lambda);   
+lambda = eigs(sparse(W),speye(n),1,'SR',opt);
+rmin = 1/real(lambda);
 rmax = 1;
 time2 = etime(clock,t0);
 else
@@ -645,23 +645,23 @@ function [detval,time1] = sar_lndet(ldetflag,W,rmin,rmax,detval,order,iter);
 % using the user-selected (or default) method
 % ---------------------------------------------------
 %  USAGE: detval = far_lndet(lflag,W,rmin,rmax)
-% where eflag,rmin,rmax,W contains input flags 
+% where eflag,rmin,rmax,W contains input flags
 % and the outputs are either user-inputs or default values
 % ---------------------------------------------------
 
 
 % do lndet approximation calculations if needed
 if ldetflag == 0 % no approximation
-t0 = clock;    
+t0 = clock;
 out = lndetfull(W,rmin,rmax);
 time1 = etime(clock,t0);
 tt=rmin:.001:rmax; % interpolate a finer grid
 outi = interp1(out.rho,out.lndet,tt','spline');
 detval = [tt' outi];
-    
+
 elseif ldetflag == 1 % use Pace and Barry, 1999 MC approximation
 
-t0 = clock;    
+t0 = clock;
 out = lndetmc(order,iter,W,rmin,rmax);
 time1 = etime(clock,t0);
 results.limit = [out.rho out.lo95 out.lndet out.up95];
@@ -689,7 +689,7 @@ elseif ldetflag == -1 % the user fed down a detval matrix
             error('sar_g: wrong sized lndet input argument');
         elseif n1 == 1
             error('sar_g: wrong sized lndet input argument');
-        end;          
+        end;
 end;
 
 function  out = sar_marginal(detval,e0,ed,epe0,eped,epe0d,nobs,nvar,logdetx,a1,a2)
@@ -784,7 +784,7 @@ C = C - 0.5*logdetx;
            rho = detval(i,1);
            D = speye(nobs) - rho*W;
            bhat = xpxi*(xs'*D*ys);
-           beta = xpxis*(xs'*D*ys + sTI*c); 
+           beta = xpxis*(xs'*D*ys + sTI*c);
            Q1(i,1) = (c - beta)'*sTI*(c - beta);
            Q2(i,1) = (bhat - beta)'*(xs'*xs)*(bhat - beta);
           end;
@@ -804,22 +804,22 @@ op=ones(p,1);
 trbig=trs(:,op)';
 
     arparmri=rho;
-   
+
     %forming P
     blockbsdm=reshape(bhat(2:end,1),p,maxorder1);
-       
+
     %forming G
-    ree=arparmri.^ree1;   
+    ree=arparmri.^ree1;
     reblock=ree(1:maxorder1,1:maxorder1);
     ree(1:maxorder1,1:maxorder1)=reblock-tril(reblock)+(diag(ones(maxorder1,1)));
-    
+
     %forming PG
     pg=blockbsdm*ree;%pg is also the total impacts by order (p by ntrs)
-   
+
     %added contribution for iteration i
     pgtrbig=pg.*trbig;%direct
     pginbig=pg-pgtrbig;%indirect
-    
+
 total = pg;
 direct = pgtrbig;
 indirect = pginbig;
@@ -836,22 +836,22 @@ op=ones(p,1);
 trbig=trs(:,op)';
 
     arparmri=rho;
-   
+
     %forming P
     blockbsdm=reshape(bhat(2:end,1),p,maxorder1);
-       
+
     %forming G
-    ree=arparmri.^ree1;   
+    ree=arparmri.^ree1;
     reblock=ree(1:maxorder1,1:maxorder1);
     ree(1:maxorder1,1:maxorder1)=reblock-tril(reblock)+(diag(ones(maxorder1,1)));
-    
+
     %forming PG
     pg=blockbsdm*ree;%pg is also the total impacts by order (p by ntrs)
-   
+
     %added contribution for iteration i
     pgtrbig=pg.*trbig;%direct
     pginbig=pg-pgtrbig;%indirect
-    
+
 total = pg;
 direct = pgtrbig;
 indirect = pginbig;
@@ -865,7 +865,7 @@ function bounds = cr_interval(adraw,hperc)
 %       hperc = 0 to 1 value for hperc percentage point
 % --------------------------------------------------------------------
 % RETURNS:
-%         bounds = a 1 x 2 vector with 
+%         bounds = a 1 x 2 vector with
 %         bounds(1,1) = 1-hperc percentage point
 %         bounds(1,2) = hperc percentage point
 %          e.g. if hperc = 0.95

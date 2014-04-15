@@ -20,7 +20,7 @@ function x = beta_inv(p, a, b)
 if (nargin ~= 3)
     error('Wrong # of arguments to beta_inv');
 end
- 
+
 if any(any((a<=0)|(b<=0)))
    error('beta_inv parameter a or b is nonpositive');
 end
@@ -35,6 +35,6 @@ while any(any(abs(dx)>256*eps*max(x,1)))
    x = x - dx;
    x = x + (dx - x) / 2 .* (x<0);
 end
-    
 
- 
+
+

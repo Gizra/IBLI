@@ -3,7 +3,7 @@ function xlag = nclag(x,lag1,n)
 %          a set of vectors, x
 %---------------------------------------------------
 % USAGE: xlag = nclag(x,lag1,n)
-% WHERE:    x    = an (nobs x neqs) matrix 
+% WHERE:    x    = an (nobs x neqs) matrix
 %           lag1 = beginning lag
 %           n    = ending lag
 %---------------------------------------------------

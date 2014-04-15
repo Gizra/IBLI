@@ -5,9 +5,9 @@ function [S]=movingsum(h,n);
 % ------------------------------------------------------------
 % OUTPUT: S: (n-h)xn moving aggregation matrix
 % ------------------------------------------------------------
-% INPUT:  
+% INPUT:
 %        h : size of consecutive aggregation
-%        n : dimension of filter matrix 
+%        n : dimension of filter matrix
 % ------------------------------------------------------------
 
 % written by:

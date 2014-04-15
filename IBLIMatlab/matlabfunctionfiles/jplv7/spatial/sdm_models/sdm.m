@@ -8,22 +8,22 @@ function results = sdm(y,x,W,info)
 %             column if used)
 %         W = contiguity matrix (standardized)
 %       info = an (optional) structure variable with input options:
-%       info.rmin = (optional) minimum value of rho to use in search  
-%       info.rmax = (optional) maximum value of rho to use in search    
+%       info.rmin = (optional) minimum value of rho to use in search
+%       info.rmax = (optional) maximum value of rho to use in search
 %       info.convg = (optional) convergence criterion (default = 1e-8)
 %       info.maxit = (optional) maximum # of iterations (default = 500)
 %       info.lflag = 0 for full lndet computation (default = 1, fastest)
 %                  = 1 for MC lndet approximation (fast for very large problems)
 %                  = 2 for Spline lndet approximation (medium speed)
 %       info.order = order to use with info.lflag = 1 option (default = 50)
-%       info.iter  = iterations to use with info.lflag = 1 option (default = 30) 
+%       info.iter  = iterations to use with info.lflag = 1 option (default = 30)
 %       info.lndet = a matrix returned by sar, sar_g, sarp_g, etc.
 %                    containing log-determinant information to save time
 % ---------------------------------------------------
 %  RETURNS: a structure
 %         results.meth  = 'sdm'
 %         results.beta  = bhat [a B1 B2]' a k+(k-1) x 1 vector
-%         results.rho   = rho 
+%         results.rho   = rho
 %         results.tstat = t-statistics (last entry is rho)
 %         results.yhat  = yhat
 %         results.resid = residuals
@@ -32,7 +32,7 @@ function results = sdm(y,x,W,info)
 %         results.rbar  = rbar-squared
 %         results.lik   = log likelihood
 %         results.nobs  = nobs
-%         results.nvar  = nvars the number of explanatory variables in [iota x W*x] (including intercept) 
+%         results.nvar  = nvars the number of explanatory variables in [iota x W*x] (including intercept)
 %         results.p     = # of explanatory variables in x-matrix excluding the constant term
 %         results.cflag = 0 for no intercept term, 1 for intercept term
 %         results.y     = y data vector
@@ -48,17 +48,17 @@ function results = sdm(y,x,W,info)
 %         results.time2 = time for eigenvalue calculation
 %         results.time3 = time for hessian or information matrix calculation
 %         results.time4 = time for optimization
-%         results.time  = total time taken       
+%         results.time  = total time taken
 %         results.lndet = a matrix containing log-determinant information
 %                          (for use in later function calls to save time)
 %  --------------------------------------------------
 %  SEE ALSO: prt(results)
 % ---------------------------------------------------
 %  NOTES: constant term should be in 1st column of the x-matrix if used
-%  if you use lflag = 1 or 2, info.rmin will be set = -1 
+%  if you use lflag = 1 or 2, info.rmin will be set = -1
 %                             info.rmax will be set = 1
 % ---------------------------------------------------
-% REFERENCES: LeSage and Pace (2009) Chapter 4 on maximum likelihood estimation 
+% REFERENCES: LeSage and Pace (2009) Chapter 4 on maximum likelihood estimation
 %             of spatial regression models.
 % For lndet information see: Chapter 4
 % For interpretation of direct, indirect and total x-impacts see: Chapter 2

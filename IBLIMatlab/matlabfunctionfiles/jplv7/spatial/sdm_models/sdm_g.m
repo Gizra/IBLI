@@ -1,37 +1,37 @@
 function results = sdm_g(y,x,W,ndraw,nomit,prior)
 % PURPOSE: Bayesian estimates of the spatial Durbin model
-%          y = rho*W*y + a + Xb + W*X*g + e, e = N(0,sige*V), V = diag(v1,v2,...vn) 
+%          y = rho*W*y + a + Xb + W*X*g + e, e = N(0,sige*V), V = diag(v1,v2,...vn)
 %          r/vi = ID chi(r)/r, r = Gamma(m,k)
 %          a,b,g = N(0,T)
-%          1/sige = Gamma(nu,d0), 
-%          rho = Uniform(rmin,rmax), or rho = beta(a1,a2); 
+%          1/sige = Gamma(nu,d0),
+%          rho = Uniform(rmin,rmax), or rho = beta(a1,a2);
 %-------------------------------------------------------------
 % USAGE: results = sdm_g(y,x,W,ndraw,nomit,prior)
 % where: y = dependent variable vector (nobs x 1)
-%        x = independent variables matrix (nobs x nvar), 
+%        x = independent variables matrix (nobs x nvar),
 %            with constant term in 1st column (if used)
 %        W = spatial weight matrix (standardized, row-sums = 1)
 %    ndraw = # of draws
-%    nomit = # of initial draws omitted for burn-in            
+%    nomit = # of initial draws omitted for burn-in
 %    prior = a structure variable with:
 %            prior.beta  = prior means for beta,   c above (default 0)
 %            priov.bcov  = prior beta covariance , T above (default 1e+12)
 %            prior.rval  = r prior hyperparameter, default = 4
-%            prior.novi  = 1 turns off sampling for vi, producing homoscedastic model            
+%            prior.novi  = 1 turns off sampling for vi, producing homoscedastic model
 %            prior.m     = informative Gamma(m,k) prior on r
 %            prior.k     = (default: not used)
 %            prior.nu    = informative Gamma(nu,d0) prior on sige
 %            prior.d0    = default: nu=0,d0=0 (diffuse prior)
 %            prior.a1    = parameter for beta(a1,a2) prior on rho see: 'help beta_prior'
-%            prior.a2    = (default = 1.0, a uniform prior on rmin,rmax) 
+%            prior.a2    = (default = 1.0, a uniform prior on rmin,rmax)
 %            prior.eig   = 0 for default rmin = -1,rmax = +1, 1 for eigenvalue calculation of these
 %            prior.rmin  = (optional) min rho used in sampling (default = -1)
-%            prior.rmax  = (optional) max rho used in sampling (default = 1)  
+%            prior.rmax  = (optional) max rho used in sampling (default = 1)
 %            prior.lflag = 0 for full lndet computation (default = 1, fastest)
 %                        = 1 for MC approx (fast for large problems)
 %                        = 2 for Spline approx (medium speed)
 %            prior.order = order to use with prior.lflag = 1 option (default = 50)
-%            prior.iter  = iters to use with prior.lflag = 1 option (default = 30) 
+%            prior.iter  = iters to use with prior.lflag = 1 option (default = 30)
 %            prior.lndet = a matrix returned by sar, sar_g, sarp_g, etc.
 %                          containing log-determinant information to save time
 %            prior.logm  = 0 for no log marginal calculation, = 1 for log marginal (default = 1)
@@ -48,7 +48,7 @@ function results = sdm_g(y,x,W,ndraw,nomit,prior)
 %          results.bdraw  = bhat draws (ndraw-nomit x nvar)
 %          results.pdraw  = rho  draws (ndraw-nomit x 1)
 %          results.sdraw  = sige draws (ndraw-nomit x 1)
-%          results.vmean  = mean of vi draws (nobs x 1) 
+%          results.vmean  = mean of vi draws (nobs x 1)
 %          results.rdraw  = r draws (ndraw-nomit x 1) (if m,k input)
 %          results.bmean  = b prior means, prior.beta from input
 %          results.bstd   = b prior std deviations sqrt(diag(prior.bcov))
@@ -73,15 +73,15 @@ function results = sdm_g(y,x,W,ndraw,nomit,prior)
 %          results.time1  = time for eigenvalue calculation
 %          results.time2  = time for log determinant calcluation
 %          results.time3  = time for sampling
-%          results.time   = total time taken  
+%          results.time   = total time taken
 %          results.rmax   = 1/max eigenvalue of W (or rmax if input)
-%          results.rmin   = 1/min eigenvalue of W (or rmin if input)          
+%          results.rmin   = 1/min eigenvalue of W (or rmin if input)
 %          results.tflag  = 'plevel' (default) for printing p-levels
-%                         = 'tstat' for printing bogus t-statistics 
+%                         = 'tstat' for printing bogus t-statistics
 %          results.lflag  = lflag from input
 %          results.iter   = prior.iter option from input
 %          results.order  = prior.order option from input
-%          results.limit  = matrix of [rho lower95,logdet approx, upper95] 
+%          results.limit  = matrix of [rho lower95,logdet approx, upper95]
 %                           intervals for the case of lflag = 1
 %          results.lndet = a matrix containing log-determinant information
 %                          (for use in later function calls to save time)

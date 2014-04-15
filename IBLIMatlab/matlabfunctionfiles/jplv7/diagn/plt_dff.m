@@ -4,7 +4,7 @@ function plt_dff(results)
 %---------------------------------------------------
 % USAGE: plt_dff(results)
 % where: results = a structure returned by dfbeta
-%---------------------------------------------------               
+%---------------------------------------------------
 % RETURNS:
 %        nothing, simply plots dffits, hat-matrix, s-residuals
 % --------------------------------------------------
@@ -21,7 +21,7 @@ function plt_dff(results)
 
 if strcmp(results.meth,'dfbeta') ~=1
 error('plt_dff requires a structure from dfbeta');
-end; 
+end;
 
 nobs = results.nobs;
 nvar = results.nvar;
@@ -36,5 +36,5 @@ tt=1:nobs;
      title('studentized residuals');
      subplot(3,1,3), plot(tt,results.hatdi);
      title('hat-matrix diagonals');
-     
+
 

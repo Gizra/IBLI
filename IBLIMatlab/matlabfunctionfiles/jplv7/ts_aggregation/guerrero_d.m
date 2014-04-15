@@ -91,14 +91,14 @@ x=[ 97.992
 110.721
 111.617
 112.003 ];
-    
+
 % ---------------------------------------------
 % Inputs for td library
 
 % Type of aggregation
-ta=1;   
-% Frequency conversion 
-s=12;    
+ta=1;
+% Frequency conversion
+s=12;
 
 % Model for  w: (0,1,1)(1,0,1)
 rexw.ar_reg = [1];
@@ -114,11 +114,11 @@ rexw.sigma = 4968.716^2;
 % Model for the discrepancy: (1,2,0)(1,0,0)
 % See: Martinez and Guerrero, 1995, Test, 4(2), 359-76.
 
-rexd.ar_reg = [1 -0.43]; 
+rexd.ar_reg = [1 -0.43];
 rexd.d  = 2;
 rexd.ma_reg = [1];
 
-rexd.ar_sea = [1 0 0 0 0 0 0 0 0 0 0 0 0.62]; 
+rexd.ar_sea = [1 0 0 0 0 0 0 0 0 0 0 0 0.62];
 rexd.bd = 0;
 rexd.ma_sea = [1];
 
@@ -129,13 +129,13 @@ res=guerrero(Y,x,ta,s,rexw,rexd);
 
 % Calling printing function
 % Name of ASCII file for output
-file_sal='guerrero.sal';   
+file_sal='guerrero.sal';
 output=0; % Do not include series
 
 % Note: if the Econometric Toolbox is not available, change the
 % next line by the followig (output related to ARIMA models is
 % missed):
-% td_print(res,file_sal,output);  
+% td_print(res,file_sal,output);
 
 td_print_G(res,file_sal,output);
 edit guerrero.sal;

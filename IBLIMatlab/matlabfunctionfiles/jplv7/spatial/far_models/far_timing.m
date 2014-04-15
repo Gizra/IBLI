@@ -1,6 +1,6 @@
 % PURPOSE: A timing comparison of heteroscedastic
 %          versus homoscedastic on small and large
-%          datasets                    
+%          datasets
 %---------------------------------------------------
 % USAGE: far_timing
 %---------------------------------------------------
@@ -18,11 +18,11 @@ times = zeros(2,2);
 ndraw = 2000;
 nomit = 500;
 prior.rval = 4; % heteroscedastic prior
-result = far_g(ydev,W,ndraw,nomit,prior); 
+result = far_g(ydev,W,ndraw,nomit,prior);
 times(1,1) = result.time; % matlab version
 
 prior.novi = 1; % homoscedastic prior
-result = far_g(ydev,W,ndraw,nomit,prior); 
+result = far_g(ydev,W,ndraw,nomit,prior);
 times(1,2) = result.time; % matlab version
 
 % NOTE a large data set with 3107 observations
@@ -33,7 +33,7 @@ y = log(elect(:,7)./elect(:,8)); % proportion of voters casting votes
 xc = elect(:,5);
 yc = elect(:,6);
 [j W j] = xy2cont(xc,yc);
-ydev = y - mean(y);         % deviations from the means form 
+ydev = y - mean(y);         % deviations from the means form
 prior.rval = 4; % heteroscedastic prior
 result = far_g(ydev,W,ndraw,nomit,prior);
 times(2,1) = result.time;

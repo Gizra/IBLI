@@ -7,7 +7,7 @@ function  k = hypg_inv(p,n,K,N)
 %---------------------------------------------------
 % RETURNS:
 %        The smallest integer k so that P(X <= k) >= p.
-%        a vector of probabilities from the distribution      
+%        a vector of probabilities from the distribution
 % --------------------------------------------------
 % SEE ALSO: hypg_d, hypg_cdf, hypg_rnd, hypg_inv
 %---------------------------------------------------
@@ -44,7 +44,7 @@ cdf(length(cdf)) = 1;
 [pp,J] = sort(p(:));
 np = length(pp);
 [S,I] = sort([pp;cdf]);
-I = find(I<=np) - (1:np)' + lowerlim; 
+I = find(I<=np) - (1:np)' + lowerlim;
 J(J) = (1:np)';
 p(:) = I(J);
 k = p;

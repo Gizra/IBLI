@@ -6,7 +6,7 @@ function [b,t]=shenqiuadf(y,constant,trend,lags)
 %Jul 2007
 [n,k]=size(y);
 % Check Data
-if k>1                     
+if k>1
    error('Vector Only')
 end
 % Check Data

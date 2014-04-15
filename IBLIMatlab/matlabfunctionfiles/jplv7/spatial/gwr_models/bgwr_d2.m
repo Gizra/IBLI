@@ -1,8 +1,8 @@
 % PURPOSE: An example of using bgwr()
 %          Geographically weighted regression model
-%          (on a fairly large data set)                  
+%          (on a fairly large data set)
 %---------------------------------------------------
-% USAGE: bgwr_d2 
+% USAGE: bgwr_d2
 %---------------------------------------------------
 
 clear all;
@@ -17,13 +17,13 @@ vnames = strvcat('hprice','crime','zoning','industry','charlesr', ...
          'noxsq','rooms2','houseage','distance','access','taxrate', ...
          'pupil/teacher','blackpop','lowclass');
 ys = studentize(log(y)); xs = studentize(x(:,2:end));
-clear boston; 
+clear boston;
 clear y;
 clear x;
 % NOTE: This baby takes 15 minutes on a fast computer.
 %        If you have a slow computer forget it.
 ndraw = 550; nomit = 50;
-prior.ptype = 'distance'; % spatial parameter smoothing prior 
+prior.ptype = 'distance'; % spatial parameter smoothing prior
 prior.rval = 4; % robustness prior for outliers
 result = bgwr(ys,xs,latt,long,ndraw,nomit,prior);
 prt(result,vnames);

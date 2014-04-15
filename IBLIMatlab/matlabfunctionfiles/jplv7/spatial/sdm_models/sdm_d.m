@@ -1,6 +1,6 @@
 % PURPOSE: An example of using sdm() max likelihood
 %          estimation of the spatial durbin model
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
 % USAGE: sdm_d (see also sdm_d2 for a large data set)
 %---------------------------------------------------
@@ -13,7 +13,7 @@ latt = anselin(:,4);
 long = anselin(:,5);
 [junk W junk] = xy2cont(latt,long);
 [n junk] = size(W);
-IN = eye(n); 
+IN = eye(n);
 rho = 0.7;  % true value of rho
 sige = 2;
 k = 3;
@@ -37,7 +37,7 @@ end;
 
 vnames = strvcat('y','x1','x2','x3');
 
-y = (IN-rho*W)\(xsdm*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige)); 
+y = (IN-rho*W)\(xsdm*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige));
 
 res2 = sdm(y,x,W,info);
 prt(res2,vnames);

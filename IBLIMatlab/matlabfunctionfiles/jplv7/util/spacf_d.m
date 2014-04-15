@@ -1,6 +1,6 @@
-% PURPOSE: demo of spacf() 
+% PURPOSE: demo of spacf()
 %          sample partial autocorrelation function estimates
-% 
+%
 %---------------------------------------------------
 % USAGE: spacf_d
 %---------------------------------------------------

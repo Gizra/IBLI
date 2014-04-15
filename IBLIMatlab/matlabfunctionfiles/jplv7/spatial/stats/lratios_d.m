@@ -1,6 +1,6 @@
 % PURPOSE: An example of using lratios()
 %          to test for spatial error correlation
-%          on a small data set                   
+%          on a small data set
 %---------------------------------------------------
 % USAGE: lratios_d
 %---------------------------------------------------

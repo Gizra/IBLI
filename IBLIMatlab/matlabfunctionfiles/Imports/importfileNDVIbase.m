@@ -1,7 +1,7 @@
 function [ ndvipost, ndvipre,NDVIname ] = importfileNDVIbase(filepath,season, folderpath)
 
 
- 
+
 % season='s'; %set season to estimate
 % StartYearSRSD=2001;
 % EndYearSRSD=2011;
@@ -50,7 +50,7 @@ end
 % for i=1:nfilesmax
 %         fileNamemax{i}= filesmax(fileIndexmax(i)).name;
 %         filename = strcat(filepath,'Maxz_base1981S-2012S\',fileNamemax{i});
-%         
+%
 %         [token, remain] = strtok(fileNamemax{i}, '.');
 %         [token1, remain] = strtok(token, '_');
 %         [token2, remain] = strtok(remain, '_');
@@ -75,30 +75,30 @@ for i=1:nsats
     sndvipostavg2001.(NDVIname{i})=NDVI.(NDVIname{i})(:,Sndvipost2001index);
     sndvipreavg2001.(NDVIname{i})=NDVI.(NDVIname{i})(:,Sndvipre2001index);
 
-    
+
     lndvipostavg2001.(NDVIname{i})=NDVI.(NDVIname{i})(:,Lndvipost2001index);
     lndvipreavg2001.(NDVIname{i})=NDVI.(NDVIname{i})(:,Lndvipre2001index);
 
-    
+
 end
 
 
 if strcmp(season,'s')
-    
+
      ndvipost=sndvipostavg2001;
      ndvipre=sndvipreavg2001;
-   
-     
+
+
 else
-    
+
      ndvipost=lndvipostavg2001;
      ndvipre=lndvipreavg2001;
-   
-          
+
+
 end
 
 
-    
+
 
 
 

@@ -2,16 +2,16 @@ function rnd = logt_rnd (r, c)
 % PURPOSE: random draws from the logistic distribution
 %---------------------------------------------------
 % USAGE: rnd = logt_rnd(r,c)
-% where: r,c = size of the matrix, vector or scalar of draws 
+% where: r,c = size of the matrix, vector or scalar of draws
 %---------------------------------------------------
 % RETURNS:
-%        rnd = a matrix of random numbers from the logistic distribution      
+%        rnd = a matrix of random numbers from the logistic distribution
 % --------------------------------------------------
 % SEE ALSO: logt_cdf, logt_pdf, logt_inv
 %---------------------------------------------------
 
 % NOTE: Written by KH (Kurt.Hornik@ci.tuwien.ac.at)
-% Converted to MATLAB by JP LeSage, jlesage@spatial-econometrics.com  
+% Converted to MATLAB by JP LeSage, jlesage@spatial-econometrics.com
   if (nargin ~= 2)
     usage ('Wrong # of arguments to logt_rnd');
   end
@@ -24,4 +24,3 @@ function rnd = logt_rnd (r, c)
   end
 
   rnd = - log (ones(r,c) ./ rand(r, c) - ones(r,c));
-  

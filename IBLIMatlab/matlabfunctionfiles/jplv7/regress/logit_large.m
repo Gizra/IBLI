@@ -39,8 +39,8 @@ function result = logit_large(y,x,maxit,tol)
 % 601 University Drive
 % San Marcos, TX 78666
 %jlesage@spatial-econometrics.com
-% modified Hessian by Magnus Myrholm 
-% Dept of Economic History, Uppsala, Sweden 
+% modified Hessian by Magnus Myrholm
+% Dept of Economic History, Uppsala, Sweden
 % magnus.myrholm@ekhist.uu.se
 
 
@@ -49,7 +49,7 @@ if (nargin > 4); error('Wrong # of arguments to logit'); end;
 
 % check for all 1's or all 0's
 tmp = find(y ==1);
-chk = length(tmp); 
+chk = length(tmp);
 [nobs junk] = size(y);
 if chk == nobs
    error('logit: y-vector contains all ones');
@@ -75,11 +75,11 @@ end;
 crit = 1.0;
 i = ones(t,1);
 
-% changed 
-% split up for memory 
+% changed
+% split up for memory
 tmp1 = [];
 for i = 1:k
-   tmp = sparse(zeros(t,1)); 
+   tmp = sparse(zeros(t,1));
    tmp1 = [tmp1,tmp];
 end
 tmp2 = tmp1;
@@ -89,24 +89,24 @@ tmp2 = tmp1;
 
 iter = 1;
 while (iter < maxit) & (crit > tol)
-   
+
    tmp = (1+exp(-x*b));
    pdf = exp(-x*b)./(tmp.*tmp);
    cdf = 1./(1+exp(-x*b));
-   
+
    %tmp = (i+exp(-x*b));
    %pdf = exp(-x*b)./(tmp.*tmp);
    %cdf = i./(i+exp(-x*b));
-   
+
    tmp = find(cdf <=0);
    [n1 n2] = size(tmp);
    if n1 ~= 0; cdf(tmp) = 0.00001; end;
-   
+
    tmp = find(cdf >= 1);
    [n1 n2] = size(tmp);
    if n1 ~= 0; cdf(tmp) = 0.99999; end;
-   
-   % gradient vector for logit 
+
+   % gradient vector for logit
    %term1 = y.*(pdf./cdf); term2 = (i-y).*(pdf./(i-cdf));
    term1 = y.*(pdf./cdf); term2 = (1-y).*(pdf./(1-cdf));
 
@@ -115,20 +115,20 @@ while (iter < maxit) & (crit > tol)
       tmp2(:,kk) = term2.*x(:,kk);
    end;
    g = tmp1-tmp2; gs = (sum(g))';
-   
+
    % modifierad Hessian
    delta = sparse(exp(x*b)./(1+exp(x*b))); % see page 883 Green, 1997
-   
-   % do this instead 
+
+   % do this instead
    Yh = sparse(diag(delta.*(1-delta)));
    H = -(sparse(x)'*Yh'*sparse(x));
-   
+
    %H = zeros(k,k);
    %for ii=1:t;
    %xp = x(ii,:)';
    %H = H - delta(ii,1)*(1-delta(ii,1))*(xp*x(ii,:));
    %end;
-   
+
    db = -inv(H)*gs;
    % stepsize determination
    s = 2;
@@ -138,7 +138,7 @@ while (iter < maxit) & (crit > tol)
       term1 = lo_like(b+s*db,y,x);
       term2 = lo_like(b+s*db/2,y,x);
    end;
-   
+
    bn = b + s*db;
    crit = abs(max(max(db)));
    b = bn;
@@ -148,7 +148,7 @@ end; % end of while
 % modified
 delta = sparse(exp(x*b)./(1+exp(x*b))); % see page 883 Green, 1997
 
-% do this instead 
+% do this instead
 Yh = sparse(diag(delta.*(1-delta)));
 H = -(sparse(x)'*Yh'*sparse(x));
 
@@ -160,7 +160,7 @@ H = -(sparse(x)'*Yh'*sparse(x));
 %   H = H - delta(i,1)*(1-delta(i,1))*(xp*x(i,:));
 %end;
 
-% do this instead 
+% do this instead
 covb = -inv(full(H));
 stdb = sqrt(diag(covb));
 result.tstat = b./stdb;
@@ -182,14 +182,14 @@ result.sige = (result.resid'*result.resid)/t;
 
 % find ones
 tmp = find(y ==1);
-P = length(tmp); 
+P = length(tmp);
 cnt0 = t-P;
 cnt1 = P;
 P = P/t; % proportion of 1's
 like0 = t*(P*log(P) + (1-P)*log(1-P)); % restricted likelihood
 like1 = lo_like(b,y,x); % unrestricted Likelihood
 
-result.r2mf = 1-(abs(like1)/abs(like0)); % McFadden pseudo-R2 
+result.r2mf = 1-(abs(like1)/abs(like0)); % McFadden pseudo-R2
 term0 = (2/t)*like0;
 term1 = 1/(abs(like1)/abs(like0))^term0;
 result.rsqr = 1-term1;  % Estrella R2

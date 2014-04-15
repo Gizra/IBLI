@@ -1,6 +1,6 @@
 % PURPOSE: An example of using bgwr()
 %          Geographically weighted regression model
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
 % USAGE: bgwr_d
 %---------------------------------------------------
@@ -73,19 +73,19 @@ end;
 
 % plot estimates for comparison
 tt=1:n;
-subplot(3,1,1), 
+subplot(3,1,1),
 plot(tt,res1.beta(:,1),'-',tt,beta1(:,1),'--', ...
 tt,beta2(:,1),'-.',tt,beta3(:,1),'o');
 legend('gwr','concentric','distance','contiguity');
-title('exponential weighting'); 
+title('exponential weighting');
 xlabel('constant');
-subplot(3,1,2), 
+subplot(3,1,2),
 plot(tt,res1.beta(:,2),'-',tt,beta1(:,2),'--', ...
-tt,beta2(:,2),'-.',tt,beta3(:,2),'o'); 
+tt,beta2(:,2),'-.',tt,beta3(:,2),'o');
 xlabel('income');
-subplot(3,1,3), 
+subplot(3,1,3),
 plot(tt,res1.beta(:,3),'-',tt,beta1(:,3),'--', ...
-tt,beta2(:,3),'-.',tt,beta3(:,3),'o'); 
+tt,beta2(:,3),'-.',tt,beta3(:,3),'o');
 xlabel('house value');
 pause;
 

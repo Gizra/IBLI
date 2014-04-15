@@ -13,8 +13,8 @@ function v = vech(x)
 % CREATED: 12/08/98
 
 if (nargin ~= 1)
-  error('Wrong # of arguments to vech'); 
-end 
+  error('Wrong # of arguments to vech');
+end
 
 [r,c] = size(x);
 v = [];

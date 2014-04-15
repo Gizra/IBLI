@@ -1,33 +1,33 @@
 function result = theilbv(y,x,nlag,neqs,eqn,theta,weight,decay,scale2,scale,nx)
 % PURPOSE: do Theil-Goldberger for bvar model (called by bvar.m)
-%--------------------------------------------------------------                     
-% USAGE:  result = theilbv(y,x,neqs,eqn,theta,weight,decay,scale2,scale,nx)                                 
-% where:  y = nobs x 1 input vector                          
-%         x = nobs x nvar input explanatory variables matrix 
-%         nobs = # of observations                           
-%         neqs = # of equations                              
-%         eqn  = # equation number                           
-%         theta= overall tightness                           
-%         weight = scalar or (neqs x neqs) matrix of prior weights                        
-%         decay  = lag decay                                 
-%         scale  = scaling vector (determined in bvar)                           
-%         scale2 = scaling vector (determined in bvar)  
+%--------------------------------------------------------------
+% USAGE:  result = theilbv(y,x,neqs,eqn,theta,weight,decay,scale2,scale,nx)
+% where:  y = nobs x 1 input vector
+%         x = nobs x nvar input explanatory variables matrix
+%         nobs = # of observations
+%         neqs = # of equations
+%         eqn  = # equation number
+%         theta= overall tightness
+%         weight = scalar or (neqs x neqs) matrix of prior weights
+%         decay  = lag decay
+%         scale  = scaling vector (determined in bvar)
+%         scale2 = scaling vector (determined in bvar)
 %         nx     = # of deterministic variables excluding constant term
-%--------------------------------------------------------------                                                
+%--------------------------------------------------------------
 % RESULTS: a structure
-%        result.beta  = bhat                 
-%        result.tstat = t-statistics              
-%        result.tprob = t-probabilities              
-%        result.yhat  = yhat                 
-%        result.resid = residuals            
-%        result.sige  = e'*e/(n-k)                  
-%        result.rsqr  = rsquared                    
-%        result.rbar  = rbar-squared                
-%        result.nobs  = nobs                        
-%        result.nvar  = nvar   
-%--------------------------------------------------------------                     
+%        result.beta  = bhat
+%        result.tstat = t-statistics
+%        result.tprob = t-probabilities
+%        result.yhat  = yhat
+%        result.resid = residuals
+%        result.sige  = e'*e/(n-k)
+%        result.rsqr  = rsquared
+%        result.rbar  = rbar-squared
+%        result.nobs  = nobs
+%        result.nvar  = nvar
+%--------------------------------------------------------------
 % see also: bvar(), prt_var(), plt_var()
-%--------------------------------------------------------------                     
+%--------------------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -35,7 +35,7 @@ function result = theilbv(y,x,nlag,neqs,eqn,theta,weight,decay,scale2,scale,nx)
 % 601 University Drive
 % San Marcos, TX 78666
 % jlesage@spatial-econometrics.com
-                          
+
 [nobs nvar] = size(x);
 
 result.nobs = nobs;
@@ -70,9 +70,9 @@ end;
 % R = diagonal matrix with scale(i,1)/S(i,j,l)
 R = zeros(nvar,nvar);
 
-% N.B. we don't want to divide by zero 
-% (diffuse prior on the x-variables and constant term) 
-% so we use nvar-nx-1  
+% N.B. we don't want to divide by zero
+% (diffuse prior on the x-variables and constant term)
+% so we use nvar-nx-1
 
 for i=1:nvar-nx-1;
 R(i,i) = scale(eqn,1)/sigma(i);
@@ -99,7 +99,7 @@ xpyrpc = x'*y + R'*c;
 
 % find bhat
 result.beta = xpxi*xpyrpc;
-    
+
 % find y-hat
 result.yhat = x*result.beta;
 

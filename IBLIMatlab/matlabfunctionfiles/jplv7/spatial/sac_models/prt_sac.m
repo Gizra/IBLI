@@ -6,15 +6,15 @@ function prt_sac(results,vnames,fid)
 %        vnames  = an optional vector of variable names
 %        fid     = optional file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
-%--------------------------------------------------- 
+%---------------------------------------------------
 %  NOTES: e.g. vnames = strvcat('y','const','x1','x2');
 %         e.g. fid = fopen('ols.out','wr');
-%  use prt_spat(results,[],fid) to print to a file with no vnames               
+%  use prt_spat(results,[],fid) to print to a file with no vnames
 % --------------------------------------------------
 %  RETURNS: nothing, just prints the spatial regression results
 % --------------------------------------------------
 % SEE ALSO: prt, plt
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, 3/2010
@@ -35,7 +35,7 @@ elseif nargin == 3
  nflag = 0;
  [vsize junk] = size(vnames); % user may supply a blank argument
    if vsize > 0
-   nflag = 1;          
+   nflag = 1;
    end;
 else
  error('Wrong # of arguments to prt_sac');
@@ -55,7 +55,7 @@ if nflag == 0 % no user-supplied vnames or an incorrect vnames argument
         tmp = ['variable ',num2str(i)];
         Vname = strvcat(Vname,tmp);
      end;
- 
+
     elseif cflag == 0 % no constant term
 
      for i=1:nvar
@@ -63,8 +63,8 @@ if nflag == 0 % no user-supplied vnames or an incorrect vnames argument
         Vname = strvcat(Vname,tmp);
      end;
     end;
- 
-     
+
+
 % add spatial rho parameter name
     Vname = strvcat(Vname,'rho');
     Vname = strvcat(Vname,'lambda');
@@ -86,8 +86,8 @@ elseif (nflag == 1) % the user supplied variable names
     % add spatial rho parameter name
         Vname = strvcat(Vname,'rho');
         Vname = strvcat(Vname,'lambda');
-    end; % end of cflag issue       
- 
+    end; % end of cflag issue
+
 end; % end of nflag issue
 
 
@@ -199,8 +199,8 @@ fprintf(fid,'***************************************************************\n')
 bout = [results.beta
         results.rho
         results.lam];
-    
-    
+
+
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
 tmp = [bout results.tstat tout];  % matrix to be printed
@@ -213,11 +213,11 @@ in.fmt = '%16.6f';
 in.fid = fid;
 mprint(tmp,in);
 
-    
+
 % now print x-effects estimates
 
-bstring = 'Coefficient'; 
-tstring = 't-stat'; 
+bstring = 'Coefficient';
+tstring = 't-stat';
 pstring = 't-prob';
 lstring = 'lower 01';
 ustring = 'upper 99';
@@ -229,7 +229,7 @@ ini.width = 2000;
 if cflag == 1
 vnameso = strvcat(Vname(3:end-2,:));
 elseif cflag == 0
-vnameso = strvcat(Vname(2:end-2,:));    
+vnameso = strvcat(Vname(2:end-2,:));
 end
 ini.rnames = strvcat('Direct  ',vnameso);
 ini.fmt = '%16.6f';
@@ -247,7 +247,7 @@ printout = total_out;
 ini.rnames = strvcat('Total   ',vnameso);
 mprint(printout,ini);
 
-        
+
 
 % <=================== end of sac case
 
@@ -292,7 +292,7 @@ lbounds2 = bounds2(1,2);
 if strcmp(results.tflag,'tstat')
 total_out(i,:) = [cmean cmean./smean tdis_prb(cmean./smean,nobs) lbounds ubounds];
 else
-total_out(i,:) = [lbounds lbounds2 cmean ubounds2 ubounds];    
+total_out(i,:) = [lbounds lbounds2 cmean ubounds2 ubounds];
 end;
 end;
 
@@ -322,7 +322,7 @@ lbounds2 = bounds2(1,2);
 if strcmp(results.tflag,'tstat')
 indirect_out(i,:) = [cmean cmean./smean tdis_prb(cmean./smean,nobs) lbounds ubounds];
 else
-indirect_out(i,:) = [lbounds lbounds2 cmean ubounds2 ubounds];    
+indirect_out(i,:) = [lbounds lbounds2 cmean ubounds2 ubounds];
 end;
 end;
 
@@ -354,7 +354,7 @@ lbounds2 = bounds2(1,2);
 if strcmp(results.tflag,'tstat')
 direct_out(i,:) = [cmean cmean./smean tdis_prb(cmean./smean,nobs) lbounds ubounds];
 else
-direct_out(i,:) = [lbounds lbounds2 cmean ubounds2 ubounds];    
+direct_out(i,:) = [lbounds lbounds2 cmean ubounds2 ubounds];
 end;
 end;
 
@@ -371,7 +371,7 @@ bout = [results.beta
     tmp3 = std(results.ldraw);
     bstd = [tmp1'
             tmp2
-            tmp3];  
+            tmp3];
 
 if strcmp(results.tflag,'tstat')
  tstat = bout./bstd;
@@ -389,7 +389,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 
 
@@ -438,7 +438,7 @@ fprintf(fid,'***************************************************************\n')
 bout = [results.beta
         results.rho
         results.lambda];
-       
+
 if (results.priorb == 1)
     % non-diffuse prior, so print it
 vstring = 'Variable';
@@ -466,7 +466,7 @@ fprintf(fid,'      Posterior Estimates \n');
  if strcmp(results.tflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -489,18 +489,18 @@ mprint(tmp,in);
 end;
 
 
-    
+
 % now print x-effects estimates
 
 if strcmp(results.tflag,'tstat')
-bstring = 'Coefficient'; 
-tstring = 't-stat'; 
+bstring = 'Coefficient';
+tstring = 't-stat';
 pstring = 't-prob';
 lstring = 'lower 01';
 ustring = 'upper 99';
 cnames = strvcat(bstring,tstring,pstring,lstring,ustring);
 else
-bstring = 'Coefficient'; 
+bstring = 'Coefficient';
 lstring = 'lower 01';
 ustring = 'upper 99';
 lstring2 = 'lower 05';
@@ -516,7 +516,7 @@ ini.cnames = cnames;
 if cflag == 1
 vnameso = strvcat(Vname(3:end-2,:));
 elseif cflag == 0
-vnameso = strvcat(Vname(2:end-2,:));    
+vnameso = strvcat(Vname(2:end-2,:));
 end
 ini.rnames = strvcat('Direct  ',vnameso);
 ini.fmt = '%16.6f';
@@ -574,7 +574,7 @@ Vname = 'Variable';
  end; % end of if-else
 end; % end of nflag issue
 
-  
+
 % find posterior means
 tmp1 = mean(results.bdraw);
 pout = mean(results.pdraw);
@@ -608,7 +608,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 yhat = results.yhat;
 e = y - yhat;
@@ -637,7 +637,7 @@ fprintf(fid,'r-value            = %6d   \n',results.r);
 else
 fprintf(fid,'mean of rdraws     = %9.4f \n',mean(results.rdraw));
 fprintf(fid,'gam(m,k) prior     = %6d,%6d \n',results.m,results.k);
-end;    
+end;
 fprintf(fid,'Nobs, Nvars        = %6d,%6d \n',results.nobs,results.nvar);
 fprintf(fid,'# censored values  = %6d \n',results.nobsc);
 fprintf(fid,'ndraws,nomit       = %6d,%6d \n',results.ndraw,results.nomit);
@@ -671,7 +671,7 @@ fprintf(fid,'      Posterior Estimates \n');
  if strcmp(results.pflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -763,7 +763,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 yhat = results.yhat;
 
@@ -780,7 +780,7 @@ fprintf(fid,'r-value         = %6d   \n',results.r);
 else
 fprintf(fid,'mean of rdraws  = %9.4f \n',mean(results.rdraw));
 fprintf(fid,'gam(m,k) prior  = %6d,%6d \n',results.m,results.k);
-end; 
+end;
 fprintf(fid,'Nobs, Nvars     = %6d,%6d \n',results.nobs,results.nvar);
 fprintf(fid,'# 0, 1 y-values = %6d,%6d \n',results.zip,nobs-results.zip);
 fprintf(fid,'ndraws,nomit    = %6d,%6d \n',results.ndraw,results.nomit);
@@ -813,7 +813,7 @@ fprintf(fid,'      Posterior Estimates \n');
  if strcmp(results.pflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -836,7 +836,7 @@ mprint(tmp,in);
  end;
 
  return;
- 
+
 % <=================== end of sacp_g case
 
 otherwise
@@ -854,7 +854,7 @@ function bounds = cr_interval(adraw,hperc)
 %       hperc = 0 to 1 value for hperc percentage point
 % --------------------------------------------------------------------
 % RETURNS:
-%         bounds = a 1 x 2 vector with 
+%         bounds = a 1 x 2 vector with
 %         bounds(1,1) = 1-hperc percentage point
 %         bounds(1,2) = hperc percentage point
 %          e.g. if hperc = 0.95

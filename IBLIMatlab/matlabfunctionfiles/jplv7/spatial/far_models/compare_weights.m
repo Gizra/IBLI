@@ -1,6 +1,6 @@
 % PURPOSE: An example of model comparison using far_g() function
 %          to compare various weight matrix specifications
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
 % USAGE: compare_weights
 %---------------------------------------------------
@@ -8,8 +8,8 @@
 clear all;
 
 % W-matrix from Anselin's neigbhorhood crime data set
-load anselin.dat; 
-latt = anselin(:,4); % latitude, longitude coordinates 
+load anselin.dat;
+latt = anselin(:,4); % latitude, longitude coordinates
 long = anselin(:,5); % are all we use here
 
 % create W-matrix based on nearest 3 neighbors
@@ -17,17 +17,17 @@ W3 = make_neighborsw(latt,long,3);
 
 % generate far model based on 3 nearest neighbors
 n = length(latt);
-IN = eye(n); 
+IN = eye(n);
 rho = 0.7;  % true value of rho
 sige = 0.1;
 k = 3;
 
 vnames = strvcat('y','Wy');
-    
+
 % far model generated here
 % based on nearest 3-neighbors W-matrix, (W3 from above)
 
-y = (IN-rho*W3)\(randn(n,1)*sqrt(sige)); 
+y = (IN-rho*W3)\(randn(n,1)*sqrt(sige));
 
 
 % estimate 5 models using W1 to W5 as weight matrices

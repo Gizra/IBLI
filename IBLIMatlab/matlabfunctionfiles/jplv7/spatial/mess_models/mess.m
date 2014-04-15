@@ -2,9 +2,9 @@ function result = mess(y,x,options)
 % PURPOSE: maximum likelihood MESS estimates
 % S*y = X*b + e, S = e^aD, with xflag == 0, or:
 % S*y = [i X D*X]*b + e, xflag == 1
-% D = a row-stochastic spatial weight matrix on input 
+% D = a row-stochastic spatial weight matrix on input
 % or: a weight matrix constructed from neighbors
-% NOTE: with options.rho and options.neigh 
+% NOTE: with options.rho and options.neigh
 % the weight matrix is constructed for you as:
 % D = sum rho^i N_i / sum rho^i, i=1,...,#neighbors
 % with i = # neighbors, N_i a matrix with ith nearest neighbors
@@ -20,11 +20,11 @@ function result = mess(y,x,options)
 %                  in constructing D (default = 5)
 %  options.xflag = 0 for S*y = X*b + e,         model (default)
 %                = 1 for S*y = [i X D*X]*b + e, model
-%  options.rho   = value of rho to use in discounting 
+%  options.rho   = value of rho to use in discounting
 %                  (0 < rho < 1), default = 1, no discounting
 %  options.hflag = 0 or 1, to compute std deviations of
 %                  the estimates using a numerical hessian
-%                 (default = 1, compute the hessian) 
+%                 (default = 1, compute the hessian)
 %  options.nflag = 0 for neighbors using 1st and 2nd order Delauney (default)
 %                = 1 for neighbors using 3rd and 4th order Delauney
 %                  for large nobs, and large # neighbors, used nflag = 1
@@ -75,7 +75,7 @@ function result = mess(y,x,options)
 % 601 University Drive
 % San Marcos, TX 78666
 % jlesage@spatial.econometrics.com
-% (With a great deal of help from R. Kelley Pace, 
+% (With a great deal of help from R. Kelley Pace,
 % the mastermind on this one)
 
 % -----------------------------------
@@ -149,23 +149,23 @@ elseif dflag == 1
       if n1 ~= n3
          error('mess: latt and long wrong on input');
       end;
-      if n2 ~= 1 
+      if n2 ~= 1
          error('mess: latt and long should be vectors');
       end;
       if n4 ~= 1
             error('mess: latt and long should be vectors');
       end;
  end;
-      
+
 
 t0 = clock; % start timer
 htime = 0;
 ntime = 0;
 
 switch xflag % switch on x transformation
-   
+
 case{0} % case where x variables are not transformed
-   
+
 tmp = rho.^(0:neigh-1);
 tmp = tmp/sum(tmp);
 
@@ -180,13 +180,13 @@ if dflag == 3 % we have to construct the weight matrix
  nnlist = find_nn(latt,long,neigh);
  elseif nflag == 1
  nnlist = find_nn2(latt,long,neigh);
- else 
+ else
  error('mess: bad option.nflag input argument');
  end;
 
 % check for empty nnlist columns
 chk = find(nnlist == 0);
-if length(chk) > 0; 
+if length(chk) > 0;
  if nflag == 1 % no saving the user here
  error('mess: trying too many neighbors, some do not exist');
  else % we save the user here
@@ -216,8 +216,8 @@ neigh = 0;
 rho = 0;
 end; % end of constructing Sy stuff
 
- 
-bmat = (x'*x)\(x'*ymat);  
+
+bmat = (x'*x)\(x'*ymat);
 emat=ymat-x*bmat;
 ssemat=emat'*emat;
 % nq is q in the paper
@@ -259,18 +259,18 @@ if hflag == 1
 parm = [bhat
         pstar
         sige];
-t1 = clock;     
+t1 = clock;
 hessn = hessian('mess_like',parm,y,x,ymat);
 htime = etime(clock,t1);
 xpxi = invpd(hessn);
-[n k] = size(x);     
+[n k] = size(x);
 xpxi = diag(xpxi(1:k+1,1:k+1));
 tmp = [bhat
        pstar];
 result.tstat = tmp./sqrt(xpxi);
 
 bstd = sqrt(xpxi(1:k,1));
-astd = sqrt(xpxi(k+1,1)); 
+astd = sqrt(xpxi(k+1,1));
 else
    tstat = zeros(k+1,1);
    bstd = zeros(k,1);
@@ -278,7 +278,7 @@ else
 end; % end of if hflag == 1
 
 time = etime(clock,t0);
-     
+
 result.meth = 'mess';
 result.y = y;
 result.nobs = n;
@@ -304,20 +304,20 @@ result.q     = q;
 result.ntime = ntime;
 
 case{1} % case of x variables spatially transformed
-   
+
    xone = x(:,1);
    if all(xone == 1)
       xsub = x(:,2:k);
    else
       xsub = x;
    end;
-   
+
 tmp = rho.^(0:neigh-1);
 tmp = tmp/sum(tmp);
 
 if dflag == 3 % we have to construct the weight matrix
               % using neighbors
- t1 = clock;  % time neighbor formulation       
+ t1 = clock;  % time neighbor formulation
 
   % construct ymat, xmat spatially transformed y, x
  % find index into nearest neighbors
@@ -325,13 +325,13 @@ if dflag == 3 % we have to construct the weight matrix
  nnlist = find_nn(latt,long,neigh);
  elseif nflag == 1
  nnlist = find_nn2(latt,long,neigh);
- else 
+ else
  error('mess: bad option.nflag input argument');
  end;
 
 % check for empty nnlist columns
 chk = find(nnlist == 0);
-if length(chk) > 0; 
+if length(chk) > 0;
  if nflag == 1 % no saving the user here
  error('mess: trying too many neighbors, some do not exist');
  else % we save the user here
@@ -359,7 +359,7 @@ end;
 
 elseif dflag == 0 % we may need to apply discounting
                   % to the user's D matrix
- t1 = clock;  % time neighbor formulation       
+ t1 = clock;  % time neighbor formulation
 
 DS = D;
 wiy = y;
@@ -375,7 +375,7 @@ rho = 0;
 
 end; % end of constructing xmat, ymat matrix stuff
 
-bmat = xmat\ymat;  
+bmat = xmat\ymat;
 emat=ymat-xmat*bmat;
 ssemat=emat'*emat;
 
@@ -419,11 +419,11 @@ if hflag == 1
 parm = [bhat
         pstar
         sige];
-t1 = clock;     
+t1 = clock;
 hessn = hessian('mess_like',parm,y,xmat,ymat);
 htime = etime(clock,t1);
 xpxi = invpd(hessn);
-[junk kk] = size(xmat);    
+[junk kk] = size(xmat);
 xpxi = diag(xpxi(1:kk+1,1:kk+1));
 tmp = [bhat
        pstar];
@@ -433,9 +433,9 @@ result.tstat(zip,1) = 0;
 end;
 
 bstd = sqrt(xpxi(1:kk,1));
-astd = sqrt(xpxi(kk+1,1));    
+astd = sqrt(xpxi(kk+1,1));
 else
-   [junk kk] = size(xmat);    
+   [junk kk] = size(xmat);
    tstat = zeros(kk+1,1);
    bstd = zeros(kk,1);
    astd = 0;
@@ -467,8 +467,8 @@ result.hflag = hflag;
 result.rho   = rho;
 result.neigh = neigh;
 result.q     = q;
-   
+
 otherwise
-   
+
 end; % end of switch
 

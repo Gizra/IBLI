@@ -7,7 +7,7 @@ function prt_coint(result,vnames,fid)
 %        vnames  = an optional vector of variable names
 %        fid     = file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
-%---------------------------------------------------               
+%---------------------------------------------------
 %                 e.g. vnames = ['y    ',
 %                                'x1   ',  NOTE: fixed width
 %                                'x2   ',        like all MATLAB
@@ -19,9 +19,9 @@ function prt_coint(result,vnames,fid)
 % --------------------------------------------------
 % NOTES: you may use prt_coint(results,[],fid) to print
 %        output to a file with no vnames
-% --------------------------------------------------    
+% --------------------------------------------------
 % SEE ALSO: prt
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -35,17 +35,17 @@ function prt_coint(result,vnames,fid)
 % Thanks to JChapman@bank-banque-canada.ca
 % for pointing out this error
 
- 
+
 % if nargin < 1; error('wrong # of arguments to prt_coint'); end;
 if nargin > 3; error('wrong # of arguments to prt_coint'); end;
 
 nflag = 0;
 if nargin == 1; fid = 1;            end;
 if nargin == 2; nflag = 1; fid = 1; end;
-if nargin == 3; 
+if nargin == 3;
 [vsize junk] = size(vnames); % user may supply a blank argument
    if vsize > 0
-   nflag = 1;          
+   nflag = 1;
    end;
 end;
 
@@ -53,10 +53,10 @@ end;
 
 
 switch result.meth
- 
+
 case {'johansen'} % <=================== johansen tests
- 
- 
+
+
 [nvar junk] = size(result.eig);
 
 %  make some up variable names
@@ -76,7 +76,7 @@ if (nflag == 1) % the user supplied variable names
  nflag = 0;
  else,
 % recover variable order index
-index = result.ind;   
+index = result.ind;
 Vname = [];
  for i=1:nvar
     Vname = strvcat(Vname,vnames(index(i),:));
@@ -108,7 +108,7 @@ mprint(prtmat,in);
 
 
 % end of Johansen
-  
+
 case {'adf'} % <=================== adf tests
 
 if ( nflag == 0) %  no variable names supplied, make some up
@@ -130,21 +130,21 @@ Vname{i} = vnames(i,1:nmax);
 end;
 
 end; % end of nflag issue
- 
+
 
   fprintf(fid,'\nAugmented DF test for unit root variable: %30s \n',Vname{1});
-  
+
       in.cnames = strvcat('ADF t-statistic','# of lags','AR(1) estimate');
       in.fmt = strvcat('16.6f','%10d','%16.6f');
       tmp = [result.adf result.nlag result.alpha];
       mprint(tmp,in);
- 
+
   in2.cnames = strvcat('1% Crit Value','5% Crit Value','10% Crit Value');
   in2.fmt = '%16.3f';
   in2.fid = fid;
 
       mprint(result.crit(1:3)',in2);
-  
+
 case {'cadf'}
 
 
@@ -171,21 +171,21 @@ Vname{i} = vnames(i,1:nmax);
 end;
 
 end; % end of nflag issue
- 
+
   fprintf(fid,'\n Augmented DF test for co-integration');
       fprintf(fid,' variables: %30s  \n',strjust([Vname{1},',',Vname{2}]));
-      
+
        in.cnames = strvcat('CADF t-statistic','# of lags','AR(1) estimate');
       in.fmt = strvcat('16.8f','%10d','%16.6f');
       tmp = [result.adf result.nlag result.alpha];
       mprint(tmp,in);
- 
+
   in2.cnames = strvcat('1% Crit Value','5% Crit Value','10% Crit Value');
   in2.fmt = '%16.3f';
   in2.fid = fid;
   mprint(result.crit(1:3)',in2);
-      
-  % end of cadf  
+
+  % end of cadf
 
 case {'phillips'}
 
@@ -213,23 +213,23 @@ Vname{i} = vnames(i,1:nmax);
 end;
 
 end; % end of nflag issue
- 
+
   fprintf(fid,'\n Phillips-Peron test for co-integration');
       fprintf(fid,' variables: %30s  \n',strjust([Vname{1},',',Vname{2}]));
-      
+
        in.cnames = strvcat('Phillips-Peron statistic','# of lags','AR(1) estimate');
       in.fmt = strvcat('16.8f','%10d','%16.6f');
       tmp = [result.pstat result.nlag result.alpha];
       mprint(tmp,in);
- 
+
   in2.cnames = strvcat('1% Crit Value','5% Crit Value','10% Crit Value');
   in2.fmt = '%16.3f';
   in2.fid = fid;
       mprint(result.crit(1:3)',in2);
-      
-  % end of phillips  
-    
-  
+
+  % end of phillips
+
+
    otherwise
 error('results structure not known by prt_coint function');
 

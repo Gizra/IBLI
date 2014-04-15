@@ -2,18 +2,18 @@ function r = logn_rnd(mu,sigma,m,n);
 % PURPOSE: random draws from the lognormal distribution
 %---------------------------------------------------
 % USAGE: rnd = logn_rnd(mu,sigma,m,n)
-% where: mu = the mean (may be a matrix) 
+% where: mu = the mean (may be a matrix)
 %        sig = the standard deviation (may be a matrix)
-%        m,n = the size of r in the case of mu or sig a matrix 
+%        m,n = the size of r in the case of mu or sig a matrix
 %---------------------------------------------------
 % RETURNS:
-%        rnd = a matrix of random numbers from the lognormal distribution      
+%        rnd = a matrix of random numbers from the lognormal distribution
 % --------------------------------------------------
 % SEE ALSO: logn_cdf, logn_pdf, logn_inv
 %---------------------------------------------------
 % NOTE: Copyright (c) 1993 by The MathWorks, Inc.
 %---------------------------------------------------
-% REFERENCES: 
+% REFERENCES:
 %    Evans, Merran, Hastings, Nicholas and Peacock, Brian,
 %    "Statistical Distributions, Second Edition", Wiley
 %    1993 p. 102-105.
@@ -22,7 +22,7 @@ function r = logn_rnd(mu,sigma,m,n);
 % -------------------------------------------------------------
 
 
-if nargin < 2, 
+if nargin < 2,
     error('Wrong # of arguments to logn_rnd');
 end
 

@@ -1,20 +1,20 @@
 % PURPOSE: A Monte Carlo comparison of sem_gmm and ML sem
 % GM estimation of the spatial error model
 % in a Monte Carlo experiment that compares maximum likelihood
-% and GM estimation  
+% and GM estimation
 %---------------------------------------------------
 % USAGE: sem_gmmd3 (see also sem_gmmd2 for a large data set)
 %---------------------------------------------------
 
 clear all;
 % W-matrix from Anselin's neigbhorhood crime data set
-load anselin.dat; 
+load anselin.dat;
 xc = anselin(:,4);
 yc = anselin(:,5);
 % crate standardized 1st-order spatial weight matrix
 [j1 W j2] = xy2cont(xc,yc);
 [n junk] = size(W);
-IN = eye(n); 
+IN = eye(n);
 rho = 0.85;  % true value of rho
 sige = 0.5;
 k = 3;

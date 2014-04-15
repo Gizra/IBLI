@@ -1,5 +1,5 @@
 function like = tvp_markov_lik(parm,y,x,start,b0,v0)
-% PURPOSE: log-likelihood for Markov-switching TVP model 
+% PURPOSE: log-likelihood for Markov-switching TVP model
 % model: y(t) = X(t) b(t) + e(t)
 %        b(t) = A_st b(t-1) + G_st v(t)
 %        e(t) = N(0,R), v(t) = N(0_k,Q)
@@ -16,7 +16,7 @@ function like = tvp_markov_lik(parm,y,x,start,b0,v0)
 %        b0 = (kx1) prior b0 (default: diffuse = 0)
 %        v0 = (kxk) prior v0 (default: diffuse = 1000)
 % -------------------------------------------------
-% RETURNS: -log likelihood        
+% RETURNS: -log likelihood
 % -------------------------------------------------
 
 % written by:
@@ -125,7 +125,7 @@ prv11 = vprob(fcast11,ss11)*ppr*prob1;
 
 prval = prv00+prv01+prv10+prv11; % pr[Yt | Yt-1]
 
-pr00 = prv00/prval; 
+pr00 = prv00/prval;
 pr01 = prv01/prval;
 pr10 = prv10/prval;
 pr11 = prv11/prval;

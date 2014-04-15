@@ -51,7 +51,7 @@ xlag = xtmp(2:nobs,:);
 ylag = ytmp(2:nobs,1);
 yt = y(2:nobs,1);
 xt = x(2:nobs,:);
-       
+
 % setup storage for iteration results
 iterout = zeros(ITERMAX,3);
 
@@ -59,7 +59,7 @@ while (converg > 0.0001) & (iter < ITERMAX),
 % step 1, using intial rho = 0, do OLS to get bhat
  ystar = yt - rho*ylag;
  xstar = xt - rho*xlag;
- 
+
 res = ols(ystar,xstar);
 
 e = y - x*res.beta;

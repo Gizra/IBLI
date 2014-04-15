@@ -35,13 +35,13 @@ function y = minter_xls(Y,x,z,ta,s,f,type,d,flax1,flax2);
 %        type: model for the innovations
 %            = 0 ---> white noise
 %            = 1 ---> random walk
-% 
+%
 % INPUT DATA:
-%         Y : NxM 
+%         Y : NxM
 %         x : nxMM
 %         z : nxnz
-% 
-%                
+%
+%
 % -----------------------------------------------------------------------
 % OUTPUT: y: nxi
 %       i=M  brief --> only temporally disaggregated series (all procedures)
@@ -70,21 +70,20 @@ case 3
    % di Fonzo
    res = difonzo(Y,x,z,ta,s,type,f);
 end
-  
+
 % -----------------------------------------------------------------------
 % SELECTION OF OUTPUT
 
  switch flax2
-     case 0 
+     case 0
          % Brief output
          y = res.y;
      case 1
          % Normal output
          switch res.meth
              case {'Multivariate Denton','Multivariate Rossi'}
-                 y = res.y;           
+                 y = res.y;
              case {'Multivariate di Fonzo'}
-                  y   = [res.y res.d_y];           
+                  y   = [res.y res.d_y];
           end
  end
- 

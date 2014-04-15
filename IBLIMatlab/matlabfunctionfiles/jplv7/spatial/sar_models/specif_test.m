@@ -1,5 +1,5 @@
-% PURPOSE: An example of using sar_g() on a large data set   
-%          Gibbs sampling spatial autoregressive model                         
+% PURPOSE: An example of using sar_g() on a large data set
+%          Gibbs sampling spatial autoregressive model
 %---------------------------------------------------
 % USAGE: sar_gd2 (see sar_gd for a small data set)
 %---------------------------------------------------
@@ -10,7 +10,7 @@ clear all;
 load elect.dat;             % load data on votes
 latt = elect(:,5);
 long = elect(:,6);
-n = length(latt); 
+n = length(latt);
 k = 4;
 x = randn(n,k);
 clear elect;                % conserve on RAM memory

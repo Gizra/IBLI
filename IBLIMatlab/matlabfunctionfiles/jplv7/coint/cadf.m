@@ -18,14 +18,14 @@ function results = cadf(y,x,p,l)
 %          results.alpha = autoregressive parameter estimate
 %          results.adf   = ADF t-statistic
 %          results.crit  =  (6 x 1) vector of critical values
-%                        [1% 5% 10% 90% 95% 99%] quintiles   
+%                        [1% 5% 10% 90% 95% 99%] quintiles
 %          results.nvar  = cols(x)
 %          results.nlag  = nlag
 %---------------------------------------------------
 % SEE ALSO: prt_coint()
-%--------------------------------------------------- 
+%---------------------------------------------------
 % References: Said and Dickey (1984) 'Testing for Unit Roots in
-% Autoregressive Moving Average Models of Unknown Order', 
+% Autoregressive Moving Average Models of Unknown Order',
 % Biometrika, Volume 71, pp. 599-607.
 
 % written by:
@@ -46,7 +46,7 @@ function results = cadf(y,x,p,l)
      if (nobs - (2*l) + 1 < 1);
      error('nlags is too large in cadf; negative degrees of freedom');
      end;
-    
+
      y       = detrend(y,p);
      x       = detrend(x,p);
      b = inv(x'*x)*x'*y;
@@ -59,26 +59,26 @@ function results = cadf(y,x,p,l)
      while (k <= l)
            z = [z lag(dep,k)];
            k = k + 1 ;
-          end;         
+          end;
      z       = trimr(z,l,0) ;
      dep     = trimr(dep,l,0) ;
-     
+
      beta    = detrend(z,0)\detrend(dep,0) ;
      % res     = dep - z*beta ;
-     % BUG fix suggested by 
+     % BUG fix suggested by
 % Nick Firoozye
 % Sanford C. Bernstein, Inc
 % 767 Fifth Avenue, #21-49
 % New York, NY 10153
-     res = detrend(dep,0)- detrend(z,0)*beta; 
+     res = detrend(dep,0)- detrend(z,0)*beta;
 
      so      = (res'*res)/(rows(dep)-cols(z));
      var_cov = so*inv(z'*z) ;
-     
+
      results.alpha = beta(1,1);
      results.adf = beta(1,1)/sqrt(var_cov(1,1));
      results.crit = rztcrit(nobs,cols(x),p);
      results.nlag = l;
      results.nvar = cols(x);
      results.meth = 'cadf';
-     
+

@@ -1,9 +1,9 @@
 function results = gwr_g(y,x,ndraw,nomit,prior)
 % PURPOSE: Gibbs estimates for the Bayesian heteroscedastic GWR model
-%          called only by bgwrv(), bgwr() 
-%          y = X B + E, E = N(0,sige*V), 
+%          called only by bgwrv(), bgwr()
+%          y = X B + E, E = N(0,sige*V),
 %          V = diag(v1,v2,...vn), r/vi = ID chi(r)/r, r = Gamma(m,k)
-%          B = N(c,T),  sige = gamma(nu,d0)    
+%          B = N(c,T),  sige = gamma(nu,d0)
 %---------------------------------------------------
 % USAGE: results = gwr_g(y,x,ndraw,nomit,prior)
 % where: y    = dependent variable vector
@@ -31,7 +31,7 @@ function results = gwr_g(y,x,ndraw,nomit,prior)
 %---------------------------------------------------
 % SEE ALSO: bgwr, bgwrv
 %---------------------------------------------------
-% REFERENCES: Geweke (1993)  'Bayesian Treatment of the 
+% REFERENCES: Geweke (1993)  'Bayesian Treatment of the
 % Independent Student-$t$ Linear Model', Journal of Applied
 % Econometrics, 8, s19-s40.
 % ----------------------------------------------------
@@ -43,7 +43,7 @@ function results = gwr_g(y,x,ndraw,nomit,prior)
 % San Marcos, TX 78666
 % jlesage@spatial-econometrics.com
 
-[n k] = size(x);   
+[n k] = size(x);
 
 
 if nargin ~= 5
@@ -51,8 +51,8 @@ error('Wrong # of arguments to gwr_g');
 end;
 
 b0 = (x'*x)\(x'*y);  % Find ols values as initial starting values
-sige = (y-x*b0)'*(y-x*b0)/(n-k); 
-V = ones(n,1); in = ones(n,1); % initial value for V  
+sige = (y-x*b0)'*(y-x*b0)/(n-k);
+V = ones(n,1); in = ones(n,1); % initial value for V
 
 fields = fieldnames(prior);
 nf = length(fields);
@@ -62,7 +62,7 @@ c = zeros(k,1); T = eye(k)*1e+12;
 mm = 0;
  for i=1:nf
     if strcmp(fields{i},'rval')
-        rval = prior.rval; 
+        rval = prior.rval;
     elseif strcmp(fields{i},'m')
         mm = prior.m;
         kk = prior.k;
@@ -70,7 +70,7 @@ mm = 0;
     elseif strcmp(fields{i},'nu')
         nu = prior.nu;
     elseif strcmp(fields{i},'d0')
-        d0 = prior.d0;   
+        d0 = prior.d0;
     elseif strcmp(fields{i},'beta');
     c = prior.beta;
     elseif strcmp(fields{i},'bcov');
@@ -97,38 +97,38 @@ Q = inv(T);
 Qpc = Q*c;
 
 bsave = zeros(ndraw-nomit,k);    % allocate storage for results
-ssave = zeros(ndraw-nomit,1); 
+ssave = zeros(ndraw-nomit,1);
 rsave = zeros(ndraw-nomit,1);
 vmean = zeros(n,1);
 
-for i=1:ndraw; % Start the sampling 
-          ystar = y.*sqrt(V); 
+for i=1:ndraw; % Start the sampling
+          ystar = y.*sqrt(V);
           xstar = matmul(x,sqrt(V));
-          xpxi = inv(xstar'*xstar + sige*Q); 
-          xpy = (xstar'*ystar + sige*Qpc); 
-          % update b  
-          b = xpxi*xpy;    
+          xpxi = inv(xstar'*xstar + sige*Q);
+          xpy = (xstar'*ystar + sige*Qpc);
+          % update b
+          b = xpxi*xpy;
        a = chol(xpxi);
-       b = sqrt(sige)*a'*randn(k,1) + b;          
+       b = sqrt(sige)*a'*randn(k,1) + b;
 
-         % update sige 
-          nu1 = n + nu; 
+         % update sige
+          nu1 = n + nu;
           e = ystar - xstar*b;
           d1 = d0 + e'*e;
           chi = chis_rnd(1,nu1);
     sige = d1/chi;
-         
+
           % update vi
           e = y - x*b;
-          chiv = chis_rnd(n,rval+1);   
+          chiv = chis_rnd(n,rval+1);
           vi = ((e.*e./sige) + in*rval)./chiv;
-          V = in./vi;   
-  
+          V = in./vi;
+
          % update rval
-         if mm ~= 0           
-         rval = gamm_rnd(1,1,mm,kk);  
+         if mm ~= 0
+         rval = gamm_rnd(1,1,mm,kk);
       end;
-   
+
     if i > nomit % if we are past burn-in, save the draws
     bsave(i-nomit,:) = b';
     ssave(i-nomit,1) = sige;

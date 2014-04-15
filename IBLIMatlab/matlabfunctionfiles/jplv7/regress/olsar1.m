@@ -7,7 +7,7 @@ function result = olsar1(y,x)
 %---------------------------------------------------
 % RETURNS: a structure
 %        results.meth  = 'olsar1'
-%        results.beta  = bhat estimates 
+%        results.beta  = bhat estimates
 %        results.rho   = rho estimate
 %        results.tstat = t-stats
 %        results.trho  = t-statistic for rho estimate

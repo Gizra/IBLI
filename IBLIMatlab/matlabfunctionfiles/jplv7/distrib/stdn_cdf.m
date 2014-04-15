@@ -1,4 +1,4 @@
-function cdf = stdn_cdf(x)  
+function cdf = stdn_cdf(x)
 % PURPOSE: computes the standard normal cumulative
 %          distribution for each component of x
 %---------------------------------------------------

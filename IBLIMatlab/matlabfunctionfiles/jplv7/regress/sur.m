@@ -4,43 +4,43 @@ function result = sur(neqs,y,x,iflag,info)
 %---------------------------------------------------
 % USAGE:    results = sur(neqs,y,x,iflag,info)
 %       or, results = sur(neqs,y,x) (for no iteration)
-% where: 
+% where:
 %      neqs  = # of equations
-%        y   = an 'eq' structure containing dependent variables 
+%        y   = an 'eq' structure containing dependent variables
 %              e.g. y(1).eq = y1; y(2).eq = y2; y(3).eq = y3;
 %        x   = an 'eq' structure containing explanatory variables
-%                 e.g. x(1).eq = [iota x1 x4]; 
-%                      x(2).eq = [iota x1]; 
+%                 e.g. x(1).eq = [iota x1 x4];
+%                      x(2).eq = [iota x1];
 %                      x(3).eq = [iota x1 x2 x5];
-%      iflag = 1 for iteration on error covariance matrix, 
-%              0 for no iteration (0 = default) 
+%      iflag = 1 for iteration on error covariance matrix,
+%              0 for no iteration (0 = default)
 %       info = a structure for iteration options:
 %              info.itmax = maximum # of iterations (default = 100)
-%              info.crit  = convergence criterion  for bhat change   
-%                           (default = 0.001)                             
+%              info.crit  = convergence criterion  for bhat change
+%                           (default = 0.001)
 %---------------------------------------------------
 %        NOTE:  x(i), i=1,...,G should include a constant vector
 %               if you want one in the equation
 %---------------------------------------------------
 % RETURNS a structure:
 %   result.meth      = 'sur'
-%   result(eq).beta  = bhat for each equation            
-%   result(eq).tstat = tstat for each equation            
-%   result(eq).tprob = tprobs for each equation        
-%   result(eq).resid = residuals for each equation      
-%   result(eq).yhat  = yhats for each equation         
-%   result(eq).y     = y for each equation             
-%   result(eq).rsqr  = r-squared for each equation     
-%   result(eq).rbar  = r-squared adj for each equation  
-%   result(eq).nvar  = nvar in each equation     
-%   result(eq).sige  = e'e/nobs for each equation 
-%   result(eq).dw    = Durbin-Watson 
+%   result(eq).beta  = bhat for each equation
+%   result(eq).tstat = tstat for each equation
+%   result(eq).tprob = tprobs for each equation
+%   result(eq).resid = residuals for each equation
+%   result(eq).yhat  = yhats for each equation
+%   result(eq).y     = y for each equation
+%   result(eq).rsqr  = r-squared for each equation
+%   result(eq).rbar  = r-squared adj for each equation
+%   result(eq).nvar  = nvar in each equation
+%   result(eq).sige  = e'e/nobs for each equation
+%   result(eq).dw    = Durbin-Watson
 %   result.srsqr     = system-wide R-squared
-%   result.nobs      = nobs 
+%   result.nobs      = nobs
 %   result.neqs      = neqs
 %   result.sigma     = sig(i,j) across equations
 %   result.ccor      = cross-equation correlation matrix
-%   result.iter      = # of iterations if iflag = 1, or 0 
+%   result.iter      = # of iterations if iflag = 1, or 0
 %   result.convg     = convergence change in bhat estimates
 % --------------------------------------------------
 % SEE ALSO: prt(), prt_eqs(), plt()
@@ -72,14 +72,14 @@ fields = fieldnames(info);
 nf = length(fields);
 for i=1:nf
     if strcmp(fields{i},'itmax')
-        itmax = info.itmax; 
+        itmax = info.itmax;
     elseif strcmp(fields{i},'crit')
         crit = info.crit;
     end;
 end;
 
 else
-error('Wrong # of arguments to sur'); 
+error('Wrong # of arguments to sur');
 end;
 
 result.meth = 'sur';
@@ -395,7 +395,7 @@ sys_rsqr = 1 - neqs/trace(sigmai*syy);
  sigu = result(i).resid'*result(i).resid;
  result(i).sige = sigu/nobs;                % sige's
    ediff = result(i).resid(2:nobs) - result(i).resid(1:nobs-1);
-   result(i).dw = (ediff'*ediff)/sigu;           % durbin-watson 
+   result(i).dw = (ediff'*ediff)/sigu;           % durbin-watson
 end;
 
 result(1).iter = icnt;

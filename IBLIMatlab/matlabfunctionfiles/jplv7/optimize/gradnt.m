@@ -1,4 +1,4 @@
-function g = gradnt(funfcn,theta,deltagrad,varargin) 
+function g = gradnt(funfcn,theta,deltagrad,varargin)
 % PURPOSE: compute the gradient of func at b
 % ------------------------------------------------
 % USAGE: grd = gradnt(func,b,delta,varargin)
@@ -20,8 +20,8 @@ function g = gradnt(funfcn,theta,deltagrad,varargin)
 
 funfcn = fcnchk(funfcn,length(varargin));
 [m k] = size(theta) ;
-if m ==1; 
-theta = theta'; 
+if m ==1;
+theta = theta';
 end;
 m=rows(theta); ii = eye(m);
 fbase = feval(funfcn,theta,varargin{:});

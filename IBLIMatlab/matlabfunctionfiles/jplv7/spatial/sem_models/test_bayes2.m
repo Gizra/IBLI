@@ -1,5 +1,5 @@
 % PURPOSE: A comparison of Bayesian and ML estimates
-%          using a large dataset                 
+%          using a large dataset
 %---------------------------------------------------
 % USAGE: test_bayes2
 %---------------------------------------------------
@@ -28,11 +28,11 @@ ndraw = 2500;
 nomit = 500;
 % uses default MC approximation to the log-det
 results1 = sem_g(y,x,W,ndraw,nomit,prior);
-prt(results1,vnames);  
+prt(results1,vnames);
 results2 = sdm_g(y,x,W,ndraw,nomit,prior);
-prt(results2,vnames);  
+prt(results2,vnames);
 results3 = sar_g(y,x,W,ndraw,nomit,prior);
-prt(results3,vnames);  
+prt(results3,vnames);
 
 % uses default MC approximation to the log-det
 results4 = sem(y,x,W);

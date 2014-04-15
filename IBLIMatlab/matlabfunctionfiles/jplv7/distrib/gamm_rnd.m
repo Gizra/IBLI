@@ -2,18 +2,18 @@ function x = gamm_rnd(n,a)
 % PURPOSE: a vector of random draws from the gamma distribution
 %---------------------------------------------------
 % USAGE: r = gamm_rnd(n,A)
-% where: n = the row size of the n x 1 vector drawn 
+% where: n = the row size of the n x 1 vector drawn
 %        a = a parameter such that the mean of the gamma = a
 %            and the variance of the gamma = a
 %        notes: x = gamm_rnd(n,a*0.5)*2,equals chisq a random deviate
 %        For different parameters, A,B use:
 %	B*gamm_rnd(n,A) to produce a vector of random deviates from the gamma
-%	distribution with shape parameter A and scale parameter B.  
+%	distribution with shape parameter A and scale parameter B.
 %   The distribution then has mean A*B and variance A*B^2.
 %---------------------------------------------------
 % RETURNS:
 %        r = an n x 1 vector of random numbers from
-%        the gamma(A) distribution      
+%        the gamma(A) distribution
 % --------------------------------------------------
 % SEE ALSO: gamm_inv, gamm_pdf, gamm_cdf
 %---------------------------------------------------
@@ -27,14 +27,14 @@ function x = gamm_rnd(n,a)
 
 % GNU Public Licence Copyright (c) Anders Holtsberg 10-05-2000.
 
-% This consumes about a third of the execution time compared to 
+% This consumes about a third of the execution time compared to
 % the Mathworks function GAMRND in a third the number of
 % codelines. Yihaaa! (But it does not work with different parameters)
 %
-% The algorithm is a rejection method. The logarithm of the gamma 
+% The algorithm is a rejection method. The logarithm of the gamma
 % variable is simulated by dominating it with a double exponential.
 % The proof is easy since the log density is convex!
-% 
+%
 % Reference: There is no reference! Send me an email if you can't
 % figure it out.
 
@@ -58,6 +58,6 @@ if length(y) >= n
    x = exp(y(1:n));
 else
    tmp = rgamma(n - length(y), a);
-   x = [exp(y) 
+   x = [exp(y)
         tmp];
 end

@@ -5,7 +5,7 @@ function [P,lnL] = multilogit_lik(y,x,beta,d);
 % Simon D. Woodcock
 % CISER / Economics
 % Cornell University
-% Ithaca, NY 
+% Ithaca, NY
 % sdw9@cornell.edu
 
 [nvar ncat] = size(beta);

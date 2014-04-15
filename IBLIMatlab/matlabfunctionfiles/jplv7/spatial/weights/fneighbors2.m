@@ -4,7 +4,7 @@ function nnlist = fneighbors2(d, xcoord, ycoord, nnmax, delorder)
 %
 %This function finds the nnmax nearest neighbors to each observation. Users
 %should set mmax to be equal or higher to the number of neighbors they will
-%need in the future. 
+%need in the future.
 %
 %INPUT:
 %
@@ -34,8 +34,8 @@ function nnlist = fneighbors2(d, xcoord, ycoord, nnmax, delorder)
 %One can optimize the likelihood over neighbors and weighting of neighbors
 %as in:
 %
-%Pace, R. Kelley and Ronald Barry, O.W. Gilley, C.F. Sirmans, 
-%“A Method for Spatial-temporal Forecasting with an Application to Real Estate Prices,” 
+%Pace, R. Kelley and Ronald Barry, O.W. Gilley, C.F. Sirmans,
+%“A Method for Spatial-temporal Forecasting with an Application to Real Estate Prices,”
 %International Journal of Forecasting, Volume 16, Number 2, April-June 2000, p. 229-246.
 %
 %Written by Kelley Pace, www.spatial-statistics.com, 6/97 and revised
@@ -54,7 +54,7 @@ end;
 %observation. If this is too low, higher order individual neighbor matrices
 %will not have a element in some rows. If d comes from a Delaunay triangularization,
 %this provides a hybrid of nearest neighbors and delaunay triangles. If this is too high, the
-%computational cost can rise quickly. 
+%computational cost can rise quickly.
 
 if (delorder<1)|(delorder>4)
     warning('setting delorder to 2 -- possible wrong argument');

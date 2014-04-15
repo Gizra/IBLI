@@ -1,6 +1,6 @@
 % PURPOSE: An example of using bgwr()
 %          Geographically weighted regression model
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
 % USAGE: bgwr_d
 %---------------------------------------------------
@@ -50,7 +50,7 @@ plot(tt,bgwr(:,3),'-r',tt,b3mean,'--b');
 legend('gwr','bgwr');
 title('b3 parameter');
 pause;
-      
+
 % plot mean of vi draws across observations
 plot(tt,result.vmean);
 title('vi means');

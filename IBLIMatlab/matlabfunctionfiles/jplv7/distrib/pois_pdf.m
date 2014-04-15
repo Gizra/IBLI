@@ -4,7 +4,7 @@ function pdf = pois_pdf(x,l)
 %---------------------------------------------------
 % USAGE:    pdf = pois_pdf(x,lambda)
 % where:    x   = variable vector (nx1)
-%        lambda = value at which to evaluate pdf 
+%        lambda = value at which to evaluate pdf
 %---------------------------------------------------
 
 % Author: Kurt Hornik
@@ -17,7 +17,7 @@ function pdf = pois_pdf(x,l)
     error('poisson_pdf: Wrong # of inputs');
   end;
 
-  
+
   [retval, x, l, junk] = com_size (x, l, l);
   if (retval > 0)
     error ('pois_pdf: x and lambda must be of common size or scalar');
@@ -40,5 +40,5 @@ function pdf = pois_pdf(x,l)
   end;
 
   pdf = reshape (pdf, r, c);
-  
+
 

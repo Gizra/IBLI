@@ -11,7 +11,7 @@ function fjac = fdjac(f,x,varargin)
 % -------------------------------------------------------
 % See also: fdhess, hessian
 % -------------------------------------------------------
-        
+
 % Code from:
 % COMPECON toolbox [www4.ncsu.edu/~pfackler]
 % documentation modified to fit the format of the Ecoometrics Toolbox

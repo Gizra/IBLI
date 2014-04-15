@@ -8,7 +8,7 @@ function rnd = bino_rnd (n, p, r, c)
 %---------------------------------------------------
 % RETURNS:
 %        rnd = matrix, vector or scalar of random deviates
-%              equal to the number of successes in n-trials 
+%              equal to the number of successes in n-trials
 % NOTE: mean = n*p, variance = n*p(1-p)
 % --------------------------------------------------
 % SEE ALSO: bino_d, bino_pdf, bino_cdf, bino_inv
@@ -39,7 +39,7 @@ function rnd = bino_rnd (n, p, r, c)
     if (retval > 0)
       error ('bino_rnd: n and p must be of common size or scalar');
     end
-  elseif (nargin == 2)       
+  elseif (nargin == 2)
     [retval, x, n, p] = com_size (zeros(1),n, p);
     if (retval > 0)
       error ('bino_rnd: n and p must be of common size or scalar');
@@ -53,13 +53,13 @@ function rnd = bino_rnd (n, p, r, c)
   n = reshape (n, 1, s);
   p = reshape (p, 1, s);
   rnd = zeros (1, s);
-  
+
   k = find (~(n > 0) | ~(n < Inf) | ~(n == round(n)) ...
       | ~(p <= 0) | ~(p >= 1));
   if any(k)
     rnd(k) = NaN * ones(1, length (k));
   end
-  
+
   k = find((n > 0) & (n < Inf) & (n == round (n)) ...
       & (p >= 0) & (p <= 1));
   if any(k)
@@ -70,6 +70,6 @@ function rnd = bino_rnd (n, p, r, c)
     rnd(k) = sum((tmp < ones(N, 1) * p(k)) ...
  & (ind <= ones(N, 1) * n(k)), 1);
   end
-  
+
   rnd = reshape(rnd, r, c);
-  
+

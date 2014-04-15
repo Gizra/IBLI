@@ -2,19 +2,19 @@ function prt_reg(results,vnames,fid)
 % PURPOSE: Prints output using regression results structures
 %---------------------------------------------------
 % USAGE: prt_reg(results,vnames,fid)
-% Where: results = a structure returned by a regression 
+% Where: results = a structure returned by a regression
 %        vnames  = an optional vector of variable names
 %        fid     = optional file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
-%--------------------------------------------------- 
+%---------------------------------------------------
 %  NOTES: e.g. vnames = strvcat('y','const','x1','x2');
 %         e.g. fid = fopen('ols.out','wr');
-%  use prt_reg(results,[],fid) to print to a file with no vnames               
+%  use prt_reg(results,[],fid) to print to a file with no vnames
 % --------------------------------------------------
 %  RETURNS: nothing, just prints the regression results
 % --------------------------------------------------
 % SEE ALSO: prt, plt
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -32,7 +32,7 @@ elseif nargin == 3
  nflag = 0;
  [vsize junk] = size(vnames); % user may supply a blank argument
    if vsize > 0
-   nflag = 1;          
+   nflag = 1;
    end;
 else
  error('Wrong # of arguments to prt_reg');
@@ -100,7 +100,7 @@ if strcmp(results.meth,'olsc')
   fprintf(fid,'Cochrane-Orcutt serial correlation Estimates \n');
 elseif strcmp(results.meth,'olsar1');
   fprintf(fid,'Maximum likelihood ar1 serial correlation Estimates \n');
-end; 
+end;
 nobs = results.nobs;
 nvar = results.nvar;
 
@@ -198,7 +198,7 @@ fprintf(fid,'gradient at solution \n');
 mprint(results.grad(1:nvar,1),in);
 
 case {'tobit'} % <=================== tobit, regressions
- 
+
 fprintf(fid,'\n');
  fprintf(fid,'Tobit Regression Estimates \n');
 
@@ -376,7 +376,7 @@ bstring = 'Coefficient'; tstring = 't-statistic'; pstring = 't-probability';
 cnames = strvcat(bstring,tstring,pstring);
 % COPE WITH VIF FIELD IF IT EXISTS (b.Dillon).
 if isfield(results,'VIF')
-  tmp=[ tmp results.VIF];  
+  tmp=[ tmp results.VIF];
   cnames=strvcat(cnames,'VIF');
 end
 in.cnames = cnames;

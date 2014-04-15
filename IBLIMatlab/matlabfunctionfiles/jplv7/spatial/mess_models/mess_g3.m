@@ -4,11 +4,11 @@ function results = mess_g3(y,x,options,ndraw,nomit,prior,start)
 %    for these hyperparameters in the problem]
 % S*y = X*b + e,           with xflag == 0, or:
 % S*y = [i X D*X]*b + e,   with xflag == 1
-%          e = N(0,sige*In), 
+%          e = N(0,sige*In),
 %          S = e^alpha*D
-%          B = N(c,T), 
-%          1/sige = Gamma(nu,d0), 
-%          alpha = N(a,B), (default: diffuse prior) 
+%          B = N(c,T),
+%          1/sige = Gamma(nu,d0),
+%          alpha = N(a,B), (default: diffuse prior)
 % D = a weight matrix constructed from neighbors using:
 % D = sum rho^i N_i / sum rho^i, i=1,...,#neighbors
 % using a grid of rho values from options.rmin to options.rmax
@@ -23,7 +23,7 @@ function results = mess_g3(y,x,options,ndraw,nomit,prior,start)
 %  options.long  = longitude coordinates (nx1 vector)
 %  options.mmin = minimum # of neighbors to search over (default = 4)
 %  options.mmax = maximum # of neighbors to search over (default = 10)
-%  options.rmin  = minimum value of rho to use (0 < rho < 1), (default 0.5)                  
+%  options.rmin  = minimum value of rho to use (0 < rho < 1), (default 0.5)
 %  options.rmax  = maximum value of rho to use in discounting (default 1)
 %  options.xflag = 0 for S*y = X*b + e,         model (default)
 %                = 1 for S*y = [i X D*X]*b + e, model
@@ -33,21 +33,21 @@ function results = mess_g3(y,x,options,ndraw,nomit,prior,start)
 %  options.q     = # of terms to use in the matrix exponential
 %                  expansion (default = 7)
 %    ndraw = # of draws
-%    nomit = # of initial draws omitted for burn-in            
+%    nomit = # of initial draws omitted for burn-in
 %    prior = a structure variable with:
 %            prior.beta  = prior means for beta,   c above (default 0)
 %                          (nvar x 1 vector, D*X terms have diffuse prior =0)
 %            priov.bcov  = prior beta covariance , T above (default 1e+12)
 %                          (nvar x nvar matrix, D*X terms have diffuse prior)
 %            prior.alpha = prior mean for alpha    a above (default uniform)
-%            prior.rcov  = prior alpha variance,   B above 
+%            prior.rcov  = prior alpha variance,   B above
 %            prior.nu    = informative Gamma(nu,d0) prior on sige
 %            prior.d0    = default: nu=0,d0=0 (diffuse prior)
 %            prior.m,    = informative Gamma(m,k) prior on r
 %            prior.k,    = informative Gamma(m,k) prior on r
 %            prior.lflag = 0 (default for marginal likelihood calculations)
 %                        = 1 for no marginal likelihood (faster)
-%    start = (optional) structure containing starting values: 
+%    start = (optional) structure containing starting values:
 %            defaults: beta=ones(k,1),sige=1,rho=0.5, V=ones(n,1)
 %            start.b   = beta starting values (nvar x 1)
 %            start.a   = alpha starting value (scalar)
@@ -81,16 +81,16 @@ function results = mess_g3(y,x,options,ndraw,nomit,prior,start)
 %          results.nu     = nu prior parameter
 %          results.d0     = d0 prior parameter
 %          results.stime  = time for sampling
-%          results.time   = total time taken  
+%          results.time   = total time taken
 %          results.ntime  = time taken for setup mesh over rho,m values
 %          results.accept = acceptance rate for alpha <= 0
 %          results.rmax   = rmax: default (or user input)
-%          results.rmin   = rmin: default (or user input)   
+%          results.rmin   = rmin: default (or user input)
 %          results.mmax   = mmax: default (or user input)
-%          results.mmin   = mmin: default (or user input)    
-%          results.nflag  = nflag value from input (or default)   
+%          results.mmin   = mmin: default (or user input)
+%          results.nflag  = nflag value from input (or default)
 %          results.tflag  = 'plevel' (default) for printing p-levels
-%                         = 'tstat' for printing bogus t-statistics 
+%                         = 'tstat' for printing bogus t-statistics
 %          results.palpha   = prior for alpha (from input)
 %          results.acov   = prior variance for alpha (from input)
 %          results.pflag  = 1, if a normal(a,B) prior for alpha, 0 otherwise
@@ -162,7 +162,7 @@ if nargin == 7
  nf = length(fields);
  for i=1:nf
     if strcmp(fields{i},'b')
-        b0 = start.b; 
+        b0 = start.b;
         [n1 n2] = size(b0); % error checking on user inputs
        if n1 ~= k
         error('mess_g3: starting beta values are wrong');
@@ -215,7 +215,7 @@ if nargin == 7
      end;
  end; % end of for loop
 
-% parse prior structure variable inputs        
+% parse prior structure variable inputs
     if ~isstruct(prior)
     error('mess_g3: must supply the prior as a structure variable');
     end;
@@ -231,13 +231,13 @@ for i=1:nf
     elseif strcmp(fields{i},'alpha')
         palpha = prior.alpha; pflag = 1;
     elseif strcmp(fields{i},'acov')
-        S = prior.acov;        
+        S = prior.acov;
     elseif strcmp(fields{i},'nu')
         nu = prior.nu;
     elseif strcmp(fields{i},'d0')
         d0 = prior.d0;
     elseif strcmp(fields{i},'lflag')
-       lflag = prior.lflag; 
+       lflag = prior.lflag;
     end;
 end;
 
@@ -253,20 +253,20 @@ elseif nargin == 6   % we supply default starting values
     elseif strcmp(fields{i},'alpha')
         palpha = prior.alpha; pflag = 1;
     elseif strcmp(fields{i},'acov')
-        S = prior.acov;         
+        S = prior.acov;
     elseif strcmp(fields{i},'nu')
         nu = prior.nu;
     elseif strcmp(fields{i},'d0')
         d0 = prior.d0;
     elseif strcmp(fields{i},'rval')
-       rval = prior.rval; 
+       rval = prior.rval;
     elseif strcmp(fields{i},'lflag')
-       lflag = prior.lflag; 
+       lflag = prior.lflag;
     elseif strcmp(fields{i},'nflag')
         nflag = options.nflag;
     end;
  end;
- 
+
  % parse options
      if ~isstruct(options)
         error('mess_g3: must supply option values in a structure');
@@ -329,7 +329,7 @@ elseif nargin == 5   % we supply all defaults
 else
 error('Wrong # of arguments to mess_g3');
 end;
-      
+
 
 % error checking on prior information inputs
 [checkk,junk] = size(c);
@@ -367,7 +367,7 @@ end;
 
 switch xflag % switch on x transformation
 
-   
+
    case{0} % case where x variables are not transformed
 
 
@@ -404,7 +404,7 @@ end;
 
 % check for empty nnlist columns
 chk = find(nnlistall == 0);
-if length(chk) > 0; 
+if length(chk) > 0;
  if nflag == 1 % no saving the user here
  error('mess_g3: trying too many neighbors, some do not exist');
  else % we save the user here
@@ -437,11 +437,11 @@ Ymat(:,:,jj,kk) = Y;
 % save rho
 rmat(jj,1) = rho;
 
-end; % end of loop over alpha values 
+end; % end of loop over alpha values
 mmat(kk,1) = neigh;
 
-iter = iter + nrho; 
-waitbar(iter/ngrid);         
+iter = iter + nrho;
+waitbar(iter/ngrid);
 
 end; % end of loop over neighbors
 close(hwait);
@@ -469,11 +469,11 @@ sige = sig0;
           rtmp = zeros(nomit,1);
 
 hwait = waitbar(0,'MCMC sampling ...');
-t0 = clock;                  
+t0 = clock;
 iter = 1;
           while (iter <= ndraw); % start sampling;
 
-          
+
           % lookup Ymat based on alpha, rho, neigh values
           gsize = rmat(2,1) - rmat(1,1);
           i1 = find(rmat <= rho + gsize);
@@ -505,46 +505,46 @@ iter = 1;
           W = (1./[1 cumprod(1:nq1)]);
           Sy = Ycap*diag(W)*v;
 
-          % update beta   
+          % update beta
           AI = inv(x'*x + sige*TI);
           b = x'*Sy + sige*TIc;
           b0 = AI*b;
-          bhat = norm_rnd(sige*AI) + b0;  
-         
+          bhat = norm_rnd(sige*AI) + b0;
+
           % update sige
-          nu1 = n + 2*nu; 
+          nu1 = n + 2*nu;
           e = (Sy - x*bhat);
           d1 = 2*d0 + e'*e;
           chi = chis_rnd(1,nu1);
           sige = d1/chi;
-                       
+
           % metropolis step to get alpha update
           if pflag == 0
-          alphax = cn_mess3(alpha,y,x,Ymat,bhat,sige,rho,neigh,rmat,mmat); 
+          alphax = cn_mess3(alpha,y,x,Ymat,bhat,sige,rho,neigh,rmat,mmat);
           elseif pflag == 1
-          alphax = cn_mess3(alpha,y,x,Ymat,bhat,sige,rho,neigh,rmat,mmat,palpha,S); 
+          alphax = cn_mess3(alpha,y,x,Ymat,bhat,sige,rho,neigh,rmat,mmat,palpha,S);
           end;
-          
-          accept = 0; 
+
+          accept = 0;
           alpha2 = alpha + cc*randn(1,1);
-          while accept == 0 
+          while accept == 0
            if (alpha2 <= 0)
-           accept = 1;  
+           accept = 1;
            else
            alpha2 = alpha + cc*randn(1,1);
            cnta = cnta+1; % counts accept rate for alpha
-           end; 
-          end; 
+           end;
+          end;
           if pflag == 0
            alphay = cn_mess3(alpha2,y,x,Ymat,bhat,sige,rho,neigh,rmat,mmat);
           elseif pflag == 1
            alphay = cn_mess3(alpha2,y,x,Ymat,bhat,sige,rho,neigh,rmat,mmat,palpha,S);
           end;
-    
+
           ru = unif_rnd(1,0,1);
           if ((alphay - alphax) > exp(1)),
           p = 1;
-          else,          
+          else,
           ratio = exp(alphay-alphax);
           p = min(1,ratio);
           end;
@@ -555,14 +555,14 @@ iter = 1;
           rtmp(iter,1) = alpha;
 
           % update rho using metroplis-hastings step
-          rhox = rn_mess3(rho,y,x,Ymat,bhat,alpha,neigh,rmat,mmat); 
+          rhox = rn_mess3(rho,y,x,Ymat,bhat,alpha,neigh,rmat,mmat);
           rho2 = unif_rnd(1,rmin,rmax);
 
           rhoy = rn_mess3(rho2,y,x,Ymat,bhat,alpha,neigh,rmat,mmat);
            ru = unif_rnd(1,0,1);
           if ((rhoy - rhox) > exp(1)),
           p = 1;
-          else,          
+          else,
           ratio = exp(rhoy-rhox);
           p = min(1,ratio);
           end;
@@ -571,35 +571,35 @@ iter = 1;
               end;
 
           % update neigh using metroplis-hastings step
-          neighx = nn_mess3(neigh,y,x,Ymat,bhat,alpha,rho,rmat,mmat); 
+          neighx = nn_mess3(neigh,y,x,Ymat,bhat,alpha,rho,rmat,mmat);
           neigh2 = round(unif_rnd(1,mmin,mmax));
 
           neighy = nn_mess3(neigh2,y,x,Ymat,bhat,alpha,rho,rmat,mmat);
            ru = unif_rnd(1,0,1);
           if ((neighy - neighx) > exp(1)),
           p = 1;
-          else,          
+          else,
           ratio = exp(neighy-neighx);
           p = min(1,ratio);
           end;
               if (ru < p)
                  neigh = neigh2;
               end;
-	  
+
      % evaulate the likelihood using current draws
      if lflag == 0
                 like = -(n/2)*log(2*pi*sige) - (e'*e)/(2*sige);
      end;
-                       
+
      % update rval
-     if mm ~= 0           
-     rval = gamm_rnd(1,1,mm,kk);  
+     if mm ~= 0
+     rval = gamm_rnd(1,1,mm,kk);
      end;
-              
+
     if iter > nomit % if we are past burn-in, save the draws
     bsave(iter-nomit,:) = bhat';
     ssave(iter-nomit,1) = sige;
-    asave(iter-nomit,1) = alpha; 
+    asave(iter-nomit,1) = alpha;
     rsave(iter-nomit,1) = rho;
     msave(iter-nomit,1) = neigh;
      if lflag == 0
@@ -608,7 +608,7 @@ iter = 1;
        lsave = lsave + 0;
      end;
     end;
-                    
+
     if iter == nomit % update cc based on initial draws
          tst = 2*std(rtmp(1:nomit,1));
          if tst > 0.1
@@ -616,8 +616,8 @@ iter = 1;
          end;
     end;
 
-iter = iter + 1; 
-waitbar(iter/ndraw);         
+iter = iter + 1;
+waitbar(iter/ndraw);
 end; % end of sampling loop
 close(hwait);
 
@@ -626,7 +626,7 @@ stime = etime(clock,t0);
 % compute posterior means
 if lflag == 0
 lmean = lsave/(ndraw-nomit);
-else 
+else
    lmean = 0;
 end;
 amean = mean(asave);
@@ -726,7 +726,7 @@ results.xflag = xflag;
 results.nflag = nflag;
 
 case{1} % case of x-variables transformed
-   
+
    xone = x(:,1);
    if all(xone == 1)
       xsub = x(:,2:k);
@@ -763,7 +763,7 @@ end;
 
 % check for empty nnlist columns
 chk = find(nnlistall == 0);
-if length(chk) > 0; 
+if length(chk) > 0;
  if nflag == 1 % no saving the user here
  error('mess_g3: trying too many neighbors, some do not exist');
  else % we save the user here
@@ -805,10 +805,10 @@ Xmat(:,:,jj,kk) = xout;
 % save rho
 rmat(jj,1) = rho;
 
-end; % end of loop over alpha values 
+end; % end of loop over alpha values
 mmat(kk,1) = neigh;
-iter = iter + nrho; 
-waitbar(iter/ngrid);         
+iter = iter + nrho;
+waitbar(iter/ngrid);
 
 end; % end of loop over neighbors
 close(hwait);
@@ -818,7 +818,7 @@ gtime = etime(clock,t1);
 
 % ====== initializations
 % compute this stuff once to save time
-[junk kk] = size([x xsub]); % need to add diffuse priors 
+[junk kk] = size([x xsub]); % need to add diffuse priors
                           % to the spatial lags of x-variables
 Tnew = eye(kk)*1e+12;
 Tnew(1:k,1:k) = T;
@@ -828,7 +828,7 @@ tmp(1:k,1) = c;
 c = tmp;
 TIc = TI*c;
 cc=0.2; % initial metropolis value
-cntr = 0; 
+cntr = 0;
 iter = 1;
 alpha = astart;
 rho = 1;
@@ -845,7 +845,7 @@ sige = sig0;
           rtmp = zeros(nomit,1);
 
 hwait = waitbar(0,'MCMC sampling ...');
-t0 = clock;                  
+t0 = clock;
 iter = 1;
           while (iter <= ndraw); % start sampling;
 
@@ -881,14 +881,14 @@ iter = 1;
           W = (1./[1 cumprod(1:nq1)]);
           Sy = Ycap*diag(W)*v;
 
-          % update beta   
+          % update beta
           AI = inv(Xcap'*Xcap + sige*TI);
           b = Xcap'*Sy + sige*TIc;
           b0 = AI*b;
-          bhat = norm_rnd(sige*AI) + b0;  
-         
+          bhat = norm_rnd(sige*AI) + b0;
+
           % update sige
-          nu1 = n + 2*nu; 
+          nu1 = n + 2*nu;
           e = (Sy - Xcap*bhat);
           d1 = 2*d0 + e'*e;
           chi = chis_rnd(1,nu1);
@@ -896,20 +896,20 @@ iter = 1;
 
           % metropolis step to get alpha update
           if pflag == 0
-          alphax = cn_mess3(alpha,y,Xcap,Ymat,bhat,sige,rho,neigh,rmat,mmat); 
+          alphax = cn_mess3(alpha,y,Xcap,Ymat,bhat,sige,rho,neigh,rmat,mmat);
           elseif pflag == 1
-          alphax = cn_mess3(alpha,y,Xcap,Ymat,bhat,sige,rho,neigh,rmat,mmat,palpha,S); 
+          alphax = cn_mess3(alpha,y,Xcap,Ymat,bhat,sige,rho,neigh,rmat,mmat,palpha,S);
           end;
           accept = 0;
           alpha2 = alpha + cc*randn(1,1);
           while accept == 0
-           if (alpha2 <= 0) 
-           accept = 1;  
+           if (alpha2 <= 0)
+           accept = 1;
            else
            alpha2 = alpha + cc*randn(1,1);
            cntr = cntr+1; % counts accept rate
-           end; 
-          end; 
+           end;
+          end;
            if pflag == 0
            alphay = cn_mess3(alpha2,y,Xcap,Ymat,bhat,sige,rho,neigh,rmat,mmat);
            elseif pflag == 1
@@ -918,7 +918,7 @@ iter = 1;
           ru = unif_rnd(1,0,1);
           if ((alphay - alphax) > exp(1)),
           p = 1;
-          else,          
+          else,
           ratio = exp(alphay-alphax);
           p = min(1,ratio);
           end;
@@ -929,29 +929,29 @@ iter = 1;
           rtmp(iter,1) = alpha;
 
           % update rho using metroplis-hastings step
-          rhox = rn_mess3(rho,y,Xcap,Ymat,bhat,alpha,neigh,rmat,mmat); 
+          rhox = rn_mess3(rho,y,Xcap,Ymat,bhat,alpha,neigh,rmat,mmat);
           rho2 = unif_rnd(1,rmin,rmax);
           rhoy = rn_mess3(rho2,y,Xcap,Ymat,bhat,alpha,neigh,rmat,mmat);
            ru = unif_rnd(1,0,1);
           if ((rhoy - rhox) > exp(1)),
           p = 1;
-          else,          
+          else,
           ratio = exp(rhoy-rhox);
           p = min(1,ratio);
           end;
               if (ru < p)
                  rho = rho2;
               end;
-	  
+
           % update neigh using metroplis-hastings step
-          neighx = nn_mess3(neigh,y,Xcap,Ymat,bhat,alpha,rho,rmat,mmat); 
+          neighx = nn_mess3(neigh,y,Xcap,Ymat,bhat,alpha,rho,rmat,mmat);
           neigh2 = round(unif_rnd(1,mmin,mmax));
 
           neighy = nn_mess3(neigh2,y,Xcap,Ymat,bhat,alpha,rho,rmat,mmat);
            ru = unif_rnd(1,0,1);
           if ((neighy - neighx) > exp(1)),
           p = 1;
-          else,          
+          else,
           ratio = exp(neighy-neighx);
           p = min(1,ratio);
           end;
@@ -959,21 +959,21 @@ iter = 1;
                  neigh = neigh2;
               end;
 
-	  
+
      % evaulate the likelihood using current draws
      if lflag == 0
                 like = -(n/2)*log(2*pi*sige) - (e'*e)/(2*sige);
      end;
-                       
+
      % update rval
-     if mm ~= 0           
-     rval = gamm_rnd(1,1,mm,kk);  
+     if mm ~= 0
+     rval = gamm_rnd(1,1,mm,kk);
      end;
-              
+
     if iter > nomit % if we are past burn-in, save the draws
     bsave(iter-nomit,:) = bhat';
     ssave(iter-nomit,1) = sige;
-    asave(iter-nomit,1) = alpha; 
+    asave(iter-nomit,1) = alpha;
     rsave(iter-nomit,1) = rho;
     msave(iter-nomit,1) = neigh;
     if lflag == 0
@@ -981,8 +981,8 @@ iter = 1;
     else
        lsave = lsave + 0;
     end;
-    
-    
+
+
     end;
 
        if iter == nomit % update cc based on initial draws
@@ -991,10 +991,10 @@ iter = 1;
          cc = tst;
          end;
     end;
-                 
 
-iter = iter + 1; 
-waitbar(iter/ndraw);         
+
+iter = iter + 1;
+waitbar(iter/ndraw);
 end; % end of sampling loop
 close(hwait);
 
@@ -1003,7 +1003,7 @@ stime = etime(clock,t0);
 % compute posterior means
 if lflag == 0
 lmean = lsave/(ndraw-nomit);
-else 
+else
    lmean = 0;
 end;
 amean = mean(asave);
@@ -1106,19 +1106,19 @@ results.xflag = xflag;
 results.nflag = nflag;
 
 otherwise
-   
+
 end; % end of switch
 
 
 function cout = rn_mess3(rho,ys,xs,Ymat,beta,alpha,neigh,rmat,mmat);
-% PURPOSE: evaluate the conditional distribution of alpha 
+% PURPOSE: evaluate the conditional distribution of alpha
 %          for the Bayesian mess_g3 model
 % ---------------------------------------------------
 %  USAGE: cout = c_mess3(alpha,y,x,Symat,beta,alpha,rho,neigh,amat,rmat,mmat)
 %  where:  alpha  = matrix exponential alpha spatial parameter
 %            y    = dependent variable vector
 %            x    = explanatory variables matrix
-%          Symat  = matrix from mess_g3 
+%          Symat  = matrix from mess_g3
 %                   containing a mesh of Sy for alph,rho,m values
 %            beta = kx1 current bhat vector
 %            rho  = current rho value (for lookup)
@@ -1173,18 +1173,18 @@ W = (1./[1 cumprod(1:nq1)]);
 Sy = Ycap*diag(W)*v;
 e = Sy - xs*beta;
 epe = e'*e;
-cout = -(n/2)*log(epe); 
+cout = -(n/2)*log(epe);
 
 
 function cout = cn_mess3(alpha,ys,xs,Ymat,beta,sige,rho,neigh,rmat,mmat,a,B);
-% PURPOSE: evaluate the conditional distribution of alpha 
+% PURPOSE: evaluate the conditional distribution of alpha
 %          for the Bayesian mess_g3 model
 % ---------------------------------------------------
 %  USAGE: cout = c_mess3(alpha,y,x,Symat,beta,sige,rho,neigh,rmat,mmat,a,B)
 %  where:  alpha  = matrix exponential alpha spatial parameter
 %            y    = dependent variable vector
 %            x    = explanatory variables matrix
-%          Symat  = matrix from mess_g3 
+%          Symat  = matrix from mess_g3
 %                   containing a mesh of Sy for rho,m values
 %            beta = kx1 current bhat vector
 %            sige = 1x1 current sige value
@@ -1254,14 +1254,14 @@ end;
 
 
 function cout = nn_mess3(neigh,ys,xs,Ymat,beta,alpha,rho,rmat,mmat);
-% PURPOSE: evaluate the conditional distribution of alpha 
+% PURPOSE: evaluate the conditional distribution of alpha
 %          for the Bayesian mess_g2 model
 % ---------------------------------------------------
 %  USAGE: cout = c_mess3(alpha,y,x,Symat,beta,alpha,rho,neigh,amat,rmat,mmat)
 %  where:  alpha  = matrix exponential alpha spatial parameter
 %            y    = dependent variable vector
 %            x    = explanatory variables matrix
-%          Symat  = matrix from mess_g3 
+%          Symat  = matrix from mess_g3
 %                   containing a mesh of Sy for rho,m values
 %            beta = kx1 current bhat vector
 %            rho  = current rho value (for lookup)
@@ -1315,5 +1315,5 @@ W = (1./[1 cumprod(1:nq1)]);
 Sy = Ycap*diag(W)*v;
 e = Sy - xs*beta;
 epe = e'*e;
-cout = -(n/2)*log(epe); 
+cout = -(n/2)*log(epe);
 

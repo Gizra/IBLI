@@ -9,7 +9,7 @@ function  pdf = bino_pdf(k,n,p)
 %---------------------------------------------------
 % RETURNS:
 %        pdf = vector or scalar of cdf at x
-%              equal to the number of successes in n-trials 
+%              equal to the number of successes in n-trials
 % --------------------------------------------------
 % SEE ALSO: bino_d, bino_cdf, bino_rnd, bino_inv
 %---------------------------------------------------

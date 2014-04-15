@@ -9,13 +9,13 @@ function ylevf = bvarf(y,nlag,nfor,begf,tight,weight,decay,x,transf);
 %           begf = the beginning date of the forecast
 %          tight = Litterman's tightness hyperparameter
 %         weight = Litterman's symmetric weight (scalar)
-%          decay = Litterman's lag decay = lag^(-decay) 
+%          decay = Litterman's lag decay = lag^(-decay)
 %           x    = an optional matrix of deterministic variables
 %         transf = 0, no data transformation
 %                = 1, 1st differences used to estimate the model
 %                = freq, seasonal differences used to estimate
 %                = cal-structure growth rates used to estimate
-%                  e.g., cal(1982,1,12) [see cal() function]    
+%                  e.g., cal(1982,1,12) [see cal() function]
 %---------------------------------------------------------------
 % NOTE: - use bvarf(y,nlag,nfor,begf,tight,weight,decay,[],transf)
 %         for a transformation model with no x's (deterministic variables)
@@ -95,7 +95,7 @@ error('Negative lag decay in bvarf');
 end;
 
 [wchk1 wchk2] = size(weight);
-if (wchk1 ~= wchk2) 
+if (wchk1 ~= wchk2)
  error('non-square weight matrix in bvarf');
 elseif wchk1 > 1
  if wchk1 ~= neqs
@@ -208,7 +208,7 @@ end;
 
 end; % end of data transformation cases
 
-% do scaling here 
+% do scaling here
 % determine scale factors using univariate AR model
 % Doan uses the full vector whereas we truncate the
 % first lags, so we will get slightly difference estimates
@@ -243,11 +243,11 @@ bmat(:,j) = reslt.beta;
 
 end;
 
-% given bmat values generate future forecasts 
+% given bmat values generate future forecasts
 % These may be levels, 1st-differences, growth rates or seas diff's
 % we worry transforming back to levels later
-    
-% 1-step-ahead forecast 
+
+% 1-step-ahead forecast
 xtrunc = [dy(nmin-nlag:nmin,:)
           zeros(1,neqs)];
 xfor = mlag(xtrunc,nlag);
@@ -306,7 +306,7 @@ cnt = step-(nlag-1);
   xnew(i,:) = yfor(cnt,:);
   cnt = cnt+1;
  end;
- 
+
 xfor = mlag(xnew,nlag);
 [xend junk] = size(xfor);
 xobs = xfor(xend,:);
@@ -326,7 +326,7 @@ end;
 
 end;
 
-  
+
 % we now worry about transforming the forecasts back
 % to levels
 
@@ -338,7 +338,7 @@ ylevf = zeros(nfor,neqs);
 % 1-step-ahead forecast
 ylevf(1,:) = yfor(1,:) + y(begf-1,:); % add change to actual from time t;
 % 2-nfor-step-ahead forecasts
-for i=2:nfor % 
+for i=2:nfor %
 ylevf(i,:) = yfor(i,:) + ylevf(i-1,:);
 end;
 

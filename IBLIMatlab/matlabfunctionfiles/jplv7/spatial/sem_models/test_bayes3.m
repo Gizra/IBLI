@@ -1,18 +1,18 @@
 % PURPOSE: A comparison of Bayesian and ML estimates
-%          using a small dataset                 
+%          using a small dataset
 %---------------------------------------------------
 % USAGE: test_bayes
 %---------------------------------------------------
 
 clear all;
 
-load anselin.dat; 
+load anselin.dat;
 xc = anselin(:,4);
 yc = anselin(:,5);
 % crate standardized 1st-order spatial weight matrix
 [j1 W j2] = xy2cont(xc,yc);
 [n junk] = size(W);
-IN = eye(n); 
+IN = eye(n);
 sige = 0.25;
 k = 3;
 x = randn(n,k);
@@ -39,11 +39,11 @@ prior.lflag = 0; % full lndet calculation
 info.lflag = 0; % full lndet calculation
 
 results1 = sem_g(y,x,W,ndraw,nomit,prior);
-%prt(results1,vnames);  
+%prt(results1,vnames);
 results2 = sem(y,x,W,info);
-%prt(results2,vnames);  
+%prt(results2,vnames);
 results3 = sem_gmm(y,x,W);
-%prt(results3,vnames);  
+%prt(results3,vnames);
 
 
 betas = [results1.beta results2.beta results3.beta];

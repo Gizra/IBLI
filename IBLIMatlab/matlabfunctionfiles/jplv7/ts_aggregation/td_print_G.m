@@ -177,8 +177,8 @@ fprintf(fid,' ARIMA model for scaled indicator:\n ');
 fprintf(fid,'\n ');
 aux=[length(res.rexw.ar_reg)-1 res.rexw.d length(res.rexw.ma_reg)-1];
 fprintf(fid,'(%2d  %1d  %2d  ) ',aux );
-aux=[length(res.rexw.ar_sea)-1 res.rexw.bd length(res.rexw.ma_sea)-1]; 
-aux(1)=aux(1)/s; aux(3)=aux(3)/s; 
+aux=[length(res.rexw.ar_sea)-1 res.rexw.bd length(res.rexw.ma_sea)-1];
+aux(1)=aux(1)/s; aux(3)=aux(3)/s;
 fprintf(fid,'(%2d  %1d  %2d  )\n ',aux );
 fprintf(fid,'\n ');
 % Using mptint() of Econometrics Toolbox
@@ -197,7 +197,7 @@ fprintf(fid,'\n ');
 aux=[length(res.rexd.ar_reg)-1 res.rexd.d length(res.rexd.ma_reg)-1];
 fprintf(fid,'(%2d  %2d  %2d  ) ',aux );
 aux=[length(res.rexd.ar_sea)-1 res.rexd.bd length(res.rexd.ma_sea)-1];
-aux(1)=aux(1)/s; aux(3)=aux(3)/s; 
+aux(1)=aux(1)/s; aux(3)=aux(3)/s;
 fprintf(fid,'(%2d  %2d  %2d  )\n ',aux);
 fprintf(fid,'\n ');
 % Using mptint() of Econometrics Toolbox

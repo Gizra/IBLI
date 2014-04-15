@@ -1,7 +1,7 @@
 % PURPOSE: demo of inter_xls()
 %          Temporal disaggregation with indicators.
 %          Interface with Excel
-% 			  
+%
 %---------------------------------------------------
 % USAGE: inter_xls_d
 %---------------------------------------------------
@@ -34,7 +34,7 @@ d=1;
 
 flax1=2;
 
-% Output: flax2 = 
+% Output: flax2 =
 % 1 = only temporally disaggregated time series y: nx1
 % 2 = 1 + s.e. lower bound upper bounf limits residuals y: nx5
 % 3 = 2 + output in ASCII file (called file_name)

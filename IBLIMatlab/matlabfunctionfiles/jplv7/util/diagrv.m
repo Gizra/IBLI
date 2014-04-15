@@ -16,7 +16,7 @@ function y = diagrv(x,v)
 % 601 University Drive
 % San Marcos, TX 78666
 % jlesage@spatial-econometrics.com
-  
+
 [r,c] = size(x);
 if r ~= c;
   error('x matrix not square')

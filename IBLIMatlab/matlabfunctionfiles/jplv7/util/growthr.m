@@ -30,7 +30,7 @@ xlag = x(1:nobs-freq,:);
 [t1 t2] = find(xlag ~= 0);
 if length(unique(t1) == nobs) & length(unique(t2) == nvar)
  xchg = (xmat - xlag)./xlag;
-else  
+else
  [t1 t2] = find(xlag == 0);
  xlag(t1,t2) = 0.01;
 xchg = (xmat - xlag)./xlag;

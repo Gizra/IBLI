@@ -1,12 +1,12 @@
-% PURPOSE: An example of using sdmp_g() on a large data set   
-%          Gibbs sampling spatial durbin probit model                         
+% PURPOSE: An example of using sdmp_g() on a large data set
+%          Gibbs sampling spatial durbin probit model
 %---------------------------------------------------
 % USAGE: sdmp_gd2 (see sdmp_gd for a small data set)
 %---------------------------------------------------
 
 clear all;
 % NOTE a large data set with 3107 observations
-% from Pace and Barry, 
+% from Pace and Barry,
 load elect.dat;             % load data on votes
 latt = elect(:,5);
 long = elect(:,6);
@@ -28,7 +28,7 @@ ysave = y;
 y = (y > mean(y));
 
 % do Gibbs sampling estimation
-ndraw = 1200; 
+ndraw = 1200;
 nomit = 200;
 %prior.rval = 200;
 prior.novi = 1;

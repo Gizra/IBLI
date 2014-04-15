@@ -16,7 +16,7 @@ function pdf = beta_pdf(x, a, b)
 %       Copyright (c) Anders Holtsberg
 % documentation modified by LeSage to
 % match the format of the econometrics toolbox
-  
+
 
 if (nargin ~=3)
     error('Wrong # of arguments to beta_pdf');

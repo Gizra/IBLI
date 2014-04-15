@@ -30,7 +30,7 @@ prt_sp(results,vnames,1); % Elhorst
 % spatial fixed effects + spatial autocorrelation
 info.lflag=0;
 info.model=1;
-results=sem_panel(y,x,W,T,info); 
+results=sem_panel(y,x,W,T,info);
 vnames=strvcat('logcit','logp','logpn','logy');
 prt_sp(results,vnames,1);
 % ----------------------------------------------------------------------------------------

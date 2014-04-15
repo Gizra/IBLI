@@ -50,7 +50,7 @@ for i=1:numsims;
     k = 3;
     x = randn(n,k);
     x(:,1) = ones(n,1);
-    y = x*beta + (speye(n) - TrueLambda1*W1 - TrueLambda2*W2)\(randn(n,1)*sqrt(sige1)); 
+    y = x*beta + (speye(n) - TrueLambda1*W1 - TrueLambda2*W2)\(randn(n,1)*sqrt(sige1));
 
     %Call sem2_gmm
     test1=sem2_gmm(y,x,W1,W2);

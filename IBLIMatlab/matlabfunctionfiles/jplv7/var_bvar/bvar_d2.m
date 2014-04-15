@@ -1,6 +1,6 @@
-% PURPOSE: An example of using bvar(), 
-%          to estimate a vector autoregressive model                                                 
-%          (with Minnesota prior)                    
+% PURPOSE: An example of using bvar(),
+%          to estimate a vector autoregressive model
+%          (with Minnesota prior)
 %---------------------------------------------------
 % USAGE: bvar_d
 %---------------------------------------------------
@@ -12,7 +12,7 @@ load test.dat; % a test data set containing
 
 vnames = strvcat('il','in','ky','mi','oh','pa','tn','wv', ...
     'd1','d2','d3','d4','d5','d6','d7','d8','d9','d10','d11');
-     
+
 y = test;
 [nobs neqs] = size(y);
 

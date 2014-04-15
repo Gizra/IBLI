@@ -24,12 +24,12 @@ function results = lad(y,x,maxit,crit)
 %        results.conv  = convergence max(abs(bnew-bold))
 % --------------------------------------------------
 % NOTES: minimizes sum(abs(y - x*b)) using re-iterated weighted
-%        least-squares where the weights are the inverse of 
+%        least-squares where the weights are the inverse of
 %        the absolute values of the residuals
 % --------------------------------------------------
 % SEE ALSO: prt_reg(results), plt_reg(results)
 %---------------------------------------------------
-         
+
 % Author: Ron Schoenberg rons@u.washington.edu
 % Date: May 29, 1995
 % converted from Gauss code to MATLAB by:
@@ -59,8 +59,8 @@ end;
           b_new = invpd(w'*x)*(w'*y);
           resid = (abs(y-x*b_new));
           ind = find(resid < 0.00001);
-          resid(ind) = 0.00001;   
-          w = matdiv(x,resid);       
+          resid(ind) = 0.00001;
+          w = matdiv(x,resid);
           iter = iter+1;
           conv = max(abs(b_new-b_old));
           end;

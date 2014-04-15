@@ -1,8 +1,8 @@
 function results = bgwrv(y,x,east,north,ndraw,nomit,info);
 % PURPOSE: compute Bayesian robust geographically weighted regression
 %          Wi*y = Wi*X*bi + ei, ei is N(0,sigi*Vi)
-%          Vi = diag(v1i,v2i,...vni), 
-%          r/vi = ID chi(r)/r, r = Gamma(m,k) 
+%          Vi = diag(v1i,v2i,...vni),
+%          r/vi = ID chi(r)/r, r = Gamma(m,k)
 %----------------------------------------------------
 % USAGE: results = bgwrv(y,x,east,north,ndraw,nomit,info)
 % where:   y = dependent variable vector
@@ -13,20 +13,20 @@ function results = bgwrv(y,x,east,north,ndraw,nomit,info);
 %      nomit = # of initial draws omitted for burn-in
 %       info = a structure variable with fields:
 %       info.rval, r prior hyperparameter, default=4
-%       info.bwidth = scalar bandwidth to use or zero 
+%       info.bwidth = scalar bandwidth to use or zero
 %                     for cross-validation estimation (default)
 %       info.bmin   = minimum bandwidth to use in CV search
 %       info.bmax   = maximum bandwidth to use in CV search
-%                     defaults: bmin = 0.1, bmax = 20                         
+%                     defaults: bmin = 0.1, bmax = 20
 %       info.dtype  = 'gaussian'    for Gaussian weighting (default)
 %                   = 'exponential' for exponential weighting
 %                   = 'tricube'     for tri-cube weighting
 %       info.q      = q-nearest neighbors to use for tri-cube weights
-%                     (default: CV estimated)  
+%                     (default: CV estimated)
 %       info.qmin   = minimum # of neighbors to use in CV search
 %       info.qmax   = maximum # of neighbors to use in CV search
-%                     defaults: qmin = nvar+2, qmax = 5*nvar     
-% ---------------------------------------------------                                    
+%                     defaults: qmin = nvar+2, qmax = 5*nvar
+% ---------------------------------------------------
 %  NOTE: res = bgwrv(y,x,east,north) does CV estimation of bandwidth
 % ---------------------------------------------------
 % RETURNS: a results structure
@@ -37,7 +37,7 @@ function results = bgwrv(y,x,east,north,ndraw,nomit,info);
 %        results.nobs   = nobs
 %        results.nvar   = nvars
 %        results.ndraw  = ndraw
-%        results.nomit  = nomit        
+%        results.nomit  = nomit
 %        results.r      = rval (from input)
 %        results.bwidth = bandwidth if gaussian or exponential
 %        results.q      = q nearest neighbors if tri-cube
@@ -73,7 +73,7 @@ if nargin == 7 % user options
 
   for i=1:nf
     if strcmp(fields{i},'bwidth')
-        bwidth = info.bwidth; 
+        bwidth = info.bwidth;
     elseif strcmp(fields{i},'dtype')
         dstring = info.dtype;
        if strcmp(dstring,'gaussian')
@@ -90,12 +90,12 @@ if nargin == 7 % user options
     elseif strcmp(fields{i},'qmin');
         qmin = info.qmin;
     elseif strcmp(fields{i},'bmin');
-        bmin = info.bmin;   
+        bmin = info.bmin;
     elseif strcmp(fields{i},'bmax');
-        bmax = info.bmax;  
+        bmax = info.bmax;
     elseif strcmp(fields{i},'rval');
         rval = info.rval;
-    end; 
+    end;
   end; % end of for i
  end; % end of if else
 
@@ -138,7 +138,7 @@ results.bwidth = sqrt(bdwt);
 elseif dtype == 1 % exponential weights
 [bdwt,junk,exitflag,output] = fminbnd('scoref',bmin,bmax,options,y,x,east,north,dtype);
 results.bwidth = sqrt(bdwt);
-end;        
+end;
  if output.iterations == 500
  fprintf(1,'bgwrv: cv convergence not obtained in %4d iterations',output.iterations);
  else
@@ -170,19 +170,19 @@ dmat = zeros(nobs,nobs);
         northi = north(j,1);
         dx = east - easti;
         dy = north - northi;
-        d = dx.*dx + dy.*dy;    
+        d = dx.*dx + dy.*dy;
         dmat(:,j) = d;
     end;
-    
+
 % generate distance decay matrix
-wt = zeros(nobs,nobs);  
+wt = zeros(nobs,nobs);
 if dtype == 1,     % exponential weights
-        wt = exp(-dmat/bdwt); 
-elseif dtype == 0, % gaussian weights  
+        wt = exp(-dmat/bdwt);
+elseif dtype == 0, % gaussian weights
         sd = std(sqrt(dmat));
         tmp = matdiv(sqrt(dmat),sd*bdwt);
         wt = stdn_pdf(tmp);
-elseif dtype == 2  
+elseif dtype == 2
 % case of tricube weights handled a bit differently
    % sort distance to find q nearest neighbors
  ds = sort(dmat); dmax = ds(q+1,:);
@@ -190,7 +190,7 @@ elseif dtype == 2
  nzip = find(dmat(:,j) <= dmax(1,j));
         wt(nzip,j) = (1-(dmat(nzip,j)/dmax(1,j)).^3).^3;
         end; % end of j-loop
-end;  % end of if-else  
+end;  % end of if-else
 
 wt = sqrt(wt);
 
@@ -201,11 +201,11 @@ vmean = ones(nobs,nobs);
 prior.rval = rval;
 
 hwait = waitbar(0,'Gibbs sampling ...');
-t0 = clock; 
+t0 = clock;
 for i=1:nobs
  nzip = find(wt(:,i) > 0.01);
  ys = y(nzip,1).*wt(nzip,i); xs = matmul(x(nzip,:),wt(nzip,i));
- res = gwr_g(ys,xs,ndraw,nomit,prior);  
+ res = gwr_g(ys,xs,ndraw,nomit,prior);
  bsave(:,i,:) = res.bdraw;
  vmean(i,nzip) = vmean(i,nzip) + res.vmean';
  smean(i,1) = mean(res.sdraw);
@@ -215,7 +215,7 @@ close(hwait);
 
 gtime = etime(clock,t0);
 
-vout = mean(vmean); 
+vout = mean(vmean);
 
 results.bdraw = bsave;
 results.meth = 'bgwrv';

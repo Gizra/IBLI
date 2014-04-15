@@ -21,7 +21,7 @@ y = x*beta + evec;
 
 
 % do ols regression
-result = ols(y,x); 
+result = ols(y,x);
 % print the output
 prt_reg(result);
 

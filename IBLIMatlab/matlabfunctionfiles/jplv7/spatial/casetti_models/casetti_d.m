@@ -1,6 +1,6 @@
 % PURPOSE: An example of using casetti
 %          Casetti's spatial expansion model
-%                              
+%
 %---------------------------------------------------
 % USAGE: casetti_d
 %---------------------------------------------------

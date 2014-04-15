@@ -3,7 +3,7 @@ function W = make_neighborsw(xc,yc,m)
 %          asymmetric, but row-sums are unity, based on m neighbors
 % --------------------------------------------------------
 % USAGE: W = make_neighborsw(xc,yc,nn)
-%       where: 
+%       where:
 %             xc = x-coordinate for each obs (nobs x 1)
 %             yc = y-coordinate for each obs (nobs x 1)
 %             nn = # of nearest neighbors to be used
@@ -11,7 +11,7 @@ function W = make_neighborsw(xc,yc,m)
 % RETURNS: W an (nobs x nobs) spatial weight matrix based on nn
 %          nearest neighbors (a sparse matrix)
 % --------------------------------------------------------
-% NOTES: 
+% NOTES:
 %        W takes a form such that: W*y would produce a vector
 %        consisting of the values of y for the nn nearest neighbors
 %        for each observation i in the (nobs x 1) vector y
@@ -35,7 +35,7 @@ function W = make_neighborsw(xc,yc,m)
 
 
 if nargin == 3
-[n junk] = size(xc);    
+[n junk] = size(xc);
 else,
 error('make_neighborsw: Wrong # of input arguments');
 end;

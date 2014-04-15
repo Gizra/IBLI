@@ -1,6 +1,6 @@
 function results = sem_c(y,x,W,prior)
 % PURPOSE: Bayesian log-marginal posterior for the spatial error model
-%          y = XB + u, 
+%          y = XB + u,
 %          u = rho*W*u + e, e = N(0,sige*In)
 %          B = N[0,inv(g*X'X)], Zellner's g-prior
 %          1/sige = Gamma(nu,d0)
@@ -18,12 +18,12 @@ function results = sem_c(y,x,W,prior)
 %            prior.a1    = parameter for beta(a1,a2) prior on rho (default = 1.01)
 %            prior.a2    = (default = 1.01) see: 'help beta_prior'
 %            prior.rmin  = (optional) min rho used in sampling (default = -1)
-%            prior.rmax  = (optional) max rho used in sampling (default = 1)  
+%            prior.rmax  = (optional) max rho used in sampling (default = 1)
 %            prior.lflag = 0 for full lndet computation (default = 1, fastest)
 %                        = 1 for MC approx (fast for large problems)
 %                        = 2 for Spline approx (medium speed)
 %            prior.order = order to use with prior.lflag = 1 option (default = 50)
-%            prior.iter  = iters to use with prior.lflag = 1 option (default = 30) 
+%            prior.iter  = iters to use with prior.lflag = 1 option (default = 30)
 %            prior.lndet = a matrix returned by sar, sar_g, sarp_g, etc.
 %                          containing log-determinant information to save time
 %-------------------------------------------------------------
@@ -38,13 +38,13 @@ function results = sem_c(y,x,W,prior)
 %          results.a2     = a2 parameter for beta prior on rho from input, or default value
 %          results.time1  = time for log determinant calcluation
 %          results.time2  = time for log-marginal posterior calculation
-%          results.time   = total time taken  
+%          results.time   = total time taken
 %          results.rmax   = rmax from input
-%          results.rmin   = rmin from input         
+%          results.rmin   = rmin from input
 %          results.lflag  = lflag from input
 %          results.iter   = prior.iter option from input
 %          results.order  = prior.order option from input
-%          results.limit  = matrix of [rho lower95,logdet approx, upper95] 
+%          results.limit  = matrix of [rho lower95,logdet approx, upper95]
 %                           intervals for the case of lflag = 1
 %          results.lndet = a matrix containing log-determinant information
 %                          (for use in later function calls to save time)
@@ -54,19 +54,19 @@ function results = sem_c(y,x,W,prior)
 % NOTES: - returns only the log-marginal posterior for model comparison purposes
 %          NO ESTIMATES returned
 % - use a1 = 1.0 and a2 = 1.0 for uniform prior on rho
-% - results.mlike can be used for model comparison 
+% - results.mlike can be used for model comparison
 %   using model_probs() function (see model_compare.m for a demonstration)
 % --------------------------------------------------------------
 % SEE ALSO: sem_g, for estimation of the model parameters
 % --------------------------------------------------------------
 % REFERENCES: James P. LeSage, `Bayesian Estimation of Spatial Autoregressive
-%             Models',  International Regional Science Review, 1997 
+%             Models',  International Regional Science Review, 1997
 %             Volume 20, number 1\&2, pp. 113-129.
-% For lndet information see: Ronald Barry and R. Kelley Pace, 
-% "A Monte Carlo Estimator of the Log Determinant of Large Sparse Matrices", 
+% For lndet information see: Ronald Barry and R. Kelley Pace,
+% "A Monte Carlo Estimator of the Log Determinant of Large Sparse Matrices",
 % Linear Algebra and its Applications", Volume 289, Number 1-3, 1999, pp. 41-54.
-% and: R. Kelley Pace and Ronald P. Barry 
-% "Simulating Mixed Regressive Spatially autoregressive Estimators", 
+% and: R. Kelley Pace and Ronald P. Barry
+% "Simulating Mixed Regressive Spatially autoregressive Estimators",
 % Computational Statistics, 1998, Vol. 13, pp. 397-418.
 %----------------------------------------------------------------
 
@@ -104,7 +104,7 @@ nobsa = n;
 
 results.nobs  = n;
 results.nvar  = k;
-results.y = y;      
+results.y = y;
 
 if n1 ~= n
 error('sem_c: x-matrix contains wrong # of observations');
@@ -197,7 +197,7 @@ function [nu,d0,rho,sige,rmin,rmax,detval,ldetflag,order,iter,a1,a2,g] = sem_par
 % ---------------------------------------------------
 %  USAGE: [nu,d0,rho,sige,rmin,rmax,detval, ...
 %         ldetflag,order,iter,a1,a2,g] = sem_parse(prior,k)
-% where info contains the structure variable with inputs 
+% where info contains the structure variable with inputs
 % and the outputs are either user-inputs or default values
 % ---------------------------------------------------
 
@@ -227,13 +227,13 @@ if nf > 0
     if strcmp(fields{i},'nu')
         nu = prior.nu;
     elseif strcmp(fields{i},'d0')
-        d0 = prior.d0;  
+        d0 = prior.d0;
     elseif strcmp(fields{i},'a1')
-       a1 = prior.a1; 
+       a1 = prior.a1;
     elseif strcmp(fields{i},'a2')
-       a2 = prior.a2; 
+       a2 = prior.a2;
     elseif strcmp(fields{i},'g')
-       g = prior.g; 
+       g = prior.g;
     elseif strcmp(fields{i},'rmin')
         rmin = prior.rmin; eflag = 0;
     elseif strcmp(fields{i},'rmax')
@@ -248,25 +248,25 @@ if nf > 0
     elseif strcmp(fields{i},'lflag')
         tst = prior.lflag;
         if tst == 0,
-        ldetflag = 0; 
+        ldetflag = 0;
         elseif tst == 1,
-        ldetflag = 1; 
+        ldetflag = 1;
         elseif tst == 2,
-        ldetflag = 2; 
+        ldetflag = 2;
         else
         error('sem_c: unrecognizable lflag value on input');
         end;
     elseif strcmp(fields{i},'order')
-        order = prior.order;  
+        order = prior.order;
     elseif strcmp(fields{i},'iter')
-        iter = prior.iter; 
+        iter = prior.iter;
     end;
  end;
 
- 
+
 else, % the user has input a blank info structure
       % so we use the defaults
-end; 
+end;
 
 
 function [detval,time1] = sar_lndet(ldetflag,W,rmin,rmax,detval,order,iter);
@@ -274,23 +274,23 @@ function [detval,time1] = sar_lndet(ldetflag,W,rmin,rmax,detval,order,iter);
 % using the user-selected (or default) method
 % ---------------------------------------------------
 %  USAGE: detval = far_lndet(lflag,W,rmin,rmax)
-% where eflag,rmin,rmax,W contains input flags 
+% where eflag,rmin,rmax,W contains input flags
 % and the outputs are either user-inputs or default values
 % ---------------------------------------------------
 
 
 % do lndet approximation calculations if needed
 if ldetflag == 0 % no approximation
-t0 = clock;    
+t0 = clock;
 out = lndetfull(W,rmin,rmax);
 time1 = etime(clock,t0);
 tt=rmin:.001:rmax; % interpolate a finer grid
 outi = interp1(out.rho,out.lndet,tt','spline');
 detval = [tt' outi];
-    
+
 elseif ldetflag == 1 % use Pace and Barry, 1999 MC approximation
 
-t0 = clock;    
+t0 = clock;
 out = lndetmc(order,iter,W,rmin,rmax);
 time1 = etime(clock,t0);
 results.limit = [out.rho out.lo95 out.lndet out.up95];
@@ -318,7 +318,7 @@ elseif ldetflag == -1 % the user fed down a detval matrix
             error('sem_c: wrong sized lndet input argument');
         elseif n1 == 1
             error('sem_c: wrong sized lndet input argument');
-        end;          
+        end;
 end;
 
 function  out = sar_marginal(detval,epe0,eped,epe0d,nobs,nvar,a1,a2,g,Qvec)
@@ -340,7 +340,7 @@ function  out = sar_marginal(detval,epe0,eped,epe0d,nobs,nvar,a1,a2,g,Qvec)
 %              Qvec = vectorized (g/(1+g))*(yhat'*yhat), over all rho-values
 %                     ybar = mean(y) - detval(i,1)*mean(Wy);
 %                     yhat = y - detval(i,1)*Wy - ybar*iota;
-%                     
+%
 % -------------------------------------------------------------------------
 % RETURNS: out = a structure variable
 %        out = log marginal, a vector the length of detval

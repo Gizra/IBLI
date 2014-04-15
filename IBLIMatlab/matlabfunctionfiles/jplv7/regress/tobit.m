@@ -44,7 +44,7 @@ function results = tobit(y,x,info)
 
 % default options
 in.btol = 1e-6;
-in.ftol = 1e-7; 
+in.ftol = 1e-7;
 in.maxit = 1000;
 in.hess = 'bfgs';
 in.call = 'other';
@@ -60,10 +60,10 @@ tflag = 0;
 vflag = 0;
 % parse options
 fields = fieldnames(info);
-nf = length(fields); 
+nf = length(fields);
   for i=1:nf
     if strcmp(fields{i},'maxit')
-        in.maxit = info.maxit; 
+        in.maxit = info.maxit;
     elseif strcmp(fields{i},'btol')
         in.btol = info.btol;
     elseif strcmp(fields{i},'ftol')
@@ -79,11 +79,11 @@ nf = length(fields);
        tflag = 1;
       end;
       elseif strcmp(fields{i},'limit');
-        vflag = info.limit;      
+        vflag = info.limit;
     end;
   end;
 
-elseif nargin == 2 
+elseif nargin == 2
 sflag = 0; % use default options
 in.call = 'other';
 tflag = 0;
@@ -102,7 +102,7 @@ else
    results.nobsc = length(find(y <= vflag));
 end;
 
-   
+
 if sflag == 0
 % use ols starting values
 res = ols(y,x);
@@ -111,21 +111,21 @@ sige = res.sige;
 baug = [b
        sige];
     end;
- 
+
 % maximize the likelihood function
 if tflag == 0 % case of left-truncation
  oresult = maxlik('to_llike',baug,in,y,x,vflag);
 elseif tflag == 1
  oresult = maxlik('to_rlike',baug,in,y,x,vflag);
-end; 
+end;
 
 iter = oresult.iter;
 llf = -oresult.f;
 vcov = inv(oresult.hess);
-grad = oresult.g; 
+grad = oresult.g;
 time = oresult.time;
 beta = oresult.b;
- 
+
 if iter == in.maxit
 fail = 1;
 else

@@ -7,7 +7,7 @@ function prt_gwr(results,vnames,fid)
 %        vnames  = an optional vector of variable names
 %        fid     = file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
-%---------------------------------------------------               
+%---------------------------------------------------
 %                 e.g. vnames = ['y    ',
 %                                'x1   ',  NOTE: fixed width
 %                                'x2   ',        like all MATLAB
@@ -18,7 +18,7 @@ function prt_gwr(results,vnames,fid)
 %        nothing, just prints the regression results
 % --------------------------------------------------
 % SEE ALSO: gwr_reg()
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by: James P. LeSage 2/98
 % Texas State University-San Marcos
@@ -36,8 +36,8 @@ if nargin == 3; nflag = 1;          end;
 
 nobs = results.nobs;
 nvar = results.nvar;
- 
-%  make up some variable names 
+
+%  make up some variable names
 Vname = 'Variable';
 for i=1:nvar
     tmp = ['variable  ',num2str(i)];
@@ -202,7 +202,7 @@ case {'bgwr'} % <=================== bgwr regression
 
 nobs = results.nobs;
 nvar = results.nvar;
-  
+
 % find posterior means
 tmp1 = mean(results.bdraw);
 bout = squeeze(tmp1);
@@ -212,7 +212,7 @@ yhat = zeros(nobs,1);
 for i=1:nobs;
 yhat(i,1) =  results.x(i,:)*bout(i,:)';
 end;
-e = y - yhat; 
+e = y - yhat;
 tmp1 = std(results.bdraw);
 bstd = squeeze(tmp1);
 results.tstat = bout./bstd; % trick for printing below
@@ -281,7 +281,7 @@ case {'bgwrv'} % <=================== bgwrv regression
 
 nobs = results.nobs;
 nvar = results.nvar;
-  
+
 % find posterior means
 tmp1 = mean(results.bdraw);
 bout = squeeze(tmp1);
@@ -291,7 +291,7 @@ yhat = zeros(nobs,1);
 for i=1:nobs;
 yhat(i,1) =  results.x(i,:)*bout(i,:)';
 end;
-e = y - yhat; 
+e = y - yhat;
 tmp1 = std(results.bdraw);
 bstd = squeeze(tmp1);
 results.tstat = bout./bstd; % trick for printing below

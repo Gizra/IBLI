@@ -1,6 +1,6 @@
 % PURPOSE: An example of using walds()
 %          test for spatial autocorrelation
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
 % USAGE: walds_d
 %---------------------------------------------------

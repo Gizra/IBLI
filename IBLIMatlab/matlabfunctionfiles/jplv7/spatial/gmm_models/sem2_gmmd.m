@@ -1,21 +1,21 @@
 % PURPOSE: An example of using sem2_gmm
 % GM estimation of spatial error model
-% with 2 spatial weight matrices (on a small data set)  
-%                                   
+% with 2 spatial weight matrices (on a small data set)
+%
 %---------------------------------------------------
 % USAGE: sem2_gmmd (see also sem_gmmd2 for a large data set)
 %---------------------------------------------------
 
 clear all;
 % W-matrix from Anselin's neigbhorhood crime data set
-load anselin.dat; 
+load anselin.dat;
 xc = anselin(:,4);
 yc = anselin(:,5);
 % crate standardized 1st-order spatial weight matrix
 [j1 W j2] = xy2cont(xc,yc);
 M = make_neighborsw(xc,yc,1);
 [n junk] = size(W);
-IN = eye(n); 
+IN = eye(n);
 rho1 = 0.6;  % true value of rho1
 rho2 = 0.3;  % true value for rho2
 sige = 0.5;

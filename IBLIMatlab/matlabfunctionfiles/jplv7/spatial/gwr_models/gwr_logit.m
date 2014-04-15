@@ -7,12 +7,12 @@ function result = gwr_logit(y,x,east,north,info);
 %       east = x-coordinates in space
 %      north = y-coordinates in space
 %       info = a structure variable with fields:
-%       info.bwidth = scalar bandwidth to use 
-%                     (default = cross-validation estimate)  
+%       info.bwidth = scalar bandwidth to use
+%                     (default = cross-validation estimate)
 %       info.bmin   = minimum bandwidth to use in CV search
 %       info.bmax   = maximum bandwidth to use in CV search
-%                       defaults: bmin = 0.1, bmax = 20                                              
-% ---------------------------------------------------                                    
+%                       defaults: bmin = 0.1, bmax = 20
+% ---------------------------------------------------
 %  NOTES: res = gwr_logit(y,x,east,north) does CV estimation of bandwidth
 %         Uses Gaussian weighting, and scoref_log for CV
 % ---------------------------------------------------
@@ -37,7 +37,7 @@ function result = gwr_logit(y,x,east,north,info);
 % See also: prt, plt, prt_gwr, plt_gwr to print and plot results
 %---------------------------------------------------
 % References: McMillen and McDonald
-% 
+%
 %---------------------------------------------------
 
 % written by: James P. LeSage 2/98
@@ -53,16 +53,16 @@ if nargin == 5 % user options
  fields = fieldnames(info);
  nf = length(fields);
  % set defaults
- [n k] = size(x); 
+ [n k] = size(x);
  bwidth = 0; bmin = 0.1; bmax = 20;
   for i=1:nf
     if strcmp(fields{i},'bwidth')
-        bwidth = info.bwidth; 
+        bwidth = info.bwidth;
     elseif strcmp(fields{i},'bmin');
-        bmin = prior.bmin;   
+        bmin = prior.bmin;
     elseif strcmp(fields{i},'bmax');
-        bmax = prior.bmax; 
-    end; 
+        bmax = prior.bmax;
+    end;
   end; % end of for i
  end; % end of if else
 
@@ -94,7 +94,7 @@ end;
 if bwidth == 0 % cross-validation
 options = optimset('fminbnd');
 optimset('MaxIter',500);
-[bdwt,junk,exitflag,output] = fminbnd('scoref_log',0.1,10,options,y,x,east,north);       
+[bdwt,junk,exitflag,output] = fminbnd('scoref_log',0.1,10,options,y,x,east,north);
  if output.iterations == 500,
  fprintf(1,'gwr_log: cv convergence not obtained in %4d iterations',output.iterations);
  else
@@ -120,10 +120,10 @@ for iter=1:n;
     dx = east - east(iter,1);
     dy = north - north(iter,1);
     d = (dx.*dx + dy.*dy);
-    % Gausian weights 
-    sd = std(sqrt(d)); 
-    wt = stdn_pdf(sqrt(d)/(sd*bdwt));  
-wt = sqrt(wt);     
+    % Gausian weights
+    sd = std(sqrt(d));
+    wt = stdn_pdf(sqrt(d)/(sd*bdwt));
+wt = sqrt(wt);
 xs = matmul(wt,x);
 res = logit(y,xs);
 bsave(iter,:) = res.beta';

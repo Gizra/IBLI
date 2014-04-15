@@ -1,4 +1,4 @@
-% PURPOSE: An example of using cal()                               
+% PURPOSE: An example of using cal()
 %          to associated time-series dates
 %          with observation #'s
 %---------------------------------------------------

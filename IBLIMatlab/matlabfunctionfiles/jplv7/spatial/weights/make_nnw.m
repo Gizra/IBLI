@@ -1,24 +1,24 @@
 function W = make_nnw(xc,yc,m,order)
-% PURPOSE: finds the n nearest neighbors and constructs a spatial weight matrix 
+% PURPOSE: finds the n nearest neighbors and constructs a spatial weight matrix
 %          based on this # of neighbors, normalized to have row-sums of unity
 % --------------------------------------------------------
 % USAGE: W = make_nnw(xc,yc,nn)
-%       where: 
+%       where:
 %             xc = x-coordinate for each obs (nobs x 1)
 %             yc = y-coordinate for each obs (nobs x 1)
 %             nn = nth nearest neighbor to be used
 %          order = 1, 2, 3, or 4. (default = 2)
 %                  This limits the extent to search for neighbors to the sum of the delaunay orders
 %                  e.g., delorder=2 limits the search to the delaunay neighbors and the neighbors of neighbors
-%                  Lower values of delorder speed computation and reduce memory. 
+%                  Lower values of delorder speed computation and reduce memory.
 % --------------------------------------------------------
 % RETURNS: W = (nobs x nobs) spatial weight matrix based on the nn
 %          nearest neighbors (a sparse matrix), row-sums of unity
 % --------------------------------------------------------
-% NOTES: This function embodies fneighbors2 
+% NOTES: This function embodies fneighbors2
 %        from Spatial Statistics Toolbox by R. Kelley Pace
 % --------------------------------------------------------
-% SEE ALSO: find_nn(), make_xyw() 
+% SEE ALSO: find_nn(), make_xyw()
 % --------------------------------------------------------
 
 % written by:

@@ -1,5 +1,5 @@
 function lik = f_sempanel(rho,eD,W,detval,T)
-% PURPOSE: evaluates concentrated log-likelihood for the 
+% PURPOSE: evaluates concentrated log-likelihood for the
 %  spatial panel error model using sparse matrix algorithms
 % ---------------------------------------------------
 %  USAGE:llike = f_sem(rho,eD,W,detm,T)
@@ -7,7 +7,7 @@ function lik = f_sempanel(rho,eD,W,detval,T)
 %         eD   = begls residuals
 %         W    = spatial weight matrix
 %         detm =  matrix with [rho log determinant] values
-%                computed in sem_panel.m using one of 
+%                computed in sem_panel.m using one of
 %                Kelley Pace's routines
 %         T    = number of time points
 % ---------------------------------------------------
@@ -25,7 +25,7 @@ function lik = f_sempanel(rho,eD,W,detval,T)
 % "Specification and Estimation of Spatial Panel Data Models",
 % International Regional Science Review, Vol. 26, pp. 244-268.
 
-n = length(W); 
+n = length(W);
 gsize = detval(2,1) - detval(1,1);
 i1 = find(detval(:,1) <= rho + gsize);
 i2 = find(detval(:,1) <= rho - gsize);

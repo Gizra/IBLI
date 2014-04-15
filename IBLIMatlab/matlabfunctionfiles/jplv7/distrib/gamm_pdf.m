@@ -2,11 +2,11 @@ function f = gamm_pdf (x, a)
 % PURPOSE: returns the pdf at x of the gamma(a) distribution
 %---------------------------------------------------
 % USAGE: pdf = gamm_pdf(x,a)
-% where: x = a vector  
+% where: x = a vector
 %        a = a scalar for gamma(a)
 %---------------------------------------------------
 % RETURNS:
-%        a vector of pdf at each element of x of the gamma(a) distribution      
+%        a vector of pdf at each element of x of the gamma(a) distribution
 % --------------------------------------------------
 % SEE ALSO: gamm_cdf, gamm_rnd, gamm_inv
 %---------------------------------------------------

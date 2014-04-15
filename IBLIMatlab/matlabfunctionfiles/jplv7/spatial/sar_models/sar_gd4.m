@@ -1,5 +1,5 @@
 % PURPOSE: An example of using priors with sar_g() Gibbs sampling
-%          spatial autoregressive model (on a small data set)                  
+%          spatial autoregressive model (on a small data set)
 %---------------------------------------------------
 % USAGE: sar_gd4 (see also sar_gd2 for a large data set)
 %---------------------------------------------------
@@ -12,7 +12,7 @@ latt = anselin(:,4);
 long = anselin(:,5);
 [junk W junk] = xy2cont(latt,long);
 [n junk] = size(W);
-IN = eye(n); 
+IN = eye(n);
 rho = 0.7;  % true value of rho
 sige = 0.5;
 k = 3;
@@ -23,7 +23,7 @@ beta(1,1) = 1.0;
 beta(2,1) = 1.0;
 beta(3,1) = 1.0;
 
-y = (IN-rho*W)\(x*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige)); 
+y = (IN-rho*W)\(x*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige));
 
 info.lflag = 0; % don't use Pace-Barry lndet approximation
 disp('maximum likelihood estimates');
@@ -43,7 +43,7 @@ disp('Bayesian tight prior estimates');
 prt(results);
 
 prior2.lflag = 0; % don't use Pace-Barry lndet approximation
-prior2.novi = 1; % homoscedastic model 
+prior2.novi = 1; % homoscedastic model
 prior2.beta = zeros(k,1);  % prior mean of 0
 prior2.bcov = eye(k)*0.5;    % imposed with medium tightness
 
@@ -59,7 +59,7 @@ out = [beta result0.beta b1mean b2mean
        sige result0.sige results.sige results2.sige
        rho result0.rho  results.rho results2.rho
        0 result0.rsqr results.rsqr results2.rsqr];
-   
+
 in.cnames = strvcat('True Values','Max Lik','Bayes tight','Bayes medium');
 in.rnames = strvcat('Parameters','beta0','beta1','beta2','sigma2','rho','r-squared');
 

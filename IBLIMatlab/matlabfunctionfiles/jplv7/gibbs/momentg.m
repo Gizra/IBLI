@@ -1,5 +1,5 @@
 function results = momentg(draws)
-% PURPOSE: computes Gewke's convergence diagnostics NSE and RNE 
+% PURPOSE: computes Gewke's convergence diagnostics NSE and RNE
 %          (numerical std error and relative numerical efficiencies)
 % -----------------------------------------------------------------
 % USAGE: result = momentg(draws)
@@ -27,7 +27,7 @@ function results = momentg(draws)
 % J.M. Bernardo, A.P. Dawid, and A.F.M. Smith (eds.) Proceedings of
 % the Fourth Valencia International Meeting on Bayesian Statistics,
 % pp. 169-194, Oxford University Press
-% Also: `Using simulation methods for Bayesian econometric models: 
+% Also: `Using simulation methods for Bayesian econometric models:
 % Inference, development and communication', at: www.econ.umn.edu/~bacc
 % -----------------------------------------------------------------
 
@@ -37,7 +37,7 @@ function results = momentg(draws)
 % 601 University Drive
 % San Marcos, TX 78666
 % jlesage@spatial-econometrics.com
- 
+
 % NOTE: this code draws heavily on MATLAB programs written by
 % Siddartha Chib available at: www.econ.umn.edu/~bacc
 % I have repackaged it to make it easier to use.
@@ -91,7 +91,7 @@ tvar=tvar+gvar;
 
 cn(ig)=gn/ns;
 cd(ig)=gd/ns;
-cdn(ig)=gdn/ns; 
+cdn(ig)=gdn/ns;
 cdd(ig)=gdd/ns;
 cnn(ig)=gnn/ns;
 cvar(ig)=gvar/ns;
@@ -99,7 +99,7 @@ end; %for ig
 
 eg = tn/td;
 varg = tvar/td - eg^2;
-sdg = -1; 
+sdg = -1;
 if (varg>0); sdg=sqrt(varg); end;
 % save posterior means and std deviations to results structure
 results(jf).pmean = eg;
@@ -107,7 +107,7 @@ results(jf).pstd = sdg;
 
 % numerical standard error assuming no serial correlation
      varnum=(tnn-2*eg*tdn+tdd*eg^2)/(td^2);
-     sdnum=-1; if (varnum>0); sdnum=sqrt(varnum); end; 
+     sdnum=-1; if (varnum>0); sdnum=sqrt(varnum); end;
 % save to results structure
 results(jf).nse = sdnum;
 results(jf).rne = varg/(nuse*varnum);
@@ -143,10 +143,10 @@ results(jf).rne = varg/(nuse*varnum);
            att=1-lag/am;
            snn=snn+2*att*rnn(lag+1);
            sdd=sdd+2*att*rdd(lag+1);
-           snd=snd+att*(rnd(lag+1) + rnd(lag+1)); 
+           snd=snd+att*(rnd(lag+1) + rnd(lag+1));
         end; %lag
         varnum=ns*nuse*(snn-2*eg*snd+sdd*eg^2)/(td^2);
-        sdnum=-1; 
+        sdnum=-1;
         if (varnum>0); sdnum=sqrt(varnum); end;
 
      % save results in structure

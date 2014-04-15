@@ -1,6 +1,6 @@
 % PURPOSE: An example of using mprint3
 %          printing of (beta, tstat, prob) matrices
-%                                                           
+%
 %---------------------------------------------------
 % USAGE: mprint3_d
 %---------------------------------------------------

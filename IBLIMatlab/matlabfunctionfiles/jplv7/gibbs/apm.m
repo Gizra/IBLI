@@ -6,7 +6,7 @@ function result = apm(results1,results2)
 %        results2 = a structure returned by momentg
 % ------------------------------------------------
 % RETURNS: a structure:
-%             results.meth  = 'apm'  
+%             results.meth  = 'apm'
 %             results.ndraw = ndraw1+ndraw2
 %             results.nvar  = # of variables
 %             results.p1    = ndraw1/(ndraw1+ndraw2)
@@ -25,7 +25,7 @@ function result = apm(results1,results2)
 % J.M. Bernardo, A.P. Dawid, and A.F.M. Smith (eds.) Proceedings of
 % the Fourth Valencia International Meeting on Bayesian Statistics,
 % pp. 169-194, Oxford University Press
-% Also: `Using simulation methods for Bayesian econometric models: 
+% Also: `Using simulation methods for Bayesian econometric models:
 % Inference, development and communication', at: www.econ.umn.edu/~bacc
 % -----------------------------------------------------------------
 
@@ -35,7 +35,7 @@ function result = apm(results1,results2)
 % 601 University Drive
 % San Marcos, TX 78666
 % jlesage@spatial-econometrics.com
- 
+
 % NOTE: this code draws heavily on MATLAB programs written by
 % Siddartha Chib available at: www.econ.umn.edu/~bacc
 % I have repackaged it to make it easier to use.
@@ -48,7 +48,7 @@ end;
 
 nvar  = results1(1).nvar;
 nvar2 = results2(1).nvar;
-if nvar ~= nvar2; 
+if nvar ~= nvar2;
 error('apm: structure arguments have different # of variables');
 end;
 
@@ -83,9 +83,9 @@ nf = 2;
 for i=1:nvar;
    for k=1:4;
       eg=0; nse=0; wtsum=0;
-      if k==1; sdnum=sdnum1; 
+      if k==1; sdnum=sdnum1;
       elseif k==2; sdnum=sdnum2;
-      elseif k==3; sdnum=sdnum3; 
+      elseif k==3; sdnum=sdnum3;
       elseif k==4; sdnum=sdnum4;
       end;
       gvar=zeros(nf-1);
@@ -103,7 +103,7 @@ for i=1:nvar;
       gvar(nf-1,nf-1)=(sdnum(nf-1,i))^2+(sdnum(nf,i))^2;
       ginv=inv(gvar);
       g1=g(1:nf-1,i); g2=g(2:nf,i);
-      cstat=(g2-g1)'*ginv*(g2-g1); 
+      cstat=(g2-g1)'*ginv*(g2-g1);
       df=nf-1;
       p = 1-chis_prb(cstat,df);
       result(i).pmean(k) = eg;

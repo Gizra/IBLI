@@ -1,31 +1,31 @@
 % PURPOSE: makes HTML verion of contents.m files for the Econometrics Toolbox
 % Does a lot of stuff specific to the Econometrics Toolbox and is
-% probably of little use to anyone else. 
+% probably of little use to anyone else.
 %
 % USAGE: type make_html while in a directory with .m MATLAB functions
 % -----------------------------------------------------------------------
 % NOTES: This program requires that the first line in the function
-% take the form: 
+% take the form:
 %                % PURPOSE: function purpose statement
-% (which is the form taken by Econometrics Toolbox functions)   
-% -----------------------------------------------------------------------           
+% (which is the form taken by Econometrics Toolbox functions)
+% -----------------------------------------------------------------------
 % RETURNS: a file contents.html used on the Econometrics Toolbox web site
 % -----------------------------------------------------------------------
 
 % This program was hacked by:
-% 
+%
 % James P. LeSage, Dept of Economics&Finance
 % Texas State University-San Marcos
 % 601 University Drive
 % San Marcos, TX 78666
 % jlesage@spatial-econometrics.com
 
-% from mkcontnt.m 
-% 
+% from mkcontnt.m
+%
 % Author: Denis Gilbert, Ph.D., physical oceanography
 % Maurice Lamontagne Institute, Department of Fisheries and Oceans Canada
-% email: gilbertd@dfo-mpo.gc.ca  
-% August 1998; Last revision: December 07, 1998 
+% email: gilbertd@dfo-mpo.gc.ca
+% August 1998; Last revision: December 07, 1998
 
 cdirectory = pwd;
 disp(['Creating contents.html file in ' cdirectory])
@@ -78,8 +78,8 @@ if (strcmp(files.m{i},'contents.m') == 0 & strcmp(files.m{i},'make_html.m') == 0
    fid2=fopen(files.m{i},'r'); %Cell array of sorted file names
    %Search for first commented line (H1 line)
    count_percent = 0;
-   while count_percent < 1 & feof(fid2)==0; 
-      %True as long as we do not encounter a line with a "%" sign 
+   while count_percent < 1 & feof(fid2)==0;
+      %True as long as we do not encounter a line with a "%" sign
       %or reach the end of file
       line = fgetl(fid2);
       if length(line) > 0 %Allow for possibility that some lines may be empty

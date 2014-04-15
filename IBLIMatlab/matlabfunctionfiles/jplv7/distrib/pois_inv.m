@@ -4,7 +4,7 @@ function pinv = pois_inv(x,l)
 %---------------------------------------------------
 % USAGE:    inv = pois_inv(x,lambda)
 % where:    x   = variable vector (nx1)
-%        lambda = value at which to evaluate pdf 
+%        lambda = value at which to evaluate pdf
 %---------------------------------------------------
 
 % Author: Kurt Hornik
@@ -21,7 +21,7 @@ function pinv = pois_inv(x,l)
   if (retval > 0)
     error ('pois_inv: x and lambda must be of common size or scalar');
   end;
-  
+
   [r, c] = size (x);
   s = r * c;
   x = reshape (x, 1, s);
@@ -37,7 +37,7 @@ function pinv = pois_inv(x,l)
   if any (k)
     pinv(k) = Inf * ones (1, length (k));
   end;
-  
+
   k = find ((x > 0) & (x < 1) & (l > 0));
   if any (k)
     cdf = exp (-l(k));
@@ -51,6 +51,6 @@ function pinv = pois_inv(x,l)
       end;
     end;
   end;
-    
+
   pinv = reshape (pinv, r, c);
-  
+

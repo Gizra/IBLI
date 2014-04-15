@@ -3,14 +3,14 @@ function [lmstat, lmprob, reslm] = lmtest(resultr,xu)
 %---------------------------------------------------
 % USAGE: [lmstat lmprob, result] = lmtest(resultr,xmatrixu)
 % or:    lmtest(resultr,xmatrixu), which prints output to the screen
-% 
+%
 % Where: resultr  = matrix returned by ols() for restricted regression
 %        xmatrixu = explanatory variables matrix from unrestricted model
 %---------------------------------------------------
-% RETURNS: lmstat = calculated chi-squared statistic 
+% RETURNS: lmstat = calculated chi-squared statistic
 %          lmprob = marginal probability for lmstat
 %          result = ols() matrix for printing with prt(result)
-%---------------------------------------------------        
+%---------------------------------------------------
 % NOTE:   Expected value of (lmstat) = #restrictions
 %---------------------------------------------------
 % SEE ALSO: ols() waldf()

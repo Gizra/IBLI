@@ -8,15 +8,15 @@ function grdd = gradt(funfcn,x0,varargin)
 %           y = data vector
 %           x = data matrix
 %    varargin = arguments list passed to func
-%---------------------------------------------------       
+%---------------------------------------------------
 % NOTE: f must take the form f(b,y,x,args)
 %       where: b = parameter vector (k x 1)
 %           args = any # of arguments passed to the function
-%---------------------------------------------------       
-% RETURNS: gradd = gradient vector (1 x k)      
-%---------------------------------------------------       
+%---------------------------------------------------
+% RETURNS: gradd = gradient vector (1 x k)
+%---------------------------------------------------
 % SEE ALSO: updateh, hessian
-%---------------------------------------------------       
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -36,7 +36,7 @@ end;
 %       pretty shoddy practice really
 [n junk] = size(varargin{1});
 
-      
+
     xarg = x0;
     f0 = feval(funfcn,x0,varargin{:});
     gradd = zeros(n,k);
@@ -46,7 +46,7 @@ end;
     absx0 = abs(x0);
     tst0 = find(absx0 == 0);
     absx0(tst0) = 0.00001*ones(length(tst0),1);
-       
+
     if x0 == 0;
        dabsx0 = 1;
     else
@@ -54,8 +54,8 @@ end;
     end;
     dh = epsilon*max(([absx0; (1e-2)*iota])').*dabsx0;
     xdh = x0+dh;
-    dh = xdh-x0;  
-    
+    dh = xdh-x0;
+
     tst0 = find(dh == 0);
     dh(tst0) = 0.00001*ones(length(tst0),1);
 
@@ -63,11 +63,11 @@ end;
     for i=1:k;
     tmp(:,i) = x0;
     end;
-      
+
     for i=1:k;
     tmp(i,i) = xdh(i,1);
     end;
-    
+
     for i = 1:k;
        xarg = tmp(:,i);
        gradd(:,i) = feval(funfcn,xarg,varargin{:});
@@ -82,7 +82,7 @@ end;
     dhp = dh';
     for i=1:n;
     gradd(i,:) = tmp2(i,:)./dhp;
-    end;   
-    
+    end;
+
     grdd = sum(gradd);
-    
+

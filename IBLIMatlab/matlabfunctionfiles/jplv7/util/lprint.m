@@ -1,34 +1,34 @@
 function lprint(y,info)
 % PURPOSE: print an (nobs x nvar) matrix in LaTeX table format
 %---------------------------------------------------
-% USAGE:     lprint(x,info) 
-% where: 
+% USAGE:     lprint(x,info)
+% where:
 % x         = (nobs x nvar) matrix (or vector) to be printed
 % info      = a structure containing printing options
 % info.begr = beginning row to print,    (default = 1)
 % info.endr = ending row to print,       (default = nobs)
 % info.begc = beginning column to print, (default = 1
-% info.endc = ending column to print,    (default = nvar)        
+% info.endc = ending column to print,    (default = nvar)
 % info.cnames = an (nvar x 1) string of names for columns (optional)
 %               e.g. info.cnames = strvcat('col1','col2');
 %               (default = no column headings)
 % info.rnames = an (nobs+1 x 1) string of names for rows (optional)
 %               e.g. info.rnames = strvcat('Rows','row1','row2');
 %               (default = no row labels)
-% info.fmt    = a format string, e.g., '%12.6f' or '%12d' 
+% info.fmt    = a format string, e.g., '%12.6f' or '%12d'
 %               (default = %10.4f)
 %               or an (nvar x 1) string containing formats
-%               e.g., info.fmt=strvcat('%12.6f','%12.2f','%12d'); 
+%               e.g., info.fmt=strvcat('%12.6f','%12.2f','%12d');
 % info.fid    = file-id for printing results to a file
 %               (defaults to the MATLAB command window)
-%               e.g. fid = fopen('file.out','w'); 
-% info.rflag  = 1 row #'s printed, 0 no row #'s (default = 0)                                                   
+%               e.g. fid = fopen('file.out','w');
+% info.rflag  = 1 row #'s printed, 0 no row #'s (default = 0)
 %---------------------------------------------------
 % e.g.   in.cnames = strvcat('col1','col2');
 %        in.rnames = strvcat('rowlabel','row1','row2');
 %        lprint(y,in), prints entire matrix, column and row headings
 %        in2.endc = 3; in2.cnames = strvcat('col1','col2','col3');
-%    or: lprint(y,in2), prints 3 columns of the matrix, with headings 
+%    or: lprint(y,in2), prints 3 columns of the matrix, with headings
 %    or: lprint(y), prints entire matrix, no column or row headings
 % NOTES: - defaults are used for info-elements not specified
 %        - wrapping occurs at (80/format) columns, which varies with
@@ -64,13 +64,13 @@ begc = 1; endc = nvars;
 fmt = '%10.4f';
 
   if ~isstruct(info)
-    error('lprint: you must supply the options as a structure variable'); 
+    error('lprint: you must supply the options as a structure variable');
   end;
 fields = fieldnames(info);
 nf = length(fields);
 for i=1:nf
     if strcmp(fields{i},'fmt')
-        fmts = info.fmt; 
+        fmts = info.fmt;
   [nfmts junk] = size(fmts);
   if nfmts == 1
    fmt = fmts;
@@ -102,7 +102,7 @@ end;
 
 else
 error('Wrong # of arguments to lprint');
-   
+
 end; % end of if-elseif input checking
 
 % see if the user supplied row names and set rnum
@@ -114,7 +114,7 @@ end;
 % parse formats
 if nfmts == 1
    f1 = strtok(fmt,'%');
-   f2 = strtok(f1,'.'); 
+   f2 = strtok(f1,'.');
     if strcmp(f1,f2)
      f2 = strtok(f2,'d');
      dflag = 1;
@@ -147,26 +147,26 @@ decimalv = zeros(nfmts,1);
     if strcmp(f1,f2)
      f2 = strtok(f2,'d');
      dflagv(ii,1) = 1;
-     fflagv(ii,1) = 0;     
+     fflagv(ii,1) = 0;
     else
      tmp1 = strtok(fmt(ii,:),'f');
      tmp2 = strtok(tmp1,'.');
      tmp1 = tmp1(2:length(tmp1));
      tmp2 = tmp2(2:length(tmp2));
      opoint = num2str(str2num(tmp1) - str2num(tmp2));
-     decimalv(ii,1) = opoint(1,length(opoint));     
+     decimalv(ii,1) = opoint(1,length(opoint));
      f2 = strtok(f2,'f');
      fflagv(ii,1) = 1;
-     dflagv(ii,1) = 0;     
+     dflagv(ii,1) = 0;
     end;
    f2v(ii,1) = str2num(f2);
    nwidev(ii,1) = floor(80/f2v(ii,1)); % 80 columns divided by format
    nvar = endc-begc+1;
-   nsetsv(ii,1) = ceil(nvar/nwidev(ii,1));   
+   nsetsv(ii,1) = ceil(nvar/nwidev(ii,1));
 end;
-nsets = min(nsetsv); 
+nsets = min(nsetsv);
 nwide = max(nwidev);
-end; 
+end;
 
 
 % if we have row and column labels
@@ -179,12 +179,12 @@ end;
 
 if cflag == 1 % we have column headings
  [vsize nsize] = size(cnames); % error check cnames argument
- if vsize ~= nvars; error('Wrong # cnames in mprint'); end;    
+ if vsize ~= nvars; error('Wrong # cnames in mprint'); end;
  if nfmts == 1 % case of only 1 format string
-  nmax = max(f2,nsize); % build format strings 
-                        % based on widest format              
+  nmax = max(f2,nsize); % build format strings
+                        % based on widest format
   sfmt = ['%', num2str(nmax)];
-  sfmt = [sfmt,'s ']; 
+  sfmt = [sfmt,'s '];
   ffmt = ['%', num2str(nmax)];
    if dflag == 1
    ffmt = [ffmt,'d '];
@@ -196,23 +196,23 @@ if cflag == 1 % we have column headings
  else % we have multiple format strings, process each
  sfmtv = []; fmtv = [];
   for ii=1:nfmts % find and parse multiple formats
-  nmax = max(f2v(ii,:),nsize); % build format strings 
-                        % based on widest format              
+  nmax = max(f2v(ii,:),nsize); % build format strings
+                        % based on widest format
   sfmtv{ii} = ['%', num2str(nmax)];
-  sfmtv{ii} = [sfmtv{ii},'s ']; 
+  sfmtv{ii} = [sfmtv{ii},'s '];
   ffmtv{ii} = ['%', num2str(nmax)];
    if dflagv(ii,1) == 1
    ffmtv{ii} = [ffmtv{ii},'d '];
    elseif fflagv(ii,1) == 1
    ffmtv{ii} = [ffmtv{ii},'.'];
-   ffmtv{ii} = [ffmtv{ii},decimalv(ii,1)];    
+   ffmtv{ii} = [ffmtv{ii},decimalv(ii,1)];
    ffmtv{ii} = [ffmtv{ii},'f '];
    end;
   end; % end of for ii loop
  end; % end of if-else
 elseif cflag == 0 % we have no column headings
  if nfmts == 1 % case of only 1 format string
-  nmax = f2; % augment format string with a space (the hard way) 
+  nmax = f2; % augment format string with a space (the hard way)
   ffmt = ['%', num2str(nmax)];
    if dflag == 1
    ffmt = [ffmt,'d '];
@@ -224,24 +224,24 @@ elseif cflag == 0 % we have no column headings
  else % we have multiple format strings, process each
  sfmtv = []; fmtv = [];
   for ii=1:nfmts % find and parse multiple formats
-  nmax = f2v(ii,:); % augment format strings with a space 
+  nmax = f2v(ii,:); % augment format strings with a space
   ffmtv{ii} = ['%', num2str(nmax)];
    if dflagv(ii,1) == 1
    ffmtv{ii} = [ffmtv{ii},'d '];
    elseif fflagv(ii,1) == 1
    ffmtv{ii} = [ffmtv{ii},'.'];
-   ffmtv{ii} = [ffmtv{ii},decimalv(ii,1)];    
+   ffmtv{ii} = [ffmtv{ii},decimalv(ii,1)];
    ffmtv{ii} = [ffmtv{ii},'f '];
    end;
   end; % end of for ii loop
- end; % end of if-else    
+ end; % end of if-else
 end; % end of if-elseif cflag == 0,1
-   
+
 if rflag == 1 % we have row labels
  [vsize nsize] = size(rnames); % error check cnames argument
- if vsize ~= nobs+1; error('Wrong # rnames in mprint'); end;  
- rfmt = ['%', num2str(nsize)]; 
- rfmt = [rfmt,'s ']; 
+ if vsize ~= nobs+1; error('Wrong # rnames in mprint'); end;
+ rfmt = ['%', num2str(nsize)];
+ rfmt = [rfmt,'s '];
 end; % end of if rflag == 1
 
 if (rflag == 0 & cflag == 0)
@@ -251,10 +251,10 @@ end;
 % print matrix
 for j=1:nsets;
  if nfmts == 1 % print row header and column headers
- if rnum == 1;fprintf(fid,'%5s ',dstr);     
-     elseif rflag == 1    
+ if rnum == 1;fprintf(fid,'%5s ',dstr);
+     elseif rflag == 1
   fprintf(fid,rfmt,rnames(1,:));
-     end;  
+     end;
      if cflag == 1
     for i = (j-1)*nwide+begc:j*nwide+begc-1
   if i < endc
@@ -269,8 +269,8 @@ for j=1:nsets;
      end;
   fprintf(fid,'\n');
  else % we have multiple formats
- if rnum == 1;fprintf(fid,'%5s ',dstr);     
-    elseif rflag == 1   
+ if rnum == 1;fprintf(fid,'%5s ',dstr);
+    elseif rflag == 1
  fprintf(fid,rfmt,rnames(1,:));
     end;
     if cflag == 1
@@ -289,7 +289,7 @@ for j=1:nsets;
  end; % end of if-else nfmts
  for k = begr:endr; % print row labels and numbers in matrix
   if rnum == 1; fprintf(fid,'%5d ',k);
-        elseif rflag == 1        
+        elseif rflag == 1
   fprintf(fid,rfmt,rnames(k+1,:));
         end;
   for l = (j-1)*nwide+begc:j*nwide+begc-1

@@ -43,7 +43,7 @@ if (nargin > 4); error('Wrong # of arguments to probit'); end;
 
 % check for all 1's or all 0's
 tmp = find(y ==1);
-chk = length(tmp); 
+chk = length(tmp);
 [nobs junk] = size(y);
 if chk == nobs
    error('probit: y-vector contains all ones');
@@ -104,11 +104,11 @@ g = tmp1-tmp2;
 gs = (sum(g))';
 
 % compute see page 883 Green, 1997
-q = 2*y - i;  
+q = 2*y - i;
 xxb = x*b;
 pdf = norm_pdf(q.*xxb);
 cdf = norm_cdf(q.*xxb);
-lambda = (q.*pdf)./cdf; 
+lambda = (q.*pdf)./cdf;
 H = zeros(k,k);
 for ii=1:t;
 xb = x(ii,:)*b;
@@ -142,7 +142,7 @@ q = 2*y - i;  % see page 883 Green, 1997
 xxb = x*b;
 pdf = norm_pdf(q.*xxb);
 cdf = norm_cdf(q.*xxb);
-lambda = (q.*pdf)./cdf; 
+lambda = (q.*pdf)./cdf;
 H = zeros(k,k);
 for i=1:t;
 xb = x(i,:)*b;
@@ -163,14 +163,14 @@ result.sige = (result.resid'*result.resid)/t;
 
 % find ones
 tmp = find(y ==1);
-P = length(tmp); 
+P = length(tmp);
 cnt0 = t-P;
 cnt1 = P;
 P = P/t; % proportion of 1's
 like0 = t*(P*log(P) + (1-P)*log(1-P)); % restricted likelihood
 like1 = pr_like(b,y,x);              % unrestricted Likelihood
 
-result.r2mf = 1-(abs(like1)/abs(like0)); % McFadden pseudo-R2 
+result.r2mf = 1-(abs(like1)/abs(like0)); % McFadden pseudo-R2
 
 
 term0 = (2/t)*like0;

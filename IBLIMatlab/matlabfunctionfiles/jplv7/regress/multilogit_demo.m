@@ -8,7 +8,7 @@ clear; clc;
 
 %---- CREATE SOME DEMO DATA ----%
 
-% specify the size of the demo 
+% specify the size of the demo
 nobs = 1000;        % number of observations
 nvar = 15;          % number of covariates
 numcat = 5;         % number of categories
@@ -17,10 +17,10 @@ numcat = 5;         % number of categories
 % note the beta vector associated with category 0 is normalized to zero
 beta = [zeros(nvar,1),ones(nvar,numcat-1)];
 
-% specify the covariates: x must include a column of ones if there 
+% specify the covariates: x must include a column of ones if there
 % is a constant term
 xmat = randn(nobs,nvar-1);
-x = [ones(nobs,1),xmat]; 
+x = [ones(nobs,1),xmat];
 
 % generate the response variable y
 xbeta = x*beta;
@@ -36,7 +36,7 @@ u = rand(nobs,1);
 yt = ones(nobs,1)*99;
 for i = 1:nobs;
     for j = 1:numcat;
-        if ((u(i,1) <= cum_P(i,j)) & (yt(i,1) == 99)) 
+        if ((u(i,1) <= cum_P(i,j)) & (yt(i,1) == 99))
             yt(i,1) = j;
         end;
     end;

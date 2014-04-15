@@ -1,6 +1,6 @@
 % PURPOSE: An example of using sem_g()
 %          Gibbs sampling spatial autoregressive model
-%          on a large data set                    
+%          on a large data set
 %---------------------------------------------------
 % USAGE: sem_gd2 (see sem_gd for a small data set)
 %---------------------------------------------------
@@ -13,7 +13,7 @@ y =  log(elect(:,7)./elect(:,8));
 x1 = log(elect(:,9)./elect(:,8));
 x2 = log(elect(:,10)./elect(:,8));
 x3 = log(elect(:,11)./elect(:,8));
-n = length(y); 
+n = length(y);
 x = [ones(n,1) x1 x2 x3];
 clear x1; clear x2; clear x3;
 xc = elect(:,5);
@@ -26,7 +26,7 @@ res = sem(y,x,W);
 prt(res,vnames);
 
 % do Gibbs sampling estimation
-ndraw = 2500; 
+ndraw = 2500;
 nomit = 500;
 prior.novi = 1; % homoscedastic prior
 % uses default M-H sampling for rho

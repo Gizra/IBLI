@@ -1,12 +1,12 @@
-% PURPOSE: An example of using sdmt_g() on a large data set   
-%          Gibbs sampling spatial durbin tobit model                         
+% PURPOSE: An example of using sdmt_g() on a large data set
+%          Gibbs sampling spatial durbin tobit model
 %---------------------------------------------------
 % USAGE: sdmt_gd2 (see sdmt_gd for a small data set)
 %---------------------------------------------------
 
 clear all;
 % NOTE a large data set with 3107 observations
-% from Pace and Barry, 
+% from Pace and Barry,
 load elect.dat;             % load data on votes
 latt = elect(:,5);
 long = elect(:,6);
@@ -33,7 +33,7 @@ ind = find(y < limit);
 y(ind,1) = limit; % censored  values
 
 % do Gibbs sampling estimation
-ndraw = 500; 
+ndraw = 500;
 nomit = 200;
 %prior.rval = 200;
 prior.novi = 1;

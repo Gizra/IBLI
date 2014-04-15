@@ -8,7 +8,7 @@ function [COEF] = invccorr(COEF,MVEC,SVEC)
 %        mvec = original means (returned by ccorr1,ccorr2)
 %        svec = original std deviations  (returned by ccorr1,ccorr2)
 %---------------------------------------------------
-% RETURNS:  coef = coefficients in raw form         
+% RETURNS:  coef = coefficients in raw form
 % --------------------------------------------------
 % SEE ALSO: ccorr1, ccorr2
 %---------------------------------------------------

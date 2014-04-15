@@ -33,7 +33,7 @@ function res=fernandez(Y,x,ta,s)
 %            ta=2 ---> average (index)
 %            ta=3 ---> last element (stock) ---> interpolation
 %            ta=4 ---> first element (stock) ---> interpolation
-%        s: number of high frequency data points for each low frequency data points 
+%        s: number of high frequency data points for each low frequency data points
 %            s= 4 ---> annual to quarterly
 %            s=12 ---> annual to monthly
 %            s= 3 ---> quarterly to monthly
@@ -42,8 +42,8 @@ function res=fernandez(Y,x,ta,s)
 % ------------------------------------------------------------
 % SEE ALSO: chowlin, litterman, td_plot, td_print
 % ------------------------------------------------------------
-% REFERENCE: Fernández, R.B.(1981)"Methodological note on the 
-% estimation of time series", Review of Economic and Statistics, 
+% REFERENCE: Fernández, R.B.(1981)"Methodological note on the
+% estimation of time series", Review of Economic and Statistics,
 % vol. 63, n. 3, p. 471-478.
 
 % written by:
@@ -63,7 +63,7 @@ t0=clock;
 % ------------------------------------------------------------
 % Preparing the X matrix: including an intercept
 
-e=ones(n,1);   
+e=ones(n,1);
 x=[e x];       % Expanding the regressor matrix
 p=p+1;         % Number of p high-frequency inputs (plus intercept)
 
@@ -77,7 +77,7 @@ C = aggreg(ta,N,s);
 % extrapolation if needed.
 
 if (n > s * N)
-   pred=n-s*N;           % Number of required extrapolations 
+   pred=n-s*N;           % Number of required extrapolations
    C=[C zeros(N,pred)];
 else
    pred=0;
@@ -90,7 +90,7 @@ X=C*x;
 
 % -----------------------------------------------------------
 % -----------------------------------------------------------
-% Estimation 
+% Estimation
 
 I=eye(n); w=I;
 LL=zeros(n,n);
@@ -139,7 +139,7 @@ y_ls=y+d_y;           % Upper lim. of high frequency estimates
 res.meth='Fernandez';
 
 % -----------------------------------------------------------
-% Basic parameters 
+% Basic parameters
 
 res.ta        = ta;
 res.type      = 2;       % For output convenience

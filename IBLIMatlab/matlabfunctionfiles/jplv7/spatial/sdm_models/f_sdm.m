@@ -1,5 +1,5 @@
 function llike = f_sdm(rho,y,x,W,detval)
-% PURPOSE: evaluates concentrated log-likelihood for the 
+% PURPOSE: evaluates concentrated log-likelihood for the
 %          spatial durbin model using sparse matrix algorithms
 % ---------------------------------------------------
 %  USAGE:llike = f_sdm(rho,y,x,W,detm)
@@ -8,15 +8,15 @@ function llike = f_sdm(rho,y,x,W,detval)
 %          x   = data matrix
 %          W   = spatial weight matrix
 %         detm =  matrix with [rho log determinant] values
-%                computed in sdm.m using one of 
-%                Kelley Pace's routines  
+%                computed in sdm.m using one of
+%                Kelley Pace's routines
 % ---------------------------------------------------
 %  RETURNS: a  scalar equal to minus the log-likelihood
 %           function value at the parameter rho
 %  --------------------------------------------------
 %  NOTE: this is really two functions depending
 %        on nargin = 4 or nargin = 5 (see the function)
-% --------------------------------------------------- 
+% ---------------------------------------------------
 %  SEE ALSO: sdm, f_far, f_sac, f_sem
 % ---------------------------------------------------
 
@@ -26,7 +26,7 @@ function llike = f_sdm(rho,y,x,W,detval)
 % San Marcos, TX 78666
 % jlesage@spatial-econometrics.com
 
-[n k] = size(x); 
+[n k] = size(x);
 rho2 = rho*rho;
 
 

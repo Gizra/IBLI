@@ -2,19 +2,19 @@ function lik = tvp_zglike(parm,y,x,start,priorb0,priorv0)
 % PURPOSE: returns -log likelihood function for tvp model with Zellner's g-prior
 %          y(t) = X(t)*B(t) + e(t), e(t) = N(0,sige^2)
 %          B(t) = B(t-1) + v(t),    v(t) = N[0,delta*sige*inv(X'X)]
-%          (Zellner's g-prior)          
+%          (Zellner's g-prior)
 % -------------------------------------------------------
 % USAGE: llike = tvp_zglike(parm,y,x,start,priorb0,priorv0)
 % where: parm = a vector of parmaeters
 %        parm(1) = sig epsilson
-%        parm(2) = delta, Zellner's g-prior delta 
+%        parm(2) = delta, Zellner's g-prior delta
 %        start   = # of observation to start at
 %                  (default: 2*k+1)
-%        priorb0   = (k+1) x 1 vector with prior b0          
+%        priorb0   = (k+1) x 1 vector with prior b0
 %        priorv0   = (k+1)x(k+1) matrix with prior variance
-%                  for sige, sigb  
+%                  for sige, sigb
 % ----------------------------------------------------
-% RETURNS: -log likelihood function value (a scalar)                  
+% RETURNS: -log likelihood function value (a scalar)
 % ----------------------------------------------------
 % REFERENCES: Kim and Nelson (1999)
 % State-Space Models with Regime Switching

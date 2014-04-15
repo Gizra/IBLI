@@ -2,7 +2,7 @@
 %
 %  compare_weights : An example of model comparison using far_g
 %           f2_far : evaluate the log-likelihood for ML rho,sigma values
-%            f_far : evaluate the concentrated log-likelihood 
+%            f_far : evaluate the concentrated log-likelihood
 %              far : computes 1st-order spatial autoregressive estimates
 %            far_d : An example of using far() on a small data set
 %           far_d2 : An example of using far() on a large data set

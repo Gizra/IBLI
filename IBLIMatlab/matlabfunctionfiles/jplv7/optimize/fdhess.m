@@ -23,21 +23,21 @@ eps = 1e-5;
 
 n = size(x,1);
 fx = feval(f,x,varargin{:});
- 
+
 % Compute the stepsize (h)
 h = eps.^(1/3)*max(abs(x),1e-2);
 xh = x+h;
-h = xh-x;    
+h = xh-x;
 ee = sparse(1:n,1:n,h,n,n);
- 
-% Compute forward step 
+
+% Compute forward step
 g = zeros(n,1);
 for i=1:n
   g(i) = feval(f,x+ee(:,i),varargin{:});
 end
-   
+
 H=h*h';
-% Compute "double" forward step 
+% Compute "double" forward step
 for i=1:n
 for j=i:n
   H(i,j) = (feval(f,x+ee(:,i)+ee(:,j),varargin{:})-g(i)-g(j)+fx)/H(i,j);

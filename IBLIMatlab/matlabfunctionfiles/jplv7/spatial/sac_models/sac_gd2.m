@@ -1,5 +1,5 @@
-% PURPOSE: An example of using sac() on a large data set  
-%          general spatial model                           
+% PURPOSE: An example of using sac() on a large data set
+%          general spatial model
 %---------------------------------------------------
 % USAGE: sac_d2 (see sac_d for a small data set)
 %---------------------------------------------------

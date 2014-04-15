@@ -5,14 +5,14 @@ function plt_dfb(results,vnames)
 % USAGE: plt_dfb(results,vnames)
 % where: results = a structure returned by dfbeta
 %         vnames = an optional vector of variable names
-%---------------------------------------------------               
+%---------------------------------------------------
 %                 e.g. vnames = ['y    ',
 %                                'x1   ',  NOTE: fixed width
 %                                'x2   ',        like all MATLAB
 %                                'cterm'];
 % --------------------------------------------------
 % RETURNS:
-%        nothing, simply plots the dfbetas 
+%        nothing, simply plots the dfbetas
 % --------------------------------------------------
 % SEE ALSO: dfbeta, plt_dff, bkw, rdiag, diagnose
 %---------------------------------------------------
@@ -27,7 +27,7 @@ function plt_dfb(results,vnames)
 
 if strcmp(results.meth,'dfbeta') ~=1
 error('plt_dfb requires a structure from dfbeta');
-end; 
+end;
 
 nobs = results.nobs;
 nvar = results.nvar;

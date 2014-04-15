@@ -1,5 +1,5 @@
-% PURPOSE: An example of using sar_gmm on a large data set   
-%          GM estimation of the general spatial model                         
+% PURPOSE: An example of using sar_gmm on a large data set
+%          GM estimation of the general spatial model
 %---------------------------------------------------
 % USAGE: sar_gmmd2 (see sar_gmmd for a small data set)
 %---------------------------------------------------

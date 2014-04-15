@@ -25,19 +25,19 @@ figure;
 plot(t,sum(res.y'),'ro',t,z);
 legend('Transversal aggregation','z: Transversal constraint',0);
 e=100*((sum(y')')-z)./z;   % Final discrepancy
-xlabel ('time'); 
+xlabel ('time');
 figure;
 plot(e);
 title ('Final discrepancy (as % of z)');
-axis ([0 res.n -1 1]);   
-xlabel ('time'); 
+axis ([0 res.n -1 1]);
+xlabel ('time');
 
 [aux,M] = size(res.y); clear aux;
 
 switch res.meth
 case {'Multivariate Denton','Multivariate Rossi'}
-   % Nothing to do 
-case {'Multivariate di Fonzo'}   
+   % Nothing to do
+case {'Multivariate di Fonzo'}
    y_li = res.y - res.d_y;           % Lower limit of high freq. estimate
    y_ls = res.y + res.d_y;           % Upper limit of high freq. estimate
 end
@@ -51,5 +51,5 @@ for i=1:M
       plot(t,res.y(:,i),'b-',t,y_li(:,i),'r-',t,y_ls(:,i),'r-');
    end
    title ('High frequency series');
-   xlabel ('time'); 
+   xlabel ('time');
 end

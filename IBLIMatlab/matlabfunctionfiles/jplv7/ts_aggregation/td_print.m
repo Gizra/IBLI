@@ -29,7 +29,7 @@ function []=td_print(res,file_sal,op1)
 meth=res.meth;
 
 % -----------------------------------------------------------
-% Basic parameters 
+% Basic parameters
 N=res.N;
 n=res.n;
 pred=res.pred;
@@ -68,7 +68,7 @@ bic=res.bic;
 % -----------------------------------------------------------
 % Selection of periodicity of high frequency data
 % Low-frequency (lf) and high-frequency (hf) depends on the
-% problem at hand. The default options are related to s 
+% problem at hand. The default options are related to s
 % according to:
 %                       s
 %  :::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -85,12 +85,12 @@ if (s==3)
 else
     lf = 1;
     hf = s;
-end 
+end
 
 % -----------------------------------------------------------
 % Descriptive measures (one indicator case only)
 
-if (p == 2) 
+if (p == 2)
    % Correlation between Y and X (levels)
    x_short=x(1:s*N,2);
    X=aggreg(res.ta,res.N,res.s)*x_short;
@@ -112,7 +112,7 @@ if (p == 2)
    c5=std(ty(hf+1:n),1);
    c6=std(tx(hf+1:n),1);
 end
-% Correlation between y and x*beta 
+% Correlation between y and x*beta
 xb=x*beta;
 % ... levels
 AUX=corrcoef(res.y,xb);
@@ -193,7 +193,7 @@ case {'Chow-Lin','Litterman','Santos Silva-Cardoso'}
 end
 fprintf(fid,'%s \n',sep);
 % Descriptive measures (one indicator case only)
-if (p == 2) 
+if (p == 2)
     fprintf(fid,' AIC: %8.4f\n ',aic);
     fprintf(fid,'BIC: %8.4f\n ',bic);
     fprintf(fid,'%s \n',sep);

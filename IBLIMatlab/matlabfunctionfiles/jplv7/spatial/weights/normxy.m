@@ -9,7 +9,7 @@ function [teast,tnorth] = normxy(east,north)
 %          northo = normalized north coordinate
 %---------------------------------------------------
 % coded from FORTRAN code supplied
-% by Brunsdon, Fotheringham, Charlton 
+% by Brunsdon, Fotheringham, Charlton
 
 [nobs junk] = size(east);
 

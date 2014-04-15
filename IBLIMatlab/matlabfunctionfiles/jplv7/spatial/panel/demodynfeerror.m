@@ -21,9 +21,9 @@ W1=wk1read('g:\lotus\spat-Sym-US.wk1');
 % j.p.elhorst@eco.rug.nl
 %
 % This demo produces the estimation results in table 2 of my paper
-% "Unconditional Maximum Likelihood Estimation of 
+% "Unconditional Maximum Likelihood Estimation of
 % Linear and Log-linear Dynamic Models for Spatial Panels"
-% Geographical Analysis (2005), No. 1, pp. 
+% Geographical Analysis (2005), No. 1, pp.
 %
 % The small deviations in the paramater estimates compared to those in table 2
 % of my paper are the result of improved programming procedures
@@ -45,7 +45,7 @@ lambda=eig(W);
 y1=A(:,[3]); % column number in the data matrix that corresponds to the dependent variable
 x1=A(:,[4,5,6]); % column numbers in the data matrix that correspond to the independent variables, no constant because it will be eliminated
 % Transformation of data into first-differences
-dy=y1(N+1:N*T,1)-y1(1:(N*T-N),1); 
+dy=y1(N+1:N*T,1)-y1(1:(N*T-N),1);
 nobs=N*T-N; % length of dy becomes N*T-N, number of observations decreases
 dy1=zeros(nobs,1);
 dy1(N+1:nobs,1)=y1(N+1:nobs,1)-y1(1:(N*T-2*N),1); % dy1(1:N,1) remains zero, because serial lagged depedent variable is not observed at t-2
@@ -106,7 +106,7 @@ for t=1:T
    wxpie(ti:tj,:)=W*xpie(ti:tj,:);
 end;
 WX=[wxpie wx];
-% 
+%
 G=zeros(T,T);
 for t=2:T
    G(t-1,t)=-1;
@@ -149,7 +149,7 @@ while (converge>criteria & iter < itermax)
       xi=X(ii:iend,:)-del*WX(ii:iend,:);
       for tj=1:T
          ij=(tj-1)*N+1;jend=tj*N;
-         ej=ed(ij:jend);        
+         ej=ed(ij:jend);
          xj=X(ij:jend,:)-del*WX(ij:jend,:);
          yj=y(ij:jend,1)-del*wy(ij:jend,1)-gam*y1(ij:jend,1)+del*gam*wy1(ij:jend,1);
          matv=GC(ti,tj)*detinv+GV(ti,tj)*detinv*V;
@@ -183,10 +183,10 @@ t2=clock;
 time_used=t2-t1
 
 if hessn(nvar+1,nvar+1) == 0
- hessn(nvar+1,nvar+1) = 1/si2;  % this is a hack for very large models that 
+ hessn(nvar+1,nvar+1) = 1/si2;  % this is a hack for very large models that
 end;                             % should not affect inference in these cases
 
-xpxi = inv(hessn); 
+xpxi = inv(hessn);
 xpxi = diag(xpxi(1:nvar,1:nvar));
 zip = find(xpxi <= 0);
 
@@ -203,7 +203,7 @@ if length(zip) ~= 0
 tstat(zip,1) = 0;
 end;
 
-fid=1; 
+fid=1;
 vnames=strvcat('logcit','pie1','pie2','pie3','logp','logpn','logy','logcit[-1]','spataut','del'); % should be changed if x is changed
 Vname = 'Variable';
 [tst_n nsize] = size(vnames);
@@ -213,7 +213,7 @@ Vname = 'Variable';
  for i=1:nvar
     Vname = strvcat(Vname,vnames(i+1,:));
  end;end;
- 
+
 fprintf(fid,'\n');
 fprintf(fid,'Model Estimates \n');
 fprintf(fid,'Dependent Variable = %16s \n',vnames(1,:));
@@ -268,10 +268,10 @@ t2=clock;
 time_used=t2-t1
 
 if hessn(nvar+1,nvar+1) == 0
- hessn(nvar+1,nvar+1) = 1/si2;  % this is a hack for very large models that 
+ hessn(nvar+1,nvar+1) = 1/si2;  % this is a hack for very large models that
 end;                             % should not affect inference in these cases
 
-xpxi = inv(hessn); 
+xpxi = inv(hessn);
 xpxi = diag(xpxi(1:nvar,1:nvar));
 zip = find(xpxi <= 0);
 
@@ -288,7 +288,7 @@ if length(zip) ~= 0
 tstat(zip,1) = 0;
 end;
 
-fid=1; 
+fid=1;
 vnames=strvcat('logcit','logcit[-1]','logp','logpn','logy','spataut'); % should be changed if x is changed
 Vname = 'Variable';
 [tst_n nsize] = size(vnames);
@@ -298,7 +298,7 @@ Vname = 'Variable';
  for i=1:nvar
     Vname = strvcat(Vname,vnames(i+1,:));
  end;end;
- 
+
 fprintf(fid,'\n');
 fprintf(fid,'Model Estimates \n');
 fprintf(fid,'Dependent Variable = %16s \n',vnames(1,:));
@@ -347,7 +347,7 @@ for ti=1:T
    ei=ed(ii:iend);
    for tj=1:T
       ij=(tj-1)*N+1;jend=tj*N;
-      ej=ed(ij:jend);        
+      ej=ed(ij:jend);
       matv=GC(ti,tj)*detinv+GV(ti,tj)*detinv*V;
       et=ei'*matv*ej;
       edt2=edt2+et;
@@ -391,7 +391,7 @@ for ti=1:T
    ei=ed(ii:iend);
    for tj=1:T
       ij=(tj-1)*N+1;jend=tj*N;
-      ej=ed(ij:jend);        
+      ej=ed(ij:jend);
       matv=GC(ti,tj)*detinv+GV(ti,tj)*detinv*V;
       et=ei'*matv*ej;
       edt2=edt2+et;
@@ -435,7 +435,7 @@ for ti=1:T
    ei=ed(ii:iend);
    for tj=1:T
       ij=(tj-1)*N+1;jend=tj*N;
-      ej=ed(ij:jend);        
+      ej=ed(ij:jend);
       matv=GC(ti,tj)*detinv+GV(ti,tj)*detinv*V;
       et=ei'*matv*ej;
       edt2=edt2+et;
@@ -483,7 +483,7 @@ for ti=1:T
    ei=ed(ii:iend);
    for tj=1:T
       ij=(tj-1)*N+1;jend=tj*N;
-      ej=ed(ij:jend);        
+      ej=ed(ij:jend);
       matv=GC(ti,tj)*detinv+GV(ti,tj)*detinv*V;
       et=ei'*matv*ej;
       edt2=edt2+et;

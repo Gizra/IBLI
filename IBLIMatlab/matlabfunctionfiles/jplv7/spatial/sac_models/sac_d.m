@@ -1,6 +1,6 @@
 % PURPOSE: An example of using sac() on a small dataset
 %          general spatial model
-%                              
+%
 %---------------------------------------------------
 % USAGE: sac_d
 %---------------------------------------------------
@@ -9,7 +9,7 @@ clear all;
 
 
 % load Anselin (1988) Columbus neighborhood crime data
-load anselin.dat; 
+load anselin.dat;
 % 5 columns:
 % column1 = crime
 % column2 = household income
@@ -19,7 +19,7 @@ load anselin.dat;
 
 n = length(anselin);
 y = anselin(:,1);
-x = [ones(n,1) anselin(:,2:3)]; 
+x = [ones(n,1) anselin(:,2:3)];
 latt = anselin(:,4);
 long = anselin(:,5);
 vnames = strvcat('crime','constant','income','hvalue');

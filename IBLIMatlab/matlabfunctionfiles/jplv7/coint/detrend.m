@@ -1,14 +1,14 @@
-function resid = detrend(y,p) 
+function resid = detrend(y,p)
 % PURPOSE: detrend a matrix y of time-series using regression
 %          of y against a polynomial time trend of order p
-% -----------------------------------------------------------          
+% -----------------------------------------------------------
 % USAGE: resid = detrend(y,p)
 % where:     y = input matrix (or vector) of time-series (nobs x nvar)
 %            p = 0, subtracts mean
 %            p = 1, constant plus trend model
 %            p > 1, higher order polynomial model
 %            p = -1, returns y
-% -----------------------------------------------------------           
+% -----------------------------------------------------------
 % RETURNS: resid = residuals from the detrending regression
 % -----------------------------------------------------------
 
@@ -45,7 +45,7 @@ end;
    else
     xmat = u;
    end;
-   
+
    xpxi = inv(xmat'*xmat);
    beta = xpxi*(xmat'*y);
    resid = y - xmat*beta;

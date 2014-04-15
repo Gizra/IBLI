@@ -1,9 +1,9 @@
 function results = bgwr(y,x,east,north,ndraw,nomit,prior);
 % PURPOSE: compute Bayesian geographically weighted regression
-%          model: y = Xb(i) + e,      e = N(0,sige*V), 
+%          model: y = Xb(i) + e,      e = N(0,sige*V),
 %                 b(i) = f[b(j)] + u, u = delta*sige*inv(x'x)
 %          V = diag(v1,v2,...vn), r/vi = ID chi(r)/r, r = Gamma(m,k)
-%          delta = gamma(s,t), 
+%          delta = gamma(s,t),
 %          f[b(j)] = b(i-1) for concentric city prior
 %          f[b(j)] = W(i) b for contiguity prior
 %          f[b(j)] = [exp(-d/b)/sum(exp(-d/b)] b for distance prior
@@ -18,28 +18,28 @@ function results = bgwr(y,x,east,north,ndraw,nomit,prior);
 %        prior.m,      informative Gamma(m,k) prior on r
 %        prior.k,      informative Gamma(m,k) prior on r
 %        prior.delta,  improper delta value (default=diffuse)
-%        prior.dscale, scalar for delta (with diffuse prior) 
-%        prior.s,      informative Gamma(s,t) prior on delta 
+%        prior.dscale, scalar for delta (with diffuse prior)
+%        prior.s,      informative Gamma(s,t) prior on delta
 %        prior.t,      informative Gamma(s,t) prior on delta
-%        prior.ptype, 'concentric' for concentric city smoothing 
+%        prior.ptype, 'concentric' for concentric city smoothing
 %                     'distance'   for distance based smoothing (default)
 %                     'contiguity' for contiguity smoothing
-%                     'casetti'    for casetti smoothing (not implemented)  
+%                     'casetti'    for casetti smoothing (not implemented)
 %        prior.ctr, observation # of central point (for concentric prior)
 %        prior.W,   (optional) prior weight matrix (for contiguity prior)
-%        prior.bwidth = scalar bandwidth to use, or zero 
+%        prior.bwidth = scalar bandwidth to use, or zero
 %                       for cross-validation estimation (default)
 %        prior.bmin   = minimum bandwidth to use in CV search
 %        prior.bmax   = maximum bandwidth to use in CV search
-%                       defaults: bmin = 0.1, bmax = 20                            
-%        prior.dtype  = 'gaussian'    for Gaussian weighting 
+%                       defaults: bmin = 0.1, bmax = 20
+%        prior.dtype  = 'gaussian'    for Gaussian weighting
 %                     = 'exponential' for exponential weighting (default)
 %                     = 'tricube'     for tri-cube weighting
 %        prior.q      = q-nearest neighbors to use for tri-cube weights
-%                       (default: CV estimated)  
+%                       (default: CV estimated)
 %        prior.qmin   = minimum # of neighbors to use in CV search
 %        prior.qmax   = maximum # of neighbors to use in CV search
-%                       defaults: qmin = nvar+2, qmax = 5*nvar          
+%                       defaults: qmin = nvar+2, qmax = 5*nvar
 %        ndraw = # of draws
 %        nomit = # of initial draws omitted for burn-in
 % ---------------------------------------------------
@@ -54,18 +54,18 @@ function results = bgwr(y,x,east,north,ndraw,nomit,prior);
 %        results.r      = value of hyperparameter r (if input)
 %        results.d      = value of hyperparameter delta (if input)
 %        results.m      = m prior parameter (if input)
-%        results.k      = k prior parameter (if input) 
+%        results.k      = k prior parameter (if input)
 %        results.s      = s prior parameter (if input)
-%        results.t      = t prior parameter (if input)         
+%        results.t      = t prior parameter (if input)
 %        results.nobs   = nobs
 %        results.nvar   = nvars
-%        results.ptype  = input string for parameter smoothing relation 
+%        results.ptype  = input string for parameter smoothing relation
 %        results.bwidth= bandwidth if gaussian or exponential
 %        results.q     = q nearest neighbors if tri-cube
 %        results.dtype = input string for Gaussian,exponential,tricube weights
 %        results.iter  = # of simplex iterations for cv
 %        results.y     = y data vector
-%        results.x     = x data matrix        
+%        results.x     = x data matrix
 %        results.xcoord = x-coordinates
 %        results.ycoord = y-coordinates
 %        results.ctr    = central point observation # (if concentric prior)
@@ -74,11 +74,11 @@ function results = bgwr(y,x,east,north,ndraw,nomit,prior);
 %---------------------------------------------------
 % See also: prt, plt, to print and plot results
 %---------------------------------------------------
-% References: LeSage, J.P. ``A Family of Geographically Weighted Regression Models'' 
+% References: LeSage, J.P. ``A Family of Geographically Weighted Regression Models''
 %---------------------------------------------------
-% NOTES: - use either improper prior.rval 
+% NOTES: - use either improper prior.rval
 %          or informative Gamma prior.m, prior.k, not both of them
-%        - for large samples tricube is fastest 
+%        - for large samples tricube is fastest
 %---------------------------------------------------
 
 % written by: James P. LeSage 2/98
@@ -90,9 +90,9 @@ function results = bgwr(y,x,east,north,ndraw,nomit,prior);
 % set defaults
 rflag = 0; % =1 for improper user input, =2 for gamma(mm,kk) prior
 sflag = 0; % =1 for scaling of delta
-mm = 0; kk = 0; 
+mm = 0; kk = 0;
 dflag = 0; % =1 for improper user input, =2 for gamma(mm,kk) prior
-ss = 0; tt = 0; 
+ss = 0; tt = 0;
 ptype = 1; % default parameter smoothing prior
 ctr = 0;   % central observation for concentric
 pstring = 'distance'; % default parameter smoothing prior
@@ -115,7 +115,7 @@ if nargin == 7 % user options
  nf = length(fields);
   for i=1:nf
     if strcmp(fields{i},'rval')
-        rval = prior.rval; 
+        rval = prior.rval;
         rflag = 1;
     elseif strcmp(fields{i},'ptype')
         pstring = prior.ptype;
@@ -138,9 +138,9 @@ if nargin == 7 % user options
         dflag = 2;
     elseif strcmp(fields{i},'W')
         W = prior.W;
-        wflag = 1;    
+        wflag = 1;
     elseif strcmp(fields{i},'bwidth')
-        bwidth = prior.bwidth; 
+        bwidth = prior.bwidth;
     elseif strcmp(fields{i},'dtype')
         dstring = prior.dtype;
        if strcmp(dstring,'gaussian')
@@ -155,13 +155,13 @@ if nargin == 7 % user options
     elseif strcmp(fields{i},'qmax');
         qmax = prior.qmax;
     elseif strcmp(fields{i},'qmin');
-        qmin = prior.qmin;   
+        qmin = prior.qmin;
     elseif strcmp(fields{i},'bmin');
-        bmin = prior.bmin;   
+        bmin = prior.bmin;
     elseif strcmp(fields{i},'bmax');
-        bmax = prior.bmax;   
+        bmax = prior.bmax;
     elseif strcmp(fields{i},'dscale');
-        dscale = prior.dscale;   
+        dscale = prior.dscale;
     end;
   end; % end of for i
 
@@ -199,7 +199,7 @@ gam = res.beta;
 sigi = res.sige;
 bwidth = bdwt;
 results.bwidth = sqrt(bdwt);
- 
+
 elseif dtype == 1 % exponential
  [bdwt,junk,exitflag,output] = fminbnd('scoref',bmin,bmax,options,y,x,east,north,dtype);
 % get GWR estimates as starting values using the bandwidth
@@ -210,9 +210,9 @@ sigi = res.sige;
 bwidth = bdwt;
 results.bwidth = sqrt(bdwt);
 
-end;  % end of if else dtype 
+end;  % end of if else dtype
 
- if output.iterations == 500, 
+ if output.iterations == 500,
  fprintf(1,'bgwr: cv convergence not obtained in %4d iterations',output.iterations);
  else
  results.iter = output.iterations;
@@ -227,14 +227,14 @@ else % user-supplied bandwidth
  elseif dtype == 1
  info.dtype = 'exponential';
  info.bwidth = bwidth;
- res = gwr(y,x,east,north,info); 
-end; 
+ res = gwr(y,x,east,north,info);
+end;
 
 gam = res.beta;
 sigi = res.sige;
 results.bwidth = bwidth;
 bwidth = bwidth*bwidth; % user supplied bandwidth
- 
+
 end;
 
 case{2} % q-nearest neigbhor cross-validation
@@ -253,7 +253,7 @@ results.q = q;
 info.dtype = 'tricube'; info.q = q;
 res = gwr(y,x,east,north,info);
 gam = res.beta;
-sigi = res.sige; 
+sigi = res.sige;
 end;
 
 otherwise
@@ -296,19 +296,19 @@ dmat = zeros(nobs,nobs);
         northi = norths(j,1);
         dx = easts - easti;
         dy = norths - northi;
-        d = dx.*dx + dy.*dy;    
-        dmat(:,j) = d;  
+        d = dx.*dx + dy.*dy;
+        dmat(:,j) = d;
     end;
 
 % generate distance decay matrix
-wt = zeros(nobs,nobs);  
+wt = zeros(nobs,nobs);
 if dtype == 1,     % exponential weights
-        wt = exp(-dmat/bwidth); 
-elseif dtype == 0, % gaussian weights  
+        wt = exp(-dmat/bwidth);
+elseif dtype == 0, % gaussian weights
         sd = std(sqrt(dmat));
         tmp = matdiv(sqrt(dmat),sd*bwidth);
         wt = stdn_pdf(tmp);
-elseif dtype == 2  
+elseif dtype == 2
 % case of tricube weights handled a bit differently
    % sort distance to find q nearest neighbors
  ds = sort(dmat); dmax = ds(q+1,:);
@@ -316,9 +316,9 @@ elseif dtype == 2
  nzip = find(dmat(:,j) <= dmax(1,j));
         wt(nzip,j) = (1-(dmat(nzip,j)/dmax(1,j)).^3).^3;
         end; % end of j-loop
-end;  % end of if-else    
+end;  % end of if-else
 
-% take the sqrt once      
+% take the sqrt once
 wt = sqrt(wt);
 
 % storage for estimates
@@ -338,7 +338,7 @@ dtemp = zeros(nomit,1);
 
 in = ones(nobs,1);
 if dflag == 0, % we need an initial delta value
- delta = 1; 
+ delta = 1;
 end;
 
 if dscale ~= 1,
@@ -347,23 +347,23 @@ dscale = 1;
 sflag = 1;
 end;
 
-t0 = clock; 
+t0 = clock;
 hwait = waitbar(0,'Gibbs sampling ...');
 
 for iter = 1:ndraw;
  bsum = 0.0;
- 
+
 for i = 1:nobs; % loop over all observations
   sige = sigis(i,1);
-  sigd = sige*delta; 
-% set up prior restriction 
-        if i > 1    
+  sigd = sige*delta;
+% set up prior restriction
+        if i > 1
         bim1 = bi;
         else
         bim1 = gam1; % use GWR for obs 1
-        end; 
+        end;
 % create y-tilde, x-tilde
-  nzip = find(wt(:,i) >= 0.01); 
+  nzip = find(wt(:,i) >= 0.01);
   V = sqrt(vmean(nzip,i));
   xt = matmul(wt(nzip,i),xs(nzip,:));
   yt = wt(nzip,i).*ys(nzip,1);
@@ -371,33 +371,33 @@ for i = 1:nobs; % loop over all observations
   xss = matmul(V,xt);
   xpx = xt'*xt;
   xx = inv(xpx);
-% concentric city prior 
+% concentric city prior
   Q = xpx/sigd;
-  Qpc = Q*bim1;  
+  Qpc = Q*bim1;
 % update bi estimates
-  xpxi = inv(xss'*xss + sige*Q); 
-  xpy = (xss'*yss + sige*Qpc); 
-  bi = xpxi*xpy;    
+  xpxi = inv(xss'*xss + sige*Q);
+  xpy = (xss'*yss + sige*Qpc);
+  bi = xpxi*xpy;
   a = chol(xpxi);
-  bi = sqrt(sige)*a'*randn(nvar,1) + bi; 
-% update sige 
-  nu1 = length(nzip) + nu; 
+  bi = sqrt(sige)*a'*randn(nvar,1) + bi;
+% update sige
+  nu1 = length(nzip) + nu;
   e = yss - xss*bi;
   d1 = d0 + e'*e;
   chi = chis_rnd(1,nu1);
   sige = d1/chi; sigis(i,1) = sige;
-  sigd = sige*delta;  
+  sigd = sige*delta;
 % update vi
   e = yt - xt*bi;
-  chiv = chis_rnd(length(nzip),rval+1);   
+  chiv = chis_rnd(length(nzip),rval+1);
   vi = ((e.*e./sige) + rval)./chiv;
-  vmean(nzip,i) = ones(length(nzip),1)./vi;   
+  vmean(nzip,i) = ones(length(nzip),1)./vi;
 % compute bsum for delta update below
   if dflag == 0
-  bsum = bsum + ((bi-bim1)'*xx*(bi-bim1))/sigd; 
+  bsum = bsum + ((bi-bim1)'*xx*(bi-bim1))/sigd;
   end;
 % store results in unsorted order
-  if iter > nomit    
+  if iter > nomit
   bsave(iter-nomit,di(i,1),:) = bi';
   smean(di(i,1),1) = smean(di(i,1),1) + sige;
 % compute log posterior
@@ -405,7 +405,7 @@ for i = 1:nobs; % loop over all observations
   tind = find(tvec > 0); % avoid log of zero
   esum = sum(wt(tind,i).*(log(tvec(tind,1)) - log(sige*vmean(tind,i))));
   lpost(i,1) = lpost(i,1) + esum;
-  end; 
+  end;
 
 end; % end loop over observations
 
@@ -413,10 +413,10 @@ end; % end loop over observations
  if dflag == 0
 % get delta draw
       chi = chis_rnd(1,nobs*nvar);
-      delta = dscale*(bsum/chi);  
-      dtemp(iter,1) = delta;       
+      delta = dscale*(bsum/chi);
+      dtemp(iter,1) = delta;
  elseif dflag == 1
-      delta = gamm_rnd(1,1,ss,tt); 
+      delta = gamm_rnd(1,1,ss,tt);
 % note case of dflag == 2, keep same delta value during sampling
  end;
 
@@ -436,10 +436,10 @@ end;
 
     waitbar(iter/ndraw)
 
-% [iter sige delta max(mean(vmean)) ]  
+% [iter sige delta max(mean(vmean)) ]
 
 end; % end of loop over draws
-close(hwait); 
+close(hwait);
 
 gtime = etime(clock,t0);
 vout = vsave/(ndraw-nomit);
@@ -478,7 +478,7 @@ results.ycoord = north;
 if rflag == 0
 results.r = rval;
 elseif rflag == 1
-results.r = rval;        
+results.r = rval;
 elseif rflag == 2,
 results.r = mean(rsave);
 end;
@@ -488,14 +488,14 @@ if dflag == 2
 results.d = delta;
 elseif dflag == 0
 results.d = mean(dsave);
-results.ddraw = dsave;        
+results.ddraw = dsave;
 elseif dflag == 1
 results.d = mean(dsave);
-results.ddraw = dsave;        
+results.ddraw = dsave;
 end;
 
 case {1} % distance prior
- 
+
 % generate big distance matrix
 dmat = zeros(nobs,nobs);
     for j=1:nobs;
@@ -504,18 +504,18 @@ dmat = zeros(nobs,nobs);
         northi = north(j,1);
         dx = east - easti;
         dy = north - northi;
-        d = dx.*dx + dy.*dy;    
+        d = dx.*dx + dy.*dy;
         dmat(:,j) = d;
     end;
 % generate distance decay matrix
-wt = zeros(nobs,nobs);  
+wt = zeros(nobs,nobs);
 if dtype == 1,     % exponential weights
-        wt = exp(-dmat/bwidth); 
-elseif dtype == 0, % gaussian weights  
+        wt = exp(-dmat/bwidth);
+elseif dtype == 0, % gaussian weights
         sd = std(sqrt(dmat));
         tmp = matdiv(sqrt(dmat),sd*bwidth);
         wt = stdn_pdf(tmp);
-elseif dtype == 2  
+elseif dtype == 2
 % case of tricube weights handled a bit differently
    % sort distance to find q nearest neighbors
  ds = sort(dmat); dmax = ds(q+1,:);
@@ -523,7 +523,7 @@ elseif dtype == 2
  nzip = find(dmat(:,j) <= dmax(1,j));
         wt(nzip,j) = (1-(dmat(nzip,j)/dmax(1,j)).^3).^3;
         end; % end of j-loop
-end;  % end of if-else  
+end;  % end of if-else
 
 wt = sqrt(wt);
 
@@ -554,7 +554,7 @@ in = ones(nobs,1);
 JKg = zeros(nvar,1);
 
 if dflag == 0, % we need an initial delta value
- delta = 1; 
+ delta = 1;
 end;
 
 if dscale ~= 1,
@@ -564,12 +564,12 @@ dscale = 1;
 end;
 
 
-t0 = clock; 
+t0 = clock;
 hwait = waitbar(0,'Gibbs sampling ...');
 for iter = 1:ndraw;
  bsum = 0.0;
- 
- for i = 1:nobs; % loop over all observations    
+
+ for i = 1:nobs; % loop over all observations
  sige = sigi(i,1);
  sigd = sige*delta;
  nzip = find(wt(:,i) >= 0.01);
@@ -585,31 +585,31 @@ for j=1:nvar
   JKg(j,1) = wtn(i,:)*gam(:,j);
 end;
   Q = xpx/sigd;
-  Qpc = Q*JKg; 
-% update b 
-  xpxi = inv(xs'*xs + sige*Q); 
-  xpy = (xs'*ys + sige*Qpc); 
-  bi = xpxi*xpy;    
+  Qpc = Q*JKg;
+% update b
+  xpxi = inv(xs'*xs + sige*Q);
+  xpy = (xs'*ys + sige*Qpc);
+  bi = xpxi*xpy;
   a = chol(xpxi);
-  bi = sqrt(sige)*a'*randn(nvar,1) + bi;          
+  bi = sqrt(sige)*a'*randn(nvar,1) + bi;
 % update gamma for next trip
   gam(i,:) = bi';
-% update sige 
-  nu1 = length(nzip) + nu; 
+% update sige
+  nu1 = length(nzip) + nu;
   e = ys - xs*bi;
   d1 = d0 + e'*e;
   chi = chis_rnd(1,nu1);
-  sige = d1/chi; 
+  sige = d1/chi;
   sigi(i,1) = sige;
-  sigd = sige*delta;  
+  sigd = sige*delta;
 % update vi
   e = yt(nzip,1) - xt(nzip,:)*bi;
-  chiv = chis_rnd(length(nzip),rval+1);   
+  chiv = chis_rnd(length(nzip),rval+1);
   vi = ((e.*e./sige) + rval)./chiv;
-  vmean(nzip,i) = ones(length(nzip),1)./vi;   
+  vmean(nzip,i) = ones(length(nzip),1)./vi;
 % compute bsum for delta update below
 if dflag == 0
-  bsum = bsum + ((bi-JKg)'*xx*(bi-JKg))/sigd; 
+  bsum = bsum + ((bi-JKg)'*xx*(bi-JKg))/sigd;
 end;
   if iter > nomit % save draws
   bsave(iter-nomit,i,:) = bi;
@@ -619,7 +619,7 @@ end;
   tind = find(tvec > 0); % avoid log of zero
   esum = sum(wt(tind,i).*(log(tvec(tind,1)) - log(sige*vmean(tind,i))));
   lpost(i,1) = lpost(i,1) + esum;
-  end; 
+  end;
 end; % end loop over observations
 
 % update delta
@@ -627,9 +627,9 @@ if dflag == 0
 % get delta draw
       chi = chis_rnd(1,nobs*nvar);
       delta = dscale*(bsum/chi);
-      dtemp(iter,1) = delta;         
+      dtemp(iter,1) = delta;
 elseif dflag == 1
-      delta = gamm_rnd(1,1,ss,tt); 
+      delta = gamm_rnd(1,1,ss,tt);
 % note case of dflag == 2, keep same delta value during sampling
 end;
 
@@ -648,7 +648,7 @@ end;
 
     waitbar(iter/ndraw)
 
-%[iter sige delta max(mean(vmean')) ]  
+%[iter sige delta max(mean(vmean')) ]
 
 end; % end of loop over draws
 close(hwait);
@@ -679,7 +679,7 @@ results.k = kk;
 if rflag == 0
 results.r = rval;
 elseif rflag == 1
-results.r = rval;  
+results.r = rval;
 elseif rflag == 2,
 results.r = mean(rsave);
 end;
@@ -689,10 +689,10 @@ if dflag == 2
 results.d = delta;
 elseif dflag == 0
 results.d = mean(dsave);
-results.ddraw = dsave;        
+results.ddraw = dsave;
 elseif dflag == 1
 results.d = mean(dsave);
-results.ddraw = dsave;        
+results.ddraw = dsave;
 end;
 
 
@@ -711,19 +711,19 @@ dmat = zeros(nobs,nobs);
         northi = north(j,1);
         dx = east - easti;
         dy = north - northi;
-        d = dx.*dx + dy.*dy;    
+        d = dx.*dx + dy.*dy;
         dmat(:,j) = d;
     end;
-    
+
 % generate distance decay matrix
-wt = zeros(nobs,nobs);  
+wt = zeros(nobs,nobs);
 if dtype == 1,     % exponential weights
-        wt = exp(-dmat/bwidth); 
-elseif dtype == 0, % gaussian weights  
+        wt = exp(-dmat/bwidth);
+elseif dtype == 0, % gaussian weights
         sd = std(sqrt(dmat));
         tmp = matdiv(sqrt(dmat),sd*bwidth);
         wt = stdn_pdf(tmp);
-elseif dtype == 2  
+elseif dtype == 2
 % case of tricube weights handled a bit differently
    % sort distance to find q nearest neighbors
  ds = sort(dmat); dmax = ds(q+1,:);
@@ -731,7 +731,7 @@ elseif dtype == 2
  nzip = find(dmat(:,j) <= dmax(1,j));
         wt(nzip,j) = (1-(dmat(nzip,j)/dmax(1,j)).^3).^3;
         end; % end of j-loop
-end;  % end of if-else  
+end;  % end of if-else
 
 wt = sqrt(wt);
 
@@ -752,7 +752,7 @@ in = ones(nobs,1);
 JKg = zeros(nvar,1);
 
 if dflag == 0, % we need an initial delta value
- delta = 1; 
+ delta = 1;
 end;
 
 if dscale ~= 1,
@@ -761,14 +761,14 @@ sflag = 1;
 scale = 1;
 end;
 
-t0 = clock; 
+t0 = clock;
 hwait = waitbar(0,'Gibbs sampling ...');
 
 for iter = 1:ndraw;
  bsum = 0.0;
 
  for i = 1:nobs; % loop over all observations
- 
+
  sige = sigi(i,1);
  sigd = sige*delta;
  nzip = find(wt(:,i) >= 0.01);
@@ -782,19 +782,19 @@ for iter = 1:ndraw;
 % contiguity prior
   for j=1:nvar
   JKg(j,1) = W(i,:)*gam(:,j);
-  end;  
+  end;
   Q = xpx/sigd;
-  Qpc = Q*JKg; 
-% update b 
-  xpxi = inv(xs'*xs + sige*Q); 
-  xpy = (xs'*ys + sige*Qpc); 
-  bi = xpxi*xpy;    
+  Qpc = Q*JKg;
+% update b
+  xpxi = inv(xs'*xs + sige*Q);
+  xpy = (xs'*ys + sige*Qpc);
+  bi = xpxi*xpy;
   a = chol(xpxi);
-  bi = sqrt(sige)*a'*randn(nvar,1) + bi;          
+  bi = sqrt(sige)*a'*randn(nvar,1) + bi;
 % update gamma for next trip
   gam(i,:) = bi';
-% update sige 
-  nu1 = length(nzip) + nu; 
+% update sige
+  nu1 = length(nzip) + nu;
   e = ys - xs*bi;
   d1 = d0 + e'*e;
   chi = chis_rnd(1,nu1);
@@ -802,12 +802,12 @@ for iter = 1:ndraw;
   sigd = sige*delta;
 % update vi
   e = yt(nzip,1) - xt(nzip,:)*bi;
-  chiv = chis_rnd(length(nzip),rval+1);   
+  chiv = chis_rnd(length(nzip),rval+1);
   vi = ((e.*e./sige) + rval)./chiv;
-  vmean(nzip,i) = ones(length(nzip),1)./vi;   
+  vmean(nzip,i) = ones(length(nzip),1)./vi;
 % compute bsum for delta update below
 if dflag == 0
-  bsum = bsum + ((bi-JKg)'*xx*(bi-JKg))/sigd; 
+  bsum = bsum + ((bi-JKg)'*xx*(bi-JKg))/sigd;
 end;
   if iter > nomit % save draws
   bsave(iter-nomit,i,:) = bi';
@@ -825,9 +825,9 @@ end; % end loop over observations
 % get delta draw
       chi = chis_rnd(1,nobs*nvar);
       delta = dscale*(bsum/chi);
-      dtemp(iter,1) = delta;         
+      dtemp(iter,1) = delta;
  elseif dflag == 1
-      delta = gamm_rnd(1,1,ss,tt); 
+      delta = gamm_rnd(1,1,ss,tt);
 % note case of dflag == 2, keep same delta value during sampling
 end;
 
@@ -875,7 +875,7 @@ results.k = kk;
 if rflag == 0
 results.r = rval;
 elseif rflag == 1
-results.r = rval;  
+results.r = rval;
 elseif rflag == 2,
 results.r = mean(rsave);
 end;
@@ -884,14 +884,14 @@ results.t = tt;
 if dflag == 2
 results.d = delta;
 elseif dflag == 0
-results.ddraw = dsave;        
+results.ddraw = dsave;
 results.d = mean(dsave);
 elseif dflag == 1
 results.d = mean(dsave);
-results.ddraw = dsave;        
+results.ddraw = dsave;
 end;
 
- 
+
 otherwise
         error('bgwr: prior parameter smoothing relation unkown to bgwr');
 end;

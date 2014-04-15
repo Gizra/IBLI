@@ -1,5 +1,5 @@
 % Geographically weighted regression estimation functions
-%   
+%
 %             bgwr : compute Bayesian geographically weighted regression
 %           bgwr_d : An example of using bgwr()
 %          bgwr_d2 : An example of using bgwr()

@@ -43,11 +43,13 @@ PRO eModisShell , settingsFilePath
 ;; The outputs are updated CSV files.
 
 
-;; - - - - Step 0 : Read Input File - - - - 
+;; - - - - Step 0 : Read Input File - - - -
+tempsettingsFilePath = command_line_args(count=nparams)
+IF (nparams GE 1) THEN BEGIN
+settingsFilePath = tempsettingsFilePath
+ENDIF
 
-settingsFilePath = DIALOG_PICKFILE(/READ, FILTER = '*.txt')
-
-IF (STRLEN(settingsFilePath) LT 2) THEN BEGIN
+IF ((nparams LT 1) and (settingsFilePath EQ '')) THEN BEGIN
   print, 'Please Enter a valid file'
   STOP
 ENDIF
@@ -58,71 +60,91 @@ IF FILE_TEST(settingsFilePath) EQ 0 THEN BEGIN
 ENDIF
 
 
-WorkingFolder=''
-SUBSET=''
-map_info=''
-adminFile=''
-startYearData=''
 
-;inData = CREATE_STRUCT('WorkingFolder','','SUBSET',0,'map_info','','adminFile','','startYearData',0,'nImagesYear',0,'periodLag',0,'startPeriodLong',0,'numberPeriodsLong',0,'startPeriodShort',0,'numberPeriodsShort',0)
-
-WorkingFolder='/home/mbrv/tryUNIX/'
-SUBSET=[ 5300  ,  7200   , 3400, 4300]
-map_info = "{Geographic Lat/Lon, 1.0000, 1.0000, 33.7889, 5.6265, 2.4130000000e-003, 2.4130000000e-003, WGS-84, units=Degrees}"
-adminFile = '/media/sf_sideProjects/NDVI_NIR/divisionID.img'
-
-
-  startYearData = 2013               ; startYear of data
-  nImagesYear = 9                   ; number of images per year (three per month)
-  periodLag   =  10                   ; first image of the year - July (note, for IDL do -1)
-  startPeriodLong = 7                ; start Period for long rains (1=first of January, 7 is first of March here)
-  numberPeriodsLong = 21             ; how many periods (10-day) are in the long season
-  startPeriodShort = 28              ; start Period for long rains (1=first of January, 28 is first of October here)
-  numberPeriodsShort = 15            ; at time of update Nov2013 we only have 5 dekads for numberPeriodsShort
-  
 
 
 OPENR, lun, settingsFilePath, /GET_LUN
 line = ''
 WHILE NOT EOF(lun) DO BEGIN & $
   READF, lun, line & $
-  print,line
+  ;print,line
+  
+  if (strpos(line,'=') GT 1) then begin
+  
+print,strmid(line,0,strpos(line,'='))
+    print,strmid(line,strpos(line,'=')+1,strlen(line)-strpos(line,'='))
+    
+  if NOT(KEYWORD_SET(dataStruct)) then begin
+    dataStruct = create_struct(strtrim(strmid(line,0,strpos(line,'=')),2),strtrim(strmid(line,strpos(line,'=')+1,strlen(line)-strpos(line,'=')),2))
+  endif else  begin
+    tmpStruct = create_struct(strtrim(strmid(line,0,strpos(line,'=')),2),strtrim(strmid(line,strpos(line,'=')+1,strlen(line)-strpos(line,'=')),2))
+    dataStruct = struct_addtags(dataStruct,tmpStruct)
+  endelse
+    
+    
+  
+  
+  
+  ;WAIT,5
+  
   ;suc = EXECUTE(line)
 ;  IF suc NE 1 THEN BEGIN
     ;print, 'Check your settings file to be in the format requested . . .'
     ;STOP
   ;ENDIF 
+  endif
 ENDWHILE
 ; Close the file and free the file unit
 FREE_LUN, lun
 
-IF KEYWORD_SET(WorkingFolder) NE 1 THEN BEGIN
+IF NOT(tag_exist(dataStruct,'WorkingFolder')) THEN BEGIN
     print, 'Check your settings file to be in the format requested . . . (Seems like the WorkingFolder was not defined)'
     STOP
-ENDIF
+ENDIF ELSE BEGIN
+    WorkingFolder=dataStruct.WorkingFolder 
+ENDELSE
 
 
 
-IF KEYWORD_SET(SUBSET) NE 1 THEN BEGIN
+IF NOT(tag_exist(dataStruct,'SUBSET')) THEN BEGIN
     print, 'Check your settings file to be in the format requested . . . (Seems like the SUBSET was not defined)'
     STOP
-ENDIF
+ENDIF ELSE BEGIN
+    data = strsplit(dataStruct.SUBSET,'[',/EXTRACT)
+    data = strsplit(data,']',/EXTRACT)
+    data = strsplit(data,',',/EXTRACT)
+    SUBSET = float(data)
+ENDELSE
 
-IF KEYWORD_SET(map_info) NE 1 THEN BEGIN
+IF NOT(tag_exist(dataStruct,'map_info')) THEN BEGIN
     print, 'Check your settings file to be in the format requested . . . (Seems like the map_info was not defined)'
     STOP
-ENDIF
+ENDIF ELSE BEGIN
+    map_info = dataStruct.map_info
+ENDELSE
 
-IF KEYWORD_SET(adminFile) NE 1 THEN BEGIN
+IF NOT(tag_exist(dataStruct,'adminFile')) THEN BEGIN
     print, 'Check your settings file to be in the format requested . . . (Seems like the admin file (with the devisions) was not defined)'
     STOP
-ENDIF
+ENDIF ELSE BEGIN
+    adminFile=dataStruct.adminFile
+ENDELSE
+
+
 
  
-IF (KEYWORD_SET(startYearData) OR KEYWORD_SET(nImagesYear) OR KEYWORD_SET(periodLag) OR KEYWORD_SET(startPeriodLong) OR KEYWORD_SET(numberPeriodsLong) OR KEYWORD_SET(startPeriodShort) OR KEYWORD_SET(numberPeriodsShort)) NE 1 THEN BEGIN
-    print, 'Check your settings file to be in the format requested . . . (Seems like the admin file (with the devisions) was not defined)'
+IF (NOT(tag_exist(dataStruct,'startYearData')) OR NOT(tag_exist(dataStruct,'nImagesYear')) OR NOT(tag_exist(dataStruct,'periodLag'))  OR NOT(tag_exist(dataStruct,'startPeriodLong')) OR NOT(tag_exist(dataStruct,'numberPeriodsLong')) OR NOT(tag_exist(dataStruct,'startPeriodShort')) OR NOT(tag_exist(dataStruct,'numberPeriodsShort'))) THEN BEGIN
+    print, 'Check your settings file to be in the format requested . . . (Seems like the period definitions has a problem . . .)'
     STOP
-ENDIF
+ENDIF ELSE BEGIN
+  startYearData=float(dataStruct.startYearData)
+  nImagesYear=float(dataStruct.nImagesYear)
+  periodLag=float(dataStruct.periodLag)
+  startPeriodLong=float(dataStruct.startPeriodLong)
+  numberPeriodsLong=float(dataStruct.numberPeriodsLong)
+  startPeriodShort=float(dataStruct.startPeriodShort)
+  numberPeriodsShort=float(dataStruct.numberPeriodsShort)
+ENDELSE
 
 
 

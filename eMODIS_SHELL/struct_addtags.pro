@@ -133,8 +133,8 @@ function struct_addtags, struct, tags_or_struct, values, structype=structype
         if size(values,/tname) ne 'STRING' then begin
             message,'values must be a string array'
         endif 
-        tmpstr = mrd_struct(tags_or_struct, values, n_struct)
-
+        tmpstr = mrd_struct(tags_or_struct, values, n_struct,/NO_EXECUTE)
+        ;tmpstr = create_struct(strtrim(tags_or_struct), values)
         if size(tmpstr,/tname) eq 'INT' then begin 
             message,'Error: MRD_STRUCT exited with error'
         endif 

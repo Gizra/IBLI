@@ -6,15 +6,15 @@ LastSRSDyear=2012;% set last season in historical data for season
 sensor='eMODIS'; %set the sensor to use from Anton data
 season='s'; %set season to estimate, 'l' for long, 's' for short
 %Add path to include needed support files
-addpath(genpath(strcat(filepathMain,'\MatlabFunctionFiles\')));
+addpath(genpath(strcat(filepathMain,'/matlabfunctionfiles/')));
 %specify folder with Anton data, which is hopefully in the main folder path
-datafolderpath='\z-scoring_first_CalibratedSeries\';
+datafolderpath='/z-scoring_first_CalibratedSeries/';
 %% Import base NDVI Files for estimation
 if season=='l'
-    load(strcat(filepathMain,'\LRLDbasedata'));
+    load(strcat(filepathMain,'/LRLDbasedata'));
     
 else
-    load(strcat(filepathMain,'\SRSDbasedata'));
+    load(strcat(filepathMain,'/SRSDbasedata'));
 end
 
 %import ndvi data for model fitting
@@ -167,8 +167,8 @@ rateFinal10=rate10outsample.*(1-credfact)+rate10insample.*credfact;
 
 %write rates to output
 %writes rates to 108x1 matrix in a csv file for all 108 divisions
-csvwrite(strcat(filepathMain,'\SRSDratefinal15.csv'),rateFinal15); 
-csvwrite(strcat(filepathMain,'\SRSDratefinal10.csv'),rateFinal10); 
+csvwrite(strcat(filepathMain,'/SRSDratefinal15.csv'),rateFinal15); 
+csvwrite(strcat(filepathMain,'/SRSDratefinal10.csv'),rateFinal10); 
 
 %% Calculate final index value and indemnity (% payment)  
 ImportFinalNDVI_SRSD %imports final NDVI preFINAL and postFINAL
@@ -181,8 +181,8 @@ FinalIndexVal_SRSD=max(0,(eye(nDivs,nDivs)-resC(iIter).rho*W)^-1*(xFINAL*resC(iI
 IndemFinal15=max(FinalIndexVal_SRSD-.15,0);
 IndemFinal10=max(FinalIndexVal_SRSD-.10,0);
 
-csvwrite(strcat(filepathMain,'\SRSDfinalIndex.csv'),FinalIndexVal_SRSD);
-csvwrite(strcat(filepathMain,'\SRSDfinalIndem15.csv'),IndemFinal15);
-csvwrite(strcat(filepathMain,'\SRSDfinalIndem10.csv'),IndemFinal10);
+csvwrite(strcat(filepathMain,'/SRSDfinalIndex.csv'),FinalIndexVal_SRSD);
+csvwrite(strcat(filepathMain,'/SRSDfinalIndem15.csv'),IndemFinal15);
+csvwrite(strcat(filepathMain,'/SRSDfinalIndem10.csv'),IndemFinal10);
 
 clear

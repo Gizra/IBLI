@@ -1,5 +1,5 @@
-% PURPOSE: An example of using sar on a large data set   
-%          Gibbs sampling spatial autoregressive model                         
+% PURPOSE: An example of using sar on a large data set
+%          Gibbs sampling spatial autoregressive model
 %---------------------------------------------------
 % USAGE: sar_d3 (see sar_d for a small data set)
 %---------------------------------------------------

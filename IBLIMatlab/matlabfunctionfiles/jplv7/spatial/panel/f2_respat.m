@@ -31,6 +31,6 @@ for i=1:N
    p1=1+T*teta^2*(1-lambda(i)*delta)^2;
    p2=1-lambda(i)*delta;
    somp1=somp1+log(p1);
-   somp2=somp2+log(p2);   
+   somp2=somp2+log(p2);
 end
 llike=(N*T)/2*log(2*pi*si2)+1/2*somp1-T*somp2+(0.5/si2)*res2;

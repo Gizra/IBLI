@@ -6,7 +6,7 @@ function result = accumulate(x)
 %---------------------------------------------------
 % RETURNS:
 %        results = nobs x nvar matrix containing cumulative sums
-%        of the column elements of the matrix argument x 
+%        of the column elements of the matrix argument x
 %--------------------------------------------------
 
 % written by:

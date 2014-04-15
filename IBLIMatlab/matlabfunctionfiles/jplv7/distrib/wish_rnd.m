@@ -9,15 +9,15 @@ function w = wish_rnd(sigma,v)
 %        w = random wishart_n(sigma)
 %             distributed matrix
 %------------------------------------------------
-% REFERENCES: Gelman, Carlin, Stern, Rubin, Bayesian Data 
+% REFERENCES: Gelman, Carlin, Stern, Rubin, Bayesian Data
 %             Analysis, (1995,96) pages 474, 480-481.
 
 % written by:
 % Aki Vehtari
-% Helsinki University of Technology 
-% Lab. of Computational Engineering 
-% P.O.Box 9400 
-% FIN-02015 HUT 
+% Helsinki University of Technology
+% Lab. of Computational Engineering
+% P.O.Box 9400
+% FIN-02015 HUT
 % FINLAND
 % Aki.Vehtari@hut.fi
 

@@ -2,7 +2,7 @@ function out=lndetint(wsw,rmin,rmax)
 % PURPOSE: computes Pace and Barry's spline approximation to log det(I-rho*W)
 % -----------------------------------------------------------------------
 % USAGE: out = lndetint(W)
-% where:    
+% where:
 %             W     = symmetric spatial weight matrix (standardized)
 % -----------------------------------------------------------------------
 % RETURNS: out = a structure variable
@@ -16,10 +16,10 @@ function out=lndetint(wsw,rmin,rmax)
 % Spatially autoregressive Estimators", Computational Statistics, 1998,
 % Vol. 13, pp. 397-418.
 % -----------------------------------------------------------------------
- 
-% This function computes a vector of log-determinants for a vector 
+
+% This function computes a vector of log-determinants for a vector
 % of AR parameters (alpha)
-% It uses a spline interpolation routine to reduce the number of 
+% It uses a spline interpolation routine to reduce the number of
 % determinants computed
 % Written by Kelley Pace, 3/19/98
 % (named fdetinterpasym1.m in the spatial statistics toolbox )

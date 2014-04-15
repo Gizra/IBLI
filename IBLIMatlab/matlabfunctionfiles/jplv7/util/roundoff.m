@@ -12,7 +12,7 @@ function y = roundoff(number,decimal_places)
 % I don't know who wrote this one, but it comes
 % in handy sometimes
 
- 
+
  decimals = 10.^decimal_places;
- 
+
  y = fix(decimals * number + 0.5)./decimals;

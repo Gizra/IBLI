@@ -3,7 +3,7 @@ function nnlist = find_neighbors(xc,yc,m)
 %          (slow but low memory version) returns an index to these neighboring observations
 % --------------------------------------------------------
 % USAGE: nnindex = find_neighbors(xc,yc,m)
-%       where: 
+%       where:
 %             xc = x-coordinate for each obs (nobs x 1)
 %             yc = y-coordinate for each obs (nobs x 1)
 %             m  = # of nearest neighbors to be found

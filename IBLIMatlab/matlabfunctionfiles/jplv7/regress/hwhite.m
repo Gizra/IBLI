@@ -24,7 +24,7 @@ function results=hwhite(y,x)
 % --------------------------------------------------
 % SEE ALSO: hwhite_d, prt(results), plt(results)
 %---------------------------------------------------
-% References: H. White 1980, Econometrica Vol. 48 pp. 818-838. 
+% References: H. White 1980, Econometrica Vol. 48 pp. 818-838.
 %---------------------------------------------------
 
 % written by:
@@ -70,7 +70,7 @@ results.dw = diag((ediff'*ediff)./(sigu))'; % durbin-watson
 
 
 function xuux = mcov(x,u)
-% PURPOSE: computes x'*u*u'*x 
+% PURPOSE: computes x'*u*u'*x
 %----------------------------------------------------------------
 % USAGE:   xuux = mcov(x,u);
 % where: x = nobs x nvar explanatory variables matrix
@@ -79,7 +79,7 @@ function xuux = mcov(x,u)
 % RETURNS: xuux such that xpx-inverse*xuux*xpx-inverse
 %          represents a heteroscedasticity consistent vcv matrix
 %----------------------------------------------------------------
-% References: H. White 1980, Econometrica Vol. 48 pp. 818-838. 
+% References: H. White 1980, Econometrica Vol. 48 pp. 818-838.
 %----------------------------------------------------------------
 
 % written by:

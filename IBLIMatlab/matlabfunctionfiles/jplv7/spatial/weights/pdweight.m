@@ -11,7 +11,7 @@ function g=pdweight(xcoord,ycoord,lower,upper,RowStdOpt);
 %            rowstdopt = 1 for row-standardization
 %                      = 0 for no standardization
 % ------------------------------------------------------
-% RETURNS: 
+% RETURNS:
 %          W = a sparse weight matrix based on distance cut-offs
 %              set by lower and upper input options
 % ------------------------------------------------------
@@ -36,7 +36,7 @@ for i=1:(length(xcoord));
       j=1;
       p1=[1 1 -9999];%Make an inital value;
         %Begin loop to compute distance from observation i to all other observations;
-      
+
             for j=1:(length(xcoord));
 
                 if xcoord(i)==xcoord(j) & ycoord(i)==ycoord(j);
@@ -48,12 +48,12 @@ for i=1:(length(xcoord));
                     Ydist=abs(ycoord(i)-ycoord(j));
                     D = sqrt(Xdist^2 + Ydist^2);
                 end;
-                
+
                 p = [i j D];
-                                                    
+
                 %A loop to generate a list of neighbors j of current obs i
                     if D > lower & D <= upper;%Check to see if j meets the neighborhood cutoff criteria
-                        
+
                         if p1(3) == -9999;  %If this is the first j in the list of neighbors, then
                                             %make it the inital data set;
                             p1=p;
@@ -61,23 +61,23 @@ for i=1:(length(xcoord));
                             p1 = [p1;p];%If this is not the first j in the list of neighbors, then append this
                                         %to previous list of all neighbors j for observation i.
                         end;
-                        
+
                     else;
                         p1=p1;%If distance between i and j did not meet neighborhood cutoff criteria, then
                                 %do not append this to previous list of neighbors for obs. i;
                     end;
                 j=j+1; %Step to next neighbor j of observation i
-                    
+
             end;
-            
+
             if p1(3) == 0;%A Check to see if observation i had any neighbors within cutoff
                 i=i+1;%If it did not, then pass loop to next i
             else;
-                    
-                
+
+
                     %If observation i had at least 1 neighbor within cutoff, then append that data to
                     %previous data set for i-1
-                    
+
                     if RowStdOpt == 1;%Row standardize the weight matrix
                         p1(:,3) = p1(:,3) ./ sum(p1(:,3));
                     end;
@@ -89,10 +89,10 @@ for i=1:(length(xcoord));
                                     %then append current observation i's neighbors to all other previous i's neighbors
                         clear p1;
                     end;
-                
+
                  i=i+1;%pass loop to next i
             end;
   end;
-  
+
   %Generate the sparse matrix
   g=sparse(p2(:,1),p2(:,2),p2(:,3));

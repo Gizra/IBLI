@@ -6,16 +6,16 @@ function [wswdel,wwsdel,wmatdel]=xy2cont(xc,yc)
 % where:     xcoord = x-direction coordinate
 %            ycoord = y-direction coordinate
 % ------------------------------------------------------
-% RETURNS: 
+% RETURNS:
 %          w1 = W*S*W, a symmetric spatial weight matrix (max(eig)=1)
-%          w2 = W*W*S, a row-stochastic spatial weight matrix, where S represents 
+%          w2 = W*W*S, a row-stochastic spatial weight matrix, where S represents
 %               the adjacency matrix from Delaunay triangles (Voronoi tesselation).
 %          w3 = diagonal matrix with i,i equal to 1/sqrt(sum of ith row)
 % ------------------------------------------------------
 % References: Kelley Pace, Spatial Statistics Toolbox 2.0
 % ------------------------------------------------------
 
-% Written by Kelley Pace, 6/23/97 
+% Written by Kelley Pace, 6/23/97
 % revised on 12/25/02
 % (named fdelw2 in his spatial statistics toolbox)
 % Documentation modified by J. LeSage 11/2002

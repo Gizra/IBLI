@@ -1,6 +1,6 @@
 % PURPOSE: demo of probit()
 %       probit maximum likelihood estimation
-%       (data from Spector and Mazzeo, 1980) 
+%       (data from Spector and Mazzeo, 1980)
 %---------------------------------------------------
 % USAGE: probit_d
 %---------------------------------------------------
@@ -24,7 +24,7 @@ x(1:n,1) = ones(n,1);      % intercept
 x(19:32,2) = ones(n-18,1); % psi variable
 tuce = [20 22 24 12 21 17 17 21 25 29 20 23 23 25 26 19 ...
         25 19 23 25 22 28 14 26 24 27 17 24 21 23 21 19];
-        
+
 x(1:n,3) = tuce';
 
 gpa = [2.66 2.89 3.28 2.92 4.00 2.86 2.76 2.87 3.03 3.92 ...

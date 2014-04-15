@@ -1,10 +1,10 @@
 function results = ols_gv(y,x,ndraw,nomit,prior)
 % PURPOSE: MCMC estimates for the Bayesian heteroscedastic linear model
 %          y = X B + e, p(e_i) = f_t(e_i | 0, v_i, lambda)
-%          p(V) = diag(v_1,v_2,...,v_n) = prod f_G(1/v_i | 1, lambda)  
+%          p(V) = diag(v_1,v_2,...,v_n) = prod f_G(1/v_i | 1, lambda)
 %          p(lambda) = f_G(lambda | v0, 2)
-%          p(B) = f_N(B | c,T),  
-%          p(h) = f_G(h | nu, d0) 
+%          p(B) = f_N(B | c,T),
+%          p(h) = f_G(h | nu, d0)
 %---------------------------------------------------
 % USAGE: results = ols_g(y,x,ndraw,nomit,prior,start)
 % where: y    = dependent variable vector
@@ -42,7 +42,7 @@ function results = ols_gv(y,x,ndraw,nomit,prior)
 %          results.hpd   =  95 percent hpd intervals
 %          results.acc   = acceptance rate
 %---------------------------------------------------
-% REFERENCES: Geweke (1993)  'Bayesian Treatment of the 
+% REFERENCES: Geweke (1993)  'Bayesian Treatment of the
 % Independent Student-$t$ Linear Model', Journal of Applied
 % Econometrics, 8, s19-s40.
 % Gary Koop, Bayesian Econometrics (2003), chapter 6, section 6.4
@@ -79,11 +79,11 @@ fields = fieldnames(prior);
 nf = length(fields);
  for i=1:nf
     if strcmp(fields{i},'v0')
-        v0 = prior.v0; 
+        v0 = prior.v0;
     elseif strcmp(fields{i},'nu')
         nu0 = prior.nu;
     elseif strcmp(fields{i},'d0')
-        d0 = prior.d0;   
+        d0 = prior.d0;
     elseif strcmp(fields{i},'beta');
     b0 = prior.beta;
     elseif strcmp(fields{i},'bcov');
@@ -129,7 +129,7 @@ hdraw=1;
 lamdraw=ones(n,1);
 pdraw=ones(n,1);
 vi = ones(n,1);
-   
+
 hwait = waitbar(0,'ols\_gv: MCMC sampling ...');
 acc = 0;
 iota = ones(n,1);
@@ -138,13 +138,13 @@ for i = 1:s
     ystar=pdraw.*y;
     xstar=matmul(pdraw,x);
     xsquare=xstar'*xstar;
-    
+
     %draw from beta conditional on rest
     capv1inv = capv0inv + hdraw*xsquare;
     capv1=inv(capv1inv);
     b1 = capv1*(capv0inv*b0 + hdraw*xstar'*ystar);
     bdraw = b1 + norm_rnd(capv1);
-     
+
     %draw from h conditional on rest
     sbar = ((ystar-xstar*bdraw)'*(ystar-xstar*bdraw) + vs);
     chi = chis_rnd(1,v1);
@@ -154,7 +154,7 @@ for i = 1:s
     %Random walk Metropolis step for dof
     temp = -log(lamdraw) + lamdraw;
     nu = 1/v0 + .5*sum(temp);
-    
+
      vlcan= vdraw +  cc*randn(1,1);
      if vlcan>0
         lpostcan = .5*n*vlcan*log(.5*vlcan) -n*gammaln(.5*vlcan)...
@@ -165,15 +165,15 @@ for i = 1:s
      else
         accprob=0;
      end
-     
+
 
 %accept candidate draw with log prob = laccprob, else keep old draw
    if  rand<accprob
        vdraw = vlcan;
        pswitch = pswitch + 1;
        acc = acc + 1;
-   end    
-    
+   end
+
       acc_rate(i,1) = acc/i;
       % update cc based on std of rho draws
        if acc_rate(i,1) < 0.4
@@ -184,15 +184,15 @@ for i = 1:s
        cc = cc*1.1;
        ccsave(i,1) = cc;
        end;
-   
+
     %Draw from lamda conditional on rest
           e = y - x*bdraw;
           dof=vdraw+1;
-          chiv = chis_rnd(n,dof);   
+          chiv = chis_rnd(n,dof);
           sige = 1/hdraw;
           vi = ((e.*e./sige) + in*vdraw)./chiv;
           lamdraw = (in./vi);
-          pdraw = sqrt(lamdraw);   
+          pdraw = sqrt(lamdraw);
 
 
     if i>s0
@@ -202,8 +202,8 @@ for i = 1:s
         v_ = [v_ vdraw];
         vmean = vmean + vi;
     end
-    
-waitbar(i/s);         
+
+waitbar(i/s);
 
 end % end of sampling loop
 

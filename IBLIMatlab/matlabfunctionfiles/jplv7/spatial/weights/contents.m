@@ -15,4 +15,4 @@
 %           slag_d : An example of using slag()
 %          xy2cont : uses x,y coordinates to produce spatial contiguity weight matrices
 %        xy2cont_d : An example of using xy2cont()
-%       xy2cont_d2 set for 1980 Presidential election results covering 3,107 
+%       xy2cont_d2 set for 1980 Presidential election results covering 3,107

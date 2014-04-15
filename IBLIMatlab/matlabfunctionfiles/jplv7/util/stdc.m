@@ -2,10 +2,10 @@ function m=stdc(x);
 % PURPOSE: standard deviation of each column
 % -----------------------------------------------------
 % USAGE: x = stdc(y)
-%  where    y = input vector 
+%  where    y = input vector
 % -----------------------------------------------------
 % RETURNS:  x = standard deviations
-% ----------------------------------------------------- 
+% -----------------------------------------------------
 % NOTE: a Gauss compatability function
 % -----------------------------------------------------
 
@@ -15,7 +15,7 @@ function m=stdc(x);
 % 601 University Drive
 % San Marcos, TX 78666
 % jlesage@spatial-econometrics.com
-       
+
 % get standard deviation of each column
 m=std(x);
 if size(m,2)>1;

@@ -1,7 +1,7 @@
-% PURPOSE: demo of unsort() 
+% PURPOSE: demo of unsort()
 %          returns sorted vectors or matrices
-%          in unsorted (orginal) form 
-% 
+%          in unsorted (orginal) form
+%
 %---------------------------------------------------
 % USAGE: unsort_d
 %---------------------------------------------------

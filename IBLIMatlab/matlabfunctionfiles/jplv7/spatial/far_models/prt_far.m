@@ -2,19 +2,19 @@ function prt_far(results,vnames,fid)
 % PURPOSE: Prints output using far model results structures
 %---------------------------------------------------
 % USAGE: prt_far(results,vnames,fid)
-% Where: results = a structure returned by a spatial regression 
+% Where: results = a structure returned by a spatial regression
 %        vnames  = an optional vector of variable names
 %        fid     = optional file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
-%--------------------------------------------------- 
+%---------------------------------------------------
 %  NOTES: e.g. vnames = strvcat('y','const','x1','x2');
 %         e.g. fid = fopen('ols.out','wr');
-%  use prt_far(results,[],fid) to print to a file with no vnames               
+%  use prt_far(results,[],fid) to print to a file with no vnames
 % --------------------------------------------------
 %  RETURNS: nothing, just prints the spatial regression results
 % --------------------------------------------------
 % SEE ALSO: prt, plt
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -33,7 +33,7 @@ elseif nargin == 3
  nflag = 0;
  [vsize junk] = size(vnames); % user may supply a blank argument
    if vsize > 0
-   nflag = 1;          
+   nflag = 1;
    end;
 else
  error('Wrong # of arguments to prt_far');
@@ -137,7 +137,7 @@ nvar = 1;
 Vname = 'Variable';
 % add spatial rho parameter name
     Vname = strvcat(Vname,'rho');
-    
+
 % find posterior means
 bout = mean(results.pdraw);
 sige = mean(results.sdraw);
@@ -157,7 +157,7 @@ else % find plevels
  cnt = find(draws < 0);
  tout = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
-end; 
+end;
 
 
 y = results.y;
@@ -215,7 +215,7 @@ fprintf(fid,'***************************************************************\n')
  if strcmp(results.tflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -301,7 +301,7 @@ fprintf(fid,'***************************************************************\n')
 bout = [results.beta
         results.rho
         results.lam];
-        
+
 
 % <=================== end of sac case
 
@@ -338,7 +338,7 @@ Vname = 'Variable';
  end; % end of if-else
 end; % end of nflag issue
 
-  
+
 % find posterior means
 tmp1 = mean(results.bdraw);
 pout = mean(results.pdraw);
@@ -372,7 +372,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 e = y - results.yhat;
 sigu = e'*e;
@@ -393,7 +393,7 @@ fprintf(fid,'r-value             = %6d   \n',results.r);
 else
 fprintf(fid,'mean of rdraws      = %9.4f \n',mean(results.rdraw));
 fprintf(fid,'gam(m,k) prior      = %6d,%6d \n',results.m,results.k);
-end;    
+end;
 fprintf(fid,'Nobs, Nvars         = %6d,%6d \n',results.nobs,results.nvar);
 fprintf(fid,'ndraws,nomit        = %6d,%6d \n',results.ndraw,results.nomit);
 fprintf(fid,'time in secs        = %9.4f   \n',results.time);
@@ -424,7 +424,7 @@ fprintf(fid,'      Posterior Estimates \n');
  if strcmp(results.tflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -483,7 +483,7 @@ Vname = 'Variable';
  end; % end of if-else
 end; % end of nflag issue
 
-  
+
 % find posterior means
 tmp1 = mean(results.bdraw);
 pout = mean(results.pdraw);
@@ -517,7 +517,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 yhat = results.yhat;
 e = y - yhat;
@@ -546,7 +546,7 @@ fprintf(fid,'r-value            = %6d   \n',results.r);
 else
 fprintf(fid,'mean of rdraws     = %9.4f \n',mean(results.rdraw));
 fprintf(fid,'gam(m,k) prior     = %6d,%6d \n',results.m,results.k);
-end;    
+end;
 fprintf(fid,'Nobs, Nvars        = %6d,%6d \n',results.nobs,results.nvar);
 fprintf(fid,'# censored values  = %6d \n',results.nobsc);
 fprintf(fid,'ndraws,nomit       = %6d,%6d \n',results.ndraw,results.nomit);
@@ -580,7 +580,7 @@ fprintf(fid,'      Posterior Estimates \n');
  if strcmp(results.pflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -672,7 +672,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 yhat = results.yhat;
 
@@ -689,7 +689,7 @@ fprintf(fid,'r-value         = %6d   \n',results.r);
 else
 fprintf(fid,'mean of rdraws  = %9.4f \n',mean(results.rdraw));
 fprintf(fid,'gam(m,k) prior  = %6d,%6d \n',results.m,results.k);
-end; 
+end;
 fprintf(fid,'Nobs, Nvars     = %6d,%6d \n',results.nobs,results.nvar);
 fprintf(fid,'# 0, 1 y-values = %6d,%6d \n',results.zip,nobs-results.zip);
 fprintf(fid,'ndraws,nomit    = %6d,%6d \n',results.ndraw,results.nomit);
@@ -722,7 +722,7 @@ fprintf(fid,'      Posterior Estimates \n');
  if strcmp(results.pflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -745,14 +745,14 @@ mprint(tmp,in);
  end;
 
  return;
- 
+
 % <=================== end of sacp_g case
 
 
 
 case{'moran'}
 fprintf(fid,'Moran I-test for spatial correlation in residuals \n');
-variable = ' '; 
+variable = ' ';
 in.rnames = strvcat(variable,'Moran I','Moran I-statistic','Marginal Probability', ...
          'mean','standard deviation');
 in.fmt = '%16.8f';
@@ -763,7 +763,7 @@ mat = [results.morani
        results.imean
        tmp];
 mprint(mat,in);
-return;    
+return;
 
 case{'lratios'}
 fprintf(fid,'LR tests for spatial correlation in residuals \n');
@@ -774,7 +774,7 @@ mat = [results.lratio
        results.prob
        results.chi1];
 mprint(mat,in);
-return;    
+return;
 
 case{'lmerror'}
 fprintf(fid,'LM error tests for spatial correlation in residuals \n');
@@ -785,7 +785,7 @@ mat = [results.lm
        results.prob
        results.chi1];
 mprint(mat,in);
-return;    
+return;
 
 case{'lmsar'}
 fprintf(fid,'LM error tests for spatial correlation in SAR model residuals \n');
@@ -796,7 +796,7 @@ mat = [results.lm
        results.prob
        results.chi1];
 mprint(mat,in);
-return;    
+return;
 
 case{'walds'}
 fprintf(fid,'Wald test for spatial correlation in residuals \n');
@@ -807,7 +807,7 @@ mat = [results.wald
        results.prob
        results.chi1];
 mprint(mat,in);
-return;    
+return;
 
 otherwise
 error('results structure not known by prt_spat function');

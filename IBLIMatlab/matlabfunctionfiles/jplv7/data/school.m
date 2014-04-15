@@ -3,10 +3,10 @@
 
 % nobs = 610
 % Variable definitions
-% number of students in district           = school(1:nobs,1); 
-% herfindahl index of concentration        = school(1:nobs,2); 
-% unemployment rate                        = school(1:nobs,3); 
-% percentage non-white                     = school(1:nobs,4); 
+% number of students in district           = school(1:nobs,1);
+% herfindahl index of concentration        = school(1:nobs,2);
+% unemployment rate                        = school(1:nobs,3);
+% percentage non-white                     = school(1:nobs,4);
 % median income                            = school(1:nobs,5);
 % proportion of students on welfare        = school(1:nobs,6);
 % expenditures per pupil                   = school(1:nobs,7);

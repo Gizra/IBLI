@@ -9,15 +9,15 @@ function ylevf = becmf(y,nlag,nfor,begf,tight,weight,decay,r);
 %           begf = the beginning date of the forecast
 %          tight = Litterman's tightness hyperparameter
 %         weight = Litterman's symmetric weight (scalar)
-%          decay = Litterman's lag decay = lag^(-decay) 
+%          decay = Litterman's lag decay = lag^(-decay)
 %              r = # of co-integrating relations to use
 %                  (optional: this will be determined using
-%                  Johansen's trace test at 95%-level if left blank)                                    
+%                  Johansen's trace test at 95%-level if left blank)
 %---------------------------------------------------------------
 % NOTES: - constant vector automatically included
 %        - x-matrix of exogenous variables not allowed
 %        - error correction variables are automatically
-%          constructed using output from Johansen's ML-estimator               
+%          constructed using output from Johansen's ML-estimator
 %---------------------------------------------------------------
 % RETURNS:
 %  yfor = an nfor x neqs matrix of level forecasts for each equation
@@ -38,7 +38,7 @@ function ylevf = becmf(y,nlag,nfor,begf,tight,weight,decay,r);
 nmin = min(nobs,begf-1);
 nobse = nmin - nlag;
 
-% do some error checking 
+% do some error checking
 
 if nlag < 1
 error('Lag length less than 1 in becmf');
@@ -53,7 +53,7 @@ error('Negative lag decay in becmf');
 end;
 
 [wchk1 wchk2] = size(weight);
-if (wchk1 ~= wchk2) 
+if (wchk1 ~= wchk2)
  error('non-square weight matrix in becmf');
 elseif wchk1 > 1
  if wchk1 ~= neqs
@@ -83,9 +83,9 @@ nx = 0;
  jres = johansen(y(1:nmin,:),0,nlag);
  % recover error correction vectors
  ecvectors = jres.evec;
-        index = jres.ind; 
+        index = jres.ind;
  % construct r-error correction variables
- x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r); 
+ x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r);
    [nobs2 nx] = size(x);
   elseif nargin == 7 % we have to determine r-value
  jres = johansen(y(1:nmin,:),0,nlag);
@@ -101,10 +101,10 @@ nx = 0;
  end;
  % recover error correction vectors
  ecvectors = jres.evec;
-        index = jres.ind; 
+        index = jres.ind;
  % construct r error correction variables
- x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r); 
-   [nobs2 nx] = size(x); 
+ x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r);
+   [nobs2 nx] = size(x);
   else
    error('Wrong # of input arguments to becmf');
   end;
@@ -113,7 +113,7 @@ nx = 0;
 % adjust nvar for constant term and error correction terms
 k = neqs*nlag+nx+1;
 
-% truncate to begf-1 for estimation 
+% truncate to begf-1 for estimation
 ytrunc = y(1:nmin,:);
 
 % transform to 1st difference form
@@ -171,16 +171,16 @@ bmat(:,j) = reslt.beta;
 
 end;
 
-% given bmat values generate future forecasts 
-    
-% 1-step-ahead forecast 
+% given bmat values generate future forecasts
+
+% 1-step-ahead forecast
 xtrunc = [dy(nmin-(nlag):nmin,:)
           zeros(1,neqs)];
 xfor = mlag(xtrunc,nlag);
 [xend junk] = size(xfor);
 xobs = xfor(xend,:);
 if nx > 0
-ecterm = y(begf-1,index)*ecvectors(:,1:r); % add ec variables 
+ecterm = y(begf-1,index)*ecvectors(:,1:r); % add ec variables
 xvec = [xobs ecterm 1];
 else
 xvec = [xobs 1];
@@ -239,7 +239,7 @@ cnt = step-(nlag-1);
   xnew(i,:) = yfor(cnt,:);
   cnt = cnt+1;
  end;
- 
+
 xfor = mlag(xnew,nlag);
 [xend junk] = size(xfor);
 xobs = xfor(xend,:);
@@ -262,13 +262,13 @@ end;
 end;
 
 end;
-  
+
 % convert 1st difference forecasts to levels
 ylevf = zeros(nfor,neqs);
 % 1-step-ahead forecast
 ylevf(1,:) = yfor(1,:) + y(begf-1,:); % add change to actual from time t;
 % 2-nfor-step-ahead forecasts
-for i=2:nfor % 
+for i=2:nfor %
 ylevf(i,:) = yfor(i,:) + ylevf(i-1,:);
 end;
 

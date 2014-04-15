@@ -2,12 +2,12 @@ function t = tdis_rnd (n,df)
 % PURPOSE: returns random draws from the t(n) distribution
 %---------------------------------------------------
 % USAGE: rnd = tdis_rnd(n,df)
-% where: n = size of vector 
+% where: n = size of vector
 %        df = a scalar dof parameter
 % NOTE:  mean=0, std=1
 %---------------------------------------------------
 % RETURNS:
-%        a vector of random draws from the t(n) distribution      
+%        a vector of random draws from the t(n) distribution
 % --------------------------------------------------
 % SEE ALSO: tdis_cdf, tdis_rnd, tdis_pdf, tdis_prb
 %---------------------------------------------------
@@ -18,7 +18,7 @@ function t = tdis_rnd (n,df)
 % 601 University Drive
 % San Marcos, TX 78666
 %jlesage@spatial-econometrics.com
-  
+
 if nargin ~= 2
 error('Wrong # of arguments to tdis_rnd');
 end;

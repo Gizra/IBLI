@@ -1,5 +1,5 @@
-% PURPOSE: demo using lmtest() 
-%                       
+% PURPOSE: demo using lmtest()
+%
 % computes LM-test for two regressions
 %---------------------------------------------------
 % USAGE: lmtest_d
@@ -8,7 +8,7 @@
 rand('seed',10);
 n = 100; k=6;
 x = randn(n,k);
-e = randn(n,1);    
+e = randn(n,1);
 b = ones(k,1);
 iota = ones(n,1);
 x(:,1) = iota;

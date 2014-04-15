@@ -6,9 +6,9 @@ function [fstat, fprb] = waldf(resultr,resultu)
 % Where: resultr = results structure from ols() restricted regression
 %        resultu = results structure from ols() unrestrcted regression
 %---------------------------------------------------
-% RETURNS: fstat = {(essr - essu)/#restrict}/{essu/(nobs-nvar)} 
+% RETURNS: fstat = {(essr - essu)/#restrict}/{essu/(nobs-nvar)}
 %          fprb  = marginal probability for fstat
-% NOTE:  large fstat => reject the restrictions as inconsisent 
+% NOTE:  large fstat => reject the restrictions as inconsisent
 %                       with the data
 %---------------------------------------------------
 % SEE ALSO: ols()

@@ -1,9 +1,9 @@
 function result = frpr_min(f,pin,info,varargin)
 % PURPOSE: Fletcher,Reeves,Polak,Ribiere minimization routine to minimize func
-%          (Converted from Numerical Recipes book frprmn routine) 
+%          (Converted from Numerical Recipes book frprmn routine)
 %---------------------------------------------------
 % USAGE: result = frpr_min(func,b,info,varargin)
-% where: func   = likelihood function to minimize 
+% where: func   = likelihood function to minimize
 %        b      = parameter vector fed to func
 %        info       = a structure with fields:
 %        info.maxit = maximum # of iterations (default = 500)
@@ -22,7 +22,7 @@ function result = frpr_min(f,pin,info,varargin)
 % NOTE: func must take the form func(b,varargin)
 %       where:     b = parameter vector (k x 1)
 %           varargin = arguments passed to the function
-%---------------------------------------------------    
+%---------------------------------------------------
 % SEE ALSO: dfp_min, pow_min functions
 %     NOTE: calls linmin() ,gradnt(), hessian()
 %---------------------------------------------------
@@ -44,16 +44,16 @@ fields = fieldnames(info);
 nf = length(fields); xcheck = 0; ycheck = 0;
   for i=1:nf
     if strcmp(fields{i},'maxit')
-        maxit = info.maxit; 
+        maxit = info.maxit;
     elseif strcmp(fields{i},'tol')
         tol = info.tol;
     elseif strcmp(fields{i},'prt')
-        pflag = info.prt;        
+        pflag = info.prt;
     end;
   end;
 
 funfcn = fcnchk(f,length(varargin));
-     
+
 
 epss = sqrt(eps);
 
@@ -77,74 +77,74 @@ Vname = 'Parameter';
  Vname = strvcat(Vname,tmp);
  end;
 pinf.cnames = strvcat('Estimates','Gradient');
-pinf.rnames = Vname;     
+pinf.rnames = Vname;
 
 t0 = clock;
 
 while (iter <= maxit)
  iter = iter+1;
- 
+
   [pin fret] = linmin(pin,xi,tol,f,varargin{:});
 
-  if pflag == 1 
+  if pflag == 1
          % print iteration results
                 matprt = [iter fp ];
                 mprint(matprt,input);
                 matprt = [pin xi];
-                mprint(matprt,pinf);  
+                mprint(matprt,pinf);
            end;
- 
+
   if ((2*abs(fp-fret)) <= tol*(abs(fp) + abs(fret)+epss));
              pout = pin;
              fout = fret;
                 hess = hessian(funfcn,xarg,varargin{:});
-             niter = iter; 
+             niter = iter;
      result.b = pin;
      result.f = -fret;
      result.hess = fdhess(funfcn,pout,varargin{:});
-     result.iter = niter; 
+     result.iter = niter;
      result.time = etime(clock,t0);
      result.flag = 0;
- 
+
   return;
  end;
     xarg = pin;
-    fp = feval(funfcn,xarg,varargin{:}); 
+    fp = feval(funfcn,xarg,varargin{:});
     xi = gradnt(funfcn,xarg,deltagrad,varargin{:});
-    
-    
+
+
     gg = g'*g;
     dgg = (xi'+g)'*xi';
-    
+
     if (gg == 0)
      pout = pin;
      fout = fret;
         hess = hessian(funfcn,xarg,varargin{:});
-     niter = iter;  
+     niter = iter;
      result.b = pin;
      result.f = -fret;
      result.hess = fdhess(funfcn,pout,varargin{:});
-     result.iter = niter; 
+     result.iter = niter;
      result.time = etime(clock,t0);
      result.flag = 0;
 
   return;
  end;
- 
+
  gam = dgg/gg;
  g = -xi';
  h = g + gam*h;
  xi = h;
- 
+
 end; % end of while
 
 
-   niter = iter; 
+   niter = iter;
 
      result.b = pin;
      result.f = -fret;
      result.hess = fdhess(funfcn,pout,varargin{:});
-     result.iter = niter; 
+     result.iter = niter;
      result.time = etime(clock,t0);
      result.flag = 1;
-   
+

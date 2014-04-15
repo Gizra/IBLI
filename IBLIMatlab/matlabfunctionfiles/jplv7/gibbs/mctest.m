@@ -8,7 +8,7 @@ function [g2, bic] = mctest2(d,n)
 % J.M. Bernardo, A.P. Dawid, and A.F.M. Smith (eds.) Proceedings of
 % the Fourth Valencia International Meeting on Bayesian Statistics,
 % pp. 169-194, Oxford University Press
-% Also: `Using simulation methods for Bayesian econometric models: 
+% Also: `Using simulation methods for Bayesian econometric models:
 % Inference, development and communication', at: www.econ.umn.edu/~bacc
 % -----------------------------------------------------------------
 
@@ -18,7 +18,7 @@ function [g2, bic] = mctest2(d,n)
 % 601 University Drive
 % San Marcos, TX 78666
 % jlesage@spatial-econometrics.com
- 
+
 % NOTE: this code draws heavily on MATLAB programs written by
 % Siddartha Chib available at: www.econ.umn.edu/~bacc
 % I have repackaged it to make it easier to use.
@@ -36,19 +36,19 @@ function [g2, bic] = mctest2(d,n)
     if (m1(i1,i2) ~= 0);
     t1 = m1(i1,i2)+m2(i1,i2); t2 = m1(1,i2)+m1(2,i2);
     t3 = m1(1,i2)+m2(1,i2); t4 = m1(2,i2)+m2(2,i2);
-    fitted = (t1*t2)/(t3+t4); focus = m1(i1,i2); 
-    g2 = g2 + log(focus/fitted)*focus; 
-    end;      % end of if m1   
+    fitted = (t1*t2)/(t3+t4); focus = m1(i1,i2);
+    g2 = g2 + log(focus/fitted)*focus;
+    end;      % end of if m1
    end;       % end of if i3
    if (i3 == 2);
     if (m2(i1,i2) ~= 0);
     t1 = m1(i1,i2) + m2(i1,i2); t2 = m2(1,i2) + m2(2,i2);
     t3 = m1(1,i2) + m2(1,i2); t4 = m1(2,i2) + m2(2,i2);
-    fitted = (t1*t2)/(t3+t4); focus = m2(i1,i2); 
+    fitted = (t1*t2)/(t3+t4); focus = m2(i1,i2);
     g2 = g2 + log(focus/fitted)*focus;
-    end;      % end of if m2  
+    end;      % end of if m2
    end;        % end of if i3
-   end;       % end of for i3 
-  end;        % end of for i2 
+   end;       % end of for i3
+  end;        % end of for i2
  end;         % end of for i1
  g2 = g2*2.0; bic = g2 - log(n - 2.0)*2.0;

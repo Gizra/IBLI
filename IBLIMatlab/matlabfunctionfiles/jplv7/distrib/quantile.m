@@ -2,18 +2,18 @@ function  q = quantile(x,p,method)
 % PURPOSE: compute empirical quantile (percentile).
 % ----------------------------------------------------
 % USAGE:   q = quantile(x,p,method)
-% where:   x = matrix or vector 
+% where:   x = matrix or vector
 %          p = percent
 %     method = 1,2,3
 %    1. Interpolation so that F(X_(k)) == (k-0.5)/n (default)
 %    2. Interpolation so that F(X_(k)) == k/(n+1).
-%    3. The least number q such that at least a part p of x 
-%      is less than or equal to q. 
+%    3. The least number q such that at least a part p of x
+%      is less than or equal to q.
 % -----------------------------------------------------
 % RETURNS: q = empirical quantile
 % -----------------------------------------------------
-% NOTES:  If input x is a matrix then the quantile is computed for 
-%        every column. Input p may be vector also.     
+% NOTES:  If input x is a matrix then the quantile is computed for
+%        every column. Input p may be vector also.
 
 % Written by:  Anders Holtsberg, 21-11-94
 %              Copyright (c) Anders Holtsberg
@@ -32,7 +32,7 @@ if any(p>1|p<0)
    error('Input p is not probability')
 end
 
-x = sort(x); 
+x = sort(x);
 p = p(:);
 n = size(x,1);
 if method == 3

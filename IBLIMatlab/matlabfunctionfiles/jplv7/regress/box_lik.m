@@ -26,14 +26,14 @@ if model == 1
    ifind = find(iota == 1);
    if isempty(ifind) % no intercept
      xs = boxc_trans(x,lam);
-   else % we may have an intercept       
+   else % we may have an intercept
     if length(ifind) == n % we have an intecept
      xtrans = boxc_trans(x(:,2:k),lam);
      xs = [ones(n,1) xtrans];
     else % no intercept
      xs = boxc_trans(x,lam);
-    end; 
-   end; 
+    end;
+   end;
 elseif model == 0
     xs = x;
 end;

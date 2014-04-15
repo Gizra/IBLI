@@ -1,7 +1,7 @@
 % PURPOSE: demo of F-distribution functions
 %          prints mean and variance of 1000 draws
 %          plots pdf,cdf,inverse
-% 
+%
 %---------------------------------------------------
 % USAGE: fdis_d
 %---------------------------------------------------
@@ -24,8 +24,8 @@ fmean = (b/a)*((a/2)/(b/2-1));
 % variance should equal term1*(term2*term3)
 % where:
  term1 = (b/a)*(b/a);
- tmp1 = a/2; 
- tmp2 = (b/2-1)*(b/2-1); 
+ tmp1 = a/2;
+ tmp2 = (b/2-1)*(b/2-1);
  tmp3 = (a+b)/2;
  tmp4 = (b/2-2);
  term2 = tmp1*(tmp3 - 1);

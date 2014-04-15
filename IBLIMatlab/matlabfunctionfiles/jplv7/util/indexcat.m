@@ -12,7 +12,7 @@ function x=indexcat(y,val);
 % NOTE: a Gauss compatability function
 % -----------------------------------------------------
 % SEE ALSO: delif
- 
+
 % written by:
 % James P. LeSage, Dept of Economics
 % Texas State University-San Marcos

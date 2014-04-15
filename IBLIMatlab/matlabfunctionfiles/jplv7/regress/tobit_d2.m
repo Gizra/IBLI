@@ -1,6 +1,6 @@
 % PURPOSE: An example using tobit()
 %          with right-censoring
-%  Tobit (censored) regression                           
+%  Tobit (censored) regression
 %---------------------------------------------------
 % USAGE: tobit_d2
 %---------------------------------------------------
@@ -23,11 +23,11 @@ for i=80:n
  ys(i,1) = limit;
 end;
 
-vnames = strvcat('y','iota','x1','x2','x3','x4');        
+vnames = strvcat('y','iota','x1','x2','x3','x4');
 
 info.trunc = 'right';
 info.limit = limit;
-tic; resp = tobit(ys,xs,info); toc;      
+tic; resp = tobit(ys,xs,info); toc;
 prt(resp,vnames);
 plt(resp);
 pause;

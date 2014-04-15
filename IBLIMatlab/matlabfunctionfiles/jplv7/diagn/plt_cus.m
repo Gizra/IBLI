@@ -8,7 +8,7 @@ function plt_cus(results)
 % RETURNS:
 %        nothing, simply plots the cusums plus confidence
 %                 intervals
-% NOTE: truncates first k+1 observations                
+% NOTE: truncates first k+1 observations
 % --------------------------------------------------
 % SEE ALSO: dfbeta, plt_dff, bkw, rdiag, diagnose
 %---------------------------------------------------

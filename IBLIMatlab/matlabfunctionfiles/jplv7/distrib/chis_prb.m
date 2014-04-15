@@ -4,12 +4,12 @@ function prob = chis_prb(x,v)
 % USAGE: prob = chis_prb(x,v)
 % where: x = the value to test
 %            (may be a matrix size(v), or a scalar)
-%        v = the degrees of freedom 
+%        v = the degrees of freedom
 %                (may be a matrix size(x), or a scalar)
 %---------------------------------------------------
 % RETURNS:
 %        prob = the probability of observing a chi-squared
-%               value <= x, i.e., prob(x | v).                  
+%               value <= x, i.e., prob(x | v).
 % --------------------------------------------------
 % SEE ALSO: chis_d, chis_pdf, chis_cdf, chis_inv, chis_rnd
 %---------------------------------------------------

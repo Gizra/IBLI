@@ -26,8 +26,8 @@ vnames = ['y    ',
           'const',
           'x1   ',
           'x2   '];
-          
-          
+
+
 res = ols(y,x);
 
 prt(res,vnames);

@@ -1,6 +1,6 @@
-% PURPOSE: Demonstrate frpr_min optimization function 
+% PURPOSE: Demonstrate frpr_min optimization function
 %          using the Banana function
-% f(x,y)=-100*(y-x*x)^2-(1-x)^2, starting at [0; 0]. 
+% f(x,y)=-100*(y-x*x)^2-(1-x)^2, starting at [0; 0].
 %---------------------------------------------------
 % USAGE: frpr_mind
 %---------------------------------------------------

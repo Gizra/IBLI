@@ -3,15 +3,15 @@ function result = thsls(neqs,y,Y,X,xall)
 %          for a model with neqs-equations
 %---------------------------------------------------
 % USAGE: results = thsls(neqs,y,Y,X,xall)
-% where: 
+% where:
 %      neqs  = # of equations
-%        y   = an 'eq' structure containing dependent variables 
+%        y   = an 'eq' structure containing dependent variables
 %              e.g. y(1).eq = y1; y(2).eq = y2; y(3).eq = y3;
-%        Y   = an 'eq' structure containing RHS endogenous 
+%        Y   = an 'eq' structure containing RHS endogenous
 %              e.g. Y(1).eq = []; Y(2).eq = [y1 y3]; Y(3).eq = y2;
-%        X   = an 'eq' structure containing exogenous/lagged endogenous 
-%                 e.g. X(1).eq = [iota x1 x2]; 
-%                      X(2).eq = [iota x1]; 
+%        X   = an 'eq' structure containing exogenous/lagged endogenous
+%                 e.g. X(1).eq = [iota x1 x2];
+%                      X(2).eq = [iota x1];
 %                      X(3).eq = [iota x1 x2 x3];
 % %     xall = matrix of all exogenous variables in the system (defalut
 % %            is to construct xall from exogenous variables in X);
@@ -23,18 +23,18 @@ function result = thsls(neqs,y,Y,X,xall)
 %---------------------------------------------------
 % RETURNS a structure:
 %     result.meth      = 'thsls'
-%     result(eq).beta  = bhat for each equation            
-%     result(eq).tstat = tstat for each equation            
-%     result(eq).tprob = tprobs for each equation        
-%     result(eq).resid = residuals for each equation      
-%     result(eq).yhat  = yhats for each equation         
-%     result(eq).y     = y for each equation             
-%     result(eq).rsqr  = r-squared for each equation     
-%     result(eq).rbar  = r-squared adj for each equation  
-%     result(eq).nvar  = nvar in each equation     
-%     result(eq).sige  = e'e/nobs for each equation 
-%     result(eq).dw    = Durbin-Watson       
-%     result.nobs      = nobs 
+%     result(eq).beta  = bhat for each equation
+%     result(eq).tstat = tstat for each equation
+%     result(eq).tprob = tprobs for each equation
+%     result(eq).resid = residuals for each equation
+%     result(eq).yhat  = yhats for each equation
+%     result(eq).y     = y for each equation
+%     result(eq).rsqr  = r-squared for each equation
+%     result(eq).rbar  = r-squared adj for each equation
+%     result(eq).nvar  = nvar in each equation
+%     result(eq).sige  = e'e/nobs for each equation
+%     result(eq).dw    = Durbin-Watson
+%     result.nobs      = nobs
 %     result.neqs      = neqs
 %     result.sigma     = sig(i,j) across equations
 %     result.ccor      = correlation of residuals across equations
@@ -91,7 +91,7 @@ if nargin == 5
     xinst = xall;
 else
 % now we have to form xall containing all exogenous in the system
-% trick is to find constant term vectors so we end up with only 1 
+% trick is to find constant term vectors so we end up with only 1
 
 xall = ones(nobs,1);
 for i=1:neqs
@@ -145,7 +145,7 @@ Zmat = zeros(nobs,nexog);
  emat(:,i) = res2s.resid;
  elseif nendog ==0
  reso = ols(y(i).eq(:),Zmat);
- emat(:,i) = reso.resid; 
+ emat(:,i) = reso.resid;
  elseif nexog == 0
  error('thsls: no exogenous variables in one equation - not even a constant?');
  end;
@@ -183,7 +183,7 @@ yhat = Z*bhat;
 resid = yvec - yhat;
 
 for i=1:neqs
-result(i).resid = resid((i-1)*nobs+1:i*nobs,1); 
+result(i).resid = resid((i-1)*nobs+1:i*nobs,1);
 % % Richard Just corrected the following line that had resid'*resid instead
 % % of result(i).resid'*result(i).resid.
 result(i).sige = (result(i).resid'*result(i).resid)/(nobs);
@@ -227,7 +227,7 @@ result(i).dw = diag((ediff'*ediff)./(sigu))'; % durbin-watson
 cnt = cnt+nvar;
 end;
 
-result(1).nobs = nobs; 
+result(1).nobs = nobs;
 result(1).sigma = sig; % return croos-equation covariances
 result(1).ccor = corrcoef(emat); % return cross-equation correlations
 

@@ -9,8 +9,8 @@ function [l,d]=modchol(A)
 %        d = the minimal diagonal increment according to the Gerschgorin Circle Theorem
 % ------------------------------------------------------------------------------
 % NOTES: Useful for dealing with ill-conditioned numerical hessians and the like
-% Schnabel, R. B. and Eskow, E. 1990. "A New Modified Cholesky Factorization." 
-% SIAM Journal of Scientific Statistical  Computing 11, 1136-58.) 
+% Schnabel, R. B. and Eskow, E. 1990. "A New Modified Cholesky Factorization."
+% SIAM Journal of Scientific Statistical  Computing 11, 1136-58.)
 %
 % Altman, M., J. Gill and M. P. McDonald.  2003.  Numerical Issues in Statistical
 % Computing for the Social Scientist}.  John Wiley \& Sons, has a nice
@@ -58,6 +58,6 @@ for j=1:n %compute jth col of L
 		c(i,i)=c(i,i)-c(i,j)^2/d(j);
 		end;
 	end;
-end 
+end
 
 

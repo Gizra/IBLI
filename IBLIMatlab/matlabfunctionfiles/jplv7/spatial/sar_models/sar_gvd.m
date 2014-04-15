@@ -2,9 +2,9 @@
 %          spatial autoregressive model that constructs
 %          a posterior distribution for the heteroscedasticity
 %          parameter r (rather than use a degenerate prior on r)
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
-% USAGE: sar_gvd 
+% USAGE: sar_gvd
 %---------------------------------------------------
 
 clear all;
@@ -15,7 +15,7 @@ latt = anselin(:,4);
 long = anselin(:,5);
 [junk W junk] = xy2cont(latt,long);
 [n junk] = size(W);
-IN = eye(n); 
+IN = eye(n);
 rho = 0.7;  % true value of rho
 sige = 0.5;
 k = 3;
@@ -25,7 +25,7 @@ beta(1,1) = -1.0;
 beta(2,1) = 1.0;
 beta(3,1) = 1.0;
 
-y = (IN-rho*W)\(x*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige)); 
+y = (IN-rho*W)\(x*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige));
 
 
 ndraw = 2500;
@@ -46,7 +46,7 @@ fprintf(1,'posterior mean for r = %16.8f \n',mean(results.rdraw));
 fprintf(1,'posterior std for r  = %16.8f \n',std(results.rdraw));
 pause;
 
-prior2.delta = 4;  % heteroscedastic prior 
+prior2.delta = 4;  % heteroscedastic prior
 results2 = sar_gv(y,x,W,ndraw,nomit,prior2);
 subplot(2,1,1),
 hist(results2.rdraw);

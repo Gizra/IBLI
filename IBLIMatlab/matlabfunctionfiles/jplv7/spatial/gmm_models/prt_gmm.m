@@ -2,19 +2,19 @@ function prt_gmm(results,vnames,fid)
 % PURPOSE: Prints output of sem_gmm, sar_gmm, sac_gmm
 %---------------------------------------------------
 % USAGE: prt_semgm(results,vnames,fid)
-% Where: results = a structure returned by a spatial regression 
+% Where: results = a structure returned by a spatial regression
 %        vnames  = an optional vector of variable names
 %        fid     = optional file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
-%--------------------------------------------------- 
+%---------------------------------------------------
 %  NOTES: e.g. vnames = strvcat('y','const','x1','x2');
 %         e.g. fid = fopen('ols.out','wr');
-%  use prt_gmm(results,[],fid) to print to a file with no vnames               
+%  use prt_gmm(results,[],fid) to print to a file with no vnames
 % --------------------------------------------------
 %  RETURNS: nothing, just prints the spatial regression results
 % --------------------------------------------------
 % SEE ALSO: sem_gmm, sar_gmm, sac_gmm
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by: Shawn Bucholtz
 % SBUCHOLTZ@ers.usda.gov
@@ -35,7 +35,7 @@ elseif nargin == 3
  nflag = 0;
  [vsize junk] = size(vnames); % user may supply a blank argument
    if vsize > 0
-   nflag = 1;          
+   nflag = 1;
    end;
 else
  error('Wrong # of arguments to prt_gmm');
@@ -60,7 +60,7 @@ elseif strcmp(results.meth,'sac_gmm');
     Vname = strvcat(Vname,'rho');
     Vname = strvcat(Vname,'lambda');
 elseif strcmp(results.meth,'sar_gmm');
-    Vname = strvcat(Vname,'rho');    
+    Vname = strvcat(Vname,'rho');
 end;
 
 if (nflag == 1) % the user supplied variable names
@@ -85,7 +85,7 @@ elseif strcmp(results.meth,'sac_gmm');
     Vname = strvcat(Vname,'rho');
     Vname = strvcat(Vname,'lambda');
 elseif strcmp(results.meth,'sar_gmm');
-    Vname = strvcat(Vname,'rho');    
+    Vname = strvcat(Vname,'rho');
 end;
 end; % end of if-else
 end; % end of nflag issue
@@ -118,7 +118,7 @@ fprintf(fid,'***************************************************************\n')
 
 bout = [results.beta
         results.lambda];
-        
+
 tstats = [results.tstat
           results.lambdatstat];
 
@@ -161,7 +161,7 @@ fprintf(fid,'***************************************************************\n')
 
 bout = [results.beta
         results.lambda];
-        
+
 tstats = [results.tstat
           results.lambdatstat];
 
@@ -177,7 +177,7 @@ in.fmt = '%16.6f';
 in.fid = fid;
 mprint(tmp,in);
 
-case {'sac_gmm'} % <=================== GMM general spatial model 
+case {'sac_gmm'} % <=================== GMM general spatial model
 
 
 nobs = results.nobs;
@@ -203,7 +203,7 @@ fprintf(fid,'***************************************************************\n')
 bout = [results.beta
         results.rho
         results.lam];
-        
+
 tstats = [results.tstat
           results.rhotstat
           results.lambdatstat];
@@ -220,7 +220,7 @@ in.fmt = '%16.6f';
 in.fid = fid;
 mprint(tmp,in);
 
-case {'sar_gmm'} % <=================== GMM spatial lag model 
+case {'sar_gmm'} % <=================== GMM spatial lag model
 
 
 nobs = results.nobs;
@@ -241,7 +241,7 @@ fprintf(fid,'***************************************************************\n')
 
 bout = [results.beta
         results.rho];
-        
+
 tstats = [results.tstat
           results.rhotstat];
 

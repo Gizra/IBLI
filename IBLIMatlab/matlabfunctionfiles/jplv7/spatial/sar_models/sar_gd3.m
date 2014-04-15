@@ -1,5 +1,5 @@
-% PURPOSE: An example of using sar_g() on a large data set   
-%          Metropolis-Hastings sampling spatial autoregressive model                         
+% PURPOSE: An example of using sar_g() on a large data set
+%          Metropolis-Hastings sampling spatial autoregressive model
 %---------------------------------------------------
 % USAGE: sar_gd3 (see sar_gd for a small data set)
 %---------------------------------------------------
@@ -22,7 +22,7 @@ n = 3107;
 vnames = strvcat('voters','const','educ','homeowners','income');
 
 % do Gibbs sampling estimation
-ndraw = 2500; 
+ndraw = 2500;
 nomit = 500;
 prior.novi = 1;  % homoscedastic model
 result1 = sar_g(y,x,W,ndraw,nomit,prior);

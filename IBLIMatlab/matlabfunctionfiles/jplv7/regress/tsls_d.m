@@ -1,7 +1,7 @@
 % PURPOSE: An example using tsls(),
 %                           prt_reg()
 % Two-stage Least-squares
-%                              
+%
 %---------------------------------------------------
 % USAGE: tsls_d
 %---------------------------------------------------
@@ -29,23 +29,23 @@ end;
 
 vname1 = ['y1-eqn  ',
           'y2 var  ',
-          'constant',          
+          'constant',
           'x1 var  '];
-          
+
 vname2 = ['y2-eqn  ',
           'y1 var  ',
           'constant',
           'x2 var  '];
-          
+
 % use all exogenous in the system as instruments
-xall = [iota x1 x2];            
+xall = [iota x1 x2];
 
 % do ols regression
 result1 = ols(y2,[y1 iota x2]);
 prt_reg(result1,vname2);
 
 % do tsls regression
-result2 = tsls(y2,y1,[iota x2],xall); 
+result2 = tsls(y2,y1,[iota x2],xall);
 prt_reg(result2,vname2);
 
 % do Monte Carlo looping
@@ -72,7 +72,7 @@ end;
 result1 = ols(y2,[y1 iota x2]);
 
 % do tsls regression
-result2 = tsls(y2,y1,[iota x2],xall); 
+result2 = tsls(y2,y1,[iota x2],xall);
 
 bols = bols + result1.beta;
 b2sls = b2sls + result2.beta;

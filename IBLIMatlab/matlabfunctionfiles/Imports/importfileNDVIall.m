@@ -2,7 +2,7 @@
 function [ ndvipost, ndvipre, ndvipostmax, ndvipremax,NDVIname ] = importfileNDVIall(filepath,season)
 
 
- 
+
 % season='s'; %set season to estimate
 % StartYearSRSD=2001;
 % EndYearSRSD=2011;
@@ -34,7 +34,7 @@ nfilesmax = length(fileIndexmax);
 for i=1:nfilesavg
         fileNameavg{i}= filesavg(fileIndexavg(i)).name;
         filename = strcat(filepath,'Avgz_base1981S-2012S\',fileNameavg{i});
-        
+
         [token, remain] = strtok(fileNameavg{i}, '.');
         [token1, remain] = strtok(token, '_');
         [token2, remain] = strtok(remain, '_');
@@ -51,7 +51,7 @@ end
 for i=1:nfilesmax
         fileNamemax{i}= filesmax(fileIndexmax(i)).name;
         filename = strcat(filepath,'Maxz_base1981S-2012S\',fileNamemax{i});
-        
+
         [token, remain] = strtok(fileNamemax{i}, '.');
         [token1, remain] = strtok(token, '_');
         [token2, remain] = strtok(remain, '_');
@@ -77,33 +77,33 @@ for i=1:nsats
     sndvipreavg2001.(NDVIname{i})=NDVI.(NDVIname{i})(:,Sndvipre2001index);
     sndvipostmax2001.(NDVIname{i})=NDVImax.(NDVIname{i})(:,Sndvipost2001index);
     sndvipremax2001.(NDVIname{i})=NDVImax.(NDVIname{i})(:,Sndvipre2001index);
-    
+
     lndvipostavg2001.(NDVIname{i})=NDVI.(NDVIname{i})(:,Lndvipost2001index);
     lndvipreavg2001.(NDVIname{i})=NDVI.(NDVIname{i})(:,Lndvipre2001index);
     lndvipostmax2001.(NDVIname{i})=NDVImax.(NDVIname{i})(:,Lndvipost2001index);
     lndvipremax2001.(NDVIname{i})=NDVImax.(NDVIname{i})(:,Lndvipre2001index);
-    
+
 end
 
 
 if strcmp(season,'s')
-    
+
      ndvipost=sndvipostavg2001;
      ndvipre=sndvipreavg2001;
      ndvipostmax=sndvipostmax2001;
      ndvipremax=sndvipremax2001;
-     
+
 else
-    
+
      ndvipost=lndvipostavg2001;
      ndvipre=lndvipreavg2001;
      ndvipostmax=lndvipostmax2001;
      ndvipremax=lndvipremax2001;
-          
+
 end
 
 
-    
+
 
 
 

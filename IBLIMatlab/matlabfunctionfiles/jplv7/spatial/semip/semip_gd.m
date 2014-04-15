@@ -1,7 +1,7 @@
 % PURPOSE: An example of using semip_g and semip_gc
 % Gibbs sampling spatial Probit model with individual effects
 % using 1996 presidential election data set
-%                
+%
 %---------------------------------------------------
 % USAGE: semip_gd
 %---------------------------------------------------
@@ -13,12 +13,12 @@ vnames = strvcat('y','highs','college','grad','non-white', ...
 'income','urban');
 
 % x-matrix contains 3,110 x 6 matrix with:
-%   col1 = high school graduates as a percent of population     
-%   col2 = college percent  
-%   col3 = graduate school 
+%   col1 = high school graduates as a percent of population
+%   col2 = college percent
+%   col3 = graduate school
 %   col4 = non-white
-%   col5 = median income     
-%   col6 = urban  
+%   col5 = median income
+%   col6 = urban
 
 % z = 0,1 with 0 = Dole wins, 1 = Clinton wins, 3,110 counties
 % W = a 48x48 spatial weight matrix (standardized)
@@ -65,7 +65,7 @@ theta_lo = theta_mean - 3*theta_std;
 % sort the y percentages versus yhat
 [ya yind] = sort(z);
 ymeans = ymean(yind,1);
-yhats = yhat(yind,1); 
+yhats = yhat(yind,1);
 
 tt=1:n;
 plot(tt,ya,'+',tt,stdn_cdf(yhats),'o');

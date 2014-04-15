@@ -19,7 +19,7 @@ load tvpmoney.data;
 %  4: inf==lagged inflation
 %  5: surpl==lagged full employment budget surplus
 %  6: m1lag==lag of m1
-%     1959.3--1987.4, 
+%     1959.3--1987.4,
 
 y = tvpmoney(:,2);
 n = length(y);

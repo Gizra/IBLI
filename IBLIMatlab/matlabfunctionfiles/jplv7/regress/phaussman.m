@@ -1,17 +1,17 @@
 function phaussman(result1, result2,fid)
 % PURPOSE: prints haussman test, use for testing the specification of the fixed or
-%			  random effects model.	
+%			  random effects model.
 %  --------------------------------------------------------------------------------
 % USAGE: phaussman(results1, results2);
 %  where: results1 = a structure returned by pfixed()
 %         results1 = a structure returned by prandom()
-%----------------------------------------------------------------------------------               
+%----------------------------------------------------------------------------------
 
 %Written by:
 % Carlos Alberto Castro
 % National Planning Department
 % Bogota, Colombia
-% Email: ccastro@dnp.gov.co 
+% Email: ccastro@dnp.gov.co
 
 if nargin < 2; error('wrong # of arguments to phaussman'); end;
 if nargin > 3; error('wrong # of arguments to phaussman'); end;
@@ -25,8 +25,8 @@ if ~isstruct(result2)
  error('phaussman requires a Random effects panel model results structure');
 end;
 
-if nargin == 2; 
-   fid = 1; 
+if nargin == 2;
+   fid = 1;
 end;
 
 

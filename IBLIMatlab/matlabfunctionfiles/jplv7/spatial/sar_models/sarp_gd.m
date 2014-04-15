@@ -1,6 +1,6 @@
 % PURPOSE: An example of using sarp_g() Gibbs sampling
 %          spatial autoregressive probit model
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
 % USAGE: sarp_gd (see also sarp_gd2 for a large data set)
 %---------------------------------------------------
@@ -16,7 +16,7 @@ latt = rand(n,1);
 long = rand(n,1);
 W = make_neighborsw(latt,long,5); % 5 nearest neighbors weight matrix
 
-IN = speye(n); 
+IN = speye(n);
 rho = 0.8;  % true value of rho
 sige = 1;
 k = 3;
@@ -211,14 +211,14 @@ Vname = 'Variable';
      for i=1:nvar-1
         tmp = ['variable ',num2str(i)];
         Vname = strvcat(Vname,tmp);
-     end 
-     
+     end
+
 % add spatial rho parameter name
     Vname = strvcat(Vname,'rho');
 
 
-bstring = 'Coefficient'; 
-tstring = 't-stat'; 
+bstring = 'Coefficient';
+tstring = 't-stat';
 pstring = 't-prob';
 lstring = 'lower 01';
 ustring = 'upper 99';
@@ -230,7 +230,7 @@ ini.width = 2000;
 if cflag == 1
 vnameso = strvcat(Vname(3:end-1,:));
 elseif cflag == 0
-vnameso = strvcat(Vname(2:end-1,:));    
+vnameso = strvcat(Vname(2:end-1,:));
 end
 ini.rnames = strvcat('Direct  ',vnameso);
 ini.fmt = '%16.6f';

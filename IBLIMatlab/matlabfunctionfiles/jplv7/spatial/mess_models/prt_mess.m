@@ -2,19 +2,19 @@ function prt_mess(results,vnames,fid)
 % PURPOSE: Prints output using MESS models results structures
 %---------------------------------------------------
 % USAGE: prt_mess(results,vnames,fid)
-% Where: results = a structure returned by a mess regression 
+% Where: results = a structure returned by a mess regression
 %        vnames  = an optional vector of variable names
 %        fid     = optional file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
-%--------------------------------------------------- 
+%---------------------------------------------------
 %  NOTES: e.g. vnames = strvcat('y','const','x1','x2');
 %         e.g. fid = fopen('ols.out','wr');
-%  use prt_mess(results,[],fid) to print to a file with no vnames               
+%  use prt_mess(results,[],fid) to print to a file with no vnames
 % --------------------------------------------------
 %  RETURNS: nothing, just prints the mess model results
 % --------------------------------------------------
 % SEE ALSO: prt, plt
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -33,7 +33,7 @@ elseif nargin == 3
  nflag = 0;
  [vsize junk] = size(vnames); % user may supply a blank argument
    if vsize > 0
-   nflag = 1;          
+   nflag = 1;
    end;
 else
  error('Wrong # of arguments to prt_mess');
@@ -97,7 +97,7 @@ if (nflag == 1) % the user supplied variable names
     % add spatial rho parameter name
     Vname = strvcat(Vname,'alpha');
    end; % end of if-else
- end;  
+ end;
 end; % end of nflag issue
 
 
@@ -156,7 +156,7 @@ mprint(tmp,in);
 end;
 
 return;
-        
+
 % <=================== end of mess case
 
 
@@ -215,7 +215,7 @@ if (nflag == 1) % the user supplied variable names
     % add spatial rho parameter name
     Vname = strvcat(Vname,'alpha');
    end; % end of if-else
- end;  
+ end;
 end; % end of nflag issue
 
 
@@ -248,7 +248,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 
 fprintf(fid,'\n');
@@ -304,7 +304,7 @@ fprintf(fid,'      Posterior Estimates \n');
  if strcmp(results.tflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -328,7 +328,7 @@ mprint(tmp,in);
 end;
 
 return;
-        
+
 % <=================== end of mess_g case
 
 case {'messt_g'} % <=================== messt_g model
@@ -386,7 +386,7 @@ if (nflag == 1) % the user supplied variable names
     % add spatial rho parameter name
     Vname = strvcat(Vname,'alpha');
    end; % end of if-else
- end;  
+ end;
 end; % end of nflag issue
 
 
@@ -419,7 +419,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 
 fprintf(fid,'\n');
@@ -476,7 +476,7 @@ fprintf(fid,'      Posterior Estimates \n');
  if strcmp(results.tflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -500,7 +500,7 @@ mprint(tmp,in);
 end;
 
 return;
-        
+
 % <=================== end of messt_g case
 
 case {'messp_g'} % <=================== messp_g model
@@ -558,7 +558,7 @@ if (nflag == 1) % the user supplied variable names
     % add spatial rho parameter name
     Vname = strvcat(Vname,'alpha');
    end; % end of if-else
- end;  
+ end;
 end; % end of nflag issue
 
 
@@ -590,7 +590,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 
 fprintf(fid,'\n');
@@ -646,7 +646,7 @@ fprintf(fid,'      Posterior Estimates \n');
  if strcmp(results.tflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -670,7 +670,7 @@ mprint(tmp,in);
 end;
 
 return;
-        
+
 % <=================== end of messp_g case
 
 case {'mess_g1'} % <=================== mess_g1 model
@@ -734,7 +734,7 @@ if (nflag == 1) % the user supplied variable names
     Vname = strvcat(Vname,'alpha');
     Vname = strvcat(Vname,'#neighbors');
    end; % end of if-else
- end;  
+ end;
 end; % end of nflag issue
 
 
@@ -772,7 +772,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 fprintf(fid,'\n');
 fprintf(fid,'Bayesian Matrix Exponential Spatial Specification\n');
@@ -826,7 +826,7 @@ fprintf(fid,'      Posterior Estimates \n');
  if strcmp(results.tflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -852,7 +852,7 @@ mprint(tmp,in);
 end;
 
 return;
-        
+
 % <=================== end of mess_g1 case
 
 
@@ -917,7 +917,7 @@ if (nflag == 1) % the user supplied variable names
     Vname = strvcat(Vname,'alpha');
     Vname = strvcat(Vname,'rho');
    end; % end of if-else
- end;  
+ end;
 end; % end of nflag issue
 
 
@@ -955,7 +955,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 fprintf(fid,'\n');
 fprintf(fid,'Bayesian Matrix Exponential Spatial Specification\n');
@@ -1010,7 +1010,7 @@ fprintf(fid,'      Posterior Estimates \n');
  if strcmp(results.tflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -1036,7 +1036,7 @@ mprint(tmp,in);
 end;
 
 return;
-        
+
 % <=================== end of mess_g2 case
 
 
@@ -1105,7 +1105,7 @@ if (nflag == 1) % the user supplied variable names
     Vname = strvcat(Vname,'rho');
     Vname = strvcat(Vname,'neighbors');
    end; % end of if-else
- end;  
+ end;
 end; % end of nflag issue
 
 
@@ -1147,7 +1147,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 fprintf(fid,'\n');
 fprintf(fid,'Bayesian Matrix Exponential Spatial Specification\n');
@@ -1201,7 +1201,7 @@ fprintf(fid,'      Posterior Estimates \n');
 
  if strcmp(results.tflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
-tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities      
+tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -1227,7 +1227,7 @@ mprint(tmp,in);
 end;
 
 return;
-        
+
 % <=================== end of mess_g3 case
 
 
@@ -1296,7 +1296,7 @@ if (nflag == 1) % the user supplied variable names
     Vname = strvcat(Vname,'rho');
     Vname = strvcat(Vname,'neighbors');
    end; % end of if-else
- end;  
+ end;
 end; % end of nflag issue
 
 
@@ -1338,7 +1338,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 fprintf(fid,'\n');
 fprintf(fid,'Bayesian heteroscedastic MESS estimates\n');
@@ -1359,7 +1359,7 @@ fprintf(fid,'r-value            = %6d   \n',results.rval);
 else
 fprintf(fid,'mean of rdraws     = %9.4f \n',mean(results.rvdraw));
 fprintf(fid,'gam(m,k) prior     = %6d,%6d \n',results.m,results.k);
-end;    
+end;
 fprintf(fid,'ndraws,nomit        = %6d,%6d \n',results.ndraw,results.nomit);
 fprintf(fid,'alpha accept rate   = %9.4f \n',results.accept);
 % print timing information
@@ -1398,7 +1398,7 @@ fprintf(fid,'      Posterior Estimates \n');
 
  if strcmp(results.tflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
-tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities      
+tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -1424,7 +1424,7 @@ mprint(tmp,in);
 end;
 
 return;
-        
+
 % <=================== end of messv_g3 case
 
 case {'messt_g3'} % <=================== messt_g3 model
@@ -1493,7 +1493,7 @@ if (nflag == 1) % the user supplied variable names
     Vname = strvcat(Vname,'rho');
     Vname = strvcat(Vname,'neigh');
    end; % end of if-else
- end;  
+ end;
 end; % end of nflag issue
 
 % find posterior means
@@ -1534,7 +1534,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 
 fprintf(fid,'\n');
@@ -1588,7 +1588,7 @@ fprintf(fid,'      Posterior Estimates \n');
  if strcmp(results.tflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -1612,7 +1612,7 @@ mprint(tmp,in);
 end;
 
 return;
-        
+
 % <=================== end of messt_g3 case
 
 

@@ -6,7 +6,7 @@ function bounds = hpdi(adraw,hperc)
 %       hperc = 0 to 1 value for hperc percentage point
 % --------------------------------------------------------------------
 % RETURNS:
-%         bounds = a 1 x 2 vector with 
+%         bounds = a 1 x 2 vector with
 %         bounds(1,1) = 1-hperc percentage point
 %         bounds(1,2) = hperc percentage point
 %          e.g. if hperc = 0.95

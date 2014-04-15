@@ -1,6 +1,6 @@
 % PURPOSE: demonstrate the use of ecmf
 %          function to forecast an error
-%          correction model 
+%          correction model
 % ---------------------------------------------
 % usage: ecmf_d
 % ----------------------------------------------
@@ -13,18 +13,18 @@ load test.dat; % a test data set containing
 % data covers 1982,1 to 1996,5
 
 vnames =  ['  il',
-           '  in',    
-           '  ky',    
-           '  mi',    
-           '  oh',    
-           '  pa',    
-           '  tn',    
-           '  wv'];    
-     
+           '  in',
+           '  ky',
+           '  mi',
+           '  oh',
+           '  pa',
+           '  tn',
+           '  wv'];
+
 
 y = test;
 [nobs neqs] = size(y);
-        
+
 nlag = 9;
 
 nfor = 12; % number of forecast periods

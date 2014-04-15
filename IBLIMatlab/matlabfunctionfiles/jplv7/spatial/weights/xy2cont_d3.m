@@ -1,6 +1,6 @@
 % PURPOSE: An example of using xy2cont()
-%          to produce a sparse spatial weight matrix 
-%          using a VERY large data set                   
+%          to produce a sparse spatial weight matrix
+%          using a VERY large data set
 %---------------------------------------------------
 % USAGE: xy2cont_d3
 %---------------------------------------------------

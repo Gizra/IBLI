@@ -11,7 +11,7 @@ function results=darp(y,x,xc,yc,option)
 %                    = 1 for distance from ctr expansion
 %        option.ctr  = central point observation # for distance expansion
 %        option.iter = # of iterations for maximum likelihood routine
-%        option.norm = 1 for isotropic x-y normalization (default=0)        
+%        option.norm = 1 for isotropic x-y normalization (default=0)
 %---------------------------------------------------
 % RETURNS:
 %        results.meth   = 'darp'
@@ -29,7 +29,7 @@ function results=darp(y,x,xc,yc,option)
 %        results.xc     = xc
 %        results.yc     = yc
 %        results.ctr    = ctr (if input)
-%        results.dist   = distance vector 
+%        results.dist   = distance vector
 %        results.exp    = exp input option
 %        results.norm   = norm input option
 %        results.iter   = # of maximum likelihood iterations
@@ -61,7 +61,7 @@ if nargin == 5 % user options
  expand = 0; ctr = 0; iter = 0; nflag = 0;
   for i=1:nf
     if strcmp(fields{i},'exp')
-        expand = option.exp; 
+        expand = option.exp;
     elseif strcmp(fields{i},'ctr')
         ctr = option.ctr;
     elseif strcmp(fields{i},'iter')
@@ -111,7 +111,7 @@ results.norm = nflag;
 switch expand
 
 case {0} % x-y expansion
-    
+
 % get base estimates
 xt = x(:,2:nvar);
 xx = matmul(xt,xc);
@@ -180,7 +180,7 @@ results.gamma(1) = result.b(2,1);
 gamma1 = result.b(2,1);
 results.gamma(2) = result.b(3,1);
 gamma2 = result.b(3,1);
-results.iter = iter;  
+results.iter = iter;
 results.lik = result.f;
 fflag = 0; % a flag for ML estimates
 end;
@@ -216,7 +216,7 @@ if fflag == 0,
     results.chi(1) = (gamma1*gamma1)/2*sum(xc);
     results.chi(2) = (gamma2*gamma2)/2*sum(yc);
 results.cprob(1) = 1-chis_prb(results.chi(1),1);
-results.cprob(2) = 1-chis_prb(results.chi(2),1);    
+results.cprob(2) = 1-chis_prb(results.chi(2),1);
 else
     results.chi(1) = (gamma1*gamma1)/4.9348*sum(xc);
     results.chi(2) = (gamma2*gamma2)/4.9348*sum(yc);
@@ -296,14 +296,14 @@ if result.iter == info.maxit;
 fprintf(1,'darp: convergence failure --- returning FGLS estimates\n');
 results.b0 = result.b(3:tvar+2,1);
 results.gamma(1) = result.b(2,1);
-results.iter = result.iter;  
+results.iter = result.iter;
 results.lik = 0;
 fflag = 1;
 else
 results.b0 = result.b(3:tvar+2,1);
 sige = result.b(1,1);
 results.gamma(1) = result.b(2,1);
-results.iter = result.iter;  
+results.iter = result.iter;
 results.lik = result.f;
 gamma1 = result.b(2,1);
 fflag = 0;

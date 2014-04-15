@@ -2,7 +2,7 @@ function shist(x,n)
 % PURPOSE: spline-smoothed plot of a histogram
 % -----------------------------------------------------
 % USAGE: shist(x,n)
-% where: x = input matrix (or vector) 
+% where: x = input matrix (or vector)
 %        n = # of bins, [default = (1/50)*size(x)]
 % -----------------------------------------------------
 % RETURNS: nothing, just plots the histogram

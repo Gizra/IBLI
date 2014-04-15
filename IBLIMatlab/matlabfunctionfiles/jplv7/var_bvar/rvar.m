@@ -1,6 +1,6 @@
 function results = rvar(y,nlag,w,freq,sig,tau,theta,x);
-% PURPOSE: Estimates a Bayesian vector autoregressive model 
-%          using the random-walk averaging prior 
+% PURPOSE: Estimates a Bayesian vector autoregressive model
+%          using the random-walk averaging prior
 %---------------------------------------------------
 % USAGE:  result = rvar(y,nlag,w,freq,sig,tau,theta,x)
 % where:    y    = an (nobs x neqs) matrix of y-vectors (in levels)
@@ -13,19 +13,19 @@ function results = rvar(y,nlag,w,freq,sig,tau,theta,x);
 %          theta = prior variance hyperparameter (see below)
 %           x    = an (nobs x nx) matrix of deterministic variables
 %                  (in any form, they are not altered during estimation)
-%                  (constant term automatically included)                  
+%                  (constant term automatically included)
 % priors for important variables:  N(w(i,j),sig) for 1st own lag
-%                                  N(  0 ,tau*sig/k) for lag k=2,...,nlag               
-% priors for unimportant variables: N(w(i,j) ,theta*sig/k) for lag 1 
-%                                   N(  0 ,theta*sig/k)    for lag k=2,...,nlag  
+%                                  N(  0 ,tau*sig/k) for lag k=2,...,nlag
+% priors for unimportant variables: N(w(i,j) ,theta*sig/k) for lag 1
+%                                   N(  0 ,theta*sig/k)    for lag k=2,...,nlag
 % e.g., if y1, y3, y4 are important variables in eq#1, y2 unimportant
-%  w(1,1) = 1/3, w(1,3) = 1/3, w(1,4) = 1/3, w(1,2) = 0                                              
-% typical values would be: sig = .1-.3, tau = 4-8, theta = .5-1  
+%  w(1,1) = 1/3, w(1,3) = 1/3, w(1,4) = 1/3, w(1,2) = 0
+% typical values would be: sig = .1-.3, tau = 4-8, theta = .5-1
 %---------------------------------------------------
-% NOTES: - estimation is carried out in annualized growth terms 
+% NOTES: - estimation is carried out in annualized growth terms
 % because the prior means rely on common (growth-rate) scaling of variables
 %          hence the need for a freq argument input.
-%        - constant term included automatically  
+%        - constant term included automatically
 %---------------------------------------------------
 % RETURNS: a structure
 % results.meth = 'rvar'
@@ -33,9 +33,9 @@ function results = rvar(y,nlag,w,freq,sig,tau,theta,x);
 % results.neqs = neqs, # of equations
 % results.nlag = nlag, # of lags
 % results.nvar = nlag*neqs+nx+1, # of variables per equation
-% --- the following are referenced by equation # --- 
-% results(eq).beta   = bhat for equation eq 
-% results(eq).tstat  = t-statistics 
+% --- the following are referenced by equation # ---
+% results(eq).beta   = bhat for equation eq
+% results(eq).tstat  = t-statistics
 % results(eq).tprob  = t-probabilities
 % results(eq).resid  = residuals (for growth rates regression)
 % results(eq).yhat   = predicted values (levels) (nlag+freq+1:nobs,1)
@@ -45,10 +45,10 @@ function results = rvar(y,nlag,w,freq,sig,tau,theta,x);
 % results(eq).sige   = e'e/(n-k) (for growth rates regression)
 % results(eq).rsqr   = r-squared (for growth rates regression)
 % results(eq).rbar   = r-squared adjusted (for growth rates regression)
-% ---------------------------------------------------    
-% SEE ALSO: rvarf, var, bvar, ecm, becm, recm, prt_var 
 % ---------------------------------------------------
-% References: LeSage and Krivelyova (1998) 
+% SEE ALSO: rvarf, var, bvar, ecm, becm, recm, prt_var
+% ---------------------------------------------------
+% References: LeSage and Krivelyova (1998)
 % ``A Spatial Prior for Bayesian Vector Autoregressive Models'',
 % forthcoming Journal of Regional Science, (on http://www.econ.utoledo.edu)
 % and
@@ -77,7 +77,7 @@ nx = 0;
 
 if nargin == 8 % user is specifying deterministic variables
    [nobs2 nx] = size(x);
-   
+
 elseif nargin == 7 % no deterministic variables
 nx = 0;
 else
@@ -91,10 +91,10 @@ dy = trimr(dy,freq,0);
 % adjust nobs to account for seasonal differences and lags
 nobse = nobs-freq-nlag;
 
-% nvar 
+% nvar
  k = neqs*nlag+nx+1;
  nvar = k;
- 
+
 results.nvar = nvar;
 
 y1 = mlag(dy,1);
@@ -109,7 +109,7 @@ iota = trimr(iota,nlag+freq,0);
 dy = trimr(dy,nlag,0);    % truncate to feed lags
 
 % form x-matrix of var plus deterministic variables
-if nx ~= 0 
+if nx ~= 0
 xmat = [xlag x iota];
 else
 xmat = [xlag iota];
@@ -119,8 +119,8 @@ end;
 % for autoregressive parameters
 % r = R beta + vmat
 
-R = zeros(k,k);   
-% only fill in 1's for lags, leave determininistic 
+R = zeros(k,k);
+% only fill in 1's for lags, leave determininistic
 % and constant term elements set to zero
 for i=1:neqs*nlag
  R(i,i) = 1.0;
@@ -128,15 +128,15 @@ end;
 
 for j=1:neqs;    % ========> Equations loop
 
-r = zeros(k,1);    % prior means 
+r = zeros(k,1);    % prior means
 vmat = eye(k)*100; % diffuse prior variance constant and deterministic
 
-% set prior means for first lags  
+% set prior means for first lags
 % using weight matrix
 for icnt = 1:neqs;
  r(icnt,1) = w(j,icnt);
 end;
-         
+
 % use prior mean of zero  for lags 2 to nlag
 % plus deterministic variables and constant
 % already set by using r=zeros to start with
@@ -148,7 +148,7 @@ for ii=1:neqs;   % prior std deviations for 1st lags
     vmat(ii,ii) = theta*sig;
     end;
    end;
-   
+
 cnt = neqs+1;
 for ii=1:neqs;   % prior std deviations for lags 2 to nlag
        if w(j,ii) ~= 0
@@ -160,12 +160,12 @@ for ii=1:neqs;   % prior std deviations for lags 2 to nlag
  for kk=2:nlag;
     vmat(cnt,cnt) = theta*sig/kk;
     cnt = cnt + 1;
-    end;       
+    end;
        end;
 end;
 
 yvec = dy(:,j);
-vmat = vmat.*vmat;       
+vmat = vmat.*vmat;
 res = theil(yvec,[y1 xmat],r,R,vmat);
 
 % rearrange bhat parameters, t-statistics, tprobs in var order
@@ -203,7 +203,7 @@ ylag = lag(y(:,j),freq);
 ylag = trimr(ylag,freq+nlag,0);
 yhat = (iota + res.yhat).*ylag; % applied growth rate prediction to level
                                 % from last year
- 
+
  % put results in structure variables
  results(j).beta = bmat;
  results(j).tstat = tmat;

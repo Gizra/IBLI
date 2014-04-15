@@ -16,7 +16,7 @@ else
     error('spyc: Wrong # of input arguments');
 end;
 [n,m] = size(S);
-[i,j,ss] = find(S);  % Note we need the values of the nonzeros as 
+[i,j,ss] = find(S);  % Note we need the values of the nonzeros as
                      % well as their indices
 if isempty(i), i = NaN; j = NaN; end
 if isempty(S), marker = 'none'; end

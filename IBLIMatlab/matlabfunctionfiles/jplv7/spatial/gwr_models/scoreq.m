@@ -4,7 +4,7 @@ function q = scoreq(qmin,qmax,y,x,east,north)
 % ------------------------------------------------------
 % USAGE: score = scoreq(qmin,qmax,y,x,east,north);
 % where: qmin = minimum # nearest neighbors to use in CV search
-%        qmax = maximum # nearest neighbors to use in CV search     
+%        qmax = maximum # nearest neighbors to use in CV search
 %        y    = dependent variable
 %        x = matrix of explanatory variables
 %     east = longitude (x-direction) coordinates
@@ -20,7 +20,7 @@ function q = scoreq(qmin,qmax,y,x,east,north)
 % SEE ALSO: scoref which finds optimal bandwidth
 %           for gaussian and exponential weighting
 % ------------------------------------------------------
-          
+
 % written by: James P. LeSage 2/98
 % Texas State University-San Marcos
 % 601 University Drive
@@ -30,21 +30,21 @@ function q = scoreq(qmin,qmax,y,x,east,north)
 d = zeros(n,1);
 qgrid = qmin:qmax;
 nq = length(qgrid);
-wt = zeros(n,nq); 
+wt = zeros(n,nq);
 for iter = 1:n;
  dx = east - east(iter,1);
  dy = north - north(iter,1);
  d = (dx.*dx + dy.*dy);
          % sort distance to find q nearest neighbors
-         ds = sort(d); 
-         dmax = ds(qmin:qmax,1); 
+         ds = sort(d);
+         dmax = ds(qmin:qmax,1);
          for j=1:nq;
    nzip = find(d <= dmax(j,1));
           wt(nzip,j) = (1-(d(nzip,1)/dmax(j,1)).^3).^3;
    wt(iter,j) = 0.0;
          end; % end of j loop
 for j=1:nq;
-% computational trick to speed things up 
+% computational trick to speed things up
 % use wt non-zero to pull out y,x observations
 nzip = find(wt(:,j) > 0);
 ys = y(nzip,1).*sqrt(wt(nzip,j));
@@ -52,7 +52,7 @@ xs = matmul(x(nzip,:),sqrt(wt(nzip,j)));
 bi=xs\ys;
 % compute predicted values
 yhat = x(iter,:)*bi;
-% compute residuals 
+% compute residuals
 res(iter,j) = y(iter,1) - yhat;
 end; % end of for j loop over q-values
 end; % end of for iter loop

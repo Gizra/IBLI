@@ -1,14 +1,14 @@
 %Write text describing the m-files in this directory
 %Write text describing the m-files in this directory (continued)
-%   
-%              acf : Estimate the coefficients of the autocorrelation 
+%
+%              acf : Estimate the coefficients of the autocorrelation
 %              adf : carry out DF tests on a time-series vector
 %            adf_d : demonstrate the use of adf()
 %            c_sja : find critical values for Johansen maximum eigenvalue statistic
 %            c_sjt : find critical values for Johansen trace statistic
 %             cadf : compute augmented Dickey-Fuller statistic for residuals
 %           cadf_d : demonstrate the use of cadf()
-%          crthegy : return critical values for the statistics used in 
+%          crthegy : return critical values for the statistics used in
 %          detrend : detrend a matrix y of time-series using regression
 %             hegy : performs the Hylleberg, Engle, Granger and Yoo(1990)
 %           hegy_d owig program use the data from UK National Statistics

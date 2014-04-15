@@ -1,13 +1,13 @@
-function t = unstudentize(xin,xraw) 
-% PURPOSE: returns reverse studentized vector 
-%          given xin a studentized vector, 
-%          and xraw the vector in raw form 
-% (adds back the mean and multiplies by its standard deviation) 
+function t = unstudentize(xin,xraw)
+% PURPOSE: returns reverse studentized vector
+%          given xin a studentized vector,
+%          and xraw the vector in raw form
+% (adds back the mean and multiplies by its standard deviation)
 %          If x is a matrix, do the above for each column.
 %---------------------------------------------------
 % USAGE:   out = unstudentize(xin,xraw)
 % where:     xin  = a vector or matrix in studentized form
-%            xraw = a vector or matrix in raw form 
+%            xraw = a vector or matrix in raw form
 %---------------------------------------------------
 % RETURNS:
 %          out = untransformed matrix or vector
@@ -20,11 +20,11 @@ function t = unstudentize(xin,xraw)
 % San Marcos, TX 78666
 % jlesage@spatia-econometrics.com
 
-  
+
   [nobs nvar] = size(xin);
   meanx = mean(xraw);
   stdx = std(xraw);
-  
+
   if nvar == 1
     if (stdx == 0)
       t = zeros(size(xin));

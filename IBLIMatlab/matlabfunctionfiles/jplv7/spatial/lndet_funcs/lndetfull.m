@@ -2,7 +2,7 @@ function out=lndetfull(W,lmin,lmax)
 % PURPOSE: computes Pace and Barry's grid for log det(I-rho*W) using sparse matrices
 % -----------------------------------------------------------------------
 % USAGE: out = lndetfull(W,lmin,lmax)
-% where:    
+% where:
 %             W     = symmetric spatial weight matrix (standardized)
 %             lmin  = lower bound on rho
 %             lmax  = upper bound on rho
@@ -16,7 +16,7 @@ function out=lndetfull(W,lmin,lmax)
 % References: % R. Kelley Pace and  Ronald Barry. 1997. ``Quick
 % Computation of Spatial Autoregressive Estimators'', Geographical Analysis
 % -----------------------------------------------------------------------
- 
+
 % written by:
 % James P. LeSage, Dept of Economics
 % Texas State University-San Marcos
@@ -25,7 +25,7 @@ function out=lndetfull(W,lmin,lmax)
 % jlesage@spatial-econometrics.com
 
 rvec = lmin:.01:lmax;
-spparms('tight'); 
+spparms('tight');
 [n junk] = size(W);
 z = speye(n) - 0.1*sparse(W);
 p = colamd(z);

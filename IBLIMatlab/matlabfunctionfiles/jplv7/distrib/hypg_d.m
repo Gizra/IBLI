@@ -1,7 +1,7 @@
 % PURPOSE: demo of Hypergeometric distribution functions
 %          prints mean and variance of 1000 draws
 %          plots pdf,cdf,inverse
-% 
+%
 %---------------------------------------------------
 % USAGE: hypg_d
 %---------------------------------------------------
@@ -9,7 +9,7 @@
 nobs = 1000;
 n = 10;
 K = 10;
-N = 50; 
+N = 50;
 
 tic;
 tst = hypg_rnd(nobs,n,K,N);

@@ -1,20 +1,20 @@
 % PURPOSE: An example of using sac_gmm
-% GM estimation of general spatial model (on a small data set)  
-%                                   
+% GM estimation of general spatial model (on a small data set)
+%
 %---------------------------------------------------
 % USAGE: sac_gmmd (see also sac_gmmd2 for a large data set)
 %---------------------------------------------------
 
 clear all;
 % W-matrix from Anselin's neigbhorhood crime data set
-load anselin.dat; 
+load anselin.dat;
 xc = anselin(:,4);
 yc = anselin(:,5);
 % crate standardized 1st-order spatial weight matrix
 W = make_neighborsw(xc,yc,3);
 [j,M,j] = xy2cont(xc,yc);
 [n junk] = size(W);
-IN = speye(n); 
+IN = speye(n);
 rho = 0.6;  % true value of rho
 lam = -0.4;  % true value of lam
 sige = 1;

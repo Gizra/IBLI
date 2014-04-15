@@ -1,7 +1,7 @@
 % PURPOSE: An example using fmin function
-%                           
+%
 %  to solve a spatial autoregressive model maximum
-%  likelihood problem                           
+%  likelihood problem
 %---------------------------------------------------
 % USAGE: optim2_d
 %---------------------------------------------------
@@ -43,15 +43,15 @@ liktmp = fval
 
 % step 2) find sige
 Wy = sparse(W)*y;
-epe = (y - p*Wy)'*(y-p*Wy); sige = epe/n; 
+epe = (y - p*Wy)'*(y-p*Wy); sige = epe/n;
 rho = p;
 yhat = p*Wy;
-resid = y - yhat; 
+resid = y - yhat;
 lik = -(liktmp + (n/2)*log(sige));
 
 
 
-% asymptotic t-stats 
+% asymptotic t-stats
 parm = [p
         sige];
 

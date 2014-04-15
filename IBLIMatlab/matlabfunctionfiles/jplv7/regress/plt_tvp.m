@@ -2,10 +2,10 @@ function plt_tvp(results,vnames)
 % PURPOSE: Plots output using tvp regression results structures
 %---------------------------------------------------
 % USAGE: plt_tvp(results,vnames)
-% Where: results = a structure returned by a tvp regression 
+% Where: results = a structure returned by a tvp regression
 %        vnames  = an optional vector of variable names
 %                  e.g. vnames = strvcat('y','constant','x1');
-%--------------------------------------------------- 
+%---------------------------------------------------
 %  RETURNS: nothing, just plots the tvp regression results
 % --------------------------------------------------
 % NOTE: user must supply pause commands, none are in plt_tvp function
@@ -14,7 +14,7 @@ function plt_tvp(results,vnames)
 %            plt_tvp(results2);
 % --------------------------------------------------
 % SEE ALSO: prt, plt
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -38,7 +38,7 @@ start = results.start;
 y = results.y(start:n,1);
 yhat = results.yhat;
 
-e = y - yhat; 
+e = y - yhat;
 subplot(1,1,1);
 
  [nobs nvar] = size(beta);
@@ -61,7 +61,7 @@ subplot(1,1,1);
    end; % end of j-loop over expanded-variables
   end;
 
-% Now plot actual vs predicted 
+% Now plot actual vs predicted
 tt=1:nobs;
 clf;
 subplot(2,1,1), plot(tt,y(tt,1),'-',tt,yhat(tt,1),'--');
@@ -91,7 +91,7 @@ start = results.start;
 y = results.y(start:n,1);
 yhat = results.yhat;
 
-e = y - yhat; 
+e = y - yhat;
 subplot(1,1,1);
 
  [nobs nvar] = size(beta);
@@ -114,7 +114,7 @@ subplot(1,1,1);
    end; % end of j-loop over expanded-variables
   end;
 
-% Now plot actual vs predicted 
+% Now plot actual vs predicted
 tt=1:nobs;
 clf;
 subplot(2,1,1), plot(tt,y(tt,1),'-',tt,yhat(tt,1),'--');
@@ -156,7 +156,7 @@ n = length(results.y);
 y = results.y(start:n,1);
 yhat = results.yhat;
 
-e = y - yhat; 
+e = y - yhat;
 subplot(1,1,1);
 
  [nobs nvar] = size(beta1);
@@ -194,7 +194,7 @@ pause;
 
 
 
-% Now plot actual vs predicted 
+% Now plot actual vs predicted
 tt=1:nobs;
 clf;
 subplot(2,1,1), plot(tt,y(tt,1),'-',tt,yhat(tt,1),'--');

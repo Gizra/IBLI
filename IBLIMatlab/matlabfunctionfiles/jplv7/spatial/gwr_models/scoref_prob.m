@@ -23,7 +23,7 @@ for iter = 1:n;
    dx = east - east(iter,1);
    dy = north - north(iter,1);
    d = (dx.*dx + dy.*dy);
-   sd = std(sqrt(d)); 
+   sd = std(sqrt(d));
    wt = stdn_pdf(sqrt(d)/(sd*bdwt));
    wt(iter,1) = 0.0;
 wt = sqrt(wt);
@@ -32,7 +32,7 @@ tmp = probit(y,xs);
 bi = tmp.beta;
 % compute predicted values
 yhat = norm_cdf(x(iter,:)*bi);
-% compute residuals 
+% compute residuals
 res(iter,1) = y(iter,1) - yhat;
 end; % end of for iter loop
 

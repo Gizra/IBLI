@@ -3,22 +3,22 @@ function pgranger(result,varargin)
 %  --------------------------------------------------
 % USAGE: pgranger(results,varargin);
 %  where: results = a structure returned by vare()
-%        varargin = a variable input list containing             
+%        varargin = a variable input list containing
 %         vnames  = an optional variable name vector
-%         cutoff  = probability cutoff used when printing 
-% usage: pgranger(result,0.05,vnames);                  
+%         cutoff  = probability cutoff used when printing
+% usage: pgranger(result,0.05,vnames);
 %    or: pgranger(result,0.05);
 %    or: pgranger(result,vnames);
-%    or: pgranger(result,vnames,0.01);  
-%----------------------------------------------------               
+%    or: pgranger(result,vnames,0.01);
+%----------------------------------------------------
 %                 e.g. vnames = ['y1', VAR variables
-%                                'y2']  
+%                                'y2']
 %                 e.g. cutoff = 0.05 would only print
-%                      marginal probabilities < 0.05                
-%---------------------------------------------------               
+%                      marginal probabilities < 0.05
+%---------------------------------------------------
 % NOTES: constant term is added automatically to vnames list
-%       you need only enter VAR variable names plus deterministic                
-%---------------------------------------------------  
+%       you need only enter VAR variable names plus deterministic
+%---------------------------------------------------
 % SEE ALSO: vare(), prt_var(), pftests()
 % ----------------------------------------------------
 
@@ -43,7 +43,7 @@ for i=1:length(varargin);
       [namsiz nsize] = size(vnames);
       if namsiz < result(1).neqs
     error('pgranger vnames argument is wrong size');
-      end;  
+      end;
  else
   cutoff = varargin{i};
  end;

@@ -1,8 +1,8 @@
 % PURPOSE: An example of using gwrw()
 %          to produce a weight matrix for GWR model
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
-% USAGE: gwrw_d 
+% USAGE: gwrw_d
 %---------------------------------------------------
 
 % load the Anselin data set

@@ -1,27 +1,27 @@
 function gr=k_pdf(X,type,nb,range,bw)
 % PURPOSE: Plots a univariate kernel density
-% 
+%
 % USAGE:
 %     gr=kpdf(X,nb,range,bw)
-% 
+%
 % INPUTS:
 %     X       : series to generate the data
 %     type    : The type of kernel used, by numbers, default is epanechnikov
 %             cosinus       :   0
 %             uniform       :   1
 %             normal        :   2
-%             quartic       :   3   
-%             triangular    :   4   
+%             quartic       :   3
+%             triangular    :   4
 %             triweight     :   5
 %             epanechnikov  :   6
-%     nb      : Number of nodes to use ; default is min(lenght X,300) 
-%     range   : Range to calculate the nodes over(2 by 1 vector)(can be omitted, 
+%     nb      : Number of nodes to use ; default is min(lenght X,300)
+%     range   : Range to calculate the nodes over(2 by 1 vector)(can be omitted,
 %               in which case an expanded range is used)
 %     bw      : The bandwidth to use. by default Silverman's BW is used
 %
 % OUTPUTS:
 %     gr       : Graphics handle to plot
-% 
+%
 % COMMENTS:
 %
 % Author: François Desmoulins-Lebeault
@@ -69,7 +69,7 @@ if nargin < 5
   end
   bw=0.99*k*N^(-1/5)*min(std(X),iqr(X)/1.34);
 end
-    
+
 vals=zeros(nb,1);
 x=linspace(rmin,rmax,nb);
 

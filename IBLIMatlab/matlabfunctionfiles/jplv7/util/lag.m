@@ -16,7 +16,7 @@ function z = lag(x,n,v)
 % NOTES: if n <= 0, z = [] is returned. While you may find this
 %        preverse, it is sometimes useful.
 %-------------------------------------------------------
-% SEE ALSO: mlag() 
+% SEE ALSO: mlag()
 %-------------------------------------------------------
 
 % written by:
@@ -54,4 +54,4 @@ otherwise
 error('lag: wrong # of input arguments');
 end;
 
-  
+

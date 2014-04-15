@@ -30,9 +30,9 @@ function res = sw(Y,ta,d,s,v);
 % -----------------------------------------------------------------------
 % SEE ALSO: bfl, tduni_print, tduni_plot
 % -----------------------------------------------------------------------
-% REFERENCE: Stram, D.O. and Wei, W.W.S. (1986) "A methodological note on the 
-% disaggregation of time series totals", Journal of Time Series Analysis, 
-% vol. 7, n. 4, p. 293-302. 
+% REFERENCE: Stram, D.O. and Wei, W.W.S. (1986) "A methodological note on the
+% disaggregation of time series totals", Journal of Time Series Analysis,
+% vol. 7, n. 4, p. 293-302.
 
 % written by:
 % Enrique M. Quilis
@@ -86,17 +86,17 @@ H1=[D1
 % Matrix formulation of U(B) filter
 % It depends on the type of disaggregation problem at hand
 
-S = movingsum(s,n);  
+S = movingsum(s,n);
 
 % Make S square matrix in order to perform SS=S^d
 S=[zeros(s-1,n)
    S];
 
 % Computing S^d
-% Note that interpolation (ta==3) or (ta==4) requires also the use of the 
+% Note that interpolation (ta==3) or (ta==4) requires also the use of the
 % U(B) filter but one time less than in the other cases. The presence
 % of the U(B) filter is due to the fact that (1-B)^d applied in the low
-% frequency is equivalent to (1-B^s)^d in the high frequency. Since 
+% frequency is equivalent to (1-B^s)^d in the high frequency. Since
 % (1-B^s)=(1-B)U(B), the operator needed to induce stationarity in the
 % low frequency introduces U(B) in the high frequency.
 
@@ -109,7 +109,7 @@ if ((ta == 3) | (ta == 4))
    case 2
       SS = S*S;
    end
-else 
+else
    switch d
    case 0
       SS=S;
@@ -120,19 +120,19 @@ else
    end
 end
 
-% Interpolation matrix. Note that temporal aggregation = 
+% Interpolation matrix. Note that temporal aggregation =
 % = moving temporal aggregation (via U(B)) + systematic sampling.
 % Proper care should be taken in the case of average restriction
 
 switch ta
-case 1   
-    IN = aggreg(3,N,s);      
+case 1
+    IN = aggreg(3,N,s);
 case 2
-    IN = (1/s) * aggreg(3,N,s);      
+    IN = (1/s) * aggreg(3,N,s);
 case 3
-    IN = aggreg(3,N,s);      
+    IN = aggreg(3,N,s);
 case 4
-    IN = aggreg(3,N,s);      
+    IN = aggreg(3,N,s);
 end
 
 Cd = IN * SS;
@@ -142,7 +142,7 @@ Cd = Cd(d+1:end,d+1:end);  % Generation of Cd matrix
 D2 = dif(d,N);
 D2 = D2(d+1:end,:);  % Difference operator without initial conditions
 
-H2 = [ v * Cd' * inv(Cd * v * Cd') * D2 
+H2 = [ v * Cd' * inv(Cd * v * Cd') * D2
     zeros(d,N-d)  eye(d) ];
 
 % ------------------------------------------------------------

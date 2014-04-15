@@ -12,11 +12,11 @@ function lik = tvp_like(parm,y,x,start,priorb0,priorv0)
 %        parm(k) = sig beta k
 %        start   = # of observation to start at
 %                  (default: 2*k+1)
-%        priorb0   = (k x 1) vector with prior b0          
+%        priorb0   = (k x 1) vector with prior b0
 %        priorv0   = (k x k) matrix with prior variance
-%                  for sigb                            
+%                  for sigb
 % ----------------------------------------------------
-% RETURNS: -log likelihood function value (a scalar)                  
+% RETURNS: -log likelihood function value (a scalar)
 % ----------------------------------------------------
 % REFERENCES: Kim and Nelson (1999)
 % State-Space Models with Regime Switching

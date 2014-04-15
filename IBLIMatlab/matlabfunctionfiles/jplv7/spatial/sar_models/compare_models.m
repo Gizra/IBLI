@@ -1,5 +1,5 @@
 % PURPOSE: An example of model comparison using log marginal posterior
-%          (on a large data set)                  
+%          (on a large data set)
 %---------------------------------------------------
 % USAGE: compare_models
 %---------------------------------------------------
@@ -15,7 +15,7 @@ x2 = log(elect(:,10)./elect(:,8));
 x3 = log(elect(:,11)./elect(:,8));
 latt = elect(:,5);
 long = elect(:,6);
-n = length(y); 
+n = length(y);
 x = [ones(n,1) x1 x2 x3];
 clear x1; clear x2; clear x3;
 clear elect;                % conserve on RAM memory
@@ -49,9 +49,9 @@ in.rnames = strvcat('Models','sem','sar');
 mprint(probs,in);
 
 
-% generate an sar model     
+% generate an sar model
 % sar model generated here
-y = (IN-rho*W)\(x*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige)); 
+y = (IN-rho*W)\(x*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige));
 
 % homoscedastic prior
 prior2.novi = 1;

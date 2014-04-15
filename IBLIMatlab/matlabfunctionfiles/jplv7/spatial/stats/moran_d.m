@@ -1,6 +1,6 @@
 % PURPOSE: An example of using moran()
 %          to test for spatial error correlation
-%          on a small data set                   
+%          on a small data set
 %---------------------------------------------------
 % USAGE: moran_d
 %---------------------------------------------------

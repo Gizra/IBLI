@@ -33,7 +33,7 @@ phii = ones(n,1)./phi;
 temp = prod(phi);
 if temp > 0.0001;
 detphi = 0.5*log(temp);
-else 
+else
 detphi = 0.0001;
 end;
 ys = sqrt(phii).*y;

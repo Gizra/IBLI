@@ -20,7 +20,7 @@ function plt_reg(results,vnames);
 % 601 University Drive
 % San Marcos, TX 78666
 %jlesage@spatial-econometrics.com
-if ~isstruct(results); 
+if ~isstruct(results);
    error('plt_reg requires a regression results structure');
 end;
 nobs = results(1).nobs;

@@ -24,22 +24,22 @@ function results = ridge(y,x,theta)
 % --------------------------------------------------
 % SEE ALSO: rtrace, prt_reg, plt_reg
 %---------------------------------------------------
-% REFERENCES: David Birkes, Yadolah Dodge, 1993, Alternative Methods of Regression    
-%              Hoerl, Kennard, Baldwin, 1975 `Ridge Regression: Some 
+% REFERENCES: David Birkes, Yadolah Dodge, 1993, Alternative Methods of Regression
+%              Hoerl, Kennard, Baldwin, 1975 `Ridge Regression: Some
 %              Simulations', Communcations in Statistics
-  
+
 % written by:
 % James P. LeSage, Dept of Economics
 % Texas State University-San Marcos
 % 601 University Drive
 % San Marcos, TX 78666
 %jlesage@spatial-econometrics.com
-if (nargin > 3); 
+if (nargin > 3);
 error('Wrong # of arguments to ridge');
 elseif (nargin < 2); error('Wrong # of arguments to ridge');
 else
  [nobs nvar] = size(x); [nobs2 junk] = size(y);
- if (nobs ~= nobs2); error('x and y must have same # obs in ridge'); 
+ if (nobs ~= nobs2); error('x and y must have same # obs in ridge');
  end;
 end;
 
@@ -53,7 +53,7 @@ results.nvar = n;
 if nargin == 2
 dfs = m - n - 1;
 b = zeros(n,1);
-[q,r] = qr(x,0); 
+[q,r] = qr(x,0);
 xpxi = (r'*r)\eye(n);
 b(:,1) = xpxi*(x'*y);
 ridi = diag(diag(x'*x));

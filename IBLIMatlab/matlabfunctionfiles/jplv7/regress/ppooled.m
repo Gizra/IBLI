@@ -2,24 +2,24 @@ function results = ppooled(y,x)
 % PURPOSE: performs Pooled Least Squares for Panel Data(for balanced or unbalanced data)
 %----------------------------------------------------------------------------------------
 % USAGE:  results = ppooled(y,x)
-% where:    y     = a (nobs x neqs) matrix of all of the individual's observations 
+% where:    y     = a (nobs x neqs) matrix of all of the individual's observations
 %						 vertically concatenated. This matrix must include in the firt
 %						 column the dependent variable, the independent variables must follow
-%						 accordingly.	
-%			    x    = optional matrix of exogenous variables, 
-%						  dummy variables. 				
+%						 accordingly.
+%			    x    = optional matrix of exogenous variables,
+%						  dummy variables.
 %						 (NOTE: constant vector automatically included)
 %----------------------------------------------------------------------------------------
 %RETURNS a structure
 % results.meth = 'ppooled'
 % results.nobs = nobs, # of observations
 % results.nvar  = nvars, # of variables
-% results.beta  = bhat 
-% results.tstat = t-statistics 
+% results.beta  = bhat
+% results.tstat = t-statistics
 % results.tprob = t-probabilities
-% results.resid = residuals 
-% results.yhat  = predicted values 
-% results.y     = actual values 
+% results.resid = residuals
+% results.yhat  = predicted values
+% results.y     = actual values
 % results.sige  = e'e/(n-k)
 % results.rsqr  = r-squared
 % results.rbar  = r-squared adjusted
@@ -33,17 +33,17 @@ function results = ppooled(y,x)
 % Carlos Alberto Castro
 % National Planning Department
 % Bogota, Colombia
-% Email: ccastro@dnp.gov.co 
+% Email: ccastro@dnp.gov.co
 
 t0 = clock;
-     
+
 results.meth = 'ppooled';
 
 [nobs equ]= size(y);
 
 nx = 0;
 
-if nargin == 2 
+if nargin == 2
 [nobs2 nx] = size(x);
  if (nobs2 ~= nobs)
  error('nobs in x-matrix not the same as y-matrix');
@@ -55,13 +55,13 @@ results.crconst = 0;    %correction of the constant term
 
 
 % form x-matrix
-if nx 
+if nx
 xmat = [y(:,2:equ) x ones(nobs,1)];
 else
 xmat = [y(:,2:equ) ones(nobs,1)];
 end;
 
-[nobs3 nvars]= size(xmat); 
+[nobs3 nvars]= size(xmat);
 results.nvar  = nvars;
 results.xmat  = xmat;
 
@@ -75,7 +75,7 @@ results.xmat  = xmat;
       tstat = res.tstat;
       tout = tdis_prb(tstat,nobs-nvars);
  results.tprob = tout;          % t-probs
- results.resid = res.resid;     % resids 
+ results.resid = res.resid;     % resids
     sigu = res.resid'*res.resid; %sse
  results.yhat = res.yhat;       % yhats
    results.y    = y(:,1);           % actual y
@@ -84,11 +84,11 @@ results.xmat  = xmat;
    results.sige = res.sige;       % sigma e
    results.time = etime(clock,t0); % time elapsed during the procedure
 
-   
 
 
 
- 
+
+
 
 
 

@@ -22,7 +22,7 @@ function results=sar_gmm(y,x,W)
 %         results.rbar       = rbar-squared
 %         results.se         = Standard errors from EGLS
 %         results.nobs       = number of observations
-%         results.nvar       = number of variables 
+%         results.nvar       = number of variables
 %         results.time       = total time taken
 % ---------------------------------------------------
 % %  SEE ALSO: prt(results), sar, sar_g
@@ -52,7 +52,7 @@ if length(ind) > 0 % we have an intercept
 end;
 
 results.meth = 'sar_gmm';
-time1 = 0; 
+time1 = 0;
 time2 = 0;
 
 
@@ -65,15 +65,15 @@ results.nvar=nvar;
       Wy = sparse(W)*y;
       Wx = sparse(W)*x(:,2:end);
        z = [x Wx W*Wx];
-      
+
       %jdw 5-10-2010 for use with psuedo panel fixed effects
 %       Wy = sparse(W)*y;
 %       Wx = sparse(W)*x(:,2:end);
 %       z = [x Wx];
-       
-      
-      
-      o1 = tsls(y,Wy,x,z);  
+
+
+
+      o1 = tsls(y,Wy,x,z);
       rho = o1.beta(1,1);
      bhat = o1.beta(2:end,1);
  rhotstat = o1.tstat(1,1);
@@ -89,8 +89,8 @@ results.nvar=nvar;
     rhotstat = o1.tstat(1,1);
     btstat = o1.tstat(2:end,1);
     sige = (o1.resid'*o1.resid)/n;
-    end;    
-    
+    end;
+
 results.rho = rho;
 results.beta = bhat;
 results.sige = sige;

@@ -1,28 +1,28 @@
 function result = theilbf(xpy,xpx,nlag,neqs,eqn,theta,weight,decay,scale2,scale,nx)
 % PURPOSE: do Theil-Goldberger for bvar model (called by bvarf.m, becmf.m)
-%--------------------------------------------------------------                     
-% USAGE:  result = theilbf(y,x,neqs,eqn,theta,weight,decay,scale2,scale,nx)                                 
-% where:  y = nobs x 1 input vector                          
-%         x = nobs x nvar input explanatory variables matrix 
-%         nobs = # of observations                           
-%         neqs = # of equations                              
-%         eqn  = # equation number                           
-%         theta= overall tightness                           
-%         weight = scalar or (neqs x neqs) matrix of prior weights                        
-%         decay  = lag decay                                 
-%         scale  = scaling vector (determined in bvarf)                           
-%         scale2 = scaling vector (determined in bvarf)  
+%--------------------------------------------------------------
+% USAGE:  result = theilbf(y,x,neqs,eqn,theta,weight,decay,scale2,scale,nx)
+% where:  y = nobs x 1 input vector
+%         x = nobs x nvar input explanatory variables matrix
+%         nobs = # of observations
+%         neqs = # of equations
+%         eqn  = # equation number
+%         theta= overall tightness
+%         weight = scalar or (neqs x neqs) matrix of prior weights
+%         decay  = lag decay
+%         scale  = scaling vector (determined in bvarf)
+%         scale2 = scaling vector (determined in bvarf)
 %         nx     = # of deterministic variables excluding constant term
-%--------------------------------------------------------------                                                
+%--------------------------------------------------------------
 % RESULTS: a structure
-%        result.beta  = bhat 
-%--------------------------------------------------------------                                                
+%        result.beta  = bhat
+%--------------------------------------------------------------
 % NOTE:  This routine is the same as theilbv used by bvar except
 %        it saves time by not computing ancillary statistics
-%        because we only need bhat's for forecasting               
-%--------------------------------------------------------------                     
+%        because we only need bhat's for forecasting
+%--------------------------------------------------------------
 % see also: bvarf(), varf()
-%--------------------------------------------------------------                     
+%--------------------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -30,7 +30,7 @@ function result = theilbf(xpy,xpx,nlag,neqs,eqn,theta,weight,decay,scale2,scale,
 % 601 University Drive
 % San Marcos, TX 78666
 % jlesage@spatial-econometrics.com
-                          
+
 [junk nvar] = size(xpx);
 
 [nw1 nw2] = size(weight);
@@ -61,9 +61,9 @@ end;
 % R = diagonal matrix with scale(i,1)/S(i,j,l)
 R = zeros(nvar,nvar);
 
-% N.B. we don't want to divide by zero 
-% (diffuse prior on the x-variables and constant term) 
-% so we use nvar-nx-1  
+% N.B. we don't want to divide by zero
+% (diffuse prior on the x-variables and constant term)
+% so we use nvar-nx-1
 
 for i=1:nvar-nx-1;
 R(i,i) = scale(eqn,1)/sigma(i);
@@ -90,4 +90,4 @@ xpyrpc = xpy + R'*c;
 
 % find bhat
 result.beta = xpxi*xpyrpc;
-    
+

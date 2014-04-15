@@ -1,7 +1,7 @@
 function result = bvar_g(x,nlag,ndraw,nomit,prior,xx);
-% PURPOSE: Gibbs sampling estimates for Bayesian vector 
+% PURPOSE: Gibbs sampling estimates for Bayesian vector
 %          autoregressive model using Minnesota-type prior
-%          y = A(L) Y + X B + E, E = N(0,sige*V), 
+%          y = A(L) Y + X B + E, E = N(0,sige*V),
 %          V = diag(v1,v2,...vn), r/vi = ID chi(r)/r, r = Gamma(m,k)
 %          c = R A(L) + U, U = N(0,Z), Minnesota prior
 %          a diffuse prior is used for B associated with deterministic
@@ -11,14 +11,14 @@ function result = bvar_g(x,nlag,ndraw,nomit,prior,xx);
 % WHERE:    y    = an (nobs x neqs) matrix of y-vectors
 %           nlag = the lag length
 %          ndraw = # of draws
-%          nomit = # of initial draws omitted for burn-in   
+%          nomit = # of initial draws omitted for burn-in
 %          prior = a structure variable
 %               prior.tight,  Litterman's tightness hyperparameter
 %               prior.weight, Litterman's weight (matrix or scalar)
-%               prior.decay,  Litterman's lag decay = lag^(-decay) 
+%               prior.decay,  Litterman's lag decay = lag^(-decay)
 %               prior.rval, r prior hyperparameter, default=4
 %               prior.m,    informative Gamma(m,k) prior on r
-%               prior.k,    informative Gamma(m,k) prior on r      
+%               prior.k,    informative Gamma(m,k) prior on r
 %          x     = an optional (nobs x nx) matrix of variables
 % NOTE:  constant vector automatically included
 %---------------------------------------------------
@@ -38,11 +38,11 @@ function result = bvar_g(x,nlag,ndraw,nomit,prior,xx);
 % results.nomit  = # of initial draws omitted
 % results.nx     = # of deterministic variables
 % results.x      = deterministic variables matrix (nobs x nx)
-% --- the following are referenced by equation # --- 
+% --- the following are referenced by equation # ---
 % results(eq).bdraw = bhat draws for equation eq
-% results(eq).vmean = mean of vi draws for equation eq 
+% results(eq).vmean = mean of vi draws for equation eq
 % results(eq).sdraw = sige draws for equation eq
-% results(eq).rdraw = r-value draws for eq, if Gamma(m,k) prior 
+% results(eq).rdraw = r-value draws for eq, if Gamma(m,k) prior
 % results(eq).y     = actual observations for eq (nobs x 1)
 % results(eq).time   = time taken for sampling eq
 % ---------------------------------------------------
@@ -64,7 +64,7 @@ function result = bvar_g(x,nlag,ndraw,nomit,prior,xx);
 % error checking on input
 if ~isstruct(prior)
     error('bvar_g: must supply the prior as a structure variable');
-    
+
 elseif  nargin == 6  % deterministic variables
 [nobs2 nx] = size(xx);
    if (nobs2 ~= nobs)
@@ -75,7 +75,7 @@ result.x = xx;
 elseif nargin == 5 % no deterministic variables
 nx = 0;
 
-else 
+else
 error('Wrong # of arguments to bvar_g');
 end;
 
@@ -85,7 +85,7 @@ mm = 0; rval = 4; % rval = 4 is default
 nu = 0; d0 = 0; % default to a diffuse prior on sige
 for i=1:nf
     if strcmp(fields{i},'rval')
-        rval = prior.rval; 
+        rval = prior.rval;
     elseif strcmp(fields{i},'m')
         mm = prior.m;
         kk = prior.k;
@@ -98,9 +98,9 @@ for i=1:nf
         warning('Tightness greater than unity in bvar_g');
         end;
     elseif strcmp(fields{i},'weight')
-        weight = prior.weight;       
+        weight = prior.weight;
        [wchk1 wchk2] = size(weight);
-       if (wchk1 ~= wchk2) 
+       if (wchk1 ~= wchk2)
        error('non-square weight matrix in bvar_g');
        elseif wchk1 > 1
         if wchk1 ~= neqs
@@ -108,10 +108,10 @@ for i=1:nf
         end;
        end;
     elseif strcmp(fields{i},'decay')
-        decay = prior.decay;    
+        decay = prior.decay;
         if decay < 0
         error('Negative lag decay in bvar_g');
-        end;       
+        end;
     end;
 end;
 
@@ -169,7 +169,7 @@ for j=1:neqs;
    end;
 end;
 
-% form x-matrix 
+% form x-matrix
 if nx
 xmat = [xlag(nlag+1:nobs,:) xx(nlag+1:nobs,:) ones(nobs-nlag,1)];
 else
@@ -210,9 +210,9 @@ end;
 % R = diagonal matrix with scale(i,1)/S(i,j,l)
 R = zeros(nvar,nvar);
 
-% N.B. we don't want to divide by zero 
-% (diffuse prior on the x-variables and constant term) 
-% so we use nvar-nx-1  
+% N.B. we don't want to divide by zero
+% (diffuse prior on the x-variables and constant term)
+% so we use nvar-nx-1
 
 for i=1:nvar-nx-1;
 R(i,i) = scale(eqn,1)/sigma(i,1);
@@ -240,10 +240,10 @@ end;
 
 bresult = theil_g(yvec,xmat,oprior,ndraw,nomit);
 
-result(eqn).bdraw = bresult.bdraw;     
-result(eqn).vmean = bresult.vmean;     
-result(eqn).rdraw = bresult.rdraw;     
-result(eqn).sdraw = bresult.sdraw;    
-result(eqn).y = x(:,eqn); 
+result(eqn).bdraw = bresult.bdraw;
+result(eqn).vmean = bresult.vmean;
+result(eqn).rdraw = bresult.rdraw;
+result(eqn).sdraw = bresult.sdraw;
+result(eqn).y = x(:,eqn);
 result(eqn).time = bresult.time;
 end;

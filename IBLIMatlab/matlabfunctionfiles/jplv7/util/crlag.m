@@ -10,7 +10,7 @@ function y = crlag(x,n)
 %               .
 %              x(n-1)
 % -----------------------------------------------------
-             
+
 % written by:
 % James P. LeSage, Dept of Economics
 % Texas State University-San Marcos

@@ -1,5 +1,5 @@
 % functions to calculated log-determinants
-%   
+%
 %          lndet_d : An example of using lndetfull, lndetmc, lndetint
 %         lndet_d2 : An example of using lndetfull, lndetmc, lndetint
 %        lndetfull : computes Pace and Barry's grid for log det(I-rho*W) using sparse matrices

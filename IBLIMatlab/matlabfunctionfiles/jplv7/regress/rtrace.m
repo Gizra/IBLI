@@ -1,5 +1,5 @@
 function rtrace(y,x,thetamax,divs,vname)
-% PURPOSE: Plots ntheta ridge regression estimates 
+% PURPOSE: Plots ntheta ridge regression estimates
 %---------------------------------------------------
 % USAGE: rtrace(y,x,thetamax,ntheta,vnames)
 % where: y        = dependent variable vector
@@ -16,7 +16,7 @@ function rtrace(y,x,thetamax,divs,vname)
 % SEE ALSO: ridge, theil
 %---------------------------------------------------
 % REFERENCES: David Birkes, Yadolah Dodge, 1993,
-% Alternative Methods of Regression 
+% Alternative Methods of Regression
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -30,14 +30,14 @@ nflag = 1;
 elseif nargin == 4
 nflag = 0;
 else
-error('Wrong # of arguments to rtrace'); 
+error('Wrong # of arguments to rtrace');
 end;
 
 incr = thetamax/divs;
 [m,n] = size(x);
 dfs = m - n - 1;
 b = zeros(n,divs+1);
-[q,r] = qr(x,0); 
+[q,r] = qr(x,0);
 xpxi = (r'*r)\eye(n);
 b(:,1) = xpxi*(x'*y);
 ridi = diag(diag(x'*x));
@@ -48,9 +48,9 @@ for i = 1:divs
   b(:,i+1) = inv(x'*x + ridi*i*incr)*(x'*y);
 end
 plot(0:incr:thetamax,b');
- hold on; 
+ hold on;
  plot([theta theta],[min(min(b)) max(max(b))],'-g');
-hold off; 
+hold off;
 title('Values of Regression Coefficients as a Function of \theta');
 xlabel('Value of \theta, vertical line shows H-K \theta value');
 ylabel('Regression Coefficients');
@@ -78,5 +78,5 @@ end;
 
    hx = legend(vnames{2:n+1});
    set(hx,'Visible','on');
-   
+
 end;

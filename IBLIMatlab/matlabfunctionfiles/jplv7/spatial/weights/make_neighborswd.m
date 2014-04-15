@@ -1,6 +1,6 @@
 % PURPOSE: An example of using make_neighborsw
 %          a nearest neighbor spatial weight matrix
-%          on a small data set                   
+%          on a small data set
 %---------------------------------------------------
 % USAGE: make_neighborsw
 %---------------------------------------------------
@@ -8,7 +8,7 @@
 clear all;
 
 % load Anselin (1988) Columbus neighborhood crime data
-load anselin.dat; 
+load anselin.dat;
 xc = anselin(:,4);
 yc = anselin(:,5);
 % To construct a row-stochastic weight matrix based on m neighbors

@@ -1,7 +1,7 @@
 % PURPOSE: demo of poisson distribution functions
 %          prints mean and variance of 1000 draws
 %          plots pdf,cdf,inverse
-% 
+%
 %---------------------------------------------------
 % USAGE: pois_d
 %---------------------------------------------------

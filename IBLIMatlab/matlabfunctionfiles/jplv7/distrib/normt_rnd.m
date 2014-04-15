@@ -26,7 +26,7 @@ function result = normt_rnd(mu,sigma2,left,right)
 % jlesage@spatial-econometrics.com
 % last updated 10/2007
 %
-% For information on Bayesian Econometric Methods: 
+% For information on Bayesian Econometric Methods:
 % Volume 7 of Econometric Exercises Series
 % Cambridge University Press by Gary Koop, Dale Poirer and Justin Tobias
 % see:

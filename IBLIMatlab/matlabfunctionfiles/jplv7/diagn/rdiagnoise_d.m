@@ -1,6 +1,6 @@
 % PURPOSE: demo of rdiagnose()
 %          Regression Diagnostic routines
-%          
+%
 %---------------------------------------------------
 % USAGE: rdiagnose_d
 %---------------------------------------------------

@@ -32,7 +32,7 @@ function []=td_plot(res)
 meth=res.meth;
 
 % -----------------------------------------------------------
-% Basic parameters 
+% Basic parameters
 N=res.N;
 n=res.n;
 pred=res.pred;
@@ -70,7 +70,7 @@ bic=res.bic;
 % -----------------------------------------------------------
 % Selection of periodicity of high frequency data
 % Low-frequency (lf) and high-frequency (hf) depends on the
-% problem at hand. The default options are related to s 
+% problem at hand. The default options are related to s
 % according to:
 %                       s
 %  :::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -87,7 +87,7 @@ if (s==3)
 else
     lf = 1;
     hf = s;
-end 
+end
 
 % -----------------------------------------------------------
 % -----------------------------------------------------------
@@ -147,7 +147,7 @@ xlabel ('time');
 
 % --------------------------------------------------------------
 % Only if there is only one indicator (without intercept)
-if (p == 2) 
+if (p == 2)
    % -----------------------------------------------------------
    % High frequency conformity: yoy rates of growth
    figure;
@@ -169,12 +169,12 @@ if (p == 2)
    grid off; legend ('y','y+sigma','y-sigma','x',0);
    title ('High frequency conformity: yoy rates of growth (detail)');
    xlabel ('time');
-end;   
+end;
 
 % -----------------------------------------------------------
 % Low frequency series vs low frequency indicators (scaled): levels
 
-C=aggreg(ta,N,s); 
+C=aggreg(ta,N,s);
 X=C*x(1:n-pred,:);  % Only low freq. data span is considered
 
 figure;
@@ -182,12 +182,12 @@ t=1:N;
 plot(t,Y,'ro-',t,X*beta,'b+-');
 grid off; legend ('Y','X*beta',0);
 title ('Low frequency conformity');
-xlabel ('time'); 
+xlabel ('time');
 
 % -----------------------------------------------------------
 % Only if there is only one indicator (without intercept)
 
-if (p == 2) 
+if (p == 2)
     % -----------------------------------------------------------
     % Low frequency series vs low frequency indicators: yoy growth
     figure;
@@ -195,9 +195,9 @@ if (p == 2)
     plot(t,tasa(Y,lf),'ro-',t,tasa(X(:,2),lf),'b+-');
     grid off; legend ('Y','X',0);
     title ('Low frequency conformity: yoy rates of growth');
-    xlabel ('time'); 
+    xlabel ('time');
 end
-   
+
 % -----------------------------------------------------------
 % High and low frequency series: y vs Y
 %   1. Generate a high freq. time series with the low freq. span
@@ -210,7 +210,7 @@ else
 end
 
 i=1; t=1;
-while (t<=N)   
+while (t<=N)
    c=0;
    while (c<s)
       ya(i,1)=Y(t,1);
@@ -226,7 +226,7 @@ y_N=y(1:n-pred);  % Only the part of low freq. span is considered
 plot(t,y_N,'r-',t,ya/g1,'b-');
 grid off; legend (meth,'y naive',0);
 title ('High frequency and low frequency series');
-xlabel ('time'); 
+xlabel ('time');
 
 % -----------------------------------------------------------
 % High and low frequency residuals: u vs U
@@ -250,4 +250,4 @@ u_N=u(1:n-pred);   % Only the part of low freq. data
 plot(t,u_N,'r-',t,ua/g1,'b-');
 grid off; legend ('u','U',0);
 title ('High frequency and low frequency residuals');
-xlabel ('time'); 
+xlabel ('time');

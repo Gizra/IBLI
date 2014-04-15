@@ -4,7 +4,7 @@ function results = sem_gcbma(y,x,W,ndraw,prior)
 % ------------------------------------------------------
 % usage: results = sem_gcbma(y,x,W,ndraw,prior)
 % where: % where: y = dependent variable vector (nobs x 1)
-%        x = studentized or well-scaled x-matrix with no intercept 
+%        x = studentized or well-scaled x-matrix with no intercept
 %        W = spatial weight matrix (standardized, row-sums = 1)
 %    ndraw = # of draws
 %    prior = a structure variable with:
@@ -16,12 +16,12 @@ function results = sem_gcbma(y,x,W,ndraw,prior)
 %            prior.a2    = (default = 1.01) see: 'help beta_prior'
 %            prior.eig   = 0 for default rmin = -1,rmax = +1, 1 for eigenvalue calculation of these
 %            prior.rmin  = (optional) min rho used in sampling (default = -1)
-%            prior.rmax  = (optional) max rho used in sampling (default = 1)  
+%            prior.rmax  = (optional) max rho used in sampling (default = 1)
 %            prior.lflag = 0 for full lndet computation (default = 1, fastest)
 %                        = 1 for MC approx (fast for large problems)
 %                        = 2 for Spline approx (medium speed)
 %            prior.order = order to use with prior.lflag = 1 option (default = 50)
-%            prior.iter  = iters to use with prior.lflag = 1 option (default = 30) 
+%            prior.iter  = iters to use with prior.lflag = 1 option (default = 30)
 %            prior.lndet = a matrix returned by sar, sar_g, sarp_g, etc.
 %                          containing log-determinant information to save time
 %-------------------------------------------------------------
@@ -47,20 +47,20 @@ function results = sem_gcbma(y,x,W,ndraw,prior)
 %          results.time1   = time for eigenvalue calculation
 %          results.time2   = time for log determinant calcluation
 %          results.time3   = time for BMA sampling
-%          results.time    = total time taken  
+%          results.time    = total time taken
 %          results.rmax    = 1/max eigenvalue of W (or rmax if input)
-%          results.rmin    = 1/min eigenvalue of W (or rmin if input)          
+%          results.rmin    = 1/min eigenvalue of W (or rmin if input)
 %          results.lflag   = lflag from input
 %          results.iter    = prior.iter option from input
 %          results.order   = prior.order option from input
-%          results.limit   = matrix of [rho lower95,logdet approx, upper95] 
+%          results.limit   = matrix of [rho lower95,logdet approx, upper95]
 %                           intervals for the case of lflag = 1
 %          results.dflag   = dflag value from input (or default value used)
 %          results.lndet  = a matrix containing log-determinant information
 %                           (for use in later function calls to save time)
 % --------------------------------------------------------------
 % NOTES: 1) the log-marginals for the top 1000 models are written to a file lmarginal.sar
-%        as vectors over a grid of rho values for later use 
+%        as vectors over a grid of rho values for later use
 %        2) the model descriptions for the top 1000 models are written to a file models.sar
 % --------------------------------------------------------------
 % SEE ALSO: prt_bmas(), for printing results
@@ -68,8 +68,8 @@ function results = sem_gcbma(y,x,W,ndraw,prior)
 %           estimates based on averaging over models using posterior
 %           model probabilities as weights
 % --------------------------------------------------------------
-% REFERENCES: James P. LeSage and Olivier Parent, 
-% `Bayesian Model Averaging for Spatial Econometric Models', working paper 
+% REFERENCES: James P. LeSage and Olivier Parent,
+% `Bayesian Model Averaging for Spatial Econometric Models', working paper
 %
 % Fernandez,Carmen, Eduardo Ley, and Mark F. J. Steel, (2001a)
 %'Model uncertainty in cross-country growth regressions,'
@@ -108,7 +108,7 @@ nobsa = n;
 
 results.nobs  = n;
 results.nvar  = k;
-results.y = y;      
+results.y = y;
 
 if n1 ~= n
 error('sem_gcbma: x-matrix contains wrong # of observations');
@@ -147,8 +147,8 @@ gmodels = max([1000 gmodels]);
           visits = zeros(ndraw,1);
           lsave = zeros(na,1);
           vfreqs = zeros(1,nvar);
-          
-          modsave = zeros(gmodels,nvar); % storage for definition of 1000 best models 
+
+          modsave = zeros(gmodels,nvar); % storage for definition of 1000 best models
           logsave = zeros(gmodels,na);
 
 % ====== initializations
@@ -161,15 +161,15 @@ for v=1:nvar
     vtmp(v)=bino_rnd(1,0.5,1,1);
 end
 vin=selif(seqa(1,1,nvar).*vtmp,vtmp)';
-vout=delif(seqa(1,1,nvar)-seqa(1,1,nvar).*vtmp,vtmp)'; 
+vout=delif(seqa(1,1,nvar)-seqa(1,1,nvar).*vtmp,vtmp)';
 
 cnt = 0;
 
 %<====================== start draws
 t0 = clock;
 hwait = waitbar(0,'SEM BMA : MCMC sampling ...');
-for i=1:ndraw; 
-    
+for i=1:ndraw;
+
 % choose new model
 [vinew vonew] = sample(vin,vout);
 for j=1:length(vinew);
@@ -186,7 +186,7 @@ maxlog(i,1) = maxl;
 lsave = [lsave lmarg];
 msave = [msave
          vsave(i,:)];
-modsave(i,:) =  vsave(i,:);     
+modsave(i,:) =  vsave(i,:);
 logsave(i,:) = lmarg';
 cnt = cnt+1; % count of unique models found
   lmarg_old = lmarg;
@@ -219,7 +219,7 @@ maxl = max(lmarg_new);
     modsave = tmp;
   else
     ind = find(maxl > maxlog);
-    if length(ind) == 0 
+    if length(ind) == 0
     %  we don't save this log-marginal
     else
     % insert this log-marginal vector into the 1000 best models
@@ -250,10 +250,10 @@ else % we have a model that we have already computed the log-marginal for
 end;
 
 bf = model_odds(detval(:,1),lmarg_new,lmarg_old);
- if bf >=1; 
-     flag = 1; 
- else 
-     flag = bino_rnd(1,bf,1,1); 
+ if bf >=1;
+     flag = 1;
+ else
+     flag = bino_rnd(1,bf,1,1);
  end;
 
  if flag == 1 % change models
@@ -261,8 +261,8 @@ bf = model_odds(detval(:,1),lmarg_new,lmarg_old);
  vout = vonew;
  lmarg_old = lmarg_new;
  end;
- 
-waitbar(i/ndraw);         
+
+waitbar(i/ndraw);
 end; % end of sampling loop
 close(hwait);
 
@@ -320,7 +320,7 @@ else
 end;
 
 
-results.vprob = vfreqs; % compute variable probabilities based on 
+results.vprob = vfreqs; % compute variable probabilities based on
                             % all unique models found
 
 results.models = msort(no-nmodels+1:no,:);
@@ -330,7 +330,7 @@ results.nu = nu;
 results.d0 = d0;
 results.a1 = a1;
 results.a2 = a2;
-results.rmax = rmax; 
+results.rmax = rmax;
 results.rmin = rmin;
 results.lflag = ldetflag;
 results.lndet = detval;
@@ -341,7 +341,7 @@ results.g = g;
 function [nu,d0,rho,sige,rmin,rmax,detval,ldetflag,eflag,order,iter,a1,a2,g,gmodels] = sar_parse(prior,x)
 % PURPOSE: parses input arguments for sem_gcbma models
 % ---------------------------------------------------
-%  USAGE: [nu,d0,rho,sige,rmin,rmax,detval,ldetflag,eflag,mflag,order,iter,a1,a2,g] = 
+%  USAGE: [nu,d0,rho,sige,rmin,rmax,detval,ldetflag,eflag,mflag,order,iter,a1,a2,g] =
 %                           sar_parse(prior,x)
 % where prior contains the structure variable with inputs,
 % x is the matrix of explanatory variables input
@@ -376,17 +376,17 @@ if nf > 0
     if strcmp(fields{i},'nu')
         nu = prior.nu;
     elseif strcmp(fields{i},'d0')
-        d0 = prior.d0;  
+        d0 = prior.d0;
     elseif strcmp(fields{i},'g')
-       g = prior.g; 
+       g = prior.g;
     elseif strcmp(fields{i},'nmodels')
-       gmodels = prior.nmodels; 
+       gmodels = prior.nmodels;
     elseif strcmp(fields{i},'dflag')
-       metflag = prior.dflag; 
+       metflag = prior.dflag;
     elseif strcmp(fields{i},'a1')
-       a1 = prior.a1; 
+       a1 = prior.a1;
     elseif strcmp(fields{i},'a2')
-       a2 = prior.a2; 
+       a2 = prior.a2;
     elseif strcmp(fields{i},'rmin')
         rmin = prior.rmin; eflag = 0;
     elseif strcmp(fields{i},'rmax')
@@ -401,18 +401,18 @@ if nf > 0
     elseif strcmp(fields{i},'lflag')
         tst = prior.lflag;
         if tst == 0,
-        ldetflag = 0; 
+        ldetflag = 0;
         elseif tst == 1,
-        ldetflag = 1; 
+        ldetflag = 1;
         elseif tst == 2,
-        ldetflag = 2; 
+        ldetflag = 2;
         else
         error('sar_g: unrecognizable lflag value on input');
         end;
     elseif strcmp(fields{i},'order')
-        order = prior.order;  
+        order = prior.order;
     elseif strcmp(fields{i},'iter')
-        iter = prior.iter; 
+        iter = prior.iter;
     elseif strcmp(fields{i},'dflag')
         metflag = prior.dflag;
     elseif strcmp(fields{i},'eig')
@@ -422,7 +422,7 @@ if nf > 0
 
 else, % the user has input a blank info structure
       % so we use the defaults
-end; 
+end;
 
 function [rmin,rmax,time2] = sar_eigs(eflag,W,rmin,rmax,n);
 % PURPOSE: compute the eigenvalues for the weight matrix
@@ -437,8 +437,8 @@ function [rmin,rmax,time2] = sar_eigs(eflag,W,rmin,rmax,n);
 if eflag == 1 % compute eigenvalues
 t0 = clock;
 opt.tol = 1e-3; opt.disp = 0;
-lambda = eigs(sparse(W),speye(n),1,'SR',opt);  
-rmin = 1/real(lambda);   
+lambda = eigs(sparse(W),speye(n),1,'SR',opt);
+rmin = 1/real(lambda);
 rmax = 1;
 time2 = etime(clock,t0);
 else
@@ -451,23 +451,23 @@ function [detval,time1] = sar_lndet(ldetflag,W,rmin,rmax,detval,order,iter);
 % using the user-selected (or default) method
 % ---------------------------------------------------
 %  USAGE: detval = far_lndet(lflag,W,rmin,rmax)
-% where eflag,rmin,rmax,W contains input flags 
+% where eflag,rmin,rmax,W contains input flags
 % and the outputs are either user-inputs or default values
 % ---------------------------------------------------
 
 
 % do lndet approximation calculations if needed
 if ldetflag == 0 % no approximation
-t0 = clock;    
+t0 = clock;
 out = lndetfull(W,rmin,rmax);
 time1 = etime(clock,t0);
 tt=rmin:.001:rmax; % interpolate a finer grid
 outi = interp1(out.rho,out.lndet,tt','spline');
 detval = [tt' outi];
-    
+
 elseif ldetflag == 1 % use Pace and Barry, 1999 MC approximation
 
-t0 = clock;    
+t0 = clock;
 out = lndetmc(order,iter,W,rmin,rmax);
 time1 = etime(clock,t0);
 results.limit = [out.rho out.lo95 out.lndet out.up95];
@@ -495,7 +495,7 @@ elseif ldetflag == -1 % the user fed down a detval matrix
             error('sar_g: wrong sized lndet input argument');
         elseif n1 == 1
             error('sar_g: wrong sized lndet input argument');
-        end;          
+        end;
 end;
 
 function [j,visits] = find_new(i,vsave,vinew,visits)
@@ -576,7 +576,7 @@ for i=1:nvar
     if vin(1,i) >= nv1
         v1 = i; % # of variables in x1
     end;
-end;    
+end;
 
 xt = [ones(nobs,1) xall(:,vin)];
 [nobs,k] = size(xt);
@@ -656,13 +656,13 @@ function odds = model_odds(rho_vec,lmarg1,lmarg2)
 % San Marcos, TX 78666
 % jlesage@spatial-econometrics.com
 
- 
+
 nrho = length(rho_vec);
 
 lmarginal = [lmarg1 lmarg2];
 
 % now scale using all of the vectors of log-marginals
-% we must scale before exponentiating 
+% we must scale before exponentiating
 adj = max(max(lmarginal));
 madj = lmarginal - adj;
 
@@ -673,7 +673,7 @@ yy = matmul(rho_vec,ones(nrho,2));
 isum = zeros(1,2);
 for j=1:2
     yj = yy(:,j);
-    xj = xx(:,j);    
+    xj = xx(:,j);
 isum(1,j) = sum(diff(yj).*(xj(1:end-1)+xj(2:end))/2);
 end;
 
@@ -751,7 +751,7 @@ function [vinew,vonew] = sample(vin,vout)
 % last modified June, 2004
 
 % find size of variables in/out of the model
-nv1 = length(vout); 
+nv1 = length(vout);
 nv2 = length(vin);
 nvar = nv1+nv2;
 
@@ -821,7 +821,7 @@ end; % end of for i loop
 
 
 otherwise
-disp('error in sample function');    
-end; % end of switch   
-    
+disp('error in sample function');
+end; % end of switch
+
 

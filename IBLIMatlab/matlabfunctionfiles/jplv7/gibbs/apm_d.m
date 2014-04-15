@@ -1,6 +1,6 @@
 % PURPOSE: demo of apm()
 %          Geweke's chi-squared test for MCMC convergence
-% 
+%
 %---------------------------------------------------
 % USAGE: apm_d
 %---------------------------------------------------
@@ -11,10 +11,10 @@ randn('seed',10101);
 x = randn(n,k); b = ones(k,1); % generate data set
 randn('seed',20201);
 y = x*b + randn(n,1);
-ndraw = 300; nomit = 10; % set the number of draws   
+ndraw = 300; nomit = 10; % set the number of draws
 r = [1.0 1.0 1.0]'; % prior b means
-R = eye(k); 
-T = eye(k);         % prior b variance 
+R = eye(k);
+T = eye(k);         % prior b variance
 rval = 2;           % hetroscedastic prior for r-value
 prior.beta = r;
 prior.bcov = T;

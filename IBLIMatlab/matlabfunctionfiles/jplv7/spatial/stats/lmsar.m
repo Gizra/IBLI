@@ -7,8 +7,8 @@ function result = lmsar(y,x,W1,W2,lmin,lmax);
 %         x = independent variables matrix
 %        W1 = contiguity matrix for rho
 %        W2 = contiguity matrix for lambda
-%      rmin = (optional) minimum value of rho to use in search  
-%      rmax = (optional) maximum value of rho to use in search   
+%      rmin = (optional) minimum value of rho to use in search
+%      rmax = (optional) maximum value of rho to use in search
 % ---------------------------------------------------
 %  RETURNS: a structure variable
 %         result.meth = 'lmsar'

@@ -1,6 +1,6 @@
 % PURPOSE: A Monte Carlo example of using sem_gmm
 % GM estimation of the spatial error model
-% in a Monte Carlo experiment  
+% in a Monte Carlo experiment
 %---------------------------------------------------
 % USAGE: sem_gmmd4 (see also sem_gmmd2 for a large data set)
 %---------------------------------------------------
@@ -8,13 +8,13 @@
 clear all;
 
 % W-matrix from Anselin's neigbhorhood crime data set
-load anselin.dat; 
+load anselin.dat;
 xc = anselin(:,4);
 yc = anselin(:,5);
 % crate standardized 1st-order spatial weight matrix
 [j1 W j2] = xy2cont(xc,yc);
 [n junk] = size(W);
-IN = eye(n); 
+IN = eye(n);
 rho = 0.8;  % true value of rho
 sige = 5;
 k = 3;
@@ -50,7 +50,7 @@ in.cnames = strvcat('b1','b2','b3');
 in.rnames = strvcat('Statistics','truth','means','median','min','max');
 in.width = 1000;
 
-bprint = [beta' 
+bprint = [beta'
           mean(bout)
           median(bout)
           min(bout)

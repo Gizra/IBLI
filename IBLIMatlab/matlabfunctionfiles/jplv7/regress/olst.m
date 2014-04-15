@@ -23,7 +23,7 @@ function results = olst(y,x,maxit,crit)
 %        results.iter  = # of iterations
 %        results.conv  = convergence max(abs(bnew-bold))
 % --------------------------------------------------
-% NOTES: uses iterated re-weighted least-squares 
+% NOTES: uses iterated re-weighted least-squares
 %        to find maximum likelihood estimates
 % --------------------------------------------------
 % SEE ALSO: prt_reg(results), plt_reg(results)

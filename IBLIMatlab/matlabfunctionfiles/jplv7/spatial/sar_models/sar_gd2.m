@@ -1,5 +1,5 @@
-% PURPOSE: An example of using sar_g() on a large data set   
-%          Gibbs sampling spatial autoregressive model                         
+% PURPOSE: An example of using sar_g() on a large data set
+%          Gibbs sampling spatial autoregressive model
 %---------------------------------------------------
 % USAGE: sar_gd2 (see sar_gd for a small data set)
 %---------------------------------------------------
@@ -25,7 +25,7 @@ result = sar(y,x,W); % maximum likelihood estimates
 prt(result,vnames);
 
 % do Gibbs sampling estimation
-ndraw = 2500; 
+ndraw = 2500;
 nomit = 500;
 prior.novi = 1; % homoscedastic model
 result2 = sar_g(y,x,W,ndraw,nomit,prior);

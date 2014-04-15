@@ -9,8 +9,8 @@ function z = vdp(y,sigma,A);
 %         sigma : kxk VCV of initial estimates
 %         A     : kxm matrix of linear constraints
 % ------------------------------------------------------------
-% REFERENCE: Van der Ploeg, F.(1982)"Reliability and the adjustment 
-% of sequences of large economic accounting matrices",Journal of 
+% REFERENCE: Van der Ploeg, F.(1982)"Reliability and the adjustment
+% of sequences of large economic accounting matrices",Journal of
 % the Royal Statistical Society, series A, vol. 145, n. 2, p. 169-194.
 
 % written by:

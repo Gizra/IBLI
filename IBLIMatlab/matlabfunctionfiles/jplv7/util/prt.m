@@ -7,7 +7,7 @@ function prt(results,vnames,fid)
 %        vnames  = an optional vector of variable names
 %        fid     = file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
-%---------------------------------------------------               
+%---------------------------------------------------
 %                 e.g. vnames = ['y    ',
 %                                'x1   ',  NOTE: fixed width
 %                                'x2   ',        like all MATLAB
@@ -17,12 +17,12 @@ function prt(results,vnames,fid)
 % NOTES: you may use prt(results,[],fid) to print
 %        output to a file with no vnames
 %        this is simply a wrapper function that calls another function
-% --------------------------------------------------        
+% --------------------------------------------------
 % RETURNS:
 %        nothing, just prints the regression results
 % --------------------------------------------------
 % SEE ALSO: plt()
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -38,7 +38,7 @@ elseif nargin == 3
 arg = 0;
  [vsize junk] = size(vnames); % user may supply a blank argument
    if vsize > 0
-   arg = 3;          
+   arg = 3;
    end;
 elseif nargin == 2
 arg = 2;
@@ -54,7 +54,7 @@ method = results(1).meth;
 switch method
 
 case {'arma','boxcox','boxcox2','hwhite','lad','logit','mlogit','nwest','ols','olsc',...
-      'olsar1','olst','probit','ridge','robust','theil','tobit','tsls'} 
+      'olsar1','olst','probit','ridge','robust','theil','tobit','tsls'}
      % call prt_reg
      if arg == 1
      prt_reg(results);
@@ -102,7 +102,7 @@ case {'psar','sarsfe','sartfe','sarstfe'} % <=================== spatial panel a
      prt_sp(results,[],fid);
      end;
 
-case {'thsls','sur'} 
+case {'thsls','sur'}
      % call prt_eqs
      if arg == 1
      prt_eqs(results);
@@ -114,7 +114,7 @@ case {'thsls','sur'}
      prt_eqs(results,[],fid);
      end;
 
-case {'sem_gmm','sem2_gmm','sac_gmm','sar_gmm'} 
+case {'sem_gmm','sem2_gmm','sac_gmm','sar_gmm'}
      % call prt_gmm
      if arg == 1
      prt_gmm(results);
@@ -127,7 +127,7 @@ case {'sem_gmm','sem2_gmm','sac_gmm','sar_gmm'}
      end;
 
 
-case {'ar','vare','bvar','rvar','ecm','becm','recm'} 
+case {'ar','vare','bvar','rvar','ecm','becm','recm'}
      % call prt_var
      if arg == 1
      prt_var(results);
@@ -139,7 +139,7 @@ case {'ar','vare','bvar','rvar','ecm','becm','recm'}
      prt_var(results,[],fid);
      end;
 
-case {'bvar_g','rvar_g','becm_g','recm_g'} 
+case {'bvar_g','rvar_g','becm_g','recm_g'}
      % call prt_varg
      if arg == 1
      prt_varg(results);
@@ -174,7 +174,7 @@ case {'coda','raftery','apm','momentg'}
      else
      prt_coda(results,[],fid);
      end;
-     
+
 case {'ar_g','ols_g', 'ols_gc', 'bma_g', 'tobit_g','probit_g','probit_gm'}
      % call prt_gibbs
      if arg == 1
@@ -246,7 +246,7 @@ case {'far','far_g','far_gc'}
      else
      prt_far(results,[],fid);
      end;
-    
+
 case{'sac','sac_g','sacp_g','sact_g'}
       % call prt_sac
      if arg == 1
@@ -258,7 +258,7 @@ case{'sac','sac_g','sacp_g','sact_g'}
      else
      prt_ssac(results,[],fid);
      end;
-    
+
 case{'moran','lmerror','lratios','walds','lmsar'}
      % call prt_spat
      if arg == 1
@@ -273,7 +273,7 @@ case{'moran','lmerror','lratios','walds','lmsar'}
 
 case {'mess','mess_g','mess_g1','mess_g2','mess_g3','messv_g3','messt_g', ...
 'messt_g1','messt_g2','messt_g3','messvt_g3','messp_g','messp_g1','messp_g2', ...
-'messp_g3','messpv_g3'}     
+'messp_g3','messpv_g3'}
      % call prt_mess
      if arg == 1
      prt_mess(results);
@@ -295,7 +295,7 @@ case {'gwr','bgwr','bgwrv','gwr_logit','gwr_probit'}
      prt_gwr(results,vnames,fid);
      else
      prt_gwr(results,[],fid);
-     end; 
+     end;
 
 case {'casetti','darp','bcasetti'}
      % call prt_cas
@@ -307,7 +307,7 @@ case {'casetti','darp','bcasetti'}
      prt_cas(results,vnames,fid);
      else
      prt_cas(results,[],fid);
-     end;  
+     end;
 
 case {'tvp','tvp_garch','tvp_markov'}
      % call prt_tvp
@@ -319,8 +319,8 @@ case {'tvp','tvp_garch','tvp_markov'}
      prt_tvp(results,vnames,fid);
      else
      prt_tvp(results,[],fid);
-     end;  
-      
+     end;
+
 case {'garch'}
      % call prt_garch
      if arg == 1
@@ -331,7 +331,7 @@ case {'garch'}
      prt_garch(results,vnames,fid);
      else
      prt_garch(results,[],fid);
-     end;  
+     end;
 
 case {'hamilton','hamilton_g'}
      % call prt_ham
@@ -343,8 +343,8 @@ case {'hamilton','hamilton_g'}
      prt_ham(results,vnames,fid);
      else
      prt_ham(results,[],fid);
-     end;  
-     
+     end;
+
 
 
  case {'felogit'}
@@ -357,21 +357,21 @@ case {'hamilton','hamilton_g'}
      prt_felogit(results,vnames,fid);
      else
      prt_felogit(results,[],fid);
-     end;  
-     
+     end;
+
   case {'multilogit'}
       arg = 1;
       [vsize junk] = size(vnames); % user may supply a blank argument
       if vsize > 0
-      arg = 2;          
+      arg = 2;
       end;
       [vsize junk] = size(cnames); % user may supply a blank argument
       if vsize > 0
-      arg = 3;          
+      arg = 3;
       end;
       [vsize junk] = size(fid); % user may supply a blank argument
       if vsize > 0
-      arg = 4;          
+      arg = 4;
       end;
 
      % call prt_multilogit
@@ -385,10 +385,10 @@ case {'hamilton','hamilton_g'}
      prt_multilogit(results,vnames,cnames,fid);
      else
      prt_multilogit(results,[],[],fid);
-     end;  
+     end;
 
- 
-    
+
+
 otherwise
 error('results structure not known by prt function');
 

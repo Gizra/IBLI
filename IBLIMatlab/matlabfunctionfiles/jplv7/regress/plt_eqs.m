@@ -5,7 +5,7 @@ function plt_eqs(results,vnames);
 % USAGE: plt_eqs(results,vnames);
 % % Where: results = a results structure returned by thsls,sur
 %          vnames  = an optional vector of variable names
-%---------------------------------------------------               
+%---------------------------------------------------
 %                 e.g. vnames = ['y    ',
 %                                'x1   ',  NOTE: fixed width
 %                                'x2   ',        like all MATLAB

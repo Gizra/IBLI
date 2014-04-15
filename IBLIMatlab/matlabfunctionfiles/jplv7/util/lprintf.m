@@ -12,7 +12,7 @@ function output = lprintf(prtdat,crtdat,info,file)
 %    info.crit     vector of criteria, largest first  [10%,5%,1%]
 %    info.symb     vector of symbols (strings)   [c,b,a]
 %    info.fmt      scalar or C-vector of format strings ['%7.4f']
-%    info.lnnum    vector indexing rows with horiz. lines [none] 
+%    info.lnnum    vector indexing rows with horiz. lines [none]
 %    info.rname    R-vector of strings with row names  [none]
 %    info.cname    C-vector of strings with column names [none]
 %    info.head     vector of strings to put as header [none]
@@ -22,8 +22,8 @@ function output = lprintf(prtdat,crtdat,info,file)
 %-----------------------------------------------------------------
 % RETURNS:  output   a string matrix with the results
 %----------------------------------------------------------------
-% NOTES: 
-%   Symbol(i) assigned when crtdat(r,c) <= info.crit(i) 
+% NOTES:
+%   Symbol(i) assigned when crtdat(r,c) <= info.crit(i)
 %   The number of criteria is flexible.  Default is 10%,5%,1% with
 %   corresponding symbols of \superscript c,b,a
 %-----------------------------------------------------------------
@@ -71,10 +71,10 @@ if ~isfield(info,'tail')
   info.tail  = ' '; tdum = 0;
 else, tdum = 1; end
 if ~isfield(info,'rname')
-  info.rname = ' '; rdum = 0; 
+  info.rname = ' '; rdum = 0;
 else,   rdum = 1; end
 if ~isfield(info,'cname')
-  info.cname = ' '; cdum = 0; 
+  info.cname = ' '; cdum = 0;
 else, cdum = 1; end
 
 output = [];
@@ -98,7 +98,7 @@ for c = 1:C
   end
   temp = num2str(prtdat(:,c),info.fmt(c,:));
   output = [output amp temp symv];
-end 
+end
 
 
 % ---- Create hlines to generate horizontal lines -------------------------

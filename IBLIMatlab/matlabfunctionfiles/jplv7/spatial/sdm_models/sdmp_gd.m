@@ -1,24 +1,24 @@
 % PURPOSE: An example of using sdmp_g() Gibbs sampling
 %          spatial durbin probit model
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
 % USAGE: sdmp_gd (see also sdmp_gd2 for a large data set)
 %---------------------------------------------------
-% 
+%
  clear all;
-% 
+%
 % % W-matrix from Anselin's neigbhorhood crime data set
 % load anselin.dat; % standardized 1st-order spatial weight matrix
 % latt = anselin(:,4);
 % long = anselin(:,5);
 % W = make_neighborsw(latt,long,5); % 5 nearest neighbors weight matrix
-% 
+%
 % [n junk] = size(W);
-% IN = eye(n); 
+% IN = eye(n);
 % rho = 0.8;  % true value of rho
 % sige = 10;
 % k = 3;
-% 
+%
 % x = randn(n,k);
 % beta(1,1) = -0.5;
 % beta(2,1) = 2.0;
@@ -28,17 +28,17 @@
 % latt = anselin(:,4);
 % long = anselin(:,5);
 % W = make_neighborsw(latt,long,5); % 5 nearest neighbors weight matrix
-% 
+%
 % [n junk] = size(W);
-% IN = eye(n); 
+% IN = eye(n);
 % rho = 0.8;  % true value of rho
 % sige = 10;
 % k = 3;
-% 
+%
 % x = randn(n,k);
-% 
+%
 % W = make_neighborsw(latt,long,6);
-% 
+%
 %  beta(1,1) = -0.5;
 %  beta(2,1) = 2.0;
 % beta(3,1) = -2.0;
@@ -49,7 +49,7 @@ long = anselin(:,5);
 W = make_neighborsw(latt,long,5); % 5 nearest neighbors weight matrix
 
 [n junk] = size(W);
-IN = eye(n); 
+IN = eye(n);
 rho = 0.8;  % true value of rho
 sige = 1;
 k = 3;
@@ -65,7 +65,7 @@ beta = ones(k+1,1);
 beta(2:3,1) = -1;
 
 
-y = (IN-rho*W)\(x*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige)); 
+y = (IN-rho*W)\(x*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige));
 
 
 z = (y > 0);

@@ -8,7 +8,7 @@
 
 % generate box-cox model data
 n = 100; k = 3; kp1 = k+1;
-x = abs(randn(n,k)) + ones(n,k)*10; 
+x = abs(randn(n,k)) + ones(n,k)*10;
 btrue = ones(k,1); epsil = 0.2*randn(n,1);
 x = [ones(n,1) x];
 y = 10*x(:,1) + x(:,2:k+1)*btrue + epsil;

@@ -10,12 +10,12 @@ function ylevf = ecmftest(y,nlag,nfor,begf,r);
 %                  (defaults to length(y) + 1)
 %              r = # of co-integrating relations to use
 %                  (optional: this will be determined using
-%                  Johansen's trace test at 95%-level if left blank)                                                 
+%                  Johansen's trace test at 95%-level if left blank)
 %-------------------------------------------------------------
 % NOTES: - constant vector automatically included
 %        - x-matrix of exogenous variables not allowed
 %        - error correction variables are automatically
-%          constructed using output from Johansen's ML-estimator               
+%          constructed using output from Johansen's ML-estimator
 %---------------------------------------------------------------
 % RETURNS:
 %  yfor = an nfor x neqs matrix of level forecasts for each equation
@@ -50,9 +50,9 @@ if nargin == 5 % user supplied r-value
     jres = johansen(y(1:nmin,:),0,nlag);
     % recover error correction vectors
     ecvectors = jres.evec;
-    index = jres.ind; 
+    index = jres.ind;
     % construct r-error correction variables
-    x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r); 
+    x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r);
     [nobs2 nx] = size(x);
 elseif nargin == 4 % we have to determine r-value
     jres = johansen(y(1:nmin,:),0,nlag);
@@ -68,10 +68,10 @@ elseif nargin == 4 % we have to determine r-value
     end;
     % recover error correction vectors
     ecvectors = jres.evec;
-    index = jres.ind; 
+    index = jres.ind;
     % construct r error correction variables
-    x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r); 
-    [nobs2 nx] = size(x); 
+    x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r);
+    [nobs2 nx] = size(x);
 else
     error('Wrong # of input arguments to ecmf');
 end;
@@ -118,18 +118,18 @@ xlev = zeros(nfor,neqs);
 for bmatcollect = 1:neqs
     bmat(:,bmatcollect) = results(1,bmatcollect).beta;  %ADAM's NOTE: use bmat from ecm call on line 44
 end
-% end of loop over equations 
+% end of loop over equations
 
-% given bmat values generate future forecasts 
+% given bmat values generate future forecasts
 
-% 1-step-ahead forecast 
+% 1-step-ahead forecast
 xtrunc = [dy(nmin-(nlag):nmin,:)
     zeros(1,neqs)];
 xfor = mlag(xtrunc,nlag);
 [xend junk] = size(xfor);
 xobs = xfor(xend,:);
 if nx > 0
-    ecterm = y(begf-1,index)*ecvectors(:,1:r); % add ec variables 
+    ecterm = y(begf-1,index)*ecvectors(:,1:r); % add ec variables
     xvec = [xobs ecterm 1];
 else
     xvec = [xobs 1];

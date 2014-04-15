@@ -2,16 +2,16 @@ function plt_far(results,vnames)
 % PURPOSE: Plots output using FAR model results structures
 %---------------------------------------------------
 % USAGE: plt_far(results,vnames) or plt(results,vnames)
-% Where: results = a structure returned by a spatial regression 
+% Where: results = a structure returned by a spatial regression
 %        vnames  = an optional vector of variable names
 %                  e.g. vnames = strvcat('y','constant','x1');
-%--------------------------------------------------- 
+%---------------------------------------------------
 %  RETURNS: nothing, just plots the spatial regression results
 % --------------------------------------------------
 % NOTE: this function is called by plt.m
 % --------------------------------------------------
 % SEE ALSO: prt, plt
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics

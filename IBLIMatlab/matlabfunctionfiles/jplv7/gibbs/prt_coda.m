@@ -5,16 +5,16 @@ function prt_coda(results,vnames,fid)
 % Where: results = a structure returned by coda, raftery, apm, momentg
 %        fid     = file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
-%---------------------------------------------------               
+%---------------------------------------------------
 %  NOTES:   e.g. vnames = ['beta    ',
 %                          'sigma   '];  NOTE: fixed width
 %           e.g. fid = fopen('gibbs.out','wr');
-%  use prt_coda(results,[],fid) to print to a file with no vnames               
+%  use prt_coda(results,[],fid) to print to a file with no vnames
 % --------------------------------------------------
 %  RETURNS: nothing, just prints the diagnostic results
 % --------------------------------------------------
 % SEE ALSO: prt
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -33,7 +33,7 @@ elseif nargin == 3
  nflag = 0;
  [vsize junk] = size(vnames); % user may supply a blank argument
    if vsize > 0
-   nflag = 1;          
+   nflag = 1;
    end;
 else
  error('Wrong # of arguments to prt_coda');
@@ -73,7 +73,7 @@ for i=1:nvar;
   rout(i,5) = results(i).irl;
 end;
 
-% print results with vnames 
+% print results with vnames
 fprintf(fid,'Raftery-Lewis Diagnostics for each parameter chain \n');
 fprintf(fid,'(q=%6.4f, r=%8.6f, s=%8.6f)\n',results(1).q,results(1).r,results(1).s);
 vstring  = 'Variable';

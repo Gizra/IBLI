@@ -10,7 +10,7 @@ function yyr = qtr2yr(yqtr,flag)
 %---------------------------------------------------
 % NOTES:  the last observation is the actual quarter or
 %         the average (sum) of the last 2 or 3 quarters in cases where
-%         nobs/4 has a remainder               
+%         nobs/4 has a remainder
 %---------------------------------------------------
 
 % written by:

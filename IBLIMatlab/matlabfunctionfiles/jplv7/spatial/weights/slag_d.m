@@ -1,6 +1,6 @@
 % PURPOSE: An example of using slag()
 %          spatial lag function
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
 % USAGE: slag_d
 %---------------------------------------------------

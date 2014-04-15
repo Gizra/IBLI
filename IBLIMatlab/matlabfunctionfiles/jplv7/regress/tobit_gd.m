@@ -1,6 +1,6 @@
 % PURPOSE: An example using tobit_g()
 %          Gibbs sampling tobit censored regression
-%                         
+%
 %---------------------------------------------------
 % USAGE: tobit_gd
 %---------------------------------------------------
@@ -32,7 +32,7 @@ if length(ind) == n
 end;
 
 Vnames = strvcat('y','constant','x1');
-          
+
 res1 = ols(yc,x);
 res2 = tobit(yc,x);
 

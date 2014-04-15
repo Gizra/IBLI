@@ -4,8 +4,8 @@
 % and empirical investigation (journal of political economy)
 
 % rows = states
-% columns = 
-% 1) crime, 1960 
+% columns =
+% 1) crime, 1960
 % 2) percent of males aged 14-24
 % 3) south, dummy variable
 % 4) mean years of schooling
@@ -15,7 +15,7 @@
 % 8) sex, number of males per 1000 females
 % 9) state population
 % 10) nonwhites per 1000 population
-% 11) unemployment rate of urban males 14-24 
+% 11) unemployment rate of urban males 14-24
 % 12) unemployment rate of urban males 35-39
 % 13) wealth
 % 14) income inequality

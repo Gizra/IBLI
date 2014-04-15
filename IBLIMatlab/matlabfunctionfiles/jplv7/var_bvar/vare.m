@@ -1,7 +1,7 @@
 function results = vare(y,nlag,x)
 % PURPOSE: performs vector autogressive estimation
 %---------------------------------------------------
-% USAGE:  result = vare(y,nlag,x) 
+% USAGE:  result = vare(y,nlag,x)
 % where:    y    = an (nobs x neqs) matrix of y-vectors
 %           nlag = the lag length
 %           x    = optional matrix of variables (nobs x nx)
@@ -13,13 +13,13 @@ function results = vare(y,nlag,x)
 % results.neqs = neqs, # of equations
 % results.nlag = nlag, # of lags
 % results.nvar = nlag*neqs+nx+1, # of variables per equation
-% --- the following are referenced by equation # --- 
+% --- the following are referenced by equation # ---
 % results(eq).beta  = bhat for equation eq
-% results(eq).tstat = t-statistics 
+% results(eq).tstat = t-statistics
 % results(eq).tprob = t-probabilities
-% results(eq).resid = residuals 
-% results(eq).yhat  = predicted values 
-% results(eq).y     = actual values 
+% results(eq).resid = residuals
+% results(eq).yhat  = predicted values
+% results(eq).y     = actual values
 % results(eq).sige  = e'e/(n-k)
 % results(eq).rsqr  = r-squared
 % results(eq).rbar  = r-squared adjusted
@@ -27,7 +27,7 @@ function results = vare(y,nlag,x)
 % results(eq).ftest = Granger F-tests
 % results(eq).fprob = Granger marginal probabilities
 %---------------------------------------------------
-% SEE ALSO: varf, prt_var, prt_granger, prt_ftests 
+% SEE ALSO: varf, prt_var, prt_granger, prt_ftests
 %---------------------------------------------------
 
 % written by:
@@ -57,7 +57,7 @@ end;
 % adjust nobs to feed the lags
 nobse = nobs - nlag;
 
-% nvar adjusted for constant term 
+% nvar adjusted for constant term
  k = neqs*nlag + 1 + nx;
  nvar = k;
 
@@ -71,7 +71,7 @@ results.nlag = nlag;
 
 
 % form x-matrix
-if nx 
+if nx
 xmat = [xlag(nlag+1:nobs,:) x(nlag+1:nobs,:) ones(nobs-nlag,1)];
 else
 xmat = [xlag(nlag+1:nobs,:) ones(nobs-nlag,1)];
@@ -90,7 +90,7 @@ for j=1:neqs;
       tstat = res.tstat;
       tout = tdis_prb(tstat,nobse-nvar);
  results(j).tprob = tout;          % t-probs
- results(j).resid = res.resid;     % resids 
+ results(j).resid = res.resid;     % resids
     sigu = res.resid'*res.resid;
  results(j).yhat = res.yhat;       % yhats
    results(j).y    = yvec;           % actual y
@@ -140,15 +140,15 @@ b = xtmp\yvec; % using Cholesky solution
 etmp = yvec-xtmp*b;
 sigr = etmp'*etmp;
 % joint F-test for variables r
-ftest(r,1) = ((sigr - sigu)/nlag)/(sigu/(nobse-k)); 
+ftest(r,1) = ((sigr - sigu)/nlag)/(sigu/(nobse-k));
 end;
 
-results(j).ftest = ftest;     
+results(j).ftest = ftest;
 results(j).fprob = fdis_prb(ftest,nlag,nobse-k);
 
-end; 
-% end of loop over equations 
- 
+end;
+% end of loop over equations
+
 
 
 

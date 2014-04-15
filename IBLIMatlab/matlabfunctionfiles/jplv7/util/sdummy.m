@@ -5,16 +5,16 @@ function y = sdummy(nobs,freq)
 %         or: y = sdummy(nobs,cstruc)
 % where:   freq = 4 for quarterly, 12 for monthly
 %        cstruc = a structure returned by cal()
-%     
+%
 %---------------------------------------------------
-% RETURNS: 
+% RETURNS:
 %        y = an (nobs x freq) matrix with 0's and 1's
 %          e.g.,   1 0 0 0  (for freq=4)
 %                  0 1 0 0
 %                  0 0 1 0
 %                  0 0 0 1
-%                  1 0 0 0 
-% 
+%                  1 0 0 0
+%
 %---------------------------------------------------
 
 % written by:

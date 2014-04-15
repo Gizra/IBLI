@@ -3,9 +3,9 @@ function y = norm_rnd(sig);
 %          var-cov matrix sig
 %---------------------------------------------------
 % USAGE:   y = norm_rnd(sig)
-% where:   sig = a square-symmetric covariance matrix 
-% NOTE: for mean b, var-cov sig use: b +  norm_rnd(sig) 
-%---------------------------------------------------      
+% where:   sig = a square-symmetric covariance matrix
+% NOTE: for mean b, var-cov sig use: b +  norm_rnd(sig)
+%---------------------------------------------------
 % RETURNS: y = random vector normal draw mean 0, var-cov(sig)
 %---------------------------------------------------
 

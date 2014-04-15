@@ -18,4 +18,4 @@ function z = trimc(x,n1,n2)
 % jlesage@spatial-econometrics.com
 
   z = trimr(x',n1,n2)';
-  
+

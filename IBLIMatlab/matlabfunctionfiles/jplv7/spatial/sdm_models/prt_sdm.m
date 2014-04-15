@@ -6,15 +6,15 @@ function prt_sdm(results,vnames,fid)
 %        vnames  = an optional vector of variable names
 %        fid     = optional file-id for printing results to a file
 %                  (defaults to the MATLAB command window)
-%--------------------------------------------------- 
+%---------------------------------------------------
 %  NOTES: e.g. vnames = strvcat('y','const','x1','x2');
 %         e.g. fid = fopen('ols.out','wr');
-%  use prt_sdm(results,[],fid) to print to a file with no vnames               
+%  use prt_sdm(results,[],fid) to print to a file with no vnames
 % --------------------------------------------------
 %  RETURNS: nothing, just prints the spatial regression results
 % --------------------------------------------------
 % SEE ALSO: prt, plt
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -33,7 +33,7 @@ elseif nargin == 3
  nflag = 0;
  [vsize junk] = size(vnames); % user may supply a blank argument
    if vsize > 0
-   nflag = 1;          
+   nflag = 1;
    end;
 else
  error('Wrong # of arguments to prt_sdm');
@@ -73,7 +73,7 @@ if nflag == 0 % no user-supplied vnames or an incorrect vnames argument
         tmp = ['W*variable ',num2str(i)];
         Vname = strvcat(Vname,tmp);
      end;
- 
+
     elseif cflag == 0 % no constant term
 
      for i=1:nvars
@@ -85,8 +85,8 @@ if nflag == 0 % no user-supplied vnames or an incorrect vnames argument
         Vname = strvcat(Vname,tmp);
      end;
     end;
- 
-     
+
+
 % add spatial rho parameter name
     Vname = strvcat(Vname,'rho');
 
@@ -111,8 +111,8 @@ elseif (nflag == 1) % the user supplied variable names
      end;
     % add spatial rho parameter name
         Vname = strvcat(Vname,'rho');
-    end; % end of cflag issue       
- 
+    end; % end of cflag issue
+
 end; % end of nflag issue
 
 
@@ -243,7 +243,7 @@ fprintf(fid,'***************************************************************\n')
 
 bout = [results.beta
         results.rho];
-    
+
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
 tmp = [bout results.tstat tout];  % matrix to be printed
@@ -258,8 +258,8 @@ mprint(tmp,in);
 
 % now print x-effects estimates
 
-bstring = 'Coefficient'; 
-tstring = 't-stat'; 
+bstring = 'Coefficient';
+tstring = 't-stat';
 pstring = 't-prob';
 lstring = 'lower 01';
 ustring = 'upper 99';
@@ -301,7 +301,7 @@ ini.rnames = strvcat('Total',vnameso);
 mprint(printout,ini);
 
 
-        
+
 % <=================== end of sdm case
 
 case {'sdm_g'} % <=================== spatial durbin model MCMC
@@ -315,7 +315,7 @@ case {'sdm_g'} % <=================== spatial durbin model MCMC
     tmp1 = std(results.bdraw);
     tmp2 = std(results.pdraw);
     bstd = [tmp1'
-        tmp2];  
+        tmp2];
 
 
 if strcmp(results.tflag,'tstat')
@@ -336,7 +336,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 % do effects estimates
 % =======================================================
@@ -420,7 +420,7 @@ if results.novi == 1
     fprintf(fid,'Homoscedastic version \n');
 elseif results.novi == 0
     fprintf(fid,'Heteroscedastic model \n');
-end;    
+end;
 if (nflag == 1)
 fprintf(fid,'Dependent Variable = %16s \n',vnames(1,:));
 end;
@@ -432,7 +432,7 @@ fprintf(fid,'r-value            = %6d   \n',results.r);
 elseif (results.rdraw ~= 0  & results.novi == 0)
 fprintf(fid,'mean of rdraws     = %9.4f \n',mean(results.rdraw));
 fprintf(fid,'gam(m,k) prior     = %6d,%6d \n',results.m,results.k);
-end;  
+end;
 fprintf(fid,'Nobs, Nvars        = %6d,%6d \n',results.nobs,nk);
 fprintf(fid,'ndraws,nomit       = %6d,%6d \n',results.ndraw,results.nomit);
 fprintf(fid,'total time in secs = %9.4f   \n',results.time);
@@ -463,7 +463,7 @@ fprintf(fid,'***************************************************************\n')
  if strcmp(results.tflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -488,8 +488,8 @@ end;
 
 % now print x-effects estimates
 
-bstring = 'Coefficient'; 
-tstring = 'mean/std'; 
+bstring = 'Coefficient';
+tstring = 'mean/std';
 pstring = 't-prob';
 lstring = 'lower 01';
 ustring = 'upper 99';
@@ -503,7 +503,7 @@ if cflag == 1
 vnameso = strvcat(Vname(3:p+2,:));
 elseif cflag == 0
 vnameso = strvcat(Vname(2:p+1,:));
-end;   
+end;
 
 
 ini.rnames = strvcat('Direct',vnameso);
@@ -530,9 +530,9 @@ mprint(printout,ini);
 
 
 return;
-   
+
 % <=================== end of sdm_g case
-     
+
 case {'sdm_gc'} % <=================== spatial durbin model MCMC
 
 nobs = results.nobs;
@@ -584,7 +584,7 @@ end; % end of nflag issue
     tmp1 = std(results.bdraw);
     tmp2 = std(results.pdraw);
     bstd = [tmp1'
-        tmp2];  
+        tmp2];
 
 
 if strcmp(results.tflag,'tstat')
@@ -605,7 +605,7 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 
 fprintf(fid,'\n');
@@ -625,7 +625,7 @@ fprintf(fid,'r-value            = %6d   \n',results.r);
 elseif (results.rdraw ~= 0  & results.novi == 0)
 fprintf(fid,'mean of rdraws     = %9.4f \n',mean(results.rdraw));
 fprintf(fid,'gam(m,k) prior     = %6d,%6d \n',results.m,results.k);
-end;  
+end;
 fprintf(fid,'Nobs, Nvars        = %6d,%6d \n',results.nobs,nk);
 fprintf(fid,'ndraws,nomit       = %6d,%6d \n',results.ndraw,results.nomit);
 fprintf(fid,'total time in secs = %9.4f   \n',results.time);
@@ -657,7 +657,7 @@ fprintf(fid,'***************************************************************\n')
  if strcmp(results.tflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -680,7 +680,7 @@ mprint(tmp,in);
 end;
 
 return;
-   
+
 % <=================== end of sdm_gc case
 
 case {'sdmp_g','sdmp_gc'} % <=================== spatial durbin probit model MCMC
@@ -744,7 +744,7 @@ end; % end of nflag issue
     tmp1 = std(results.bdraw);
     tmp2 = std(results.pdraw);
     bstd = [tmp1'
-        tmp2];  
+        tmp2];
 
 
 if strcmp(results.tflag,'tstat')
@@ -765,14 +765,14 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 fprintf(fid,'\n');
 fprintf(fid,'Bayesian Spatial Durbin Probit model\n');
 if (nflag == 1)
 fprintf(fid,'Dependent Variable = %16s \n',vnames(1,:));
 end;
-fprintf(fid,'# 0, 1 y-values    = %6d,%6d \n',results.zip,nobs-results.zip);    
+fprintf(fid,'# 0, 1 y-values    = %6d,%6d \n',results.zip,nobs-results.zip);
 fprintf(fid,'Nobs, Nvars        = %6d,%6d \n',results.nobs,nk);
 fprintf(fid,'ndraws,nomit       = %6d,%6d \n',results.ndraw,results.nomit);
 fprintf(fid,'total time in secs = %9.4f   \n',results.time);
@@ -804,7 +804,7 @@ fprintf(fid,'***************************************************************\n')
  if strcmp(results.tflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -827,9 +827,9 @@ mprint(tmp,in);
 end;
 
 return;
-   
+
 % <=================== end of sdmp_g case
-     
+
 case {'sdmt_g','sdmt_gc'} % <=================== spatial durbin tobit model MCMC
 
 nobs = results.nobs;
@@ -856,7 +856,7 @@ indirect = results.indirect;
 % % add spatial rho parameter name
 %     Vname = strvcat(Vname,'rho');
 % end;
-% 
+%
 % if (nflag == 1) % the user supplied variable names
 % Vname = 'Variable';
 % [tst_n nsize] = size(vnames);
@@ -960,7 +960,7 @@ end;
     tmp1 = std(results.bdraw);
     tmp2 = std(results.pdraw);
     bstd = [tmp1'
-        tmp2];  
+        tmp2];
 
 
 if strcmp(results.tflag,'tstat')
@@ -981,13 +981,13 @@ else % find plevels
  tout(i,1) = 1 - (length(cnt)/(results.ndraw-results.nomit));
  end; % end of if - else
  end; % end of for loop
-end; 
+end;
 
 fprintf(fid,'\n');
 fprintf(fid,'Bayesian Spatial Durbin tobit model\n');
 if (nflag == 1)
 fprintf(fid,'Dependent Variable = %16s \n',vnames(1,:));
-end;    
+end;
 fprintf(fid,'Nobs, Nvars        = %6d,%6d \n',results.nobs,nk);
 fprintf(fid,'# censored values  = %6d \n',results.nobsc);
 fprintf(fid,'ndraws,nomit       = %6d,%6d \n',results.ndraw,results.nomit);
@@ -1020,7 +1020,7 @@ fprintf(fid,'***************************************************************\n')
  if strcmp(results.tflag,'tstat')
 % now print coefficient estimates, t-statistics and probabilities
 tout = norm_prb(results.tstat); % find asymptotic z (normal) probabilities
-      
+
 tmp = [bout results.tstat tout];  % matrix to be printed
 % column labels for printing results
 bstring = 'Coefficient'; tstring = 'Asymptot t-stat'; pstring = 'z-probability';
@@ -1044,8 +1044,8 @@ end;
 
 % now print x-effects estimates
 
-bstring = 'Coefficient'; 
-tstring = 'mean/std'; 
+bstring = 'Coefficient';
+tstring = 'mean/std';
 pstring = 't-prob';
 lstring = 'lower 01';
 ustring = 'upper 99';
@@ -1088,7 +1088,7 @@ mprint(printout,ini);
 
 
 return;
-   
+
 % <=================== end of sdmt_g case
 
 otherwise
@@ -1105,7 +1105,7 @@ function bounds = cr_interval(adraw,hperc)
 %       hperc = 0 to 1 value for hperc percentage point
 % --------------------------------------------------------------------
 % RETURNS:
-%         bounds = a 1 x 2 vector with 
+%         bounds = a 1 x 2 vector with
 %         bounds(1,1) = 1-hperc percentage point
 %         bounds(1,2) = hperc percentage point
 %          e.g. if hperc = 0.95

@@ -1,38 +1,38 @@
 function results = semip_g(y,x,W,m,mobs,ndraw,nomit,prior)
 % PURPOSE: Bayesian Probit model with individual effects exhibiting spatial dependence:
-%	      Y = (Yi, i=1,..,m) with each vector, Yi = (yij:j=1..Ni) consisting of individual 
-%          dichotomous observations in regions i=1..m, as defined by yij = Indicator(zij>0), 
+%	      Y = (Yi, i=1,..,m) with each vector, Yi = (yij:j=1..Ni) consisting of individual
+%          dichotomous observations in regions i=1..m, as defined by yij = Indicator(zij>0),
 %          where latent vector Z = (zij) is given by the linear model:
 %
 %          Z = x*b + del*a + e   with:
 %
-%          x = n x k matrix of explanatory variables [n = sum(Ni: i=1..m)]; 
+%          x = n x k matrix of explanatory variables [n = sum(Ni: i=1..m)];
 %			  del = n x m indicator matrix with del(j,i) = 1 iff indiv j is in reg i;
 %          a = (ai: i=1..m) a vector of random regional effects modeled by
 %
 %          a = rho*W*a + U,     U ~ N[0,sige*I_m] ; (I_m = m-square Identity matrix)
 %
-%          and with e ~ N(0,V), V = diag(del*v) where v = (vi:i=1..m). 
+%          and with e ~ N(0,V), V = diag(del*v) where v = (vi:i=1..m).
 %
 %          The priors for the above parameters are of the form:
 %          r/vi ~ ID chi(r), r ~ Gamma(m,k)
-%          b ~ N(c,T),  
-%          1/sige ~ Gamma(nu,d0), 
+%          b ~ N(c,T),
+%          1/sige ~ Gamma(nu,d0),
 %          rho ~ beta(a1,a2)
 %-----------------------------------------------------------------
 % USAGE: results = semip_g(y,x,W,m,mobs,ndraw,nomit,prior)
 % where: y = dependent variable vector (nobs x 1) [must be zero-one]
 %        x = independent variables matrix (nobs x nvar)
 %        W = 1st order contiguity matrix (standardized, row-sums = 1)
-%        m = # of regions 
+%        m = # of regions
 %     mobs = an m x 1 vector containing the # of observations in each
 %            region [= (Ni:i=1..m) above]
 %    ndraw = # of draws
-%    nomit = # of initial draws omitted for burn-in            
+%    nomit = # of initial draws omitted for burn-in
 %    prior = a structure variable with:
-%            prior.beta  = prior means for beta,  (= c above) 
+%            prior.beta  = prior means for beta,  (= c above)
 %                          (default = 0)
-%            prior.bcov  = prior beta covariance , (= T above)  
+%            prior.bcov  = prior beta covariance , (= T above)
 %                          [default = 1e+12*I_k ]
 %            prior.rval  = r prior hyperparameter, default=4
 %            prior.a1    = parameter for beta(a1,a2) prior on rho (default = 1.01)
@@ -42,14 +42,14 @@ function results = semip_g(y,x,W,m,mobs,ndraw,nomit,prior)
 %            prior.nu    = informative Gamma(nu,d0) prior on sige
 %            prior.d0    = default: nu=0,d0=0 (diffuse prior)
 %            prior.rmin  = (optional) min rho used in sampling (default = -1)
-%            prior.rmax  = (optional) max rho used in sampling (default = 1)  
+%            prior.rmax  = (optional) max rho used in sampling (default = 1)
 %            prior.lflag = 0 for full lndet computation (default = 1, fastest)
 %                        = 1 for MC approx (fast for large problems)
 %                        = 2 for Spline approx (medium speed)
 %            prior.dflag = 0 for numerical integration, 1 for Metropolis-Hastings (default = 0)
 %            prior.eig   = 0 for default rmin = -1,rmax = +1, 1 for eigenvalue calculation of these
 %            prior.order = order to use with prior.lflag = 1 option (default = 50)
-%            prior.iter  = iters to use with prior.lflag = 1 option (default = 30)   
+%            prior.iter  = iters to use with prior.lflag = 1 option (default = 30)
 %---------------------------------------------------
 % RETURNS:  a structure:
 %          results.meth   = 'semip_g'
@@ -58,7 +58,7 @@ function results = semip_g(y,x,W,m,mobs,ndraw,nomit,prior)
 %          results.adraw  = a draws (ndraw-nomit x m)
 %          results.amean  = mean of a draws (m x 1)
 %          results.sdraw  = sige draws (ndraw-nomit x 1)
-%          results.vmean  = mean of vi draws (m x 1) 
+%          results.vmean  = mean of vi draws (m x 1)
 %          results.rdraw  = r draws (ndraw-nomit x 1) (if m,k input)
 %          results.bmean  = b prior means, prior.beta from input
 %          results.bstd   = b prior std deviations sqrt(diag(prior.bcov))
@@ -78,19 +78,19 @@ function results = semip_g(y,x,W,m,mobs,ndraw,nomit,prior)
 %          results.time1  = time for eigenvalue calculation
 %          results.time2  = time for log determinant calcluation
 %          results.time3  = time for sampling
-%          results.time   = total time taken 
+%          results.time   = total time taken
 %          results.rmax   = 1/max eigenvalue of W (or rmax if input)
-%          results.rmin   = 1/min eigenvalue of W (or rmin if input)          
+%          results.rmin   = 1/min eigenvalue of W (or rmin if input)
 %          results.tflag  = 'plevel' (default) for printing p-levels
-%                         = 'tstat' for printing bogus t-statistics 
+%                         = 'tstat' for printing bogus t-statistics
 %          results.rflag  = 1, if a beta(a1,a2) prior for rho, 0 otherwise
 %          results.lflag  = lflag from input
 %          results.dflag  = dflag from input
 %          results.bflag  = 1 for informative prior on beta, 0 otherwise
 %          results.iter   = prior.iter  option from input
 %          results.order  = prior.order option from input
-%          results.limit  = matrix of [rho lower95,logdet approx, upper95] 
-%                           intervals for the case of lflag = 1 
+%          results.limit  = matrix of [rho lower95,logdet approx, upper95]
+%                           intervals for the case of lflag = 1
 %          results.acc   = acceptance rate for M-H sampling (ndraw x 1 vector)
 % ----------------------------------------------------
 % SEE ALSO: sem_gd, prt, semp_g, coda
@@ -231,7 +231,7 @@ for i = 1:m
 end
 
 end %end if(m > 10)
-    
+
 %*********************************
 % START SAMPLING
 %*********************************
@@ -239,23 +239,23 @@ end %end if(m > 10)
 dmean = zeros(length(detval),1);
 
 hwait = waitbar(0,'MCMC sampling ...');
-t0 = clock;                  
+t0 = clock;
 iter = 1;
 acc = 0;
 cc = 0.1;
 cntr = 1;
           while (iter <= ndraw); % start sampling;
 
-          
-          % UPDATE: beta   
+
+          % UPDATE: beta
           xs = matmul(sqrt(inV),x);
-          zs = sqrt(inV).*z; 
+          zs = sqrt(inV).*z;
           A0i = inv(xs'*xs + TI);
           zmt = sqrt(inV).*(z-tvec);
-                   
+
           b = xs'*zmt + TIc;
           b0 = A0i*b;
-          bhat = norm_rnd(A0i) + b0; 
+          bhat = norm_rnd(A0i) + b0;
           %Update b1
           e0 = z - x*bhat;
           cobs = 0;
@@ -265,111 +265,111 @@ cntr = 1;
             cobs = cobs + obs;
            end;
 
-                             
-          % UPDATE: a 
-          
-          if m <= 100   %Procedure for small m 
+
+          % UPDATE: a
+
+          if m <= 100   %Procedure for small m
              vii = ones(m,1)./vi;
              A1i = inv((1/sige)*Bp'*Bp + diag(vii.*mobs));
-             a = norm_rnd(A1i) + A1i*b1;             
-             
+             a = norm_rnd(A1i) + A1i*b1;
+
            else   %Procedure for large m
-             
+
              cobs = 0;
-             
+
              for i = 1:m
-                
-                obs = mobs(i,1); 
-                
+
+                obs = mobs(i,1);
+
                 if i == 1            %Form complementary vector
                    ai = a(2:m);
                 elseif i == m
                    ai = a(1:m-1);
                 else
                    ai = a([1:i-1,i+1:m]);
-                end                
-                
-                                
-                di = (1/sige) + ((rho^2)/sige)*w1(i) + (obs/vi(i));                
-                               
-                zi = z(cobs+1:cobs+obs,1);                
-                xbi = x([cobs+1:cobs+obs],:)* bhat;                
-                phi = (1/vi(i))*(ones(1,obs)*(zi - xbi));  
-                awi = ai'*(W1(i,:)' + W2(:,i));                
-                bi = phi + (rho/sige)*awi - ((rho^2)/sige)*(W3(i,:)*ai) ;                
-                a(i) = (bi/di) + sqrt(1/di)*randn(1,1);                                              
+                end
+
+
+                di = (1/sige) + ((rho^2)/sige)*w1(i) + (obs/vi(i));
+
+                zi = z(cobs+1:cobs+obs,1);
+                xbi = x([cobs+1:cobs+obs],:)* bhat;
+                phi = (1/vi(i))*(ones(1,obs)*(zi - xbi));
+                awi = ai'*(W1(i,:)' + W2(:,i));
+                bi = phi + (rho/sige)*awi - ((rho^2)/sige)*(W3(i,:)*ai) ;
+                a(i) = (bi/di) + sqrt(1/di)*randn(1,1);
                 cobs = cobs + obs;
-                
-             end %end for i = 1:m 
-             
+
+             end %end for i = 1:m
+
           end %end if on m
-          
-          % Update tvec = del*a   
-             
-          cobs = 0;              
+
+          % Update tvec = del*a
+
+          cobs = 0;
           for i=1:m;
              obs = mobs(i,1);
              tvec(cobs+1:cobs+obs,1) = a(i,1)*ones(obs,1);
              cobs = cobs + obs;
           end;
-          
-                  
+
+
 			 % UPDATE: sige
 
           term1 = a'*Bp'*Bp*a + 2*d0;
           chi = chis_rnd(1,m + 2*nu);
-          sige = term1/chi; 
-          
-          
+          sige = term1/chi;
+
+
 			 % UPDATE: vi (and form inV, b1)
 
-           e = z - x*bhat - tvec;         
-                                
+           e = z - x*bhat - tvec;
+
            cobs = 0;
            for i=1:m;
             obs = mobs(i,1);
             ee = e(cobs+1:cobs+obs,1)'*e(cobs+1:cobs+obs,1);
             chi = chis_rnd(1,rval+obs);
-            vi(i,1) = (ee + rval)/chi; 
+            vi(i,1) = (ee + rval)/chi;
             inV(cobs+1:cobs+obs,1) = ones(obs,1)/vi(i,1);
             b1(i,1) = sum(e0(cobs+1:cobs+obs,1)/vi(i,1));
             cobs = cobs + obs;
            end;
-    
+
           % UPDATE: rval (if necessary)
-           
-          if mm ~= 0           
-          rval = gamm_rnd(1,1,mm,kk);  
+
+          if mm ~= 0
+          rval = gamm_rnd(1,1,mm,kk);
           end;
 
          if (metflag == 1) | (inform_flag == 1)
           % UPDATE: rho (using metropolis step)
           % Construct new candidate rho value: rho2
-             %  Using proposal distribution: N(rho,cc^2) 
-             %  truncated to the interval (rmin,rmax) 
+             %  Using proposal distribution: N(rho,cc^2)
+             %  truncated to the interval (rmin,rmax)
           accept = 0;
           while accept == 0
-             rho2 = rho + cc*randn(1,1);    
+             rho2 = rho + cc*randn(1,1);
              if (rmin < rho2 & rho2 < rmax)
               accept = 1;
             end;
             cntr = cntr+1; % counts acceptance rate
           end;
-          
+
           %Form density ratio
-          
+
           rhox = c_semip(rho,a,sige,W,detval,a1,a2);  %log density at rho
           rhoy = c_semip(rho2,a,sige,W,detval,a1,a2); %log density at rho2
           ratio = exp(rhoy-rhox);
-          
+
           %Make Metropolis comparison
-                                    
+
           if ratio > 1,
           	p = 1;
           else,
             p = min(1,ratio);
           end;
-         
+
           ru = unif_rnd(1,0,1);
           if (ru < p)
               rho = rho2;
@@ -393,11 +393,11 @@ cntr = 1;
           Wa = W*a;
           C1 = a'*Wa;
           C2 = Wa'*Wa;
-          
+
 		  rho = draw_rho(detval,C0,C1,C2,sige,rho,a1,a2);
 end; % end  sampling for rho
- 
-	  	  Bp = speye(m) - rho*sparse(W); 
+
+	  	  Bp = speye(m) - rho*sparse(W);
 
    % UPDATE: z
 
@@ -424,11 +424,11 @@ end; % end  sampling for rho
         rsave(iter-nomit,1) = rval;
      	end;
     end;
-    
-           
+
+
     iter = iter + 1;
-       
-waitbar(iter/ndraw);     
+
+waitbar(iter/ndraw);
 
 end; % end of sampling loop
 
@@ -497,8 +497,8 @@ function cout = c_semip(rho,a,sige,W,detval,a1,a2)
 %  where:  rho  = spatial autoregressive parameter
 %          a    = regional effects vector
 %          W    = spatial weight matrix
-%        detval = an (ngrid,2) matrix of values for det(I-rho*W) 
-%                 over a grid of rho values 
+%        detval = an (ngrid,2) matrix of values for det(I-rho*W)
+%                 over a grid of rho values
 %                 detval(:,1) = rho values
 %                 detval(:,2) = associated log det values
 %          a1    = optional beta prior for rho
@@ -575,8 +575,8 @@ function [rmin,rmax,time2] = semip_eigs(eflag,W,rmin,rmax,n);
 if eflag == 1 % compute eigenvalues
 t0 = clock;
 opt.tol = 1e-3; opt.disp = 0;
-lambda = eigs(sparse(W),speye(n),1,'SR',opt);  
-rmin = 1/real(lambda);   
+lambda = eigs(sparse(W),speye(n),1,'SR',opt);
+rmin = 1/real(lambda);
 rmax = 1;
 time2 = etime(clock,t0);
 else
@@ -586,12 +586,12 @@ end;
 
 
 function [nu,d0,rval,mm,kk,rho,sige,rmin,rmax,detval,ldetflag,eflag,order,iter,c,T,inform_flag,cc,metflag,a1,a2] = semip_parse(prior,k)
-% PURPOSE: parses input arguments 
+% PURPOSE: parses input arguments
 % ---------------------------------------------------
 %  USAGE: [nu,d0,rval,mm,kk,rho,sige,rmin,rmax,detval, ...
-%         ldetflag,eflag,order,iter,novi_flag,c,T,prior_beta,cc,metflag],a1,a2 = 
+%         ldetflag,eflag,order,iter,novi_flag,c,T,prior_beta,cc,metflag],a1,a2 =
 %                           semip_parse(prior,k)
-% where info contains the structure variable with inputs 
+% where info contains the structure variable with inputs
 % and the outputs are either user-inputs or default values
 % ---------------------------------------------------
 
@@ -627,19 +627,19 @@ if nf > 0
     if strcmp(fields{i},'nu')
         nu = prior.nu;
     elseif strcmp(fields{i},'d0')
-        d0 = prior.d0;  
+        d0 = prior.d0;
     elseif strcmp(fields{i},'rval')
-        rval = prior.rval; 
+        rval = prior.rval;
     elseif strcmp(fields{i},'dflag')
-       metflag = prior.dflag; 
+       metflag = prior.dflag;
     elseif strcmp(fields{i},'a1')
-       a1 = prior.a1; 
+       a1 = prior.a1;
     elseif strcmp(fields{i},'a2')
-       a2 = prior.a2; 
+       a2 = prior.a2;
     elseif strcmp(fields{i},'m')
         mm = prior.m;
         kk = prior.k;
-        rval = gamm_rnd(1,1,mm,kk);    % initial value for rval   
+        rval = gamm_rnd(1,1,mm,kk);    % initial value for rval
     elseif strcmp(fields{i},'beta')
         c = prior.beta; inform_flag = 1; % flag for informative prior on beta
     elseif strcmp(fields{i},'bcov')
@@ -658,18 +658,18 @@ if nf > 0
     elseif strcmp(fields{i},'lflag')
         tst = prior.lflag;
         if tst == 0,
-        ldetflag = 0; 
+        ldetflag = 0;
         elseif tst == 1,
-        ldetflag = 1; 
+        ldetflag = 1;
         elseif tst == 2,
-        ldetflag = 2; 
+        ldetflag = 2;
         else
         error('sar_g: unrecognizable lflag value on input');
         end;
     elseif strcmp(fields{i},'order')
-        order = prior.order;  
+        order = prior.order;
     elseif strcmp(fields{i},'iter')
-        iter = prior.iter; 
+        iter = prior.iter;
     elseif strcmp(fields{i},'dflag')
         metflag = prior.dflag;
     elseif strcmp(fields{i},'eig')
@@ -677,10 +677,10 @@ if nf > 0
     end;
  end;
 
- 
+
 else, % the user has input a blank info structure
       % so we use the defaults
-end; 
+end;
 
 
 function [detval,time1] = semip_lndet(ldetflag,W,rmin,rmax,detval,order,iter);
@@ -688,23 +688,23 @@ function [detval,time1] = semip_lndet(ldetflag,W,rmin,rmax,detval,order,iter);
 % using the user-selected (or default) method
 % ---------------------------------------------------
 %  USAGE: detval = far_lndet(lflag,W,rmin,rmax)
-% where eflag,rmin,rmax,W contains input flags 
+% where eflag,rmin,rmax,W contains input flags
 % and the outputs are either user-inputs or default values
 % ---------------------------------------------------
 
 
 % do lndet approximation calculations if needed
 if ldetflag == 0 % no approximation
-t0 = clock;    
+t0 = clock;
 out = lndetfull(W,rmin,rmax);
 time1 = etime(clock,t0);
 tt=rmin:.001:rmax; % interpolate a finer grid
 outi = interp1(out.rho,out.lndet,tt','spline');
 detval = [tt' outi];
-    
+
 elseif ldetflag == 1 % use Pace and Barry, 1999 MC approximation
 
-t0 = clock;    
+t0 = clock;
 out = lndetmc(order,iter,W,rmin,rmax);
 time1 = etime(clock,t0);
 results.limit = [out.rho out.lo95 out.lndet out.up95];
@@ -732,6 +732,6 @@ elseif ldetflag == -1 % the user fed down a detval matrix
             error('sar_g: wrong sized lndet input argument');
         elseif n1 == 1
             error('sar_g: wrong sized lndet input argument');
-        end;          
+        end;
 end;
 

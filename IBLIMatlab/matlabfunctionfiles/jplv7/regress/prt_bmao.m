@@ -42,11 +42,11 @@ m = ['probs  '];
         fprintf(fid,'%5.3f ',vprob(1,j));
     end;
     fprintf(fid,'\n');
-   
+
 case {1} % we have a large # of variables so we print differently
  rnames = [];
  for i=3:nvar+2;
- rnames = strvcat(rnames,vnames(i,:)); 
+ rnames = strvcat(rnames,vnames(i,:));
  end;
 
 cnames = [];
@@ -54,7 +54,7 @@ for i=1:nmodels;
  cnames = strvcat(cnames,['model' num2str(i)]);
 end;
 in.cnames = cnames;
- 
+
 fprintf(fid,'%16s','Variables');
 for i=1:nmodels
 fprintf(fid,'%6s',['m' num2str(i)]);

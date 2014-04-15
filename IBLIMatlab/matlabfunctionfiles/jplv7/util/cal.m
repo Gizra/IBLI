@@ -5,7 +5,7 @@ function result = cal(begin_yr,begin_per,freq,obs)
 % USAGE:       result = cal(begin_yr,begin_per,freq,obs)
 %         or:  result = cal(cstruc,obs)
 % where:    begin_yr  = beginning year, e.g., 1982
-%           begin_per = beginning period, e.g., 3 
+%           begin_per = beginning period, e.g., 3
 %               freq  = frequency, 1=annual,4=quarterly,12=monthly
 %               obs   = optional argument for an observation #
 %           cstruc    = a structure returned by cal()
@@ -22,7 +22,7 @@ function result = cal(begin_yr,begin_per,freq,obs)
 %           associated with a cal-structure date
 %           tsdate() that returns a string for the date associated
 %           with observation #
-          
+
 % written by:
 % James P. LeSage, Dept of Economics
 % Texas State University-San Marcos

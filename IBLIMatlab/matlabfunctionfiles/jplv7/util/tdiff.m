@@ -8,7 +8,7 @@ function dmat = tdiff(x,k)
 % NOTE: uses trimr() and lag()
 % -----------------------------------------
 % RETURNS: dmat = matrix or vector, differenced by k-periods
-%                 e.g. x(t) - x(t-k), of length nobs, 
+%                 e.g. x(t) - x(t-k), of length nobs,
 %                 (first k observations are zero)
 % -----------------------------------------
 % SEE ALSO: trimr() modeled after Gauss trimr function
@@ -35,12 +35,12 @@ elseif k ==1
     dmat = zeros(nobs,nvar);
  dmat(2:nobs,:) = x(2:nobs,:)-x(1:nobs-1,:);
 else
-    
+
 % modified by Jushan Bai
 % NYU
     dmat =zeros(nobs,nvar);
     dmat(k+1:nobs,:) = x(k+1:nobs,:)-x(1:nobs-k,:);
-    
+
  %   tmp = x - lag(x,1);
  %   for ndiff = 2:k;
  %   tmp = tmp - lag(tmp,1);

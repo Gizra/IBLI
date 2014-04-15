@@ -7,8 +7,8 @@ function results = sem(y,x,W,info)
 %         x = independent variables matrix
 %         W = contiguity matrix (standardized)
 %       info = an (optional) structure variable with input options:
-%       info.rmin  = (optional) minimum value of rho to use in search (default = -0.99) 
-%       info.rmax  = (optional) maximum value of rho to use in search (default = +0.99)   
+%       info.rmin  = (optional) minimum value of rho to use in search (default = -0.99)
+%       info.rmax  = (optional) maximum value of rho to use in search (default = +0.99)
 %       info.eigs  = 0 to compute rmin/rmax using eigenvalues, (1 = don't compute default)
 %       info.convg = (optional) convergence criterion (default = 1e-4)
 %       info.maxit = (optional) maximum # of iterations (default = 500)
@@ -16,7 +16,7 @@ function results = sem(y,x,W,info)
 %                  = 1 for MC lndet approximation (fast for very large problems)
 %                  = 2 for Spline lndet approximation (medium speed)
 %       info.order = order to use with info.lflag = 1 option (default = 50)
-%       info.iter  = iterations to use with info.lflag = 1 option (default = 30)     
+%       info.iter  = iterations to use with info.lflag = 1 option (default = 30)
 %       info.lndet = a matrix returned by sar, sar_g, sarp_g, etc.
 %                    containing log-determinant information to save time
 % ---------------------------------------------------
@@ -46,22 +46,22 @@ function results = sem(y,x,W,info)
 %         results.time2 = time for eigenvalue calculation
 %         results.time3 = time for hessian or information matrix calculation
 %         results.time4 = time for optimization
-%         results.time  = total time taken         
+%         results.time  = total time taken
 %         results.lndet = a matrix containing log-determinant information
 %                          (for use in later function calls to save time)
 %  --------------------------------------------------
-%  NOTES: if you use lflag = 1 or 2, info.rmin will be set = -1 
+%  NOTES: if you use lflag = 1 or 2, info.rmin will be set = -1
 %                                    info.rmax will be set = 1
 %         For n < 1000 you should use lflag = 0 to get exact results
-% --------------------------------------------------    
+% --------------------------------------------------
 %  SEE ALSO: prt(results), sar, sdm, sac, far
 % ---------------------------------------------------
 % REFERENCES: Luc Anselin Spatial Econometrics (1988) pages 182-183.
-% For lndet information see: Ronald Barry and R. Kelley Pace, 
-% "A Monte Carlo Estimator of the Log Determinant of Large Sparse Matrices", 
+% For lndet information see: Ronald Barry and R. Kelley Pace,
+% "A Monte Carlo Estimator of the Log Determinant of Large Sparse Matrices",
 % Linear Algebra and its Applications", Volume 289, Number 1-3, 1999, pp. 41-54.
-% and: R. Kelley Pace and Ronald P. Barry 
-% "Simulating Mixed Regressive Spatially autoregressive Estimators", 
+% and: R. Kelley Pace and Ronald P. Barry
+% "Simulating Mixed Regressive Spatially autoregressive Estimators",
 % Computational Statistics, 1998, Vol. 13, pp. 397-418.
 % ---------------------------------------------------
 
@@ -83,7 +83,7 @@ function results = sem(y,x,W,info)
 
 
 
-time1 = 0; 
+time1 = 0;
 time2 = 0;
 time3 = 0;
 
@@ -103,7 +103,7 @@ elseif sum(x(:,1)) == n % we have an intercept in the right place
      cflag = 1;
      p = size(x,2)-1;
 end;
-     
+
 results.cflag = cflag;
 results.p = p;
 
@@ -122,7 +122,7 @@ end;
 % return the easy stuff
 results.y = y;
 results.nobs = n;
-results.nvar = nvar; 
+results.nvar = nvar;
 
 % if we have no options, invoke defaults
 if nargin == 3
@@ -176,11 +176,11 @@ rho = rgrid(rindex,1);
 
 results.iter = 0;
 
-% 
+%
 % liktmp = like;
 time4 = etime(clock,t0);
 
-% compute results 
+% compute results
 xs = x - rho*Wx;
 ys = y - rho*Wy;
 b = (xs'*xs)\(xs'*ys);
@@ -201,8 +201,8 @@ parm = [results.beta
         results.sige];
 
 results.lik = f2_sem(parm,y,x,W,detval);
-    
-if n <= 500, % t-stats using information matrix (Anselin, 1982 pages 
+
+if n <= 500, % t-stats using information matrix (Anselin, 1982 pages
 t0 = clock;
 B = (speye(n) - rho*sparse(W));
 BI = inv(B); WB = W*BI;
@@ -223,7 +223,7 @@ bvec = [results.beta
 results.tstat = bvec./(sqrt(tmp(1:nvar+1,1)));
 time3 = etime(clock,t0);
 
-elseif n > 500 
+elseif n > 500
 
 t0 = clock;
 hessn = hessian('f2_sem',parm,y,x,W,detval);
@@ -258,7 +258,7 @@ function [rmin,rmax,convg,maxit,detval,ldetflag,eflag,order,iter,options] = sem_
 % PURPOSE: parses input arguments for far, far_g models
 % ---------------------------------------------------
 %  USAGE: [rmin,rmax,convg,maxit,detval,ldetflag,eflag,order,iter] = far_parse(info)
-% where info contains the structure variable with inputs 
+% where info contains the structure variable with inputs
 % and the outputs are either user-inputs or default values
 % ---------------------------------------------------
 
@@ -279,7 +279,7 @@ maxit = 500;
 fields = fieldnames(info);
 nf = length(fields);
 if nf > 0
-    
+
  for i=1:nf
     if strcmp(fields{i},'rmin')
         rmin = info.rmin;  eflag = 1;
@@ -290,7 +290,7 @@ if nf > 0
     elseif strcmp(fields{i},'convg')
        options.TolFun = info.convg;
     elseif strcmp(fields{i},'maxit')
-        options.MaxIter = info.maxit;  
+        options.MaxIter = info.maxit;
     elseif strcmp(fields{i},'lndet')
     detval = info.lndet;
     ldetflag = -1;
@@ -301,24 +301,24 @@ if nf > 0
     elseif strcmp(fields{i},'lflag')
         tst = info.lflag;
         if tst == 0,
-        ldetflag = 0; 
+        ldetflag = 0;
         elseif tst == 1,
-        ldetflag = 1; 
+        ldetflag = 1;
         elseif tst == 2,
-        ldetflag = 2; 
+        ldetflag = 2;
         else
         error('sar: unrecognizable lflag value on input');
         end;
     elseif strcmp(fields{i},'order')
-        order = info.order;  
+        order = info.order;
     elseif strcmp(fields{i},'iter')
-        iter = info.iter; 
+        iter = info.iter;
     end;
  end;
- 
+
 else, % the user has input a blank info structure
       % so we use the defaults
-end; 
+end;
 
 function [rmin,rmax,time2] = sem_eigs(eflag,W,rmin,rmax,n);
 % PURPOSE: compute the eigenvalues for the weight matrix
@@ -333,8 +333,8 @@ function [rmin,rmax,time2] = sem_eigs(eflag,W,rmin,rmax,n);
 if eflag == 0
 t0 = clock;
 opt.tol = 1e-3; opt.disp = 0;
-lambda = eigs(sparse(W),speye(n),1,'SR',opt);  
-rmin = 1/lambda;   
+lambda = eigs(sparse(W),speye(n),1,'SR',opt);
+rmin = 1/lambda;
 rmax = 1;
 time2 = etime(clock,t0);
 else
@@ -347,23 +347,23 @@ function [detval,time1] = sem_lndet(ldetflag,W,rmin,rmax,detval,order,iter);
 % using the user-selected (or default) method
 % ---------------------------------------------------
 %  USAGE: detval = far_lndet(lflag,W,rmin,rmax)
-% where eflag,rmin,rmax,W contains input flags 
+% where eflag,rmin,rmax,W contains input flags
 % and the outputs are either user-inputs or default values
 % ---------------------------------------------------
 
 
 % do lndet approximation calculations if needed
 if ldetflag == 0 % no approximation
-t0 = clock;    
+t0 = clock;
 out = lndetfull(W,rmin,rmax);
 time1 = etime(clock,t0);
 tt=rmin:.001:rmax; % interpolate a finer grid
 outi = interp1(out.rho,out.lndet,tt','spline');
 detval = [tt' outi];
-    
+
 elseif ldetflag == 1 % use Pace and Barry, 1999 MC approximation
 
-t0 = clock;    
+t0 = clock;
 out = lndetmc(order,iter,W,rmin,rmax);
 time1 = etime(clock,t0);
 results.limit = [out.rho out.lo95 out.lndet out.up95];
@@ -391,7 +391,7 @@ elseif ldetflag == -1 % the user fed down a detval matrix
             error('sem: wrong sized lndet input argument');
         elseif n1 == 1
             error('sem: wrong sized lndet input argument');
-        end;          
+        end;
 end;
 
 
@@ -407,7 +407,7 @@ function llike = f2_sem(parm,y,x,W,detval);
 %         W    = spatial weight matrix
 %         ldet = matrix with [rho log determinant] values
 %                computed in sem.m using one of Kelley Pace's routines
-% ---------------------------------------------------                                           
+% ---------------------------------------------------
 %  NOTE: this is really two functions depending
 %        on nargin = 3 or nargin = 4 (see the function)
 % ---------------------------------------------------
@@ -449,7 +449,7 @@ tmp = 1/(2*sige);
 llike =  detm - (n/2)*log(sige) - (n/2)*log(pi) - tmp*epe;
 
 function lik = f_sem(rho,e,W,detval)
-% PURPOSE: evaluates concentrated log-likelihood for the 
+% PURPOSE: evaluates concentrated log-likelihood for the
 %  spatial error model using sparse matrix algorithms
 % ---------------------------------------------------
 %  USAGE:llike = f_sem(lam,eD,W,detm)
@@ -457,15 +457,15 @@ function lik = f_sem(rho,e,W,detval)
 %         e    = begls residuals
 %         W    = spatial weight matrix
 %         detm =  matrix with [rho log determinant] values
-%                computed in sem.m using one of 
-%                Kelley Pace's routines           
+%                computed in sem.m using one of
+%                Kelley Pace's routines
 % ---------------------------------------------------
 %  RETURNS: a  scalar equal to minus the log-likelihood
 %           function value at the parameter rho
 %  --------------------------------------------------
 %  NOTE: this is really two functions depending
 %        on nargin = 3 or nargin = 4 (see the function)
-% ---------------------------------------------------        
+% ---------------------------------------------------
 %  SEE ALSO: sem, f_far, f_sac, f_sar
 % ---------------------------------------------------
 
@@ -519,21 +519,21 @@ eps = 1e-5;
 
 n = size(x,1);
 fx = feval(f,x,varargin{:});
- 
+
 % Compute the stepsize (h)
 h = eps.^(1/3)*max(abs(x),1e-2);
 xh = x+h;
-h = xh-x;    
+h = xh-x;
 ee = sparse(1:n,1:n,h,n,n);
- 
-% Compute forward step 
+
+% Compute forward step
 g = zeros(n,1);
 for i=1:n
   g(i) = feval(f,x+ee(:,i),varargin{:});
 end
-   
+
 H=h*h';
-% Compute "double" forward step 
+% Compute "double" forward step
 for i=1:n
 for j=i:n
   H(i,j) = (feval(f,x+ee(:,i)+ee(:,j),varargin{:})-g(i)-g(j)+fx)/H(i,j);

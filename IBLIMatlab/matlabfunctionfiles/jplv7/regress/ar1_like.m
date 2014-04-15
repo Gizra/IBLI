@@ -1,7 +1,7 @@
 function llike = ar1_like(param,y,x)
 % PURPOSE: evaluate ols model with AR1 errors log-likelihood
 %-----------------------------------------------------
-% USAGE:    like = ar1_like(b,y,x) 
+% USAGE:    like = ar1_like(b,y,x)
 % where:     b = parameter vector (k x 1)
 %            y = dependent variable vector (n x 1)
 %            x = explanatory variables matrix (n x m)

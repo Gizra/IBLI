@@ -7,7 +7,7 @@
 
 close all; clear all; clc;
 
-% Low-frequency data: annual US personal consumption, 1953-1984. 
+% Low-frequency data: annual US personal consumption, 1953-1984.
 % Data from Greene (1997) "Econometric analysis", table 17.5
 
 Y = [  1453.60
@@ -40,10 +40,10 @@ Y = [  1453.60
        3727.30
        3801.80
        3853.10
-       4036.70 
+       4036.70
        4249.60 ];
-    
-% High-frequency data: quarterly US personal personal disposable income, 
+
+% High-frequency data: quarterly US personal personal disposable income,
 % 1953.I - 1984.IV. Seasonally adjusted data.
 % Data from Greene (1997) "Econometric analysis", table 17.5
 
@@ -170,12 +170,12 @@ x=[   395.5
      1073.3
      1082.2
      1102.1
-     1124.4 
+     1124.4
      1147.8
      1165.3
-     1176.7 
+     1176.7
     1186.9 ];
-          
+
 % ---------------------------------------------
 % Inputs for td library
 
@@ -188,12 +188,12 @@ type=1;
 % Name of ASCII file for output
 file_sal='td.sal';
 
-% Note: the grid search applied in the ssc procedure generates 
-% a warning when phi=0. It is easy to modify the code to skip 
-% this value but it may create some inconveniences in their connection 
-% with the output functions, so I advise to instruct Matlab to avoid 
-% sending this message before calling ssc and reset the warning after ssc. 
-% Although my experience with ssc is limited, this conditioning problem 
+% Note: the grid search applied in the ssc procedure generates
+% a warning when phi=0. It is easy to modify the code to skip
+% this value but it may create some inconveniences in their connection
+% with the output functions, so I advise to instruct Matlab to avoid
+% sending this message before calling ssc and reset the warning after ssc.
+% Although my experience with ssc is limited, this conditioning problem
 % is not critical for the overall performance of the function.
 
 warning off MATLAB:nearlySingularMatrix
@@ -214,4 +214,4 @@ edit td.sal;
 td_plot(res);
 
 
- 
+

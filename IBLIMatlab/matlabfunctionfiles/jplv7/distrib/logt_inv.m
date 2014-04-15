@@ -2,16 +2,16 @@ function inv = logt_inv (x)
 % PURPOSE: inv of the logistic distribution
 %---------------------------------------------------
 % USAGE: cdf = logt_inv(x)
-% where: x = a vector or scalar argument 
+% where: x = a vector or scalar argument
 %---------------------------------------------------
 % RETURNS:
-%        inv = the inverse (quantile) of the logistic distribution      
+%        inv = the inverse (quantile) of the logistic distribution
 % --------------------------------------------------
 % SEE ALSO: logt_cdf, logt_pdf, logt_rnd
 %---------------------------------------------------
 
 % NOTE: Written by KH (Kurt.Hornik@ci.tuwien.ac.at)
-% Converted to MATLAB by JP LeSage, jlesage@spatial-econometrics.com    
+% Converted to MATLAB by JP LeSage, jlesage@spatial-econometrics.com
 
   if (nargin ~= 1)
     error('Wrong # of arguments to logt_inv');
@@ -36,11 +36,11 @@ function inv = logt_inv (x)
   if any (k)
     inv(k) = Inf * ones (1, length (k));
   end;
-  
+
   k = find ((x > 0) & (x < 1));
   if any (k)
     inv (k) = - log (1 ./ x(k) - 1);
   end;
-  
+
   inv = reshape (inv, r, c);
-  
+

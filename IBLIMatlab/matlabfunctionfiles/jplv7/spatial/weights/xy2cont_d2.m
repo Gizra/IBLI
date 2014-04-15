@@ -1,18 +1,18 @@
 % PURPOSE: An example of using xy2cont()
-%          to produce a sparse spatial weight matrix 
-%          using a large data set                   
+%          to produce a sparse spatial weight matrix
+%          using a large data set
 %---------------------------------------------------
 % USAGE: xy2cont_d2
 %---------------------------------------------------
 
 
-% A data set for 1980 Presidential election results covering 3,107 
+% A data set for 1980 Presidential election results covering 3,107
 % US counties. From Pace, R. Kelley and Ronald Barry. 1997. ``Quick
 % Computation of Spatial Autoregressive Estimators'',
 % in  Geographical Analysis.
-% 
+%
 %  Variables are:
-%  columns 1-4 are census identifiers 
+%  columns 1-4 are census identifiers
 %  column 5  = lattitude
 %  column 6  = longitude
 %  column 7  = population casting votes

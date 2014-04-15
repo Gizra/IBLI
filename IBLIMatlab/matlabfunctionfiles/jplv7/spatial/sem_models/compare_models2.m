@@ -1,6 +1,6 @@
 % PURPOSE: An example of using sar_g() sem_g() Gibbs sampling
 %          spatial model comparisons using log marginal posterior
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
 % USAGE: model_compare
 %---------------------------------------------------
@@ -27,9 +27,9 @@ nomit = 500;
 prior.lflag = 0; % full lndet calculation
 
 results1 = sem_g(y,x,W,ndraw,nomit,prior);
-prt(results1);  
+prt(results1);
 results2 = sdm_g(y,x,W,ndraw,nomit,prior);
-prt(results2);  
+prt(results2);
 probs = model_probs(results1,results2);
 
 fprintf(1,'posterior probs for sem versus sdm model \n');
@@ -40,7 +40,7 @@ mprint(probs,in);
 % do maximum likelihood estimates for comparison
 info.lflag = 0; % full lndet calculation
 results3 = sem(y,x,W,info);
-prt(results3);  
+prt(results3);
 results4 = sdm(y,x,W,info);
-prt(results4);  
+prt(results4);
 

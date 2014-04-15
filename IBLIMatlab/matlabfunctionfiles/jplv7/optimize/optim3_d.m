@@ -1,7 +1,7 @@
 % PURPOSE: An example of optimization
 % solving a time-varying parameter model
 % from Kim and Nelson pages 44-49
-%                          
+%
 %---------------------------------------------------
 % USAGE: optim3_d
 %---------------------------------------------------
@@ -16,7 +16,7 @@ load tvpmoney.data;
 %  4: inf==lagged inflation
 %  5: surpl==lagged full employment budget surplus
 %  6: m1lag==lag of m1
-%     1959.3--1987.4, 
+%     1959.3--1987.4,
 
 y = tvpmoney(:,2);
 n = length(y);
@@ -31,22 +31,22 @@ parm = [0.5
         0.1
         0.1
         0.1];
-            
+
 
 % solve using minz routine
 infoz.call = 'other';
 infoz.maxit = 500;
 infoz.prt = 1;
-result1 = maxlik('tvp_like1',parm,infoz,y,x); 
+result1 = maxlik('tvp_like1',parm,infoz,y,x);
 niter1   = result1.iter;
 like1    = result1.f;
 hess1    = result1.hess;
 parm1 = result1.b;
-  
+
 % solve using frpr_min
 info.maxit = 500;
 info.prt = 1;
-result2 = frpr_min('tvp_like1',parm,info,y,x); 
+result2 = frpr_min('tvp_like1',parm,info,y,x);
 parm2 = result2.b;
 niter2   = result2.iter;
 like2    = result2.f;

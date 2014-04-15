@@ -1,5 +1,5 @@
 function lik = f_sem(rho,e,W,detval)
-% PURPOSE: evaluates concentrated log-likelihood for the 
+% PURPOSE: evaluates concentrated log-likelihood for the
 %  spatial error model using sparse matrix algorithms
 % ---------------------------------------------------
 %  USAGE:llike = f_sem(lam,eD,W,detm)
@@ -7,15 +7,15 @@ function lik = f_sem(rho,e,W,detval)
 %         e    = begls residuals
 %         W    = spatial weight matrix
 %         detm =  matrix with [rho log determinant] values
-%                computed in sem.m using one of 
-%                Kelley Pace's routines           
+%                computed in sem.m using one of
+%                Kelley Pace's routines
 % ---------------------------------------------------
 %  RETURNS: a  scalar equal to minus the log-likelihood
 %           function value at the parameter rho
 %  --------------------------------------------------
 %  NOTE: this is really two functions depending
 %        on nargin = 3 or nargin = 4 (see the function)
-% ---------------------------------------------------        
+% ---------------------------------------------------
 %  SEE ALSO: sem, f_far, f_sac, f_sar
 % ---------------------------------------------------
 

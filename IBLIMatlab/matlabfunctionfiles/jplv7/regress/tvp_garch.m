@@ -10,12 +10,12 @@ function result = tvp_garch(y,x,parm,info)
 %        x = explanatory variable matrix
 %     parm = (k+3)x1 vector of starting values
 %             parm(1:k,1)   = sigb vector
-%             parm(k+1,1)   = a0 
+%             parm(k+1,1)   = a0
 %             parm(k+2,1)   = a1
 %             parm(k+3,1)   = a2
 %   info = a structure variable containing optimization options
 %   info.b0    = a (k+1) x 1 vector with initial b values (default: zeros(k+1,1))
-%   info.v0    = a (k+1)x(k+1) matrix with prior for sigb 
+%   info.v0    = a (k+1)x(k+1) matrix with prior for sigb
 %                (default: eye(k+1)*1e+5, a diffuse prior)
 %   info.prt   = 1 for printing some intermediate results
 %              = 2 for printing detailed results (default = 0)
@@ -25,7 +25,7 @@ function result = tvp_garch(y,x,parm,info)
 %   info.lamda = Minimum eigenvalue of Hessian for Marquardt      [.01]
 %   info.cond  = Tolerance level for condition of Hessian        [1000]
 %   info.btol  = Tolerance for convergence of parm vector        [1e-4]
-%   info.ftol  = Tolerance for convergence of objective function [sqrt(eps)] 
+%   info.ftol  = Tolerance for convergence of objective function [sqrt(eps)]
 %   info.gtol  = Tolerance for convergence of gradient           [sqrt(eps)]
 %   info.start = starting observation (default: 2*k+1)
 % -------------------------------------------------------------------
@@ -33,7 +33,7 @@ function result = tvp_garch(y,x,parm,info)
 %       result.meth   = 'tvp_garch'
 %       result.sigb   = a (kx1) vector of sig beta estimates
 %       result.ahat   = a (3x1) vector with a0,a1,a2 estimates
-%       result.vcov   = a (k+3)x(k+3) var-cov matrix for the parameters       
+%       result.vcov   = a (k+3)x(k+3) var-cov matrix for the parameters
 %       result.tstat  = a (k+3) x 1 vector of t-stats based on vcov
 %       result.stdhat = a (k+3) x 1 vector of estimated std deviations
 %       result.beta   = a (start:n x k) matrix of time-varying beta hats
@@ -78,10 +78,10 @@ if ~isstruct(info)
 end;
 % parse options
 fields = fieldnames(info);
-nf = length(fields); 
+nf = length(fields);
   for i=1:nf
     if strcmp(fields{i},'maxit')
-        infoz.maxit = info.maxit; 
+        infoz.maxit = info.maxit;
     elseif strcmp(fields{i},'btol')
         infoz.btol = info.btol;
     elseif strcmp(fields{i},'ftol')
@@ -95,19 +95,19 @@ nf = length(fields);
     elseif strcmp(fields{i},'prt')
         infoz.prt = info.prt;
     elseif strcmp(fields{i},'delta')
-        infoz.delta = info.delta;     
+        infoz.delta = info.delta;
     elseif strcmp(fields{i},'lambda')
-        infoz.lambda = info.lambda;  
+        infoz.lambda = info.lambda;
     elseif strcmp(fields{i},'start')
-        start = info.start;  
+        start = info.start;
     elseif strcmp(fields{i},'v0')
-        priorv0 = info.v0;  
+        priorv0 = info.v0;
     elseif strcmp(fields{i},'b0')
-        priorb0 = info.b0;         
+        priorb0 = info.b0;
     end;
   end;
 end;
-         
+
 
 % Do maximum likelihood estimation
 oresult = maxlik('tvp_garch_like',parm,infoz,y,x,start,priorb0,priorv0);
@@ -125,7 +125,7 @@ grad = fdjac('garch_trans',parm1);
 vcov = grad*cov0*grad';
 stdhat = sqrt(diag(vcov));
 
-% produce tvp beta hats, 
+% produce tvp beta hats,
 % prediction errors and variance of forecast error,
 % and garch(1,1) variance estimates
 [beta ferror fvar sigt] = tvp_garch_filter(parm1,y,x,start,priorb0,priorv0);
@@ -184,15 +184,15 @@ function [betao, ferroro, fvaro, sigto] =  tvp_garch_filter(parm,y,x,start,prior
 %        x = data matrix
 %    start = # of observation to start the filter
 %            (default = 1)
-%    priorb0 = a (k+1) x 1 vector with prior for b0        
+%    priorb0 = a (k+1) x 1 vector with prior for b0
 %    priorv0 = a (k+1)x(k+1) matrix with prior for sigb
-%            (default: eye(k+1)*1e+5, a diffuse prior)  
+%            (default: eye(k+1)*1e+5, a diffuse prior)
 % -------------------------------------------------------------
 % RETURNS:   beta = (Txk) matrix of tvp beta estimates
 %          ferror = (Tx1) vector with forecast error and
-%                              
+%
 %            fvar = (Tx1) vector with conditional variance
-%            sigt = (Tx1) vector with garch variances               
+%            sigt = (Tx1) vector with garch variances
 % -------------------------------------------------------------
 
 % written by:

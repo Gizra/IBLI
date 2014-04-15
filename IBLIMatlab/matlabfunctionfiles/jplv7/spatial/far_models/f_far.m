@@ -1,5 +1,5 @@
 function llike = f_far(rho,y,W,detval)
-% PURPOSE: evaluate the concentrated log-likelihood 
+% PURPOSE: evaluate the concentrated log-likelihood
 %  1st order spatial autoregressive model using sparse matrix algorithms
 % ---------------------------------------------------
 %  USAGE:llike = f_far(rho,y,W)
@@ -7,8 +7,8 @@ function llike = f_far(rho,y,W,detval)
 %         y    = dependent variable vector
 %         W    = spatial weight matrix
 %         ldet = matrix with [rho log determinant] values
-%                computed in far.m using one of 
-%                Pace and Barry's routines         
+%                computed in far.m using one of
+%                Pace and Barry's routines
 % ---------------------------------------------------
 %  RETURNS: a  scalar equal to minus the log-likelihood
 %           function value at the parameter rho

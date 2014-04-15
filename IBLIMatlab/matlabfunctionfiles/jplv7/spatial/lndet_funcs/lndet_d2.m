@@ -1,7 +1,7 @@
 % PURPOSE: An example of using lndetfull, lndetmc, lndetint
 %          to compute the log-determinant term
 %          NOTE: these are usually
-%                used inside the estimation functions  
+%                used inside the estimation functions
 % based on a larger data set, see lndet_d for a small dataset
 %---------------------------------------------------
 % USAGE: lndet_d2
@@ -19,8 +19,8 @@ n = 3107;
 % find eigenvalues min,max
 % t0 = clock;
 % opt.tol = 1e-3; opt.disp = 0;
-% lambda = eigs(sparse(W),speye(n),1,'SR',opt);  
-% rmin = 1/lambda;   
+% lambda = eigs(sparse(W),speye(n),1,'SR',opt);
+% rmin = 1/lambda;
 % rmax = 1;
 % time1 = etime(clock,t0);
 

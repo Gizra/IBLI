@@ -1,6 +1,6 @@
 % PURPOSE: demo of rdiagn()
 %          diagnostic plots of residuals
-% 
+%
 %---------------------------------------------------
 % USAGE: rdiagn_d
 %---------------------------------------------------

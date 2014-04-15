@@ -1,12 +1,12 @@
 % PURPOSE: demo of qstat2() Ljunbg-Box Q test
 %          for AR(p) effects
-% 
+%
 %---------------------------------------------------
 % USAGE: qstat2_d
 %---------------------------------------------------
 
 % generate serially correlated time-series
-nobs = 100; 
+nobs = 100;
 y = zeros(nobs,1);
 y(1,1) = randn(1,1);
 tt = 1:nobs;

@@ -1,6 +1,6 @@
 function [value,position] = findnear(A,b)
-% PURPOSE: finds element in the input matrix (or vector) with 
-%          value closest to the input value b 
+% PURPOSE: finds element in the input matrix (or vector) with
+%          value closest to the input value b
 % -----------------------------------------------------
 % USAGE: [value,pos] = findnear(A,b)
 %          where:  A = a matrix or vector
@@ -28,4 +28,3 @@ end;
           else
           position = pos;
           end;
-  

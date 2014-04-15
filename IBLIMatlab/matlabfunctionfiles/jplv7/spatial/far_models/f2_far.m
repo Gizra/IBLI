@@ -7,14 +7,14 @@ function llike = f2_far(parm,y,W,detval)
 %          y    = dependent variable vector
 %          W    = spatial weight matrix
 %         ldet = matrix with [rho log determinant] values
-%                computed in far.m using one of Kelley Pace's routines          
+%                computed in far.m using one of Kelley Pace's routines
 % ---------------------------------------------------
 %  RETURNS: a scalar equal to minus the log-likelihood
 %           function value at the parameters rho,sigma
 %  --------------------------------------------------
 %  NOTE: this is really two functions depending
 %        on nargin = 3 or nargin = 4 (see the function)
-% ---------------------------------------------------  
+% ---------------------------------------------------
 %  SEE ALSO: far, f2_sar, f2_sac, f2_sem
 % ---------------------------------------------------
 

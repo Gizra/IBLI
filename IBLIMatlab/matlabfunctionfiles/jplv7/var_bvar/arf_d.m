@@ -1,5 +1,5 @@
-% PURPOSE: An example of using arf(),                               
-%          to produce ar-model forecasts                    
+% PURPOSE: An example of using arf(),
+%          to produce ar-model forecasts
 %---------------------------------------------------
 % USAGE: arf_d
 %---------------------------------------------------
@@ -10,7 +10,7 @@ load test.dat; % a test data set containing
 % data covers 1982,1 to 1996,5
 
 vnames =  strvcat('il');
-     
+
 y = test(:,1); % illinois employment
 [nobs junk] = size(y);
 

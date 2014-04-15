@@ -8,7 +8,7 @@ function res=denton_uni_prop(Y,x,ta,d,s);
 %         res.N     = Number of low frequency data
 %         res.ta    = Type of disaggregation
 %         res.s     = Frequency conversion
-%         res.d     = Degree of differencing 
+%         res.d     = Degree of differencing
 %         res.y     = High frequency estimate
 %         res.x     = High frequency indicator
 %         res.U     = Low frequency residuals
@@ -26,7 +26,7 @@ function res=denton_uni_prop(Y,x,ta,d,s);
 %            d=0 ---> levels
 %            d=1 ---> first differences
 %            d=2 ---> second differences
-%        s: number of high frequency data points for each low frequency data point 
+%        s: number of high frequency data points for each low frequency data point
 %            s= 4 ---> annual to quarterly
 %            s=12 ---> annual to monthly
 %            s= 3 ---> quarterly to monthly
@@ -35,8 +35,8 @@ function res=denton_uni_prop(Y,x,ta,d,s);
 % -----------------------------------------------------------------------
 % SEE ALSO: denton_uni, tduni_plot, tduni_print
 % -----------------------------------------------------------------------
-% REFERENCE: Denton, F.T. (1971) "Adjustment of monthly or quarterly 
-% series to annual totals: an approach based on quadratic minimization", 
+% REFERENCE: Denton, F.T. (1971) "Adjustment of monthly or quarterly
+% series to annual totals: an approach based on quadratic minimization",
 % Journal of the American Statistical Society, vol. 66, n. 333, p. 99-102.
 
 % written by:
@@ -100,7 +100,7 @@ y = x + u;
 % Loading the structure
 % -----------------------------------------------------------------------
 
-% Basic parameters 
+% Basic parameters
 
 res.meth = 'Proportional Denton';
 res.N = N;

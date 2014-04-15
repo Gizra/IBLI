@@ -2,12 +2,12 @@ function x = fdis_rnd(n,a,b)
 % PURPOSE: returns random draws from the F(a,b) distribution
 %---------------------------------------------------
 % USAGE: rnd = fdis_rnd(n,a,b)
-% where: n = size of vector 
+% where: n = size of vector
 %        a = scalar dof parameter
 %        b = scalar dof parameter
 %---------------------------------------------------
 % RETURNS:
-%        a vector of random draws from the F(a,b) distribution      
+%        a vector of random draws from the F(a,b) distribution
 % --------------------------------------------------
 % NOTES:
 % mean should equal (b/a)*((a/2)/(b/2-1))

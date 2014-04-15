@@ -5,7 +5,7 @@
 %---------------------------------------------------
 clear all;
 % NOTE a large data set with 3107 observations
-% from Pace and Barry, 
+% from Pace and Barry,
 % test MCMC sampling on pace and barry data set
 clear all;
 load elect.dat;             % load data on votes

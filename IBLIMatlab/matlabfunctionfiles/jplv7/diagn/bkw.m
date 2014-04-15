@@ -4,14 +4,14 @@ function bkw(x,vnames,fmt)
 %---------------------------------------------------
 % USAGE: bkw(x,vnames,fmt)
 % where:       x = independent variable matrix (from a regression model)
-%         vnames = (optional) variable name vector    
-%            fmt = (optional) format string, e.g., '%12.6f' or '%12d' 
-%                  default = %10.2f   
+%         vnames = (optional) variable name vector
+%            fmt = (optional) format string, e.g., '%12.6f' or '%12d'
+%                  default = %10.2f
 %---------------------------------------------------
 % NOTE: you can use either x-variable names or an ols
 %       vnames argument containing y-variable + x-variable names
 % e.g. vnames = strvcat('y','x1','x2') or
-%      vnames = strvcat('x1','x2') 
+%      vnames = strvcat('x1','x2')
 %---------------------------------------------------
 % RETURNS:
 %        nothing, just prints the table out
@@ -41,7 +41,7 @@ elseif nargin == 1
    nflag = 0;
    fmt = '%10.2f';
 else
-error('Wrong # of arguments to bkw');   
+error('Wrong # of arguments to bkw');
 end;
 
 [u d v] = svd(x,0);
@@ -62,7 +62,7 @@ phik = sum(phi(i,:));
 pi(i,:) = phi(i,:)/phik;
 end;
 
-% BUG fix suggested by 
+% BUG fix suggested by
 % John P. Burkett <burkett@uriacc.uri.edu
 lmax = lamda(1);
 lmaxvec = lmax*ones(nvar,1);
@@ -86,7 +86,7 @@ out = pi';
                name];
      end;
     end;
-if nflag == 1 
+if nflag == 1
  [namsiz nsize] = size(vnames); % error check vnames argument
   if namsiz == nvar+1
     Vname = [];

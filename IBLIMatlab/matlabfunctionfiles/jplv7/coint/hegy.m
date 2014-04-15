@@ -1,6 +1,6 @@
 function results = hegy(x,sig,det,alag,fid);
 % PURPOSE: performs the Hylleberg, Engle, Granger and Yoo(1990)
-%          seasonal unit root test for quaterly time series, with 
+%          seasonal unit root test for quaterly time series, with
 %          and without intercept, seasonal dummies, and/or trend.
 %          Also reported are the extensions of the HEGY method by
 %          Ghysels, Lee and Noh (1994)
@@ -8,8 +8,8 @@ function results = hegy(x,sig,det,alag,fid);
 % USAGE: results = hegy(x,sig,det,fid,lag);
 % where:       x = a time-series vector
 %            sig = level of significance or
-%                  size of the test for all test 
-%                  [1% 5% 10% 90% 95% 99%] 
+%                  size of the test for all test
+%                  [1% 5% 10% 90% 95% 99%]
 %                  the default is 5%.
 %            det = 1, no deterministic components
 %                = 2, constant (default)
@@ -34,7 +34,7 @@ function results = hegy(x,sig,det,alag,fid);
 
 
 nobs = rows(x);
-if nargin > 5 
+if nargin > 5
   error('Wrong # of arguments to hegy');
 elseif (nargin ==4)
     fid = 1;
@@ -43,18 +43,18 @@ elseif (nargin ==3)
     alag =0;  % default has no augmented component
 elseif (nargin ==2)
     fid =1;
-    alag =0;  
+    alag =0;
     det =2; % the default model only includes a constant
 elseif (nargin ==1)
     fid =1;
-    alag =0;  
-    det =2; 
-    sig = 0.05; %the default level of significance is 95% 
+    alag =0;
+    det =2;
+    sig = 0.05; %the default level of significance is 95%
 else
     error('Wrong # of arguments to Hegy');
 end;
 
-%create auxiliary series 
+%create auxiliary series
 
 y1= x + lag(x,1) + lag(x,2) + lag(x,3);
 y1=trimr(y1,4,0);
@@ -64,77 +64,77 @@ y3= -x + lag(x,2);
 y3=trimr(y3,4,0);
 y4= x - lag(x,4);
 y4=trimr(y4,4,0);
- 
+
 
 %Deterministic component options
     switch det
-    
+
     case 1 % no deterministic components
 
-%Augmented lags of the dependent variable option 
+%Augmented lags of the dependent variable option
 if alag==0
     xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1)];
     xmat=trimr(xmat,2,0);
     yvec=trimr(y4,2,0);
 elseif alag == 1
-    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) lag(y4,1)];    
+    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) lag(y4,1)];
     xmat=trimr(xmat,2,0);
     yvec=trimr(y4,2,0);
 else
-    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) mlag(y4,alag)];    
+    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) mlag(y4,alag)];
     xmat=trimr(xmat,alag,0);
     yvec=trimr(y4,alag,0);
 end
 
     case 2 % constant (default)
 
-%Augmented lags of the dependent variable option 
+%Augmented lags of the dependent variable option
 if alag==0
     xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1)];
     xmat=trimr(xmat,2,0);
     yvec=trimr(y4,2,0);
 elseif alag == 1
-    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) lag(y4,1)];    
+    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) lag(y4,1)];
     xmat=trimr(xmat,2,0);
     yvec=trimr(y4,2,0);
 else
-    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) mlag(y4,alag)];    
+    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) mlag(y4,alag)];
     xmat=trimr(xmat,alag,0);
     yvec=trimr(y4,alag,0);
 end
-  
+
     case 3 % constant & 3 seasonal dummies
 
 seasond=sdummy(rows(y4),4);
 seasond=trimc(seasond,0,1);
-%Augmented lags of the dependent variable option 
+%Augmented lags of the dependent variable option
 if alag==0
     xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) seasond];
     xmat=trimr(xmat,2,0);
     yvec=trimr(y4,2,0);
 elseif alag == 1
-    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) seasond lag(y4,1)];    
+    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) seasond lag(y4,1)];
     xmat=trimr(xmat,2,0);
     yvec=trimr(y4,2,0);
 else
-    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) seasond mlag(y4,alag)];    
+    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) seasond mlag(y4,alag)];
     xmat=trimr(xmat,alag,0);
     yvec=trimr(y4,alag,0);
-end    
+end
 
     case 4 % constant & trend
 
-%Augmented lags of the dependent variable option 
+%Augmented lags of the dependent variable option
 if alag==0
     xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) seqa(1,1,rows(y4))];
     xmat=trimr(xmat,2,0);
     yvec=trimr(y4,2,0);
 elseif alag == 1
-    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) seqa(1,1,rows(y4)) lag(y4,1)];    
+    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) seqa(1,1,rows(y4)) lag(y4,1)];
     xmat=trimr(xmat,2,0);
     yvec=trimr(y4,2,0);
 else
-    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) seqa(1,1,rows(y4)) mlag(y4,alag)];    
+    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) seqa(1,1,rows(y4)) mlag(y4,alag)];
     xmat=trimr(xmat,alag,0);
     yvec=trimr(y4,alag,0);
 end
@@ -143,20 +143,20 @@ end
 
 seasond=sdummy(rows(y4),4);
 seasond=trimc(seasond,0,1);
-%Augmented lags of the dependent variable option 
+%Augmented lags of the dependent variable option
 if alag==0
     xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) seasond seqa(1,1,rows(y4))];
     xmat=trimr(xmat,2,0);
     yvec=trimr(y4,2,0);
 elseif alag == 1
-    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) seasond seqa(1,1,rows(y4)) lag(y4,1)];    
+    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) seasond seqa(1,1,rows(y4)) lag(y4,1)];
     xmat=trimr(xmat,2,0);
     yvec=trimr(y4,2,0);
 else
-    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) seasond seqa(1,1,rows(y4)) mlag(y4,alag)];    
+    xmat=[lag(y1,1) lag(y2,1) lag(y3,2) lag(y3,1) ones(rows(y4),1) seasond seqa(1,1,rows(y4)) mlag(y4,alag)];
     xmat=trimr(xmat,alag,0);
     yvec=trimr(y4,alag,0);
-end    
+end
 
     otherwise;
     error('Wrong kind of deterministic components for Hegy');
@@ -169,51 +169,51 @@ end;
      pi3=res.tstat(3,1);  %t-stat for pi3
      pi4=res.tstat(4,1);  %t-stat for pi4
      residu=res.resid;      %residuals from the unrestricted model
-     rrsu= residu'*residu; 
+     rrsu= residu'*residu;
      nobsu= res.nobs;
      nvaru= res.nvar;
-     
-  %t-stat probabilities for deterministic components and last lag 
+
+  %t-stat probabilities for deterministic components and last lag
   %(these do not have to be cross check against the critical values tables from Hegy or Ghysels)
      switch det
   case 2
       detstat=res.tstat(5,1);
       pvdet = tdis_prb(detstat,nobsu-nvaru); % find t-stat probabilities
-      info3.rnames = strvcat('Data','Const');    
+      info3.rnames = strvcat('Data','Const');
   case 3
      for j=1:det+1
-     detstat(j,1)=res.tstat(4+j,1); 
+     detstat(j,1)=res.tstat(4+j,1);
      pvdet(j,1) = tdis_prb(detstat(j,1),nobsu-nvaru); % find t-stat probabilities
-     info3.rnames = strvcat('Data','Const','Sdum1','Sdum2','Sdum3');    
+     info3.rnames = strvcat('Data','Const','Sdum1','Sdum2','Sdum3');
      end
    case 4
      for j=1:det-2
-     detstat(j,1)=res.tstat(4+j,1); 
+     detstat(j,1)=res.tstat(4+j,1);
      pvdet(j,1) = tdis_prb(detstat(j,1),nobsu-nvaru); % find t-stat probabilities
-     info3.rnames = strvcat('Data','Const','Trend');    
+     info3.rnames = strvcat('Data','Const','Trend');
      end
   case 5
      for j=1:det
-     detstat(j,1)=res.tstat(4+j,1); 
+     detstat(j,1)=res.tstat(4+j,1);
      pvdet(j,1) = tdis_prb(detstat(j,1),nobsu-nvaru); % find t-stat probabilities
-     info3.rnames = strvcat('Data','Const','Sdum1','Sdum2','Sdum3','Trend');    
+     info3.rnames = strvcat('Data','Const','Sdum1','Sdum2','Sdum3','Trend');
      end
 
   end
- 
+
      if (alag~=0)
-     kth =cols(xmat);    
-     last=res.tstat(kth,1); 
+     kth =cols(xmat);
+     last=res.tstat(kth,1);
      pvlast = tdis_prb(last,nobsu-nvaru); % find t-stat probabilities
      end
 
 
-% F-statistics 
-if det~=1 
+% F-statistics
+if det~=1
 %test of the null of unit roots at frequency: 0, pi/2 and pi simultaneously
      resr1=ols(yvec,xmat(:,5:cols(xmat)));
      residr1=resr1.resid;
-     rrsr1= residr1'*residr1; 
+     rrsr1= residr1'*residr1;
      nobs1= res.nobs;
      nvar1= res.nvar;
 %F-test pi1=pi2=pi3=pi4=0
@@ -221,7 +221,7 @@ theta14 = ((rrsr1-rrsu)/4)/(rrsu/(nobsu-nvaru));
 %test of the null of unit roots at frequency: pi/2 and pi simultaneously
      resr2=ols(yvec,[xmat(:,1) xmat(:,5:cols(xmat))]);
      residr2=resr2.resid;
-     rrsr2= residr2'*residr2; 
+     rrsr2= residr2'*residr2;
      nobs2= res.nobs;
      nvar2= res.nvar;
 %F-test pi2=pi3=pi4=0
@@ -229,13 +229,13 @@ theta24 = ((rrsr2-rrsu)/3)/(rrsu/(nobsu-nvaru));
 %test of the null of unit roots at frequency: pi/2 simultaneously
      resr3=ols(yvec,[xmat(:,1:2) xmat(:,5:cols(xmat))]);
      residr3=resr3.resid;
-     rrsr3= residr3'*residr3; 
+     rrsr3= residr3'*residr3;
      nobs3= res.nobs;
      nvar3= res.nvar;
 %F-test pi3=pi4=0
 theta34 = ((rrsr3-rrsu)/2)/(rrsu/(nobsu-nvaru));
 end
- 
+
 %Print Out Results (check consistency)
 
 %Table 1 Coefficient Test
@@ -253,7 +253,7 @@ x1=[pi1 crthegy('pi1',det,nobsu,sig);
 mprint(x1,info1);
 fprintf(fid,'********************************************\n');
 
-if det~=1 
+if det~=1
 fprintf(fid,'\n Joint Test \n');
 fprintf(fid,'********************************************\n');
 info2.cnames = strvcat('F-Statistic','Critical Value');
@@ -293,4 +293,3 @@ fprintf(fid,'***********************************************\n');
 
 
 
-   

@@ -9,7 +9,7 @@ load election.dat;
 %   col 3 = long  coordinate
 %   col 11 = statecode (a number 1 to 48 with the state in which the county is located)
 
-y = election(:,1);  
+y = election(:,1);
 xc = election(:,2);
 yc = election(:,3);
 
@@ -33,7 +33,7 @@ toc;
 % extract the 30 nearest neighbors to observation/county 20
 % covington Alabama
 
-% nnindex takes a form such that: 
+% nnindex takes a form such that:
 %         ind = nnindex(i,:)';
 %         y(ind,1) would pull out the m nearest neighbor observations to
 %         y(i,1), and y(ind,1)/m would represent an avg of these
@@ -45,7 +45,7 @@ xc20a = [xc(20,1)
         xc20];
 yc20a = [yc(20,1)
         yc20];
-    
+
 ind2 = nnindex3(20,:)';
 xc20 = xc(ind2,1);
 yc20 = yc(ind2,1);

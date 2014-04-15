@@ -5,7 +5,7 @@ function results=tsls(y,y1,x1,xall)
 % where: y      = dependent variable vector (nobs x 1)
 %        yendog = endogenous variables matrix (nobs x g)
 %        xexog  = exogenous variables matrix for this equation
-%        xall   = all exogenous and lagged endogenous variables 
+%        xall   = all exogenous and lagged endogenous variables
 %                 in the system
 %---------------------------------------------------
 % RETURNS: a structure
@@ -59,7 +59,7 @@ xpx = [y1'*xall*xapxa*xall'*y1     y1'*x1
        x1'*y1                      x1'*x1];
 xpy = [y1'*xall*xapxa*xall'*y
        x1'*y                  ];
-xpxi = inv(xpx);                
+xpxi = inv(xpx);
 results.beta  = xpxi*xpy;             % bhat
 results.yhat  = [y1 x1]*results.beta; % yhat
 results.resid = y - results.yhat;     % residuals

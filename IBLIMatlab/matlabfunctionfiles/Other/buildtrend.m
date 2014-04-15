@@ -12,23 +12,23 @@ function b=buildtrend(lookcol,table_,trendVec)
  [k,~]=size(trendVec);
 
  [n,~]=size(lookcol);
- 
+
  [m,~]=size(table_);
-   
+
  b=zeros(n*k,m);
- 
+
  for h=1:k
     for i=1:n
-     
-        for j=1:m    
-        
+
+        for j=1:m
+
             if lookcol(i,1)==table_(j,1)
-                                   
+
                     b(n*(h-1)+i,table_(j,2))=trendVec(h,1);
-                   
-                break 
+
+                break
             end
-                           
+
         end
     end
  end

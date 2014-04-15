@@ -11,7 +11,7 @@ function out = matdiv(x,y)
 % --------------------------------------------------
 
 % written by:
-% James P. LeSage, 
+% James P. LeSage,
 % Dept of Finance & Economics
 % Texas State University-San Marcos
 % 601 University Drive

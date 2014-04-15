@@ -38,7 +38,7 @@ for i=1:numsims;
     k = 3;
     x = randn(n,k);
     x(:,1) = ones(n,1);
-    y = x*beta + (speye(n) - TrueLambda1*W1)\(randn(n,1)*sqrt(sige1)); 
+    y = x*beta + (speye(n) - TrueLambda1*W1)\(randn(n,1)*sqrt(sige1));
 
     %Call sem_gmm
     test1=sem_gmm(y,x,W1);

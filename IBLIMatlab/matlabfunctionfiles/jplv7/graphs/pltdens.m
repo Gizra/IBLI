@@ -1,19 +1,19 @@
 function [h,f,xx] = plotdens(x,h,positive,kernel)
-% PURPOSE: Draw a nonparametric density estimate. 
+% PURPOSE: Draw a nonparametric density estimate.
 %---------------------------------------------------
 % USAGE: [h f y] = pltdens(x,h,p,kernel)
 %        or pltdens(x) which uses gaussian kernel default
 % where:
 %        x is a vector
-%        h is the kernel bandwidth 
+%        h is the kernel bandwidth
 %          default=1.06 * std(x) * n^(-1/5); Silverman page 45
 %        p is 1 if the density is 0 for negative values
 %        k is the kernel type:
 %          =1 Gaussian (default)
-%        =2 Epanechnikov 
+%        =2 Epanechnikov
 %        =3 Biweight
 %        =4 Triangular
-%   A jittered plot of the 
+%   A jittered plot of the
 %   observations is shown below the density.
 %---------------------------------------------------
 % RETURNS:
@@ -54,12 +54,12 @@ end
 xk = [-gridsize:gridsize-1]'*d;
 if kernel == 1
    K = exp(-0.5*(xk/h).^2);
-elseif kernel == 2 
+elseif kernel == 2
    K = max(0,1-(xk/h).^2/5);
 elseif kernel == 3
    c = sqrt(1/7);
    K = (1-(xk/h*c).^2).^2 .* ((1-abs(xk/h*c)) > 0);
-elseif kernel == 4 
+elseif kernel == 4
    c = sqrt(1/6);
    K = max(0,1-abs(xk/h*c));
 end

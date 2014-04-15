@@ -29,7 +29,7 @@ function results = ols_gcbma(y,x,ndraw,prior)
 %          results.nu      = nu prior parameter
 %          results.d0      = d0 prior parameter
 %          results.time1   = time for BMA sampling
-%          results.time2   = total time taken  
+%          results.time2   = total time taken
 % --------------------------------------------------------------
 % NOTES: 1) the model descriptions and log-marginals for all unique models found
 %           are written  to a file lmarginal.ols
@@ -39,7 +39,7 @@ function results = ols_gcbma(y,x,ndraw,prior)
 %           estimates based on averaging over models using posterior
 %           model probabilities as weights
 % --------------------------------------------------------------
-% REFERENCES: 
+% REFERENCES:
 % Fernandez,Carmen, Eduardo Ley, and Mark F. J. Steel, (2001a)
 %'Model uncertainty in cross-country growth regressions,'
 % Journal of Applied Econometrics}, Volume 16, number 5, pp. 563 - 576.
@@ -68,7 +68,7 @@ time2 = 0;
 nobsa = n;
 results.nobs  = n;
 results.nvar  = k;
-results.y = y;      
+results.y = y;
 
 if n1 ~= n
 error('ols_gcbma: x-matrix contains wrong # of observations');
@@ -94,15 +94,15 @@ for v=1:nvar
     vtmp(v)=bino_rnd(1,0.5,1,1);
 end
 vin=selif(seqa(1,1,nvar).*vtmp,vtmp)';
-vout=delif(seqa(1,1,nvar)-seqa(1,1,nvar).*vtmp,vtmp)'; 
+vout=delif(seqa(1,1,nvar)-seqa(1,1,nvar).*vtmp,vtmp)';
 
 cnt = 0;
 
 %<====================== start draws
 t0 = clock;
 hwait = waitbar(0,'OLS BMA : MCMC sampling ...');
-for i=1:ndraw; 
-    
+for i=1:ndraw;
+
 % choose new model
 [vinew vonew] = sample(vin,vout);
 for j=1:length(vinew);
@@ -136,10 +136,10 @@ else % we have a model that we have already computed the log-marginal for
 end;
 
 bf = model_odds(lmarg_new,lmarg_old);
- if bf >=1; 
-     flag = 1; 
- else 
-     flag = bino_rnd(1,bf,1,1); 
+ if bf >=1;
+     flag = 1;
+ else
+     flag = bino_rnd(1,bf,1,1);
  end;
 
  if flag == 1 % change models
@@ -147,8 +147,8 @@ bf = model_odds(lmarg_new,lmarg_old);
  vout = vonew;
  lmarg_old = lmarg_new;
  end;
- 
-waitbar(i/ndraw);         
+
+waitbar(i/ndraw);
 end; % end of sampling loop
 close(hwait);
 
@@ -174,7 +174,7 @@ adj = max(mlog);
 madj = mlog - adj;
   isum = exp(madj);
   postprob = isum/sum(isum);
-  
+
 [probs_sort,pind] = sort(postprob);
 results.mprob = probs_sort;
 msort = models(pind,:);
@@ -207,7 +207,7 @@ results.time2 = time2;
 function [nu,d0,sige,g,gmodels] = ols_parse(prior,x)
 % PURPOSE: parses input arguments for ols_gcbma models
 % ---------------------------------------------------
-%  USAGE: [nu,d0,rho,sige,g,gmodels] = 
+%  USAGE: [nu,d0,rho,sige,g,gmodels] =
 %                           ols_parse(prior,x)
 % where prior contains the structure variable with inputs,
 % x is the matrix of explanatory variables input
@@ -232,16 +232,16 @@ if nf > 0
     if strcmp(fields{i},'nu')
         nu = prior.nu;
     elseif strcmp(fields{i},'d0')
-        d0 = prior.d0;  
+        d0 = prior.d0;
     elseif strcmp(fields{i},'g')
-       g = prior.g; 
+       g = prior.g;
     elseif strcmp(fields{i},'nmodels')
-       gmodels = prior.nmodels; 
+       gmodels = prior.nmodels;
     end;
  end;
 else, % the user has input a blank info structure
       % so we use the defaults
-end; 
+end;
 
 
 function [j,visits] = find_new(i,vsave,vinew,visits)
@@ -301,7 +301,7 @@ function lmout = bmapost(y,xall,vin,nu1,d1,g)
 %          g = g prior hyperparameter
 %-----------------------------------------------------------
 % RETURNS: lpost = log marginal posterior, a scalar
-%                  containing the log marginal 
+%                  containing the log marginal
 %-----------------------------------------------------------
 % REFERENCES: Raftery and Madigan (1997) 'Bayesian model averaging
 % for linear regression models', 92, pp. 179-191
@@ -321,7 +321,7 @@ for i=1:nvar
     if vin(1,i) >= nv1
         v1 = i; % # of variables in x1
     end;
-end;    
+end;
 
 iota = ones(nobs,1);
 xt = [iota xall(:,vin)];
@@ -341,7 +341,7 @@ no2 = nobs/2;
           logdetx = (nvar/2)*log(g/(1+g));
           den = logdetx - nm1o2*log(nu1*d1 + epe0 + Qterm);
           kterm = gammaln(nm1o2) -no2*log(pi);
-          
+
 lmout = kterm + den;
 
 
@@ -366,7 +366,7 @@ function odds = model_odds(lmarg1,lmarg2)
 
 lmarginal = [lmarg1 lmarg2];
 
-% now scale log-marginals before exponentiating 
+% now scale log-marginals before exponentiating
 adj = max(lmarginal);
 madj = lmarginal - adj;
 
@@ -402,7 +402,7 @@ function [vinew,vonew] = sample(vin,vout)
 % last modified June, 2004
 
 % find size of variables in/out of the model
-nv1 = length(vout); 
+nv1 = length(vout);
 nv2 = length(vin);
 nvar = nv1+nv2;
 
@@ -472,7 +472,7 @@ end; % end of for i loop
 
 
 otherwise
-disp('error in sample function');    
-end; % end of switch   
-    
+disp('error in sample function');
+end; % end of switch
+
 

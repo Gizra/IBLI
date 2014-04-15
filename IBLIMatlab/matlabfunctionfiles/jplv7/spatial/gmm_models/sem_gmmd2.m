@@ -1,5 +1,5 @@
-% PURPOSE: An example of using sem_gmm,sem2_gmm on a large data set   
-%          GM estimation of the spatial error model                         
+% PURPOSE: An example of using sem_gmm,sem2_gmm on a large data set
+%          GM estimation of the spatial error model
 %---------------------------------------------------
 % USAGE: sem_gmmd2 (see sem_gmmd for a small data set)
 %---------------------------------------------------

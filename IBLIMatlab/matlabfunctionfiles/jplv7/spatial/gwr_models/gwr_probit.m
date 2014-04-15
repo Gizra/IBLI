@@ -8,17 +8,17 @@ function result = gwr_probit(y,x,east,north,info);
 %       east = x-coordinates in space
 %      north = y-coordinates in space
 %       info = a structure variable with fields:
-%       info.bwidth = scalar bandwidth to use 
-%                     (default = cross-validation estimate)   
+%       info.bwidth = scalar bandwidth to use
+%                     (default = cross-validation estimate)
 %       info.bmin   = minimum bandwidth to use in CV search
-%       info.bmax   = maximum bandwidth to use in CV search  
-%                       defaults: bmin = 0.1, bmax = 20                                                                 
-% ---------------------------------------------------                                    
+%       info.bmax   = maximum bandwidth to use in CV search
+%                       defaults: bmin = 0.1, bmax = 20
+% ---------------------------------------------------
 % NOTES: res = gwr_probit(y,x,east,north) does CV estimation of bandwidth
 %        Uses Gaussian weighting, and scoref_prob for CV
 % ---------------------------------------------------
 % RETURNS: a results structure
-%        results.meth  = 'gwr_probit' 
+%        results.meth  = 'gwr_probit'
 %        results.beta  = bhat matrix    (nobs x nvar)
 %        results.tstat = t-stats matrix (nobs x nvar)
 %        results.yhat  = yhat
@@ -56,17 +56,17 @@ if nargin == 5 % user options
  fields = fieldnames(info);
  nf = length(fields);
  % set defaults
- [n k] = size(x); 
- bwidth = 0; dtype = 1; 
-bmin = 0.1; bmax = 20;  % default values for CV gaussian and exponential search 
+ [n k] = size(x);
+ bwidth = 0; dtype = 1;
+bmin = 0.1; bmax = 20;  % default values for CV gaussian and exponential search
   for i=1:nf
     if strcmp(fields{i},'bwidth')
-        bwidth = info.bwidth; 
+        bwidth = info.bwidth;
     elseif strcmp(fields{i},'bmin');
-        bmin = prior.bmin;   
+        bmin = prior.bmin;
     elseif strcmp(fields{i},'bmax');
-        bmax = prior.bmax; 
-    end; 
+        bmax = prior.bmax;
+    end;
   end; % end of for i
  end; % end of if else
 
@@ -102,8 +102,8 @@ options = optimset('fminbnd');
 optimset('MaxIter',500);
 
 
-[bdwt,junk,exitflag,output] = fminbnd('scoref_prob',bmin,bmax,options,y,x,east,north);       
- if output.iterations == 500, 
+[bdwt,junk,exitflag,output] = fminbnd('scoref_prob',bmin,bmax,options,y,x,east,north);
+ if output.iterations == 500,
  fprintf(1,'gwr_probit: cv convergence not obtained in %4d iterations',output.iterations);
  else
  result.iter = output.iterations;
@@ -130,10 +130,10 @@ for iter=1:n;
     dx = east - east(iter,1);
     dy = north - north(iter,1);
     d = (dx.*dx + dy.*dy);
-    % Gausian weights 
+    % Gausian weights
     sd = std(sqrt(d));
-    wt = stdn_pdf(sqrt(d)/(sd*bdwt)); 
-wt = sqrt(wt);     
+    wt = stdn_pdf(sqrt(d)/(sd*bdwt));
+wt = sqrt(wt);
 xs = matmul(x,wt);
 res = probit(y,xs);
 bsave(iter,:) = res.beta';

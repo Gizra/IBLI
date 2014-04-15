@@ -1,5 +1,5 @@
 function obs = ical(year,period,cstructure)
-% PURPOSE: finds observation # associated with a year,period 
+% PURPOSE: finds observation # associated with a year,period
 %          given a cal() structure
 % -----------------------------------------------------
 % USAGE: obs = ical(year,period,c_str)
@@ -8,7 +8,7 @@ function obs = ical(year,period,cstructure)
 %         c_str  = a structure returned by cal() function
 % -----------------------------------------------------
 % RETURNS: obs = # of observation associated with year,period
-% e.g., cstr = cal(1982,1,12) 
+% e.g., cstr = cal(1982,1,12)
 %        obs = ical(1986,1,cstr) would return 48
 % e.g., cstr = cal(1982,1,12)
 %        obs = ical(1982,1,cstr) would return 1
@@ -17,7 +17,7 @@ function obs = ical(year,period,cstructure)
 %           that associates observation #'s with dates
 %           tsdate() that returns a string for the date associated
 %           with observation #
-          
+
 % written by:
 % James P. LeSage, Dept of Economics
 % Texas State University-San Marcos

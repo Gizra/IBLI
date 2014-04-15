@@ -66,4 +66,4 @@ end
 
 
 % --- Uncomment for diagnostics --------------------------------
-%fprintf(1,'Step size = %10.8f   %%Red in Obj Fcn %10.8f\n',alpha,f/f0);	
+%fprintf(1,'Step size = %10.8f   %%Red in Obj Fcn %10.8f\n',alpha,f/f0);

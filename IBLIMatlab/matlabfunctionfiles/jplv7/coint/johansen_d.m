@@ -8,13 +8,13 @@
 clear all;
 
 vnames  = ['  illinos      ',
-           '  indiana      ',    
-           '  kentucky     ',    
-           '  michigan     ',    
-           '  ohio         ',    
-           '  pennsyvlania ',    
-           '  tennesse     ',    
-           '  west virginia'];    
+           '  indiana      ',
+           '  kentucky     ',
+           '  michigan     ',
+           '  ohio         ',
+           '  pennsyvlania ',
+           '  tennesse     ',
+           '  west virginia'];
 
 load test.dat;
 % a sample of monthly employment for 8 states

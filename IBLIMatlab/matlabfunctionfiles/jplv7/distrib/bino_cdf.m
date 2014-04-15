@@ -9,7 +9,7 @@ function cdf = bino_cdf (x, n, p)
 %---------------------------------------------------
 % RETURNS:
 %        cdf = vector or scalar of cdf at x
-%              equal to the number of successes in n-trials 
+%              equal to the number of successes in n-trials
 % --------------------------------------------------
 % SEE ALSO: bino_d, bino_pdf, bino_rnd, bino_inv
 %---------------------------------------------------

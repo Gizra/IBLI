@@ -1,8 +1,8 @@
 % PURPOSE: An example of using gwr()
 %          Geographically weighted regression model
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
-% USAGE: gwr_d 
+% USAGE: gwr_d
 %---------------------------------------------------
 
 % load the Anselin data set

@@ -2,8 +2,8 @@ function results = switch_em(y,x1,x2,x3,b1,b2,b3,crit,maxit)
 % PURPOSE: Switching Regime regression (EM-estimation)
 %          y1 = x1*b1 + e1
 %          y2 = x2*b2 + e2
-%          y3 = x3*b3 + e3; e3 =N(0,1) 
-%          y = y1 if y3 <= 0, y = y2 if y3 > 0 
+%          y3 = x3*b3 + e3; e3 =N(0,1)
+%          y = y1 if y3 <= 0, y = y2 if y3 > 0
 %---------------------------------------------------
 % USAGE: results = switch_em(y,x1,x2,x3,crit)
 % where: y = dependent variable vector (nobs x 1)
@@ -13,8 +13,8 @@ function results = switch_em(y,x1,x2,x3,b1,b2,b3,crit,maxit)
 %        b1 = (optional) initial values for b1
 %        b2 = (optional) initial values for b2
 %        b3 = (optional) initial values for b3
-%      crit = (optional) convergence criteria (default = 0.001)  
-%     maxit = maximum # of iterations (default = 1000)     
+%      crit = (optional) convergence criteria (default = 0.001)
+%     maxit = maximum # of iterations (default = 1000)
 %---------------------------------------------------
 % RETURNS: a structure
 %        results.meth  = 'switch_em'
@@ -46,7 +46,7 @@ function results = switch_em(y,x1,x2,x3,b1,b2,b3,crit,maxit)
 %        results.crit  = convergence criterion
 %        results.like  = likelihood function value
 % --------------------------------------------------
-% SEE ALSO: prt,plt switchm_em 
+% SEE ALSO: prt,plt switchm_em
 %---------------------------------------------------
 
 % written by:
@@ -108,7 +108,7 @@ b3 = res.beta;
 
 else % user supplied b1,b2,b3 we need to find sig1,sig2
     sig1 = (y - x1*b1)'*(y - x1*b1)/nobs;
-    sig2 = (y - x2*b2)'*(y - x2*b2)/nobs; 
+    sig2 = (y - x2*b2)'*(y - x2*b2)/nobs;
 end;
 
 while converge > crit
@@ -223,17 +223,17 @@ for i=1:nobs
     end;
 end;
 
-% Overall y-hat and  R-squared 
+% Overall y-hat and  R-squared
 yhat  = zeros(nobs,1);
 resid = zeros(nobs,1);
 for j=1:2
  for i=1:nobs
-  if prob1 >= 0.5 
+  if prob1 >= 0.5
   yhat(i,1) = xx1(i,:)*b1;
   resid(i,1) = y(i,1) - yhat(i,1);
   else
   yhat(i,1) = xx2(i,:)*b2;
-  resid(i,1) = y(i,1) - yhat(i,1);    
+  resid(i,1) = y(i,1) - yhat(i,1);
   end;
  end;
 end;

@@ -18,17 +18,17 @@ function result = rdiagnose(y,x,prt)
 %        result.cookd = Cook's distance
 %        result.reid  = OLS residuals
 % --------------------------------------------------
-% NOTES: if prt = 1, candidate outlier observations where:  
+% NOTES: if prt = 1, candidate outlier observations where:
 %       result.hatdi > 2*k/n
 %       abs(result.rstud) > 2
 %       abs(DFBETA) > 2/sqrt(n)
 %       abs(DFFIT) > 2*sqrt(k/n)
-% are printed along with these statistics  
+% are printed along with these statistics
 % --------------------------------------------------
 % SEE ALSO: dfbeta, bkw, rdiag
 %---------------------------------------------------
 % REFERENCES: Belsley, Kuh, Welsch, 1980 Regression Diagnostics,
-% Cook and Weisberg 1982, Residuals and Influence in Regression 
+% Cook and Weisberg 1982, Residuals and Influence in Regression
 
 % written by:
 % James P. LeSage, Dept of Economics

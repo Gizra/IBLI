@@ -1,5 +1,5 @@
-% PURPOSE: An example of using sem() on a large data set   
-%          Gibbs sampling spatial autoregressive model                         
+% PURPOSE: An example of using sem() on a large data set
+%          Gibbs sampling spatial autoregressive model
 %---------------------------------------------------
 % USAGE: sem_d2 (see sem_d for a small data set)
 %---------------------------------------------------
@@ -27,7 +27,7 @@ vnames = strvcat('voters','const','educ','homeowners','income');
 result = sem(y,x,W); % maximum likelihood estimates
 prt(result,vnames);
 
-info.eigs = 0; % compute minimum and maximum eigenvalues of W 
+info.eigs = 0; % compute minimum and maximum eigenvalues of W
                % to determine bounds on rho
 info.lflag = 0; % use full log-determinant
 result2 = sem(y,x,W,info); % maximum likelihood estimates

@@ -1,5 +1,5 @@
 function sigt =  garch_sigt(parm,y,x)
-% PURPOSE: generate garch model sigmas over time 
+% PURPOSE: generate garch model sigmas over time
 %          given maximum likelihood estimates
 % -------------------------------------------------------------
 % USAGE: sigt = garch_sigt(parm,y,x)
@@ -7,7 +7,7 @@ function sigt =  garch_sigt(parm,y,x)
 %        y = data vector
 %        x = data matrix
 % -------------------------------------------------------------
-% RETURNS:   sigt = (Tx1) vector of sigma(t) estimates      
+% RETURNS:   sigt = (Tx1) vector of sigma(t) estimates
 % -------------------------------------------------------------
 
 % written by:

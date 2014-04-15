@@ -1,12 +1,12 @@
 function results = mlogit(y,x,beta,theta)
-% PURPOSE: multinomial logistic regression 
+% PURPOSE: multinomial logistic regression
 % logit(p_ij) = theta(j) + x_i'beta , i = 1,..,nobs, j = 1,..,k-1,
 %---------------------------------------------------
 % USAGE: results = mlogit(y,x,beta,theta)
 % where: y = dependent variable vector (nobs x 1)
 %        x = independent variables matrix (nobs x nvar)
-%     beta = (optional) initial values for beta 
-%    theta = (optional) initial values for theta  
+%     beta = (optional) initial values for beta
+%    theta = (optional) initial values for theta
 % NOTE:  k = # of distinct ordinal values in round(y)
 %---------------------------------------------------
 % RETURNS: a structure
@@ -23,7 +23,7 @@ function results = mlogit(y,x,beta,theta)
 %        results.z     = y data vector in category form
 %        results.y     = y data vector from input
 %---------------------------------------------------
-% NOTES: uses functions mlogit_lik, mderivs, dmult        
+% NOTES: uses functions mlogit_lik, mderivs, dmult
 %---------------------------------------------------
 % SEE ALSO: prt(results), plt(results)
 %---------------------------------------------------

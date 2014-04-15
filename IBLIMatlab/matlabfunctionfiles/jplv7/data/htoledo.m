@@ -34,7 +34,7 @@
 %        3=water only
 %        4=half bath
 %        5=1 bath
-%        6=1+1half 
+%        6=1+1half
 %        7=1+2half
 %        8=2
 %        9=2+1half
@@ -78,7 +78,7 @@
 load htoledo.dat;
 y = htoledo(:,1);
 n = length(y);
-x = [ones(n,1) htoledo(:,3:11) htoledo(:,14)]; 
+x = [ones(n,1) htoledo(:,3:11) htoledo(:,14)];
 % Note: we skip census tract number in column 2
 %       and land plus building value which add to y-variable
 % convert year built to house age

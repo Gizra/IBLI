@@ -14,11 +14,11 @@ function ylevf = varf(y,nlag,nfor,begf,x,transf);
 %                = 1, 1st differences used to estimate the model
 %                = freq, seasonal differences used to estimate
 %                = cal-structure growth rates used to estimate
-%                  e.g., cal(1982,1,12) [see cal() function]              
+%                  e.g., cal(1982,1,12) [see cal() function]
 %-------------------------------------------------------------
 % NOTE: constant term included automatically
 %-------------------------------------------------------------
-% RETURNS: 
+% RETURNS:
 %      yfor = an nfor x neqs matrix of level forecasts for each equation
 %-------------------------------------------------------------
 % SEE ALSO: var, plt_var, prt_var
@@ -167,18 +167,18 @@ xpx = xmat'*xmat;
 % pull out each y-vector and run regressions
 for j=1:neqs;
  yvec = dys(:,j);
- bhat = (xpx)\(xmat'*yvec); 
+ bhat = (xpx)\(xmat'*yvec);
  % save bhat
  bmat(:,j) = bhat;
-end; 
+end;
 % end of loop over equations
 
 
-% given bhat estimates, generate future forecasts 
+% given bhat estimates, generate future forecasts
 % These may be levels, 1st-differences, growth rates or seas diff's
 % we worry transforming back to levels later
 
-% 1-step-ahead forecast 
+% 1-step-ahead forecast
 xtrunc = [dy(nmin-nlag:nmin,:)
           zeros(1,neqs)];
 xfor = mlag(xtrunc,nlag);
@@ -239,7 +239,7 @@ cnt = step-(nlag-1);
   xnew(i,:) = yfor(cnt,:);
   cnt = cnt+1;
  end;
- 
+
 xfor = mlag(xnew,nlag);
 [xend junk] = size(xfor);
 xobs = xfor(xend,:);
@@ -270,7 +270,7 @@ ylevf = zeros(nfor,neqs);
 % 1-step-ahead forecast
 ylevf(1,:) = yfor(1,:) + y(begf-1,:); % add change to actual from time t;
 % 2-nfor-step-ahead forecasts
-for i=2:nfor % 
+for i=2:nfor %
 ylevf(i,:) = yfor(i,:) + ylevf(i-1,:);
 end;
 
@@ -309,4 +309,4 @@ ylevf = yfor;
 end;
 
 
-  
+

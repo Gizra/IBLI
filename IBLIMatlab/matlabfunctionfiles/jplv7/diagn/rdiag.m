@@ -7,7 +7,7 @@ function rdiag(y,x)
 %        x = independent variable matrix (from a regression model)
 %---------------------------------------------------
 % RETURNS:
-%        nothing, produces 4 plots 
+%        nothing, produces 4 plots
 % --------------------------------------------------
 % SEE ALSO: dfbeta, bkw, diagnose
 %---------------------------------------------------
@@ -40,7 +40,7 @@ ns = norm_inv(tmp);
 
 minn = min(ns);
 maxn = max(ns);
- 
+
 subplot(221),plot(ns,resids,'.')
 axis([minn maxn minr maxr])
 title('Normal Plot of Residuals')

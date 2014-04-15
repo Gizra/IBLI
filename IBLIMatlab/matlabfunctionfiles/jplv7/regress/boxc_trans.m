@@ -13,7 +13,7 @@ function bdata = boxc_trans(x,lam)
 % 601 University Drive
 % San Marcos, TX 78666
 % jlesage@spatial-econometrics.com
- 
+
 [n k] = size(x);
 z = zeros(n,k);
 iota = ones(n,1);

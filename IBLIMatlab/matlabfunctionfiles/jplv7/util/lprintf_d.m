@@ -1,6 +1,6 @@
-% PURPOSE: demo of lprintf() 
+% PURPOSE: demo of lprintf()
 %          LaTeX table printing with symbols
-% 
+%
 %---------------------------------------------------
 % USAGE: lprintf_d
 %---------------------------------------------------

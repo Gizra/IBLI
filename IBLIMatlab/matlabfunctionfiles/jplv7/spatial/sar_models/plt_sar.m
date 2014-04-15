@@ -2,16 +2,16 @@ function plt_sar(results,vnames)
 % PURPOSE: Plots output using SAR model results structures
 %---------------------------------------------------
 % USAGE: plt_sar(results,vnames) or plt(results,vnames)
-% Where: results = a structure returned by a spatial regression 
+% Where: results = a structure returned by a spatial regression
 %        vnames  = an optional vector of variable names
 %                  e.g. vnames = strvcat('y','constant','x1');
-%--------------------------------------------------- 
+%---------------------------------------------------
 %  RETURNS: nothing, just plots the spatial regression results
 % --------------------------------------------------
 % NOTE: called by plt.m
 % --------------------------------------------------
 % SEE ALSO: prt, plt
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics&Finance
@@ -60,7 +60,7 @@ h2 = figure;
 subplot(2,1,1), plot(tt,results.vmean);
 title('Mean of Vi draws');
 subplot(2,1,2), pltdens(results.pdraw);
-title('Posterior Density for rho');    
+title('Posterior Density for rho');
 h3 = figure;
 plot(results.bdraw);
 title('draws for beta');
@@ -69,12 +69,12 @@ ylabel('beta values');
 else
 h2 = figure;
 subplot(2,1,1), pltdens(results.pdraw);
-title('Posterior Density for rho');    
+title('Posterior Density for rho');
 subplot(2,1,2), plot(results.bdraw);
 title('draws for beta');
 xlabel('draws');
 ylabel('beta values');
-end; 
+end;
 
 case {'sarp_g'}
 y = results.y;

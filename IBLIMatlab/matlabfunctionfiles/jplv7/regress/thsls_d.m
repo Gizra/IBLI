@@ -1,6 +1,6 @@
 % PURPOSE: An example using thsls(),
 %                           prt_eqs(), plt_eqs()
-% Three-stage least-squares estimation                              
+% Three-stage least-squares estimation
 %---------------------------------------------------
 % USAGE: thsls_d
 %---------------------------------------------------
@@ -33,20 +33,20 @@ end;
 
 
 vname1 = ['y1-LHS  ',
-          'constant',          
+          'constant',
           'x1 var  '];
-          
+
 vname2 = ['y2-LHS  ',
           'y1 var  ',
           'constant',
           'x2 var  '];
-          
+
 vname3 = ['y3-LHS  ',
           'y2 var  ',
           'constant',
           'x2 var  ',
           'x3 var  '];
-                     
+
 
 % set up a structure for y containing y's for each eqn
 y(1).eq = y1;

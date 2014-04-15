@@ -20,7 +20,7 @@ function result = lratios(y,x,W,res);
 % NOTES: lratio > 6.635, => small prob,
 %                        => reject HO: of no spatial correlation
 %        calling the function with a results structure from sem()
-%        can save time for large models that have already been estimated                 
+%        can save time for large models that have already been estimated
 % ---------------------------------------------------
 % See also: lmerror, walds, moran, lmsar
 % ---------------------------------------------------
@@ -38,7 +38,7 @@ if nargin == 3
 % do ols to get residuals
 b = (x'*x)\(x'*y); e0 = y - x*b; epe0 = e0'*e0; sig0 = epe0/n;
 % do sem to get residuals
-res = sem(y,x,W); 
+res = sem(y,x,W);
 
 elseif nargin == 4
  if ~isstruct(res)
@@ -53,7 +53,7 @@ end;
 sig1 = res.sige;
 lam = res.rho;
 % compute determinant of I-lam*W
-spparms('tight'); 
+spparms('tight');
 z = speye(n) - 0.1*sparse(W); p = colmmd(z);
 z = speye(n) - lam*sparse(W);
 [l,u] = lu(z(:,p));

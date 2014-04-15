@@ -11,7 +11,7 @@ function llike = f2_sempanel(parm,y,x,W,detval,T)
 %         ldet = matrix with [rho log determinant] values
 %                computed in sem_panel.m using one of Kelley Pace's routines
 %         T    = number of time points
-% ---------------------------------------------------                                           
+% ---------------------------------------------------
 %  RETURNS: a  scalar equal to minus the log-likelihood
 %           function value at the ML parameters
 % ---------------------------------------------------

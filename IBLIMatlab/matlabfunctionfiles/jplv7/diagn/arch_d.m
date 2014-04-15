@@ -1,5 +1,5 @@
 % PURPOSE: demo of arch() test for ARCH(p)
-% 
+%
 %---------------------------------------------------
 % USAGE: arch_d
 %---------------------------------------------------
@@ -8,7 +8,7 @@
 nobs = 100; nvar = 3;
 x = randn(nobs,nvar);
 b = ones(nvar,1);
-tt = 1:nobs; 
+tt = 1:nobs;
 tt = tt';
 y = x*b + randn(nobs,1).*tt;
 

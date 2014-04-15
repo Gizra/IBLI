@@ -1,5 +1,5 @@
 % PURPOSE: computes spatial error model estimates for spatial panels (N regions*T time periods)
-%           y = XB + u + v,  u vector of spatial random effects, v = p*W*v + e, 
+%           y = XB + u + v,  u vector of spatial random effects, v = p*W*v + e,
 % Supply data sorted first by time and then by spatial units, so first region 1,
 % region 2, et cetera, in the first year, then region 1, region 2, et
 % cetera in the second year, and so on
@@ -11,7 +11,7 @@
 % the Netherlands
 % j.p.elhorst@rug.nl
 %
-% REFERENCES: 
+% REFERENCES:
 % "Specification and Estimation of Spatial Panel Data Models",
 % International Regional Science Review, Vol. 26, pp. 244-268.
 
@@ -102,10 +102,10 @@ hessn(K+1:K+3,K+1:K+3)=hessian('f2_respat',[delta;alpha;si2],y,x,wy,wx,lambda,bp
 nvar=K+2;
 
 if hessn(nvar+1,nvar+1) == 0
- hessn(nvar+1,nvar+1) = 1/si2;  % this is a hack for very large models that 
+ hessn(nvar+1,nvar+1) = 1/si2;  % this is a hack for very large models that
 end;                             % should not affect inference in these cases
 
-xpxi = inv(hessn); 
+xpxi = inv(hessn);
 xpxi = diag(xpxi(1:nvar,1:nvar));
 zip = find(xpxi <= 0);
 

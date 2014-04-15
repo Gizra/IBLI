@@ -7,7 +7,7 @@ function results = boxcox1(y,x,lamlo,lamup,model,foptions)
 %             x = explanatory variables matrix
 %                 (intercept vector in 1st column --- if desired)
 %        lam_lo = scalar, lower limit for simplex search
-%        lam_up = scalar, upper limit for simplex search  
+%        lam_up = scalar, upper limit for simplex search
 %        model  = 0 for y-transform only
 %               = 1 for both y, and x-transform
 %     foptions  = (optional) structure OPTIONS, created with
@@ -58,7 +58,7 @@ if nargin == 6
   [lam fval exitf out] = fminbnd('box_lik',lamlo,lamup,foptions,y,x,model);
   niter = out.iterations;
   llike = -fval;
-  
+
   elseif model == 1
   % error check on positive x-values
   ncheck = find(x > 0);
@@ -66,10 +66,10 @@ if nargin == 6
    error('box_cox: all x-values must be positive');
    end;
 
-  [lam fval exitf out] = fminbnd('box_lik',lamlo,lamup,foptions,y,x,model); 
+  [lam fval exitf out] = fminbnd('box_lik',lamlo,lamup,foptions,y,x,model);
 niter = out.iterations;
 llike = -fval;
-  
+
  else
  error('box_cox: only model=0,1 values allowed');
  end;
@@ -98,14 +98,14 @@ if model == 1
    ifind = find(iota == 1);
    if isempty(ifind) % no intercept
      xs = boxc_trans(x,lam);
-   else % we may have an intercept       
+   else % we may have an intercept
     if length(ifind) == n % we have an intecept
      xtrans = boxc_trans(x(:,2:k),lam);
      xs = [ones(n,1) xtrans];
     else % no intercept
      xs = boxc_trans(x,lam);
-    end; 
-   end; 
+    end;
+   end;
 elseif model == 0
     xs = x;
 end;
@@ -136,7 +136,7 @@ results.sige = sige;
 results.iter = niter;
 results.like = llike;
 
-% The following function was cut and save in a new function file 
+% The following function was cut and save in a new function file
 % named boxc_trans
 
 % function bdata = boxc_trans(x,lam)
@@ -147,18 +147,18 @@ results.like = llike;
 % %           data = matrix nobs x k
 % %----------------------------------------------------
 % % RETURNS: bdata = data matrix box-cox transformed
-% 
+%
 % % written by:
 % % James P. LeSage, Dept of Economics
 % % Texas State University-San Marcos
 % 601 University Drive
 % San Marcos, TX 78666
 % % jlesage@spatial-econometrics.com
-% 
+%
 % [n k] = size(x);
 % z = zeros(n,k);
 % iota = ones(n,1);
-% 
+%
 %  for i=1:k;
 %    if lam ~= 0
 %    z(:,i) = (x(:,i).^lam - iota)/lam;
@@ -166,6 +166,6 @@ results.like = llike;
 %    z(:,i) = log(abs(x(:,i)));
 %    end;
 %  end;
-% 
+%
 % bdata = z;
 

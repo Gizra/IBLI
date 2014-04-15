@@ -1,7 +1,7 @@
 % spatial Durbin model estimation functions
 %
-%           f2_sdm : evaluates llike for the spatial durbin model 
-%            f_sdm : evaluates concentrated log-likelihood for the 
+%           f2_sdm : evaluates llike for the spatial durbin model
+%            f_sdm : evaluates concentrated log-likelihood for the
 %        make_html : makes HTML verion of contents.m files for the Econometrics Toolbox
 %          prt_sdm : Prints output using sdm results structures
 %          plt_sdm : Plots output using sdm results structures
@@ -14,7 +14,7 @@
 %          sdm_gd2 : An example of using sdm_g() on a large data set
 %           sdmp_g : Bayesian estimates of the heteroscedastic spatial durbin probit model
 %          sdmp_gd : An example of using sdmp_g() Gibbs sampling
-%         sdmp_gd2 : An example of using sdmp_g() on a large data set   
+%         sdmp_gd2 : An example of using sdmp_g() on a large data set
 %           sdmt_g : Bayesian estimates of the heteroscedastic spatial durbin tobit model
 %          sdmt_gd : An example of using sdmt_g() Gibbs sampling
-%         sdmt_gd2 : An example of using sdmt_g() on a large data set   
+%         sdmt_gd2 : An example of using sdmt_g() on a large data set

@@ -2,7 +2,7 @@ function plt_gibbs(results,vnames)
 % PURPOSE: Plots output from Gibbs sampler regression models
 %---------------------------------------------------
 % USAGE: plt_gibbs(results,vnames)
-% Where: results = a structure returned by a Gibbs regression 
+% Where: results = a structure returned by a Gibbs regression
 %        vnames  = an optional vector of variable names
 % --------------------------------------------------
 % RETURNS: nothing, just plots regression results
@@ -21,7 +21,7 @@ function plt_gibbs(results,vnames)
 % 601 University Drive
 % San Marcos, TX 78666
 %jlesage@spatial-econometrics.com
-if ~isstruct(results); 
+if ~isstruct(results);
    error('plt_reg requires a regression results structure');
 end;
 nobs = results.nobs;
@@ -29,7 +29,7 @@ nobs = results.nobs;
 switch results.meth
 
 case {'ols_g'} % <=================== heteroscedastic linear model
-    
+
 % find yhat and residuals
 
 y = results.y;
@@ -43,7 +43,7 @@ title([upper(results.meth), '   Actual vs. Predicted']);
 subplot(212), plot(tt,resid)
 title('Residuals');
 
-case {'ar_g'} % <=================== autoregressive model 
+case {'ar_g'} % <=================== autoregressive model
 
 
 yhat = results.yhat;
@@ -60,7 +60,7 @@ subplot(212), plot(tt,resid)
 title('Residuals');
 
 
-case {'bma_g'} % <=================== Bayesian model averaging 
+case {'bma_g'} % <=================== Bayesian model averaging
 
 nobs = results.nobs;
 nvar = results.nvar;
@@ -72,8 +72,8 @@ title([upper(results.meth), '   Actual vs. Predicted']);
 subplot(212), plot(tt,results.resid)
 title('Residuals');
 
-case {'probit_g'} % <=================== heteroscedastic probit model    
-    
+case {'probit_g'} % <=================== heteroscedastic probit model
+
 y = results.y;
 yhat = results.yhat;
 resid = y - yhat;
@@ -87,8 +87,8 @@ legend('Actual','Predicted');
 subplot(212), plot(tt,resid)
 title('Residuals');
 
-case {'tobit_g'} % <=================== heteroscedastic tobit model    
-    
+case {'tobit_g'} % <=================== heteroscedastic tobit model
+
 
 y = results.y;
 bhat = mean(results.bdraw);  % calculate means and std deviations

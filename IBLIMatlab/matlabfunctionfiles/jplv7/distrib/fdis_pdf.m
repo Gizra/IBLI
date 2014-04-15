@@ -2,12 +2,12 @@ function pdf = fdis_pdf(x,a,b)
 % PURPOSE: returns pdf at x of the F(a,b) distribution
 %---------------------------------------------------
 % USAGE: pdf = fdis_pdf(x,a,b)
-% where: x = a vector 
+% where: x = a vector
 %        a = numerator dof
 %        b = denominator dof
 %---------------------------------------------------
 % RETURNS:
-%   a vector of pdf at each element of x of the F(a,b) distribution      
+%   a vector of pdf at each element of x of the F(a,b) distribution
 % --------------------------------------------------
 % SEE ALSO: fdis_d, fdis_inv, fdis_rnd, fdis_cdf, fdis_prb
 %---------------------------------------------------

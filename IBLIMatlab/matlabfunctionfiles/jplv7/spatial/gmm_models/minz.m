@@ -20,7 +20,7 @@ function [b,infoz,stat]=minz(b,func,infoz,varargin)
 %   infoz.lambda Minimum eigenvalue of Hessian for Marquardt     [.001]
 %   infoz.cond   Tolerance level for condition of Hessian        [1000]
 %   infoz.btol   Tolerance for convergence of parm vector        [1e-4]
-%   infoz.ftol   Tolerance for convergence of objective function [1e-7] 
+%   infoz.ftol   Tolerance for convergence of objective function [1e-7]
 %   infoz.gtol   Tolerance for convergence of gradient           [1e-7]
 %   infoz.prt    Printing: 0 = None, 1 = Screen, higher = file   [1]
 %
@@ -52,7 +52,7 @@ function [b,infoz,stat]=minz(b,func,infoz,varargin)
 % UPDATED  11/14/99 (1.1.1 ftol; btol/gtol now relative, alpha on output)
 %           5/17/00 (1.1.2 Trap for Imaginary Parm Vector)
 %           9/23/00 (1.1.3 fcnck)
-%           5/15/01 (1.1.4 Changed hmsg to print for fid = 1 also.) 
+%           5/15/01 (1.1.4 Changed hmsg to print for fid = 1 also.)
 %          11/10/02 (1.1.5 Updated possible error around line 168)
 
 %====================================================================
@@ -70,41 +70,41 @@ if ~isfield(infoz,'prt'), infoz.prt=1; end
 
 hmsg = [];
 if ~isfield(infoz,'maxit')
-  infoz.maxit = 100; 
+  infoz.maxit = 100;
   hmsg = strvcat(hmsg,'Maximum Iterations Set to 100');
 end
 if ~isfield(infoz,'hess')
-  infoz.hess = 'dfp'; 
-  hmsg = strvcat(hmsg,'Hessian Type Set to DFP in HESSZ.M'); 
+  infoz.hess = 'dfp';
+  hmsg = strvcat(hmsg,'Hessian Type Set to DFP in HESSZ.M');
 end
 if ~isfield(infoz,'step')
   infoz.step = 'step2';
-  hmsg = strvcat(hmsg,'Line Minimization Using STEP2.M'); 
+  hmsg = strvcat(hmsg,'Line Minimization Using STEP2.M');
 end
 if ~isfield(infoz,'cond')
-  infoz.cond = 1000; 
-  hmsg = strvcat(hmsg,'Ill-Conditioning Tolerance Set to 1000'); 
+  infoz.cond = 1000;
+  hmsg = strvcat(hmsg,'Ill-Conditioning Tolerance Set to 1000');
 end
 if ~isfield(infoz,'btol')
-  infoz.btol = 1e-4; 
-  hmsg = strvcat(hmsg,'Parameter Convergence Tolerance Set to 1e-4'); 
+  infoz.btol = 1e-4;
+  hmsg = strvcat(hmsg,'Parameter Convergence Tolerance Set to 1e-4');
 end
 if ~isfield(infoz,'ftol')
-  infoz.ftol = 1e-7; 
+  infoz.ftol = 1e-7;
   hmsg = strvcat(hmsg,'Objective Function Convergence Tolerance Set to 1e-7');
 end
 if ~isfield(infoz,'gtol')
-  infoz.gtol = 1e-7; 
-  hmsg = strvcat(hmsg,'Gradient Convergence Tolerance Set to 1e-7'); 
-end  
+  infoz.gtol = 1e-7;
+  hmsg = strvcat(hmsg,'Gradient Convergence Tolerance Set to 1e-7');
+end
 if (~isfield(infoz,'lambda') & strcmp(infoz.hess,'marq'))
-  infoz.lambda = .001; 
-  hmsg = strvcat(hmsg,'LAMBDA SET TO .01'); 
+  infoz.lambda = .001;
+  hmsg = strvcat(hmsg,'LAMBDA SET TO .01');
 end
 if (strcmp(infoz.hess,'dfp') | strcmp(infoz.hess,'bfgs'))
   if ~isfield(infoz,'H1')
-    infoz.H1=1; 
-    hmsg = strvcat(hmsg,'INITIAL HESSIAN = I'); 
+    infoz.H1=1;
+    hmsg = strvcat(hmsg,'INITIAL HESSIAN = I');
   end
 end
 if strcmp(infoz.step,'step2')
@@ -115,13 +115,13 @@ if infoz.prt >= 1
     fprintf(infoz.prt,[hmsg(i,:) '\n']);
   end
 end
-  
+
 lvar = length(varargin);
 
 if strcmp(infoz.call,'gmm') | strcmp(infoz.call,'ls')
-  if ~isfield(infoz,'momt'), error('MISSING MOMENT CONDITION FILE'); end  
+  if ~isfield(infoz,'momt'), error('MISSING MOMENT CONDITION FILE'); end
   if ~isfield(infoz,'jake')
-    error('MISSING JACOBIAN OF MOMENT CONDITIONS'); end    
+    error('MISSING JACOBIAN OF MOMENT CONDITIONS'); end
   if ~isfield(infoz,'func'), infoz.func='lsfunc'; end
   if ~isfield(infoz,'grad'), infoz.grad='lsgrad'; end
   if ~strcmp(infoz.func,'lsfunc')
@@ -138,7 +138,7 @@ end
 if ~isfield(infoz,'func'), error('MISSING FUNCTION NAME'); end
 if ~isfield(infoz,'grad')
   fprintf(infoz.prt,'Using Numerical Derivatives\n');
-  infoz.grad='numz'; 
+  infoz.grad='numz';
 end
 
 %====================================================================
@@ -154,7 +154,7 @@ end
 stat.iter = 0;
 k = rows(b); n = rows(varargin{1});
 convcrit = ones(4,1);
-stat.Hi = []; 
+stat.Hi = [];
 stat.df = 1000; stat.db = ones(k,1)*1000; stat.dG = stat.db;
 func = fcnchk(infoz.func);
 grad = fcnchk(infoz.grad);
@@ -174,7 +174,7 @@ else
   stat.f = feval(func,b,infoz,stat,varargin{:});
   stat.G = feval(grad,b,infoz,stat,varargin{:});
 end
-%f0 = stat.f;  G0=stat.G;  
+%f0 = stat.f;  G0=stat.G;
 stat.star = ' ';  stat.Hcond = 0;
 
 %====================================================================
@@ -185,7 +185,7 @@ if infoz.prt > 0
   fprintf(infoz.prt,...
     '\n ---------------------------------------------------------------\n');
   fprintf(infoz.prt,...
-    ['\n        ITER      cond(H)  *    Step' blanks(17) 'Obj Fcn \n']); 
+    ['\n        ITER      cond(H)  *    Step' blanks(17) 'Obj Fcn \n']);
 end
 
 while all(convcrit > 0)
@@ -194,12 +194,12 @@ while all(convcrit > 0)
   stat = feval(hess,b,infoz,stat,varargin{:});
   stat.direc = -stat.Hi*stat.G;
   alpha  = feval(step,b,infoz,stat,varargin{:});
-  stat.db = alpha*stat.direc; 
+  stat.db = alpha*stat.direc;
   if ~isreal(stat.db)
     disp(b')
-    error('Parm Vector Not Real (Last Good b Above)'); 
+    error('Parm Vector Not Real (Last Good b Above)');
   end
-  b = b + stat.db; 
+  b = b + stat.db;
 
 % --- Re-evaluate function, display current status -------------------
   f0 = stat.f;     G0 = stat.G;
@@ -209,7 +209,7 @@ while all(convcrit > 0)
     fprintf(infoz.prt,'\t%3.0f     %10.2e %s  %7.6f  \t%14.10f\n',...
       stat.iter,stat.Hcond,stat.star,alpha,stat.f);
   end
-  
+
 % --- Determine changes in func, grad, and parms -------------------
   if stat.f == 0
     stat.df = 0;
@@ -224,7 +224,7 @@ while all(convcrit > 0)
       dbcrit; dgcrit];
   end
   if stat.df < 0
-    error(['Objective Function Increased by ' num2str(-stat.df,'%15.10f')]); 
+    error(['Objective Function Increased by ' num2str(-stat.df,'%15.10f')]);
   end
   X(stat.iter,:) = b';
 
@@ -245,7 +245,7 @@ if infoz.prt > 0
   elseif convcrit(3) <= 0
     critmsg = 'Change in Parameter Vector';
   elseif convcrit(4) <= 0
-    critmsg = 'Change in Gradient';  
+    critmsg = 'Change in Gradient';
   end
   fprintf(infoz.prt,'  CONVERGENCE CRITERIA MET: %s\n',critmsg);
 end

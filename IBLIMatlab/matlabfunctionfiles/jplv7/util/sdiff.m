@@ -10,7 +10,7 @@ function xlag = sdiff(x,freq)
 % RETURNS: xsdiff = a seasonlly differenced matrix or vector,
 %                   length nobs (first freq values = 0)
 % -----------------------------------------------
-% SEE ALSO: tdiff() 
+% SEE ALSO: tdiff()
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -33,4 +33,4 @@ tmp = zeros(freq,nvar);
 xlag = zeros(nobs,nvar);
 xlag = [tmp
         x(freq+1:nobs,:) - x(1:nobs-freq,:)];
-        
+

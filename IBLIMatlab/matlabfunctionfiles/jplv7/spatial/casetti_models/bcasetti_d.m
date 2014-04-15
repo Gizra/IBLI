@@ -1,6 +1,6 @@
 % PURPOSE: An example of using bcasetti
 %          Bayesian version of Casetti's spatial expansion model
-%                              
+%
 %---------------------------------------------------
 % USAGE: bcasetti_d
 %---------------------------------------------------

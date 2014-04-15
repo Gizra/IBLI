@@ -31,4 +31,4 @@ left = -999*ones(nobs,1);
 
 result = normt_rnd(mu,sigma2,left,right);
 
- 
+

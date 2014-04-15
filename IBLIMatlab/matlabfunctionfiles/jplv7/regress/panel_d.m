@@ -1,7 +1,7 @@
 % PURPOSE: Demonstrates use of panel data estimation
-% The followig program use the data from " Introduction to the Theory and Practice of 
+% The followig program use the data from " Introduction to the Theory and Practice of
 % Econometrics "(Judge, Hill, Griffiths, Lütkepohl and Lee) Second Edition.
-% Chapter 11 pages 476-479 and pages 487-488, as an example to test the procedures for 
+% Chapter 11 pages 476-479 and pages 487-488, as an example to test the procedures for
 % panel data estimation.
 
 clear;
@@ -13,8 +13,8 @@ load datat.txt;      %Judge Example with Balanced Panel
 y= datat(:,2:3);
 id = datat(:,1);
 
-vnames =  ['c',		% Cost 
-   		  'y'];		% Output     
+vnames =  ['c',		% Cost
+   		  'y'];		% Output
 
 
 % Pooled Estimation
@@ -31,7 +31,7 @@ prt_panel(result1,vnames);
 result2 = prandom(y,id);
 prt_panel(result2,vnames);
 
-% Haussman Test 
+% Haussman Test
 phaussman(result1, result2);
 
 

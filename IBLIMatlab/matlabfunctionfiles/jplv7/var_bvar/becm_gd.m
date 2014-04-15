@@ -1,6 +1,6 @@
-% PURPOSE: An example of using becm_g(), 
-%          Gibbs estimates for a error correction model                                                 
-%          (with Minnesota prior)                    
+% PURPOSE: An example of using becm_g(),
+%          Gibbs estimates for a error correction model
+%          (with Minnesota prior)
 %---------------------------------------------------
 % USAGE: becm_gd
 %---------------------------------------------------
@@ -22,17 +22,17 @@ weight = 0.5; % symmetric weights
 
 % this is an example of using 1st-order contiguity
 % of the states as weights as in LeSage and Pan (1995)
-% `Using Spatial Contiguity as Bayesian Prior Information 
-% in Regional Forecasting Models'' International Regional 
+% `Using Spatial Contiguity as Bayesian Prior Information
+% in Regional Forecasting Models'' International Regional
 % Science Review, Volume 18, no. 1, pp. 33-53, 1995.
 
-w = [1.0  1.0  1.0  0.1  0.1  0.1  0.1  0.1 
-     1.0  1.0  1.0  1.0  1.0  0.1  0.1  0.1 
-     1.0  1.0  1.0  0.1  1.0  0.1  1.0  1.0 
-     0.1  1.0  0.1  1.0  1.0  0.1  0.1  0.1 
-     0.1  1.0  1.0  1.0  1.0  1.0  0.1  1.0 
-     0.1  0.1  0.1  0.1  1.0  1.0  0.1  1.0 
-     0.1  0.1  1.0  0.1  0.1  0.1  1.0  0.1 
+w = [1.0  1.0  1.0  0.1  0.1  0.1  0.1  0.1
+     1.0  1.0  1.0  1.0  1.0  0.1  0.1  0.1
+     1.0  1.0  1.0  0.1  1.0  0.1  1.0  1.0
+     0.1  1.0  0.1  1.0  1.0  0.1  0.1  0.1
+     0.1  1.0  1.0  1.0  1.0  1.0  0.1  1.0
+     0.1  0.1  0.1  0.1  1.0  1.0  0.1  1.0
+     0.1  0.1  1.0  0.1  0.1  0.1  1.0  0.1
      0.1  0.1  1.0  0.1  1.0  1.0  0.1  1.0];
 
 % set up prior structure

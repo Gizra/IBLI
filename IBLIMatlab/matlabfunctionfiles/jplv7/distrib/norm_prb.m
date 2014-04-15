@@ -6,11 +6,11 @@ function p=norm_prb(tratio)
 % USAGE: prob = norm_prb(tratio)
 % where: tratio = bhat/std(bhat)
 % ---------------------------------------------------
-% RETURNS: prob = marginal probability 
+% RETURNS: prob = marginal probability
 % ---------------------------------------------------
 % NOTE: test the null hypothesis beta = 0 (2-tailed)
 % ---------------------------------------------------
-% SEE ALSO: tdis_prb, fdis_prb, chis_prb  
+% SEE ALSO: tdis_prb, fdis_prb, chis_prb
 % ---------------------------------------------------
 
 % written by:
@@ -25,13 +25,13 @@ if nargin ~= 1
 error('Wrong # of arguments to norm_prb');
 end;
 
-mu=0; 
+mu=0;
 
 tratio = abs(tratio);
 
 p = 2*(1-0.5*(1+erf( tratio*(1/sqrt(2)))));
 
 big=find(p>1);
-if any(big), 
-   p(big)=ones(size(big)); 
+if any(big),
+   p(big)=ones(size(big));
 end;

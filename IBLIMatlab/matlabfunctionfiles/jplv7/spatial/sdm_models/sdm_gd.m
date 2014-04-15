@@ -1,6 +1,6 @@
 % PURPOSE: An example of using sdm_g() Gibbs sampling
 %          spatial durbin model
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
 % USAGE: sdm_gd (see also sdm_gd2 for a large data set)
 %---------------------------------------------------
@@ -13,7 +13,7 @@ latt = anselin(:,4);
 long = anselin(:,5);
 [junk W junk] = xy2cont(latt,long);
 [n junk] = size(W);
-IN = eye(n); 
+IN = eye(n);
 rho = 0.7;  % true value of rho
 sige = 2;
 k = 2;

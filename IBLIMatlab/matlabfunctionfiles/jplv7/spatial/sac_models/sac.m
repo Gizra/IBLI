@@ -7,7 +7,7 @@ function results = sac(y,x,W1,W2,info)
 %          x = explanatory variables matrix, (with intercept term in first
 %              column if used)
 %         W1 = spatial weight matrix (standardized)
-%         W2 = spatial weight matrix 
+%         W2 = spatial weight matrix
 %      info        = an (optional) structure variable with input options
 %      info.parm   = (optional) 2x1 vector of starting values for rho, lambda
 %      info.convg  = (optional) convergence criterion (default = 1e-4)
@@ -20,13 +20,13 @@ function results = sac(y,x,W1,W2,info)
 %                  = 1 for Pace and Barry 1999 MC approximation (fast for very large problems)
 %                  = 2 for Pace and Barry 1998 Spline approximation (medium speed)
 %      info.order  = order to use with info.lflag = 1 option (default = 50)
-%      info.iter   = iterations to use with info.lflag = 1 option (default = 30)     
+%      info.iter   = iterations to use with info.lflag = 1 option (default = 30)
 %      info.hessian = 1 for numerical hessian calculation of var-cov matrix
 %                     default = 0 if n < 500, analytical hessian
 %                             = 1 if n > 500, numerical hessian
 %      info.ndraw = 1,000 by default
 % ---------------------------------------------------
-%  RETURNS: a structure 
+%  RETURNS: a structure
 %         results.meth  = 'sac'
 %         results.beta  = bhat
 %         results.rho   = rho
@@ -57,13 +57,13 @@ function results = sac(y,x,W1,W2,info)
 %  --------------------------------------------------
 %  SEE ALSO: prt_spat(results), prt
 % ---------------------------------------------------
-% REFERENCES: Luc Anselin Spatial Econometrics (1988) 
+% REFERENCES: Luc Anselin Spatial Econometrics (1988)
 %             pages 64-65 and pages 182-183.
-% For lndet information see: Ronald Barry and R. Kelley Pace, 
-% "A Monte Carlo Estimator of the Log Determinant of Large Sparse Matrices", 
+% For lndet information see: Ronald Barry and R. Kelley Pace,
+% "A Monte Carlo Estimator of the Log Determinant of Large Sparse Matrices",
 % Linear Algebra and its Applications", Volume 289, Number 1-3, 1999, pp. 41-54.
 % and: R. Kelley Pace and Ronald P. Barry "Simulating Mixed Regressive
-% Spatially autoregressive Estimators", 
+% Spatially autoregressive Estimators",
 % Computational Statistics, 1998, Vol. 13, pp. 397-418.
 % ---------------------------------------------------
 
@@ -101,7 +101,7 @@ rmin = -0.99;
 rmax = 0.99;
     parm = [0.5
          0.5];
-     
+
      % check if the user handled the intercept term okay
     n = length(y);
     if sum(x(:,1)) ~= n
@@ -117,10 +117,10 @@ rmax = 0.99;
      cflag = 1;
      p = size(x,2)-1;
     end;
-     
+
     results.cflag = cflag;
     results.p = p;
-    
+
 
 % default options
 options = optimset('fminsearch');
@@ -162,8 +162,8 @@ options.MaxIter = 500;
 elseif nargin == 4 % use default options
 options = optimset('fminsearch');
 else
- error('Wrong # of arguments to sac'); 
-end; 
+ error('Wrong # of arguments to sac');
+end;
 
 
 [n nvar] = size(x);
@@ -183,20 +183,20 @@ elseif n1 ~= n
 error('sac: wrong size weight matrix W2');
 end;
 
-results.y = y;      
+results.y = y;
 results.nobs = n; results.nvar = nvar;
 results.meth = 'sac';
 
 % do lndet approximation calculations if needed
 if ldetflag == 0 % no approximation
-t0 = clock;    
+t0 = clock;
 out = lndetfull(W1,rmin,rmax);
 time1 = etime(clock,t0);
 tt=rmin:.001:rmax; % interpolate a finer grid
 outi = interp1(out.rho,out.lndet,tt','spline');
 det1 = [tt' outi];
 
-t0 = clock;    
+t0 = clock;
 out = lndetfull(W2,lmin,lmax);
 time1 = time1 + etime(clock,t0);
 results.time1 = time1;
@@ -207,7 +207,7 @@ det2 = [tt' outi];
 
 elseif ldetflag == 1 % use Pace and Barry, 1999 MC approximation
 
-t0 = clock;    
+t0 = clock;
 out = lndetmc(order,liter,W1,rmin,rmax);
 time1 = etime(clock,t0);
 results.limit = [out.rho out.lo95 out.lndet out.up95];
@@ -215,7 +215,7 @@ tt=rmin:.001:rmax; % interpolate a finer grid
 outi = interp1(out.rho,out.lndet,tt','spline');
 det1 = [tt' outi];
 
-t0 = clock;    
+t0 = clock;
 out = lndetmc(order,liter,W2,lmin,lmax);
 time1 = time1 + etime(clock,t0);
 results.time1 = time1;
@@ -248,7 +248,7 @@ end;
 % res0 = sac_gmm(y,x,W1,W2);
 % parm = [res0.rho
 %         res0.lam];
-% 
+%
 % timeo = clock;
 % [pout,like,exitflag,output]=fminsearch('f_sac',parm,options,y,x,W1,W2,det1,det2);
 % time4 = etime(clock,timeo);
@@ -260,7 +260,7 @@ time4 = etime(clock,timeo);
 results.time4 = time4;
 
 
-if exitflag == 0 
+if exitflag == 0
 fprintf(1,'\n sac: convergence not obtained in %4d iterations \n',output.iterations);
 end;
 results.iter = output.iterations;
@@ -290,7 +290,7 @@ results.sige = sige;
 
 
 if (hess_flag == 0 & n <= 500)
-    
+
 t0 = clock;
 
 % find asymptotic t-stats (from Anselin, 1982, pages 183-184
@@ -379,7 +379,7 @@ std_rhoi = results.tstat(end-1,1)/results.rho;
 time3 = etime(clock,t0);
 results.time3 = time3;
 
-end;    
+end;
 
 parm = [results.beta
         results.rho
@@ -403,7 +403,7 @@ wjjju=rv;
 for jjj=1:maxorderu
     wjjju=W1*wjjju;
     tracew(jjj)=mean(mean(rv.*wjjju));
-    
+
 end
 
 traces=[tracew];
@@ -443,9 +443,9 @@ bsave = draws(:,1:end-1);
         bdraws = bsave(:,2:end);
         elseif cflag == 0
         bdraws = bsave;
-        end; 
+        end;
         pdraws = psave;
-        
+
         ree = 0:1:ntrs-1;
 
         rmat = zeros(1,ntrs);
@@ -453,7 +453,7 @@ bsave = draws(:,1:end-1);
         direct = zeros(ndraw,p,ntrs);
         indirect = zeros(ndraw,p,ntrs);
 
-        
+
 for i=1:ndraw;
     rmat = pdraws(i,1).^ree;
     for j=1:p;
@@ -469,7 +469,7 @@ time5 = etime(clock,t0);
 results.time5 = time5;
 
 
-    
+
 % r-squared and rbar-squared
 ym = y - mean(y);
 rsqr1 = sigu;
@@ -491,13 +491,13 @@ function y = norm_rndmat(sig,ndraw)
 %          var-cov matrix sig
 %---------------------------------------------------
 % USAGE:   y = norm_rnd(sig)
-% where:   sig = a square-symmetric covariance matrix 
-% NOTE: for mean b, var-cov sig use: b +  norm_rnd(sig) 
-%---------------------------------------------------      
+% where:   sig = a square-symmetric covariance matrix
+% NOTE: for mean b, var-cov sig use: b +  norm_rnd(sig)
+%---------------------------------------------------
 % RETURNS: y = random vector normal draw mean 0, var-cov(sig)
 %---------------------------------------------------
 
-% by 
+% by
 % James P. LeSage, last updated 3/2010
 % Dept of Finance & Economics
 % Texas State University-San Marcos
@@ -543,21 +543,21 @@ eps = 1e-8;
 
 n = size(x,1);
 fx = feval(f,x,varargin{:});
- 
+
 % Compute the stepsize (h)
 h = eps.^(1/3)*max(abs(x),1e-2);
 xh = x+h;
-h = xh-x;    
+h = xh-x;
 ee = sparse(1:n,1:n,h,n,n);
- 
-% Compute forward step 
+
+% Compute forward step
 g = zeros(n,1);
 for i=1:n
   g(i) = feval(f,x+ee(:,i),varargin{:});
 end
-   
+
 H=h*h';
-% Compute "double" forward step 
+% Compute "double" forward step
 for i=1:n
 for j=i:n
   H(i,j) = (feval(f,x+ee(:,i)+ee(:,j),varargin{:})-g(i)-g(j)+fx)/H(i,j);

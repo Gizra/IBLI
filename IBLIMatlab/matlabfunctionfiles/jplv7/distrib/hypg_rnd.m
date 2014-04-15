@@ -5,12 +5,12 @@ function  x = hypg_rnd(num,n,K,N)
 %---------------------------------------------------
 % USAGE:     x = hypg_rnd(nobs,n,K,N)
 % where:  nobs = number of draws
-%        n,K,N = parameters of the distribution 
+%        n,K,N = parameters of the distribution
 % NOTE: mean     = (n/N)*k
 %       variance = [(n*K)/(N*N)*(N-1)]*(N-K)*(N-n)
 %---------------------------------------------------
 % RETURNS:
-%        a vector of random draws from the distribution      
+%        a vector of random draws from the distribution
 % --------------------------------------------------
 % SEE ALSO: hypg_cdf, hypg_rnd, hypg_inv
 %---------------------------------------------------

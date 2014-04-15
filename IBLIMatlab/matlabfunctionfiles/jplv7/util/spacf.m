@@ -1,5 +1,5 @@
 function x = spacf(y,m)
-% PURPOSE: find sample partial autocorrelation coefficients 
+% PURPOSE: find sample partial autocorrelation coefficients
 %---------------------------------------------------
 % USAGE: p = spacf(y,m)
 % where: y = a time-series (need not have mean zero)
@@ -11,7 +11,7 @@ function x = spacf(y,m)
 % --------------------------------------------------
 % SEE ALSO: sacf(y,m)
 %---------------------------------------------------
- 
+
 if nargin ~= 2
 error('Wrong # of arguments to spacf');
 end;

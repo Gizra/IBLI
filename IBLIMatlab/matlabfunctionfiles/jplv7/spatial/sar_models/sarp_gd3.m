@@ -1,6 +1,6 @@
 % PURPOSE: An example of using sarp_g()
 %          Gibbs sampling spatial autoregressive model
-%          on a large data set                    
+%          on a large data set
 %---------------------------------------------------
 % USAGE: sarp_gd3 (see sarp_gd for a small data set)
 %---------------------------------------------------
@@ -10,21 +10,21 @@ clear all;
 load election.dat;
 %   documentation for election.data
 %   3,110 Counties
-%   
+%
 %   education variables are expressed as a proportion of all those with degrees,
 %   that is as a proportion of: educated = (high+smcollege+associate+college+gradprof)
 %   NOTE:because of this, the education proportion variables sum to unity
-%   
+%
 %   col 1= binary y with 0=Dole, 1=Clinton (1996 Presidential Election)
 %   col2 = latt  coordinate
 %   col3 = long  coordinate
-%   col4 = log-urban  (log of urban population)      
-%   col5 = log-rural  (log of rural population)    
-%   col6 = prop-highs (pop with high school or GED graduates as aproportion of educated -- see above )  
-%   col7 = prop-smcollege  (pop with some college as aproportion of educated -- see above)  
-%   col8 = prop-associate (pop with associate degrees as aproportion of educated -- see above)      
-%   col9 = prop-college   (pop with college degrees as aproportion of educated -- see above)  
-%   col10 = prop-gradprof (pop with grad/professional degrees as aproportion of educated -- see above) 
+%   col4 = log-urban  (log of urban population)
+%   col5 = log-rural  (log of rural population)
+%   col6 = prop-highs (pop with high school or GED graduates as aproportion of educated -- see above )
+%   col7 = prop-smcollege  (pop with some college as aproportion of educated -- see above)
+%   col8 = prop-associate (pop with associate degrees as aproportion of educated -- see above)
+%   col9 = prop-college   (pop with college degrees as aproportion of educated -- see above)
+%   col10 = prop-gradprof (pop with grad/professional degrees as aproportion of educated -- see above)
 %   col11 = statecode (a number 1 to 48 with the state in which the county is located)
 
 y = election(:,1);
@@ -40,7 +40,7 @@ n = 3110;
 vnames = strvcat('clinton/dole,s','constant','urban','some college', ...
 'associate degree','college','graduate/professional');
 
-ndraw = 5; 
+ndraw = 5;
 nomit = 0;
 prior.dflag = 1;
 prior.novi = 1;

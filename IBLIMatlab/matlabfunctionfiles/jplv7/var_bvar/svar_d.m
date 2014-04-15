@@ -1,4 +1,4 @@
-% PURPOSE: An example of using svar                                               
+% PURPOSE: An example of using svar
 %---------------------------------------------------
 % USAGE: svar_d
 %---------------------------------------------------
@@ -8,7 +8,7 @@ load test.dat; % a test data set containing
                % il,in,ky,mi,oh,pa,tn,wv
 % data covers 1982,1 to 1996,5
 y = test(:,1:5);
-     
+
 nlag = 2;  % number of lags in var-model
 
 % estimate the model
@@ -26,4 +26,4 @@ sb=zeros(nsq,bfree);sb(1,1)=1;sb(7,2)=1;sb(13,3)=1;sb(19,4)=1; sb(25,5)=1;db=zer
 [a, b,a_se, b_se]=svar(results,sa,sb,da,db,afree,bfree)
 
 
-        
+

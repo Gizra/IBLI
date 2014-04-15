@@ -1,5 +1,5 @@
 function stat=hessz(b,infoz,stat,varargin)
-% PURPOSE: Calculate/update Inverse Hessian 
+% PURPOSE: Calculate/update Inverse Hessian
 % ------------------------------------------------------
 % USAGE: stat=hessz(b,infoz,stat,varargin)
 % Where: b          = parameter vector fed to func
@@ -7,7 +7,7 @@ function stat=hessz(b,infoz,stat,varargin)
 %        stat       = status structure from MINZ
 %        varargin   = arguments list passed to func
 % ------------------------------------------------------
-% RETURNS: stat = updated status structure with new 
+% RETURNS: stat = updated status structure with new
 %          inverse Hessian
 % ------------------------------------------------------
 % NOTES: Supports the following search direction algorithms:
@@ -31,7 +31,7 @@ function stat=hessz(b,infoz,stat,varargin)
 % UPDATED: 11/19/99 (1.1.2 safeguarding in eval eig, cond)
 %          7/24/00  (1.1.3 scaling of gnbase)
 %          9/23/00  (1.1.4 fcnchk)
-  
+
 %==================================================================
 %   INITIALIZATIONS
 %==================================================================
@@ -43,14 +43,14 @@ if strcmp(infoz.call,'gmm') | strcmp(infoz.call,'ls')
   if strcmp(infoz.call,'gmm')
     wdum = 1;
   else
-    wdum=0; 
+    wdum=0;
   end
   momt = fcnchk(infoz.momt);
   jake = fcnchk(infoz.jake);
   m = feval(momt,b,infoz,stat,varargin{1:lvar-wdum});
   M = feval(jake,b,infoz,stat,varargin{1:lvar-wdum});
   if strcmp(infoz.call,'gmm')
-    W = varargin{lvar};    
+    W = varargin{lvar};
   else
     W = eye(rows(M));
   end
@@ -72,14 +72,14 @@ case 'sd'                          % Steepest Descent
 
 case {'gn','marq'}                 % GN/Marq directions
   H = gnbase;
-  if strcmp(infoz.hess,'marq')       % Marquardt    
+  if strcmp(infoz.hess,'marq')       % Marquardt
     try 				% Safeguard against errors
       mineig = min(eig(gnbase));
-      Hcond = sqrt(cond(gnbase));      
+      Hcond = sqrt(cond(gnbase));
     catch				% If problem with eig(S)
       mineig = -Inf;
       Hcond = Inf;
-    end        
+    end
     lambda = max(infoz.lambda,mineig);  % alternate criteria
 %    lambda = infoz.lambda;
     while Hcond > infoz.cond
@@ -93,13 +93,13 @@ case {'gn','marq'}                 % GN/Marq directions
       if lambda > 100
 	Hcond = -Inf;
 	H = eye(k);                % Just use SD
-      end      
+      end
     end
   end
   Hi = H\eye(k);
 
-case {'dfp','bfgs'}               % DFP/BFGS 
-  if isempty(stat.Hi)              
+case {'dfp','bfgs'}               % DFP/BFGS
+  if isempty(stat.Hi)
     if infoz.H1 == 1, Hi = eye(k); % Initial Hessian
     else, Hi = gnbase\eye(k); end
   else
@@ -111,13 +111,13 @@ case {'dfp','bfgs'}               % DFP/BFGS
       if strcmp(infoz.hess,'bfgs')             % c = [0] for DFP
         c = db/(db'*dG) - Hi0*dG/(dG'*Hi0*dG);
         c = dG'*Hi0*dG*c*c';
-      else 
-        c=zeros(k); 
+      else
+        c=zeros(k);
       end
       Hi = Hi0 + a + b + c;
     else
       Hi = stat.Hi;
-    end    
+    end
   end
 
 otherwise

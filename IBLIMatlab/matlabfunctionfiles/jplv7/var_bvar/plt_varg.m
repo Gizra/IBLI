@@ -1,12 +1,12 @@
 function plt_varg(results,vnames)
 % PURPOSE: Plots Gibbs sampled VAR model results
 %---------------------------------------------------
-% USAGE:   plt_varg(result,vnames)        
-% where:   results = a Gibbs var structure 
+% USAGE:   plt_varg(result,vnames)
+% where:   results = a Gibbs var structure
 %          vnames  = optional vector of variable names
-%---------------------------------------------------               
+%---------------------------------------------------
 %          e.g. vnames = strvcat('y1','y2','x1');
-%---------------------------------------------------                            
+%---------------------------------------------------
 % SEE ALSO: plt, prt
 %---------------------------------------------------
 
@@ -165,5 +165,5 @@ otherwise
 error('results structure unknown to plt_varg');
 end;
 
-  
-  
+
+

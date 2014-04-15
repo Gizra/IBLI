@@ -4,7 +4,7 @@ function out=lndetmc(order,iter,wsw,rmin,rmax)
 % USAGE: out = lndetmc(order,iter,W,rmin,rmax)
 % where:      order = # of moments u'(wsw^j)u/(u'u) to examine (default = 50)
 %              iter = how many realizations are employed (default = 30)
-%                 W = symmetric spatial weight matrix (standardized)             
+%                 W = symmetric spatial weight matrix (standardized)
 % -----------------------------------------------------------------------
 % RETURNS: out = a structure variable
 %          out.lndet = a vector of log determinants for -1 < rho < 1
@@ -19,9 +19,9 @@ function out=lndetmc(order,iter,wsw,rmin,rmax)
 % of the Log Determinant of Large Sparse Matrices", Linear Algebra and
 % its Applications", Volume 289, Number 1-3, 1999, pp. 41-54.
 % -----------------------------------------------------------------------
- 
- 
-% Written by Kelley Pace, 6/23/97 
+
+
+% Written by Kelley Pace, 6/23/97
 % (named fmcdetnormgen1.m in the spatial statistics toolbox )
 % Documentation modified by J. LeSage 11/99
 

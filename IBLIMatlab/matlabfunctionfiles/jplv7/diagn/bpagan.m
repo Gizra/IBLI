@@ -4,7 +4,7 @@ function result = bpagan(y,x)
 % USAGE:      result = bpagan(y,x), returns a results structure
 %        or:           bpagan(y,x), prints results to command window
 % where: y = dependent variable vector (n x 1)
-%        x = independent variable matrix (n x k), 
+%        x = independent variable matrix (n x k),
 %            (must include a constant)
 %---------------------------------------------------
 % RETURNS: a structure, or prints to the command window

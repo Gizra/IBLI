@@ -37,12 +37,12 @@ function res=litterman_fix(Y,x,ta,s,type,mu)
 %            ta=2 ---> average (index)
 %            ta=3 ---> last element (stock) ---> interpolation
 %            ta=4 ---> first element (stock) ---> interpolation
-%        s: number of high frequency data points for each low frequency data points 
+%        s: number of high frequency data points for each low frequency data points
 %            s= 4 ---> annual to quarterly
 %            s=12 ---> annual to monthly
 %            s= 3 ---> quarterly to monthly
-%        type: estimation method: 
-%            type=0 ---> weighted least squares 
+%        type: estimation method:
+%            type=0 ---> weighted least squares
 %            type=1 ---> maximum likelihood
 %        mu: innovational parameter 0 < mu < 1
 % ------------------------------------------------------------
@@ -50,8 +50,8 @@ function res=litterman_fix(Y,x,ta,s,type,mu)
 % ------------------------------------------------------------
 % SEE ALSO: litterman, chowlin, fernandez, td_plot, td_print
 % ------------------------------------------------------------
-% REFERENCE: Litterman, R.B. (1983a) "A random walk, Markov model 
-% for the distribution of time series", Journal of Business and 
+% REFERENCE: Litterman, R.B. (1983a) "A random walk, Markov model
+% for the distribution of time series", Journal of Business and
 % Economic Statistics, vol. 1, n. 2, p. 169-173.
 
 % written by:
@@ -80,7 +80,7 @@ end
 % ------------------------------------------------------------
 % Preparing the X matrix: including an intercept
 
-e=ones(n,1);   
+e=ones(n,1);
 x=[e x];       % Expanding the regressor matrix
 p=p+1;         % Number of p high-frequency inputs (plus intercept)
 
@@ -94,7 +94,7 @@ C = aggreg(ta,N,s);
 % extrapolation if needed.
 
 if (n > s * N)
-   pred=n-s*N;           % Number of required extrapolations 
+   pred=n-s*N;           % Number of required extrapolations
    C=[C zeros(N,pred)];
 else
    pred=0;
@@ -154,7 +154,7 @@ y_ls=y+d_y;           % Upper lim. of high frequency estimates
 res.meth='Litterman';
 
 % -----------------------------------------------------------
-% Basic parameters 
+% Basic parameters
 
 res.ta        = ta;
 res.type      = type;

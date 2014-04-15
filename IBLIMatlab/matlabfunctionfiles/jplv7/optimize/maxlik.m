@@ -2,9 +2,9 @@ function result=maxlik(func,b,info,varargin)
 % PURPOSE: minimize a log likelihood function
 % ------------------------------------------------------------------
 % USAGE:     result = maxlike(func,b,info,varargin)
-%        or: result = maxlike(func,b,[],varargin) for default options 
-% Where: func    = function to be minimized 
-%        b       = parameter vector fed to func       
+%        or: result = maxlike(func,b,[],varargin) for default options
+% Where: func    = function to be minimized
+%        b       = parameter vector fed to func
 %        info structure containing optimization options
 %        .delta  = Increment in numerical derivs                   [.000001]
 %        .hess   = Hessian method: ['dfp'], 'bfgs', 'gn', 'marq', 'sd'
@@ -12,7 +12,7 @@ function result=maxlik(func,b,info,varargin)
 %        .lambda = Minimum eigenvalue of Hessian for Marquardt     [.01]
 %        .cond   = Tolerance level for condition of Hessian        [1000]
 %        .btol   = Tolerance for convergence of parm vector        [1e-4]
-%        .ftol   = Tolerance for convergence of objective function [sqrt(eps)] 
+%        .ftol   = Tolerance for convergence of objective function [sqrt(eps)]
 %        .gtol   = Tolerance for convergence of gradient           [sqrt(eps)]
 %        .prt    = Printing: 0 = None, 1 = Most, 2 = All           [0]
 %       varargin = arguments list passed to func
@@ -30,7 +30,7 @@ function result=maxlik(func,b,info,varargin)
 %           .meth  = 'dfp', 'bfgs', 'gn', 'marq', 'sd' (from input)
 %           .time  = time (in seconds) needed to find solution
 % ------------------------------------------------------------------
-% NOTES: This is really Mike Cliff's minz function converted for usage 
+% NOTES: This is really Mike Cliff's minz function converted for usage
 %        with the Econometrics Toolbox.
 % calls stepz, numz, hessz functions
 % ------------------------------------------------------------------
@@ -65,7 +65,7 @@ infoz.H1 = 1;
 infoz.delta = .000001;
 infoz.call = 'other';
 infoz.step = 'stepz';
-infoz.grad='numzz'; 
+infoz.grad='numzz';
 hessfile = 'hesszz';
 
 
@@ -78,7 +78,7 @@ fields = fieldnames(info);
 nf = length(fields); xcheck = 0; ycheck = 0;
   for i=1:nf
     if strcmp(fields{i},'maxit')
-        infoz.maxit = info.maxit; 
+        infoz.maxit = info.maxit;
     elseif strcmp(fields{i},'btol')
         infoz.btol = info.btol;
     elseif strcmp(fields{i},'gtol')
@@ -94,24 +94,24 @@ nf = length(fields); xcheck = 0; ycheck = 0;
     elseif strcmp(fields{i},'delta')
         infoz.delta = info.delta;
     elseif strcmp(fields{i},'prt')
-        infoz.prt = info.prt;        
+        infoz.prt = info.prt;
     end;
   end;
 else
 % rely on default options
 end;
 
- 
+
 lvar = length(varargin);
 stat.iter = 0;
-k = rows(b); 
+k = rows(b);
 if lvar > 0
 n = rows(varargin{1});
 end;
 convcrit = ones(4,1);
-stat.Hi = []; 
-stat.df = 1000; 
-stat.db = ones(k,1)*1000; 
+stat.Hi = [];
+stat.df = 1000;
+stat.db = ones(k,1)*1000;
 stat.dG = stat.db;
 func = fcnchk(infoz.func,lvar+2);
 grad = fcnchk(infoz.grad,lvar+1);
@@ -121,7 +121,7 @@ step = fcnchk(infoz.step,lvar+2);
 stat.f = feval(func,b,varargin{:});
 stat.G = feval(grad,b,infoz,stat,varargin{:});
 
-stat.star = ' ';  
+stat.star = ' ';
 stat.Hcond = 0;
 
 %====================================================================
@@ -142,7 +142,7 @@ Vname = 'Parameter';
  end;
 in2.cnames = strvcat('Estimates','dEstimates','Gradient','dGradient');
 in2.rnames = Vname;
-in2.fmt = strvcat('%16.8f','%16.8f','%16.8f','%16.8f');    
+in2.fmt = strvcat('%16.8f','%16.8f','%16.8f','%16.8f');
 end
 
 if infoz.prt == 1
@@ -160,7 +160,7 @@ while all(convcrit > 0)
   stat = feval(hess,b,infoz,stat,varargin{:});
   stat.direc = -stat.Hi*stat.G;
   alpha  = feval(step,b,infoz,stat,varargin{:});
-  stat.db = alpha*stat.direc; 
+  stat.db = alpha*stat.direc;
   b = b + stat.db;
 
 % Re-evaluate function, display current status
@@ -214,7 +214,7 @@ if infoz.prt > 0
   elseif convcrit(3) <= 0
     critmsg = 'Change in Parameter Vector';
   elseif convcrit(4) <= 0
-    critmsg = 'Change in Gradient';  
+    critmsg = 'Change in Gradient';
   end
   disp(['  CONVERGENCE CRITERIA MET: ' critmsg])
   disp(' ')

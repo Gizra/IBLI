@@ -58,7 +58,7 @@ for i=1:nvar;
 emat = [emat
         results.resid'];
 end;
-       
+
     hhat=emat.*x';
     G=zeros(nvar,nvar); w=zeros(2*nlag+1,1);
     a=0;
@@ -75,7 +75,7 @@ end;
         G=G+w(nlag+1+a,1)*ga;
         a=a+1;
     end; % end of while
-    
+
         V=xpxi*G*xpxi;
         nwerr= sqrt(diag(V));
 

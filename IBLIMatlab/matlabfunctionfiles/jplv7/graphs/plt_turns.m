@@ -15,7 +15,7 @@ function plt_turns(results,cstruc,vname)
 % RETURNS:nothing, simply plots time-series with turns denoted
 % ------------------------------------------------------
 % SEE ALSO: plt, fturns, cal
-          
+
 % written by:
 % James P. LeSage, Dept of Economics
 % Texas State University-San Marcos
@@ -29,12 +29,12 @@ tsflag = 0; vflag = 0; % defaults
 if nargin == 1 % don't use tsplot
   if ~isstruct(results)
     error('plt_turns: requires a results structure from fturns');
-  end;    
+  end;
 % use defaults
 elseif nargin == 2 % use tsplot
   if ~isstruct(cstruc)
     error('plt_turns: requires a cal structure for 2nd argument');
-  end;     
+  end;
 tsflag = 1;
 elseif nargin == 3 % we have a vname
 vflag = 1;
@@ -68,13 +68,13 @@ case{1} % use tsplot
 begp = 1;
 endp = nobs;
 freq = cstruc.freq;
-  
+
  switch freq;
 
-     case 1,      % case of annual series 
+     case 1,      % case of annual series
      out = cal(cstruc.beg_yr,cstruc.beg_per,cstruc.freq,begp);
       yut = []; xut = [];
-      ydt = []; xdt = [];     
+      ydt = []; xdt = [];
      beg_yr = out.year;
   yr = beg_yr:beg_yr+nobs-1;
   yrs = yr';
@@ -89,9 +89,9 @@ freq = cstruc.freq;
             cntd = cntd+1;
                 ydt(cntd,1) = y(i,1);
                 xdt(cntd,1) = datenum(yrs(i,1),1,1);
-            end;           
-      end;        
-  ydigit = 'yyyy';  
+            end;
+      end;
+  ydigit = 'yyyy';
   plot(datenum(yrs,1,1),y(begp:endp,:));
         hold on;
         plot(xut,yut,'^k');
@@ -100,17 +100,17 @@ freq = cstruc.freq;
          legend('time-series','upturn','downturn');
         else
          legend(vname,'upturn','downturn');
-        end;  
+        end;
         fsize = 9;             % font size
         datetick('x',ydigit);
-        set(gca,'fontsize',fsize); 
-        set(gca,'tickdir','in');          
+        set(gca,'fontsize',fsize);
+        set(gca,'tickdir','in');
         hold off;
-   
+
      case 4,      % case of quarterly series
       yrs = zeros(nobs,1);
       qtr = zeros(nobs,1);
-   
+
       out = cal(cstruc.beg_yr,cstruc.beg_per,cstruc.freq,begp);
       beg_yr = out.year;
       beg_qtr = out.period;
@@ -135,9 +135,9 @@ freq = cstruc.freq;
             cntd = cntd+1;
                 ydt(cntd,1) = y(i,1);
                 xdt(cntd,1) = datenum(yrs(i,1),qtr(i,1),1);
-            end;           
+            end;
       end;
-  ydigit = 'QQ-YY';  
+  ydigit = 'QQ-YY';
   plot(datenum(yrs,qtr,1),y(begp:endp,:));
         hold on;
         plot(xut,yut,'^k');
@@ -146,11 +146,11 @@ freq = cstruc.freq;
          legend('time-series','upturn','downturn');
         else
          legend(vname,'upturn','downturn');
-        end; 
+        end;
         fsize = 9;             % font size
         datetick('x',ydigit);
-        set(gca,'fontsize',fsize); 
-        set(gca,'tickdir','in');          
+        set(gca,'fontsize',fsize);
+        set(gca,'tickdir','in');
         hold off;
 
      case 12,      % case of monthly series
@@ -191,8 +191,8 @@ freq = cstruc.freq;
         end;
         fsize = 9;             % font size
         datetick('x',ydigit);
-        set(gca,'fontsize',fsize); 
-        set(gca,'tickdir','in');        
+        set(gca,'fontsize',fsize);
+        set(gca,'tickdir','in');
         hold off;
 
       otherwise % how did we get here?
@@ -200,5 +200,5 @@ freq = cstruc.freq;
  end; % end of switch freq
 
 otherwise
- 
+
 end; % end of switch tsflag

@@ -1,26 +1,26 @@
 % PURPOSE: An example of using mess() on a small dataset
 %          matrix exponential spatial specification
-%                              
+%
 %---------------------------------------------------
 % USAGE: mess_d
 %---------------------------------------------------
 
 % load Anselin (1988) Columbus neighborhood crime data
-load anselin.dat; 
+load anselin.dat;
 n = length(anselin);
-x = [ones(n,1) anselin(:,2:3)]; 
+x = [ones(n,1) anselin(:,2:3)];
 latt = anselin(:,4);
 long = anselin(:,5);
 vnames = strvcat('crime','constant','income','hvalue');
 
-load wmat.dat; 
+load wmat.dat;
 W = sparse(wmat(:,1),wmat(:,2),wmat(:,3));;
 
 % do Monte Carlo generation of an SAR model
-sige = 100; 
+sige = 100;
 evec = randn(n,1)*sqrt(sige);
 beta = ones(3,1);
-rho = 0.6; lam = 0.25; 
+rho = 0.6; lam = 0.25;
 A = eye(n) - rho*W;  AI = inv(A);
 y = AI*x*beta + AI*evec; % generate some data
 

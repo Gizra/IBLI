@@ -7,20 +7,20 @@ function result = gwr(y,x,east,north,info);
 %       east = x-coordinates in space
 %      north = y-coordinates in space
 %       info = a structure variable with fields:
-%       info.bwidth = scalar bandwidth to use or zero 
+%       info.bwidth = scalar bandwidth to use or zero
 %                     for cross-validation estimation (default)
 %       info.bmin   = minimum bandwidth to use in CV search
 %       info.bmax   = maximum bandwidth to use in CV search
-%                     defaults: bmin = 0.1, bmax = 20                                             
+%                     defaults: bmin = 0.1, bmax = 20
 %       info.dtype  = 'gaussian'    for Gaussian weighting (default)
 %                   = 'exponential' for exponential weighting
 %                   = 'tricube'     for tri-cube weighting
 %       info.q      = q-nearest neighbors to use for tri-cube weights
-%                     (default: CV estimated)  
+%                     (default: CV estimated)
 %       info.qmin   = minimum # of neighbors to use in CV search
 %       info.qmax   = maximum # of neighbors to use in CV search
-%                     defaults: qmin = nvar+2, qmax = 4*nvar     
-% ---------------------------------------------------                                    
+%                     defaults: qmin = nvar+2, qmax = 4*nvar
+% ---------------------------------------------------
 %  NOTE: res = gwr(y,x,east,north) does CV estimation of bandwidth
 % ---------------------------------------------------
 % RETURNS: a results structure
@@ -62,11 +62,11 @@ if nargin == 5 % user options
  nf = length(fields);
  % set defaults
  [n k] = size(x);
- bwidth = 0; dtype = 0; q = 0; qmin = k+2; qmax = 5*k; 
+ bwidth = 0; dtype = 0; q = 0; qmin = k+2; qmax = 5*k;
  bmin = 0.1; bmax = 20.0;
   for i=1:nf
     if strcmp(fields{i},'bwidth')
-        bwidth = info.bwidth; 
+        bwidth = info.bwidth;
     elseif strcmp(fields{i},'dtype')
         dstring = info.dtype;
        if strcmp(dstring,'gaussian')
@@ -87,7 +87,7 @@ if nargin == 5 % user options
     elseif strcmp(fields{i},'bmax');
         bmax = info.bmax;
 
-    end; 
+    end;
   end; % end of for i
  end; % end of if else
 
@@ -128,8 +128,8 @@ if dtype == 0     % Gaussian weights
 [bdwt,junk,exitflag,output] = fminbnd('scoref',bmin,bmax,options,y,x,east,north,dtype);
 elseif dtype == 1 % exponential weights
 [bdwt,junk,exitflag,output] = fminbnd('scoref',bmin,bmax,options,y,x,east,north,dtype);
-end;        
- if output.iterations == 500, 
+end;
+ if output.iterations == 500,
  fprintf(1,'gwr: cv convergence not obtained in %4d iterations',output.iterations);
  else
  result.iter = output.iterations;
@@ -166,9 +166,9 @@ for iter=1:n;
     d = (dx.*dx + dy.*dy);
     sd = std(sqrt(d));
     % sort distance to find q nearest neighbors
-    ds = sort(d); 
+    ds = sort(d);
     if dtype == 2, dmax = ds(q,1); end;
-       if dtype == 0,     % Gausian weights 
+       if dtype == 0,     % Gausian weights
         wt = stdn_pdf(sqrt(d)/(sd*bdwt));
        elseif dtype == 1, % exponential weights
         wt = exp(-d/bdwt);
@@ -176,7 +176,7 @@ for iter=1:n;
  wt = zeros(n,1);
  nzip = find(d <= dmax);
         wt(nzip,1) = (1-(d(nzip,1)/dmax).^3).^3;
-       end; % end of if,else 
+       end; % end of if,else
 wt = sqrt(wt);
 
 
@@ -191,7 +191,7 @@ b = xpxi*xs'*ys;
 yhatv = xs*b;
 yhat(iter,1) = x(iter,:)*b;
 resid(iter,1) = y(iter,1) - yhat(iter,1);
-% compute residuals 
+% compute residuals
 e = ys - yhatv;
 % find # of non-zero observations
 nadj = length(nzip);
@@ -202,7 +202,7 @@ sdb = sqrt(sige*diag(xpxi));
 % store coefficient estimates and std errors in matrices
 % one set of beta,std for each observation
 bsave(iter,:) = b';
-ssave(iter,:) = sdb'; 
+ssave(iter,:) = sdb';
 sigv(iter,1) = sige;
 end;
 

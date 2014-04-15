@@ -1,5 +1,5 @@
 function llike = f_sar(rho,detval,epe0,eped,epe0d,n)
-% PURPOSE: evaluates concentrated log-likelihood for the 
+% PURPOSE: evaluates concentrated log-likelihood for the
 %  spatial autoregressive model using sparse matrix algorithms
 % ---------------------------------------------------
 %  USAGE:llike = f_sar(rho,detval,epe0,eped,epe0d,n)
@@ -19,7 +19,7 @@ function llike = f_sar(rho,detval,epe0,eped,epe0d,n)
 % ---------------------------------------------------
 %  RETURNS: a  scalar equal to minus the log-likelihood
 %           function value at the parameter rho
-% ---------------------------------------------------                         
+% ---------------------------------------------------
 %  NOTE: this is really two functions depending
 %        on nargin = 3 or nargin = 4 (see the function)
 %  --------------------------------------------------
@@ -44,7 +44,7 @@ if isempty(index)
 index = 1;
 end;
 
-detm = detval(index,2); 
+detm = detval(index,2);
 
 z = epe0 - 2*rho*epe0d + rho*rho*eped;
 

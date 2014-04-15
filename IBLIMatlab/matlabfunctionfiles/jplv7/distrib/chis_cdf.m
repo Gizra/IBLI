@@ -7,7 +7,7 @@ function F = chis_cdf (x, a)
 % NOTE: chis_cdf(x,n) = gamm_cdf(x/2,n/2)
 %---------------------------------------------------
 % RETURNS:
-%        a vector pdf at each element of x from chisq(n) distribution      
+%        a vector pdf at each element of x from chisq(n) distribution
 % --------------------------------------------------
 % SEE ALSO: chis_d, chis_pdf, chis_rnd, chis_inv
 %---------------------------------------------------

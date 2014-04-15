@@ -1,5 +1,5 @@
 % PURPOSE: demo using most all regression functions
-%                       
+%
 %       ols,hwhite,nwest,ridge,theil,tsls,logit,probit,tobit,robust
 %---------------------------------------------------
 % USAGE: demo_all
@@ -43,12 +43,12 @@ prt(rres,vnames);
 n = 24;
 y = zeros(n,1);
 y(1:14,1) = ones(14,1);
-%       (data from Spector and Mazzeo, 1980) 
+%       (data from Spector and Mazzeo, 1980)
 xdata = [21 24 25 26 28 31 33 34 35 37 43 49 ...
          51 55 25 29 43 44 46 46 51 55 56 58];
-         
+
 iota = ones(n,1);
-x = [iota xdata'];      
+x = [iota xdata'];
 
 vnames=strvcat('days','iota','response');
 
@@ -75,7 +75,7 @@ x(1:n,1) = ones(n,1);      % intercept
 x(19:32,2) = ones(n-18,1); % psi variable
 tuce = [20 22 24 12 21 17 17 21 25 29 20 23 23 25 26 19 ...
         25 19 23 25 22 28 14 26 24 27 17 24 21 23 21 19];
-        
+
 x(1:n,3) = tuce';
 
 gpa = [2.66 2.89 3.28 2.92 4.00 2.86 2.76 2.87 3.03 3.92 ...
@@ -110,11 +110,11 @@ Vnames = strvcat('y','const','x1','x2','x3','x4');
 
 % set up prior
 rvec = [-1.0    % prior means for the coefficients
-         1.0    
-         2.0    
-         2.0    
+         1.0
+         2.0
+         2.0
          1.0];
-        
+
 rmat = eye(nvar);
 bv = 10000.0;
 
@@ -154,12 +154,12 @@ vname2 = ['y2-eqn  ',
           'y1 var  ',
           'constant',
           'x2 var  '];
-          
+
 % use all exogenous in the system as instruments
-xall = [iota x1 x2];            
+xall = [iota x1 x2];
 
 % do tsls regression
-result2 = tsls(y2,y1,[iota x2],xall); 
+result2 = tsls(y2,y1,[iota x2],xall);
 prt(result2,vname2);
 
 
@@ -243,9 +243,9 @@ vnames = ['y     ',
           'x1var ',
           'x2var ',
           'x3var ',
-          'x4var '];          
-          
-prt(resp,vnames);          
+          'x4var '];
+
+prt(resp,vnames);
 
 
 % * * * * * * * demo thsls regression
@@ -278,20 +278,20 @@ end;
 
 
 vname1 = ['y1-LHS  ',
-          'constant',          
+          'constant',
           'x1 var  '];
-          
+
 vname2 = ['y2-LHS  ',
           'y1 var  ',
           'constant',
           'x2 var  '];
-          
+
 vname3 = ['y3-LHS  ',
           'y2 var  ',
           'constant',
           'x2 var  ',
           'x3 var  '];
-                     
+
 
 % set up a structure for y containing y's for each eqn
 y(1).eq = y1;
@@ -341,12 +341,12 @@ end;
 yt = y(101:n,1);
 xt = xmat(101:n,:);
 n = n-100; % reset n to reflect truncation
- 
+
 Vnames = ['y    ',
           'cterm',
           'x2   ',
           'x3   '];
-          
+
 
 % do Cochrane-Orcutt ar1 regression
 result = olsc(yt,xt);

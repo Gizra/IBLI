@@ -4,13 +4,13 @@ function y = pois_rnd(n,lambda)
 % USAGE:  y = pois_rnd(n,lambda)
 % where:   lambda = mean used for the draws
 %               n = # of draws
-%--------------------------------------------------  
+%--------------------------------------------------
 % RETURNS: y = a vector of draws
-%--------------------------------------------------  
+%--------------------------------------------------
 % NOTES:  Uses naive inversion method.
 % mean = lambda, variance = lambda
 %--------------------------------------------------
-                    
+
 % Gordon K Smyth
 % gks@maths.uq.edu.au
 % Department of Mathematics, Unversity of Queensland, Q 4072, Australia

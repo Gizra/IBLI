@@ -7,7 +7,7 @@ function s = bingen(p0,p1,m)
 %         m = number of outputs
 % ----------------------------------------
 % RETURNS: an (m x 1) vector of 0,1 values
-%          based on unif_rnd(m) >= p0/(p0+p1)        
+%          based on unif_rnd(m) >= p0/(p0+p1)
 
 % written by:
 % James P. LeSage, Dept of Economics

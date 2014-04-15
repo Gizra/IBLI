@@ -3,9 +3,9 @@ function K=commutation(m,n)
 % PURPOSE: given any (m X n) matrix A returns the (mn X mn) K
 %          matrix such that: vec(A')=K*vec(A).
 % -----------------------------------------------------------
-% USAGE: K=commutation(m,n) where m and n are the numbers of 
+% USAGE: K=commutation(m,n) where m and n are the numbers of
 %         rows and columns of matrix A.
-% -----------------------------------------------------------        
+% -----------------------------------------------------------
 
 % written by
 % Marco Aiolfi

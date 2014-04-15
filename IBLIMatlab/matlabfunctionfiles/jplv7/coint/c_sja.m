@@ -10,17 +10,17 @@ function jc =  c_sja(n,p)
 %                 p >  1  returns no critical values
 % ------------------------------------------------------------
 % RETURNS: a (3x1) vector of percentiles for the maximum eigenvalue
-%          statistic for: [90% 95% 99%]               
+%          statistic for: [90% 95% 99%]
 % ------------------------------------------------------------
 % NOTES: for n > 12, the function returns a (3x1) vector of zeros.
 %        The values returned by the function were generated using
 %        a method described in MacKinnon (1996), using his FORTRAN
-%        program johdist.f                        
+%        program johdist.f
 % ------------------------------------------------------------
 % SEE ALSO: johansen()
 % ------------------------------------------------------------
-% References: MacKinnon, Haug, Michelis (1996) 'Numerical distribution 
-% functions of likelihood ratio tests for cointegration', 
+% References: MacKinnon, Haug, Michelis (1996) 'Numerical distribution
+% functions of likelihood ratio tests for cointegration',
 % Queen's University Institute for Economic Research Discussion paper.
 % -------------------------------------------------------
 
@@ -45,22 +45,22 @@ jcp0 = [ 2.9762  4.1296  6.9406
         57.7954 61.0404 67.6415
         63.7248 67.0756 73.8856
         69.6513 73.0946 80.0937];
-  
-jcp1 = [ 2.7055   3.8415   6.6349  
-        12.2971  14.2639  18.5200  
-        18.8928  21.1314  25.8650  
-        25.1236  27.5858  32.7172  
-        31.2379  33.8777  39.3693  
-        37.2786  40.0763  45.8662  
-        43.2947  46.2299  52.3069  
-        49.2855  52.3622  58.6634  
-        55.2412  58.4332  64.9960  
-        61.2041  64.5040  71.2525  
+
+jcp1 = [ 2.7055   3.8415   6.6349
+        12.2971  14.2639  18.5200
+        18.8928  21.1314  25.8650
+        25.1236  27.5858  32.7172
+        31.2379  33.8777  39.3693
+        37.2786  40.0763  45.8662
+        43.2947  46.2299  52.3069
+        49.2855  52.3622  58.6634
+        55.2412  58.4332  64.9960
+        61.2041  64.5040  71.2525
         67.1307  70.5392  77.4877
         73.0563  76.5734  83.7105];
-        
-jcp2 = [ 2.7055   3.8415   6.6349        
-        15.0006  17.1481  21.7465        
+
+jcp2 = [ 2.7055   3.8415   6.6349
+        15.0006  17.1481  21.7465
         21.8731  24.2522  29.2631
         28.2398  30.8151  36.1930
         34.4202  37.1646  42.8612
@@ -83,4 +83,4 @@ jcp2 = [ 2.7055   3.8415   6.6349
    elseif p == 1
     jc = jcp2(n,:);
    end;
-   
+

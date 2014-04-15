@@ -1,6 +1,6 @@
-% PURPOSE: An example of using bvar_g(), 
-%          Gibbs estimates for a vector autoregressive model                                                 
-%          (with Minnesota prior)                    
+% PURPOSE: An example of using bvar_g(),
+%          Gibbs estimates for a vector autoregressive model
+%          (with Minnesota prior)
 %---------------------------------------------------
 % USAGE: bvar_gd
 %---------------------------------------------------
@@ -11,10 +11,10 @@ load test.dat; % a test data set containing
 % data covers 1982,1 to 1996,5
 
 vnames =  ['  il',
-           '  in'];  
+           '  in'];
 
 % vnames = strvcat('il','in','ky','mi','oh','pa','tn','wv');
-     
+
 y = test(:,1:2); % use only two variables
 [nobs neqs] = size(y);
 
@@ -25,17 +25,17 @@ weight = 0.5; % symmetric weights
 
 % this is an example of using 1st-order contiguity
 % of the states as weights as in LeSage and Pan (1995)
-% `Using Spatial Contiguity as Bayesian Prior Information 
-% in Regional Forecasting Models'' International Regional 
+% `Using Spatial Contiguity as Bayesian Prior Information
+% in Regional Forecasting Models'' International Regional
 % Science Review, Volume 18, no. 1, pp. 33-53, 1995.
 
-w = [1.0  1.0  1.0  0.1  0.1  0.1  0.1  0.1 
-     1.0  1.0  1.0  1.0  1.0  0.1  0.1  0.1 
-     1.0  1.0  1.0  0.1  1.0  0.1  1.0  1.0 
-     0.1  1.0  0.1  1.0  1.0  0.1  0.1  0.1 
-     0.1  1.0  1.0  1.0  1.0  1.0  0.1  1.0 
-     0.1  0.1  0.1  0.1  1.0  1.0  0.1  1.0 
-     0.1  0.1  1.0  0.1  0.1  0.1  1.0  0.1 
+w = [1.0  1.0  1.0  0.1  0.1  0.1  0.1  0.1
+     1.0  1.0  1.0  1.0  1.0  0.1  0.1  0.1
+     1.0  1.0  1.0  0.1  1.0  0.1  1.0  1.0
+     0.1  1.0  0.1  1.0  1.0  0.1  0.1  0.1
+     0.1  1.0  1.0  1.0  1.0  1.0  0.1  1.0
+     0.1  0.1  0.1  0.1  1.0  1.0  0.1  1.0
+     0.1  0.1  1.0  0.1  0.1  0.1  1.0  0.1
      0.1  0.1  1.0  0.1  1.0  1.0  0.1  1.0];
 
 % set up prior structure

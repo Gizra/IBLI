@@ -1,6 +1,6 @@
-% PURPOSE: An example of using sem_g() 
-% Gibbs sampling spatial error model(on a small data set)  
-%                                   
+% PURPOSE: An example of using sem_g()
+% Gibbs sampling spatial error model(on a small data set)
+%
 %---------------------------------------------------
 % USAGE: sem_gd (see also sem_gd2 for a large data set)
 %---------------------------------------------------
@@ -8,13 +8,13 @@
 clear all;
 
 % W-matrix from Anselin's neigbhorhood crime data set
-load anselin.dat; 
+load anselin.dat;
 xc = anselin(:,4);
 yc = anselin(:,5);
 % crate standardized 1st-order spatial weight matrix
 [j1 W j2] = xy2cont(xc,yc);
 [n junk] = size(W);
-IN = eye(n); 
+IN = eye(n);
 rho = 0.7;  % true value of rho
 sige = 1;
 k = 3;
@@ -68,7 +68,7 @@ legend('novi','rval=200','rval=4');
 title('rho posterior distributions');
 
 % print comparison of estimates
-out = [results0.beta mean(results1.bdraw)' mean(results2.bdraw)' mean(results3.bdraw)' 
+out = [results0.beta mean(results1.bdraw)' mean(results2.bdraw)' mean(results3.bdraw)'
        results0.rho  mean(results1.pdraw)  mean(results2.pdraw)  mean(results3.pdraw) ];
 
 in.cnames = strvcat('max lik','novi','rval=200','rval=4');
@@ -77,7 +77,7 @@ in.rnames = strvcat('coefficients','b0','b1','b2','lambda');
 fprintf(1,'\n comparison of mean estimates \n');
 mprint(out,in);
 
-out2 = [results0.beta median(results1.bdraw)' median(results2.bdraw)' median(results3.bdraw)' 
+out2 = [results0.beta median(results1.bdraw)' median(results2.bdraw)' median(results3.bdraw)'
         results0.rho  median(results1.pdraw)  median(results2.pdraw)  median(results3.pdraw)  ];
 
 fprintf(1,'\n comparison of median estimates \n');

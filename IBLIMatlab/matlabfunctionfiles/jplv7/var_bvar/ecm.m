@@ -1,16 +1,16 @@
 function results = ecm(y,nlag,r)
 % PURPOSE: performs error correction model estimation
 %---------------------------------------------------
-% USAGE: result = ecm(y,nlag,r) 
+% USAGE: result = ecm(y,nlag,r)
 % where:    y    = an (nobs x neqs) matrix of y-vectors in levels
 %           nlag = the lag length
 %           r    = # of cointegrating relations to use
 %                  (optional: this will be determined using
-%                  Johansen's trace test at 95%-level if left blank)                                    
+%                  Johansen's trace test at 95%-level if left blank)
 % NOTES: constant vector automatically included
 %         x-matrix of exogenous variables not allowed
 %         error correction variables are automatically
-%         constructed using output from Johansen's ML-estimator 
+%         constructed using output from Johansen's ML-estimator
 %---------------------------------------------------
 % RETURNS a structure
 % results.meth = 'ecm'
@@ -21,11 +21,11 @@ function results = ecm(y,nlag,r)
 % results.coint= # of co-integrating relations (or r if input)
 % results.index= index of co-integrating variables ranked by
 %                size of eigenvalues large to small
-% --- the following are referenced by equation # --- 
+% --- the following are referenced by equation # ---
 % results(eq).beta   = bhat for equation eq (includes ec-bhats)
-% results(eq).tstat  = t-statistics 
+% results(eq).tstat  = t-statistics
 % results(eq).tprob  = t-probabilities
-% results(eq).resid  = residuals 
+% results(eq).resid  = residuals
 % results(eq).yhat   = predicted values (levels) (nlag+2:nobs,1)
 % results(eq).dyhat  = predicted values (differenced) (nlag+2:nobs,1)
 % results(eq).y      = actual y-level values (nobs x 1)
@@ -35,8 +35,8 @@ function results = ecm(y,nlag,r)
 % results(eq).rbar   = r-squared adjusted
 % results(eq).ftest  = Granger F-tests
 % results(eq).fprob  = Granger marginal probabilities
-% ---------------------------------------------------    
-% SEE ALSO: ecmf, becm, recm, prt_var 
+% ---------------------------------------------------
+% SEE ALSO: ecmf, becm, recm, prt_var
 % ---------------------------------------------------
 
 % written by:
@@ -57,9 +57,9 @@ if nargin == 3 % user is specifying the # of error correction terms to
  ecvectors = jres.evec;
    index = jres.ind;
  % construct r-error correction variables
- x = mlag(y(:,index),1)*ecvectors(:,1:r); 
+ x = mlag(y(:,index),1)*ecvectors(:,1:r);
    [nobs2 nx] = size(x);
-   
+
 elseif nargin == 2 % we need to find r
  jres = johansen(y,0,nlag);
  % find r = # significant co-integrating relations using
@@ -76,13 +76,13 @@ elseif nargin == 2 % we need to find r
  ecvectors = jres.evec;
    index = jres.ind;
  % construct r error correction variables
- x = mlag(y(:,index),1)*ecvectors(:,1:r); 
-   [junk nx] = size(x);    
+ x = mlag(y(:,index),1)*ecvectors(:,1:r);
+   [junk nx] = size(x);
 else
  error('Wrong # of arguments to ecm');
 end;
 
-% nvar adjusted for constant term 
+% nvar adjusted for constant term
  k = neqs*nlag+nx+1;
  nvar = k;
 
@@ -93,7 +93,7 @@ x = trimr(x,1,0);   % account for differencing
 
 % call VAR using 1st difference and co-integrating variables
 % call depends on whether we have an x-matrix or not
-if nx ~= 0 
+if nx ~= 0
 results = vare(dy,nlag,x);
 else
 results = vare(dy,nlag);

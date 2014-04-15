@@ -1,7 +1,7 @@
 function [pout,fout] = linmin(pin,xi,tol,f,varargin)
 % PURPOSE: line minimization routine that performs an ad hoc n-dimensional
-%          Golden Section Search for the minimum of a function. 
-%          (Converted from Numerical Recipes book linmin routine) 
+%          Golden Section Search for the minimum of a function.
+%          (Converted from Numerical Recipes book linmin routine)
 %---------------------------------------------------
 % USAGE: [pout,fout] = linmin(pin,x,tol,func,varargin)
 % where:      pin = (kx1) vector of starting values
@@ -15,8 +15,8 @@ function [pout,fout] = linmin(pin,xi,tol,f,varargin)
 %---------------------------------------------------
 % NOTE: func must take the form func(b,varargin)
 %       where: b = parameter vector (k x 1)
-%       varargin = arguments passed to the function               
-%---------------------------------------------------    
+%       varargin = arguments passed to the function
+%---------------------------------------------------
 % SEE ALSO: dfp_min, pow_min, frpr_min functions that use this routine
 %---------------------------------------------------
 
@@ -43,8 +43,8 @@ itry = 0;
 
     xarg = p2;
     f2 = feval(funfcn,xarg,varargin{:});
-    
-while (f1 == f2 ) 
+
+while (f1 == f2 )
  itry = itry+1;
     p2 = p2 + xi;
     xarg = p2;
@@ -52,7 +52,7 @@ while (f1 == f2 )
     if itry == 10
      error('problems in linmin --- itry is 10');
     end;
-end;  
+end;
 
 if f1 <= f2
  pm = p1;
@@ -94,9 +94,9 @@ while (sqrt(sum(p1-p2).^2) >= tol)
      p2 = x2;
     else
      p1 = x1;
-    end;   
+    end;
 end;
-   
+
 if (fx1 < fx2)
  pout = x1;
 else
@@ -104,4 +104,3 @@ else
 end;
 xarg = pout;
     fout = feval(funfcn,xarg,varargin{:});
-    

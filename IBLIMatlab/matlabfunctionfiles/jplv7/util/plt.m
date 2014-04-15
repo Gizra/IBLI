@@ -11,11 +11,11 @@ function plt(results,vnames,arg3)
 %                                'cterm'];       strings
 % --------------------------------------------------
 % NOTES: this is simply a wrapper function that calls another function
-% --------------------------------------------------        
+% --------------------------------------------------
 % RETURNS: nothing, just plots the results
 % --------------------------------------------------
 % SEE ALSO: prt()
-%---------------------------------------------------   
+%---------------------------------------------------
 
 % written by:
 % James P. LeSage, Dept of Economics
@@ -28,7 +28,7 @@ function plt(results,vnames,arg3)
 if ~isstruct(results)
 error('plt: requires a structure input');
 elseif nargin == 3
-arg = 3;          
+arg = 3;
 elseif nargin == 2
 arg = 2;
 elseif nargin == 1
@@ -44,7 +44,7 @@ switch method
 
 case {'arma','boxcox','boxcox2','hwhite','lad','logit','mlogit','nwest','ols','olsc',...
       'olsar1','olst','probit','ridge','robust','switch_em','theil','tobit','tsls',...
-      'hmarkov_em','hmarkov_em2'} 
+      'hmarkov_em','hmarkov_em2'}
      % call plt_reg
      if arg == 1
      plt_reg(results);
@@ -52,7 +52,7 @@ case {'arma','boxcox','boxcox2','hwhite','lad','logit','mlogit','nwest','ols','o
      plt_reg(results,vnames);
      end;
 
-case {'thsls','sur'} 
+case {'thsls','sur'}
      % call plt_eqs
      if arg == 1
      plt_eqs(results);
@@ -60,7 +60,7 @@ case {'thsls','sur'}
      plt_eqs(results,vnames);
      end;
 
-case {'vare','bvar','rvar','ecm','becm','recm'} 
+case {'vare','bvar','rvar','ecm','becm','recm'}
      % call plt_var
      if arg == 1
      plt_var(results);
@@ -68,7 +68,7 @@ case {'vare','bvar','rvar','ecm','becm','recm'}
      plt_var(results,vnames);
      end;
 
-case {'bvar_g','rvar_g','becm_g','recm_g'} 
+case {'bvar_g','rvar_g','becm_g','recm_g'}
      % call plt_varg
      if arg == 1
      plt_varg(results);
@@ -86,7 +86,7 @@ case {'ar_g','ols_g', 'bma_g', 'tobit_g','probit_g'}
 
 case {'sar','sar_g','sart_g','sarp_g','far','far_g','sem','sem_g','semt_g', ...
  'semp_g','bcasetti','casetti','darp','gwr','bgwr','bgwrv','sac','sac_g', ...
- 'sact_g','sacp_g','sdm','sdm_g','sdmt_g','sdmp_g','gwr_logit','gwr_probit'}     
+ 'sact_g','sacp_g','sdm','sdm_g','sdmt_g','sdmp_g','gwr_logit','gwr_probit'}
      % call plt_spat
      if arg == 1
      plt_spat(results);
@@ -133,16 +133,16 @@ case {'dfbeta'}
 
 case {'cusums'}
      plt_cus(results);
-  
+
 case {'fturns'}
      if arg == 1
-  plt_turns(results); 
+  plt_turns(results);
   elseif arg == 2
      plt_turns(results,vnames); % vnames is really cstruct
   elseif arg == 3
      plt_turns(results,vnames,arg3);
   end;
-  
+
 otherwise
 error('results structure not known by plt function');
 

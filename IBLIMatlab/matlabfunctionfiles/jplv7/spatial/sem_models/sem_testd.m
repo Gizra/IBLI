@@ -1,6 +1,6 @@
-% PURPOSE: An example of using sem 
-% Maximum likelihood spatial error model(on a small data set)  
-%                                   
+% PURPOSE: An example of using sem
+% Maximum likelihood spatial error model(on a small data set)
+%
 %---------------------------------------------------
 % USAGE: sem_gcd (see also sem_gcd2 for a large data set)
 %---------------------------------------------------
@@ -26,14 +26,14 @@
 % latt = anselin(:,4);
 % long = anselin(:,5);
 % vnames = strvcat('crime','constant','income','hvalue');
-% 
+%
 % clear anselin;
-% 
+%
 % load anselin.ford;
-% 
+%
 % W = anselin;
 % % use defaults including lndet approximation
-% 
+%
 clear all;
 % NOTE a large data set with 3107 observations
 % from Pace and Barry, takes around 150-250 seconds

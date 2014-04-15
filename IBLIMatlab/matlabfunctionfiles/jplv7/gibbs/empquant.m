@@ -9,7 +9,7 @@ function y = empquant(runs,q)
 % J.M. Bernardo, A.P. Dawid, and A.F.M. Smith (eds.) Proceedings of
 % the Fourth Valencia International Meeting on Bayesian Statistics,
 % pp. 169-194, Oxford University Press
-% Also: `Using simulation methods for Bayesian econometric models: 
+% Also: `Using simulation methods for Bayesian econometric models:
 % Inference, development and communication', at: www.econ.umn.edu/~bacc
 % -----------------------------------------------------------------
 
@@ -19,7 +19,7 @@ function y = empquant(runs,q)
 % 601 University Drive
 % San Marcos, TX 78666
 % jlesage@spatial-econometrics.com
- 
+
 % NOTE: this code draws heavily on MATLAB programs written by
 % Siddartha Chib available at: www.econ.umn.edu/~bacc
 % I have repackaged it to make it easier to use.

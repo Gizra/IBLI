@@ -1,5 +1,5 @@
 function []=tduni_plot(res)
-% PURPOSE: Generate graphic output of the BFL or Denton 
+% PURPOSE: Generate graphic output of the BFL or Denton
 %          temporal disaggregation method
 % ------------------------------------------------------------
 % SYNTAX: tduni_plot(res);
@@ -32,7 +32,7 @@ ya=zeros(n,1);   % Initial allocation
 
 while (t<=res.N)
    c=0;
-   while (c<res.s)         
+   while (c<res.s)
       ya(i,1)=Y(t,1);
       c=c+1;
       i=i+1;
@@ -51,7 +51,7 @@ plot(t,res.y,'b-',t,ya/g1,'r-');
 axis ([0 n+1 min(res.y)*0.99 max(res.y)*1.01]);
 grid off; legend (res.meth,'naive',0);
 title ('High frequency and low frequency series');
-xlabel ('time'); 
+xlabel ('time');
 
 switch res.meth
 case {'Boot-Feibes-Lisman'}
@@ -82,10 +82,9 @@ case {'Denton','Proportional Denton'}
    plot(t,res.u,'r-',t,ua/g1,'b-');
    grid off; legend ('u','U',0);
    title ('High frequency and low frequency residuals');
-   xlabel ('time'); 
+   xlabel ('time');
 end
 
 
 
 
-   

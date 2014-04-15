@@ -10,7 +10,7 @@ function T = calT(rex,s,n);
 % INPUT: rex: structure that contains the AR and MA operators
 %        of ARIMA model, both regular and seasonal, as well as
 %        the degrees of differencing
-%        s: number of high frequency data points 
+%        s: number of high frequency data points
 %        for each low frequency data points
 %        n: number of data points to compute
 % ------------------------------------------------------------
@@ -84,7 +84,7 @@ ma  = conv(ma_reg,ma_sea);
 % ------------------------------------------------------------
 % Computing phi-weights of ARMA model
 
-[phi,t] = impz(ma,ar,n); 
+[phi,t] = impz(ma,ar,n);
 
 phi=phi(2:end); % Skipping first element (normalized to 1)
 

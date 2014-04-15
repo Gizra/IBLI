@@ -1,6 +1,6 @@
 % PURPOSE: An example of using sarp_g() Gibbs sampling
 %          spatial autoregressive probit model
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
 % USAGE: sarp_gd (see also sarp_gd2 for a large data set)
 %---------------------------------------------------
@@ -14,7 +14,7 @@ long = anselin(:,5);
 W = make_neighborsw(latt,long,5); % 5 nearest neighbors weight matrix
 
 [n junk] = size(W);
-IN = eye(n); 
+IN = eye(n);
 rho = 0.7;  % true value of rho
 sige = 10;
 k = 3;
@@ -24,7 +24,7 @@ beta(1,1) = -0.5;
 beta(2,1) = 2.0;
 beta(3,1) = -2.0;
 
-y = (x*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige)); 
+y = (x*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige));
 
 res = sem(y,x,W);
 prt(res);

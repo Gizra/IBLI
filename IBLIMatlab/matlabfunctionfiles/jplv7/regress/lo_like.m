@@ -1,7 +1,7 @@
 function out = lo_like(b,y,x)
 % PURPOSE: evaluate logit log-likelihood
 %-----------------------------------------------------
-% USAGE:    like = lo_like(b,y,x,flag) 
+% USAGE:    like = lo_like(b,y,x,flag)
 % where:     b = parameter vector (k x 1)
 %            y = dependent variable vector (n x 1)
 %            x = explanatory variables matrix (n x m)

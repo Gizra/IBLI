@@ -4,12 +4,12 @@ function ans = isposdef(a)
 % USAGE: ans = isposdef(x)
 % where: x    = input matrix
 %---------------------------------------------------
-% RETURNS: 
+% RETURNS:
 %        ans = 1, positive definite
 %        ans = 0, not positive definite
 % ----------------------------------------------------------------
 % NOTES:
-% uses: [R,p] = chol(a); ans = (p == 0); which is fairly fast 
+% uses: [R,p] = chol(a); ans = (p == 0); which is fairly fast
 % ----------------------------------------------------------------
 
 

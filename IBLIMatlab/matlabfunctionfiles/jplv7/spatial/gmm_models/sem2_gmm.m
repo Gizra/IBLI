@@ -36,7 +36,7 @@ function results=sem2_gmm(y,x,W1,W2,options)
 %         results.rbar          = rbar-squared
 %         results.se            = Standard errors from EGLS
 %         results.nobs          = number of observations
-%         results.nvar          = number of variables 
+%         results.nvar          = number of variables
 %         results.time1         = time for optimization
 %         results.time          = total time taken
 %         results.iter          = # of EGLS iterations
@@ -49,7 +49,7 @@ function results=sem2_gmm(y,x,W1,W2,options)
 % Model with Autoregressive Disturbances. \textit{Journal of Real
 % Estate and Finance Economics},  17, 99-121.
 % Documentation in microsoft word format included in the Econometrics Toolbox
-% GENERALIZED MOMENTS ESTIMATION FOR FLEXIBLE SPATIAL ERROR MODELS:  
+% GENERALIZED MOMENTS ESTIMATION FOR FLEXIBLE SPATIAL ERROR MODELS:
 % A LIBRARY FOR MATLAB, by Shawn Bucholtz
 % ---------------------------------------------------
 
@@ -86,7 +86,7 @@ if length(ind) > 0 % we have an intercept
 end;
 
 results.meth = 'sem2_gmm';
-time1 = 0; 
+time1 = 0;
 time2 = 0;
 
 if nargin == 5 % we need to parse user input options
@@ -94,19 +94,19 @@ fields = fieldnames(options);
 nf = length(fields);
  for i=1:nf
     if strcmp(fields{i},'prt')
-        infoz2.prt = options.prt; 
+        infoz2.prt = options.prt;
     elseif strcmp(fields{i},'maxit')
         infoz2.maxit = options.maxit;
     elseif strcmp(fields{i},'iter')
         itflag = options.iter;
     elseif strcmp(fields{i},'btol')
-        infoz2.btol = options.btol;   
+        infoz2.btol = options.btol;
     elseif strcmp(fields{i},'ftol');
         infoz2.ftol = options.ftol;
   end;
  end;
 end;
-    
+
 
 
 timet = clock; % start the clock for overall timing
@@ -156,9 +156,9 @@ while (converge > criteria & iter < itermax)
 %The notation is simialar to the publication;
 %se1 denotes e with a single dot (W*e);
 %de1 denotes e with a double dot (W*W*e);
-    se1=W1*e;     
+    se1=W1*e;
     de1=W1*se1;
-    se2=W2*e;     
+    se2=W2*e;
     de2=W2*se2;
 
 Gn=zeros(6,6);
@@ -214,14 +214,14 @@ Gn2=[(1/N)*e'*e;(1/N)*se1'*se1;(1/N)*se2'*se2;(1/N)*se1'*se2;(1/N)*se1'*e;(1/N)*
     %Pass arguements to MINZ function;
     [lambdahat,infoz2,stat]=minz(lambdavec,infoz2.func,infoz2,Gn,Gn2);
 
-    
+
     % impose a restriction on lam1, lam2
     lam1 = lambdahat(1);
     lam2 = lambdahat(2);
     if lam1 + lam2 > 1
         lam1 = 1 - lam2;
     end;
-    
+
     lambdavec = [lam1;lam2;lambdahat(3)];
 
     %Estimate Parameters using EGLS;
@@ -239,10 +239,10 @@ Gn2=[(1/N)*e'*e;(1/N)*se1'*se1;(1/N)*se2'*se2;(1/N)*se1'*se2;(1/N)*se1'*e;(1/N)*
 end;
 
 elseif itflag == 0
-        
-    se1=W1*e;     
+
+    se1=W1*e;
     de1=W1*se1;
-    se2=W2*e;     
+    se2=W2*e;
     de2=W2*se2;
 
 Gn=zeros(6,6);
@@ -308,7 +308,7 @@ Gn2=[(1/N)*e'*e;(1/N)*se1'*se1;(1/N)*se2'*se2;(1/N)*se1'*se2;(1/N)*se1'*e;(1/N)*
     ys = tmp*y;
     results.beta = xs\ys;
 
-end;        
+end;
 
 time1 = etime(clock,t0);
 results.iter = iter;
@@ -328,7 +328,7 @@ results.GMsige=lambdahat(3);
 results.yhat = x*results.beta;
 results.resid = y - results.yhat;
 
-B = speye(N) - results.lambda(1)*sparse(W1) - results.lambda(2)*sparse(W2); 
+B = speye(N) - results.lambda(1)*sparse(W1) - results.lambda(2)*sparse(W2);
 Be = B*e;
 epe = Be'*Be;
 results.sige = (1/N)*epe;

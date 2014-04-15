@@ -36,22 +36,22 @@ function res=chowlin(Y,x,ta,s,type)
 %            ta=2 ---> average (index)
 %            ta=3 ---> last element (stock) ---> interpolation
 %            ta=4 ---> first element (stock) ---> interpolation
-%        s: number of high frequency data points for each low frequency data points 
+%        s: number of high frequency data points for each low frequency data points
 %            s= 4 ---> annual to quarterly
 %            s=12 ---> annual to monthly
 %            s= 3 ---> quarterly to monthly
-%        type: estimation method: 
-%            type=0 ---> weighted least squares 
+%        type: estimation method:
+%            type=0 ---> weighted least squares
 %            type=1 ---> maximum likelihood
 % ------------------------------------------------------------
 % LIBRARY: aggreg
 % ------------------------------------------------------------
 % SEE ALSO: litterman, fernandez, td_plot, td_print
 % ------------------------------------------------------------
-% REFERENCE: Chow, G. and Lin, A.L. (1971) "Best linear unbiased 
-% distribution and extrapolation of economic time series by related 
+% REFERENCE: Chow, G. and Lin, A.L. (1971) "Best linear unbiased
+% distribution and extrapolation of economic time series by related
 % series", Review of Economic and Statistics, vol. 53, n. 4, p. 372-375.
-% Bournay, J. y Laroque, G. (1979) "Reflexions sur la methode d'elaboration 
+% Bournay, J. y Laroque, G. (1979) "Reflexions sur la methode d'elaboration
 % des comptes trimestriels", Annales de l'INSEE, n. 36, p. 3-30.
 
 % written by:
@@ -71,7 +71,7 @@ t0=clock;
 % ------------------------------------------------------------
 % Preparing the X matrix: including an intercept
 
-e=ones(n,1);   
+e=ones(n,1);
 x=[e x];       % Expanding the regressor matrix
 p=p+1;         % Number of p high-frequency inputs (plus intercept)
 
@@ -85,7 +85,7 @@ C = aggreg(ta,N,s);
 % extrapolation if needed.
 
 if (n > s * N)
-   pred=n-s*N;           % Number of required extrapolations 
+   pred=n-s*N;           % Number of required extrapolations
    C=[C zeros(N,pred)];
 else
    pred=0;
@@ -98,8 +98,8 @@ X=C*x;
 
 % -----------------------------------------------------------
 % -----------------------------------------------------------
-% Estimation of optimal innovational parameter by means of a 
-% grid search on the objective function: likelihood (type=1) 
+% Estimation of optimal innovational parameter by means of a
+% grid search on the objective function: likelihood (type=1)
 % or weighted least squares (type=0)
 
 % Parameters of grid search
@@ -141,7 +141,7 @@ for h=1:h_lim;
       val(h)=-scp;   % Objective function = Weighted least squares
    case 1
       val(h)=l;      % Objective function = Likelihood function
-   end; 
+   end;
 end; % of loop h
 
 % -----------------------------------------------------------
@@ -195,7 +195,7 @@ y_ls=y+d_y;           % Upper lim. of high frequency estimates
 res.meth='Chow-Lin';
 
 % -----------------------------------------------------------
-% Basic parameters 
+% Basic parameters
 
 res.ta        = ta;
 res.type      = type;

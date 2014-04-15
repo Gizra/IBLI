@@ -1,8 +1,8 @@
 function results = ar_g(y,nlag,ndraw,nomit,prior,start)
-% PURPOSE: MCMC estimates Bayesian heteroscedastic AR(k) model 
+% PURPOSE: MCMC estimates Bayesian heteroscedastic AR(k) model
 %          imposing stability restrictions using Gibbs sampling
-%          y = b0 + y(t-1) b1 + y(t-2) b2 +,...,y(t-k) bk + E, 
-%          E = N(0,sige*V), sige = gamma(nu,d0), b = N(c,T), 
+%          y = b0 + y(t-1) b1 + y(t-2) b2 +,...,y(t-k) bk + E,
+%          E = N(0,sige*V), sige = gamma(nu,d0), b = N(c,T),
 %          V = diag(v1,v2,...vn), r/vi = ID chi(r)/r, r = Gamma(m,k)
 %---------------------------------------------------
 % USAGE:    results = ar_g(y,nlag,ndraw,nomit,prior,start)
@@ -10,18 +10,18 @@ function results = ar_g(y,nlag,ndraw,nomit,prior,start)
 %        nlag = # of lagged values
 %       ndraw = # of draws
 %       nomit = # of initial draws omitted for burn-in
-%       prior = a structure for prior information input:   
+%       prior = a structure for prior information input:
 %               prior.beta, prior means for beta,   c above
 %               priov.bcov, prior beta covariance , T above
 %               prior.rval, r prior hyperparameter, default=4
 %               prior.m,    informative Gamma(m,k) prior on r
 %               prior.k,    informative Gamma(m,k) prior on r
-%               prior.const, a switch for constant term, 
+%               prior.const, a switch for constant term,
 %                            default = 1 (a constant included)
 %               prior.nu,    a prior parameter for sige
 %               prior.d0,    a prior parameter for sige
 %                            (default = diffuse prior for sige)
-%       start = (optional) structure containing starting values: 
+%       start = (optional) structure containing starting values:
 %               defaults: OLS beta,sige, V= ones(n,1)
 %               start.b   = beta starting values (nvar x 1)
 %               start.sig = sige starting value  (scalar)
@@ -47,11 +47,11 @@ function results = ar_g(y,nlag,ndraw,nomit,prior,start)
 %          results.nu    = nu prior parameter
 %          results.d0    = d0 prior parameter
 %          results.m     = m prior parameter (if input)
-%          results.k     = k prior parameter (if input)          
+%          results.k     = k prior parameter (if input)
 %          results.time  = time taken for sampling
 %          results.accept= acceptance rate
-%          results.pflag = 'plevel' (default) 
-%                          or 'tstat' for bogus t-statistics          
+%          results.pflag = 'plevel' (default)
+%                          or 'tstat' for bogus t-statistics
 % --------------------------------------------------
 % NOTES: a constant term is automatically included in the model
 %        unless you set prior.const = 0;
@@ -89,14 +89,14 @@ end;
 
 fields = fieldnames(prior);
 nf = length(fields);
-mm = 0; 
+mm = 0;
 rval = 4;  % rval = 4 is default
 const = 1; % a constant is the default
 nu = 0;    % default diffuse prior for sige
 d0 = 0;
 for i=1:nf
     if strcmp(fields{i},'rval')
-        rval = prior.rval; 
+        rval = prior.rval;
     elseif strcmp(fields{i},'m')
         mm = prior.m;
         kk = prior.k;
@@ -117,12 +117,12 @@ if sflag == 0 % we supply ols starting values
  x = mlag(y,nlag);
  end;
 x = trimr(x,nlag,0); % feed the lags
-y = trimr(y,nlag,0); 
+y = trimr(y,nlag,0);
 nadj = length(y);
 b0 = x\y;  % Find ols values as initial starting values
 k = nlag+const;
-sige = (y-x*b0)'*(y-x*b0)/(nadj-k); 
-V = ones(nadj,1); in = ones(nadj,1); % initial value for V  
+sige = (y-x*b0)'*(y-x*b0)/(nadj-k);
+V = ones(nadj,1); in = ones(nadj,1); % initial value for V
 else
  if const == 1
  x = [ones(n,1) mlag(y,nlag)];
@@ -130,9 +130,9 @@ else
  x = mlag(y,nlag);
  end;
 x = trimr(x,nlag,0); % feed the lags
-y = trimr(y,nlag,0); 
+y = trimr(y,nlag,0);
 nadj = length(y);
-in = ones(nadj,1); % initial value for V  
+in = ones(nadj,1); % initial value for V
 end;
 
 c = prior.beta;
@@ -189,7 +189,7 @@ accept = 0; % rejection sampling
 end; % end of while loop
 
 % generate sige conditional on beta
-nu1 = nadj + nu; 
+nu1 = nadj + nu;
 e = ys - xs*beta;
 d1 = d0 + e'*e;
 chi = chis_rnd(1,nu1);
@@ -198,14 +198,14 @@ sige = 1/t2;
   chiv = chis_rnd(nadj,rval+1);   % update vi
   e = y-x*beta;
   vi = ((e.*e./sige) + in*rval)./chiv;
-  V = in./vi;  
+  V = in./vi;
 
   if mm ~= 0
   rval = gamm_rnd(1,1,mm,kk);  % update rval
   end;
-     
+
 if iter > nomit; % save draws
-vmean = vmean + vi;            
+vmean = vmean + vi;
 ssave(iter-nomit,1) = sige;
 bsave(iter-nomit,:) = beta';
 yhat = yhat + randn(nadj,1).*sqrt(sige*vi) + x*beta;

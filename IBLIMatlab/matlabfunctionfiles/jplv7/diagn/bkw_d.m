@@ -1,7 +1,7 @@
-% PURPOSE: demo of bkw() 
+% PURPOSE: demo of bkw()
 %          Belsley, Kuh, Welsch (1980)
 %          Collinearity diagnostic routine
-% 
+%
 %---------------------------------------------------
 % USAGE: bkw_d
 %---------------------------------------------------
@@ -30,16 +30,16 @@ vnames = ['vname1 ',
 % demonstrate BKW collinearity diagnostics
 disp('results with no variable names');
           bkw(x(:,1:5));
-disp('results with variable names');          
+disp('results with variable names');
           bkw(x(:,1:5),vnames(1:5,:));
-          
+
 
 x = randn(50,5);
 x(:,2) = x(:,1) + randn(50,1)*0.001;
 
 vnames =strvcat('y-variable','Illinois','Ohio','Indiana',...
          'W. Virginia','Pennsylvania');
-disp('results with default format');     
+disp('results with default format');
           bkw(x,vnames);
 
 fmt = '%12.6f';

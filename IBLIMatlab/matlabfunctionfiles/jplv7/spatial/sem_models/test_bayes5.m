@@ -1,5 +1,5 @@
 % PURPOSE: A comparison of Bayesian and ML estimates
-%          using a small dataset                 
+%          using a small dataset
 %---------------------------------------------------
 % USAGE: test_bayes
 %---------------------------------------------------
@@ -39,11 +39,11 @@ ndraw = 1500;
 nomit = 500;
 
 results3 = sem_gmm(y,x,W);
-prt(results3,vnames);  
+prt(results3,vnames);
 results2 = sem(y,x,W);
-prt(results2,vnames);  
+prt(results2,vnames);
 results1 = sem_g(y,x,W,ndraw,nomit,prior);
-prt(results1,vnames);  
+prt(results1,vnames);
 
 
 betas = [results1.beta results2.beta results3.beta];

@@ -1,10 +1,10 @@
 function [a,b,a_se,b_se]=svar(results,sa,sb,da,db,afree,bfree)
 % PURPOSE: svar verifies the identification conditions for a given structural form
-%          to be imposed on an estimated Var model; if the model is exactly 
+%          to be imposed on an estimated Var model; if the model is exactly
 %          or overidentified, svar performs a FIML estimation of the
-%          structural parameters. 
+%          structural parameters.
 %-----------------------------------------------------------------------
-% USAGE:  [a,b,a_se,b_se] = svar(results,sa,sb,da,db,afree,bfree) 
+% USAGE:  [a,b,a_se,b_se] = svar(results,sa,sb,da,db,afree,bfree)
 % ----------------------------------------------------------------------
 % INPUT:
 % sa,sb,da,db:      the matrix of the constraints in explicit form
@@ -21,10 +21,10 @@ function [a,b,a_se,b_se]=svar(results,sa,sb,da,db,afree,bfree)
 % -------------------------------------------------------------------------
 % NOTE: modeled after RATS svar function
 % -------------------------------------------------------------------------
-% SEE ALSO: vare.m. 
+% SEE ALSO: vare.m.
 % ------------------------------------------------------------------------
-% REFERENCES: 
-% Amisano and Giannini (1994). Topics in structural Var econometrics. 
+% REFERENCES:
+% Amisano and Giannini (1994). Topics in structural Var econometrics.
 % Favero, C. A. (2000). Applied Macroeconometrics. Oxford University Press, forthcoming.
 % -------------------------------------------------------------------------
 
@@ -114,7 +114,7 @@ mid2=eye(nsq);
 %T=results.nobs;
 vecab=zeros(2*nsq,1);
 
-% FIML estimation of the structural parameters using the 
+% FIML estimation of the structural parameters using the
 % scoring algorithm
 
 for i=1:maxit;
@@ -141,7 +141,7 @@ for i=1:maxit;
    z=gamma1-gamma0;
    if max(abs(z))<=tol
          disp(['Convergence achieved after ',num2str(i),' iterations'])
-         break  
+         break
    else
       gamma0=gamma1;
    end

@@ -1,7 +1,7 @@
 function results = ar(y,nlag,info)
-% PURPOSE: ols estimates for the AR(k) model 
-%          y = b0 + y(t-1) b1 + y(t-2) b2 +,...,y(t-k) bk + E, 
-%          E = N(0,sige*In) 
+% PURPOSE: ols estimates for the AR(k) model
+%          y = b0 + y(t-1) b1 + y(t-2) b2 +,...,y(t-k) bk + E,
+%          E = N(0,sige*In)
 %---------------------------------------------------
 % USAGE:    results = ar(y,nlag,info)
 % where: y    = dependent variable vector
@@ -49,7 +49,7 @@ nf = length(fields);
 const = 1; % a constant is the default
 for i=1:nf
     if strcmp(fields{i},'const')
-        const = info.const; 
+        const = info.const;
     end;
 end;
 elseif nargin == 2
@@ -64,11 +64,11 @@ end;
  x = mlag(y,nlag);
  end;
 x = trimr(x,nlag,0); % feed the lags
-y = trimr(y,nlag,0); 
+y = trimr(y,nlag,0);
 nadj = length(y);
 b0 = (x'*x)\(x'*y);  % Find ols bhat estimates
 k = nlag+const;
-sige = (y-x*b0)'*(y-x*b0)/(nadj-k); 
+sige = (y-x*b0)'*(y-x*b0)/(nadj-k);
 
 results.meth  = 'ar';
 results.beta = b0;

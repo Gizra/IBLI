@@ -5,7 +5,7 @@ function results = olsrs(y,x,R,q)
 % USAGE: results = olsrs(y,x,R,q)
 % where: y = dependent variable vector (nobs x 1)
 %        x = independent variables matrix (nobs x nvar)
-%        R = restriction matrix (h x nvar) where h < nvar 
+%        R = restriction matrix (h x nvar) where h < nvar
 %            h corresponds to the number of linear restrictions
 %        q = vector (h x 1);
 %---------------------------------------------------
@@ -32,16 +32,16 @@ function results = olsrs(y,x,R,q)
 % Email: dgross@wiwi.uni-frankfurt.de
 %
 
-if (nargin ~= 4); 
-   error('Wrong # of arguments to olsrs'); 
+if (nargin ~= 4);
+   error('Wrong # of arguments to olsrs');
 else
-   [nobs nvar]  = size(x); 
+   [nobs nvar]  = size(x);
    [nobs2 junk] = size(y);
    [roR colR]   = size(R);
    [roq colq]   = size(q);
    rankR        = rank(R);
-   if (nobs ~= nobs2); 
-      error('x and y must have same # obs in olsrs'); 
+   if (nobs ~= nobs2);
+      error('x and y must have same # obs in olsrs');
    end;
    if (roR >= nvar);
       error('Too much restrictions imposed');
@@ -51,7 +51,7 @@ else
    end;
    if (rankR~=roR);
       error('R must have full rank !');
-   end;   
+   end;
 end;
 
 results.meth = 'olsrs';

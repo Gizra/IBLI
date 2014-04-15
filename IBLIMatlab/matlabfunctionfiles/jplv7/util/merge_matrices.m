@@ -2,7 +2,7 @@ function out = merge_matrices(key1,key2,matrix1,matrix2)
 % PURPOSE: merge matrices using ID keys
 % ---------------------------------------------------------
 % USAGE: merged = merge_matrices(key1,key2,matrix1,matrix2)
-% where: key1 is from matrix1, 
+% where: key1 is from matrix1,
 %        key2 is from matrix2,
 %        matrix1 = nobs by nvars1
 %        matrix2 = nobs by nvars2
@@ -32,7 +32,7 @@ end;
 if nv1 ~= 1
       error('merge_matrices: key1 must be an nobs x 1 vector');
 end;
- 
+
 if nv2 ~= 1
       error('merge_matrices: key2 must be an nobs x 1 vector');
 end;
@@ -53,5 +53,5 @@ for i=1:nobs;
         out(i,:) = [matrix1(i,:) zeros(1,nvars2)];
     end;
 end;
-    
-    
+
+

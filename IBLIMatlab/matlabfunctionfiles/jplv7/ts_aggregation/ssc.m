@@ -1,6 +1,6 @@
 function res=ssc(Y,x,ta,s,type)
 % PURPOSE: Temporal disaggregation using the dynamic Chow-Lin method
-%          proposed by Santos Silva-Cardoso (2001). 
+%          proposed by Santos Silva-Cardoso (2001).
 % ------------------------------------------------------------
 % SYNTAX: res=ssc(Y,x,ta,s,type);
 % ------------------------------------------------------------
@@ -55,8 +55,8 @@ function res=ssc(Y,x,ta,s,type)
 % ------------------------------------------------------------
 % REFERENCE: Santos, J.M.C. and Cardoso, F.(2001) "The Chow-Lin method
 % using dynamic models",Economic Modelling, vol. 18, p. 269-280.
-% Di Fonzo, T. (2002) "Temporal disaggregation of economic time series: 
-% towards a dynamic extension", Dipartimento di Scienze Statistiche, 
+% Di Fonzo, T. (2002) "Temporal disaggregation of economic time series:
+% towards a dynamic extension", Dipartimento di Scienze Statistiche,
 % Universita di Padova, Working Paper n. 2002-17.
 
 % written by:
@@ -103,8 +103,8 @@ X=C*x;
 
 % -----------------------------------------------------------
 % -----------------------------------------------------------
-% Estimation of optimal dynamic parameter by means of a 
-% grid search on the objective function: likelihood (type=1) 
+% Estimation of optimal dynamic parameter by means of a
+% grid search on the objective function: likelihood (type=1)
 % or weighted least squares (type=0)
 
 % Parameters of grid search
@@ -129,7 +129,7 @@ end
 % -----------------------------------------------------------
 % Evaluation of the objective function in the grid
 
-q=zeros(n,1); 
+q=zeros(n,1);
 z = [x q];
 
 for h=1:h_lim;
@@ -145,7 +145,7 @@ for h=1:h_lim;
    % GLS estimator of gamma
    w = inv(D_phi' * D_phi);
    W = C * w * C';
-   iW = inv(W);   
+   iW = inv(W);
    gamma = (Z_phi' * iW * Z_phi) \ (Z_phi' * iW * Y); % gamma GLS
    U = Y - Z_phi * gamma;           % Low frequency residuals
    scp = U' * iW * U;               % Weighted least squares
@@ -157,7 +157,7 @@ for h=1:h_lim;
       val(h)=-scp;   % Objective function = Weighted least squares
    case 1
       val(h)=l;      % Objective function = Likelihood function
-   end; 
+   end;
 end; % of loop h
 
 % -----------------------------------------------------------

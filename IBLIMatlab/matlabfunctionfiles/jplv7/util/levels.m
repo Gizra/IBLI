@@ -1,5 +1,5 @@
 function f = levels(nlevels,nreps,length)
-% PURPOSE: produces a variable vector of factor levels 
+% PURPOSE: produces a variable vector of factor levels
 %---------------------------------------------------
 % USAGE:     vfact  = levels(nlevels,nreps,length)
 % where:     nlevels = # of levels

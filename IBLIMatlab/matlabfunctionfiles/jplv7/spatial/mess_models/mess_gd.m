@@ -1,5 +1,5 @@
-% PURPOSE: An example of using mess_g() on a small data set  
-%          Bayesian matrix exponential spatial model                            
+% PURPOSE: An example of using mess_g() on a small data set
+%          Bayesian matrix exponential spatial model
 %---------------------------------------------------
 % USAGE: mess_gd (see mess_gd2 for a large data set)
 %---------------------------------------------------
@@ -7,9 +7,9 @@
 clear all;
 
 % load Anselin (1988) Columbus neighborhood crime data
-load anselin.dat; 
+load anselin.dat;
 n = length(anselin);
-x = [ones(n,1) anselin(:,2:3)]; 
+x = [ones(n,1) anselin(:,2:3)];
 latt = anselin(:,4);
 long = anselin(:,5);
 vnames = strvcat('crime','constant','income','hvalue');
@@ -17,7 +17,7 @@ vnames = strvcat('crime','constant','income','hvalue');
 [junk W junk] = xy2cont(latt,long);
 
 % do Monte Carlo generation of an SAR model
-sige = 100; 
+sige = 100;
 randn('seed',0);
 evec = randn(n,1)*sqrt(sige);
 beta = ones(3,1);

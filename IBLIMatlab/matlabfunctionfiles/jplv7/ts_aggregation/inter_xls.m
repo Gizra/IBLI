@@ -26,33 +26,33 @@ function y = inter_xls(Y,x,ta,s,type,ip,d,flax1,flax2,file_name);
 %            d=2 ---> second differences
 %
 % ==> Chow-Lin, Litterman, Santos-Cardoso:
-%        type: estimation method: 
-%            type=0 ---> weighted least squares 
+%        type: estimation method:
+%            type=0 ---> weighted least squares
 %            type=1 ---> maximum likelihood
 % ==> Chow-Lin, Litterman, Santos-Cardoso when innovational parameter is supplied:
 %         ip, such as -1 < ip < 1
 %
 %           INPUT DATA:
-% 
-% Common:  
+%
+% Common:
 %       Y: Nx1 --> Low-frequency time series (to be temporally disaggregated)
 % Specific:
 %       x: nx1 --> Denton, n=s*N (extrapolation is not feasible)
 %       x: nxp --> Fernandez, Chow-Lin, Litterman, Santos-Cardoso
-%          p >= 1, n >= s*N (extrapolation is feasible) 
-%               
+%          p >= 1, n >= s*N (extrapolation is feasible)
+%
 % -----------------------------------------------------------------------
 % OUTPUT: y: nxi
 %
 %       i=1 brief --> only temporally disaggregated series (all procedures)
-%       i=5 normal --> temporally disaggregated series, standard errors of estimates, 
+%       i=5 normal --> temporally disaggregated series, standard errors of estimates,
 %                  one-sigma upper and lower limits and residuals.
 %                  Available for Fernandez, Chow-Lin, Litterman, Santos-Cardoso
 %       i=5 detailed --> normal + ASCII file with model results (all
 %                   procedures). A name for the output file should be supplied.
 %
 % -----------------------------------------------------------------------
-% LIBRARY: bfl, denton_uni, fernandez, chowlin, litterman, ssc, 
+% LIBRARY: bfl, denton_uni, fernandez, chowlin, litterman, ssc,
 % chowlin_fix, litterman_fix, ssc_fix, td_uni_print, td_print
 
 % written by:
@@ -93,12 +93,12 @@ switch flax1
          % Santos-Cardoso, fixed innovational parameter (ip)
           res=ssc_fix(Y,x,ta,s,type,ip);
   end
-  
+
 % -----------------------------------------------------------------------
 % SELECTION OF OUTPUT
 
  switch flax2
-     case 1 
+     case 1
          % Brief output
          y = res.y;
      case 2
@@ -122,7 +122,6 @@ switch flax1
                   tduni_print(res,file_name);
              case {'Fernandez','Chow-Lin','Litterman','Santos Silva-Cardoso'}
                  y = [res.y res.y_dt res.y_lo res.y_up res.u];
-                 td_print(res,file_name,0);                 
+                 td_print(res,file_name,0);
          end
  end
-           

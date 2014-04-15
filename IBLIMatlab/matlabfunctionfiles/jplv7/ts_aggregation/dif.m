@@ -25,6 +25,6 @@ switch d
     case 2 % Second differences
         % Initial conditions: y(0)=y(-1)=0
         D = eye(n) + diag(-2*ones((n-1),1),-1) + diag(ones((n-2),1),-2);
-    otherwise 
+    otherwise
         error (' *** IMPROPER DEGREE OF DIFFERENCING *** ');
 end

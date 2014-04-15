@@ -3,19 +3,19 @@ function [confide, moms]=fdet_mc3(d, total_order, iter, oxact, draw_tolerance, a
 %[confide, moms]=fdet_mc3(d, total_order, iter, oxact, draw_tolerance, asize, randstate, alphafine)
 %
 %This function estimates the Log-determinant of (I-a*d) and provides confidence bounds on the estimated log-determinant
-%(a is a scalar, and d is an n by n weight matrix). While the estimated log-determinant is valid for a in (-1/min(eig(d)),1), the 
+%(a is a scalar, and d is an n by n weight matrix). While the estimated log-determinant is valid for a in (-1/min(eig(d)),1), the
 %lower bound computation requires a in (-1,1).
 %
 %
 %INPUT:
 %
-%The required n by n matrix d can be a symmetric or asymmetric weight matrix. However, maximum modulus of the eigenvalue of d must be 1 or less. 
+%The required n by n matrix d can be a symmetric or asymmetric weight matrix. However, maximum modulus of the eigenvalue of d must be 1 or less.
 %A row-stochastic, doubly stochastic scaling will do this. Matrices similar to stochastic matrices will satisfy this as well.
 %Finally, one can find the maximum eigenvalue, and scale a candidate weight matrix by this to yield a weight
-%maxtrix with maximum eigenvalue of 1. Note, one can find the maximum eigenvalue of a sparse d using the command 
-%eigs in a reasonable time for moderately large matrices. 
+%maxtrix with maximum eigenvalue of 1. Note, one can find the maximum eigenvalue of a sparse d using the command
+%eigs in a reasonable time for moderately large matrices.
 %
-%The optional scalar integer total_order specifies the highest term estimated in the Taylor series (e.g., E(tr(D^total_order)) ). 
+%The optional scalar integer total_order specifies the highest term estimated in the Taylor series (e.g., E(tr(D^total_order)) ).
 %Please specify even order. The default equals 50.
 %
 %The optional scalar integer iter specifies how many independent realizations of u to use in the estimation of E(tr(D^total_order)).
@@ -36,8 +36,8 @@ function [confide, moms]=fdet_mc3(d, total_order, iter, oxact, draw_tolerance, a
 %by Zhang, Y. and W.E. Leithead, "Approximate Implementation of Logarithm
 %of Matrix Determinant in Gaussian Processes," Journal of Statistical
 %Computation and Simulation, forthcoming. This work uses some of the
-%structure and results of Barry, Ronald, and R. Kelley Pace, 
-%"A Monte Carlo Estimator of the Log Determinant of Large Sparse Matrices," 
+%structure and results of Barry, Ronald, and R. Kelley Pace,
+%"A Monte Carlo Estimator of the Log Determinant of Large Sparse Matrices,"
 %Linear Algebra and its Applications, Volume 289, Number 1-3, 1999, p.
 %41-54.
 %
@@ -45,7 +45,7 @@ function [confide, moms]=fdet_mc3(d, total_order, iter, oxact, draw_tolerance, a
 %lie in (0,1). This is a Chebyshev interval, and the actual size is very conservative.
 %
 %The optional non-negative integer scalar randstate sets the state of the random number generator. Use this if you wish the same
-%result each invocation, otherwise the results will vary somewhat each time. This variation should provide some idea of the 
+%result each invocation, otherwise the results will vary somewhat each time. This variation should provide some idea of the
 %sensitivity of the results to the approximation.
 %
 %The optional aiter by 1 vector alphafine gives the evaluation points a(i) for i=1...aiter. The default is an linearly spaced vector
@@ -55,10 +55,10 @@ function [confide, moms]=fdet_mc3(d, total_order, iter, oxact, draw_tolerance, a
 %
 %OUTPUT:
 %
-%The aiter by 4 matrix confide gives a, lower bound of ln|I-a*d|, an estimated ln|I-a*d|, and upper bound of ln|I-a*d|, 
+%The aiter by 4 matrix confide gives a, lower bound of ln|I-a*d|, an estimated ln|I-a*d|, and upper bound of ln|I-a*d|,
 %where aiter is specified internally (can be edited in this file) or has the same length of the
-%optionally specified alphafine. Essentially, the matrix confide supplies the points used in the creation of the grid of 
-%stimated log-determinant values along with their confidence limits. 
+%optionally specified alphafine. Essentially, the matrix confide supplies the points used in the creation of the grid of
+%stimated log-determinant values along with their confidence limits.
 %
 %confide(:,1) gives the evaluation points (values of a).
 %
@@ -75,8 +75,8 @@ function [confide, moms]=fdet_mc3(d, total_order, iter, oxact, draw_tolerance, a
 %
 %If you use this function, please cite:
 %
-%Barry, Ronald, and R. Kelley Pace, 
-%"A Monte Carlo Estimator of the Log Determinant of Large Sparse Matrices," 
+%Barry, Ronald, and R. Kelley Pace,
+%"A Monte Carlo Estimator of the Log Determinant of Large Sparse Matrices,"
 %Linear Algebra and its Applications, Volume 289, Number 1-3, 1999, p. 41-54.
 %
 %Written by Kelley Pace, www.spatial-statistics.com, on 11/27/99, revised 1/1/03, revised 3/1/07.
@@ -138,47 +138,47 @@ aiter=length(alphafine);
 
 %making sure alphafine is a column vector
       if aiter==1
-       error('alphafine needs to be a column vector') 
+       error('alphafine needs to be a column vector')
       end
 
       if draw_tolerance<0.001 | ~isreal(draw_tolerance)
           error('draw_tolerance should be sufficiently positive real scalar to allow for draws')
       end
-    
-%transforming a row into a column vector (when necessary)   
+
+%transforming a row into a column vector (when necessary)
       if size(alphafine,2)>1
         alphafine=alphafine';
     end
- 
+
  if length(iter)>1 | rem(iter,1)
         error('iter should be a scalar integer')
     end
-    
+
  if length(total_order)>1 | rem(total_order,1)
        error('total_order should be a scalar integer')
    end
-   
+
    if length(asize)>1 |~isreal(asize)
        error('asize should be a real scalar')
    end
-       
+
  if n~=ncols
      error('weight matrix needs to be n by n')
  end
-   
+
    if length(oxact)>1 | ~((oxact==2)|(oxact==4))
        error('oxact should be a scalar integer equal to 2 or 4')
    end
-   
-       
+
+
    if max(abs(alphafine))>=1 | ~isreal(alphafine)
        error('the real vector alphafine should have a maximum element of less than 1 and a minimum element of greater than -1.0')
    end
-   
+
    if (asize>=1)|(asize<=0)
        error('asize must lie in (0,1)')
    end
-   
+
     if ((randstate<0)|logical( rem(randstate,1)~=0 )|( length(randstate)>1 ) );
        error('randstate must be a non-negative integer scalar');
    end
@@ -203,7 +203,7 @@ t4=sum(sum(d2.*(d2')));
 tvec=[t1;t2;t3;t4];
 td=full([t1;t2/2;t3/3;t4/4]);
 end
-    
+
 
 %The scalar total_order specifies total number of moments and is comprised of 2 exact moments, tr(D),tr(D*D)
 %and o-2 stochastic moments u'(D^j)u/(u'u).
@@ -213,9 +213,9 @@ mavmomi=zeros(total_order, iter);
 momis=zeros(total_order, iter);
 for j=1:iter;
 
-%This code segment selects draws that come close to giving the correct answer for the known first moment (tr(d)=0).    
+%This code segment selects draws that come close to giving the correct answer for the known first moment (tr(d)=0).
 std_m1=sqrt(2*t2/(n*n));%standard deviation of first moment
-stand=std_m1*draw_tolerance;%setting standard of  draw_tolerance standard deviations 
+stand=std_m1*draw_tolerance;%setting standard of  draw_tolerance standard deviations
 delta1v=100;%setting a value above stand to get loop started
 u=randn(n,1);%random draw that occurs in case stand is so high that no loops occur
 while abs(delta1v/n)>stand;%allowing only draws that are within stand standard deviations of correct value
@@ -223,9 +223,9 @@ u=randn(n,1);%random draw
 utu=u'*u;%inner product
 du=d*u;%du
 delta1v=n*u'*du/utu;%estimated first moment
-end    
-    
-    
+end
+
+
 v=u;
 utu=u'*u;
 for i=1:total_order;
@@ -257,7 +257,7 @@ sum_all_weights=zeros(aiter, 1);
 sum_even_weights=zeros(aiter,1);
 for ii=1:aiter
     wvec=(alphafine(ii).^seq_order);
-srvs(:,ii)=-(wvec*mavmomi)'; 
+srvs(:,ii)=-(wvec*mavmomi)';
 sum_all_weights(ii)=wvec*oiter;
 sum_eve_weights(ii)=wvec*even_ind;
 end
@@ -272,7 +272,7 @@ sderr=(std(srvs)/sqrt(iter))'; %standard error of independent realizations of Kr
 %fbound=((n*alpha.^(total_order+1))./((total_order+1)*(1-alpha)))';
 
 %However, for matrices with max(abs(eigenvalue)) equal to or less than 1,
-%and an even order_total, the following bound is tighter. 
+%and an even order_total, the following bound is tighter.
 
 last_moment=avmomi(end);
 posind=(alphafine>=0);
@@ -283,7 +283,7 @@ fbound=posind.*altlowpos+(1-posind).*altlowneg;
 
 %confidence limits, with lower limit biased downward (more conservative)
 %The paper used a normal approximation or a t for small iter.
-%Using Chebyshev's Theorem should yield a very conservative asize% confidence interval. 
+%Using Chebyshev's Theorem should yield a very conservative asize% confidence interval.
 cfactor=sqrt(1/asize);
 
 %confidence limits of size asize
@@ -296,5 +296,5 @@ confide=[alphafine low_asize lndetmat high_asize];
 if (nargout>1)
     moms=momsout;
 end
-    
+
 

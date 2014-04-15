@@ -7,7 +7,7 @@ function out = sort_matrix(key1,key2,matrix)
 %        matrix = nobs by nvars input matrix
 % RETURNS:
 % sorted = a matrix arranged according to key1
-%                nobs by nvars 
+%                nobs by nvars
 %                where matrix has been sorted by key1
 % ---------------------------------------------------------
 
@@ -23,7 +23,7 @@ end;
 if nv1 ~= 1
       error('sort_matrix: key1 must be an nobs x 1 vector');
 end;
- 
+
 if nv2 ~= 1
       error('sort_matrix: key2 must be an nobs x 1 vector');
 end;
@@ -43,5 +43,5 @@ for i=1:nobs;
         out(i,:) = [zeros(1,nvars)];
     end;
 end;
-    
-    
+
+

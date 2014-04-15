@@ -40,7 +40,7 @@ res = sem(y,x,W);
 lam = res.rho;
 [n k] = size(x);
 
-spparms('tight'); 
+spparms('tight');
 z = speye(n) - 0.1*sparse(W);
 p = colmmd(z);
 z = speye(n) - lam*sparse(W);

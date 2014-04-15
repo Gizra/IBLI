@@ -45,10 +45,10 @@
 %         logt_pdf : pdf of the logistic distribution at x
 %         logt_rnd : random draws from the logistic distribution
 %        make_html : makes HTML verion of contents.m files for the Econometrics Toolbox
-%         norm_cdf : computes the cumulative normal distribution 
+%         norm_cdf : computes the cumulative normal distribution
 %        norm_crnd : random numbers from a contaminated normal distribution
-%         norm_inv : computes the quantile (inverse of the CDF) 
-%         norm_pdf : computes the normal probability density function 
+%         norm_inv : computes the quantile (inverse of the CDF)
+%         norm_pdf : computes the normal probability density function
 %         norm_prb : computes normal probability given
 %        norm_prbd : demo of norm_prb function
 %         norm_rnd : random multivariate random vector based on
@@ -70,16 +70,16 @@
 %         quantile : compute empirical quantile (percentile).
 %         stdn_cdf : computes the standard normal cumulative
 %           stdn_d : demo of standard normal distribution functions
-%         stdn_inv : computes the quantile (inverse of the CDF) 
+%         stdn_inv : computes the quantile (inverse of the CDF)
 %         stdn_pdf : computes the standard normal probability density
 %         tdis_cdf : returns cdf at x of the t(n) distribution
 %           tdis_d : demo of Student t-distribution functions
 %         tdis_inv : returns the inverse (quantile) at x of the t(n) distribution
 %         tdis_pdf : returns the pdf at x of the t(n) distribution
-%         tdis_prb : calculates t-probabilities for elements in x-vector 
+%         tdis_prb : calculates t-probabilities for elements in x-vector
 %         tdis_rnd : returns random draws from the t(n) distribution
 %          trunc_d : demo of truncated normal draws
 %           unif_d : demo of uniform distribution functions
-%         unif_rnd : returns a uniform random number between a,b 
+%         unif_rnd : returns a uniform random number between a,b
 %           wish_d : demo of random draws from a Wishart distribution
 %         wish_rnd : generate random wishart matrix

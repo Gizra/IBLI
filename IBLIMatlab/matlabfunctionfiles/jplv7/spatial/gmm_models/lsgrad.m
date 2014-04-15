@@ -1,11 +1,11 @@
 function G = lsgrad(b,infoz,stat,varargin)
-% PURPOSE: Evaluate M(b)'Wm(b) Gradient of objective function 
+% PURPOSE: Evaluate M(b)'Wm(b) Gradient of objective function
 % -------------------------------------------------------------
 % USAGE: function G = lsgrad(b,infoz,stat,varargin)
 % Where: b          = parameter vector fed to func
 %        infoz       = infoz structure (see MINZ for details)
 %        stat       = status structure (see MINZ for details)
-%        varargin   = arguments used by 
+%        varargin   = arguments used by
 % -------------------------------------------------------------
 % RETURNS: G    = Gradient evaluated at b
 % -------------------------------------------------------------
@@ -18,8 +18,8 @@ function G = lsgrad(b,infoz,stat,varargin)
 % Mike Cliff,  Purdue Finance,   mcliff@mgmt.purdue.edu
 % CREATED:  12/10/98
 % UPDATED:  1/24/99
-%           7/21/00 (1.2   Added 2* back into G)  
-%           9/23/00 (1.2.1 fcnchk)  
+%           7/21/00 (1.2   Added 2* back into G)
+%           9/23/00 (1.2.1 fcnchk)
 
 lvar = length(varargin);
 if strcmp(infoz.call,'gmm')

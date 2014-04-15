@@ -1,6 +1,6 @@
-% PURPOSE: An example of using bvarf(), 
-%          to produce bvar-model forecasts                                                 
-%          (Minnesota prior)                    
+% PURPOSE: An example of using bvarf(),
+%          to produce bvar-model forecasts
+%          (Minnesota prior)
 %---------------------------------------------------
 % USAGE: bvarf_d
 %---------------------------------------------------
@@ -13,14 +13,14 @@ dates = cal(1982,1,12);
 y = test;
 
 vnames =  ['  il',
-           '  in',    
-           '  ky',    
-           '  mi',    
-           '  oh',    
-           '  pa',    
-           '  tn',    
-           '  wv'];    
-     
+           '  in',
+           '  ky',
+           '  mi',
+           '  oh',
+           '  pa',
+           '  tn',
+           '  wv'];
+
 
 
 nlag = 6;  % number of lags in var-model
@@ -33,17 +33,17 @@ weight = 0.5; % symmetric weights
 
 % this is an example of using 1st-order contiguity
 % of the states as weights as in LeSage and Pan (1995)
-% `Using Spatial Contiguity as Bayesian Prior Information 
-% in Regional Forecasting Models'' International Regional 
+% `Using Spatial Contiguity as Bayesian Prior Information
+% in Regional Forecasting Models'' International Regional
 % Science Review, Volume 18, no. 1, pp. 33-53, 1995.
 
-w = [1.0  1.0  1.0  0.1  0.1  0.1  0.1  0.1 
-     1.0  1.0  1.0  1.0  1.0  0.1  0.1  0.1 
-     1.0  1.0  1.0  0.1  1.0  0.1  1.0  1.0 
-     0.1  1.0  0.1  1.0  1.0  0.1  0.1  0.1 
-     0.1  1.0  1.0  1.0  1.0  1.0  0.1  1.0 
-     0.1  0.1  0.1  0.1  1.0  1.0  0.1  1.0 
-     0.1  0.1  1.0  0.1  0.1  0.1  1.0  0.1 
+w = [1.0  1.0  1.0  0.1  0.1  0.1  0.1  0.1
+     1.0  1.0  1.0  1.0  1.0  0.1  0.1  0.1
+     1.0  1.0  1.0  0.1  1.0  0.1  1.0  1.0
+     0.1  1.0  0.1  1.0  1.0  0.1  0.1  0.1
+     0.1  1.0  1.0  1.0  1.0  1.0  0.1  1.0
+     0.1  0.1  0.1  0.1  1.0  1.0  0.1  1.0
+     0.1  0.1  1.0  0.1  0.1  0.1  1.0  0.1
      0.1  0.1  1.0  0.1  1.0  1.0  0.1  1.0];
 
 % no data transformation example

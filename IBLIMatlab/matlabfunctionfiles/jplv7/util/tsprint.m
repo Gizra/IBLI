@@ -1,7 +1,7 @@
 function tsprint(y,cstruc,varargin)
 % PURPOSE: print time-series matrix or vector with dates and column labels
 %---------------------------------------------------
-% USAGE:     tsprint(y,cstruc,begp,endp,vnames,fmt) 
+% USAGE:     tsprint(y,cstruc,begp,endp,vnames,fmt)
 %        or: tsprint(y,cstruct,vnames), prints entire series with names
 %        or: tsprint(y,cstruct), entire series, no variable names
 %        or: tsprint(y,cstruct,fmt) entire series, using fmt
@@ -71,7 +71,7 @@ elseif nargs == 3             % begp,endp with either vnames or fmt
   nflag = 1;
   begp = varargin{1};
   endp = varargin{2};
-  vnames = varargin{3}; 
+  vnames = varargin{3};
  end;
 elseif nargs == 4             % we have everything
  nflag = 1;
@@ -105,7 +105,7 @@ in.cnames = vnames;
 mprint(y(begp:endp,:),in);
 
 
- 
+
 
 
 

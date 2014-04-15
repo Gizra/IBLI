@@ -1,5 +1,5 @@
 function invp = norm_inv(x, m, v)
-% PURPOSE: computes the quantile (inverse of the CDF) 
+% PURPOSE: computes the quantile (inverse of the CDF)
 %          for each component of x with mean m, variance v
 %---------------------------------------------------
 % USAGE: invp = norm_inv(x,m,v)
@@ -21,7 +21,7 @@ function invp = norm_inv(x, m, v)
 
   [r, c] = size (x);
   s = r * c;
-  
+
   if (nargin == 1)
     m = zeros(1,s);
     v = ones(1,s);
@@ -38,4 +38,4 @@ function invp = norm_inv(x, m, v)
     invp = m + sqrt(v) .* stdn_inv(x);
 
     invp = reshape (invp, r, c);
-  
+

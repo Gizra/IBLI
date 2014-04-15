@@ -1,6 +1,6 @@
 function ylevf = recmf(y,nlag,w,freq,nfor,begf,sig,tau,theta,r);
 % PURPOSE: Estimates a Bayesian error correction model of order n
-%          using Random-Walk averaging prior and produces f-step-ahead forecasts.          
+%          using Random-Walk averaging prior and produces f-step-ahead forecasts.
 %---------------------------------------------------
 % USAGE:    yfor = recmf(y,nlag,w,freq,nfor,begf,sig,tau,theta,r)
 % where:    y    = an (nobs x neqs) matrix of y-vectors in levels
@@ -12,27 +12,27 @@ function ylevf = recmf(y,nlag,w,freq,nfor,begf,sig,tau,theta,r);
 %          theta = prior variance hyperparameter (see below)
 %              r = # of co-integrating relations to use
 %                  (optional: this will be determined using
-%                  Johansen's trace test at 95%-level if left blank)            
+%                  Johansen's trace test at 95%-level if left blank)
 %           nfor = the forecast horizon
 %           begf = the beginning date of the forecast
-% priors for important variables are:  N(1/ci,sig) for 1st own lag 
+% priors for important variables are:  N(1/ci,sig) for 1st own lag
 %                                      (ci = # of important)
 %                                      N(  0 ,tau*sig/k) for lag k=2,...,nlag
-% priors for unimportant variables are:  N(  0 ,theta*sig/k) for lag k                                             
-% typical values would be: sig = .1-.3, tau = 4-8, theta = .5-1  
+% priors for unimportant variables are:  N(  0 ,theta*sig/k) for lag k
+% typical values would be: sig = .1-.3, tau = 4-8, theta = .5-1
 %---------------------------------------------------
-% NOTES: - estimation is carried out in annualized growth terms 
+% NOTES: - estimation is carried out in annualized growth terms
 %          hence the need for a freq argument input.
-%          the prior means rely on common (growth-rate) scaling of variables  
-%        - constant term included automatically 
+%          the prior means rely on common (growth-rate) scaling of variables
+%        - constant term included automatically
 %        - x-matrix of exogenous variables not allowed
 %        - error correction variables are automatically
-%          constructed using output from Johansen's ML-estimator  
+%          constructed using output from Johansen's ML-estimator
 %---------------------------------------------------
 % RETURNS:
-%  yfor = (nfor x neqs) matrix of levels forecasts for each equation 
+%  yfor = (nfor x neqs) matrix of levels forecasts for each equation
 %---------------------------------------------------
-% References: LeSage and Krivelyova (1998) 
+% References: LeSage and Krivelyova (1998)
 % ``A Spatial Prior for Bayesian Vector Autoregressive Models'',
 % forthcoming Journal of Regional Science, (on http://www.econ.utoledo.edu)
 % and
@@ -59,9 +59,9 @@ nobse = nmin - nlag;
  jres = johansen(y(1:nmin,:),0,nlag);
  % recover error correction vectors
  ecvectors = jres.evec;
-        index = jres.ind; 
+        index = jres.ind;
  % construct r-error correction variables
- x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r); 
+ x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r);
    [nobs2 nx] = size(x);
   elseif nargin == 9 % we have to determine r-value
  jres = johansen(y(1:nmin,:),0,nlag);
@@ -77,14 +77,14 @@ nobse = nmin - nlag;
  end;
  % recover error correction vectors
  ecvectors = jres.evec;
-        index = jres.ind; 
+        index = jres.ind;
  % construct r error correction variables
- x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r); 
-   [nobs2 nx] = size(x); 
+ x = mlag(y(1:nmin,index),1)*ecvectors(:,1:r);
+   [nobs2 nx] = size(x);
   else
    error('Wrong # of input arguments to recmf');
   end;
- 
+
 % adjust nvar for constant term and error correction terms
 k = neqs*nlag+nx+1;
 
@@ -97,21 +97,21 @@ end;
 
 yfor = zeros(nfor,neqs);
 ylev = zeros(nfor,neqs);
- 
+
 % given bmat values generate future
-%  growth rate forecasts 
+%  growth rate forecasts
 
 dy = growthr(y,freq);
 ylevf = zeros(nfor,neqs); % storage for level forecasts
-   
-% 1-step-ahead forecast 
+
+% 1-step-ahead forecast
 xtrunc = [dy(nmin-(nlag):nmin,:)
           zeros(1,neqs)];
 xfor = mlag(xtrunc,nlag);
 [xend junk] = size(xfor);
 xobs = xfor(xend,:);
 if nx > 0
-ecterm = y(begf-1,index)*ecvectors(:,1:r); % add ec variables 
+ecterm = y(begf-1,index)*ecvectors(:,1:r); % add ec variables
 xvec = [xobs ecterm 1];
 else
 xvec = [xobs 1];
@@ -139,8 +139,8 @@ xnew(nlag+1,:) = zeros(1,neqs);
 xfor = mlag(xnew,nlag);
 [xend junk] = size(xfor);
 xobs = xfor(xend,:);
-if nx > 0 % add ec variables based on past level forecasts 
-   ecterm = ylevf(step-1,index)*ecvectors(:,1:r); 
+if nx > 0 % add ec variables based on past level forecasts
+   ecterm = ylevf(step-1,index)*ecvectors(:,1:r);
 xvec = [xobs ecterm 1];
 else
 xvec = [xobs 1];
@@ -173,12 +173,12 @@ cnt = step-(nlag-1);
   xnew(i,:) = yfor(cnt,:);
   cnt = cnt+1;
  end;
- 
+
 xfor = mlag(xnew,nlag);
 [xend junk] = size(xfor);
 xobs = xfor(xend,:);
-if nx > 0 % add ec variables based on past level forecasts 
-   ecterm = ylevf(step,index)*ecvectors(:,1:r); 
+if nx > 0 % add ec variables based on past level forecasts
+   ecterm = ylevf(step,index)*ecvectors(:,1:r);
 xvec = [xobs ecterm 1];
 else
 xvec = [xobs 1];
@@ -196,7 +196,7 @@ yfor(step+1,i) = xvec*bhat/100;
 end;
 
 end; % end of if step
-  
+
 end;
 
 

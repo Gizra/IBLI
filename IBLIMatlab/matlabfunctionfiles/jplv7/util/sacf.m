@@ -1,5 +1,5 @@
 function [rho,bigY] = sacf(y,m,gflag)
-% PURPOSE: find sample autocorrelation coefficients 
+% PURPOSE: find sample autocorrelation coefficients
 %---------------------------------------------------
 % USAGE: p = sacf(y,m,gflag)
 % where: y = a time-series (need not have mean zero)

@@ -2,13 +2,13 @@ function  p = hypg_cdf(k,n,K,N)
 % PURPOSE: hypergeometric cdf function
 %---------------------------------------------------
 % USAGE: p = hypg_cdf(k,n,K,N)
-% where: k,n,K,N are parameters 
-% 
+% where: k,n,K,N are parameters
+%
 %---------------------------------------------------
 % RETURNS:
-%        a vector of cumulative probabilities from the distribution      
+%        a vector of cumulative probabilities from the distribution
 % --------------------------------------------------
-% SEE ALSO: hypg_d, hypg_cdf, hypg_rnd, 
+% SEE ALSO: hypg_d, hypg_cdf, hypg_rnd,
 %---------------------------------------------------
 
 %       Anders Holtsberg, 18-11-93

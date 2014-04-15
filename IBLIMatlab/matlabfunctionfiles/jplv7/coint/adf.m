@@ -8,20 +8,20 @@ function results =  adfPS(x,p,l)
 %                 p =  0, for constant term
 %                 p =  1, for constant plus time-trend
 %                 p >  1, for higher order polynomial
-%         nlags = # of lagged changes of x included           
+%         nlags = # of lagged changes of x included
 %---------------------------------------------------
 % RETURNS: a results structure
 %         results.meth  = 'adf'
 %         results.alpha = estimate of the autoregressive parameter
 %         results.adf   = ADF t-statistic
 %         results.crit = (6 x 1) vector of critical values
-%                        [1% 5% 10% 90% 95% 99%] quintiles    
-%         results.nlag = nlag   
+%                        [1% 5% 10% 90% 95% 99%] quintiles
+%         results.nlag = nlag
 %---------------------------------------------------
 % SEE ALSO: prt_coint()
-%--------------------------------------------------- 
+%---------------------------------------------------
 % References: Said and Dickey (1984) 'Testing for Unit Roots in
-% Autoregressive Moving Average Models of Unknown Order', 
+% Autoregressive Moving Average Models of Unknown Order',
 % Biometrika, Volume 71, pp. 599-607.
 
 % written by:
@@ -81,20 +81,20 @@ results=ols(y2,regressor);
 
 %      b       = inv(z'*z)*(z'*dep);
 %      % res     = dep - z*b ;
-%      % BUG fix suggested by 
+%      % BUG fix suggested by
 % % Nick Firoozye
 % % Sanford C. Bernstein, Inc
-%      res = detrend(dep,0) - detrend(z,0)*b; 
+%      res = detrend(dep,0) - detrend(z,0)*b;
 res=results.resid;
 
      %so      = (res'*res)/(rows(y2)-cols(regressor))
      so=results.sige;
      var_cov = so*inv(regressor'*regressor) ;
-     
+
      results.nlag = l;
      results.alpha = results.beta(1,1);
      results.adf = (results.beta(1,1)-1)/sqrt(var_cov(1,1));
      results.crit = ztcrit(nobs,p);
      results.meth = 'adf';
 
-     
+

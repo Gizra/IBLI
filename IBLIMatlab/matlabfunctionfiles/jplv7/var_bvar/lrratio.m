@@ -2,11 +2,11 @@ function lrratio(y,maxlag,minlag,simsc,x)
 % PURPOSE: performs likelihood ratio test for var model
 %          to determine optimal lag length
 %---------------------------------------------------
-% USAGE:  lrratio(y,maxlag,minlag,simsc,x) 
+% USAGE:  lrratio(y,maxlag,minlag,simsc,x)
 % where:    y    = an (nobs x neqs) matrix of y-vectors
 %           maxlag = the maximum lag length
 %           minlag = the minimum lag length
-%            simsc = flag for Sim's dof correction factor 
+%            simsc = flag for Sim's dof correction factor
 %                    0 = no, 1 = use correction
 %                    (default = 0)
 %           x    = optional matrix of variables (nobs x nx)
@@ -14,7 +14,7 @@ function lrratio(y,maxlag,minlag,simsc,x)
 %---------------------------------------------------
 % RETURNS: nothing, prints results to the MATLAB command window
 %---------------------------------------------------
-% SEE ALSO: var, varf, prt_var 
+% SEE ALSO: var, varf, prt_var
 %---------------------------------------------------
 
 if nargin > 5
@@ -41,7 +41,7 @@ end;
 
 % loop over lag lengths and do likelihood ratio tests
 for i=maxlag:-1:minlag+1
- 
+
  % adjust nobs to feed the lags
     nobse = nobs-i;
 
@@ -55,26 +55,26 @@ for i=maxlag:-1:minlag+1
      end;
    else % case of no deterministic variables
        if i == maxlag
-  resid1 = var_resid(y,i);   
+  resid1 = var_resid(y,i);
   resid2 = var_resid(y,i-1); % restricted model
     else
   resid1 = resid2; % save time by not running it again
   resid2 = var_resid(y,i-1);
     end;
- end; 
- 
+ end;
+
  % compute likelihood ratio test
- 
+
  % first get var-cov matrices for residuals
  epe1 = cov(resid1); % cov is a MATLAB command
  epe2 = cov(resid2);
- 
+
  if simsc == 1
     tminusc = nobse-neqs*i+1;
     else
     tminusc = nobse;
     end;
-   
+
  % compute (T-c)*(log(det(epe2)) - log(det(epe1)))
     lratio = tminusc*(log(det(epe2)) - log(det(epe1)));
 

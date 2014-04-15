@@ -1,6 +1,6 @@
 % PURPOSE: A Monte Carlo comparison of GMM sem and ML sem
 % estimation of the spatial error model
-% in a Monte Carlo experiment that compares maximum likelihood and GMM estimation  
+% in a Monte Carlo experiment that compares maximum likelihood and GMM estimation
 %---------------------------------------------------
 % USAGE: sar_mcarlo
 %---------------------------------------------------
@@ -16,11 +16,11 @@ yc = randn(n,1);
 
 % compute eigenvalue range for rho
 opt.tol = 1e-3; opt.disp = 0;
-lambda = eigs(sparse(W),speye(n),1,'SR',opt);  
-rmin = 1/lambda;   
+lambda = eigs(sparse(W),speye(n),1,'SR',opt);
+rmin = 1/lambda;
 rmax = 1;
 
-% these are the true values for sige and beta 
+% these are the true values for sige and beta
 sige = 0.5;
 k = 3;
 x = randn(n,k);
@@ -40,7 +40,7 @@ nrho = length(rgrid);
 % ========== begin the fun ==========================
 for i=1:nrho; % loop over rho values
     rho = rgrid(i);
-    
+
 bout = zeros(niter,2*k); % storage for results
 pout = zeros(niter,2);
 sout = zeros(niter,2);
@@ -107,11 +107,11 @@ in.cnames = strvcat('min','0.05','means','median','Truth','0.95','max');
 in.width = 1000;
 
 bprint = [min(bout)
-          bounds1(:,1)' bounds2(:,1)' 
+          bounds1(:,1)' bounds2(:,1)'
           mean(bout)
           median(bout)
           [beta' beta']
-          bounds1(:,2)' bounds2(:,2)' 
+          bounds1(:,2)' bounds2(:,2)'
           max(bout)];
 
 
@@ -123,21 +123,21 @@ bbounds1(i,:) = hpdi(pout(:,i),0.95);
 bbounds2(i,:) = hpdi(sout(:,i),0.95);
 end;
 
-pprint1 = [min(pout)  
+pprint1 = [min(pout)
           bbounds1(:,1)'
-          mean(pout)  
+          mean(pout)
           median(pout)
           [rho rho]
           bbounds1(:,2)'
           max(pout)];
-pprint2 = [min(sout)  
+pprint2 = [min(sout)
           bbounds2(:,1)'
-          mean(sout)  
+          mean(sout)
           median(sout)
           [sige sige]
           bbounds2(:,2)'
           max(sout)];
-                  
+
 
 fprintf(1,'============================================================ \n');
 fprintf(1,'results from %5d Monte Carlo simulations rho = %5.2f, nobs = %10d \n',niter,rho,n);
@@ -145,7 +145,7 @@ fprintf(1,'results from %5d Monte Carlo simulations rho = %5.2f, nobs = %10d \n'
 out = [bprint'
        pprint1'
        pprint2'];
-   
+
 mprint(out,in);
 
 in3.cnames = strvcat('ML TIME','GMM TIME');

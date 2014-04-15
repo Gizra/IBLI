@@ -1,7 +1,7 @@
 % PURPOSE: demo of binomial distribution functions
 %          prints mean and variance of 1000 draws
 %          plots pdf,cdf,inverse
-% 
+%
 %---------------------------------------------------
 % USAGE: bino_d
 %---------------------------------------------------

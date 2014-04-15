@@ -1,7 +1,7 @@
-% PURPOSE: An example of using find_big()  
+% PURPOSE: An example of using find_big()
 %         to find rows in a matrix
 %          that meet a size criterion
-%                                  
+%
 %---------------------------------------------------
 % USAGE: find_bigd
 %---------------------------------------------------

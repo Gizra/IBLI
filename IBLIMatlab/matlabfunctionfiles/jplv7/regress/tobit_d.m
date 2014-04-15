@@ -1,6 +1,6 @@
 % PURPOSE: An example using tobit()
 %                           prt()
-%  Tobit (censored) regression                           
+%  Tobit (censored) regression
 %---------------------------------------------------
 % USAGE: tobit_d
 %---------------------------------------------------
@@ -24,9 +24,9 @@ for i=1:n
  end;
 end;
 
-vnames = strvcat('y','iota','x1','x2','x3','x4');        
-            
-resp = tobit(y,x);     
+vnames = strvcat('y','iota','x1','x2','x3','x4');
+
+resp = tobit(y,x);
 prt(resp,vnames);
 info.meth = 'dfp';
 resp = tobit(y,x,info);

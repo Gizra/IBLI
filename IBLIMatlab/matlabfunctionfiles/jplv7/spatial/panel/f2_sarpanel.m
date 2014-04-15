@@ -9,7 +9,7 @@ function llike = f2_sarpanel(parm,y,x,W,detval,T)
 %         x    = explanatory variables matrix (N x k)
 %         W    = spatial weight matrix
 %     detval   = matrix with [rho log determinant] values
-%                computed in sar_panel.m using one of Kelley Pace's routines  
+%                computed in sar_panel.m using one of Kelley Pace's routines
 %         T    = number of time points
 % ---------------------------------------------------
 %  RETURNS: a  scalar equal to minus the log-likelihood
@@ -17,13 +17,13 @@ function llike = f2_sarpanel(parm,y,x,W,detval,T)
 % ---------------------------------------------------
 
 % Updated by J.P. Elhorst summer 2008
-% REFERENCES: 
+% REFERENCES:
 % Elhorst JP (2003) Specification and Estimation of Spatial Panel Data Models,
 % International Regional Science Review 26: 244-268.
-% Elhorst JP (2009) Spatial Panel Data Models. In Fischer MM, Getis A (Eds.) 
+% Elhorst JP (2009) Spatial Panel Data Models. In Fischer MM, Getis A (Eds.)
 % Handbook of Applied Spatial Analysis, Ch. C.2. Springer: Berlin Heidelberg New York.
 
-N = length(W); 
+N = length(W);
 k = length(parm);
 b = parm(1:k-2,1);
 rho = parm(k-1,1);

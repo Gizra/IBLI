@@ -2,12 +2,12 @@ function x = chis_inv (p, a)
 % PURPOSE: returns the inverse (quantile) at x of the chisq(n) distribution
 %---------------------------------------------------
 % USAGE: x = chis_inv(p,a)
-% where: p = a vector of probabilities 
+% where: p = a vector of probabilities
 %        a = a scalar parameter
 % NOTE: chis_inv(x,n) = gamm_inv(p,a/2)*2
 %---------------------------------------------------
 % RETURNS:
-%        a vector x at each element of p from chisq(n) distribution      
+%        a vector x at each element of p from chisq(n) distribution
 % --------------------------------------------------
 % SEE ALSO: chis_d, chis_cdf, chis_rnd, chis_pdf
 %---------------------------------------------------
@@ -16,7 +16,7 @@ function x = chis_inv (p, a)
 %        Copyright (c) Anders Holtsberg
 % documentation modified by LeSage to
 % match the format of the econometrics toolbox
-   
+
 
 if (nargin ~= 2)
     error ('Wrong # of arguments to chis_inv');

@@ -1,11 +1,11 @@
-% PURPOSE: An example of using mess_g1() on a large data set 
-%          Bayesian matrix exponential spatial model                            
+% PURPOSE: An example of using mess_g1() on a large data set
+%          Bayesian matrix exponential spatial model
 %---------------------------------------------------
 % USAGE: mess_g1d2 (see mess_g1d for a small data set)
 %---------------------------------------------------
 
 % NOTE a large data set with 3107 observations
-% from Pace and Barry, 
+% from Pace and Barry,
 % test MCMC sampling on pace and barry data set
 
 clear all;

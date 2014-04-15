@@ -12,19 +12,19 @@ load test.dat; % a test data set containing
 dates = cal(1982,1,12); % set up calendar structure
 y = test;
 vnames =  ['il',
-           'in',    
-           'ky',    
-           'mi',    
-           'oh',    
-           'pa',    
-           'tn',    
-           'wv'];    
-     
+           'in',
+           'ky',
+           'mi',
+           'oh',
+           'pa',
+           'tn',
+           'wv'];
+
 [nobs neqs] = size(y);
 
 tight = 0.1;        % Litterman's overall tightness
 decay = 0.1;
-weight = 0.5;       % symmetric weights          
+weight = 0.5;       % symmetric weights
 nlag = 9;
 
 nfor = 12; % number of forecast periods

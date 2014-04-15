@@ -5,7 +5,7 @@
 %---------------------------------------------------
 
 % NOTE a large data set with 3107 observations
-% from Pace and Barry, 
+% from Pace and Barry,
 load elect.dat;             % load data on votes
 y =  (elect(:,7)./elect(:,8));
 x1 = log(elect(:,9)./elect(:,8));

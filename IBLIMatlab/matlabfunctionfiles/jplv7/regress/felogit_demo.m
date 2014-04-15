@@ -35,7 +35,7 @@ clear imat tmat cmat;
 % create rest of data
 x = randn(nobs,nvar);                     % covariates
 beta = ones(nvar,1);                      % slope parameters
-e = sqrt(1)*randn(nobs,1);    
+e = sqrt(1)*randn(nobs,1);
 P = exp(x*beta + c + e) ./ ( 1 + exp(x*beta + c + e) );
 u = rand(nobs,1);
 y = u < P;                                % response variable
@@ -44,7 +44,7 @@ clear c e P u beta punk junk T_i nvar N T id;
 pack;
 
 %---- SHOW WHAT THE DATA LOOKS LIKE ----%
-disp('Here is a print of the first 20 observations in our data'); 
+disp('Here is a print of the first 20 observations in our data');
 look=[ivec(1:20) tvec(1:20) y(1:20) x(1:20,:)]
 
 

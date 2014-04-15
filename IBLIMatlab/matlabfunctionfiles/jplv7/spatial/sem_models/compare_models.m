@@ -1,6 +1,6 @@
 % PURPOSE: An example of using sar_g() sem_g() Gibbs sampling
 %          spatial model comparisons using log marginal posterior
-%          (on a small data set)                  
+%          (on a small data set)
 %---------------------------------------------------
 % USAGE: model_compare
 %---------------------------------------------------
@@ -34,9 +34,9 @@ ndraw = 2500;
 nomit = 500;
 
 results1 = sem_g(y,x,W,ndraw,nomit,prior);
-prt(results1);  
+prt(results1);
 results2 = sar_g(y,x,W,ndraw,nomit,prior);
-prt(results2);  
+prt(results2);
 probs = model_probs(results1,results2);
 
 fprintf(1,'posterior probs for sar versus sem model \n');
@@ -46,9 +46,9 @@ in.rnames = strvcat('Models','sem','sar');
 mprint(probs,in);
 
 
-% generate an sar model 
+% generate an sar model
 n = length(latt);
-IN = eye(n); 
+IN = eye(n);
 rho = 0.7;  % true value of rho
 sige = 0.5;
 k = 3;
@@ -60,9 +60,9 @@ beta(3,1) = 1.0;
 
 % for sar model
 vnames = strvcat('y','constant','x1','x2');
-    
+
 % sar model generated here
-y = (IN-rho*W)\(x*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige)); 
+y = (IN-rho*W)\(x*beta) + (IN-rho*W)\(randn(n,1)*sqrt(sige));
 
 % homoscedastic prior
 prior2.novi = 1;
@@ -70,9 +70,9 @@ ndraw = 2500;
 nomit = 500;
 
 results3 = sem_g(y,x,W,ndraw,nomit,prior2);
-prt(results3); 
+prt(results3);
 results4 = sar_g(y,x,W,ndraw,nomit,prior2);
-prt(results4);  
+prt(results4);
 probs = model_probs(results3,results4);
 
 fprintf(1,'posterior probs for sar versus sem model \n');

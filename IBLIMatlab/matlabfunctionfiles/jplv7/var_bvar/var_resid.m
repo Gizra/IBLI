@@ -3,7 +3,7 @@ function resid = var_resid(y,nlag,x)
 %          and returns only residuals
 %          (used by lrratio.m)
 %---------------------------------------------------
-% USAGE: resid = var_resid(y,nlag,x) 
+% USAGE: resid = var_resid(y,nlag,x)
 % where:    y    = an (nobs x neqs) matrix of y-vectors
 %           nlag = the lag length
 %           x    = optional matrix of variables (nobs x nx)
@@ -11,7 +11,7 @@ function resid = var_resid(y,nlag,x)
 %---------------------------------------------------
 % RETURNS: a matrix of residuals (nobs x neqs)
 %---------------------------------------------------
-% SEE ALSO: var, varf, prt_var 
+% SEE ALSO: var, varf, prt_var
 %---------------------------------------------------
 
 % written by:
@@ -35,14 +35,14 @@ end;
 % adjust nobs to feed the lags
 nobse = nobs - nlag;
 
-% nvar adjusted for constant term 
+% nvar adjusted for constant term
  k = neqs*nlag + 1 + nx;
  nvar = k;
 
 xlag = mlag(y,nlag);
 
 % form x-matrix
-if nx 
+if nx
 xmat = [xlag(nlag+1:nobs,:) x(nlag+1:nobs,:) ones(nobs-nlag,1)];
 else
 xmat = [xlag(nlag+1:nobs,:) ones(nobs-nlag,1)];
@@ -54,9 +54,9 @@ resid = zeros(nobse,neqs);
 for j=1:neqs;
  yvec = y(nlag+1:nobs,j);
  resid(:,j) = olse(yvec,xmat);
-end; 
-% end of loop over equations 
- 
+end;
+% end of loop over equations
+
 
 
 

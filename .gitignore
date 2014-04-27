@@ -39,10 +39,10 @@ Thumbs.db
 
 # Garmentbox #
 #############
-ethosia/modules/contrib
-ethosia/1/modules
-ethosia/themes/contrib
-ethosia/libraries
+ibli/modules/contrib
+ibli/1/modules
+ibli/themes/contrib
+ibli/libraries
 www
 install.sh
 
@@ -53,7 +53,7 @@ install.sh
 .idea
 
 # Behat
-ethosia/behat/vendor/
+ibli/behat/vendor/
 behat.local.yml
-ethosia/behat/bin
-ethosia/behat/composer.phar
+ibli/behat/bin
+ibli/behat/composer.phar

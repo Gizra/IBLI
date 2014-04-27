@@ -4,10 +4,10 @@
 MYSQL_USERNAME="root"
 MYSQL_PASSWORD="root"
 MYSQL_HOST="localhost"
-MYSQL_DB_NAME="ethosia"
+MYSQL_DB_NAME="ibli"
 
 # Modify the URL below to match your OpenScholar base domain URL.
-BASE_DOMAIN_URL="http://localhost/ethosia/www"
+BASE_DOMAIN_URL="http://localhost/ibli/www"
 
 # Modify the login details below to be the desired login details for the Administrator account.
 ADMIN_USERNAME="admin"
@@ -23,7 +23,7 @@ bash scripts/build
 cd www
 
 
-drush si -y ethosia --locale=en --account-name=$ADMIN_USERNAME --account-pass=$ADMIN_PASSWORD --account-mail=$ADMIN_EMAIL --db-url=mysql://$MYSQL_USERNAME:$MYSQL_PASSWORD@$MYSQL_HOST/$MYSQL_DB_NAME --uri=$BASE_DOMAIN_URL
+drush si -y ibli --locale=en --account-name=$ADMIN_USERNAME --account-pass=$ADMIN_PASSWORD --account-mail=$ADMIN_EMAIL --db-url=mysql://$MYSQL_USERNAME:$MYSQL_PASSWORD@$MYSQL_HOST/$MYSQL_DB_NAME --uri=$BASE_DOMAIN_URL
 
 # Development modules
 drush en devel views_ui field_ui migrate_ui -y

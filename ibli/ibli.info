@@ -1,0 +1,53 @@
+name = Pipeline
+description = EU Pipeline
+version = VERSION
+core = 7.x
+
+; Core
+dependencies[] = block
+dependencies[] = color
+dependencies[] = contextual
+dependencies[] = help
+dependencies[] = image
+dependencies[] = locale
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = taxonomy
+dependencies[] = dblog
+dependencies[] = shortcut
+dependencies[] = file
+dependencies[] = rdf
+
+; Contrib modules
+dependencies[] = admin_menu_toolbar
+dependencies[] = admin_views
+dependencies[] = ctools
+dependencies[] = countries
+dependencies[] = date
+dependencies[] = date_popup
+dependencies[] = entity
+dependencies[] = entity_token
+dependencies[] = entityreference
+dependencies[] = entityreference_prepopulate
+dependencies[] = features
+dependencies[] = flag
+dependencies[] = inline_entity_form
+dependencies[] = libraries
+dependencies[] = message
+dependencies[] = message_notify
+dependencies[] = message_subscribe
+dependencies[] = module_filter
+dependencies[] = pathauto
+dependencies[] = page_manager
+dependencies[] = panels
+dependencies[] = strongarm
+dependencies[] = title
+dependencies[] = token
+dependencies[] = views
+dependencies[] = views_bulk_operations
+dependencies[] = views_content
+
+; Features

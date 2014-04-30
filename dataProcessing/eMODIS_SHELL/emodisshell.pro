@@ -239,10 +239,17 @@ Print , ' - - - - The Repository is up to date - - - - ' ;
 
 Print , ' - - - - Updating Last Month New NDVI data - -' ;
 
+
+
+IF NOT((Day EQ 4) OR (Day EQ 14) OR (Day EQ 24)) THEN BEGIN
+    print, 'Repository Doesnt need update ... process STOPED'
+    STOP
+ENDIF
+
 ;; Step 0.2 :  Update month back from now
 
 curWIY = 6*Month-4+2*((Day-3)/10-1); // WIY = Week In Year
-FOR k=0,-1  DO BEGIN ; ; ; - - - - REMEMBER TO TAKE BACK TO 9 - - - - ; ; ; 
+FOR k=0,5  DO BEGIN ; ; ; - - - - REMEMBER TO TAKE BACK TO 9 - - - - ; ; ; 
  toUpdateMonth = curWIY-2*k
  IF toUpdateMonth LE 0 THEN BEGIN
     toUpdateMonth= toUpdateMonth+72
@@ -293,7 +300,7 @@ Print , ' - - - - new NDVI data is is up to date - - - ' ;
  
 
 
-IF (0) THEN BEGIN
+IF (1) THEN BEGIN
 total = 0
 FOR line=0, SUBSET(3)-1, 1L DO BEGIN
   FOR file=0, N_ELEMENTS(fileList)-1, 1L DO BEGIN
@@ -323,7 +330,7 @@ print, ' - - - Finished Stacking Temporal Layers - - - ';
    
 
         print, ' - - - Calculating IFTemporal Mean,STD,zNDVI and Diagnostics per pixel - - - ';
-        IF (0) THEN print, ZNORMBIL_8BIT (procDataPath+'\eMODIS_FEWS_Kenya.bil', SUBSET(2), SUBSET(3), N_ELEMENTS(fileList), 10, 1, 1, N_ELEMENTS(fileList), 0, 100, 200, 5, 102)
+        IF (1) THEN print, ZNORMBIL_8BIT (procDataPath+'\eMODIS_FEWS_Kenya.bil', SUBSET(2), SUBSET(3), N_ELEMENTS(fileList), 10, 1, 1, N_ELEMENTS(fileList), 0, 100, 200, 5, 102)
         
 
         print , ' - - - Begin zScore aggregation per division - - - '

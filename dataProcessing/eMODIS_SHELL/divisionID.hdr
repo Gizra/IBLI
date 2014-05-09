@@ -1,0 +1,21 @@
+ENVI
+description = {
+  File Resize Result, x resize factor: 1.000000, y resize factor: 1.000000.
+  [Mon May 06 09:39:14 2013]}
+samples = 3400
+lines   = 4300
+bands   = 1
+header offset = 0
+file type = ENVI Standard
+data type = 1
+interleave = bsq
+sensor type = Unknown
+byte order = 0
+map info = {Geographic Lat/Lon, 1.0000, 1.0000, 33.78890000, 5.62650000, 2.4130000000e-003, 2.4130000000e-003, WGS-84, units=Degrees}
+coordinate system string = {GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]}
+sun azimuth = -1.00000000
+sun elevation = -1.00000000
+cloud cover = -1.00000000
+wavelength units = Unknown
+band names = {
+ Resize (Band 1:divisionID_tif.tif)}

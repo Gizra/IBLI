@@ -8,7 +8,7 @@ class IbliPageNodes extends ShenkarMigration {
   public $bundle = 'page';
 
   public $csvColumns = array(
-    array('field_body', 'Body'),
+    array('body', 'Body'),
   );
 
   public function __construct() {
@@ -16,7 +16,7 @@ class IbliPageNodes extends ShenkarMigration {
 
     // Map fields that don't need extra definitions.
     $field_names = array(
-      'field_body',
+      'body',
     );
     $this->addSimpleMappings($field_names);
   }

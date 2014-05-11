@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Migrate IBLI content.
+ */
+
+/**
+ * Implements hook_migrate_api().
+ */
+function ibli_migrate_migrate_api() {
+  $class_names = array(
+    // Nodes.
+    'IbliPageNodes',
+  );
+
+  foreach ($class_names as $class_name) {
+    $migrations[$class_name] = array('class_name' => $class_name);
+  }
+
+  $api = array(
+    'api' => 2,
+    'migrations' => $migrations,
+  );
+
+  return $api;
+}

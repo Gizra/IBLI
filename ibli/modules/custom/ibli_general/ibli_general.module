@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the IBLI General feature.
+ */
+
+include_once 'ibli_general.features.inc';

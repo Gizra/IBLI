@@ -50,4 +50,5 @@ dependencies[] = views
 dependencies[] = views_bulk_operations
 dependencies[] = views_content
 
-; Features
+; Features; Custom modules
+dependencies[] = ibli_general

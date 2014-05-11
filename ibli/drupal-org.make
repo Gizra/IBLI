@@ -81,6 +81,9 @@ projects[pathauto][version] = "1.2"
 projects[purl][subdir] = "contrib"
 projects[purl][version] = "1.x-dev"
 
+projects[special_menu_items][subdir] = "contrib"
+projects[special_menu_items][version] = "2.0"
+
 projects[strongarm][subdir] = "contrib"
 projects[strongarm][version] = "2.0"
 

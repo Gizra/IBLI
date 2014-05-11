@@ -43,6 +43,7 @@ dependencies[] = module_filter
 dependencies[] = pathauto
 dependencies[] = page_manager
 dependencies[] = panels
+dependencies[] = special_menu_items
 dependencies[] = strongarm
 dependencies[] = title
 dependencies[] = token

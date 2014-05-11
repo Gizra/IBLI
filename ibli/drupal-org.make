@@ -96,6 +96,14 @@ projects[views][version] = "3.7"
 projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.2"
 
+projects[wysiwyg][subdir] = "contrib"
+projects[wysiwyg][version] = "2.2"
+
 ; Themes
 projects[bootstrap][subdir] = "contrib"
 projects[bootstrap][version] = "3.0"
+
+; Libraries
+libraries[tinymce][type] = "libraries"
+libraries[tinymce][download][type] = "get"
+libraries[tinymce][download][url] = "http://download.moxiecode.com/tinymce/tinymce_3.5.10.zip"

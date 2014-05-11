@@ -49,5 +49,8 @@ dependencies[] = token
 dependencies[] = views
 dependencies[] = views_bulk_operations
 dependencies[] = views_content
+dependencies[] = wysiwyg
 
-; Features
+; Custom modules
+dependencies[] = ibli_general
+dependencies[] = ibli_migrate

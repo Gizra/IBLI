@@ -24,6 +24,7 @@ class IbliPageNodes extends ShenkarMigration {
   }
 
   public function complete($entity, $row) {
+    $menu_name = variable_get('menu_main_links_source', 'menu-ibli-main-menu');
 
     if (!$row->is_in_menu) {
       // Do not create menu link.
@@ -31,13 +32,12 @@ class IbliPageNodes extends ShenkarMigration {
     }
 
     $m = array();
-    $m['menu_name'] = 'main-menu';
+    $m['menu_name'] = $menu_name;
     $m['link_path'] = 'node/' . $entity->nid;
     $m['link_title'] = $entity->title;
 
     if ($row->parent) {
-      $main_menu = variable_get('menu_main_links_source', 'menu-ibli-main-menu');
-      $links = menu_load_links($main_menu);
+      $links = menu_load_links($menu_name);
       foreach ($links as $link) {
         if ($link['link_title'] == $row->parent) {
           $m['plid'] = $link['mlid'];

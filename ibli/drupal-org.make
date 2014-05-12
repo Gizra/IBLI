@@ -106,10 +106,16 @@ projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][version] = "2.2"
 
 ; Themes
+
 projects[bootstrap][subdir] = "contrib"
 projects[bootstrap][version] = "3.0"
 
 ; Libraries
+
 libraries[tinymce][type] = "libraries"
 libraries[tinymce][download][type] = "get"
 libraries[tinymce][download][url] = "http://download.moxiecode.com/tinymce/tinymce_3.5.10.zip"
+
+libraries[bootstrap_sass][download][type] = "file"
+libraries[bootstrap_sass][type] = "libraries"
+libraries[bootstrap_sass][download][url] = "https://github.com/twbs/bootstrap-sass/archive/v3.1.1.zip"

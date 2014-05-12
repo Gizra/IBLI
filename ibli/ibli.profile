@@ -35,6 +35,9 @@ function ibli_set_variables() {
     // Mime-mail
     'mimemail_format' => 'full_html',
     'mimemail_sitestyle' => FALSE,
+    // JQuery.
+    'jquery_update_jquery_version' => 1.8,
+    'jquery_update_jquery_admin_version' => 1.5,
   );
 
   foreach ($variables as $key => $value) {

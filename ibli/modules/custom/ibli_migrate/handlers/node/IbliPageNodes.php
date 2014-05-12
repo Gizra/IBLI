@@ -36,7 +36,8 @@ class IbliPageNodes extends ShenkarMigration {
     $m['link_title'] = $entity->title;
 
     if ($row->parent) {
-      $links = menu_load_links('main-menu');
+      $main_menu = variable_get('menu_main_links_source', 'menu-ibli-main-menu');
+      $links = menu_load_links($main_menu);
       foreach ($links as $link) {
         if ($link['link_title'] == $row->parent) {
           $m['plid'] = $link['mlid'];

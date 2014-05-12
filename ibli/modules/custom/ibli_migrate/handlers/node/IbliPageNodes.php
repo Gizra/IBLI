@@ -10,7 +10,8 @@ class IbliPageNodes extends ShenkarMigration {
   public $csvColumns = array(
     array('body', 'Body'),
     array('is_in_menu', 'Is In Menu'),
-    array('parent', 'Parent'),
+    array('parent', 'Menu Parent'),
+    array('weight', 'Menu Order'),
   );
 
   public function __construct() {
@@ -35,6 +36,7 @@ class IbliPageNodes extends ShenkarMigration {
     $m['menu_name'] = $menu_name;
     $m['link_path'] = 'node/' . $entity->nid;
     $m['link_title'] = $entity->title;
+    $m['weight'] = $row->weight;
 
     if ($row->parent) {
       $links = menu_load_links($menu_name);

@@ -1,2 +1,14 @@
-Unique ID,Title,Body
-1,Homepage,"This is the homepage."
+Unique ID,Title,Body,Is In Menu,Menu Parent,Menu Order
+1,Homepage,This is the homepage.,0,,
+2,What is IBLI?,What is IBLI?,1,Pages,1
+3,Where is IBLI Offered?,Where is IBLI Offered?,1,Pages,2
+4,Coverage Areas,Coverage Areas,1,Pages,3
+5,Past Premiums,Past Premiums,1,Pages,4
+6,Current Premiums,Current Premiums,1,Pages,5
+7,What's Going On In My Area?,What's Going On In My Area?,1,Pages,6
+8,"Yes, I Want to Protect My Livestock from Drought!","Yes, I Want to Protect My Livestock from Drought!",1,Pages,7
+9,Reports,Reports,1,Pages,8
+10,Learn More,Learn More,1,Pages,9
+11,Ethiopia,Ethiopia,1,Partners,1
+12,Kenya,Kenya,1,Partners,2
+13,Contact Us,Contact Us,1,,50

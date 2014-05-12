@@ -43,6 +43,9 @@ projects[flag][version] = "2.1"
 projects[inline_entity_form][subdir] = "contrib"
 projects[inline_entity_form][version] = "1.5"
 
+projects[jquery_update][subdir] = "contrib"
+projects[jquery_update][version] = "2.4"
+
 projects[libraries][subdir] = "contrib"
 projects[libraries][version] = "2.2"
 
@@ -81,6 +84,9 @@ projects[pathauto][version] = "1.2"
 projects[purl][subdir] = "contrib"
 projects[purl][version] = "1.x-dev"
 
+projects[special_menu_items][subdir] = "contrib"
+projects[special_menu_items][version] = "2.0"
+
 projects[strongarm][subdir] = "contrib"
 projects[strongarm][version] = "2.0"
 
@@ -100,10 +106,16 @@ projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][version] = "2.2"
 
 ; Themes
+
 projects[bootstrap][subdir] = "contrib"
 projects[bootstrap][version] = "3.0"
 
 ; Libraries
+
 libraries[tinymce][type] = "libraries"
 libraries[tinymce][download][type] = "get"
 libraries[tinymce][download][url] = "http://download.moxiecode.com/tinymce/tinymce_3.5.10.zip"
+
+libraries[bootstrap_sass][download][type] = "file"
+libraries[bootstrap_sass][type] = "libraries"
+libraries[bootstrap_sass][download][url] = "https://github.com/twbs/bootstrap-sass/archive/v3.1.1.zip"

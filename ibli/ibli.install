@@ -11,15 +11,20 @@ function ibli_install() {
   ini_set('auto_detect_line_endings', TRUE);
 
   // Enable our themes.
-  theme_enable(array('seven', 'bootstrap'));
+  theme_enable(array('seven', 'bootstrap', 'bootstrap_subtheme'));
 
   // Set the default theme.
-  variable_set('theme_default', 'bootstrap');
+  variable_set('theme_default', 'bootstrap_subtheme');
 
   // Enable node view page override by Page manager module.
   variable_set('page_manager_node_view_disabled', FALSE);
 
   variable_set('node_admin_theme', TRUE);
+
+  // Set bootstrap's default menu to be our menu.
+  variable_set('menu_main_links_source', 'menu-ibli-main-menu');
+  // Remove the user menu from the navigation bar.
+  variable_set('menu_secondary_links_source', FALSE);
 
   // Set required date API variables.
   // See date_api_status().

@@ -1,0 +1,9 @@
+@import "_mixins.scss";
+@import "../../../../libraries/bootstrap_sass/vendor/assets/stylesheets/bootstrap.scss";
+
+ul.nav {
+
+  li {
+    cursor: pointer;
+  }
+}

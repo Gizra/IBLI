@@ -1,10 +1,62 @@
 @import "_mixins.scss";
 @import "../../../../libraries/bootstrap_sass/vendor/assets/stylesheets/bootstrap.scss";
+@import "../fonts/font-awesome-4.0.3/css/font-awesome.css";
 
-ul.nav {
 
-  li {
-    cursor: pointer;
+
+
+html, body {
+  font-family: 'Lato', sans-serif;
+  height: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lato', sans-serif;
+}
+h1.hl, h2.hl, h3.hl, h4.hl, h5.hl, h6.hl {
+  color: #515151;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+h1.hl small, h2.hl small, h3.hl small, h4.hl small, h5.hl small, h6.hl small {
+  text-transform: none;
+}
+
+
+
+
+
+/* ===== Top Menu ===== */
+
+header.navbar {
+
+  ul.nav {
+
+    li {
+      cursor: pointer;
+
+      &.dropdown {
+
+        ul.dropdown-menu {
+          border-top-color: #EEEEEE;
+          @include box-shadow(none);
+
+          li {
+
+            a {
+              padding: 10px 20px;
+            }
+          }
+        }
+
+        &.open {
+
+          .dropdown-toggle {
+            background-color: #EEEEEE;
+            color: #515151;
+          }
+        }
+      }
+    }
   }
 }
 

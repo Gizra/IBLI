@@ -1,9 +1,9 @@
 @import "_mixins.scss";
 @import "../../../../libraries/bootstrap_sass/vendor/assets/stylesheets/bootstrap.scss";
 @import "../fonts/font-awesome-4.0.3/css/font-awesome.css";
+@import "pages/_homepage.scss";
 
-
-
+/* ===== General ===== */
 
 html, body {
   font-family: 'Lato', sans-serif;
@@ -20,10 +20,6 @@ h1.hl, h2.hl, h3.hl, h4.hl, h5.hl, h6.hl {
 h1.hl small, h2.hl small, h3.hl small, h4.hl small, h5.hl small, h6.hl small {
   text-transform: none;
 }
-
-
-
-
 
 /* ===== Top Menu ===== */
 
@@ -59,9 +55,6 @@ header.navbar {
     }
   }
 }
-
-
-
 
 /* ===== Footer ===== */
 
@@ -167,3 +160,5 @@ footer {
     }
   }
 }
+
+

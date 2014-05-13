@@ -1,0 +1,296 @@
+
+/* ===== Services ===== */
+
+.services {
+
+  ul {
+    padding: 0;
+
+    li {
+      transition: width 0.3s;
+      -webkit-transition: width 0.3s;
+      -moz-transition: width 0.3s;
+      list-style-type: none;
+      float: left;
+      background: #eee;
+      padding: 20px;
+      margin-right: 1px;
+      text-align: center;
+      color: #888;
+      width: 227px;
+      height: 100px;
+
+      &:hover {
+        width: 328px!important;
+        background: #69D2E7;
+        cursor: pointer;
+        color: #FFF;
+        text-align: left;
+
+        i {
+          float: left;
+          line-height: 60px;
+          margin: 0 20px 0 5px;
+        }
+
+        p a {
+          visibility: visible;
+          color: #FFF;
+        }
+      }
+
+      p {
+        overflow: hidden;
+        white-space: nowrap;
+
+        a {
+          visibility: hidden;
+        }
+      }
+    }
+
+    &:hover li {
+      width: 201px;
+    }
+  }
+}
+
+
+/* ===== Block header ===== */
+
+.block-header h2 {
+  margin: 40px 0;
+  font-size: 24px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  color: #515151;
+  text-transform: uppercase;
+  background: #eee;
+}
+
+.block-header h2 .title {
+  background: #fff;
+  padding: 0 15px 0 0;
+}
+
+.block-header h2 .decoration {
+  background: #fff;
+  padding-left: 3px;
+  margin-left: 5px;
+}
+
+
+
+/* ===== About Us block ===== */
+
+img.img-about {
+  width: 40%;
+  padding: 10px;
+  border: 1px solid #eee;
+  float: left;
+  margin: 0 20px 20px 0;
+}
+
+/* ===== Info Boards ==== */
+
+.info-board {
+  margin: 20px 0;
+  padding: 15px 30px 15px 15px;
+  border-left: 5px solid #eee;
+}
+
+/* 1. Info board green */
+
+.info-board-green {
+  background-color: #F5FAF0;
+  border-color: #72a53b;
+}
+.info-board h4 {
+  margin-top: 0;
+}
+.info-board p:last-child {
+  margin-bottom: 0;
+}
+
+/* 2. Info board blue */
+
+.info-board-blue {
+  background-color: #EBF9FF;
+  border-color: #00B4FF;
+}
+.info-board h4 {
+  margin-top: 0;
+}
+.info-board p:last-child {
+  margin-bottom: 0;
+}
+
+/* 3. Info board red */
+
+.info-board-red {
+  background-color: #FBF0EE;
+  border-color: #E74C3C;
+}
+.info-board h4 {
+  margin-top: 0;
+}
+.info-board p:last-child {
+  margin-bottom: 0;
+}
+
+/* 4. Info board orange */
+
+.info-board-orange {
+  background-color: #FFF2EB;
+  border-color: #FFA973;
+}
+.info-board h4 {
+  margin-top: 0;
+}
+.info-board p:last-child {
+  margin-bottom: 0;
+}
+
+/* ===== Media objects ===== */
+
+.media-object {
+  height: 64px;
+  width: 64px;
+}
+.media-heading a{
+  color: #333;
+}
+.media-heading a:hover{
+  color: #333;
+  text-decoration: none;
+}
+.read-more {
+  float:right;
+  margin-top: 10px;
+}
+
+/* ===== Navs ===== */
+
+/* 1. Nav tabs */
+
+.nav-tabs {
+  margin-bottom: 15px;
+}
+.nav-tabs > li > a {
+  border-bottom: 1px solid #dedede;
+  border-radius: 0;
+  background: #f5f5f5;
+}
+
+/* 2. Nav pills */
+
+.nav-pills {
+  margin-bottom: 15px;
+}
+.nav-pills > li > a {
+  border-radius: 0;
+}
+.nav-pills > li > a {
+  background-color: #f5f5f5;
+}
+.nav-pills-green > li.active > a,
+.nav-pills-green > li.active > a:hover,
+.nav-pills-green > li.active > a:focus {
+  background-color: #72a53b;
+}
+.nav-pills-blue > li.active > a,
+.nav-pills-blue > li.active > a:hover,
+.nav-pills-blue > li.active > a:focus {
+  background-color: #00B4FF;
+}
+.nav-pills-dark > li.active > a,
+.nav-pills-dark > li.active > a:hover,
+.nav-pills-dark > li.active > a:focus {
+  background-color: #515151;
+}
+.nav-pills-red > li.active > a,
+.nav-pills-red > li.active > a:hover,
+.nav-pills-red > li.active > a:focus {
+  background-color: #E74C3C;
+}
+.nav-pills-turquoise > li.active > a,
+.nav-pills-turquoise > li.active > a:hover,
+.nav-pills-turquoise > li.active > a:focus {
+  background-color: #1ABC9C;
+}
+.nav-pills-amethyst > li.active > a,
+.nav-pills-amethyst > li.active > a:hover,
+.nav-pills-amethyst > li.active > a:focus {
+  background-color: #9B59B6;
+}
+
+/* ===== Recent Works ===== */
+
+.thumbnail {
+  position: relative;
+}
+.thumbnail .visit {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  text-align: center;
+  top: 80px;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+}
+.thumbnail:hover .visit {
+  opacity: 1;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+}
+.thumbnail .visit a {
+  color: #FFF;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+}
+.thumbnail .visit a:hover {
+  color: #FFF;
+  text-decoration: none;
+}
+
+
+/* ===== Thumbnails ===== */
+
+.thumbnail {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+.thumbnail > img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  padding: 10px;
+  border: 1px solid #eee;
+}
+a.thumbnail:hover img,
+a.thumbnail:focus img {
+  border-color: #ccc;
+}
+.thumbnail > img {
+  margin-left: auto;
+  margin-right: auto;
+}
+.thumbnail .caption {
+  padding: 10px;
+  color: #333333;
+}
+.thumbnail .caption h4{
+  text-transform: uppercase;
+}
+.thumbnail .caption .rating {
+  margin-bottom: 10px;
+}
+.thumbnail .caption .rating i {
+  color: #F7C41F;
+  font-size: 18px;
+}
+

@@ -1,5 +1,5 @@
-name = Pipeline
-description = EU Pipeline
+name = IBLI
+description = IBLI
 version = VERSION
 core = 7.x
 

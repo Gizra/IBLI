@@ -25,5 +25,7 @@ features[variable][] = menu_parent_page
 features[variable][] = node_options_page
 features[variable][] = node_preview_page
 features[variable][] = node_submitted_page
+features[variable][] = site_frontpage
+features[variable][] = site_name
 features[variable][] = special_menu_items_nolink_tag
 features[wysiwyg][] = filtered_html

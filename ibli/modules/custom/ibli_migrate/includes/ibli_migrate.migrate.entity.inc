@@ -5,7 +5,7 @@
  * Populate distribution with some content.
  */
 
-abstract class ShenkarMigration extends Migration {
+abstract class IbliMigration extends Migration {
 
   public function __construct() {
     parent::__construct();

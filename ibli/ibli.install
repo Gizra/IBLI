@@ -109,26 +109,6 @@ function ibli_standard_install() {
       'pages' => '',
       'cache' => -1,
     ),
-    array(
-      'module' => 'user',
-      'delta' => 'login',
-      'theme' => $default_theme,
-      'status' => 1,
-      'weight' => 0,
-      'region' => 'sidebar_first',
-      'pages' => '',
-      'cache' => -1,
-    ),
-    array(
-      'module' => 'system',
-      'delta' => 'help',
-      'theme' => $default_theme,
-      'status' => 1,
-      'weight' => 0,
-      'region' => 'help',
-      'pages' => '',
-      'cache' => -1,
-    ),
   );
   $query = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));
   foreach ($values as $record) {

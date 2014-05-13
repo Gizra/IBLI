@@ -33,6 +33,8 @@ function ibli_install_tasks() {
 function ibli_set_variables() {
   $variables = array(
     // Mime-mail
+    'site_name' => 'IBLI',
+    // Mime-mail
     'mimemail_format' => 'full_html',
     'mimemail_sitestyle' => FALSE,
     // JQuery.

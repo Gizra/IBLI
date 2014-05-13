@@ -3,12 +3,11 @@
 /**
  * Migrate "page" nodes.
  */
-class IbliPageNodes extends ShenkarMigration {
+class IbliPageNodes extends IbliMigration {
   public $entityType = 'node';
   public $bundle = 'page';
 
   public $csvColumns = array(
-    array('body', 'Body'),
     array('is_in_menu', 'Is In Menu'),
     array('parent', 'Menu Parent'),
     array('weight', 'Menu Order'),
@@ -17,13 +16,30 @@ class IbliPageNodes extends ShenkarMigration {
   public function __construct() {
     parent::__construct();
 
-    // Map fields that don't need extra definitions.
-    $field_names = array(
-      'body',
-    );
-    $this->addSimpleMappings($field_names);
+    // Map body.
+    $this->addFieldMapping('body', 'body')
+      ->arguments(array('format' => 'full_html'));
   }
 
+  /**
+   * Get body content from HTML.
+   */
+  public function prepareRow($row) {
+    parent::prepareRow($row);
+
+    // Fetch the body from a file stored under
+    // "ibli_migrate/html/[bundle]/".
+    $file = drupal_get_path('module', 'ibli_migrate') . '/html/' . $this->bundle . '/' . $row->id . '.html';
+    if (!file_exists($file)) {
+      drupal_set_message('cannot find ' . $file);
+      return;
+    }
+    $row->body = file_get_contents($file);
+  }
+
+  /**
+   * Create menu links for nodes.
+   */
   public function complete($entity, $row) {
     $menu_name = variable_get('menu_main_links_source', 'menu-ibli-main-menu');
 

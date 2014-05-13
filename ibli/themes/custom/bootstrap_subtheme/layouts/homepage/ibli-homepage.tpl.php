@@ -44,34 +44,12 @@
   <div class="row">
 
     <div class="panel-panel panel-col-left col-xs-8 col-sm-8 col-md-8 col-lg-8">
-      <?php print $content['left']; ?>
-
-
-      <!---------------------------------------------------------------------------------->
       <div class="block-header">
         <h2>
           <span class="title">Welcome Message</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
         </h2>
       </div>
-      <img src="<?php print $images_path; ?>/about.jpg" class="img-about img-responsive" alt="About">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-        Sed sit amet auctor augue, nec dignissim ligula.
-        Nullam euismod quis odio eu commodo. Duis vitae dignissim eros.
-        <br /><br />
-        Nunc in neque nec arcu vulputate ullamcorper. Ut id orci ac arcu consectetur fringilla.
-        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-        Duis hendrerit enim id arcu lacinia, id commodo ante semper.
-        Sed vel ante nec nisi vestibulum congue. Pellentesque non lacus in tortor rutrum tristique.
-      </p>
-      <div class="info-board info-board-blue">
-        <h4>Important info</h4>
-        <p>Nunc in neque nec arcu vulputate ullamcorper. Ut id orci ac arcu consectetur fringilla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-      </div>
-      <!---------------------------------------------------------------------------------->
-
-
+      <?php print $content['left']; ?>
     </div>
 
     <div class="panel-panel panel-col-right col-xs-4 col-sm-4 col-md-4 col-lg-4">

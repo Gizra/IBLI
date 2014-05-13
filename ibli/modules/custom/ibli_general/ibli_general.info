@@ -17,7 +17,6 @@ features[field_instance][] = node-page-body
 features[filter][] = filtered_html
 features[menu_custom][] = menu-ibli-main-menu
 features[menu_links][] = menu-ibli-main-menu_blog:http://livestockinsurance.wordpress.com
-features[menu_links][] = menu-ibli-main-menu_ibli:<front>
 features[menu_links][] = menu-ibli-main-menu_pages:<nolink>
 features[menu_links][] = menu-ibli-main-menu_partners:<nolink>
 features[node][] = page

@@ -119,7 +119,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-sm-12">
-          <h1 class="animated slideInDown">The Highland Template</h1>
+          <h1 class="animated slideInDown">Index-based Livestock Insurance</h1>
           <div class="list">
             <ul>
               <li class="animated slideInLeft first"><span><i class="fa fa fa-code"></i> Built with Bootstrap 3.</span></li>

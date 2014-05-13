@@ -30,26 +30,6 @@ function ibli_general_menu_default_menu_links() {
     'weight' => 10,
     'customized' => 1,
   );
-  // Exported menu link: menu-ibli-main-menu_ibli:<front>
-  $menu_links['menu-ibli-main-menu_ibli:<front>'] = array(
-    'menu_name' => 'menu-ibli-main-menu',
-    'link_path' => '<front>',
-    'router_path' => '',
-    'link_title' => 'IBLI',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-      'identifier' => 'menu-ibli-main-menu_ibli:<front>',
-    ),
-    'module' => 'menu',
-    'hidden' => 0,
-    'external' => 1,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -2,
-    'customized' => 1,
-  );
   // Exported menu link: menu-ibli-main-menu_pages:<nolink>
   $menu_links['menu-ibli-main-menu_pages:<nolink>'] = array(
     'menu_name' => 'menu-ibli-main-menu',
@@ -93,7 +73,6 @@ function ibli_general_menu_default_menu_links() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Blog');
-  t('IBLI');
   t('Pages');
   t('Partners');
 

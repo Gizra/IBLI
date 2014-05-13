@@ -1,0 +1,36 @@
+body.page-admin .panel-2col {
+  /*  overflow: hidden;  */
+}
+
+body.page-admin .panel-2col .panel-col-left {
+  float: left;
+  width: 66%;
+}
+body.page-admin * html .panel-2col .panel-col-left {
+  width: 66%;
+}
+
+body.page-admin .panel-2col .panel-col-left .inside {
+  margin: 0 .5em 1em 0;
+}
+
+body.page-admin .panel-2col .panel-col-right {
+  float: left;
+  width: 33%;
+}
+body.page-admin * html .panel-2col .panel-col-right {
+  width: 33%;
+}
+
+body.page-admin .panel-2col .panel-col-right .inside {
+  margin: 0 0 1em .5em;
+}
+
+body.page-admin #panels-edit-display .panel-pane,
+body.page-admin #panels-edit-display .helperclass {
+  margin: .5em;
+}
+
+body.page-admin .panel-2col .panel-separator {
+  margin: 0 0 1em 0;
+}

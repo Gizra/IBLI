@@ -33,7 +33,7 @@ STARTTIME = SYSTIME(1)
 
 
 ; access the input csv-file
-inFile=dataPath+'\zNDVI_aggregated_eMODIS.csv'
+inFile=dataPath+'/zNDVI_aggregated_eMODIS.csv'
 ; read data
 read = READ_ASCII(inFile,data_start=2,delimiter=',',HEADER=firstLine)
 firstLine=firstLine[1]                 ; get rid of description

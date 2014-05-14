@@ -296,7 +296,7 @@ Print , ' - - - - new NDVI data is is up to date - - - ' ;
  
  fileList = FILE_SEARCH(rawDataPath+'/*.img')
  bandList=STRMID(FILE_BASENAME(fileList),0,6) 
- OPENW , 1 ,procDataPath+'\eMODIS_FEWS_Kenya.bil'
+ OPENW , 1 ,procDataPath+'/eMODIS_FEWS_Kenya.bil'
  
 
 
@@ -321,7 +321,7 @@ ENDIF
 FREE_LUN,1
 
 
-CREATE_HEADER, procDataPath+'\eMODIS_FEWS_Kenya.bil',SUBSET(2),SUBSET(3),N_ELEMENTS(fileList),'{'+STRJOIN(bandList,', ')+'}',map_info      ; Procedure to generate generic header for each output
+CREATE_HEADER, procDataPath+'/eMODIS_FEWS_Kenya.bil',SUBSET(2),SUBSET(3),N_ELEMENTS(fileList),'{'+STRJOIN(bandList,', ')+'}',map_info      ; Procedure to generate generic header for each output
 
 
 

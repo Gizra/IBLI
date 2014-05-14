@@ -61,8 +61,8 @@ IF dataSet eq 'SPOT' THEN BEGIN
 ENDIF
 
 IF dataSet eq 'eMODIS' THEN BEGIN
-  inFile = dataPath+'\PRCOESSEd\eMODIS_FEWS_Kenya_Z.bil'                    ; input file with z-scores
-  diaFile = dataPath+'\PRCOESSEd\eMODIS_FEWS_Kenya_dia.img'                 ; file with diagnostics ; Note: before we used oldest (check)
+  inFile = dataPath+'/PRCOESSEd/eMODIS_FEWS_Kenya_Z.bil'                    ; input file with z-scores
+  diaFile = dataPath+'/PRCOESSEd/eMODIS_FEWS_Kenya_dia.img'                 ; file with diagnostics ; Note: before we used oldest (check)
   ratioAdmin=1                       ; number indicates how many times the spatial resolution of Admin-layer is higher than NDVI
   ; create a stringArray to hold identifiers for dekad-identifiers to be printed to file later
   
@@ -71,7 +71,7 @@ ENDIF
 ;***********************************
 
 ; general activities
-workPath=dataPath+'\CSV\'                                   ; location where output will be written to
+workPath=dataPath+'/CSV/'                                   ; location where output will be written to
 ;IF dataSet eq 'eMODIS' THEN workPath = 'G:\BACKUP\IMAGES\IBLI\eMODIS\z-scoring-first\aggregate\update20140123\'
 IF FILE_TEST(workPath) eq 0 THEN FILE_MKDIR, workPath
 

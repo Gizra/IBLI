@@ -33,7 +33,7 @@ STARTTIME = SYSTIME(1)
 
 
 ; access the input csv-file
-inFile=dataPath+'\zNDVI_aggregated_eMODIS.csv'
+inFile=dataPath+'/zNDVI_aggregated_eMODIS.csv'
 ; read data
 read = READ_ASCII(inFile,data_start=2,delimiter=',',HEADER=firstLine)
 firstLine=firstLine[1]                 ; get rid of description
@@ -81,7 +81,7 @@ FOR season=0,nSeasons-1,1L DO BEGIN
 ENDFOR
 
 ; Write the output to a CSV-file
-outFile = dataPath+'\zCumNDVI_aggregated_eMODIS.csv'
+outFile = dataPath+'/zCumNDVI_aggregated_eMODIS.csv'
 
 IF FILE_TEST(outFile) eq 1 THEN FILE_DELETE, outFile
 OPENW, W1, outFile, /GET_LUN, width=2000                        ; set width to get all data in one row

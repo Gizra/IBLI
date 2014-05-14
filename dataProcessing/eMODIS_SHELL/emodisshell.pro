@@ -321,7 +321,7 @@ ENDIF
 FREE_LUN,1
 
 
-CREATE_HEADER, procDataPath+'\eMODIS_FEWS_Kenya.bil',SUBSET(2),SUBSET(3),N_ELEMENTS(fileList),'{'+STRJOIN(bandList,', ')+'}',map_info      ; Procedure to generate generic header for each output
+CREATE_HEADER, procDataPath+'/eMODIS_FEWS_Kenya.bil',SUBSET(2),SUBSET(3),N_ELEMENTS(fileList),'{'+STRJOIN(bandList,', ')+'}',map_info      ; Procedure to generate generic header for each output
 
 
 
@@ -330,7 +330,7 @@ print, ' - - - Finished Stacking Temporal Layers - - - ';
    
 
         print, ' - - - Calculating IFTemporal Mean,STD,zNDVI and Diagnostics per pixel - - - ';
-        IF (1) THEN print, ZNORMBIL_8BIT (procDataPath+'\eMODIS_FEWS_Kenya.bil', SUBSET(2), SUBSET(3), N_ELEMENTS(fileList), 10, 1, 1, N_ELEMENTS(fileList), 0, 100, 200, 5, 102)
+        IF (1) THEN print, ZNORMBIL_8BIT (procDataPath+'/eMODIS_FEWS_Kenya.bil', SUBSET(2), SUBSET(3), N_ELEMENTS(fileList), 10, 1, 1, N_ELEMENTS(fileList), 0, 100, 200, 5, 102)
         
 
         print , ' - - - Begin zScore aggregation per division - - - '

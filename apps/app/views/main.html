@@ -1,2 +1,6 @@
-hello<br />
-<leaflet width="640px" height="480px"></leaflet>
+<form>
+  Latitude : <input type="number" step="any" ng-model="london.lat" />
+  Longitude : <input type="number" step="any" ng-model="london.lng" />
+  Zoom : <input type="number" step="any" ng-model="london.zoom" />
+</form>
+<leaflet center="london" width="640" height="400"></leaflet>

@@ -330,7 +330,7 @@ print, ' - - - Finished Stacking Temporal Layers - - - ';
    
 
         print, ' - - - Calculating IFTemporal Mean,STD,zNDVI and Diagnostics per pixel - - - ';
-        IF (1) THEN print, ZNORMBIL_8BIT (procDataPath+'\eMODIS_FEWS_Kenya.bil', SUBSET(2), SUBSET(3), N_ELEMENTS(fileList), 10, 1, 1, N_ELEMENTS(fileList), 0, 100, 200, 5, 102)
+        print,ZNORMBIL_8BIT(procDataPath+'\eMODIS_FEWS_Kenya.bil', SUBSET(2), SUBSET(3), N_ELEMENTS(fileList), 10, 1, 1, N_ELEMENTS(fileList), 0, 100, 200, 5, 102)
         
 
         print , ' - - - Begin zScore aggregation per division - - - '

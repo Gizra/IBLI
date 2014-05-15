@@ -134,7 +134,7 @@ print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string
     ; here loop over relevant lines & build temporary array of all relevant pixels
     lines = index/ns
     uniqlines = lines[UNIQ(lines)]
-    j = 0
+    j = 0.0
     ; loop over lines of data where Admin region falls in
     WHILE j lt N_ELEMENTS(uniqlines) DO BEGIN
     

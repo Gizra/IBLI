@@ -1,89 +1,184 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css({.tmp,app}) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
-  </head>
-  <body ng-app="ethosiaClientApp">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+<!DOCTYPE html>
+<html ng-app="demoapp">
+<head>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/leaflet-dist/leaflet.js"></script>
+  <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.min.js"></script>
+  <link rel="stylesheet" href="bower_components/leaflet-dist/leaflet.css" />
+  <link rel="stylesheet" type="text/css" href="http://cloud.github.com/downloads/lafeber/world-flags-sprite/flags32.css" />
+  <style>
+    html {
+      font-family: sans-serif;
+    }
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    body, html { height: 100%; }
 
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
+    .info {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 5px;
+    }
 
-    <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
+    .legend {
+      padding: 6px 8px;
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 5px;
+      font-weight: bold;
+      line-height: 18px;
+      color: #555;
+    }
 
-    <style>
-      input {
-        width: 120px;
-        margin-right: 10px;
+    .legend i {
+      clear: both;
+      width: 16px;
+      height: 16px;
+      float: left;
+      opacity: 0.7;
+      margin-right: 8px;
+    }
+
+    div.box {
+      position: absolute;
+      top: 1em;
+      right: 1em;
+      z-index: 100;
+      padding: 1em;
+      text-align: center;
+    }
+
+    div.country {
+      font-size: 2em;
+      font-weight: bold;
+      position: absolute;
+      bottom: 1em;
+      left: 1em;
+      z-index: 100;
+      padding: .2em .5em;
+      line-height: 1.1em;
+      text-align: center;
+    }
+  </style>
+  <script>
+    var app = angular.module("demoapp", ["leaflet-directive"]);
+    app.controller('DemoController', [ "$scope", "$http", function($scope, $http) {
+
+      $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, leafletEvent) {
+        countryMouseover(leafletEvent);
+      });
+
+      $scope.$on("leafletDirectiveMap.geojsonClick", function(ev, featureSelected, leafletEvent) {
+        countryClick(featureSelected, leafletEvent);
+      });
+
+      var continentProperties= {
+        "009": {
+          name: 'Oceania',
+          colors: [ '#CC0066', '#993366', '#990066', '#CC3399', '#CC6699' ]
+        },
+        "019": {
+          name: 'America',
+          colors: [ '#006699', '#336666', '#003366', '#3399CC', '#6699CC' ]
+        },
+        "150": {
+          name: 'Europe',
+          colors: [ '#FF0000', '#CC3333', '#990000', '#FF3333', '#FF6666' ]
+        },
+        "002": {
+          name: 'Africa',
+          colors: [ '#00CC00', '#339933', '#009900', '#33FF33', '#66FF66' ]
+        },
+        "142": {
+          name: 'Asia',
+          colors: [ '#FFCC00', '#CC9933', '#999900', '#FFCC33', '#FFCC66' ]
+        },
+      };
+
+      angular.extend($scope, {
+        center: {
+          lat: 40.8471,
+          lng: 14.0625,
+          zoom: 2
+        },
+        legend: {
+          colors: [ '#CC0066', '#006699', '#FF0000', '#00CC00', '#FFCC00' ],
+          labels: [ 'Oceania', 'America', 'Europe', 'Africa', 'Asia' ]
+        }
+      });
+
+      function countryClick(country, event) {
+        console.log(country.properties.name);
       }
-    </style>
 
-    <!-- build:js scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/leaflet-dist/leaflet.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/alert.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/button.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/carousel.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/collapse.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/dropdown.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tab.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/transition.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/scrollspy.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/modal.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tooltip.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/popover.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
-    <link rel="stylesheet" href="bower_components/leaflet-dist/leaflet.css" />
-    <!-- endbower -->
+      // Get a country paint color from the continents array of colors
+      function getColor(country) {
+        if (!country || !country["region-code"]) {
+          return "#FFF";
+        }
 
-    <script src="bower_components/angular-apimock/dist/angular-apimock.min.js"></script>
+        var colors = continentProperties[country["region-code"]].colors;
+        var index = country["alpha-3"].charCodeAt(0) % colors.length ;
+        return colors[index];
+      }
 
-    <!-- endbuild -->
+      function style(feature) {
+        return {
+          fillColor: getColor($scope.countries[feature.id]),
+          weight: 2,
+          opacity: 1,
+          color: 'white',
+          dashArray: '3',
+          fillOpacity: 0.7
+        };
+      }
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/services/boxes.js"></script>
-        <script src="scripts/services/ethosiahttpinterceptor.js"></script>
-        <script src="scripts/services/backend-url.js"></script>
-        <script src="scripts/directives/nofar.js"></script>
-        <!-- endbuild -->
+      // Mouse over function, called from the Leaflet Map Events
+      function countryMouseover(leafletEvent) {
+        var layer = leafletEvent.target;
+        layer.setStyle({
+          weight: 2,
+          color: '#666',
+          fillColor: 'white'
+        });
+        layer.bringToFront();
+      }
+
+      // Get the countries data from a JSON
+      $http.get("json/all.json").success(function(data, status) {
+
+        // Put the countries on an associative array
+        $scope.countries = {};
+        for (var i=0; i< data.length; i++) {
+          var country = data[i];
+          $scope.countries[country['alpha-3']] = country;
+        }
+
+        // Get the countries geojson data from a JSON
+        $http.get("json/countries.geo.json").success(function(data, status) {
+          angular.extend($scope, {
+            geojson: {
+              data: data,
+              style: style,
+              resetStyleOnMouseout: true
+            }
+          });
+        });
+      });
+    }]);
+  </script>
+  <style>
+    .angular-leaflet-map {
+      height: 100%;
+    }
+  </style>
+</head>
+<body ng-controller="DemoController">
+<div class="info country f32">
+  <div ng-show="geojson.selected" class="flag" ng-class="countries[geojson.selected.id]['alpha-2']|lowercase"></div>
+  {{ geojson.selected.properties.name || 'No country'}}
+</div>
+<div class="info box">Map center: [ lat: {{ center.lat | number:4 }}, lng: {{ center.lng | number:4 }} ]</div>
+<leaflet center="center" events="events" legend="legend" geojson="geojson"></leaflet>
 </body>
 </html>

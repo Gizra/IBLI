@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-  .module('ethosiaClientApp', [
+  .module('ibliApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
@@ -13,7 +13,7 @@ angular
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MapController'
       })
       .otherwise({
         redirectTo: '/'

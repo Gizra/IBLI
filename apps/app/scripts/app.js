@@ -6,7 +6,8 @@ angular
     'ngResource',
     'ngSanitize',
     'ngRoute',
-    'apiMock'
+    'apiMock',
+    'leaflet-directive'
   ])
   .config(function ($routeProvider, apiMockProvider) {
     $routeProvider

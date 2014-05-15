@@ -1,6 +1,3 @@
-<div class="info country f32">
-  <div ng-show="geojson.selected" class="flag" ng-class="countries[geojson.selected.id]['alpha-2']|lowercase"></div>
-  {{ geojson.selected.properties.name || 'No country'}}
-</div>
-<div class="info box">Map center: [ lat: {{ center.lat | number:4 }}, lng: {{ center.lng | number:4 }} ]</div>
-<leaflet center="center" events="events" legend="legend" geojson="geojson"></leaflet>
+<h1>Hi </h1>
+  {{ center }}
+<leaflet center="kenya" legend="legend" height="480px" width="640px"></leaflet>

@@ -107,9 +107,13 @@ print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string
   adminCode = adminList[admin]                          ; assign adminCode-region to process
   ; create a weight-file in original GIMMS geometry that indicates % of adminArea per original GIMMS-pixel
   adminWeights=BYTARR(ns,nl)
+  iiddxx=0;
   IF ratioAdmin gt 1 THEN BEGIN
     FOR i=0,ns-1,1L DO BEGIN                             ; Loop over lines of GIMMS-geometry
       FOR j=0,nl-1,1L DO BEGIN                           ; Loop over sample of GIMMS-geometry
+      
+      print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string(N_ELEMENTS(adminList)) + '(1 : '+string(iiddxx)+' / '+string(ns*nl)+' )' 
+      
         ; create 1st an 10*10 window to calculate percentages
         window = adminRaster[i*ratioAdmin:i*ratioAdmin+(ratioAdmin-1), j*ratioAdmin:j*ratioAdmin+(ratioAdmin-1)]
         ; For the 100 pixels, sum #pixels of admin-unit within GIMMS pixel.
@@ -133,6 +137,9 @@ print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string
     j = 0
     ; loop over lines of data where Admin region falls in
     WHILE j lt N_ELEMENTS(uniqlines) DO BEGIN
+    
+    print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string(N_ELEMENTS(adminList)) + '(2 : '+string(j)+' / '+string(N_ELEMENTS(uniqlines))+' )'
+    
       zNDVIdataLine = lineAssZNDVI[uniqlines[j]]
       check = where(lines eq uniqlines[j], CNT)
       index2 = index[check] mod ns                 ; index for the relevant samples in the line
@@ -147,6 +154,9 @@ print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string
     weightArray[admin]=totalWeight
     ; the final step of combining the weights with the zNDVIArrayAdminComplete
     FOR t=0, nb-1, 1L DO BEGIN            ; note: different as previously, because NaN can occur
+    
+    print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string(N_ELEMENTS(adminList)) + '(3 : '+string(t)+' / '+string(N_ELEMENTS(nb))+' )'
+    
       zNDVIAdmin_OneTimePeriod = zNDVIArrayAdminComplete[*,t]
       index=WHERE(FINITE(zNDVIAdmin_OneTimePeriod))
       zNDVIAdminAvg_OneTimePeriod = TOTAL(zNDVIAdmin_OneTimePeriod[index]*weightArrayAdmin[index])/TOTAL(weightArrayAdmin[index])

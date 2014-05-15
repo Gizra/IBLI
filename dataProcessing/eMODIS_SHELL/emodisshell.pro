@@ -241,10 +241,10 @@ Print , ' - - - - Updating Last Month New NDVI data - -' ;
 
 
 
-IF NOT((Day EQ 4) OR (Day EQ 14) OR (Day EQ 24)) THEN BEGIN
-    print, 'Repository Doesnt need update ... process STOPED'
-    STOP
-ENDIF
+;IF NOT((Day EQ 4) OR (Day EQ 14) OR (Day EQ 24)) THEN BEGIN
+    ;print, 'Repository Doesnt need update ... process STOPED'
+    ;STOP
+;ENDIF
 
 ;; Step 0.2 :  Update month back from now
 

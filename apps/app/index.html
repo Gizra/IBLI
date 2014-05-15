@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html ng-app="ibliApp">
+<html>
 <head>
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/leaflet-dist/leaflet.js"></script>
@@ -117,6 +117,7 @@
     }]);
   </script>
 </head>
+<body ng-controller="MapController" ng-app="ibliApp">
 <body ng-controller="MapController">
 <div class="info country f32">
   <div ng-show="geojson.selected" class="flag" ng-class="countries[geojson.selected.id]['alpha-2']|lowercase"></div>

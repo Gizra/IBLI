@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html ng-app="demoapp">
+<html ng-app="ibliApp">
 <head>
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/leaflet-dist/leaflet.js"></script>
@@ -10,8 +10,8 @@
   <link rel="stylesheet" type="text/css" href="css/main.css" />
 
   <script>
-    var app = angular.module("demoapp", ["leaflet-directive"]);
-    app.controller('DemoController', [ "$scope", "$http", function($scope, $http) {
+    var app = angular.module("ibliApp", ["leaflet-directive"]);
+    app.controller('MapController', [ "$scope", "$http", function($scope, $http) {
 
       $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, leafletEvent) {
         countryMouseover(leafletEvent);
@@ -116,13 +116,8 @@
       });
     }]);
   </script>
-  <style>
-    .angular-leaflet-map {
-      height: 100%;
-    }
-  </style>
 </head>
-<body ng-controller="DemoController">
+<body ng-controller="MapController">
 <div class="info country f32">
   <div ng-show="geojson.selected" class="flag" ng-class="countries[geojson.selected.id]['alpha-2']|lowercase"></div>
   {{ geojson.selected.properties.name || 'No country'}}

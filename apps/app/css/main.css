@@ -103,3 +103,7 @@ div.country {
   line-height: 1.1em;
   text-align: center;
 }
+
+.angular-leaflet-map {
+  height: 100%;
+}

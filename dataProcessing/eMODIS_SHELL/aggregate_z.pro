@@ -112,7 +112,7 @@ print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string
     FOR i=0,ns-1,1L DO BEGIN                             ; Loop over lines of GIMMS-geometry
       FOR j=0,nl-1,1L DO BEGIN                           ; Loop over sample of GIMMS-geometry
       
-      print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string(N_ELEMENTS(adminList)) + '(1 : '+string(iiddxx)+' / '+string(ns*nl)+' )' 
+      ;print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string(N_ELEMENTS(adminList)) + '(1 : '+string(iiddxx)+' / '+string(ns*nl)+' )' 
       
         ; create 1st an 10*10 window to calculate percentages
         window = adminRaster[i*ratioAdmin:i*ratioAdmin+(ratioAdmin-1), j*ratioAdmin:j*ratioAdmin+(ratioAdmin-1)]
@@ -138,7 +138,7 @@ print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string
     ; loop over lines of data where Admin region falls in
     WHILE j lt N_ELEMENTS(uniqlines) DO BEGIN
     
-    print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string(N_ELEMENTS(adminList)) + '(2 : '+string(j)+' / '+string(N_ELEMENTS(uniqlines))+' )'
+    ;print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string(N_ELEMENTS(adminList)) + '(2 : '+string(j)+' / '+string(N_ELEMENTS(uniqlines))+' )'
     
       zNDVIdataLine = lineAssZNDVI[uniqlines[j]]
       check = where(lines eq uniqlines[j], CNT)
@@ -155,7 +155,7 @@ print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string
     ; the final step of combining the weights with the zNDVIArrayAdminComplete
     FOR t=0, nb-1, 1L DO BEGIN            ; note: different as previously, because NaN can occur
     
-    print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string(N_ELEMENTS(adminList)) + '(3 : '+string(t)+' / '+string(N_ELEMENTS(nb))+' )'
+    ;print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string(N_ELEMENTS(adminList)) + '(3 : '+string(t)+' / '+string(N_ELEMENTS(nb))+' )'
     
       zNDVIAdmin_OneTimePeriod = zNDVIArrayAdminComplete[*,t]
       index=WHERE(FINITE(zNDVIAdmin_OneTimePeriod))

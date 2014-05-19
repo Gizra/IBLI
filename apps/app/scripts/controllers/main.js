@@ -26,9 +26,7 @@ angular.module('ethosiaClientApp')
           id: 'v3/examples.map-20v6611k'
         }
       }
-
     });
-
 
     function getColor(d) {
       return d > 1000 ? '#800026' :
@@ -54,18 +52,13 @@ angular.module('ethosiaClientApp')
       };
     }
 
-
-    // Get the countries geojson data from a JSON
     $http.get("json/us-states.json").success(function(data) {
-//      $scope.geojson = data;
-
       angular.extend($scope, {
         geojson: {
           data: data,
           style: style
         }
       })
-
     });
-//
+
   });

@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-  .module('ethosiaClientApp', [
+  .module('ibliApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ethosiaClientApp')
+angular.module('ibliApp')
   .factory('Boxes', function ($http, $q) {
 
     function Boxes() {

@@ -3,7 +3,7 @@
 describe('Service: ethosiaHttpInterceptor', function () {
 
   // load the service's module
-  beforeEach(module('ethosiaClientApp'));
+  beforeEach(module('ibliApp'));
 
   // instantiate service
   var ethosiaHttpInterceptor;

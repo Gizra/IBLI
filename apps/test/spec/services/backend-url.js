@@ -3,7 +3,7 @@
 describe('Service: BACKEND_URL', function () {
 
   // load the service's module
-  beforeEach(module('ethosiaClientApp'));
+  beforeEach(module('ibliApp'));
 
   // instantiate service
   var backendUrl;

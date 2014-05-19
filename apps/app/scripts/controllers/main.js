@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ethosiaClientApp')
+angular.module('ibliApp')
   .controller('MainCtrl', function ($scope, $http) {
 
     //  Definition map options.

@@ -6,11 +6,11 @@ angular.module('ethosiaClientApp')
     //  Definition map options.
     angular.extend($scope, {
       kenya: {
-        lat: 0.263,
-        lng: 37.024,
-        zoom: 6
+        lat: 1.1864,
+        lng: 37.925,
+        zoom: 7
       },
-      tile: {
+      tiles: {
         url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         options: {
           id: 'v3/examples.map-20v6611k'

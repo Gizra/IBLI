@@ -3,7 +3,7 @@
 angular.module('ibliApp')
   .controller('MainCtrl', function ($scope, $http) {
     // Array of indexes, keyed by division ID.
-    var divIdToIndex;
+    $scope.divIdToIndex = [];
 
     // Get current month from 1 to 12.
     var date = new Date();
@@ -49,11 +49,11 @@ angular.module('ibliApp')
     // Get the CSV of indexes, according to the current season.
     $http.get('csv/indexes' + currentSeason + '.csv').success(function(data) {
       // Split the data into an array of indexes.
-      divIdToIndex = data.split("\n");
+      $scope.divIdToIndex = data.split("\n");
 
       // First key in array is 0, but first divId is 1, so add a dummy at the
       // beginning of the array so that the first real index's key is 1.
-      divIdToIndex.unshift('');
+      $scope.divIdToIndex.unshift('');
 
       // Get the divisions data from the JSON file.
       $http.get('json/kenya.json').success(function(data) {
@@ -98,7 +98,7 @@ angular.module('ibliApp')
      */
     function getColor(divId) {
       // Get index for the given division ID.
-      var index = divIdToIndex[divId];
+      var index = $scope.divIdToIndex[divId];
 
       // Get color according to the index.
       var color = index < 0.06 ? colors['green'] :

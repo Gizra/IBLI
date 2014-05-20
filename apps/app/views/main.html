@@ -1,1 +1,6 @@
+<div class="division-hover-info">
+  {{ geojson.selected.properties.DIVISION || '&nbsp;'}}
+  {{ divIdToIndex[geojson.selected.properties.DIV_ID] * 100 | number:2 || '&nbsp;'}}%
+</div>
+
 <leaflet center="kenya" tiles="tiles" geojson="geojson" legend="legend" width="840" height="780"></leaflet>

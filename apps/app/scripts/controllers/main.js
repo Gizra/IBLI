@@ -2,16 +2,8 @@
 
 angular.module('ibliApp')
   .controller('MainCtrl', function ($scope, $http) {
-
-    var div_to_index;
-
-    var colors = {
-      green:  '#00AA00',
-      yellow: '#DDDD00',
-      orange: '#BB5500',
-      red:    '#AA0000',
-      black:  '#000000'
-    };
+    // Array of indexes, keyed by division ID.
+    var divIdToIndex;
 
     // Get current month from 1 to 12.
     var date = new Date();
@@ -20,7 +12,16 @@ angular.module('ibliApp')
     // Get current season, in March-September it is LRLD, otherwise SRSD.
     var currentSeason = currentMonth >=3 && currentMonth <= 9 ? 'LRLD' : 'SRSD';
 
-    //  Definition map options.
+    // Specific HEX codes for colors we use in the map.
+    var colors = {
+      green:  '#00AA00',
+      yellow: '#DDDD00',
+      orange: '#BB5500',
+      red:    '#AA0000',
+      black:  '#000000'
+    };
+
+    // Map options.
     angular.extend($scope, {
       kenya: {
         lat: 1.1864,
@@ -40,23 +41,35 @@ angular.module('ibliApp')
       }
     });
 
-    function getColor(divId) {
-      // First key in array is 0, but first divId is 1, so subtract 1 from the
-      // divId to match the array keys.
-      divId = divId -1;
+    // Get the CSV of indexes, according to the current season.
+    $http.get('csv/indexes' + currentSeason + '.csv').success(function(data) {
+      // Split the data into an array of indexes.
+      divIdToIndex = data.split("\n");
 
-      // Get index for the divID.
-      var index = div_to_index[divId];
+      // First key in array is 0, but first divId is 1, so add a dummy at the
+      // beginning of the array so that the first real index's key is 1.
+      divIdToIndex.unshift('');
 
-      var color = index < 0.06 ? colors['green'] :
-                  index < 0.08 ? colors['yellow'] :
-                  index < 0.10 ? colors['orange'] :
-                  index < 0.15 ? colors['red'] :
-                  colors['black'];
+      // Get the divisions data from the JSON file.
+      $http.get('json/kenya.json').success(function(data) {
+        angular.extend($scope, {
+          geojson: {
+            data: data,
+            style: style
+          }
+        })
+      });
+    });
 
-      return color;
-    }
-
+    /**
+     * Returns style settings for a given geoJson feature.
+     *
+     * @param feature
+     *    GeoJson feature.
+     *
+     * @return
+     *    Style settings for the feature.
+     */
     function style(feature) {
       return {
         fillColor: getColor(feature.properties.DIV_ID),
@@ -68,17 +81,27 @@ angular.module('ibliApp')
       };
     }
 
-    $http.get('csv/indexes' + currentSeason + '.csv').success(function(data) {
-      div_to_index = data.split("\n");
+    /**
+     * Returns color for a given divion ID.
+     *
+     * @param divId
+     *    Division ID.
+     *
+     * @return
+     *    The HEX color for the division ID.
+     */
+    function getColor(divId) {
+      // Get index for the given division ID.
+      var index = divIdToIndex[divId];
 
-      $http.get('json/kenya.json').success(function(data) {
-        angular.extend($scope, {
-          geojson: {
-            data: data,
-            style: style
-          }
-        })
-      });
-    });
+      // Get color according to the index.
+      var color = index < 0.06 ? colors['green'] :
+                  index < 0.08 ? colors['yellow'] :
+                  index < 0.10 ? colors['orange'] :
+                  index < 0.15 ? colors['red'] :
+                  colors['black'];
+
+      return color;
+    }
 
   });

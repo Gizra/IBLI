@@ -41,6 +41,11 @@ angular.module('ibliApp')
       }
     });
 
+    // Define a function to be executed when hovering a division.
+    $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, leafletEvent) {
+      divisionMouseover(leafletEvent);
+    });
+
     // Get the CSV of indexes, according to the current season.
     $http.get('csv/indexes' + currentSeason + '.csv').success(function(data) {
       // Split the data into an array of indexes.
@@ -55,7 +60,8 @@ angular.module('ibliApp')
         angular.extend($scope, {
           geojson: {
             data: data,
-            style: style
+            style: style,
+            resetStyleOnMouseout: true
           }
         })
       });
@@ -102,6 +108,22 @@ angular.module('ibliApp')
                   colors['black'];
 
       return color;
+    }
+
+    /**
+     * Event handler for hovering a division.
+     *
+     * @param leafletEvent
+     *    Leaflet event object.
+     */
+    function divisionMouseover(leafletEvent) {
+      var layer = leafletEvent.target;
+      layer.setStyle({
+        weight: 2,
+        color: '#666666',
+        fillColor: 'white'
+      });
+      layer.bringToFront();
     }
 
   });

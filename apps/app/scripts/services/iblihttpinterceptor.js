@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ibliApp')
-  .factory('ethosiaHttpInterceptor', function ($q, BACKEND_URL) {
+  .factory('ibliHttpInterceptor', function ($q, BACKEND_URL) {
     // Public API here
     return {
       /**

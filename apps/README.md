@@ -1,6 +1,6 @@
-[![Build Status](https://magnum.travis-ci.com/Gizra/ethosia-client.svg?token=p2M1EeCrd3dY32WxWj3X&branch=master)](https://magnum.travis-ci.com/Gizra/ethosia-client)
+[![Build Status](https://magnum.travis-ci.com/Gizra/IBLI.svg?token=p2M1EeCrd3dY32WxWj3X&branch=master)](https://magnum.travis-ci.com/Gizra/IBLI)
 
-Ethosia Client
+IBLI
 ==============
 
 Install libraries:

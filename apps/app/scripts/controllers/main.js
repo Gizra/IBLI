@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ibliApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('MainCtrl', function ($scope, $http, $compile) {
     // Array of indexes, keyed by division ID.
     $scope.divIdToIndex = [];
 
@@ -125,5 +125,16 @@ angular.module('ibliApp')
       });
       layer.bringToFront();
     }
+
+    // Custom control for displaying name of division and percent on hover.
+    $scope.controls = {
+      custom: []
+    };
+    var hoverInfoControl = L.control();
+    hoverInfoControl.setPosition('bottomleft');
+    hoverInfoControl.onAdd = function () {
+      return $compile(angular.element('<hover-info></hover-info>'))($scope)[0];;
+    }
+    $scope.controls.custom.push(hoverInfoControl);
 
   });

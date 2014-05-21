@@ -3,7 +3,7 @@
 describe('Directive: hoverInfo', function () {
 
   // load the directive's module
-  beforeEach(module('ethosiaClientApp'));
+  beforeEach(module('ibliApp'));
 
   var element,
     scope;

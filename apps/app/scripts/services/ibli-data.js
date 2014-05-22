@@ -51,14 +51,7 @@ angular.module('ibliApp')
         url: 'csv/indexes' + _getSeason() + '.csv',
         serverPredefined: true
       }).success(function(response) {
-
-          console.log(response);
-          angular.forEach(response, function(value, key){
-            console.log('key: ' + key);
-            console.log('value: ' + value);
-            divIdToIndex[key]= value;
-          });
-
+          divIdToIndex = response.split("\n");
           deferred.resolve(divIdToIndex);
         });
       return deferred.promise;

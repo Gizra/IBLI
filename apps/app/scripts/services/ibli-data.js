@@ -39,46 +39,6 @@ angular.module('ibliApp')
     }
 
     /**
-     * Get indexes keyed by division ID.
-     *
-     * @return
-     *    Array of indexes keyed by division ID.
-     */
-    function _getDivIdToIndex() {
-      var deferred = $q.defer();
-      $http({
-        method: 'GET',
-        url: 'csv/indexes' + _getSeason() + '.csv',
-        serverPredefined: true
-      }).success(function(response) {
-          divIdToIndex = response.split("\n");
-          deferred.resolve(divIdToIndex);
-        });
-      return deferred.promise;
-    }
-
-    function _getGeoJson() {
-      // Get divisions data from geoJSON file.
-      var deferred = $q.defer();
-      $http({
-        method: 'GET',
-        url: 'json/kenya.json',
-        serverPredefined: true
-      }).success(function(kenyaDivisions) {
-          // Prepare map options object with the division data.
-
-          var x = {
-            data: kenyaDivisions,
-            style: style,
-            resetStyleOnMouseout: true
-          };
-
-          deferred.resolve(x);
-        });
-      return deferred.promise;
-    }
-
-    /**
      * Get map options.
      *
      * @return
@@ -107,7 +67,49 @@ angular.module('ibliApp')
       };
     }
 
+    /**
+     * Get indexes keyed by division ID.
+     *
+     * @return
+     *    Array of indexes keyed by division ID.
+     */
+    function _getDivIdToIndex() {
+      var deferred = $q.defer();
+      $http({
+        method: 'GET',
+        url: 'csv/indexes' + _getSeason() + '.csv',
+        serverPredefined: true
+      }).success(function(response) {
+          divIdToIndex = response.split("\n");
+          deferred.resolve(divIdToIndex);
+        });
+      return deferred.promise;
+    }
 
+    /**
+     * Get geoJson object.
+     *
+     * @return
+     *    Object of geoJson data, used for extending the scope.
+     */
+    function _getGeoJson() {
+      // Get divisions data from geoJSON file.
+      var deferred = $q.defer();
+      $http({
+        method: 'GET',
+        url: 'json/kenya.json',
+        serverPredefined: true
+      }).success(function(kenyaDivisions) {
+          // Prepare geoJson object with the division data.
+          var geojsonObject = {
+            data: kenyaDivisions,
+            style: style,
+            resetStyleOnMouseout: true
+          };
+          deferred.resolve(geojsonObject);
+        });
+      return deferred.promise;
+    }
 
     /**
      * Returns style settings for a given geoJson feature.
@@ -141,6 +143,7 @@ angular.module('ibliApp')
     function getColor(divId) {
       // Get index for the given division ID.
       var index = divIdToIndex[divId];
+      // Get all colors.
       var colors = _getColors();
 
       // Get color according to the index.
@@ -155,11 +158,11 @@ angular.module('ibliApp')
 
     // Public API here
     return {
-      getDivIdToIndex: function () {
-        return _getDivIdToIndex();
-      },
       getMapOptions: function () {
         return _getMapOptions();
+      },
+      getDivIdToIndex: function () {
+        return _getDivIdToIndex();
       },
       getGeoJson: function () {
         return _getGeoJson();

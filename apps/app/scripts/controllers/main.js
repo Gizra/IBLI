@@ -3,35 +3,35 @@
 angular.module('ibliApp')
   .controller('MainCtrl', function ($scope, $http, $compile, ibliData) {
 
+    // Set map options.
+    angular.extend($scope, ibliData.getMapOptions());
 
+    // Get divIdToIndex data.
     ibliData.getDivIdToIndex().then(function(data) {
       $scope.divIdToIndex = data;
 
-
-      console.log($scope.divIdToIndex);
-      console.log($scope.divIdToIndex[30]);
-
+      // Get geoJson data. We do this here because we need the divIdToIndex
+      // data to be available for the geoJson to work properly.
       ibliData.getGeoJson().then(function(data) {
         $scope.geojson = data;
       });
     });
 
-
-
-
-
-    angular.extend($scope, ibliData.getMapOptions());
-
-
+    // Custom control for displaying name of division and percent on hover.
+    $scope.controls = {
+      custom: []
+    };
+    var hoverInfoControl = L.control();
+    hoverInfoControl.setPosition('bottomleft');
+    hoverInfoControl.onAdd = function () {
+      return $compile(angular.element('<hover-info></hover-info>'))($scope)[0];;
+    }
+    $scope.controls.custom.push(hoverInfoControl);
 
     // Define a function to be executed when hovering a division.
     $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, leafletEvent) {
       divisionMouseover(leafletEvent);
     });
-
-
-
-
 
     /**
      * Event handler for hovering a division.
@@ -48,16 +48,4 @@ angular.module('ibliApp')
       });
       layer.bringToFront();
     }
-
-    // Custom control for displaying name of division and percent on hover.
-    $scope.controls = {
-      custom: []
-    };
-    var hoverInfoControl = L.control();
-    hoverInfoControl.setPosition('bottomleft');
-    hoverInfoControl.onAdd = function () {
-      return $compile(angular.element('<hover-info></hover-info>'))($scope)[0];;
-    }
-    $scope.controls.custom.push(hoverInfoControl);
-
   });

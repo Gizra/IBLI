@@ -9,14 +9,14 @@ angular.module('ibliApp')
      * Get current season.
      *
      * @return
-     *    In March-September returns "LRLD", otherwise SRSD.
+     *    In March-September returns "LRLD", otherwise "SRSD".
      */
     function _getSeason() {
       // Get current month from 1 to 12.
       var date = new Date();
       var currentMonth = date.getMonth() + 1;
 
-      // Get current season, in March-September it is LRLD, otherwise SRSD.
+      // Get current season, in March-September it is "LRLD", otherwise "SRSD".
       var currentSeason = currentMonth >=3 && currentMonth <= 9 ? 'LRLD' : 'SRSD';
 
       return currentSeason;
@@ -35,6 +35,20 @@ angular.module('ibliApp')
         orange: '#BB5500',
         red:    '#AA0000',
         black:  '#000000'
+      };
+    }
+
+    /**
+     * Get style to apply when hovering a division.
+     *
+     * @return
+     *    Object with style settings.
+     */
+    function _getHoverStyle() {
+      return {
+        weight: 2,
+        color: '#666666',
+        fillColor: 'white'
       };
     }
 
@@ -170,6 +184,9 @@ angular.module('ibliApp')
     return {
       getMapOptions: function () {
         return _getMapOptions();
+      },
+      getHoverStyle: function () {
+        return _getHoverStyle();
       },
       getDivIdToIndex: function () {
         return _getDivIdToIndex();

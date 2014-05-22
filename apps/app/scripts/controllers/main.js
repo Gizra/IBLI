@@ -24,28 +24,15 @@ angular.module('ibliApp')
     var hoverInfoControl = L.control();
     hoverInfoControl.setPosition('bottomleft');
     hoverInfoControl.onAdd = function () {
-      return $compile(angular.element('<hover-info></hover-info>'))($scope)[0];;
-    }
+      return $compile(angular.element('<hover-info></hover-info>'))($scope)[0];
+    };
     $scope.controls.custom.push(hoverInfoControl);
 
-    // Define a function to be executed when hovering a division.
+    // When hovering a division, color it white.
     $scope.$on("leafletDirectiveMap.geojsonMouseover", function(ev, leafletEvent) {
-      divisionMouseover(leafletEvent);
+      var layer = leafletEvent.target;
+      layer.setStyle(ibliData.getHoverStyle());
+      layer.bringToFront();
     });
 
-    /**
-     * Event handler for hovering a division.
-     *
-     * @param leafletEvent
-     *    Leaflet event object.
-     */
-    function divisionMouseover(leafletEvent) {
-      var layer = leafletEvent.target;
-      layer.setStyle({
-        weight: 2,
-        color: '#666666',
-        fillColor: 'white'
-      });
-      layer.bringToFront();
-    }
   });

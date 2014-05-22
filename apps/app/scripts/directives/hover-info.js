@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ibliApp')
-  .directive('hoverInfo', function ($compile) {
+  .directive('hoverInfo', function () {
     return {
       templateUrl: 'templates/hover-info.html',
       restrict: 'AEC'

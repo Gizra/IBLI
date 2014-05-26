@@ -130,6 +130,12 @@ ENDIF ELSE BEGIN
     adminFile=dataStruct.adminFile
 ENDELSE
 
+IF NOT(tag_exist(dataStruct,'calcNewZ')) THEN BEGIN
+  calcNewZ=0;
+ENDIF ELSE BEGIN
+  calcNewZ=dataStruct.calcNewZ;
+ENDELSE
+
 
 
  
@@ -159,7 +165,7 @@ If FILE_TEST(rawDataPath) NE 1 THEN BEGIN
 print, 'Creating Folder : '+rawDataPath + '. . .' 
 FILE_MKDIR , rawDataPath
 ENDIF 
-procDataPath = WorkingFolder + 'PRCOESSED'
+procDataPath = WorkingFolder + 'PROCESSED'
 If FILE_TEST(procDataPath) NE 1 THEN BEGIN 
 print, 'Creating Folder : '+procDataPath + '. . .' 
 FILE_MKDIR , procDataPath
@@ -199,7 +205,7 @@ Print , ' - - - - Checking For Repository Fullnes - - - - ' ;
     ; - - - Download Zip File 
   oUrl = OBJ_NEW('IDLnetUrl')
   oUrl->SetProperty, CALLBACK_FUNCTION ='Url_Callback'
-  oUrl->SetProperty, VERBOSE = 1
+  oUrl->SetProperty, VERBOSE = 0
   oUrl->SetProperty, TIMEOUT = 3600
   oUrl->SetProperty, url_scheme = 'http'
   oUrl->SetProperty, URL_HOST = 'earlywarning.usgs.gov'
@@ -235,9 +241,9 @@ Print , ' - - - - Checking For Repository Fullnes - - - - ' ;
  ENDFOR
  
 ENDFOR
-Print , ' - - - - The Repository is up to date - - - - ' ;
+Print , SYSTIME(0)+ ' >  - - - - The Repository is up to date - - - - ' ;
 
-Print , ' - - - - Updating Last Month New NDVI data - -' ;
+Print , SYSTIME(0)+' > - - - - Updating Last Month New NDVI data - -' ;
 
 
 
@@ -288,11 +294,11 @@ FOR k=0,5  DO BEGIN ; ; ; - - - - REMEMBER TO TAKE BACK TO 9 - - - - ; ; ;
 ENDFOR
 
 
-Print , ' - - - - new NDVI data is is up to date - - - ' ; 
+Print , SYSTIME(0)+' > - - - - new NDVI data is is up to date - - - ' ; 
  
  
  
- Print, ' - - - - Stacking Temporal NDVI Images - - - - ' ;
+ Print, SYSTIME(0)+' > - - - - Stacking Temporal NDVI Images - - - - ' ;
  
  fileList = FILE_SEARCH(rawDataPath+'/*.img')
  bandList=STRMID(FILE_BASENAME(fileList),0,6) 
@@ -310,7 +316,7 @@ FOR line=0, SUBSET(3)-1, 1L DO BEGIN
     FREE_LUN, R1
     WRITEU, 1, dataline
     total=total+( float(1)/( (SUBSET(3)-1) * (N_ELEMENTS(fileList)-1) ))*100
-    print , string(total) + ' % Completed Stacking' 
+    print , SYSTIME(0)+ ' > ' + string(total) + ' % Completed Stacking' 
   ENDFOR
 ENDFOR
 CLOSE, /ALL
@@ -325,15 +331,15 @@ CREATE_HEADER, procDataPath+'/eMODIS_FEWS_Kenya.bil',SUBSET(2),SUBSET(3),N_ELEME
 
 
 
-print, ' - - - Finished Stacking Temporal Layers - - - ';
+print, SYSTIME(0)+' > - - - Finished Stacking Temporal Layers - - - ';
 
    
 
-        print, ' - - - Calculating IFTemporal Mean,STD,zNDVI and Diagnostics per pixel - - - ';
+        print, SYSTIME(0)+'> - - - Calculating IFTemporal Mean,STD,zNDVI and Diagnostics per pixel - - - ';
         print,ZNORMBIL_8BIT(procDataPath+'/eMODIS_FEWS_Kenya.bil', SUBSET(2), SUBSET(3), N_ELEMENTS(fileList), 10, 1, 1, N_ELEMENTS(fileList), 0, 100, 200, 5, 102)
         
 
-        print , ' - - - Begin zScore aggregation per division - - - '
+        print , SYSTIME(0)+'> - - - Begin zScore aggregation per division - - - '
         AGGREGATE_Z , 'eMODIS',WorkingFolder,adminFile,SUBSET(2),SUBSET(3),N_ELEMENTS(fileList),bandList
         CUMULATE_Z_PER_DIVISION  ,csvDataPath , startYearData , nImagesYear , periodLag , startPeriodLong , numberPeriodsLong , startPeriodShort , numberPeriodsShort
 END

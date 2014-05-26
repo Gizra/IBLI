@@ -23,6 +23,8 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
   drupal_add_js(libraries_get_path('angular-leaflet-directive') . '/dist/angular-leaflet-directive.min.js');
   drupal_add_js(libraries_get_path('ibli-map') . '/dist/ibli-map.js');
   drupal_add_js(libraries_get_path('leaflet') . '/dist/leaflet.js');
+
+  drupal_add_css(libraries_get_path('leaflet') . '/dist/leaflet.css');
 }
 
 /**

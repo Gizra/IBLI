@@ -1,5 +1,5 @@
 
-<div class="panel-display panel-ibli-homepage clearfix" <?php if (!empty($css_id)) { print 'id="' . $css_id . '"'; } ?>>
+<div ng-app="ibliApp" ng-view="" class="panel-display panel-ibli-homepage clearfix" <?php if (!empty($css_id)) { print 'id="' . $css_id . '"'; } ?>>
   <div class="row">
     <div class="col-md-12 panel-col-top">
       <?php print $content['top']; ?>
@@ -39,6 +39,10 @@
 
 
     </div>
+  </div>
+
+  <div class="row">
+    <leaflet center="kenya" maxbounds="maxbounds" tiles="tiles" geojson="geojson" controls="controls" legend="legend" width="840" height="780"></leaflet>
   </div>
 
   <div class="row">

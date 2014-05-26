@@ -1,1 +1,0 @@
-Place .tpl.php files in this directory

@@ -1,1 +1,0 @@
-Place .inc files in this directory and add them to template.php using require_once();

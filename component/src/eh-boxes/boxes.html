@@ -1,0 +1,4 @@
+<!-- Boxes -->
+<div replace ng-repeat="item in boxes.data.list">
+  <ng-include box-wrap="item.style" src="'scripts/directives/eh-boxes/templates/box/box-' + item.type + '.html'" ></ng-include>
+</div>

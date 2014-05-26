@@ -1,0 +1,22 @@
+<a href="#" class="">הנדסה</a>
+<ul class="description-list">
+  <li class="style1"><a href="#"><span>{{item.job_number}}</span></a></li>
+  <li class="style2"><a href="#"><span>{{item.industry}}</span></a></li>
+  <li class="style3"><a href="#"><span>{{item.job_type}}</span></a></li>
+  <li class="style4"><a href="#"><span>{{item.salary}}</span></a></li>
+</ul>
+<div class="">
+  <h3>{{item.label}}<h3>
+  <span class="id">{{item.job_number}}</span>
+</div>
+<div class="">
+  <p>{{item.content}}</p>
+  <div class="">
+    <a href="javascript:void(0);" class="btn-send" onclick="toggleBoxContent(this, 'div.send-resume');">שלח</a>
+    <ul class="">
+      <li><a href="javascript:void(0);" onclick="toggleBoxContent(this, 'div.share-job');">שתף</a></li>
+      <li><a href="javascript:void(0);" onclick="toggleBoxContent(this, 'div.job-alert');">צור התראה</a></li>
+      <li><a href="javascript:void(0);">שמור</a></li>
+    </ul>
+  </div>
+</div>

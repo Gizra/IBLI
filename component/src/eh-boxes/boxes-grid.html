@@ -1,0 +1,9 @@
+<!-- Boxes Grid -->
+<div masonry>
+
+  <div class="masonry-brick" ng-repeat="item in boxes.data.list">
+    <ng-include box-wrap="item.style" src="'scripts/directives/eh-boxes/templates/box/grid/box-' + item.type + '.html'" ></ng-include>
+  </div>
+
+</div>
+

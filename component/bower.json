@@ -1,0 +1,14 @@
+{
+  "name": "eh-boxes",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular-masonry": "~0.8.1",
+    "angular-local-storage": "~0.0.4"
+  },
+  "devDependencies": {
+    "angular": "latest",
+    "angular-mocks": "latest",
+    "jquery": "latest",
+    "angular-apimock": "~0.1.4"
+  }
+}

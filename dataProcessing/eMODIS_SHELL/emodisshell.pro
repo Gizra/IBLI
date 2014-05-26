@@ -182,7 +182,8 @@ ENDIF
 
 CALDAT,SYSTIME(/JULIAN),Month,Day,Year ; Get the current date.
 Year=Year-2000
-Print , ' - - - - Checking For Repository Fullnes - - - - ' ;
+Print ,  SYSTIME(0)+' - - - - Beginning Chain - - - - ' ;
+Print ,  SYSTIME(0)+' - - - - Checking For Repository Fullnes - - - - ' ;
 
 ;; Step 0.1 : Go from beginning till date and make sure repository is complete - - ;;
  FOR Y=1,Year DO BEGIN 

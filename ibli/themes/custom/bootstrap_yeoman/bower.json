@@ -1,0 +1,8 @@
+{
+  "name": "bootstrap_yeoman",
+  "version": "0.0.1",
+  "dependencies": {
+    "twitter" : "~2.3.2"
+  }
+}
+

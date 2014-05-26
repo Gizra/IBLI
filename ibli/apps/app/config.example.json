@@ -1,0 +1,8 @@
+{
+  "development": {
+    "BACKEND_URL": "http://localhost:9000"
+  },
+  "production": {
+    "BACKEND_URL": "http://localhost:9000"
+  }
+}

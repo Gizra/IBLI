@@ -1,0 +1,19 @@
+{
+  "name": "IBLI",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Gizra/IBLI",
+  "description": "IBLI",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "ibli/libraries",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ibli-map": "https://github.com/Gizra/IBLI-map.git"
+  }
+}

@@ -25,6 +25,13 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
   drupal_add_js(libraries_get_path('leaflet') . '/dist/leaflet.js');
 
   drupal_add_css(libraries_get_path('leaflet') . '/dist/leaflet.css');
+
+  drupal_add_js(
+    array('ibli_general' =>
+      array('iblimap_library_path' => libraries_get_path('ibli-map') . '/dist'),
+    ),
+    array('type' => 'setting')
+  );
 }
 
 /**

@@ -17,6 +17,12 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
 
   // Set the images path.
   $variables['images_path'] = drupal_get_path('theme', 'bootstrap_subtheme') . '/images';
+
+  // Add libraries.
+  drupal_add_js(libraries_get_path('angular') . '/angular.min.js');
+  drupal_add_js(libraries_get_path('angular-leaflet-directive') . '/dist/angular-leaflet-directive.min.js');
+  drupal_add_js(libraries_get_path('ibli-map') . '/dist/ibli-map.js');
+  drupal_add_js(libraries_get_path('leaflet') . '/dist/leaflet.js');
 }
 
 /**

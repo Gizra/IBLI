@@ -1,50 +1,5 @@
 
-<div ng-app="ibliApp" class="panel-display panel-ibli-homepage clearfix" <?php if (!empty($css_id)) { print 'id="' . $css_id . '"'; } ?>>
-
-  <div class="row">
-    <div class="col-md-12 panel-col-top">
-      <?php print $content['top']; ?>
-
-
-      <!---------------------------------------------------------------------------------->
-      <div class="row">
-        <div class="col-md-12">
-          <div class="services">
-            <ul>
-              <li>
-                <i class="fa fa-briefcase fa-3x"></i>
-                <p>Lorem ipsum dolor sit amet<br /><a href="#">Action...</a></p>
-              </li>
-              <li>
-                <i class="fa fa-cloud-upload fa-3x"></i>
-                <p>Lorem ipsum dolor sit amet<br /><a href="#">Action...</a></p>
-              </li>
-              <li>
-                <i class="fa fa-laptop fa-3x"></i>
-                <p>Lorem ipsum dolor sit amet<br /><a href="#">Action...</a></p>
-              </li>
-              <li>
-                <i class="fa fa-gears fa-3x"></i>
-                <p>Lorem ipsum dolor sit amet<br /><a href="#">Action...</a></p>
-              </li>
-              <li>
-                <i class="fa fa-compass fa-3x"></i>
-                <p>Lorem ipsum dolor sit amet<br /><a href="#">Action...</a></p>
-              </li>
-            </ul>
-            <div class="clearfix"></div>
-          </div>
-        </div>
-      </div>
-      <!---------------------------------------------------------------------------------->
-
-
-    </div>
-  </div>
-
-  <div class="row" ng-controller="MainCtrl">
-    <leaflet center="kenya" maxbounds="maxbounds" tiles="tiles" geojson="geojson" controls="controls" legend="legend" width="840" height="780"></leaflet>
-  </div>
+<div class="panel-display panel-ibli-homepage clearfix" <?php if (!empty($css_id)) { print 'id="' . $css_id . '"'; } ?>>
 
   <div class="row">
 

@@ -7,7 +7,7 @@ MYSQL_HOST="localhost"
 MYSQL_DB_NAME="ibli"
 
 # Modify the URL below to match your OpenScholar base domain URL.
-BASE_DOMAIN_URL="http://localhost/ibli/www"
+BASE_DOMAIN_URL="http://localhost/IBLI/www"
 
 # Modify the login details below to be the desired login details for the Administrator account.
 ADMIN_USERNAME="admin"
@@ -33,3 +33,9 @@ drush mi --all --user=1
 
 # This command does the login for you when the build script is done. It will open a new tab in your default browser and login to your project as the Administrator. Comment out this line if you do not want the login to happen automatically.
 drush uli --uri=$BASE_DOMAIN_URL
+
+cd ..
+
+# Install angular components via bower.
+bower uninstall ibli-map
+bower install

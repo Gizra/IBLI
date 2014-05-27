@@ -117,7 +117,7 @@
   <!---------------------------------------------------------------------------------->
   <div ng-app="ibliApp">
     <div ng-controller="MainCtrl">
-      <leaflet center="kenya" maxbounds="maxbounds" tiles="tiles" geojson="geojson" controls="controls" legend="legend" width="100%" height="400"></leaflet>
+      <leaflet center="kenya" maxbounds="maxbounds" tiles="tiles" geojson="geojson" controls="controls" legend="legend"></leaflet>
     </div>
   </div>
   <!---------------------------------------------------------------------------------->

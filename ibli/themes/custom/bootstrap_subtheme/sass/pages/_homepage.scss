@@ -405,6 +405,8 @@ a.thumbnail:focus img {
 }
 
 .angular-leaflet-map {
+  width: 100%;
+  height: 400px;
 
   .leaflet-top,
   .leaflet-bottom {

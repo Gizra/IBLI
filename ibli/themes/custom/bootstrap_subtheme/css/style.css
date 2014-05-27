@@ -5342,7 +5342,7 @@ a.thumbnail:focus img {
 
 .angular-leaflet-map {
   width: 100%;
-  height: 400px; }
+  height: 600px; }
   .angular-leaflet-map .leaflet-top,
   .angular-leaflet-map .leaflet-bottom {
     z-index: 999; }

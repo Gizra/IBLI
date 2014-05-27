@@ -103,7 +103,7 @@ weightArray = LONARR(N_ELEMENTS(adminList))
 ; Here the average cumNDVI per Admin1-region is calculated.
 FOR admin=0,N_ELEMENTS(adminList)-1, 1L DO BEGIN
 
-print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string(N_ELEMENTS(adminList))
+print, SYSTIME(0)+ ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string(N_ELEMENTS(adminList))
   adminCode = adminList[admin]                          ; assign adminCode-region to process
   ; create a weight-file in original GIMMS geometry that indicates % of adminArea per original GIMMS-pixel
   adminWeights=BYTARR(ns,nl)

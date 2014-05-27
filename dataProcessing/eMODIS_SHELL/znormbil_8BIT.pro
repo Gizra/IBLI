@@ -137,7 +137,7 @@ print , ' - - - Calculating Per Pixel Temporal : Average , STD , and diagnostics
 ;Loop on lines
 FOR l=0, nl-1, 1L DO BEGIN
 
-  print, ' Calculating <Mean>,<STD> and diagnostics For line :' + string(l) + ' / ' + string(nl)
+  print, SYSTIME(0)+ '>  Calculating <Mean>,<STD> and diagnostics For line :' + string(l) + ' / ' + string(nl)
 
   ;var initialization, clean line and set it to NaN
   line_avg = FLTARR(ns,ppy)*!VALUES.F_NAN      

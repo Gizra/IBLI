@@ -37,4 +37,5 @@ drush uli --uri=$BASE_DOMAIN_URL
 cd ..
 
 # Install angular components via bower.
+bower uninstall ibli-map
 bower install

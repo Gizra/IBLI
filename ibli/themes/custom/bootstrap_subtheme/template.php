@@ -27,19 +27,18 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
 function bootstrap_subtheme_preprocess_ibli_homepage(&$variables) {
   $variables['images_path'] = drupal_get_path('theme', 'bootstrap_subtheme') . '/images';
 
-  // Add libraries.
+  // Add required libraries and CSS for the map.
   drupal_add_js(libraries_get_path('angular') . '/angular.min.js');
   drupal_add_js(libraries_get_path('angular-leaflet-directive') . '/dist/angular-leaflet-directive.min.js');
   drupal_add_js(libraries_get_path('ibli-map') . '/dist/ibli-map.js');
   drupal_add_js(libraries_get_path('leaflet') . '/dist/leaflet.js');
-
   drupal_add_css(libraries_get_path('leaflet') . '/dist/leaflet.css');
 
-  drupal_add_js(
-    array(
-      'ibli_general' =>
-        array('iblimap_library_path' => libraries_get_path('ibli-map') . '/dist'),
+  // Setting for holding the path to map data files.
+  $setting = array(
+    'ibli_general' => array(
+      'iblimap_library_path' => libraries_get_path('ibli-map') . '/dist',
     ),
-    array('type' => 'setting')
   );
+  drupal_add_js($setting, array('type' => 'setting'));
 }

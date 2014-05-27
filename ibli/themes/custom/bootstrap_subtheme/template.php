@@ -17,6 +17,15 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
 
   // Set the images path.
   $variables['images_path'] = drupal_get_path('theme', 'bootstrap_subtheme') . '/images';
+}
+
+/**
+ * Preprocess IBLI homepage.
+ *
+ * Set the images path.
+ */
+function bootstrap_subtheme_preprocess_ibli_homepage(&$variables) {
+  $variables['images_path'] = drupal_get_path('theme', 'bootstrap_subtheme') . '/images';
 
   // Add libraries.
   drupal_add_js(libraries_get_path('angular') . '/angular.min.js');
@@ -27,18 +36,10 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
   drupal_add_css(libraries_get_path('leaflet') . '/dist/leaflet.css');
 
   drupal_add_js(
-    array('ibli_general' =>
-      array('iblimap_library_path' => libraries_get_path('ibli-map') . '/dist'),
+    array(
+      'ibli_general' =>
+        array('iblimap_library_path' => libraries_get_path('ibli-map') . '/dist'),
     ),
     array('type' => 'setting')
   );
-}
-
-/**
- * Preprocess IBLI homepage.
- *
- * Set the images path.
- */
-function bootstrap_subtheme_preprocess_ibli_homepage(&$variables) {
-  $variables['images_path'] = drupal_get_path('theme', 'bootstrap_subtheme') . '/images';
 }

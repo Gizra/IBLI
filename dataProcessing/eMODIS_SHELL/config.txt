@@ -11,3 +11,5 @@ adminFile = /media/sf_sideProjects/NDVI_NIR/divisionID.img
   numberPeriodsLong = 21
   startPeriodShort = 28 
   numberPeriodsShort = 15 
+
+calcNewZ=1

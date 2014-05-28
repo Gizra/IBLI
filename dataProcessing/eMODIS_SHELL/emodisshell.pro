@@ -4,7 +4,7 @@ FUNCTION Url_Callback, status, progress, data
 
    ; print the info msgs from the url object
 
-   PRINT, status
+   ;PRINT, status
 
  
 
@@ -256,7 +256,10 @@ Print , SYSTIME(0)+' > - - - - Updating Last Month New NDVI data - -' ;
 ;; Step 0.2 :  Update month back from now
 
 curWIY = 6*Month-4+2*((Day-3)/10-1); // WIY = Week In Year
-FOR k=0,5  DO BEGIN ; ; ; - - - - REMEMBER TO TAKE BACK TO 9 - - - - ; ; ; 
+FOR k=0,5  DO BEGIN ; ; ; - - - - REMEMBER TO TAKE BACK TO 9 - - - - ; ; ;
+
+Print, SYSTIME(0)+'> - - - Updating : ' + string(k) + ' / 5  - - ' ;
+ 
  toUpdateMonth = curWIY-2*k
  IF toUpdateMonth LE 0 THEN BEGIN
     toUpdateMonth= toUpdateMonth+72

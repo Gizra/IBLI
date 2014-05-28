@@ -31,11 +31,13 @@ drush en devel views_ui field_ui migrate_ui -y
 # These commands migrates dummy content and is used for development and testing. Comment out both lines if you wish to have a clean OpenScholar installation.
 drush mi --all --user=1
 
-# This command does the login for you when the build script is done. It will open a new tab in your default browser and login to your project as the Administrator. Comment out this line if you do not want the login to happen automatically.
-drush uli --uri=$BASE_DOMAIN_URL
-
 cd ..
 
 # Install angular components via bower.
 bower uninstall ibli-map
 bower install
+
+cd www
+
+# This command does the login for you when the build script is done. It will open a new tab in your default browser and login to your project as the Administrator. Comment out this line if you do not want the login to happen automatically.
+drush uli --uri=$BASE_DOMAIN_URL

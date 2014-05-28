@@ -6,7 +6,7 @@
     <div class="panel-panel panel-col-left col-xs-8 col-sm-8 col-md-8 col-lg-8">
       <div class="block-header">
         <h2>
-          <span class="title">Welcome Message</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+          <span class="title">Welcome to IBLI</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
         </h2>
       </div>
       <?php print $content['left']; ?>

@@ -185,11 +185,11 @@
         <div class="headline"><h3>Contact us</h3></div>
         <div class="content">
           <p>
-            San Francisco, CA 94101<br />
-            1987 Lincoln Street<br />
-            Phone: +0 000 000 00 00<br />
-            Fax: +0 000 000 00 00<br />
-            Email: <a href="#">admin@mysite.com</a>
+            IBLI Project Development Manager<br />
+            International Livestock Research Institute (ILRI)<br />
+            P.O. Box 30709 – 00100, Nairobi – Kenya<br />
+            Tel: +254-20-422 3000 (SwitchBoard) / 3043 (Direct)<br />
+            Fax: +254-20-422 3001
           </p>
         </div>
       </div>
@@ -200,21 +200,32 @@
         <div class="content social">
           <p>Stay in touch with us:</p>
           <ul>
-            <li><a href="#"><i class="fa fa-twitter"></i></a>
+            <li>
+              <a href="#"><i class="fa fa-twitter"></i></a>
             </li>
-            <li><a href="#"><i class="fa fa-facebook"></i></a>
+            <li>
+              <a href="#"><i class="fa fa-facebook"></i></a>
             </li>
-            <li><a href="#"><i class="fa fa-pinterest"></i></a>
+            <li>
+              <a href="#"><i class="fa fa-pinterest"></i></a>
             </li>
-            <li><a href="#"><i class="fa fa-youtube"></i></a>
+            <li>
+              <a href="#"><i class="fa fa-youtube"></i></a>
             </li>
-            <li><a href="#"><i class="fa fa-github"></i></a>
+            <li>
+              <a href="#"><i class="fa fa-github"></i></a>
             </li>
-            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+            <li>
+              <a href="#"><i class="fa fa-linkedin"></i></a>
             </li>
-            <li><a href="#"><i class="fa fa-vk"></i></a>
+            <li>
+              <a href="#"><i class="fa fa-vk"></i></a>
             </li>
-            <li><a href="#"><i class="fa fa-google-plus"></i></a>
+            <li>
+              <a href="#"><i class="fa fa-google-plus"></i></a>
+            </li>
+            <li>
+              <a href="https://www.flickr.com/photos/ilri/sets/72157623247974374/"><i class="fa fa-flickr"></i></a>
             </li>
           </ul>
           <div class="clearfix"></div>
@@ -225,7 +236,7 @@
       <div class="col-sm-4">
         <div class="headline"><h3>Subscribe</h3></div>
         <div class="content">
-          <p>Enter your e-mail below to subscribe to our free newsletter.<br />We promise not to bother you often!</p>
+          <p>Enter your email or mobile phone number to receive updates about IBLI" with a text box,<br /> currently disconnected.</p>
           <form class="form" role="form">
             <div class="row">
               <div class="col-sm-8">

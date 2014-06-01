@@ -1,6 +1,7 @@
-<h2>
-  <span class="title">LATEST IBLI UPDATES</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
-</h2>
+<div class="block-header">
+  <h2>
+    <span class="title">LATEST IBLI UPDATES</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+  </h2>
 </div>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#partners" data-toggle="tab">Partners</a></li>
@@ -13,30 +14,27 @@
       <a class="pull-left" href="#">
         <img class="media-object" src="<?php print $images_path; ?>/eu.png" alt="Blog Message">
       </a>
-      <div class="media-body">
-        <h4 class="media-heading"><a href="#">Story title</a></h4>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-      </div>
     </div>
     <div class="media">
       <a class="pull-left" href="#">
         <img class="media-object" src="<?php print $images_path; ?>/uk.png" alt="Blog Message">
       </a>
-      <div class="media-body">
-        <h4 class="media-heading"><a href="#">Story title</a></h4>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-      </div>
     </div>
     <div class="media">
       <a class="pull-left" href="#">
         <img class="media-object" src="<?php print $images_path; ?>/aid.png" alt="Blog Message">
       </a>
-      <div class="media-body">
-        <h4 class="media-heading"><a href="#">Story title</a></h4>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius, tincidunt odio nec, placerat enim.
-      </div>
     </div>
-    <a href="#" class="read-more">Read more stories...</a>
+    <div class="media">
+      <a class="pull-left" href="#">
+        <img class="media-object" src="<?php print $images_path; ?>/takaful.png" alt="Blog Message">
+      </a>
+    </div>
+    <div class="media">
+      <a class="pull-left" href="#">
+        <img class="media-object" src="<?php print $images_path; ?>/mercycorps.png" alt="Blog Message">
+      </a>
+    </div>
   </div>
   <div class="tab-pane" id="events">
     <h5>Moblie Web+DevCon San Francisco 2014 <small>January 28, 2014</small></h5>

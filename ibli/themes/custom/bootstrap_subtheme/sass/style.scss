@@ -162,4 +162,20 @@ footer {
   }
 }
 
+.media:first-child {
+   margin: 0;
+}
 
+.media-object {
+  height: 118px;
+  width: 168px;
+}
+
+.media {
+  margin-top: 0px;
+  overflow: inherit;
+
+  .media {
+    margin-top: 15px;
+  }
+}

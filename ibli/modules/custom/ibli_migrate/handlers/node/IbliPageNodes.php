@@ -8,9 +8,11 @@ class IbliPageNodes extends IbliMigration {
   public $bundle = 'page';
 
   public $csvColumns = array(
-    array('is_in_menu', 'Is In Menu'),
+    array('show_in_menu', 'Show In Menu'),
     array('parent', 'Menu Parent'),
     array('weight', 'Menu Order'),
+    array('show_in_ground', 'Show In IBLI On The Ground'),
+    array('ground_weight', 'IBLI On The Ground Order'),
   );
 
   public function __construct() {
@@ -43,7 +45,7 @@ class IbliPageNodes extends IbliMigration {
   public function complete($entity, $row) {
     $menu_name = variable_get('menu_main_links_source', 'menu-ibli-main-menu');
 
-    if (!$row->is_in_menu) {
+    if (!$row->show_in_menu) {
       // Do not create menu link.
       return;
     }

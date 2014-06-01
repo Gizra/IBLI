@@ -3,15 +3,15 @@
 </h2>
 </div>
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#blog" data-toggle="tab">Partners</a></li>
-  <li><a href="#comments" data-toggle="tab">Events</a></li>
-  <li><a href="#events" data-toggle="tab">News</a></li>
+  <li class="active"><a href="#partners" data-toggle="tab">Partners</a></li>
+  <li><a href="#events" data-toggle="tab">Events</a></li>
+  <li><a href="#news" data-toggle="tab">News</a></li>
 </ul>
 <div class="tab-content">
-  <div class="tab-pane active" id="blog">
+  <div class="tab-pane active" id="partners">
     <div class="media">
       <a class="pull-left" href="#">
-        <img class="media-object" src="<?php print $images_path; ?>/blog-1.jpg" alt="Blog Message">
+        <img class="media-object" src="<?php print $images_path; ?>/eu.png" alt="Blog Message">
       </a>
       <div class="media-body">
         <h4 class="media-heading"><a href="#">Story title</a></h4>
@@ -20,7 +20,7 @@
     </div>
     <div class="media">
       <a class="pull-left" href="#">
-        <img class="media-object" src="<?php print $images_path; ?>/blog-2.jpg" alt="Blog Message">
+        <img class="media-object" src="<?php print $images_path; ?>/uk.png" alt="Blog Message">
       </a>
       <div class="media-body">
         <h4 class="media-heading"><a href="#">Story title</a></h4>
@@ -29,7 +29,7 @@
     </div>
     <div class="media">
       <a class="pull-left" href="#">
-        <img class="media-object" src="<?php print $images_path; ?>/blog-3.jpg" alt="Blog Message">
+        <img class="media-object" src="<?php print $images_path; ?>/aid.png" alt="Blog Message">
       </a>
       <div class="media-body">
         <h4 class="media-heading"><a href="#">Story title</a></h4>
@@ -38,7 +38,17 @@
     </div>
     <a href="#" class="read-more">Read more stories...</a>
   </div>
-  <div class="tab-pane" id="comments">
+  <div class="tab-pane" id="events">
+    <h5>Moblie Web+DevCon San Francisco 2014 <small>January 28, 2014</small></h5>
+    <p class="text-muted"><i class="fa fa-map-marker"></i> Kuala Lumpur, Malaysia</p>
+    <hr>
+    <h5>2013 The 2nd International Conference on Information and Intelligent Computing(ICIIC 2013) <small>December 29, 2013</small></h5>
+    <p class="text-muted"><i class="fa fa-map-marker"></i> San Francisco, California, United States</p>
+    <hr>
+    <h5>International Conference on Cloud Computing and eGovernances 2014 <small>November 20, 2013</small></h5>
+    <p class="text-muted"><i class="fa fa-map-marker"></i> Saigon, Ho Chi Minh, Vietnam</p>
+  </div>
+  <div class="tab-pane" id="news">
     <div class="media">
       <a class="pull-left" href="#">
         <img class="media-object" src="<?php print $images_path; ?>/face1.jpg" alt="Blog Message">
@@ -66,15 +76,5 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius...</p>
       </div>
     </div>
-  </div>
-  <div class="tab-pane" id="events">
-    <h5>Moblie Web+DevCon San Francisco 2014 <small>January 28, 2014</small></h5>
-    <p class="text-muted"><i class="fa fa-map-marker"></i> Kuala Lumpur, Malaysia</p>
-    <hr>
-    <h5>2013 The 2nd International Conference on Information and Intelligent Computing(ICIIC 2013) <small>December 29, 2013</small></h5>
-    <p class="text-muted"><i class="fa fa-map-marker"></i> San Francisco, California, United States</p>
-    <hr>
-    <h5>International Conference on Cloud Computing and eGovernances 2014 <small>November 20, 2013</small></h5>
-    <p class="text-muted"><i class="fa fa-map-marker"></i> Saigon, Ho Chi Minh, Vietnam</p>
   </div>
 </div>

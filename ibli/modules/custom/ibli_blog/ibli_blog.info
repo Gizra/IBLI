@@ -1,4 +1,0 @@
-name = IBLI Blog
-core = 7.x
-package = IBLI
-dependencies[] = ctools

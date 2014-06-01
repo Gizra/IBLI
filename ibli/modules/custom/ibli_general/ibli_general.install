@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * Enable module blog.
+ */
+function ibli_general_update_7000() {
+  module_enable(array('last_updates'));
+}

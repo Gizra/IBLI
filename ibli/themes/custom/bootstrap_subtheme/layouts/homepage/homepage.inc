@@ -11,6 +11,7 @@ $plugin = array(
     'top' => t('Top'),
     'left' => t('Left side'),
     'right' => t('Right side'),
+    'last_updates' => t('Last updates'),
     'bottom' => t('Bottom'),
   ),
 );

@@ -113,7 +113,7 @@
       <div class="row">
         <div class="col-md-12 block-header">
           <h2>
-            <span class="title">Recent Works</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+            <span class="title">IBLI ON THE GROUND</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
           </h2>
         </div>
       </div>

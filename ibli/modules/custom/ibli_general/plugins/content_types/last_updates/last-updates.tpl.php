@@ -1,11 +1,11 @@
 <h2>
-  <span class="title">Last Updates</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+  <span class="title">LATEST IBLI UPDATES</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
 </h2>
 </div>
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#blog" data-toggle="tab">Blog</a></li>
-  <li><a href="#comments" data-toggle="tab">Comments</a></li>
-  <li><a href="#events" data-toggle="tab">Events</a></li>
+  <li class="active"><a href="#blog" data-toggle="tab">Partners</a></li>
+  <li><a href="#comments" data-toggle="tab">Events</a></li>
+  <li><a href="#events" data-toggle="tab">News</a></li>
 </ul>
 <div class="tab-content">
   <div class="tab-pane active" id="blog">

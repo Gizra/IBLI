@@ -7,24 +7,24 @@
       <div class="services">
         <ul>
           <li>
-            <i class="fa fa-briefcase fa-3x"></i>
-            <p>Lorem ipsum dolor sit amet<br /><a href="#">Action...</a></p>
+            <span class="glyphicon glyphicon-envelope"></span>
+            <p>Sign-up for IBLI Updates<br /><a href="#">Action...</a></p>
           </li>
           <li>
-            <i class="fa fa-cloud-upload fa-3x"></i>
-            <p>Lorem ipsum dolor sit amet<br /><a href="#">Action...</a></p>
+            <span class="glyphicon glyphicon-book"></span>
+            <p>Publications<br /><a href="#">Action...</a></p>
           </li>
           <li>
-            <i class="fa fa-laptop fa-3x"></i>
-            <p>Lorem ipsum dolor sit amet<br /><a href="#">Action...</a></p>
+            <span class="glyphicon glyphicon-calendar"></span>
+            <p>Premium Calculator<br /><a href="#">Action...</a></p>
           </li>
           <li>
-            <i class="fa fa-gears fa-3x"></i>
-            <p>Lorem ipsum dolor sit amet<br /><a href="#">Action...</a></p>
+            <span class="glyphicon glyphicon-stats"></span>
+            <p>Current Index Readings<br /><a href="#">Action...</a></p>
           </li>
           <li>
-            <i class="fa fa-compass fa-3x"></i>
-            <p>Lorem ipsum dolor sit amet<br /><a href="#">Action...</a></p>
+            <span class="glyphicon glyphicon-folder-open"></span>
+            <p>Past Index Readings<br /><a href="#">Action...</a></p>
           </li>
         </ul>
         <div class="clearfix"></div>

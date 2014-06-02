@@ -162,20 +162,19 @@ footer {
   }
 }
 
-.media:first-child {
-   margin: 0;
-}
+#partners {
 
-.media-object {
-  height: 118px;
-  width: 168px;
-}
+  .media:first-child {
+     margin: 0;
+  }
 
-.media {
-  margin-top: 0px;
-  overflow: inherit;
+  .media-object {
+    height: 88px;
+    width: 136px;
+  }
 
   .media {
-    margin-top: 15px;
+    margin-top: 0px;
+    overflow: inherit;
   }
 }

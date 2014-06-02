@@ -5476,15 +5476,11 @@ footer {
       -webkit-transition: color 0.1s;
       -moz-transition: color 0.1s; }
 
-.media:first-child {
+#partners .media:first-child {
   margin: 0; }
-
-.media-object {
-  height: 118px;
-  width: 168px; }
-
-.media {
+#partners .media-object {
+  height: 88px;
+  width: 136px; }
+#partners .media {
   margin-top: 0px;
   overflow: inherit; }
-  .media .media {
-    margin-top: 15px; }

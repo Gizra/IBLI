@@ -17,6 +17,8 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
 
   // Set the images path.
   $variables['images_path'] = drupal_get_path('theme', 'bootstrap_subtheme') . '/images';
+  // Add a awesome icons css
+  drupal_add_css('http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', array('type' => 'external'));
 }
 
 /**

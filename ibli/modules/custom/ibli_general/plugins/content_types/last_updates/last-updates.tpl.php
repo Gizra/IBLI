@@ -4,9 +4,9 @@
   </h2>
 </div>
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#partners" data-toggle="tab">Partners</a></li>
-  <li><a href="#events" data-toggle="tab">Events</a></li>
-  <li><a href="#news" data-toggle="tab">News</a></li>
+  <li class="active"><a href="#partners" data-toggle="tab"><?php echo("Partners"); ?></a></li>
+  <li><a href="#events" data-toggle="tab"><?php echo t("Events"); ?></a></li>
+  <li><a href="#news" data-toggle="tab"><?php echo t("News"); ?></a></li>
 </ul>
 <div class="tab-content">
   <div class="tab-pane active" id="partners">

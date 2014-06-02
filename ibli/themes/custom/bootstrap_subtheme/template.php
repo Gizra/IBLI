@@ -47,7 +47,6 @@ function bootstrap_subtheme_preprocess_ibli_homepage(&$variables) {
  * Preprocess last updates.
  */
 function bootstrap_subtheme_preprocess_ibli_general_last_updates(&$variables) {
-
   // Set the images path.
   $variables['images_path'] = drupal_get_path('theme', 'bootstrap_subtheme') . '/images';
 }

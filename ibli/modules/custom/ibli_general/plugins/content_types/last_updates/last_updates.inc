@@ -21,7 +21,6 @@ function ibli_general_last_updates_content_type_render($subtype, $conf, $args, $
   $block->module = 'ibli_general';
   $block->content = theme('ibli_general_last_updates', $variable);
   return $block;
-
 }
 
 /**

@@ -14,12 +14,6 @@
 
     <div class="panel-panel panel-col-right col-xs-4 col-sm-4 col-md-4 col-lg-4">
       <?php print $content['right']; ?>
-
-
-      <!---------------------------------------------------------------------------------->
-      <div class="block-header">
-        <?php print $content['last_updates']; ?>
-      </div>
     </div>
 
   <div class="row">

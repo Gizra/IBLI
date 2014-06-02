@@ -1,2 +1,4 @@
-Unique ID,Title,Page,Position
-homepage-welcome,Homepage Welcome,home,welcome
+Unique ID,Title,Page,Position,Body
+homepage-welcome,Homepage Welcome,home,welcome,""
+text-footer,Text Footer,anypage,footer,""
+

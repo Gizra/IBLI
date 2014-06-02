@@ -10,6 +10,7 @@ class IbliPageElementNodes extends IbliMigration {
   public $csvColumns = array(
     array('field_page', 'Page'),
     array('field_position', 'Position'),
+    array('body', 'Body'),
   );
 
   public function __construct() {

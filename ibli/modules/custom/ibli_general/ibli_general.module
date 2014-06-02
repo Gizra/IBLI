@@ -5,3 +5,27 @@
  */
 
 include_once 'ibli_general.features.inc';
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function ibli_general_preprocess_page(&$variables) {
+  $query = new EntityFieldQuery();
+  $results = $query
+    ->entityCondition('entity_type', 'node')
+    ->propertyCondition('type','page_element')
+    ->fieldCondition('field_page','value', 'anypage')
+    ->fieldCondition('field_position','value', 'footer')
+    ->execute();
+
+  if (empty($results['node'])) {
+    return;
+  }
+
+  $nids = array_keys($results['node']);
+  $node = node_load(reset($nids));
+
+  $render = node_view($node);
+
+  $variables['contact_us'] = render($render);
+}

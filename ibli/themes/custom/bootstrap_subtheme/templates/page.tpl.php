@@ -72,12 +72,13 @@
  *
  * @ingroup themeable
  */
+
 ?>
 <header id="navbar" role="banner" class="<?php print $navbar_classes; ?>">
   <div class="container">
     <div class="navbar-header">
       <?php if ($logo): ?>
-        <a class="logo navbar-btn pull-left" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
+        <a class="logo naavbar-btn pull-left" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
           <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
         </a>
       <?php endif; ?>
@@ -185,11 +186,7 @@
         <div class="headline"><h3><?php print t('Contact us'); ?></h3></div>
         <div class="content">
           <p>
-            IBLI Project Development Manager<br />
-            International Livestock Research Institute (ILRI)<br />
-            P.O. Box 30709 – 00100, Nairobi – Kenya<br />
-            Tel: +254-20-422 3000 (SwitchBoard) / 3043 (Direct)<br />
-            Fax: +254-20-422 3001
+            <?php print $contact_us; ?>
           </p>
         </div>
       </div>

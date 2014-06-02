@@ -5488,3 +5488,10 @@ footer {
   overflow: inherit; }
   .media .media {
     margin-top: 15px; }
+
+#what-is-ibli-image {
+  background: url(../images/what_is_ibli.png) no-repeat;
+  width: 960px;
+  height: 212px;
+  margin-top: 5px;
+  margin-bottom: 36px; }

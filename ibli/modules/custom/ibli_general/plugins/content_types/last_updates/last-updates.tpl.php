@@ -1,6 +1,6 @@
 <div class="block-header">
   <h2>
-    <span class="title"><?php echo t("LATEST IBLI UPDATES") ?></span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+    <span class="title"><?php echo t('LATEST IBLI UPDATES') ?></span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
   </h2>
 </div>
 <ul class="nav nav-tabs">

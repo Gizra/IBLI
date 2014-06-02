@@ -174,7 +174,7 @@
   </div>
 </div>
 
-<!-- Foooter
+<!-- Footer
 ================== -->
 <footer>
   <div class="container">
@@ -182,7 +182,7 @@
       <!-- Contact Us
       =================  -->
       <div class="col-sm-4">
-        <div class="headline"><h3>Contact us</h3></div>
+        <div class="headline"><h3><?php print t('Contact us'); ?></h3></div>
         <div class="content">
           <p>
             IBLI Project Development Manager<br />
@@ -196,9 +196,9 @@
       <!-- Social icons
       ===================== -->
       <div class="col-sm-4">
-        <div class="headline"><h3>Go Social</h3></div>
+        <div class="headline"><h3><?php print t('Go Social'); ?></h3></div>
         <div class="content social">
-          <p>Stay in touch with us:</p>
+          <p><?php print t('Stay in touch with us:'); ?></p>
           <ul>
             <li>
               <a href="#"><i class="fa fa-twitter"></i></a>
@@ -234,18 +234,17 @@
       <!-- Subscribe
       =============== -->
       <div class="col-sm-4">
-        <div class="headline"><h3>Subscribe</h3></div>
+        <div class="headline"><h3><?php print t('Subscribe'); ?></h3></div>
         <div class="content">
-          <p>Enter your email or mobile phone number to receive updates about IBLI</p>
+          <p><?php print t('Enter your email or mobile phone number to receive updates about IBLI'); ?></p>
           <form class="form" role="form">
             <div class="row">
               <div class="col-sm-8">
                 <div class="input-group">
-                  <label class="sr-only" for="subscribe-email">Email address</label>
                   <input type="email" class="form-control" id="subscribe-email" placeholder="Enter email">
-                    <span class="input-group-btn">
-                      <button type="submit" class="btn btn-default">OK</button>
-                    </span>
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><?php print t('OK'); ?></button>
+                  </span>
                 </div>
               </div>
             </div>
@@ -261,7 +260,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <p>&copy; The Highland 2013. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        <p>&copy; <?php print t('The Highland 2013.'); ?> <a href="#"><?php print t('Privacy Policy'); ?></a> | <a href="#"><?php print t('Terms of Service'); ?></a></p>
       </div>
     </div>
   </div>

@@ -52,7 +52,6 @@ function ibli_general_default_page_manager_pages() {
       'left' => NULL,
       'right' => NULL,
       'bottom' => NULL,
-      'last_updates' => NULL,
     ),
   );
   $display->cache = array();

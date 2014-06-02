@@ -5489,7 +5489,7 @@ footer {
   .media .media {
     margin-top: 15px; }
 
-#what-is-ibli-image {
+#what-is-ibli #what-is-ibli-image {
   background: url(../images/what_is_ibli.png) no-repeat;
   width: 960px;
   height: 212px;

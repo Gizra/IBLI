@@ -236,7 +236,7 @@
       <div class="col-sm-4">
         <div class="headline"><h3>Subscribe</h3></div>
         <div class="content">
-          <p>Enter your email or mobile phone number to receive updates about IBLI" with a text box,<br /> currently disconnected.</p>
+          <p>Enter your email or mobile phone number to receive updates about IBLI</p>
           <form class="form" role="form">
             <div class="row">
               <div class="col-sm-8">

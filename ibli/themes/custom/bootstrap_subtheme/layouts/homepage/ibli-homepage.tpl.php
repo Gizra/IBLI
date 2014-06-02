@@ -15,7 +15,7 @@
     <div class="panel-panel panel-col-right col-xs-4 col-sm-4 col-md-4 col-lg-4">
       <?php print $content['right']; ?>
     </div>
-
+  </div>
   <div class="row">
     <div class="col-md-12 panel-col-bottom">
       <?php print $content['bottom']; ?>

@@ -162,4 +162,31 @@ footer {
   }
 }
 
+.media:first-child {
+   margin: 0;
+}
 
+.media-object {
+  height: 118px;
+  width: 168px;
+}
+
+.media {
+  margin-top: 0px;
+  overflow: inherit;
+
+  .media {
+    margin-top: 15px;
+  }
+}
+
+#what-is-ibli {
+
+  #what-is-ibli-image {
+    background: url(../images/what_is_ibli.png) no-repeat;
+    width: 960px;
+    height: 212px;
+    margin-top: 5px;
+    margin-bottom: 36px;
+  }
+}

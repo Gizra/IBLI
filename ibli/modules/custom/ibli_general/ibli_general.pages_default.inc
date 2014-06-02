@@ -52,6 +52,7 @@ function ibli_general_default_page_manager_pages() {
       'left' => NULL,
       'right' => NULL,
       'bottom' => NULL,
+      'last_updates' => NULL,
     ),
   );
   $display->cache = array();
@@ -83,6 +84,25 @@ function ibli_general_default_page_manager_pages() {
     $pane->uuid = 'f64d6492-c710-4515-8004-fafdd73b7818';
     $display->content['new-f64d6492-c710-4515-8004-fafdd73b7818'] = $pane;
     $display->panels['left'][0] = 'new-f64d6492-c710-4515-8004-fafdd73b7818';
+    $pane = new stdClass();
+    $pane->pid = 'new-7c0f2c70-de3b-4c1a-929b-c579ca73d436';
+    $pane->panel = 'right';
+    $pane->type = 'last_updates';
+    $pane->subtype = 'last_updates';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '7c0f2c70-de3b-4c1a-929b-c579ca73d436';
+    $display->content['new-7c0f2c70-de3b-4c1a-929b-c579ca73d436'] = $pane;
+    $display->panels['right'][0] = 'new-7c0f2c70-de3b-4c1a-929b-c579ca73d436';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

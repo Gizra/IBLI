@@ -1,4 +1,3 @@
-@import url(../fonts/font-awesome-4.0.3/css/font-awesome.css);
 /* Remove all rounded corners */
 /* Top menu */
 /* Dropdown */
@@ -5475,3 +5474,16 @@ footer {
       transition: color 0.1s;
       -webkit-transition: color 0.1s;
       -moz-transition: color 0.1s; }
+
+.media:first-child {
+  margin: 0; }
+
+.media-object {
+  height: 118px;
+  width: 168px; }
+
+.media {
+  margin-top: 0px;
+  overflow: inherit; }
+  .media .media {
+    margin-top: 15px; }

@@ -1,4 +1,3 @@
-@import url(../fonts/font-awesome-4.0.3/css/font-awesome.css);
 /* Remove all rounded corners */
 /* Top menu */
 /* Dropdown */
@@ -5104,13 +5103,16 @@ button.close {
     color: #888;
     width: 227px;
     height: 100px; }
+    .services ul li span {
+      font-size: 30px;
+      display: block; }
     .services ul li:hover {
       width: 328px !important;
       background: #69D2E7;
       cursor: pointer;
       color: #FFF;
       text-align: left; }
-      .services ul li:hover i {
+      .services ul li:hover span {
         float: left;
         line-height: 60px;
         margin: 0 20px 0 5px; }
@@ -5475,3 +5477,12 @@ footer {
       transition: color 0.1s;
       -webkit-transition: color 0.1s;
       -moz-transition: color 0.1s; }
+
+#partners .media:first-child {
+  margin: 0; }
+#partners .media-object {
+  height: 88px;
+  width: 136px; }
+#partners .media {
+  margin-top: 0px;
+  overflow: inherit; }

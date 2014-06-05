@@ -34,6 +34,9 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
   $node = node_load(key($results['node']));
   $render = node_view($node);
   $variables['contact_address'] = render($render);
+  
+  // Add a awesome icons css
+  drupal_add_css('http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', array('type' => 'external'));
 }
 
 /**
@@ -57,4 +60,12 @@ function bootstrap_subtheme_preprocess_ibli_homepage(&$variables) {
     ),
   );
   drupal_add_js($setting, array('type' => 'setting'));
+}
+
+/**
+ * Preprocess last updates.
+ */
+function bootstrap_subtheme_preprocess_ibli_general_last_updates(&$variables) {
+  // Set the images path.
+  $variables['images_path'] = drupal_get_path('theme', 'bootstrap_subtheme') . '/images';
 }

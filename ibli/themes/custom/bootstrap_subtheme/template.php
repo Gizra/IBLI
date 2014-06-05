@@ -17,16 +17,33 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
 
   // Set the images path.
   $variables['images_path'] = drupal_get_path('theme', 'bootstrap_subtheme') . '/images';
+
+  // Get contact address for footer.
+  $query = new EntityFieldQuery();
+  $results = $query
+    ->entityCondition('entity_type', 'node')
+    ->propertyCondition('type','page_element')
+    ->fieldCondition('field_page','value', 'contact')
+    ->fieldCondition('field_position','value', 'address')
+    ->execute();
+
+  if (empty($results['node'])) {
+    return;
+  }
+
+  $node = node_load(key($results['node']));
+  $render = node_view($node);
+  $variables['contact_address'] = render($render);
+  
   // Add a awesome icons css
   drupal_add_css('http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', array('type' => 'external'));
 }
 
 /**
  * Preprocess IBLI homepage.
- *
- * Set the images path.
  */
 function bootstrap_subtheme_preprocess_ibli_homepage(&$variables) {
+  // Set the images path.
   $variables['images_path'] = drupal_get_path('theme', 'bootstrap_subtheme') . '/images';
 
   // Add required libraries and CSS for the map.

@@ -185,11 +185,7 @@
         <div class="headline"><h3><?php print t('Contact us'); ?></h3></div>
         <div class="content">
           <p>
-            IBLI Project Development Manager<br />
-            International Livestock Research Institute (ILRI)<br />
-            P.O. Box 30709 – 00100, Nairobi – Kenya<br />
-            Tel: +254-20-422 3000 (SwitchBoard) / 3043 (Direct)<br />
-            Fax: +254-20-422 3001
+            <?php print $contact_address; ?>
           </p>
         </div>
       </div>

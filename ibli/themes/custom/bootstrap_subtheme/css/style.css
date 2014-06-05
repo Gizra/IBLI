@@ -5474,3 +5474,12 @@ footer {
       transition: color 0.1s;
       -webkit-transition: color 0.1s;
       -moz-transition: color 0.1s; }
+
+#partners .media:first-child {
+  margin: 0; }
+#partners .media-object {
+  height: 88px;
+  width: 136px; }
+#partners .media {
+  margin-top: 0px;
+  overflow: inherit; }

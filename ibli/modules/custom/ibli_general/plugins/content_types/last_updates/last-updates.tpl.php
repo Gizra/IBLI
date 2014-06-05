@@ -1,38 +1,38 @@
 <div class="block-header">
   <h2>
-    <span class="title"><?php echo t('LATEST IBLI UPDATES') ?></span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+    <span class="title"><?php print t('LATEST IBLI UPDATES') ?></span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
   </h2>
 </div>
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#partners" data-toggle="tab"><?php echo('Partners'); ?></a></li>
-  <li><a href="#events" data-toggle="tab"><?php echo t('Events'); ?></a></li>
-  <li><a href="#news" data-toggle="tab"><?php echo t('News'); ?></a></li>
+  <li class="active"><a href="#partners" data-toggle="tab"><?php print t('Partners'); ?></a></li>
+  <li><a href="#events" data-toggle="tab"><?php print t('Events'); ?></a></li>
+  <li><a href="#news" data-toggle="tab"><?php print t('News'); ?></a></li>
 </ul>
 <div class="tab-content">
   <div class="tab-pane active" id="partners">
     <div class="media">
       <a class="pull-left" href="#">
-        <img class="media-object" src="<?php print $images_path; ?>/eu.png" alt="Blog Message">
+        <img class="media-object" src="<?php print $images_path; ?>/eu.png" alt="Blog Message" />
       </a>
     </div>
     <div class="media">
       <a class="pull-left" href="#">
-        <img class="media-object" src="<?php print $images_path; ?>/uk.png" alt="Blog Message">
+        <img class="media-object" src="<?php print $images_path; ?>/uk.png" alt="Blog Message" />
       </a>
     </div>
     <div class="media">
       <a class="pull-left" href="#">
-        <img class="media-object" src="<?php print $images_path; ?>/aid.png" alt="Blog Message">
+        <img class="media-object" src="<?php print $images_path; ?>/aid.png" alt="Blog Message" />
       </a>
     </div>
     <div class="media">
       <a class="pull-left" href="#">
-        <img class="media-object" src="<?php print $images_path; ?>/takaful.png" alt="Blog Message">
+        <img class="media-object" src="<?php print $images_path; ?>/takaful.png" alt="Blog Message" />
       </a>
     </div>
     <div class="media">
       <a class="pull-left" href="#">
-        <img class="media-object" src="<?php print $images_path; ?>/mercycorps.png" alt="Blog Message">
+        <img class="media-object" src="<?php print $images_path; ?>/mercycorps.png" alt="Blog Message" />
       </a>
     </div>
   </div>
@@ -49,7 +49,7 @@
   <div class="tab-pane" id="news">
     <div class="media">
       <a class="pull-left" href="#">
-        <img class="media-object" src="<?php print $images_path; ?>/face1.jpg" alt="Blog Message">
+        <img class="media-object" src="<?php print $images_path; ?>/face1.jpg" alt="Blog Message" />
       </a>
       <div class="media-body">
         <a href="#">Alex Smith</a> <span class="text-muted">20 minutes ago</span>
@@ -58,7 +58,7 @@
     </div>
     <div class="media">
       <a class="pull-left" href="#">
-        <img class="media-object" src="<?php print $images_path; ?>/face2.jpg" alt="Blog Message">
+        <img class="media-object" src="<?php print $images_path; ?>/face2.jpg" alt="Blog Message" />
       </a>
       <div class="media-body">
         <a href="#">Dan Smith</a> <span class="text-muted">1 hour ago</span>
@@ -67,7 +67,7 @@
     </div>
     <div class="media">
       <a class="pull-left" href="#">
-        <img class="media-object" src="<?php print $images_path; ?>/face3.jpg" alt="Blog Message">
+        <img class="media-object" src="<?php print $images_path; ?>/face3.jpg" alt="Blog Message" />
       </a>
       <div class="media-body">
         <a href="#">David Smith</a> <span class="text-muted">11/10/2013</span>

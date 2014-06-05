@@ -32,7 +32,6 @@ function ibli_general_last_updates_type_edit_form($form, &$form_state) {
  */
 function ibli_general_last_updates_content_type_theme(&$theme, $plugin) {
   $theme['ibli_general_last_updates'] = array(
-
     'path' => $plugin['path'],
     'template' => 'last-updates',
   );

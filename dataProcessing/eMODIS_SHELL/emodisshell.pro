@@ -256,8 +256,8 @@ Print , SYSTIME(0)+' > - - - - Updating Last Month New NDVI data - -' ;
 ;; Step 0.2 :  Update month back from now
 
 curWIY = 6*Month-4+2*((Day-3)/10-1); // WIY = Week In Year
-; FOR k=0,5  DO BEGIN - REMEMBER TO RETURN !!!!!!!!!!! 04/06/2014
-FOR k=0,-1  DO BEGIN ; ; ; - - - - REMEMBER TO TAKE BACK TO 9 - - - - ; ; ;
+ FOR k=0,5  DO BEGIN ;- REMEMBER TO RETURN !!!!!!!!!!! 04/06/2014
+;FOR k=0,-1  DO BEGIN ; ; ; - - - - REMEMBER TO TAKE BACK TO 9 - - - - ; ; ;
 
 Print, SYSTIME(0)+'> - - - Updating : ' + string(k) + ' / 5  - - ' ;
  

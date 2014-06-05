@@ -21,11 +21,31 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
 
 /**
  * Preprocess IBLI homepage.
- *
- * Set the images path.
  */
 function bootstrap_subtheme_preprocess_ibli_homepage(&$variables) {
+  // Set the images path.
   $variables['images_path'] = drupal_get_path('theme', 'bootstrap_subtheme') . '/images';
+
+  // Load "IBLI On The Ground" nodequeue data.
+  $variables['nodequeue'] = array();
+  $query = db_select('nodequeue_queue', 'nq');
+  $query->innerJoin('nodequeue_nodes', 'nn', 'nq.qid = nn.qid');
+  $result = $query
+    ->fields('nn', array('nid'))
+    ->condition('nq.name', 'ibli_on_the_ground')
+    ->execute()
+    ->fetchAllAssoc('nid');
+  if (!empty($result)) {
+    $nodes = node_load_multiple(array_keys($result));
+
+    foreach ($nodes as $node) {
+      $variables['nodequeue'][] = array(
+        'title' => $node->title,
+        'image' => 'http://animal-medical-clinic.com/wp-content/uploads/2014/03/So-cute-puppies-14749028-1600-1200.jpg',
+        'url' => url('node/' . $node->nid),
+      );
+    }
+  }
 
   // Add required libraries and CSS for the map.
   drupal_add_js(libraries_get_path('angular') . '/angular.min.js');

@@ -12,7 +12,6 @@ class IbliPageNodes extends IbliMigration {
     array('parent', 'Menu Parent'),
     array('weight', 'Menu Order'),
     array('show_in_ground', 'Show In IBLI On The Ground'),
-    array('ground_weight', 'IBLI On The Ground Order'),
   );
 
   public function __construct() {
@@ -40,15 +39,20 @@ class IbliPageNodes extends IbliMigration {
   }
 
   /**
-   * Create menu links for nodes.
+   * Create menu links for nodes and add nodes to nodequeue.
    */
   public function complete($entity, $row) {
-    $menu_name = variable_get('menu_main_links_source', 'menu-ibli-main-menu');
+    if (!empty($row->show_in_ground)) {
+      // Add node to the "IBLI On The Ground" nodequeue.
+      $this->nodequeueAddNodeToSubqueueList('ibli_on_the_ground', $entity->nid);
+    }
 
     if (!$row->show_in_menu) {
       // Do not create menu link.
       return;
     }
+
+    $menu_name = variable_get('menu_main_links_source', 'menu-ibli-main-menu');
 
     $m = array();
     $m['menu_name'] = $menu_name;

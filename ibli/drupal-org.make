@@ -61,19 +61,22 @@ projects[message_notify][version] = "2.5"
 projects[message_subscribe][subdir] = "contrib"
 projects[message_subscribe][version] = "1.x-dev"
 
-projects[migrate][version] = 2.5
 projects[migrate][subdir] = "contrib"
+projects[migrate][version] = 2.5
 
-projects[migrate_extras][version] = 2.5
 projects[migrate_extras][subdir] = "contrib"
+projects[migrate_extras][version] = 2.5
 
-projects[mimemail][version] = 1.0-alpha1
 projects[mimemail][subdir] = "contrib"
+projects[mimemail][version] = "1.0-alpha1"
 projects[mimemail][patch][] = "http://drupal.org/files/rules-1585546-1-moving_rules_actions.patch"
 projects[mimemail][patch][] = "http://drupal.org/files/compress_install_missing_value.patch"
 
 projects[module_filter][subdir] = "contrib"
-projects[module_filter][version] = 2.0-alpha2
+projects[module_filter][version] = "2.0-alpha2"
+
+projects[nodequeue][subdir] = "contrib"
+projects[nodequeue][version] = "2.0-beta1"
 
 projects[panels][subdir] = "contrib"
 projects[panels][version] = "3.4"

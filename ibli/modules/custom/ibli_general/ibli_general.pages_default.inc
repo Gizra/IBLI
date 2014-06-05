@@ -102,6 +102,25 @@ function ibli_general_default_page_manager_pages() {
     $pane->uuid = '552c8d35-d518-42f4-8e86-bc2b779d080d';
     $display->content['new-552c8d35-d518-42f4-8e86-bc2b779d080d'] = $pane;
     $display->panels['right'][0] = 'new-552c8d35-d518-42f4-8e86-bc2b779d080d';
+    $pane = new stdClass();
+    $pane->pid = 'new-bd5a345f-38aa-44cd-8a1c-6a86596309b6';
+    $pane->panel = 'top';
+    $pane->type = 'boxes_below_map';
+    $pane->subtype = 'boxes_below_map';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'bd5a345f-38aa-44cd-8a1c-6a86596309b6';
+    $display->content['new-bd5a345f-38aa-44cd-8a1c-6a86596309b6'] = $pane;
+    $display->panels['top'][0] = 'new-bd5a345f-38aa-44cd-8a1c-6a86596309b6';
   $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

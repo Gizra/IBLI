@@ -37,6 +37,7 @@ dependencies[] = flag
 dependencies[] = inline_entity_form
 dependencies[] = jquery_update
 dependencies[] = libraries
+dependencies[] = mailchimp
 dependencies[] = message
 dependencies[] = message_notify
 dependencies[] = message_subscribe

@@ -121,6 +121,11 @@
       width: 227px;
       height: 100px;
 
+      span {
+        font-size: 30px;
+        display: block;
+      }
+
       &:hover {
         width: 328px!important;
         background: #69D2E7;
@@ -128,7 +133,7 @@
         color: #FFF;
         text-align: left;
 
-        i {
+        span {
           float: left;
           line-height: 60px;
           margin: 0 20px 0 5px;

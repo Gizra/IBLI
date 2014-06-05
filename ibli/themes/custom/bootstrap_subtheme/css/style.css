@@ -5103,13 +5103,16 @@ button.close {
     color: #888;
     width: 227px;
     height: 100px; }
+    .services ul li span {
+      font-size: 30px;
+      display: block; }
     .services ul li:hover {
       width: 328px !important;
       background: #69D2E7;
       cursor: pointer;
       color: #FFF;
       text-align: left; }
-      .services ul li:hover i {
+      .services ul li:hover span {
         float: left;
         line-height: 60px;
         margin: 0 20px 0 5px; }

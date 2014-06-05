@@ -145,76 +145,45 @@
       <div class="row">
         <div class="col-md-12 block-header">
           <h2>
-            <span class="title">Recent Works</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
+            <span class="title"><?php print t('IBLI ON THE GROUND'); ?></span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
           </h2>
         </div>
       </div>
       <div class="row">
         <div class="col-md-3 col-sm-6">
           <div class="thumbnail">
-            <img src="<?php print $images_path; ?>/works1.jpg" class="img-responsive" alt="...">
+            <img src="<?php print $images_path; ?>/ibli-on-the-ground-1.jpg" class="img-responsive" alt="...">
             <div class="visit"><a href="#"><i class="fa fa-question-circle"></i> More details...</a></div>
             <div class="caption">
-              <h4>Project #1</h4>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+              <p><?php print t('Index-Based Livestock Takaful in Wajir'); ?></p>
             </div>
           </div>
         </div>
         <div class="col-md-3 col-sm-6">
           <div class="thumbnail">
-            <img src="<?php print $images_path; ?>/works2.jpg" class="img-responsive" alt="...">
+            <img src="<?php print $images_path; ?>/ibli-on-the-ground-2.jpg" class="img-responsive" alt="...">
             <div class="visit"><a href="#"><i class="fa fa-question-circle"></i> More details...</a></div>
             <div class="caption">
-              <h4>Project #2</h4>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+              <p><?php print t('Mifugo Maisha in Marsabit'); ?></p>
             </div>
           </div>
         </div>
         <div class="clearfix visible-sm"></div>
         <div class="col-md-3 col-sm-6">
           <div class="thumbnail">
-            <img src="<?php print $images_path; ?>/works3.jpg" class="img-responsive" alt="...">
+            <img src="<?php print $images_path; ?>/ibli-on-the-ground-3.jpg" class="img-responsive" alt="...">
             <div class="visit"><a href="#"><i class="fa fa-question-circle"></i> More details...</a></div>
             <div class="caption">
-              <h4>Project #3</h4>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half"></i>
-              </div>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+              <p><?php print t('Index-Based Livestock Takaful in Borana'); ?></p>
             </div>
           </div>
         </div>
         <div class="col-md-3 col-sm-6">
           <div class="thumbnail">
-            <img src="<?php print $images_path; ?>/works4.jpg" class="img-responsive" alt="...">
+            <img src="<?php print $images_path; ?>/ibli-on-the-ground-4.jpg" class="img-responsive" alt="...">
             <div class="visit"><a href="#"><i class="fa fa-question-circle"></i> More details...</a></div>
             <div class="caption">
-              <h4>Project #4</h4>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+              <p><?php print t('Mifugo Maisha in Isiolo'); ?></p>
             </div>
           </div>
         </div>

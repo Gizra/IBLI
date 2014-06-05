@@ -5,7 +5,7 @@
  */
 $plugin = array(
   'title' => t('Last updates'),
-  'description' => t('Display Last Updates'),
+  'description' => t('Display Last Updates.'),
   'category' => t('ibli'),
   'hook theme' => 'ibli_general_last_updates_content_type_theme',
 );

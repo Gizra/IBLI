@@ -8,6 +8,7 @@ class IbliPageNodes extends IbliMigration {
   public $bundle = 'page';
 
   public $csvColumns = array(
+    array('field_image', 'Image'),
     array('show_in_menu', 'Show In Menu'),
     array('parent', 'Menu Parent'),
     array('weight', 'Menu Order'),
@@ -20,6 +21,15 @@ class IbliPageNodes extends IbliMigration {
     // Map body.
     $this->addFieldMapping('body', 'body')
       ->arguments(array('format' => 'full_html'));
+
+    // Map image.
+    $this->addFieldMapping('field_image', 'field_image');
+    $this
+      ->addFieldMapping('field_image:file_replace')
+      ->defaultValue(FILE_EXISTS_REPLACE);
+    $this
+      ->addFieldMapping('field_image:source_dir')
+      ->defaultValue(drupal_get_path('module', 'ibli_migrate') . '/images');
   }
 
   /**
@@ -36,6 +46,11 @@ class IbliPageNodes extends IbliMigration {
       return;
     }
     $row->body = file_get_contents($file);
+
+    if (!empty($row->field_image)) {
+      // Remove the "public://" from image paths.
+      $row->field_image = str_replace('public://', '', $row->field_image);
+    }
   }
 
   /**

@@ -5104,7 +5104,8 @@ button.close {
       font-size: 30px;
       display: block; }
     .services ul li:hover {
-      background: #69D2E7; }
+      background: #69D2E7;
+      color: #FFF; }
     .services ul li p {
       overflow: hidden;
       white-space: nowrap; }

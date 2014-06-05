@@ -57,3 +57,5 @@ ibli/behat/vendor/
 behat.local.yml
 ibli/behat/bin
 ibli/behat/composer.phar
+
+*.~lock*#

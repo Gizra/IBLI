@@ -161,4 +161,19 @@ footer {
   }
 }
 
+#partners {
 
+  .media:first-child {
+     margin: 0;
+  }
+
+  .media-object {
+    height: 88px;
+    width: 136px;
+  }
+
+  .media {
+    margin-top: 0px;
+    overflow: inherit;
+  }
+}

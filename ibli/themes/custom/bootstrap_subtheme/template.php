@@ -32,7 +32,8 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
   }
 
   $node = node_load(key($results['node']));
-  $variables['contact_address'] = render(node_view($node));
+  $render = node_view($node);
+  $variables['contact_address'] = render($render);
 }
 
 /**

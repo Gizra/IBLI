@@ -57,6 +57,54 @@ function ibli_general_default_page_manager_pages() {
   $display->uuid = 'cf70b3f8-7a9b-4c88-a9e3-312296882738';
   $display->content = array();
   $display->panels = array();
+    $pane = new stdClass();
+    $pane->pid = 'new-dc6ebcbf-54da-46ed-995f-54a6cdccf3da';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'page_element-panel_page_element';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_page_value' => 'contact',
+        'field_position_value' => 'address',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'dc6ebcbf-54da-46ed-995f-54a6cdccf3da';
+    $display->content['new-dc6ebcbf-54da-46ed-995f-54a6cdccf3da'] = $pane;
+    $display->panels['right'][0] = 'new-dc6ebcbf-54da-46ed-995f-54a6cdccf3da';
+    $pane = new stdClass();
+    $pane->pid = 'new-88f036d9-475c-4894-968b-40eeb3e96ca1';
+    $pane->panel = 'right';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'page_element-panel_page_element';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_page_value' => 'contact',
+        'field_position_value' => 'map',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = '88f036d9-475c-4894-968b-40eeb3e96ca1';
+    $display->content['new-88f036d9-475c-4894-968b-40eeb3e96ca1'] = $pane;
+    $display->panels['right'][1] = 'new-88f036d9-475c-4894-968b-40eeb3e96ca1';
   $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

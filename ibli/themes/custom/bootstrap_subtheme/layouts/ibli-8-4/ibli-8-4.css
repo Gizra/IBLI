@@ -1,0 +1,10 @@
+body.page-admin-structure-pages .col-md-8 {
+  width: 60%;
+  float: left;
+}
+
+body.page-admin-structure-pages .col-md-4 {
+  width: 35%;
+  float: right;
+}
+

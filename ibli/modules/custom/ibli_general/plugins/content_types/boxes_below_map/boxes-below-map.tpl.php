@@ -2,23 +2,23 @@
   <ul>
     <li>
       <span class="fa fa-envelope"></span>
-      <p>Sign-up for IBLI Updates<br /><a href="#">Action...</a></p>
+      <p>Sign-up for IBLI Updates<br /></p>
     </li>
     <li>
       <span class="fa fa-book"></span>
-      <p>Publications<br /><a href="#">Action...</a></p>
+      <p>Publications<br /></p>
     </li>
     <li>
       <span class="fa fa-keyboard-o"></span>
-      <p>Premium Calculator<br /><a href="#">Action...</a></p>
+      <p>Premium Calculator<br /></p>
     </li>
     <li>
       <span class="fa fa-tachometer"></span>
-      <p>Current Index Readings<br /><a href="#">Action...</a></p>
+      <p>Current Index Readings<br /></p>
     </li>
     <li>
       <span class="fa fa-history"></span>
-      <p>Past Index Readings<br /><a href="#">Action...</a></p>
+      <p>Past Index Readings<br /></p>
     </li>
   </ul>
   <div class="clearfix"></div>

@@ -39,10 +39,19 @@ function bootstrap_subtheme_preprocess_ibli_homepage(&$variables) {
     $nodes = node_load_multiple(array_keys($result));
 
     foreach ($nodes as $node) {
+      $wrapper = entity_metadata_wrapper('node', $node);
+
+      $image = $wrapper->field_image->value();
+      $image_vars = array(
+        'path' => $image['uri'],
+        'alt' => $node->title,
+        'attributes' => array('class' => array('img-responsive')),
+      );
+
       $variables['nodequeue'][] = array(
         'title' => $node->title,
-        'image' => 'http://animal-medical-clinic.com/wp-content/uploads/2014/03/So-cute-puppies-14749028-1600-1200.jpg',
         'url' => url('node/' . $node->nid),
+        'image' => theme('image', $image_vars),
       );
     }
   }

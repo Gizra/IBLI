@@ -121,7 +121,7 @@
         <?php foreach ($nodequeue as $page): ?>
           <div class="col-md-3 col-sm-6">
             <div class="thumbnail">
-              <a href="<?php print $page['url']; ?>"><img src="<?php print $page['image']; ?>" class="img-responsive" alt="..."></a>
+              <a href="<?php print $page['url']; ?>"><?php print $page['image']; ?></a>
               <div class="visit"><a href="#"><i class="fa fa-question-circle"></i> More details...</a></div>
               <div class="caption">
                 <p><a href="<?php print $page['url']; ?>"><?php print $page['title']; ?></a></p>

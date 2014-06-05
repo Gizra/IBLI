@@ -5315,12 +5315,16 @@ a.thumbnail:hover img,
 a.thumbnail:focus img {
   border-color: #ccc; }
 
-.thumbnail > img {
+.thumbnail a img {
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  height: 175px; }
 
 .thumbnail .caption {
   padding: 10px;
+  color: #333333; }
+
+.thumbnail .caption a {
   color: #333333; }
 
 .thumbnail .caption h4 {

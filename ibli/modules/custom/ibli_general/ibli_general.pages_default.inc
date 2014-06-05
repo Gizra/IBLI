@@ -58,6 +58,28 @@ function ibli_general_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
+    $pane->pid = 'new-daeca86a-ee6e-491f-a5bb-b7c62c493486';
+    $pane->panel = 'left';
+    $pane->type = 'contact_form';
+    $pane->subtype = 'contact_form';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 0,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = 'daeca86a-ee6e-491f-a5bb-b7c62c493486';
+    $display->content['new-daeca86a-ee6e-491f-a5bb-b7c62c493486'] = $pane;
+    $display->panels['left'][0] = 'new-daeca86a-ee6e-491f-a5bb-b7c62c493486';
+    $pane = new stdClass();
     $pane->pid = 'new-dc6ebcbf-54da-46ed-995f-54a6cdccf3da';
     $pane->panel = 'right';
     $pane->type = 'views_panes';

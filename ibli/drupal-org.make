@@ -122,3 +122,7 @@ libraries[tinymce][download][url] = "http://download.moxiecode.com/tinymce/tinym
 libraries[bootstrap_sass][download][type] = "file"
 libraries[bootstrap_sass][type] = "libraries"
 libraries[bootstrap_sass][download][url] = "https://github.com/twbs/bootstrap-sass/archive/v3.1.1.zip"
+
+libraries[mailchimp][download][type] = "file"
+libraries[mailchimp][type] = "libraries"
+libraries[mailchimp][download][url] = "http://apidocs.mailchimp.com/api/downloads/mailchimp-api-class.zip"

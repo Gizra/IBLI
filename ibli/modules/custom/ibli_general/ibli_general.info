@@ -22,6 +22,7 @@ features[menu_links][] = menu-ibli-main-menu_partners:<nolink>
 features[node][] = page
 features[page_manager_pages][] = homepage
 features[variable][] = language_content_type_page
+features[variable][] = mailchimp_api_key
 features[variable][] = menu_options_page
 features[variable][] = menu_parent_page
 features[variable][] = node_options_page

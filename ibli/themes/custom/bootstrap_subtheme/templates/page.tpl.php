@@ -186,7 +186,7 @@
         <div class="headline"><h3><?php print t('Contact us'); ?></h3></div>
         <div class="content">
           <p>
-            <?php print $contact_us; ?>
+            <?php print $contact_address; ?>
           </p>
         </div>
       </div>

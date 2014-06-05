@@ -14,8 +14,8 @@ function ibli_general_preprocess_page(&$variables) {
   $results = $query
     ->entityCondition('entity_type', 'node')
     ->propertyCondition('type','page_element')
-    ->fieldCondition('field_page','value', 'anypage')
-    ->fieldCondition('field_position','value', 'footer')
+    ->fieldCondition('field_page','value', 'contact')
+    ->fieldCondition('field_position','value', 'address')
     ->execute();
 
   if (empty($results['node'])) {
@@ -27,5 +27,5 @@ function ibli_general_preprocess_page(&$variables) {
 
   $render = node_view($node);
 
-  $variables['contact_us'] = render($render);
+  $variables['contact_address'] = render($render);
 }

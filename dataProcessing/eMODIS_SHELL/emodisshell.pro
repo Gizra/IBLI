@@ -113,7 +113,7 @@ ENDIF ELSE BEGIN
     data = strsplit(dataStruct.SUBSET,'[',/EXTRACT)
     data = strsplit(data,']',/EXTRACT)
     data = strsplit(data,',',/EXTRACT)
-    SUBSET = float(data)
+    SUBSET = UINT(data)
 ENDELSE
 
 IF NOT(tag_exist(dataStruct,'map_info')) THEN BEGIN
@@ -256,7 +256,8 @@ Print , SYSTIME(0)+' > - - - - Updating Last Month New NDVI data - -' ;
 ;; Step 0.2 :  Update month back from now
 
 curWIY = 6*Month-4+2*((Day-3)/10-1); // WIY = Week In Year
-FOR k=0,5  DO BEGIN ; ; ; - - - - REMEMBER TO TAKE BACK TO 9 - - - - ; ; ;
+; FOR k=0,5  DO BEGIN - REMEMBER TO RETURN !!!!!!!!!!! 04/06/2014
+FOR k=0,-1  DO BEGIN ; ; ; - - - - REMEMBER TO TAKE BACK TO 9 - - - - ; ; ;
 
 Print, SYSTIME(0)+'> - - - Updating : ' + string(k) + ' / 5  - - ' ;
  
@@ -310,8 +311,9 @@ Print , SYSTIME(0)+' > - - - - new NDVI data is is up to date - - - ' ;
  
 
 
-IF (1) THEN BEGIN
+;IF (0) THEN BEGIN
 total = 0
+jmp=0
 FOR line=0, SUBSET(3)-1, 1L DO BEGIN
   FOR file=0, N_ELEMENTS(fileList)-1, 1L DO BEGIN
     OPENR, R1, fileList[file], /GET_LUN
@@ -320,11 +322,16 @@ FOR line=0, SUBSET(3)-1, 1L DO BEGIN
     FREE_LUN, R1
     WRITEU, 1, dataline
     total=total+( float(1)/( (SUBSET(3)-1) * (N_ELEMENTS(fileList)-1) ))*100
-    print , SYSTIME(0)+ ' > ' + string(total) + ' % Completed Stacking' 
+    ;print,floor(total)
+    
+    IF (floor(total)  gt jmp) THEN BEGIN
+    jmp=jmp+1;
+    print , SYSTIME(0)+ ' > ' + string(total) + ' % Completed Stacking'
+    ENDIF 
   ENDFOR
 ENDFOR
 CLOSE, /ALL
-ENDIF
+;ENDIF
 
 
 
@@ -340,11 +347,12 @@ print, SYSTIME(0)+' > - - - Finished Stacking Temporal Layers - - - ';
    
 
         print, SYSTIME(0)+'> - - - Calculating IFTemporal Mean,STD,zNDVI and Diagnostics per pixel - - - ';
+        
         print,ZNORMBIL_8BIT(procDataPath+'/eMODIS_FEWS_Kenya.bil', SUBSET(2), SUBSET(3), N_ELEMENTS(fileList), 10, 1, 1, N_ELEMENTS(fileList), 0, 100, 200, 5, 102)
         
 
         print , SYSTIME(0)+'> - - - Begin zScore aggregation per division - - - '
-        AGGREGATE_Z , 'eMODIS',WorkingFolder,adminFile,SUBSET(2),SUBSET(3),N_ELEMENTS(fileList),bandList
+        AGGREGATE_Z , 'eMODIS',WorkingFolder,adminFile,SUBSET(3),SUBSET(2),N_ELEMENTS(fileList),bandList
         CUMULATE_Z_PER_DIVISION  ,csvDataPath , startYearData , nImagesYear , periodLag , startPeriodLong , numberPeriodsLong , startPeriodShort , numberPeriodsShort
 END
  

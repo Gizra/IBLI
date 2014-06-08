@@ -43,13 +43,14 @@ function ibli_general_default_page_manager_pages() {
     'relationships' => array(),
   );
   $display = new panels_display();
-  $display->layout = 'ibli_8_4';
+  $display->layout = 'contact_us';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
       'default' => NULL,
-      'left' => NULL,
-      'right' => NULL,
+      'form' => NULL,
+      'address' => NULL,
+      'map' => NULL,
     ),
   );
   $display->cache = array();
@@ -58,54 +59,8 @@ function ibli_general_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-52e4dfc5-d220-430b-9352-87056aade7f9';
-    $pane->panel = 'left';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'page_element-panel_page_element';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'arguments' => array(
-        'field_page_value' => 'contact',
-        'field_position_value' => 'form',
-      ),
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 0;
-    $pane->locks = array();
-    $pane->uuid = '52e4dfc5-d220-430b-9352-87056aade7f9';
-    $display->content['new-52e4dfc5-d220-430b-9352-87056aade7f9'] = $pane;
-    $display->panels['left'][0] = 'new-52e4dfc5-d220-430b-9352-87056aade7f9';
-    $pane = new stdClass();
-    $pane->pid = 'new-b15fae41-b679-4b12-af25-c54a1615c9c8';
-    $pane->panel = 'left';
-    $pane->type = 'contact';
-    $pane->subtype = 'contact';
-    $pane->shown = TRUE;
-    $pane->access = array();
-    $pane->configuration = array(
-      'override_title' => 1,
-      'override_title_text' => '',
-    );
-    $pane->cache = array();
-    $pane->style = array(
-      'settings' => NULL,
-    );
-    $pane->css = array();
-    $pane->extras = array();
-    $pane->position = 1;
-    $pane->locks = array();
-    $pane->uuid = 'b15fae41-b679-4b12-af25-c54a1615c9c8';
-    $display->content['new-b15fae41-b679-4b12-af25-c54a1615c9c8'] = $pane;
-    $display->panels['left'][1] = 'new-b15fae41-b679-4b12-af25-c54a1615c9c8';
-    $pane = new stdClass();
-    $pane->pid = 'new-dc6ebcbf-54da-46ed-995f-54a6cdccf3da';
-    $pane->panel = 'right';
+    $pane->pid = 'new-24e5a80c-78bd-454e-ae2a-84cf0feec1d5';
+    $pane->panel = 'address';
     $pane->type = 'views_panes';
     $pane->subtype = 'page_element-panel_page_element';
     $pane->shown = TRUE;
@@ -124,12 +79,58 @@ function ibli_general_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = 'dc6ebcbf-54da-46ed-995f-54a6cdccf3da';
-    $display->content['new-dc6ebcbf-54da-46ed-995f-54a6cdccf3da'] = $pane;
-    $display->panels['right'][0] = 'new-dc6ebcbf-54da-46ed-995f-54a6cdccf3da';
+    $pane->uuid = '24e5a80c-78bd-454e-ae2a-84cf0feec1d5';
+    $display->content['new-24e5a80c-78bd-454e-ae2a-84cf0feec1d5'] = $pane;
+    $display->panels['address'][0] = 'new-24e5a80c-78bd-454e-ae2a-84cf0feec1d5';
     $pane = new stdClass();
-    $pane->pid = 'new-88f036d9-475c-4894-968b-40eeb3e96ca1';
-    $pane->panel = 'right';
+    $pane->pid = 'new-17596442-c407-4bde-a0df-9a5468a756aa';
+    $pane->panel = 'form';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'page_element-panel_page_element';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'field_page_value' => 'contact',
+        'field_position_value' => 'form',
+      ),
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '17596442-c407-4bde-a0df-9a5468a756aa';
+    $display->content['new-17596442-c407-4bde-a0df-9a5468a756aa'] = $pane;
+    $display->panels['form'][0] = 'new-17596442-c407-4bde-a0df-9a5468a756aa';
+    $pane = new stdClass();
+    $pane->pid = 'new-c2fc4a79-fe31-4ae2-a928-22f631721d66';
+    $pane->panel = 'form';
+    $pane->type = 'contact';
+    $pane->subtype = 'contact';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'override_title' => 1,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $pane->uuid = 'c2fc4a79-fe31-4ae2-a928-22f631721d66';
+    $display->content['new-c2fc4a79-fe31-4ae2-a928-22f631721d66'] = $pane;
+    $display->panels['form'][1] = 'new-c2fc4a79-fe31-4ae2-a928-22f631721d66';
+    $pane = new stdClass();
+    $pane->pid = 'new-d7fe1cd7-2bb8-46f9-836d-856aaf607324';
+    $pane->panel = 'map';
     $pane->type = 'views_panes';
     $pane->subtype = 'page_element-panel_page_element';
     $pane->shown = TRUE;
@@ -146,11 +147,11 @@ function ibli_general_default_page_manager_pages() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = '88f036d9-475c-4894-968b-40eeb3e96ca1';
-    $display->content['new-88f036d9-475c-4894-968b-40eeb3e96ca1'] = $pane;
-    $display->panels['right'][1] = 'new-88f036d9-475c-4894-968b-40eeb3e96ca1';
+    $pane->uuid = 'd7fe1cd7-2bb8-46f9-836d-856aaf607324';
+    $display->content['new-d7fe1cd7-2bb8-46f9-836d-856aaf607324'] = $pane;
+    $display->panels['map'][0] = 'new-d7fe1cd7-2bb8-46f9-836d-856aaf607324';
   $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

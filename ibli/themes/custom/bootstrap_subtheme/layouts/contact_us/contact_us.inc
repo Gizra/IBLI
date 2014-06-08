@@ -8,7 +8,8 @@ $plugin = array(
   'theme' => 'contact_us',
   'css' => 'contact-us.css',
   'regions' => array(
-    'left' => t('Left side'),
-    'right' => t('Right side'),
+    'form' => t('Form'),
+    'address' => t('Address'),
+    'map' => t('Map'),
   ),
 );

@@ -14,39 +14,43 @@ $plugin = array(
  * Render callback.
  */
 function ibli_general_ibli_on_the_ground_content_type_render($subtype, $conf, $args, $context) {
-  $variables = array(
-    'nodequeue' => array(),
-  );
-
   // Load "IBLI On The Ground" nodequeue data.
   $query = db_select('nodequeue_queue', 'nq');
   $query->innerJoin('nodequeue_nodes', 'nn', 'nq.qid = nn.qid');
+  $query->innerJoin('node', 'n', 'n.nid = nn.nid');
   $result = $query
     ->fields('nn', array('nid'))
     ->condition('nq.name', 'ibli_on_the_ground')
+    ->condition('n.status', NODE_PUBLISHED)
     ->execute()
     ->fetchAllAssoc('nid');
-  if (!empty($result)) {
-    $nodes = node_load_multiple(array_keys($result));
 
-    foreach ($nodes as $node) {
-      $wrapper = entity_metadata_wrapper('node', $node);
+  if (empty($result)) {
+    // Nodequeue is empty.
+    return;
+  }
+  $nodes = node_load_multiple(array_keys($result));
 
-      // Get data for image style.
-      $image = $wrapper->field_image->value();
-      $image_vars = array(
-        'path' => $image['uri'],
-        'alt' => $node->title,
-        'attributes' => array('class' => array('img-responsive')),
-        'style_name' => 'ibli_on_the_ground_thumbnail',
-      );
+  $variables = array(
+    'nodequeue' => array(),
+  );
+  foreach ($nodes as $node) {
+    $wrapper = entity_metadata_wrapper('node', $node);
 
-      $variables['nodequeue'][] = array(
-        'title' => $node->title,
-        'url' => url('node/' . $node->nid),
-        'image' => theme('image_style', $image_vars),
-      );
-    }
+    // Get data for image style.
+    $image = $wrapper->field_image->value();
+    $image_vars = array(
+      'path' => $image['uri'],
+      'alt' => check_plain($node->title),
+      'attributes' => array('class' => array('img-responsive')),
+      'style_name' => 'ibli_on_the_ground_thumbnail',
+    );
+
+    $variables['nodequeue'][] = array(
+      'title' => $node->title,
+      'url' => url('node/' . $node->nid),
+      'image' => theme('image_style', $image_vars),
+    );
   }
 
   $block = new stdClass();

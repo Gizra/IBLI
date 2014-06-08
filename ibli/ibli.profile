@@ -40,6 +40,8 @@ function ibli_set_variables() {
     // JQuery.
     'jquery_update_jquery_version' => 1.8,
     'jquery_update_jquery_admin_version' => 1.5,
+    // Images path.
+    $variables['ibli_images_path'] = drupal_get_path('theme', 'bootstrap_subtheme') . '/images',
   );
 
   foreach ($variables as $key => $value) {

@@ -5319,7 +5319,10 @@ h1.hl small, h2.hl small, h3.hl small, h4.hl small, h5.hl small, h6.hl small {
 
 /* ===== Top Menu ===== */
 header.navbar {
-  margin: 0; }
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  font-size: 12px; }
   header.navbar ul.nav li {
     cursor: pointer; }
     header.navbar ul.nav li.dropdown ul.dropdown-menu {

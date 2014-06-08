@@ -16,67 +16,31 @@ function ibli_general_ctools_plugin_directory($module, $plugin) {
 }
 
 /**
- * Form builder; Contact form.
+ * Implements hook_form_FORM_ID_alter().
  */
-function ibli_general_contact_form() {
-  $form = array();
-
-  $form['email'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Your email address'),
-    '#required' => TRUE,
-    '#attributes' => array(
-      'placeholder' => t('Enter e-mail'),
-    ),
+function ibli_general_form_contact_site_form_alter(&$form, &$form_state) {
+  $form['actions']['submit']['#attributes'] = array(
+    'class' => array('btn-green'),
   );
 
-  $form['name'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Your name'),
-    '#required' => TRUE,
-    '#attributes' => array(
-      'placeholder' => t('Enter name'),
-    ),
+  unset($form['name']['#default_value']);
+
+  $form['name']['#attributes'] = array(
+    'placeholder'=>'Enter name',
   );
 
-  $form['message'] = array(
-    '#type' => 'textarea',
-    '#title' => t('Your message'),
-    '#required' => TRUE,
-    '#attributes' => array(
-      'placeholder' => t('Enter message'),
-    ),
+  unset($form['mail']['#default_value']);
+
+  $form['mail']['#attributes'] = array(
+    'placeholder'=>'Enter e-mail',
   );
 
-  $form['send_copy'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Send a copy to myself'),
+  $form['subject']['#attributes'] = array(
+    'placeholder'=>'Enter subject',
   );
 
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Send request'),
-    '#attributes' => array(
-      'class' => array('btn-green'),
-    ),
+  $form['message']['#attributes'] = array(
+    'placeholder'=>'Enter message',
   );
 
-  return $form;
-}
-
-/**
- * Validation handler; Contact form.
- */
-function ibli_general_contact_form_validate($form, &$form_state) {
-  if (!valid_email_address($form_state['values']['email'])) {
-    // Email not valid.
-    form_set_error('email', 'You must enter a valid Email address.');
-  }
-}
-
-/**
- * Submit handler; Contact form.
- */
-function ibli_general_contact_form_submit($form, &$form_state) {
-  dpm('SUBMIT');
 }

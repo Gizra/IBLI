@@ -55,39 +55,3 @@ function bootstrap_subtheme_preprocess_ibli_homepage(&$variables) {
   );
   drupal_add_js($setting, array('type' => 'setting'));
 }
-
-/**
- * Preprocess IBLI On The Ground.
- */
-function bootstrap_subtheme_preprocess_ibli_on_the_ground(&$variables) {
-  // Load "IBLI On The Ground" nodequeue data.
-  $variables['nodequeue'] = array();
-  $query = db_select('nodequeue_queue', 'nq');
-  $query->innerJoin('nodequeue_nodes', 'nn', 'nq.qid = nn.qid');
-  $result = $query
-    ->fields('nn', array('nid'))
-    ->condition('nq.name', 'ibli_on_the_ground')
-    ->execute()
-    ->fetchAllAssoc('nid');
-  if (!empty($result)) {
-    $nodes = node_load_multiple(array_keys($result));
-
-    foreach ($nodes as $node) {
-      $wrapper = entity_metadata_wrapper('node', $node);
-
-      $image = $wrapper->field_image->value();
-      $image_vars = array(
-        'path' => $image['uri'],
-        'alt' => $node->title,
-        'attributes' => array('class' => array('img-responsive')),
-        'style_name' => 'ibli_on_the_ground_thumbnail',
-      );
-
-      $variables['nodequeue'][] = array(
-        'title' => $node->title,
-        'url' => url('node/' . $node->nid),
-        'image' => theme('image_style', $image_vars),
-      );
-    }
-  }
-}

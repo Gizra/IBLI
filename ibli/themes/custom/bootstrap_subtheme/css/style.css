@@ -263,7 +263,7 @@ th {
 
 html {
   font-size: 62.5%;
-  -webkit-tap-highlight-color: transparent; }
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2134,6 +2134,7 @@ input[type="button"].btn-block {
   font-family: 'Glyphicons Halflings';
   src: url("bootstrap/glyphicons-halflings-regular.eot");
   src: url("bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); }
+
 .glyphicon {
   position: relative;
   top: 1px;
@@ -3914,12 +3915,14 @@ a.thumbnail.active {
 
   to {
     background-position: 0 0; } }
+
 @keyframes progress-bar-stripes {
   from {
     background-position: 40px 0; }
 
   to {
     background-position: 0 0; } }
+
 .progress {
   overflow: hidden;
   height: 20px;
@@ -4819,7 +4822,7 @@ button.close {
     border-radius: 10px;
     cursor: pointer;
     background-color: #000 \9;
-    background-color: transparent; }
+    background-color: rgba(0, 0, 0, 0); }
   .carousel-indicators .active {
     margin: 0;
     width: 12px;
@@ -4900,6 +4903,7 @@ button.close {
 
 @-ms-viewport {
   width: device-width; }
+
 .visible-xs, .visible-sm, .visible-md, .visible-lg {
   display: none !important; }
 
@@ -5085,9 +5089,6 @@ body.front {
   body.front .services ul {
     padding: 0; }
     body.front .services ul li {
-      transition: width 0.3s;
-      -webkit-transition: width 0.3s;
-      -moz-transition: width 0.3s;
       list-style-type: none;
       float: left;
       background: #eee;
@@ -5101,25 +5102,14 @@ body.front {
         font-size: 30px;
         display: block; }
       body.front .services ul li:hover {
-        width: 328px !important;
         background: #69D2E7;
-        cursor: pointer;
         color: #FFF;
-        text-align: left; }
-        body.front .services ul li:hover span {
-          float: left;
-          line-height: 60px;
-          margin: 0 20px 0 5px; }
-        body.front .services ul li:hover p a {
-          visibility: visible;
-          color: #FFF; }
+        cursor: pointer; }
       body.front .services ul li p {
         overflow: hidden;
         white-space: nowrap; }
         body.front .services ul li p a {
           visibility: hidden; }
-    body.front .services ul:hover li {
-      width: 201px; }
   body.front .block-header h2 {
     margin: 40px 0;
     font-size: 24px;
@@ -5244,30 +5234,32 @@ body.front {
   body.front .thumbnail .visit a:hover {
     color: #FFF;
     text-decoration: none; }
-  body.front .thumbnail {
+  body.front .ibli-on-the-ground .thumbnail {
     padding: 0;
     border: 0;
     border-radius: 0; }
-  body.front .thumbnail > img {
+  body.front .ibli-on-the-ground .thumbnail > img {
     display: block;
     max-width: 100%;
     height: auto;
     padding: 10px;
     border: 1px solid #eee; }
-  body.front a.thumbnail:hover img,
-  body.front a.thumbnail:focus img {
+  body.front .ibli-on-the-ground a.thumbnail:hover img,
+  body.front .ibli-on-the-ground a.thumbnail:focus img {
     border-color: #ccc; }
-  body.front .thumbnail > img {
+  body.front .ibli-on-the-ground .thumbnail > img {
     margin-left: auto;
     margin-right: auto; }
-  body.front .thumbnail .caption {
+  body.front .ibli-on-the-ground .thumbnail .caption {
     padding: 10px;
     color: #333333; }
-  body.front .thumbnail .caption h4 {
+  body.front .ibli-on-the-ground .thumbnail .caption a {
+    color: #333333; }
+  body.front .ibli-on-the-ground .thumbnail .caption h4 {
     text-transform: uppercase; }
-  body.front .thumbnail .caption .rating {
+  body.front .ibli-on-the-ground .thumbnail .caption .rating {
     margin-bottom: 10px; }
-  body.front .thumbnail .caption .rating i {
+  body.front .ibli-on-the-ground .thumbnail .caption .rating i {
     color: #F7C41F;
     font-size: 18px; }
   body.front .browsehappy {

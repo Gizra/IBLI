@@ -42,6 +42,7 @@ dependencies[] = message
 dependencies[] = message_notify
 dependencies[] = message_subscribe
 dependencies[] = module_filter
+dependencies[] = nodequeue
 dependencies[] = pathauto
 dependencies[] = page_manager
 dependencies[] = panels

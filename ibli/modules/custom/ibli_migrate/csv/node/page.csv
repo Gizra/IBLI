@@ -1,12 +1,16 @@
-Unique ID,Title,Is In Menu,Menu Parent,Menu Order
-what-is-ibli,What is IBLI?,1,Pages,1
-where-is-ibli,Where is IBLI Offered?,1,Pages,2
-coverage-areas,Coverage Areas,1,Pages,3
-past-premiums,Past Premiums,1,Pages,4
-current-premiums,Current Premiums,1,Pages,5
-whats-going-on,What's Going On In My Area?,1,Pages,6
-yes-i-want,"Yes, I Want to Protect My Livestock from Drought!",1,Pages,7
-reports,Reports,1,Pages,8
-learn-more,Learn More,1,Pages,9
-ethiopia,Ethiopia,1,Partners,1
-kenya,Kenya,1,Partners,2
+Unique ID,Title,Image,Show In Menu,Menu Parent,Menu Order,Show In IBLI On The Ground
+what-is-ibli,What is IBLI?,,1,Pages,1,
+where-is-ibli,Where is IBLI Offered?,,1,Pages,2,
+coverage-areas,Coverage Areas,,1,Pages,3,
+past-premiums,Past Premiums,,1,Pages,4,
+current-premiums,Current Premiums,,1,Pages,5,
+whats-going-on,What's Going On In My Area?,,1,Pages,6,
+yes-i-want,"Yes, I Want to Protect My Livestock from Drought!",,1,Pages,7,
+reports,Reports,,1,Pages,8,
+learn-more,Learn More,,1,Pages,9,
+ethiopia,Ethiopia,,1,Partners,1,
+kenya,Kenya,,1,Partners,2,
+index-based-livestock-takaful-in-wajir,Index Based Livestock Takaful In Wajir,ibli-on-the-ground1.jpg,,,,1
+mifugo-maisha-in-marsabit,Mifugo Maisha In Marsabit,ibli-on-the-ground2.jpg,,,,1
+index-based-livestock-insurance-in-borana,Index Based Livestock Insurance In Borana,ibli-on-the-ground3.jpg,,,,1
+mifugo-maisha-in-isiolo,Mifugo Maisha in Isiolo,ibli-on-the-ground4.jpg,,,,1

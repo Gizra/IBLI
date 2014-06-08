@@ -65,4 +65,26 @@ abstract class IbliMigration extends Migration {
       ->addFieldMapping('uid')
       ->defaultValue(1);
   }
+
+  /**
+   * Adds a node to the nodequeue list.
+   *
+   * @param $queue_name
+   *  Nodequeue machine name.
+   * @param $nid
+   *  Node ID to add to the nodequeue.
+   */
+  public function nodequeueAddNodeToSubqueueList($queue_name, $nid) {
+    // Get queue by machine name.
+    if (!$queue = nodequeue_load_queue_by_name($queue_name)) {
+      // Queue doesn't exist.
+      return;
+    }
+
+    // Get the subqueue list.
+    $subqueue = reset(nodequeue_load_subqueues_by_queue($queue->qid));
+
+    // Add node to subqueue list.
+    nodequeue_subqueue_add($queue, $subqueue, $nid);
+  }
 }

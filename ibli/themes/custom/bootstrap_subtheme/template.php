@@ -15,9 +15,6 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
     unset($variables['navbar_classes_array'][$container_key]);
   }
 
-  // Set the images path.
-  $variables['images_path'] = drupal_get_path('theme', 'bootstrap_subtheme') . '/images';
-
   // Get contact address for footer.
   $query = new EntityFieldQuery();
   $results = $query
@@ -43,9 +40,6 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
  * Preprocess IBLI homepage.
  */
 function bootstrap_subtheme_preprocess_ibli_homepage(&$variables) {
-  // Set the images path.
-  $variables['images_path'] = drupal_get_path('theme', 'bootstrap_subtheme') . '/images';
-
   // Add required libraries and CSS for the map.
   drupal_add_js(libraries_get_path('angular') . '/angular.min.js');
   drupal_add_js(libraries_get_path('leaflet') . '/dist/leaflet.js');
@@ -60,12 +54,4 @@ function bootstrap_subtheme_preprocess_ibli_homepage(&$variables) {
     ),
   );
   drupal_add_js($setting, array('type' => 'setting'));
-}
-
-/**
- * Preprocess last updates.
- */
-function bootstrap_subtheme_preprocess_ibli_general_last_updates(&$variables) {
-  // Set the images path.
-  $variables['images_path'] = drupal_get_path('theme', 'bootstrap_subtheme') . '/images';
 }

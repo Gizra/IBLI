@@ -51,7 +51,7 @@ function ibli_general_ibli_on_the_ground_content_type_render($subtype, $conf, $a
 
   $block = new stdClass();
   $block->module = 'ibli_general';
-  $block->content = theme('ibli_on_the_ground');
+  $block->content = theme('ibli_on_the_ground', $variables);
   return $block;
 }
 

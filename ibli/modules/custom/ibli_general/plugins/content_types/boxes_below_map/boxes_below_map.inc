@@ -23,7 +23,7 @@ function ibli_general_boxes_below_map_content_type_render($subtype, $conf, $args
 /**
  * Edit form.
  */
-function ibli_general_boxes_below_map_type_edit_form($form, &$form_state) {
+function ibli_general_boxes_below_map_content_type_edit_form($form, &$form_state) {
   return $form;
 }
 

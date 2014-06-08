@@ -8,9 +8,11 @@ class IbliPageNodes extends IbliMigration {
   public $bundle = 'page';
 
   public $csvColumns = array(
-    array('is_in_menu', 'Is In Menu'),
+    array('field_image', 'Image'),
+    array('show_in_menu', 'Show In Menu'),
     array('parent', 'Menu Parent'),
     array('weight', 'Menu Order'),
+    array('show_in_ground', 'Show In IBLI On The Ground'),
   );
 
   public function __construct() {
@@ -19,6 +21,15 @@ class IbliPageNodes extends IbliMigration {
     // Map body.
     $this->addFieldMapping('body', 'body')
       ->arguments(array('format' => 'full_html'));
+
+    // Map image.
+    $this->addFieldMapping('field_image', 'field_image');
+    $this
+      ->addFieldMapping('field_image:file_replace')
+      ->defaultValue(FILE_EXISTS_REPLACE);
+    $this
+      ->addFieldMapping('field_image:source_dir')
+      ->defaultValue(drupal_get_path('module', 'ibli_migrate') . '/images');
   }
 
   /**
@@ -35,18 +46,28 @@ class IbliPageNodes extends IbliMigration {
       return;
     }
     $row->body = file_get_contents($file);
+
+    if (!empty($row->field_image)) {
+      // Remove the "public://" from image paths.
+      $row->field_image = str_replace('public://', '', $row->field_image);
+    }
   }
 
   /**
-   * Create menu links for nodes.
+   * Create menu links for nodes and add nodes to nodequeue.
    */
   public function complete($entity, $row) {
-    $menu_name = variable_get('menu_main_links_source', 'menu-ibli-main-menu');
+    if (!empty($row->show_in_ground)) {
+      // Add node to the "IBLI On The Ground" nodequeue.
+      $this->nodequeueAddNodeToSubqueueList('ibli_on_the_ground', $entity->nid);
+    }
 
-    if (!$row->is_in_menu) {
+    if (!$row->show_in_menu) {
       // Do not create menu link.
       return;
     }
+
+    $menu_name = variable_get('menu_main_links_source', 'menu-ibli-main-menu');
 
     $m = array();
     $m['menu_name'] = $menu_name;

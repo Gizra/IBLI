@@ -42,6 +42,9 @@ function ibli_general_form_contact_site_form_alter(&$form, &$form_state) {
   unset($form['mail']['#default_value']);
   unset($form['name']['#default_value']);
 
+  // Do not allow sending a copy.
+  $form['copy']['#access'] = FALSE;
+
   // Make button green.
   $form['actions']['submit']['#attributes'] = array(
     'class' => array('btn-green'),

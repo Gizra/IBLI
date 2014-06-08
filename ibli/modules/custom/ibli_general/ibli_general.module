@@ -14,3 +14,69 @@ function ibli_general_ctools_plugin_directory($module, $plugin) {
     return 'plugins/' . $plugin;
   }
 }
+
+/**
+ * Form builder; Contact form.
+ */
+function ibli_general_contact_form() {
+  $form = array();
+
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Your email address'),
+    '#required' => TRUE,
+    '#attributes' => array(
+      'placeholder' => t('Enter e-mail'),
+    ),
+  );
+
+  $form['name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Your name'),
+    '#required' => TRUE,
+    '#attributes' => array(
+      'placeholder' => t('Enter name'),
+    ),
+  );
+
+  $form['message'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Your message'),
+    '#required' => TRUE,
+    '#attributes' => array(
+      'placeholder' => t('Enter message'),
+    ),
+  );
+
+  $form['send_copy'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Send a copy to myself'),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Send request'),
+    '#attributes' => array(
+      'class' => array('btn-green'),
+    ),
+  );
+
+  return $form;
+}
+
+/**
+ * Validation handler; Contact form.
+ */
+function ibli_general_contact_form_validate($form, &$form_state) {
+  if (!valid_email_address($form_state['values']['email'])) {
+    // Email not valid.
+    form_set_error('email', 'You must enter a valid Email address.');
+  }
+}
+
+/**
+ * Submit handler; Contact form.
+ */
+function ibli_general_contact_form_submit($form, &$form_state) {
+  dpm('SUBMIT');
+}

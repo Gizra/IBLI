@@ -60,6 +60,25 @@ function ibli_general_default_page_manager_pages() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
+    $pane->pid = 'new-543e346a-50a8-41c1-95fc-918f1f0b797c';
+    $pane->panel = 'bottom';
+    $pane->type = 'ibli_on_the_ground';
+    $pane->subtype = 'ibli_on_the_ground';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array();
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $pane->uuid = '543e346a-50a8-41c1-95fc-918f1f0b797c';
+    $display->content['new-543e346a-50a8-41c1-95fc-918f1f0b797c'] = $pane;
+    $display->panels['bottom'][0] = 'new-543e346a-50a8-41c1-95fc-918f1f0b797c';
+    $pane = new stdClass();
     $pane->pid = 'new-f64d6492-c710-4515-8004-fafdd73b7818';
     $pane->panel = 'left';
     $pane->type = 'views_panes';

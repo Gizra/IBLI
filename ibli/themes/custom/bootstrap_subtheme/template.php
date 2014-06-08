@@ -46,6 +46,26 @@ function bootstrap_subtheme_preprocess_ibli_homepage(&$variables) {
   // Set the images path.
   $variables['images_path'] = drupal_get_path('theme', 'bootstrap_subtheme') . '/images';
 
+  // Add required libraries and CSS for the map.
+  drupal_add_js(libraries_get_path('angular') . '/angular.min.js');
+  drupal_add_js(libraries_get_path('leaflet') . '/dist/leaflet.js');
+  drupal_add_js(libraries_get_path('angular-leaflet-directive') . '/dist/angular-leaflet-directive.min.js');
+  drupal_add_js(libraries_get_path('ibli-map') . '/dist/ibli-map.js');
+  drupal_add_css(libraries_get_path('leaflet') . '/dist/leaflet.css');
+
+  // Setting for holding the path to map data files.
+  $setting = array(
+    'ibli_general' => array(
+      'iblimap_library_path' => libraries_get_path('ibli-map') . '/dist',
+    ),
+  );
+  drupal_add_js($setting, array('type' => 'setting'));
+}
+
+/**
+ * Preprocess IBLI On The Ground.
+ */
+function bootstrap_subtheme_preprocess_ibli_on_the_ground(&$variables) {
   // Load "IBLI On The Ground" nodequeue data.
   $variables['nodequeue'] = array();
   $query = db_select('nodequeue_queue', 'nq');
@@ -75,21 +95,6 @@ function bootstrap_subtheme_preprocess_ibli_homepage(&$variables) {
       );
     }
   }
-
-  // Add required libraries and CSS for the map.
-  drupal_add_js(libraries_get_path('angular') . '/angular.min.js');
-  drupal_add_js(libraries_get_path('leaflet') . '/dist/leaflet.js');
-  drupal_add_js(libraries_get_path('angular-leaflet-directive') . '/dist/angular-leaflet-directive.min.js');
-  drupal_add_js(libraries_get_path('ibli-map') . '/dist/ibli-map.js');
-  drupal_add_css(libraries_get_path('leaflet') . '/dist/leaflet.css');
-
-  // Setting for holding the path to map data files.
-  $setting = array(
-    'ibli_general' => array(
-      'iblimap_library_path' => libraries_get_path('ibli-map') . '/dist',
-    ),
-  );
-  drupal_add_js($setting, array('type' => 'setting'));
 }
 
 /**

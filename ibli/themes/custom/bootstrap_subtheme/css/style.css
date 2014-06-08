@@ -5287,41 +5287,32 @@ img.img-about {
   text-decoration: none; }
 
 /* ===== Thumbnails ===== */
-.thumbnail {
+.ibli-on-the-ground .thumbnail {
   padding: 0;
   border: 0;
   border-radius: 0; }
-
-.thumbnail > img {
+.ibli-on-the-ground .thumbnail > img {
   display: block;
   max-width: 100%;
   height: auto;
   padding: 10px;
   border: 1px solid #eee; }
-
-a.thumbnail:hover img,
-a.thumbnail:focus img {
+.ibli-on-the-ground a.thumbnail:hover img,
+.ibli-on-the-ground a.thumbnail:focus img {
   border-color: #ccc; }
-
-.thumbnail a img {
+.ibli-on-the-ground .thumbnail > img {
   margin-left: auto;
-  margin-right: auto;
-  height: 175px; }
-
-.thumbnail .caption {
+  margin-right: auto; }
+.ibli-on-the-ground .thumbnail .caption {
   padding: 10px;
   color: #333333; }
-
-.thumbnail .caption a {
+.ibli-on-the-ground .thumbnail .caption a {
   color: #333333; }
-
-.thumbnail .caption h4 {
+.ibli-on-the-ground .thumbnail .caption h4 {
   text-transform: uppercase; }
-
-.thumbnail .caption .rating {
+.ibli-on-the-ground .thumbnail .caption .rating {
   margin-bottom: 10px; }
-
-.thumbnail .caption .rating i {
+.ibli-on-the-ground .thumbnail .caption .rating i {
   color: #F7C41F;
   font-size: 18px; }
 

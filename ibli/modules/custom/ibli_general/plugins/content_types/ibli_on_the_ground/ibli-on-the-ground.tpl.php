@@ -11,7 +11,7 @@
       <div class="col-md-3 col-sm-6">
         <div class="thumbnail">
           <a href="<?php print $page['url']; ?>"><?php print $page['image']; ?></a>
-          <div class="visit"><a href="#"><i class="fa fa-question-circle"></i> More details...</a></div>
+          <div class="visit"><a href="#"><i class="fa fa-question-circle"></i> <?php print t('More details...'); ?></a></div>
           <div class="caption">
             <p><a href="<?php print $page['url']; ?>"><?php print $page['title']; ?></a></p>
           </div>

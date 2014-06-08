@@ -86,12 +86,13 @@ function bootstrap_subtheme_preprocess_ibli_on_the_ground(&$variables) {
         'path' => $image['uri'],
         'alt' => $node->title,
         'attributes' => array('class' => array('img-responsive')),
+        'style_name' => 'ibli_on_the_ground_thumbnail',
       );
 
       $variables['nodequeue'][] = array(
         'title' => $node->title,
         'url' => url('node/' . $node->nid),
-        'image' => theme('image', $image_vars),
+        'image' => theme('image_style', $image_vars),
       );
     }
   }

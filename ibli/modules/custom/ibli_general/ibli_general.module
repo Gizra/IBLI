@@ -17,30 +17,33 @@ function ibli_general_ctools_plugin_directory($module, $plugin) {
 
 /**
  * Implements hook_form_FORM_ID_alter().
+ *
+ * Contact form modifications.
  */
 function ibli_general_form_contact_site_form_alter(&$form, &$form_state) {
-  $form['actions']['submit']['#attributes'] = array(
-    'class' => array('btn-green'),
-  );
-
-  unset($form['name']['#default_value']);
-
+  // Add placeholders.
   $form['name']['#attributes'] = array(
-    'placeholder'=>'Enter name',
+    'placeholder' => t('Enter name'),
   );
-
-  unset($form['mail']['#default_value']);
 
   $form['mail']['#attributes'] = array(
-    'placeholder'=>'Enter e-mail',
+    'placeholder' => t('Enter e-mail'),
   );
 
   $form['subject']['#attributes'] = array(
-    'placeholder'=>'Enter subject',
+    'placeholder' => t('Enter subject'),
   );
 
   $form['message']['#attributes'] = array(
-    'placeholder'=>'Enter message',
+    'placeholder' => t('Enter message'),
   );
 
+  // Remove default values.
+  unset($form['mail']['#default_value']);
+  unset($form['name']['#default_value']);
+
+  // Make button green.
+  $form['actions']['submit']['#attributes'] = array(
+    'class' => array('btn-green'),
+  );
 }

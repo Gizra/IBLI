@@ -30,11 +30,11 @@ function ibli_news_feeds_importer_default() {
       'plugin_key' => 'FeedsXPathParserXML',
       'config' => array(
         'sources' => array(
-          'xpathparser:0' => '//item//link',
-          'xpathparser:1' => '//item//title',
-          'xpathparser:2' => '//item//description',
-          'xpathparser:3' => '//item//link',
-          'xpathparser:4' => '//item//pubDate',
+          'xpathparser:0' => 'link',
+          'xpathparser:1' => 'title',
+          'xpathparser:2' => 'description',
+          'xpathparser:3' => 'link',
+          'xpathparser:4' => 'pubDate',
         ),
         'rawXML' => array(
           'xpathparser:0' => 0,
@@ -43,7 +43,7 @@ function ibli_news_feeds_importer_default() {
           'xpathparser:3' => 0,
           'xpathparser:4' => 0,
         ),
-        'context' => '//channel',
+        'context' => '//channel/item',
         'exp' => array(
           'errors' => 0,
           'tidy' => 0,

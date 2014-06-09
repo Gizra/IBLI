@@ -5374,6 +5374,15 @@ a.thumbnail:focus img {
       color: #555;
       min-width: 130px; }
 
+body.node-type-page .what-is-ibli .main-image {
+  background: url(../images/what_is_ibli.png) no-repeat;
+  width: 960px;
+  height: 212px;
+  margin-top: 5px;
+  margin-bottom: 20px; }
+body.node-type-page .what-is-ibli .buttons {
+  margin-top: 20px; }
+
 /* ===== General ===== */
 html, body {
   font-family: 'Lato', sans-serif;
@@ -5481,13 +5490,3 @@ footer {
   overflow: inherit; }
   .media .media {
     margin-top: 15px; }
-
-#what-is-ibli #what-is-ibli-image {
-  background: url(../images/what_is_ibli.png) no-repeat;
-  width: 960px;
-  height: 212px;
-  margin-top: 5px;
-  margin-bottom: 36px; }
-#what-is-ibli .lead {
-  font-weight: normal;
-  color: #515151; }

@@ -2,6 +2,7 @@
 @import "../../../../libraries/bootstrap_sass/vendor/assets/stylesheets/bootstrap.scss";
 @import "../fonts/font-awesome-4.0.3/css/font-awesome.css";
 @import "pages/_homepage.scss";
+@import "pages/_node.scss";
 
 /* ===== General ===== */
 
@@ -169,21 +170,5 @@ footer {
 
   .media {
     margin-top: 15px;
-  }
-}
-
-#what-is-ibli {
-
-  #what-is-ibli-image {
-    background: url(../images/what_is_ibli.png) no-repeat;
-    width: 960px;
-    height: 212px;
-    margin-top: 5px;
-    margin-bottom: 36px;
-  }
-
-  .lead {
-    font-weight: normal;
-    color: #515151;
   }
 }

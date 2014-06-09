@@ -1,6 +1,5 @@
 @import "_mixins.scss";
 @import "../../../../libraries/bootstrap_sass/vendor/assets/stylesheets/bootstrap.scss";
-@import "../fonts/font-awesome-4.0.3/css/font-awesome.css";
 @import "pages/_homepage.scss";
 @import "pages/_node.scss";
 
@@ -163,12 +162,19 @@ footer {
   }
 }
 
+#partners {
 
-.media {
-  margin-top: 0px;
-  overflow: inherit;
+  .media:first-child {
+    margin: 0;
+  }
+
+  .media-object {
+    height: 88px;
+    width: 136px;
+  }
 
   .media {
-    margin-top: 15px;
+    margin-top: 0px;
+    overflow: inherit;
   }
 }

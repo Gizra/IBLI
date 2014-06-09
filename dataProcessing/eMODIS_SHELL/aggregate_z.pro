@@ -136,6 +136,7 @@ print, SYSTIME(0)+ ' - - - Aggrgating Admin region ' + string(admin+1) + ' out o
     uniqlines = lines[UNIQ(lines)]
     j = 0.0
     ; loop over lines of data where Admin region falls in
+    print, ' - - - number of uniqLines : ' + string(N_ELEMENTS(uniqlines)) + ' - - - '
     WHILE j lt N_ELEMENTS(uniqlines) DO BEGIN
     
     ;print, ' - - - Aggrgating Admin region ' + string(admin+1) + ' out of ' + string(N_ELEMENTS(adminList)) + '(2 : '+string(j)+' / '+string(N_ELEMENTS(uniqlines))+' )'

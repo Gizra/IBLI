@@ -1,0 +1,32 @@
+
+<?php
+
+/**
+ * Implements hook_install();
+ *
+ * Set up a nodequeue for "IBLI On The Ground".
+ */
+function ibli_general_install() {
+  $nodequeue = new stdClass;
+  $nodequeue->api_version = 2;
+  $nodequeue->name = 'ibli_on_the_ground';
+  $nodequeue->title = 'IBLI On The Ground';
+  $nodequeue->subqueue_title = '';
+  $nodequeue->size = 4;
+  $nodequeue->link = '';
+  $nodequeue->link_remove = '';
+  $nodequeue->owner = 'nodequeue';
+  $nodequeue->show_in_ui = 1;
+  $nodequeue->show_in_tab = 1;
+  $nodequeue->show_in_links = 1;
+  $nodequeue->reference = '0';
+  $nodequeue->reverse = 0;
+  $nodequeue->i18n = 0;
+  $nodequeue->roles = array();
+  $nodequeue->types = array('page');
+  $nodequeue->add_subqueue = array(
+    1 => 'IBLI On The Ground',
+  );
+
+  nodequeue_save($nodequeue);
+}

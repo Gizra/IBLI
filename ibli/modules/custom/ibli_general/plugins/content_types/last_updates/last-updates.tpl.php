@@ -47,32 +47,36 @@
     <p class="text-muted"><i class="fa fa-map-marker"></i> Saigon, Ho Chi Minh, Vietnam</p>
   </div>
   <div class="tab-pane" id="news">
-    <div class="media">
-      <a class="pull-left" href="#">
-        <img class="media-object" src="<?php print variable_get('ibli_images_path'); ?>/face1.jpg" alt="Blog Message" />
-      </a>
-      <div class="media-body">
-        <a href="#">Alex Smith</a> <span class="text-muted">20 minutes ago</span>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius...</p>
-      </div>
-    </div>
-    <div class="media">
-      <a class="pull-left" href="#">
-        <img class="media-object" src="<?php print variable_get('ibli_images_path'); ?>/face2.jpg" alt="Blog Message" />
-      </a>
-      <div class="media-body">
-        <a href="#">Dan Smith</a> <span class="text-muted">1 hour ago</span>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius...</p>
-      </div>
-    </div>
-    <div class="media">
-      <a class="pull-left" href="#">
-        <img class="media-object" src="<?php print variable_get('ibli_images_path'); ?>/face3.jpg" alt="Blog Message" />
-      </a>
-      <div class="media-body">
-        <a href="#">David Smith</a> <span class="text-muted">11/10/2013</span>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius...</p>
-      </div>
-    </div>
+
+
+      <?php print ibli_news_get_news(); ?>
+
+<!--    <div class="media">-->
+<!--      <a class="pull-left" href="#">-->
+<!--        <img class="media-object" src="--><?php //print variable_get('ibli_images_path'); ?><!--/face1.jpg" alt="Blog Message" />-->
+<!--      </a>-->
+<!--      <div class="media-body">-->
+<!--        <a href="#">Alex Smith</a> <span class="text-muted">20 minutes ago</span>-->
+<!--        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius...</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="media">-->
+<!--      <a class="pull-left" href="#">-->
+<!--        <img class="media-object" src="--><?php //print variable_get('ibli_images_path'); ?><!--/face2.jpg" alt="Blog Message" />-->
+<!--      </a>-->
+<!--      <div class="media-body">-->
+<!--        <a href="#">Dan Smith</a> <span class="text-muted">1 hour ago</span>-->
+<!--        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius...</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="media">-->
+<!--      <a class="pull-left" href="#">-->
+<!--        <img class="media-object" src="--><?php //print variable_get('ibli_images_path'); ?><!--/face3.jpg" alt="Blog Message" />-->
+<!--      </a>-->
+<!--      <div class="media-body">-->
+<!--        <a href="#">David Smith</a> <span class="text-muted">11/10/2013</span>-->
+<!--        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id ipsum varius...</p>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </div>

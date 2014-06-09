@@ -5,3 +5,44 @@
  */
 
 include_once 'ibli_news.features.inc';
+
+function ibli_news_get_news() {
+
+  $query= new EntityFieldQuery();
+
+  // Get all the news
+  $result = $query->entityCondition('entity_type', 'node')
+                  ->entityCondition('bundle', 'news')
+                  ->propertyCondition('status', NODE_PUBLISHED)
+                  ->execute();
+
+  if(!isset($result['node'])) {
+    return;
+  }
+
+  // Get news IDs.
+  $news = array_keys($result['node']);
+  $news_nodes = node_load_multiple($news);
+
+  foreach ($news_nodes as $node) {
+    $wrapper = entity_metadata_wrapper('node', $node);
+  }
+
+  $description = $wrapper->body->value->value();
+  if (strlen($description) >= 100) {
+    $description =  substr($description, 0, 100) . "...";
+
+   return '
+  <div class="media">
+      <a class="pull-left" href="#">
+      </a>
+      <div class="media-body">
+        <a href="' . $wrapper->field_link->value() . '">' . $wrapper->label() . '</a>
+         <br />
+         <span class="text-muted">' . date('D, d M Y G:i:s P', $wrapper->field_publish_date->value()) . '</span>
+        <p>' .  trim($description) . '</p>
+      </div>
+    </div>
+  ';
+  }
+}

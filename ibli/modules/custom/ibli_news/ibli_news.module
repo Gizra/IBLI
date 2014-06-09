@@ -6,6 +6,7 @@
 
 include_once 'ibli_news.features.inc';
 
+
 function ibli_news_get_news() {
 
   $query= new EntityFieldQuery();
@@ -24,25 +25,35 @@ function ibli_news_get_news() {
   $news = array_keys($result['node']);
   $news_nodes = node_load_multiple($news);
 
+  $html = NULL;
   foreach ($news_nodes as $node) {
     $wrapper = entity_metadata_wrapper('node', $node);
-  }
 
-  $description = $wrapper->body->value->value();
-  if (strlen($description) >= 100) {
-    $description =  substr($description, 0, 100) . "...";
+    $description = $wrapper->body->value->value();
+    if (strlen($description) >= 100) {
+      $description =  substr($description, 0, 100) . "...";
+    }
 
-   return '
-  <div class="media">
-      <a class="pull-left" href="#">
-      </a>
-      <div class="media-body">
-        <a href="' . $wrapper->field_link->value() . '">' . $wrapper->label() . '</a>
-         <br />
-         <span class="text-muted">' . date('D, d M Y G:i:s P', $wrapper->field_publish_date->value()) . '</span>
-        <p>' .  trim($description) . '</p>
-      </div>
-    </div>
-  ';
+    $news_items[] = array(
+      'link' => $wrapper->field_link->value(),
+      'title' => $wrapper->label(),
+      'date' => date('D, d M Y G:i:s P', $wrapper->field_publish_date->value()),
+      'description' => $description,
+    );
+    $html .= theme('ibli_news', $news_items);
   }
+  return $html;
+}
+
+/**
+ * Delegated hook_theme().
+ */
+function ibli_news_content_type_theme(&$theme) {
+  $theme['ibli_news'] = array(
+    'variables' => array(
+      'news_items' => NULL,
+    ),
+    'path' => drupal_get_path('module', 'ibli_news') .'/templates',
+    'template' => 'ibli-news',
+  );
 }

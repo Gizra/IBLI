@@ -64,3 +64,4 @@ dependencies[] = wysiwyg
 dependencies[] = ibli_general
 dependencies[] = ibli_migrate
 dependencies[] = page_element
+dependencies[] = ibli_news

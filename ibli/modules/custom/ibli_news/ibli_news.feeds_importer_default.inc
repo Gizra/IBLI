@@ -89,7 +89,7 @@ function ibli_news_feeds_importer_default() {
           ),
           4 => array(
             'source' => 'xpathparser:4',
-            'target' => 'field_publish_date',
+            'target' => 'field_publish_date:start',
             'unique' => FALSE,
           ),
         ),

@@ -206,22 +206,7 @@
               <a href="https://www.facebook.com/pages/Index-Based-Livestock-Insurance-Kenya-and-Ethiopia/1408317826105114"><i class="fa fa-facebook"></i></a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-pinterest"></i></a>
-            </li>
-            <li>
               <a href="https://www.youtube.com/channel/UCLcdSaDIcb6VHq3GflfQL0w"><i class="fa fa-youtube"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-github"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-linkedin"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-vk"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-google-plus"></i></a>
             </li>
             <li>
               <a href="https://www.flickr.com/photos/ilri/sets/72157623247974374/"><i class="fa fa-flickr"></i></a>

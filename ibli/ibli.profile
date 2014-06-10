@@ -19,6 +19,7 @@ function ibli_form_install_configure_form_alter(&$form, $form_state) {
  */
 function ibli_install_tasks() {
   $tasks = array();
+
   $tasks['ibli_set_variables'] = array(
     'display_name' => st('Set Variables'),
     'display' => FALSE,
@@ -54,17 +55,18 @@ function ibli_set_variables() {
   }
 }
 
+
 /**
- * Task callback; Import Daily News Feeds.
+ * Task callback; Import Ibli News Feeds.
  */
 function ibli_import_feeds() {
   // Setting the feed and import him.
   $config = array(
     'FeedsHTTPFetcher' => array(
-      'source' => 'http://www.http://livestockinsurance.wordpress.com/feed/',
+      'source' => 'http://livestockinsurance.wordpress.com/feed/',
     ),
   );
-  $source = feeds_source('ibli_news');
+  $source = feeds_source('news');
   $source->addConfig($config);
   $source->save();
   $source->import();

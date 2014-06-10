@@ -197,16 +197,19 @@
           <p><?php print t('Stay in touch with us:'); ?></p>
           <ul>
             <li>
-              <a href="#"><i class="fa fa-twitter"></i></a>
+              <a href="https://twitter.com/IBLI_Kenya"><i class="fa fa-twitter"></i></a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-facebook"></i></a>
+              <a href="https://twitter.com/IBLI_Ethiopia"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/pages/Index-Based-Livestock-Insurance-Kenya-and-Ethiopia/1408317826105114"><i class="fa fa-facebook"></i></a>
             </li>
             <li>
               <a href="#"><i class="fa fa-pinterest"></i></a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-youtube"></i></a>
+              <a href="https://www.youtube.com/channel/UCLcdSaDIcb6VHq3GflfQL0w"><i class="fa fa-youtube"></i></a>
             </li>
             <li>
               <a href="#"><i class="fa fa-github"></i></a>

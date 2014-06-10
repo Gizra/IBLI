@@ -34,13 +34,6 @@ function ibli_news_get_news() {
       $description =  substr($description, 0, 100) . "...";
     }
 
-
-    $description = htmlentities($description);
-
-    $description = html_entity_decode($description);
-
-    dpm($description);
-
     $news_items[] = array(
       'link' => $wrapper->field_link->value(),
       'title' => $wrapper->label(),

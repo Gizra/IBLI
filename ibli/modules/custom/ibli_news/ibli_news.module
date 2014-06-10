@@ -34,13 +34,20 @@ function ibli_news_get_news() {
       $description =  substr($description, 0, 100) . "...";
     }
 
+
+    $description = htmlentities($description);
+
+    $description = html_entity_decode($description);
+
+    dpm($description);
+
     $news_items[] = array(
       'link' => $wrapper->field_link->value(),
       'title' => $wrapper->label(),
       'date' => date('D, d M Y G:i:s P', $wrapper->field_publish_date->value()),
       'description' => $description,
     );
-    $html .= theme('ibli_news', $news_items);
+    $html .= theme('ibli_news', array('news_items' => $news_items));
   }
   return $html;
 }
@@ -48,12 +55,14 @@ function ibli_news_get_news() {
 /**
  * Delegated hook_theme().
  */
-function ibli_news_content_type_theme(&$theme) {
-  $theme['ibli_news'] = array(
-    'variables' => array(
-      'news_items' => NULL,
+function ibli_news_theme() {
+  return array(
+    'ibli_news' =>   array(
+      'variables' => array(
+        'news_items' => NULL,
+      ),
+      'path' => drupal_get_path('module', 'ibli_news') .'/templates',
+      'template' => 'ibli-news',
     ),
-    'path' => drupal_get_path('module', 'ibli_news') .'/templates',
-    'template' => 'ibli-news',
   );
 }

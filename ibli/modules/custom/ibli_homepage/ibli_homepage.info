@@ -1,4 +1,10 @@
 name = IBLI Homepage
 core = 7.x
 package = IBLI
+dependencies[] = ctools
+dependencies[] = image
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
+features[image][] = ibli_on_the_ground_thumbnail
+features[variable][] = site_frontpage

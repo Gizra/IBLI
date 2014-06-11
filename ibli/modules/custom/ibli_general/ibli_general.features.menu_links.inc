@@ -27,7 +27,27 @@ function ibli_general_menu_default_menu_links() {
     'external' => 1,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => 10,
+    'weight' => 40,
+    'customized' => 1,
+  );
+  // Exported menu link: menu-ibli-main-menu_contact-us:contact-us
+  $menu_links['menu-ibli-main-menu_contact-us:contact-us'] = array(
+    'menu_name' => 'menu-ibli-main-menu',
+    'link_path' => 'contact-us',
+    'router_path' => 'contact-us',
+    'link_title' => 'Contact Us',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-ibli-main-menu_contact-us:contact-us',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 50,
     'customized' => 1,
   );
   // Exported menu link: menu-ibli-main-menu_pages:<nolink>
@@ -73,6 +93,7 @@ function ibli_general_menu_default_menu_links() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Blog');
+  t('Contact Us');
   t('Pages');
   t('Partners');
 

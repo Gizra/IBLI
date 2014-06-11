@@ -37,14 +37,7 @@
     </div>
   </div>
   <div class="tab-pane" id="events">
-    <h5>Moblie Web+DevCon San Francisco 2014 <small>January 28, 2014</small></h5>
-    <p class="text-muted"><i class="fa fa-map-marker"></i> Kuala Lumpur, Malaysia</p>
-    <hr>
-    <h5>2013 The 2nd International Conference on Information and Intelligent Computing(ICIIC 2013) <small>December 29, 2013</small></h5>
-    <p class="text-muted"><i class="fa fa-map-marker"></i> San Francisco, California, United States</p>
-    <hr>
-    <h5>International Conference on Cloud Computing and eGovernances 2014 <small>November 20, 2013</small></h5>
-    <p class="text-muted"><i class="fa fa-map-marker"></i> Saigon, Ho Chi Minh, Vietnam</p>
+    <iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showNav=0&amp;showDate=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=AGENDA&amp;height=360&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;ctz=Africa%2FNairobi" style=" border-width:0 " width="360" height="360" frameborder="0" scrolling="no"></iframe>
   </div>
   <div class="tab-pane" id="news">
     <div class="media">

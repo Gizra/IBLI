@@ -6,7 +6,7 @@
  *
  * Set up a nodequeue for "IBLI On The Ground".
  */
-function ibli_general_install() {
+function ibli_homepage_install() {
   $nodequeue = new stdClass;
   $nodequeue->api_version = 2;
   $nodequeue->name = 'ibli_on_the_ground';

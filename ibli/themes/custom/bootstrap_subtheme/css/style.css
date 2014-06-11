@@ -5357,6 +5357,17 @@ img.img-about {
       color: #555;
       min-width: 130px; }
 
+/* =====Youtube video section=====*/
+#home-page-video {
+  height: 315px;
+  width: 560px;
+  padding-left: 5px;
+  float: right; }
+
+#ibli-hom-page-paragraph {
+  display: inline;
+  overflow: hidden; }
+
 /* ===== General ===== */
 html, body {
   font-family: 'Lato', sans-serif;
@@ -5467,13 +5478,3 @@ footer {
 #partners .media {
   margin-top: 0px;
   overflow: inherit; }
-
-#home-page-video {
-  height: 315px;
-  width: 560px;
-  padding-left: 5px;
-  float: right; }
-
-#ibli-hom-page-paragraph {
-  display: inline;
-  overflow: hidden; }

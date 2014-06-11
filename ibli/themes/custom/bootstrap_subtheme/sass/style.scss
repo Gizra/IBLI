@@ -1,6 +1,7 @@
 @import "_mixins.scss";
 @import "../../../../libraries/bootstrap_sass/vendor/assets/stylesheets/bootstrap.scss";
 @import "pages/_homepage.scss";
+@import "pages/_node.scss";
 
 /* ===== General ===== */
 
@@ -167,7 +168,7 @@ footer {
 #partners {
 
   .media:first-child {
-     margin: 0;
+    margin: 0;
   }
 
   .media-object {

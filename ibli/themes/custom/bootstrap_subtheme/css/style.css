@@ -5303,6 +5303,15 @@ body.front {
         color: #555;
         min-width: 130px; }
 
+body.node-type-page .what-is-ibli .main-image {
+  background: url(../images/what_is_ibli.png) no-repeat;
+  width: 960px;
+  height: 212px;
+  margin-top: 5px;
+  margin-bottom: 20px; }
+body.node-type-page .what-is-ibli .buttons {
+  margin-top: 20px; }
+
 /* ===== General ===== */
 html, body {
   font-family: 'Lato', sans-serif;

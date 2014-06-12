@@ -7,13 +7,13 @@ $plugin = array(
   'title' => t('IBLI On The Ground'),
   'description' => t('Display IBLI On The Ground.'),
   'category' => t('ibli'),
-  'hook theme' => 'ibli_general_ibli_on_the_ground_content_type_theme',
+  'hook theme' => 'ibli_homepage_ibli_on_the_ground_content_type_theme',
 );
 
 /**
  * Render callback.
  */
-function ibli_general_ibli_on_the_ground_content_type_render($subtype, $conf, $args, $context) {
+function ibli_homepage_ibli_on_the_ground_content_type_render($subtype, $conf, $args, $context) {
   // Load "IBLI On The Ground" nodequeue data.
   $query = db_select('nodequeue_queue', 'nq');
   $query->innerJoin('nodequeue_nodes', 'nn', 'nq.qid = nn.qid');
@@ -54,7 +54,7 @@ function ibli_general_ibli_on_the_ground_content_type_render($subtype, $conf, $a
   }
 
   $block = new stdClass();
-  $block->module = 'ibli_general';
+  $block->module = 'ibli_homepage';
   $block->content = theme('ibli_on_the_ground', $variables);
   return $block;
 }
@@ -62,14 +62,14 @@ function ibli_general_ibli_on_the_ground_content_type_render($subtype, $conf, $a
 /**
  * Edit form.
  */
-function ibli_general_ibli_on_the_ground_type_edit_form($form, &$form_state) {
+function ibli_homepage_ibli_on_the_ground_type_edit_form($form, &$form_state) {
   return $form;
 }
 
 /**
  * Delegated hook_theme().
  */
-function ibli_general_ibli_on_the_ground_content_type_theme(&$theme, $plugin) {
+function ibli_homepage_ibli_on_the_ground_content_type_theme(&$theme, $plugin) {
   $theme['ibli_on_the_ground'] = array(
     'path' => $plugin['path'],
     'template' => 'ibli-on-the-ground',

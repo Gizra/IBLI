@@ -5304,7 +5304,7 @@ body.front {
         min-width: 130px; }
 
 body.node-type-page .what-is-ibli .main-image {
-  background: url(../images/what_is_ibli.png) no-repeat;
+  background: url("../images/what_is_ibli.png") no-repeat;
   width: 960px;
   height: 212px;
   margin-top: 5px;
@@ -5345,6 +5345,9 @@ header.navbar {
     header.navbar ul.nav li.dropdown.open .dropdown-toggle {
       background-color: #EEEEEE;
       color: #515151; }
+  header.navbar .navbar-brand {
+    color: #ffffff;
+    font-size: 28px; }
 
 /* ===== Footer ===== */
 footer {
@@ -5701,7 +5704,3 @@ fieldset[disabled] .btn-amethyst.active {
 
 .main-container {
   margin-top: 20px; }
-
-.navbar-default .navbar-brand {
-  color: #ffffff;
-  font-size: 28px; }

@@ -107,40 +107,33 @@ body.front {
   /* ===== Services ===== */
 
   .services {
+    margin-top: 10px;
 
-    ul {
-      padding: 0;
+    a {
+      float: left;
+      background: #eee;
+      padding: 20px;
+      margin-right: 1px;
+      text-align: center;
+      color: #888;
+      width: 227px;
+      height: 100px;
+      text-decoration: none;
 
-      li {
-        list-style-type: none;
-        float: left;
-        background: #eee;
-        padding: 20px;
-        margin-right: 1px;
-        text-align: center;
-        color: #888;
-        width: 227px;
-        height: 100px;
+      &:hover {
+        background: #69D2E7;
+        color: #FFF;
+        cursor: pointer;
+      }
 
-        span {
-          font-size: 30px;
-          display: block;
-        }
+      span.fa {
+        font-size: 30px;
+        display: block;
+      }
 
-        &:hover {
-          background: #69D2E7;
-          color: #FFF;
-          cursor: pointer;
-        }
-
-        p {
-          overflow: hidden;
-          white-space: nowrap;
-
-          a {
-            visibility: hidden;
-          }
-        }
+      span.text {
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
   }

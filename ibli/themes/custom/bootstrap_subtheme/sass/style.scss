@@ -2,6 +2,7 @@
 @import "../../../../libraries/bootstrap_sass/vendor/assets/stylesheets/bootstrap.scss";
 @import "pages/_homepage.scss";
 @import "pages/_node.scss";
+@import "pages/_publications.scss";
 
 /* ===== General ===== */
 
@@ -11,14 +12,18 @@ html, body {
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lato', sans-serif;
-}
-h1.hl, h2.hl, h3.hl, h4.hl, h5.hl, h6.hl {
   color: #515151;
   font-weight: 300;
   text-transform: uppercase;
 }
 h1.hl small, h2.hl small, h3.hl small, h4.hl small, h5.hl small, h6.hl small {
   text-transform: none;
+}
+
+h2.page-header {
+  border-bottom: 0 none;
+  margin: 0 0 5px 0;
+  padding-bottom: 20px;
 }
 
 /* ===== Top Menu ===== */

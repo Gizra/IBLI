@@ -43,6 +43,11 @@ header.navbar {
   text-transform: uppercase;
   font-size: 12px;
 
+  .navbar-brand {
+    color: #ffffff;
+    font-size: 28px;
+  }
+
   ul.nav {
 
     li {
@@ -71,12 +76,6 @@ header.navbar {
         }
       }
     }
-  }
-
-  .navbar-brand {
-    
-    color: #ffffff;
-    font-size: 28px;
   }
 }
 

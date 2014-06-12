@@ -5012,7 +5012,7 @@ body.front {
   body.front #wrap,
   body.front #hp-slider {
     height: 480px;
-    background: url(../images/bg3.jpg) no-repeat center center;
+    background: url("../images/bg3.jpg") no-repeat center center;
     background-size: cover;
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/bg3.jpg', sizingMethod='scale');
     -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/bg3.jpg', sizingMethod='scale')";
@@ -5355,6 +5355,9 @@ header.navbar {
   font-family: 'Lato', sans-serif;
   text-transform: uppercase;
   font-size: 12px; }
+  header.navbar .navbar-brand {
+    color: #ffffff;
+    font-size: 28px; }
   header.navbar ul.nav li {
     cursor: pointer; }
     header.navbar ul.nav li.dropdown ul.dropdown-menu {
@@ -5366,9 +5369,6 @@ header.navbar {
     header.navbar ul.nav li.dropdown.open .dropdown-toggle {
       background-color: #EEEEEE;
       color: #515151; }
-  header.navbar .navbar-brand {
-    color: #ffffff;
-    font-size: 28px; }
 
 /* ===== Footer ===== */
 footer {

@@ -5342,7 +5342,7 @@ h1.hl small, h2.hl small, h3.hl small, h4.hl small, h5.hl small, h6.hl small {
   .main-container h2.page-header {
     border-bottom: 0 none;
     margin: 0 0 5px 0;
-    padding-bottom: 20px; }
+    padding-bottom: 12px; }
 
 /* ===== Top Menu ===== */
 header.navbar {

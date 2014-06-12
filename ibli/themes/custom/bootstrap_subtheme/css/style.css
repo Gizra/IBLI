@@ -5303,11 +5303,6 @@ body.front {
         color: #555;
         min-width: 130px; }
 
-/*==== Nav bar ====*/
-.navbar-default .navbar-brand {
-  color: #ffffff;
-  font-size: 28px; }
-
 body.node-type-page .what-is-ibli .main-image {
   background: url(../images/what_is_ibli.png) no-repeat;
   width: 960px;
@@ -5706,3 +5701,7 @@ fieldset[disabled] .btn-amethyst.active {
 
 .main-container {
   margin-top: 20px; }
+
+.navbar-default .navbar-brand {
+  color: #ffffff;
+  font-size: 28px; }

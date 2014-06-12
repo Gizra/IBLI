@@ -37,7 +37,8 @@ function ibli_general_install() {
     db_insert('contact') // Table name
     ->fields(array(
       'category' => 'Contact us',
-      'uid' => 1,
+      'recipients' => '',
+      'reply' => '',
       'recipients' => 'contactibli@cgiar.org',
       'weight' => 0,
       'selected' => 1,

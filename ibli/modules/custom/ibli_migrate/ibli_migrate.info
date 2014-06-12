@@ -9,3 +9,4 @@ dependencies[] = migrate_extras
 files[] = includes/ibli_migrate.migrate.entity.inc
 files[] = handlers/node/IbliPageNodes.php
 files[] = handlers/node/IbliPageElementNodes.php
+files[] = handlers/node/IbliPublicationNodes.php

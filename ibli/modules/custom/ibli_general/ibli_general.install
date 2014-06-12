@@ -3,10 +3,9 @@
 
 /**
  * Implements hook_install();
- *
- * Set up a nodequeue for "IBLI On The Ground".
  */
 function ibli_general_install() {
+  // Set up a nodequeue for "IBLI On The Ground".
   $nodequeue = new stdClass;
   $nodequeue->api_version = 2;
   $nodequeue->name = 'ibli_on_the_ground';
@@ -27,21 +26,17 @@ function ibli_general_install() {
   $nodequeue->add_subqueue = array(
     1 => 'IBLI On The Ground',
   );
-
   nodequeue_save($nodequeue);
 
-
- // For the following query:
-// Insert into contact the email address.
-
-    db_insert('contact') // Table name
-    ->fields(array(
-      'category' => 'Contact us',
-      'recipients' => '',
-      'reply' => '',
-      'recipients' => 'contactibli@cgiar.org',
-      'weight' => 0,
-      'selected' => 1,
-    ))
-    ->execute();
+  // Set email address for receiving emails from Contact Us page.
+  db_insert('contact')
+  ->fields(array(
+    'category' => 'Contact us',
+    'recipients' => '',
+    'reply' => '',
+    'recipients' => 'contactibli@cgiar.org',
+    'weight' => 0,
+    'selected' => 1,
+  ))
+  ->execute();
 }

@@ -52,6 +52,9 @@ projects[libraries][version] = "2.2"
 projects[mailsystem][version] = 2.34
 projects[mailsystem][subdir] = "contrib"
 
+projects[mailchimp][subdir] = "contrib"
+projects[mailchimp][version] = 2.12
+
 projects[message][subdir] = "contrib"
 projects[message][version] = "1.9"
 
@@ -122,3 +125,7 @@ libraries[tinymce][download][url] = "http://download.moxiecode.com/tinymce/tinym
 libraries[bootstrap_sass][download][type] = "file"
 libraries[bootstrap_sass][type] = "libraries"
 libraries[bootstrap_sass][download][url] = "https://github.com/twbs/bootstrap-sass/archive/v3.1.1.zip"
+
+libraries[mailchimp][download][type] = "file"
+libraries[mailchimp][type] = "libraries"
+libraries[mailchimp][download][url] = "http://apidocs.mailchimp.com/api/downloads/mailchimp-api-class.zip"

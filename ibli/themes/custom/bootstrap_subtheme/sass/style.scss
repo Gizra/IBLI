@@ -1,6 +1,8 @@
 @import "_mixins.scss";
 @import "../../../../libraries/bootstrap_sass/vendor/assets/stylesheets/bootstrap.scss";
 @import "pages/_homepage.scss";
+@import "pages/_node.scss";
+@import "pages/_publications.scss";
 
 /* ===== General ===== */
 
@@ -8,22 +10,38 @@ html, body {
   font-family: 'Lato', sans-serif;
   height: 100%;
 }
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lato', sans-serif;
 }
-h1.hl, h2.hl, h3.hl, h4.hl, h5.hl, h6.hl {
-  color: #515151;
-  font-weight: 300;
-  text-transform: uppercase;
-}
+
 h1.hl small, h2.hl small, h3.hl small, h4.hl small, h5.hl small, h6.hl small {
   text-transform: none;
+}
+
+.main-container {
+  margin-top: 20px;
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #515151;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+
+  h2.page-header {
+    border-bottom: 0 none;
+    margin: 0 0 5px 0;
+    padding-bottom: 20px;
+  }
 }
 
 /* ===== Top Menu ===== */
 
 header.navbar {
   margin: 0;
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  font-size: 12px;
 
   ul.nav {
 
@@ -164,7 +182,7 @@ footer {
 #partners {
 
   .media:first-child {
-     margin: 0;
+    margin: 0;
   }
 
   .media-object {
@@ -176,4 +194,293 @@ footer {
     margin-top: 0px;
     overflow: inherit;
   }
+}
+
+/* ===== Buttons ===== */
+
+.btn {
+  border-radius: 0;
+}
+
+/* 1. Default Button */
+
+.btn-default {
+  color: #333333;
+  background-color: #ffffff;
+  border-color: #cccccc;
+}
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active,
+.hl-open .dropdown-toggle.btn-default {
+  color: #333333;
+  background-color: #ebebeb;
+  border-color: #adadad;
+}
+.btn-default:active,
+.btn-default.active,
+.open .dropdown-toggle.btn-default {
+  background-image: none;
+}
+.btn-default.disabled,
+.btn-default[disabled],
+fieldset[disabled] .btn-default,
+.btn-default.disabled:hover,
+.btn-default[disabled]:hover,
+fieldset[disabled] .btn-default:hover,
+.btn-default.disabled:focus,
+.btn-default[disabled]:focus,
+fieldset[disabled] .btn-default:focus,
+.btn-default.disabled:active,
+.btn-default[disabled]:active,
+fieldset[disabled] .btn-default:active,
+.btn-default.disabled.active,
+.btn-default[disabled].active,
+fieldset[disabled] .btn-default.active {
+  background-color: #ffffff;
+  border-color: #cccccc;
+}
+
+/* 2. Green Button */
+
+.btn-green {
+  color: #ffffff;
+  background-color: #72a53b;
+  border-color: #72a53b;
+}
+.btn-green:hover,
+.btn-green:focus,
+.btn-green:active,
+.btn-green.active,
+.open .dropdown-toggle.btn-green {
+  color: #ffffff;
+  background-color: #5d8731;
+  border-color: #5d8731;
+}
+.btn-green:active,
+.btn-green.active,
+.open .dropdown-toggle.btn-green {
+  background-image: none;
+}
+.btn-green.disabled,
+.btn-green[disabled],
+fieldset[disabled] .btn-green,
+.btn-green.disabled:hover,
+.btn-green[disabled]:hover,
+fieldset[disabled] .btn-green:hover,
+.btn-green.disabled:focus,
+.btn-green[disabled]:focus,
+fieldset[disabled] .btn-green:focus,
+.btn-green.disabled:active,
+.btn-green[disabled]:active,
+fieldset[disabled] .btn-green:active,
+.btn-green.disabled.active,
+.btn-green[disabled].active,
+fieldset[disabled] .btn-green.active {
+  background-color: #AFD487;
+  border-color: #AFD487;
+}
+
+/* 3. Red Button */
+
+.btn-red {
+  color: #ffffff;
+  background-color: #E74C3C;
+  border-color: #E74C3C;
+}
+.btn-red:hover,
+.btn-red:focus,
+.btn-red:active,
+.btn-red.active,
+.open .dropdown-toggle.btn-red {
+  color: #ffffff;
+  background-color: #C0392B;
+  border-color: #C0392B;
+}
+.btn-red:active,
+.btn-red.active,
+.open .dropdown-toggle.btn-red {
+  background-image: none;
+}
+.btn-red.disabled,
+.btn-red[disabled],
+fieldset[disabled] .btn-red,
+.btn-red.disabled:hover,
+.btn-red[disabled]:hover,
+fieldset[disabled] .btn-red:hover,
+.btn-red.disabled:focus,
+.btn-red[disabled]:focus,
+fieldset[disabled] .btn-red:focus,
+.btn-red.disabled:active,
+.btn-red[disabled]:active,
+fieldset[disabled] .btn-red:active,
+.btn-red.disabled.active,
+.btn-red[disabled].active,
+fieldset[disabled] .btn-red.active {
+  background-color: #EF8B80;
+  border-color: #EF8B80;
+}
+
+/* 4. Blue Button */
+
+.btn-blue {
+  color: #ffffff;
+  background-color: #00B4FF;
+  border-color: #00B4FF;
+}
+.btn-blue:hover,
+.btn-blue:focus,
+.btn-blue:active,
+.btn-blue.active,
+.open .dropdown-toggle.btn-blue {
+  color: #ffffff;
+  background-color: #009DE0;
+  border-color: #009DE0;
+}
+.btn-blue:active,
+.btn-blue.active,
+.open .dropdown-toggle.btn-blue {
+  background-image: none;
+}
+.btn-blue.disabled,
+.btn-blue[disabled],
+fieldset[disabled] .btn-blue,
+.btn-blue.disabled:hover,
+.btn-blue[disabled]:hover,
+fieldset[disabled] .btn-blue:hover,
+.btn-blue.disabled:focus,
+.btn-blue[disabled]:focus,
+fieldset[disabled] .btn-blue:focus,
+.btn-blue.disabled:active,
+.btn-blue[disabled]:active,
+fieldset[disabled] .btn-blue:active,
+.btn-blue.disabled.active,
+.btn-blue[disabled].active,
+fieldset[disabled] .btn-blue.active {
+  background-color: #5CCEFF;
+  border-color: #5CCEFF;
+}
+/* 5. Dark Button */
+
+.btn-dark {
+  color: #ffffff;
+  background-color: #515151;
+  border-color: #515151;
+}
+.btn-dark:hover,
+.btn-dark:focus,
+.btn-dark:active,
+.btn-dark.active,
+.open .dropdown-toggle.btn-dark {
+  color: #ffffff;
+  background-color: #444;
+  border-color: #444;
+}
+.btn-dark:active,
+.btn-dark.active,
+.open .dropdown-toggle.btn-dark {
+  background-image: none;
+}
+.btn-dark.disabled,
+.btn-dark[disabled],
+fieldset[disabled] .btn-dark,
+.btn-dark.disabled:hover,
+.btn-dark[disabled]:hover,
+fieldset[disabled] .btn-dark:hover,
+.btn-dark.disabled:focus,
+.btn-dark[disabled]:focus,
+fieldset[disabled] .btn-dark:focus,
+.btn-dark.disabled:active,
+.btn-dark[disabled]:active,
+fieldset[disabled] .btn-dark:active,
+.btn-dark.disabled.active,
+.btn-dark[disabled].active,
+fieldset[disabled] .btn-dark.active {
+  background-color: #707070;
+  border-color: #707070;
+}
+
+/* 6. Turquoise Button */
+
+.btn-turquoise {
+  color: #ffffff;
+  background-color: #1ABC9C;
+  border-color: #1ABC9C;
+}
+.btn-turquoise:hover,
+.btn-turquoise:focus,
+.btn-turquoise:active,
+.btn-turquoise.active,
+.open .dropdown-toggle.btn-turquoise {
+  color: #ffffff;
+  background-color: #16A085;
+  border-color: #16A085;
+}
+.btn-turquoise:active,
+.btn-turquoise.active,
+.open .dropdown-toggle.btn-turquoise {
+  background-image: none;
+}
+.btn-turquoise.disabled,
+.btn-turquoise[disabled],
+fieldset[disabled] .btn-turquoise,
+.btn-turquoise.disabled:hover,
+.btn-turquoise[disabled]:hover,
+fieldset[disabled] .btn-turquoise:hover,
+.btn-turquoise.disabled:focus,
+.btn-turquoise[disabled]:focus,
+fieldset[disabled] .btn-turquoise:focus,
+.btn-turquoise.disabled:active,
+.btn-turquoise[disabled]:active,
+fieldset[disabled] .btn-turquoise:active,
+.btn-turquoise.disabled.active,
+.btn-turquoise[disabled].active,
+fieldset[disabled] .btn-turquoise.active {
+  background-color: #4BE7C8;
+  border-color: #4BE7C8;
+}
+
+/* 7. Amethyst Button */
+
+.btn-amethyst {
+  color: #ffffff;
+  background-color: #9B59B6;
+  border-color: #9B59B6;
+}
+.btn-amethyst:hover,
+.btn-amethyst:focus,
+.btn-amethyst:active,
+.btn-amethyst.active,
+.open .dropdown-toggle.btn-amethyst {
+  color: #ffffff;
+  background-color: #8E44AD;
+  border-color: #8E44AD;
+}
+.btn-amethyst:active,
+.btn-amethyst.active,
+.open .dropdown-toggle.btn-amethyst {
+  background-image: none;
+}
+.btn-amethyst.disabled,
+.btn-amethyst[disabled],
+fieldset[disabled] .btn-amethyst,
+.btn-amethyst.disabled:hover,
+.btn-amethyst[disabled]:hover,
+fieldset[disabled] .btn-amethyst:hover,
+.btn-amethyst.disabled:focus,
+.btn-amethyst[disabled]:focus,
+fieldset[disabled] .btn-amethyst:focus,
+.btn-amethyst.disabled:active,
+.btn-amethyst[disabled]:active,
+fieldset[disabled] .btn-amethyst:active,
+.btn-amethyst.disabled.active,
+.btn-amethyst[disabled].active,
+fieldset[disabled] .btn-amethyst.active {
+  background-color: #BB8ECD;
+  border-color: #BB8ECD;
+}
+
+.top-zero {
+  margin-top: 0;
 }

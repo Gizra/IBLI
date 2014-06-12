@@ -29,4 +29,18 @@ function ibli_general_install() {
   );
 
   nodequeue_save($nodequeue);
+
+
+ // For the following query:
+// Insert into contact the email address.
+
+    db_insert('contact') // Table name
+    ->fields(array(
+      'category' => 'Contact us',
+      'uid' => 1,
+      'recipients' => 'contactibli@cgiar.org',
+      'weight' => 0,
+      'selected' => 1,
+    ))
+    ->execute();
 }

@@ -13,6 +13,7 @@ function ibli_migrate_migrate_api() {
     // Nodes.
     'IbliPageNodes',
     'IbliPageElementNodes',
+    'IbliPublicationNodes',
   );
 
   foreach ($class_names as $class_name) {

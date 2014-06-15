@@ -93,7 +93,7 @@ function ibli_news_feeds_importer_default() {
             'unique' => FALSE,
           ),
         ),
-        'update_existing' => '2',
+        'update_existing' => '1',
         'input_format' => 'plain_text',
         'skip_hash_check' => 0,
         'bundle' => 'news',

@@ -104,6 +104,12 @@ ENDIF ELSE BEGIN
     WorkingFolder=dataStruct.WorkingFolder 
 ENDELSE
 
+IF NOT(tag_exist(dataStruct,'MatlabFolder')) THEN BEGIN
+    print, 'Check your settings file to be in the format requested . . . (Seems like the MATLAB was not defined)'
+    STOP
+ENDIF ELSE BEGIN
+    WorkingFolder=dataStruct.WorkingFolder 
+ENDELSE
 
 
 IF NOT(tag_exist(dataStruct,'SUBSET')) THEN BEGIN
@@ -354,6 +360,15 @@ print, SYSTIME(0)+' > - - - Finished Stacking Temporal Layers - - - ';
         print , SYSTIME(0)+'> - - - Begin zScore aggregation per division - - - '
         AGGREGATE_Z , 'eMODIS',WorkingFolder,adminFile,SUBSET(3),SUBSET(2),N_ELEMENTS(fileList),bandList
         CUMULATE_Z_PER_DIVISION  ,csvDataPath , startYearData , nImagesYear , periodLag , startPeriodLong , numberPeriodsLong , startPeriodShort , numberPeriodsShort
+        
+        print , SYSTIME(0)+'> - - - Copying CSV Files to MATLAB Folder - - - '
+        spawn , 'cp -R' + csvDataPath+'/zCumNDVI_aggregated_eMODIS.csv ' + MatlabFolder+'/z-scoring_first_CalibratedSeries/zCumNDVI_aggregated_eMODIS.csv'
+        
+        print , SYSTIME(0)+'> - - - Starting Premium Calculation using MATLAB  - - - '
+        spawn , '/usr/local/MATLAB/R2014a/bin/matlab -r "cd /opt/IBLI/dataProcessing/IBLIMatlab/ ; genLRLDrate ; exit"'
+        spawn , '/usr/local/MATLAB/R2014a/bin/matlab -r "cd /opt/IBLI/dataProcessing/IBLIMatlab/ ; genSRSDrate ; exit"'
+        print , SYSTIME(0)+'> - - - Completed Process : new Premium Values are now available '
+        
 END
  
  

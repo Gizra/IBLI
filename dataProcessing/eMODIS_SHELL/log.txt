@@ -1,0 +1,34 @@
+WorkingFolder
+/var/www/data/
+SUBSET
+[ 5300  ,  7200   , 3400, 4300]
+map_info 
+ {Geographic Lat/Lon, 1.0000, 1.0000, 33.7889, 5.6265, 2.4130000000e-003, 2.4130000000e-003, WGS-84, units=Degrees}
+adminFile 
+ /opt/IBLI/dataProcessing/eMODIS_SHELL/divisionID.img
+  startYearData 
+ 2001
+  nImagesYear 
+ 36     
+  periodLag   
+  1   
+  startPeriodLong 
+ 7 
+  numberPeriodsLong 
+ 21
+  startPeriodShort 
+ 28 
+  numberPeriodsShort 
+ 15 
+Mon Jun 16 12:57:47 2014 - - - - Beginning Chain - - - - 
+Mon Jun 16 12:57:47 2014 - - - - Checking For Repository Fullnes - - - - 
+Mon Jun 16 12:57:47 2014 >  - - - - The Repository is up to date - - - - 
+Mon Jun 16 12:57:47 2014 > - - - - Updating Last Month New NDVI data - -
+Mon Jun 16 12:57:47 2014> - - - Updating :        0 / 5  - - 
+Archive:  /var/www/data/RAW/east1432.zip
+  inflating: /var/www/data/RAW/ea3214m.tfw  
+  inflating: /var/www/data/RAW/ea3214m.tif  
+Mon Jun 16 13:00:15 2014> - - - Updating :        1 / 5  - - 
+Archive:  /var/www/data/RAW/east1430.zip
+  inflating: /var/www/data/RAW/ea3014m.tfw  
+  inflating: /var/www/data/RAW/ea3014m.tif  

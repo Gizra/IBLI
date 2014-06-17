@@ -104,12 +104,12 @@ ENDIF ELSE BEGIN
     WorkingFolder=dataStruct.WorkingFolder 
 ENDELSE
 
-IF NOT(tag_exist(dataStruct,'MatlabFolder')) THEN BEGIN
-    print, 'Check your settings file to be in the format requested . . . (Seems like the MATLAB was not defined)'
-    STOP
-ENDIF ELSE BEGIN
-    WorkingFolder=dataStruct.WorkingFolder 
-ENDELSE
+;IF NOT(tag_exist(dataStruct,'MatlabFolder')) THEN BEGIN
+    ;print, 'Check your settings file to be in the format requested . . . (Seems like the MATLAB was not defined)'
+    ;STOP
+;ENDIF ELSE BEGIN
+    ;WorkingFolder=dataStruct.WorkingFolder 
+;ENDELSE
 
 
 IF NOT(tag_exist(dataStruct,'SUBSET')) THEN BEGIN

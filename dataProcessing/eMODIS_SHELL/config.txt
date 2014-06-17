@@ -1,9 +1,7 @@
-WorkingFolder=/home/mbrv/tryUNIX/
+WorkingFolder=C:\eMODISWORKINGFOLDER\
 SUBSET=[ 5300  ,  7200   , 3400, 4300]
 map_info = {Geographic Lat/Lon, 1.0000, 1.0000, 33.7889, 5.6265, 2.4130000000e-003, 2.4130000000e-003, WGS-84, units=Degrees}
-adminFile = /media/sf_sideProjects/NDVI_NIR/divisionID.img
-
-
+adminFile = C:\IBLI\dataProcessing\eMODIS_SHELL\divisionID.img
   startYearData = 2013
   nImagesYear = 9     
   periodLag   =  10   

@@ -261,6 +261,8 @@ Print , SYSTIME(0)+' > - - - - Updating Last Month New NDVI data - -' ;
 
 ;; Step 0.2 :  Update month back from now
 
+IF (0) THEN BEGIN
+
 curWIY = 6*Month-4+2*((Day-3)/10-1); // WIY = Week In Year
  FOR k=0,5  DO BEGIN ;- REMEMBER TO RETURN !!!!!!!!!!! 04/06/2014
 ;FOR k=0,-1  DO BEGIN ; ; ; - - - - REMEMBER TO TAKE BACK TO 9 - - - - ; ; ;
@@ -360,9 +362,9 @@ print, SYSTIME(0)+' > - - - Finished Stacking Temporal Layers - - - ';
         print , SYSTIME(0)+'> - - - Begin zScore aggregation per division - - - '
         AGGREGATE_Z , 'eMODIS',WorkingFolder,adminFile,SUBSET(3),SUBSET(2),N_ELEMENTS(fileList),bandList
         CUMULATE_Z_PER_DIVISION  ,csvDataPath , startYearData , nImagesYear , periodLag , startPeriodLong , numberPeriodsLong , startPeriodShort , numberPeriodsShort
-        
+ENDIF ; END OF DEBUG MODE
         print , SYSTIME(0)+'> - - - Copying CSV Files to MATLAB Folder - - - '
-        spawn , 'cp -R' + csvDataPath+'/zCumNDVI_aggregated_eMODIS.csv ' + MatlabFolder+'/z-scoring_first_CalibratedSeries/zCumNDVI_aggregated_eMODIS.csv'
+        spawn , 'cp -R' + csvDataPath+'/zCumNDVI_aggregated_eMODIS.csv ' +'/opt/IBLI/dataProcessing/IBLIMatlab/z-scoring_first_CalibratedSeries/zCumNDVI_aggregated_eMODIS.csv'
         
         print , SYSTIME(0)+'> - - - Starting Premium Calculation using MATLAB  - - - '
         spawn , '/usr/local/MATLAB/R2014a/bin/matlab -r "cd /opt/IBLI/dataProcessing/IBLIMatlab/ ; genLRLDrate ; exit"'

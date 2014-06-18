@@ -1,0 +1,10 @@
+ENVI
+description = {Deiagnostics. 0: correct, 200: all NoData, +1: at least one LT minVal or GT maxVal, +10: 95-5 percentile LT minVar, +100: 5 percentile LT min5prct}
+samples = 3350
+lines   = 4360
+bands   = 1
+header offset = 0
+file type = ENVI Standard
+data type = 1
+interleave = bsq
+byte order = 0

@@ -261,7 +261,7 @@ Print , SYSTIME(0)+' > - - - - Updating Last Month New NDVI data - -' ;
 
 ;; Step 0.2 :  Update month back from now
 
-IF (0) THEN BEGIN
+IF (1) THEN BEGIN
 
 curWIY = 6*Month-4+2*((Day-3)/10-1); // WIY = Week In Year
  FOR k=0,5  DO BEGIN ;- REMEMBER TO RETURN !!!!!!!!!!! 04/06/2014

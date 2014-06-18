@@ -365,12 +365,12 @@ print, SYSTIME(0)+' > - - - Finished Stacking Temporal Layers - - - ';
 ENDIF ; END OF DEBUG MODE
         print , SYSTIME(0)+'> - - - Copying CSV Files to MATLAB Folder - - - '
         spawn , 'cp -R' + csvDataPath+'/zCumNDVI_aggregated_eMODIS.csv ' +'/opt/IBLI/dataProcessing/IBLIMatlab/z-scoring_first_CalibratedSeries/zCumNDVI_aggregated_eMODIS.csv'
-        
+        print,'cp -R' + csvDataPath+'/zCumNDVI_aggregated_eMODIS.csv ' +'/opt/IBLI/dataProcessing/IBLIMatlab/z-scoring_first_CalibratedSeries/zCumNDVI_aggregated_eMODIS.csv'
         print , SYSTIME(0)+'> - - - Starting Premium Calculation using MATLAB  - - - '
         spawn , '/usr/local/MATLAB/R2014a/bin/matlab -r "cd /opt/IBLI/dataProcessing/IBLIMatlab/ ; genLRLDrate ; exit"'
         spawn , '/usr/local/MATLAB/R2014a/bin/matlab -r "cd /opt/IBLI/dataProcessing/IBLIMatlab/ ; genSRSDrate ; exit"'
         print , SYSTIME(0)+'> - - - Completed Process : new Premium Values are now available '
-        
+        STOP
 END
  
  

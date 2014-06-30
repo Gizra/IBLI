@@ -356,8 +356,9 @@ print, SYSTIME(0)+' > - - - Finished Stacking Temporal Layers - - - ';
 
         print, SYSTIME(0)+'> - - - Calculating IFTemporal Mean,STD,zNDVI and Diagnostics per pixel - - - ';
         
-        print,ZNORMBIL_8BIT(procDataPath+'/eMODIS_FEWS_Kenya.bil', SUBSET(2), SUBSET(3), N_ELEMENTS(fileList), 10, 1, 1, N_ELEMENTS(fileList), 0, 100, 200, 5, 102)
+        print,ZNORMBIL_8BIT(procDataPath+'/eMODIS_FEWS_Kenya.bil', SUBSET(2), SUBSET(3), N_ELEMENTS(fileList), 10, 1, 1, 396, 0, 100, 200, 5, 102)
         
+        ;;396
 
 ENDIF ; END OF DEBUG MODE
 

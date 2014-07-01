@@ -1,0 +1,13 @@
+WorkingFolder=/var/www/data/
+SUBSET=[ 5350  ,  7140   , 3350, 4360]
+map_info = {Geographic Lat/Lon, 1.0000, 1.0000, 33.90955, 5.77128, 2.4130000000e-003, 2.4130000000e-003, WGS-84, units=Degrees}
+adminFile = /opt/IBLI/dataProcessing/eMODIS_SHELL/newDIV/supportRasters/divisionID_K+E.img
+
+
+  startYearData = 2001
+  nImagesYear = 36     
+  periodLag   =  1   
+  startPeriodLong = 7 
+  numberPeriodsLong = 21
+  startPeriodShort = 28 
+  numberPeriodsShort = 15 

@@ -104,6 +104,12 @@ ENDIF ELSE BEGIN
     WorkingFolder=dataStruct.WorkingFolder 
 ENDELSE
 
+;IF NOT(tag_exist(dataStruct,'MatlabFolder')) THEN BEGIN
+    ;print, 'Check your settings file to be in the format requested . . . (Seems like the MATLAB was not defined)'
+    ;STOP
+;ENDIF ELSE BEGIN
+    ;WorkingFolder=dataStruct.WorkingFolder 
+;ENDELSE
 
 
 IF NOT(tag_exist(dataStruct,'SUBSET')) THEN BEGIN
@@ -255,6 +261,8 @@ Print , SYSTIME(0)+' > - - - - Updating Last Month New NDVI data - -' ;
 
 ;; Step 0.2 :  Update month back from now
 
+IF (1) THEN BEGIN
+
 curWIY = 6*Month-4+2*((Day-3)/10-1); // WIY = Week In Year
  FOR k=0,5  DO BEGIN ;- REMEMBER TO RETURN !!!!!!!!!!! 04/06/2014
 ;FOR k=0,-1  DO BEGIN ; ; ; - - - - REMEMBER TO TAKE BACK TO 9 - - - - ; ; ;
@@ -348,12 +356,25 @@ print, SYSTIME(0)+' > - - - Finished Stacking Temporal Layers - - - ';
 
         print, SYSTIME(0)+'> - - - Calculating IFTemporal Mean,STD,zNDVI and Diagnostics per pixel - - - ';
         
-        print,ZNORMBIL_8BIT(procDataPath+'/eMODIS_FEWS_Kenya.bil', SUBSET(2), SUBSET(3), N_ELEMENTS(fileList), 10, 1, 1, N_ELEMENTS(fileList), 0, 100, 200, 5, 102)
+        print,ZNORMBIL_8BIT(procDataPath+'/eMODIS_FEWS_Kenya.bil', SUBSET(2), SUBSET(3), N_ELEMENTS(fileList), 10, 1, 1, 396, 0, 100, 200, 5, 102)
         
+        ;;396
+
+ENDIF ; END OF DEBUG MODE
 
         print , SYSTIME(0)+'> - - - Begin zScore aggregation per division - - - '
         AGGREGATE_Z , 'eMODIS',WorkingFolder,adminFile,SUBSET(3),SUBSET(2),N_ELEMENTS(fileList),bandList
         CUMULATE_Z_PER_DIVISION  ,csvDataPath , startYearData , nImagesYear , periodLag , startPeriodLong , numberPeriodsLong , startPeriodShort , numberPeriodsShort
+
+        print , SYSTIME(0)+'> - - - Copying CSV Files to MATLAB Folder - - - '
+        print,'cp -R ' + csvDataPath+'/zCumNDVI_aggregated_eMODIS.csv ' +'/opt/IBLI/dataProcessing/IBLIMatlab/z-scoring_first_CalibratedSeries/zCumNDVI_aggregated_eMODIS.csv'
+        spawn , 'cp -R ' + csvDataPath+'/zCumNDVI_aggregated_eMODIS.csv ' +'/opt/IBLI/dataProcessing/IBLIMatlab/z-scoring_first_CalibratedSeries/zCumNDVI_aggregated_eMODIS.csv'
+        
+        print , SYSTIME(0)+'> - - - Starting Premium Calculation using MATLAB  - - - '
+        spawn , '/usr/local/MATLAB/R2014a/bin/matlab -r "cd /opt/IBLI/dataProcessing/IBLIMatlab/ ; genLRLDrate ; exit"'
+        spawn , '/usr/local/MATLAB/R2014a/bin/matlab -r "cd /opt/IBLI/dataProcessing/IBLIMatlab/ ; genSRSDrate ; exit"'
+        print , SYSTIME(0)+'> - - - Completed Process : new Premium Values are now available '
+        STOP
 END
  
  

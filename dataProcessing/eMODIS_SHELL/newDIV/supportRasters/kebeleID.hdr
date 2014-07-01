@@ -1,0 +1,17 @@
+ENVI
+description = {
+  Administrative ID's for the Kebeles of Borana-Ethiopia}
+samples = 3350
+lines   = 4360
+bands   = 1
+header offset = 0
+file type = ENVI Standard
+data type = 1
+interleave = bsq
+sensor type = Unknown
+byte order = 0
+map info = {Geographic Lat/Lon, 1.0000, 1.0000, 33.90955000, 5.77128000, 2.4130000000e-003, 2.4130000000e-003, WGS-84, units=Degrees}
+coordinate system string = {GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]}
+wavelength units = Unknown
+band names = {
+ Resize (Band 1:kebeleID_tif.tif)}

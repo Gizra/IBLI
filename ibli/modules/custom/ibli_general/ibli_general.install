@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for the IBLI general module.
+ */
+
+/**
+ * Enable contact module.
+ */
+function ibli_general_update_7000() {
+  module_enable(array('contact'));
+}
+

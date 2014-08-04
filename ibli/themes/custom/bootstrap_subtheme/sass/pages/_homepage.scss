@@ -392,8 +392,9 @@ body.front {
   }
 
   .angular-leaflet-map {
-    width: 100%;
+    width: 1140px;
     height: 600px;
+    margin: auto;
 
     .leaflet-top,
     .leaflet-bottom {

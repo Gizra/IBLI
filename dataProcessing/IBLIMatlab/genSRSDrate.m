@@ -83,7 +83,7 @@ ytemp=yinit; %set temp variable
 yfit(:,1)=ytemp;
 
 for i=1:iIter %iterate to find fitted model with missing
-            i
+            i/iIter
             resC(i)=sar_panel(ytemp,xC,W,T,panelinfo);
             Residtemp=resC(i).resid;
             Residtemp(isnan(MortMissStack))=0;

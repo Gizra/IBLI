@@ -364,7 +364,12 @@ ENDIF ; END OF DEBUG MODE
 
         print , SYSTIME(0)+'> - - - Begin zScore aggregation per division - - - '
         AGGREGATE_Z , 'eMODIS',WorkingFolder,adminFile,SUBSET(3),SUBSET(2),N_ELEMENTS(fileList),bandList
-        CUMULATE_Z_PER_DIVISION  ,csvDataPath , startYearData , nImagesYear , periodLag , startPeriodLong , numberPeriodsLong , startPeriodShort , numberPeriodsShort
+        
+        ;; First Cummulate for full seasones 
+        CUMULATE_Z_PER_DIVISION  ,csvDataPath , startYearData , nImagesYear , periodLag , startPeriodLong , numberPeriodsLong , startPeriodShort , numberPeriodsShort,''
+        ;; For the current seasone - cummulate only for what you've got
+        ;;CUMULATE_Z_PER_DIVISION  ,csvDataPath , startYearData , nImagesYear , periodLag , startPeriodLong , max([curWIY/2-7,1]) , startPeriodShort , max([curWIY/2-28,1]),'_ADDITION'
+        zCum_Percentile , csvDataPath
 
         print , SYSTIME(0)+'> - - - Copying CSV Files to MATLAB Folder - - - '
         print,'cp -R ' + csvDataPath+'/zCumNDVI_aggregated_eMODIS.csv ' +'/opt/IBLI/dataProcessing/IBLIMatlab/z-scoring_first_CalibratedSeries/zCumNDVI_aggregated_eMODIS.csv'

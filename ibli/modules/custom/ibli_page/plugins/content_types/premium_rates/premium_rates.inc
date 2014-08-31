@@ -30,7 +30,8 @@ function ibli_page_premium_rates_content_type_render($subtype, $conf, $args, $co
     $row = array_values($row);
   }
 
-  $raw_header = array_slice($csv, 0, 1)[0];
+  $raw_header = array_slice($csv, 0, 1);
+  $raw_header = $raw_header[0];
   $rows = array_slice($csv, 1);
 
   // Set colspans on the header.

@@ -19,7 +19,7 @@ function ibli_page_premium_rates_content_type_render($subtype, $conf, $args, $co
   $block->module = 'ibli_page';
   $block->title = t('Premium Rates');
 
-  $csv = array_map('str_getcsv', file('https://raw.githubusercontent.com/Gizra/IBLI/master/dataProcessing/IBLI_unit_premium_rates.csv'));
+  $csv = array_map('str_getcsv', file('public://data/IBLI_unit_premium_rates.csv'));
 
   // Hide redundant columns.
   foreach ($csv as &$row) {
@@ -49,9 +49,11 @@ function ibli_page_premium_rates_content_type_render($subtype, $conf, $args, $co
       // The first rate is on the 4th cell. Each block has 5 rates.
       $group_id = floor(($index - 3) / 5) + 1;
 
+      $active = $group_id == 1 ? 'active' : '';
       $header[] = array(
-        'data' => l($title, '', array('external' => TRUE, 'attributes' => array('class' => array('toggle-hideable'), 'data-group-id' => $group_id))),
+        'data' => l($title, '', array('external' => TRUE, 'attributes' => array('data-group-id' => $group_id))),
         'colspan' => $colspan,
+        'class' => array('toggle-hideable', $active, 'group-' . $group_id),
       );
     }
     else {

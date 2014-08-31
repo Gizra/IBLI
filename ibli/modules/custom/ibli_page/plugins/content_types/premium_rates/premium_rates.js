@@ -2,13 +2,16 @@
 (function($) {
 
   $(document).ready(function() {
-    $("a.toggle-hideable").click(function (event) {
+    $('.toggle-hideable a').click(function (event) {
       event.preventDefault();
-      var table = $(event.currentTarget).parents('table');
+
       // Hide all hideable values.
-      table.find('.hideable span').addClass('hidden');
+      $('.hideable span').addClass('hidden');
+      $('.toggle-hideable').removeClass('active');
       // Show
-      table.find('.hideable.group-' + $(event.currentTarget).data('group-id') + ' span').removeClass('hidden');
+      var groupId = $(event.currentTarget).data('group-id');
+      $('.hideable.group-' + groupId + ' span').removeClass('hidden');
+      $('.toggle-hideable.group-' + groupId).addClass('active');
     });
 
   });

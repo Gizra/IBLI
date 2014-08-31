@@ -1,0 +1,16 @@
+<?php
+/**
+ * @file
+ * Code for the IBLI Page feature.
+ */
+
+include_once 'ibli_page.features.inc';
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function ibli_page_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools') {
+    return 'plugins/' . $plugin;
+  }
+}

@@ -175,17 +175,17 @@ function ibli_general_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'menu-ibli-main-menu_information:<nolink>',
   );
-  // Exported menu link: menu-ibli-main-menu_premiums-table:<front>
-  $menu_links['menu-ibli-main-menu_premiums-table:<front>'] = array(
+  // Exported menu link: menu-ibli-main-menu_premiums-table:premium-rates
+  $menu_links['menu-ibli-main-menu_premiums-table:premium-rates'] = array(
     'menu_name' => 'menu-ibli-main-menu',
-    'link_path' => '<front>',
+    'link_path' => 'premium-rates',
     'router_path' => '',
     'link_title' => 'Premiums Table',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'menu-ibli-main-menu_premiums-table:<front>',
+      'identifier' => 'menu-ibli-main-menu_premiums-table:premium-rates',
     ),
     'module' => 'menu',
     'hidden' => 0,

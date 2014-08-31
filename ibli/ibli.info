@@ -62,5 +62,6 @@ dependencies[] = ibli_data
 dependencies[] = ibli_general
 dependencies[] = ibli_homepage
 dependencies[] = ibli_migrate
+dependencies[] = ibli_page
 dependencies[] = ibli_publications
 dependencies[] = page_element

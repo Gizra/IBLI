@@ -58,6 +58,7 @@ dependencies[] = views_content
 dependencies[] = wysiwyg
 
 ; Custom modules
+dependencies[] = ibli_data
 dependencies[] = ibli_general
 dependencies[] = ibli_homepage
 dependencies[] = ibli_migrate

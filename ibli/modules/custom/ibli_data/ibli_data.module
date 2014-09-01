@@ -12,6 +12,7 @@
 function ibli_data_cron() {
   $urls = array (
     'IBLI_unit_premium_rates.csv' => 'https://raw.githubusercontent.com/Gizra/IBLI/master/dataProcessing/IBLI_unit_premium_rates.csv',
+    'zCumNDVI_Percentile.csv' => 'https://raw.githubusercontent.com/Gizra/IBLI/master/dataProcessing/zCumNDVI_Percentile.csv',
   );
 
   $path = file_default_scheme() . '://data';

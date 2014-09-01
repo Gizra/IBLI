@@ -5,8 +5,8 @@ PRO zCum_Percentile , dataPath
 
 
 ; - - Define Input Output
-inFile=dataPath+'\zCumNDVI_aggregated_eMODIS.csv'
-outFile=dataPath+'\zCumNDVI_Percentile.csv'
+inFile=dataPath+'/zCumNDVI_aggregated_eMODIS.csv'
+outFile=dataPath+'/zCumNDVI_Percentile.csv'
 
 
 ; - - Read Relevant CSV files.

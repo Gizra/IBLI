@@ -34,3 +34,13 @@ body.page-admin #panels-edit-display .helperclass {
 body.page-admin .panel-2col .panel-separator {
   margin: 0 0 1em 0;
 }
+
+/* Hiding the marker icon from the map in the homepage. */
+img.leaflet-marker-icon.leaflet-zoom-animated.leaflet-clickable,
+img.leaflet-marker-shadow.leaflet-zoom-animated {
+ display: none !important;
+}
+
+.leaflet-popup {
+  bottom: 0 !important;
+}

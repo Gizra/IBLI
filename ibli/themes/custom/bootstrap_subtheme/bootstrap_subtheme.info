@@ -46,10 +46,10 @@ scripts[] = '../../../libraries/bootstrap_sass/vendor/assets/javascripts/bootstr
 scripts[] = '../../../libraries/bootstrap_sass/vendor/assets/javascripts/bootstrap/collapse.js'
 scripts[] = '../../../libraries/bootstrap_sass/vendor/assets/javascripts/bootstrap/dropdown.js'
 scripts[] = '../../../libraries/bootstrap_sass/vendor/assets/javascripts/bootstrap/modal.js'
+scripts[] = '../../../libraries/bootstrap_sass/vendor/assets/javascripts/bootstrap/tooltip.js'
 scripts[] = '../../../libraries/bootstrap_sass/vendor/assets/javascripts/bootstrap/popover.js'
 scripts[] = '../../../libraries/bootstrap_sass/vendor/assets/javascripts/bootstrap/scrollspy.js'
 scripts[] = '../../../libraries/bootstrap_sass/vendor/assets/javascripts/bootstrap/tab.js'
-scripts[] = '../../../libraries/bootstrap_sass/vendor/assets/javascripts/bootstrap/tooltip.js'
 scripts[] = '../../../libraries/bootstrap_sass/vendor/assets/javascripts/bootstrap/transition.js'
 
 ; Disable BootstrapCDN if using Bootstrap source files in your sub-theme.

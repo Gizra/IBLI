@@ -5,13 +5,17 @@
     $('.toggle-hideable a').click(function (event) {
       event.preventDefault();
 
-      // Hide all hideable values.
-      $('.hideable span').addClass('hidden');
-      $('.toggle-hideable').removeClass('active');
-      // Show
       var groupId = $(event.currentTarget).data('group-id');
-      $('.hideable.group-' + groupId + ' span').removeClass('hidden');
-      $('.toggle-hideable.group-' + groupId).addClass('active');
+      if ( $('.toggle-hideable.group-' + groupId).hasClass('active') ) {
+        // Hide
+        $('.hideable.group-' + groupId + ' span').addClass('hidden');
+        $('.toggle-hideable.group-' + groupId).removeClass('active');
+      }
+      else {
+        // Show
+        $('.hideable.group-' + groupId + ' span').removeClass('hidden');
+        $('.toggle-hideable.group-' + groupId).addClass('active');
+      }
     });
 
   });

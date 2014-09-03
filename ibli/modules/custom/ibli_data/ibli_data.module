@@ -29,4 +29,52 @@ function ibli_data_cron() {
     curl_close($ch);
     fclose($fp);
   }
+
+  // Create a json file for Premium rates "15rate".
+  _ibli_data_prepare_rates();
+}
+
+/**
+ * Creates a json file containing all the Premium rates for all the proviences.
+ *
+ */
+function _ibli_data_prepare_rates() {
+  $csv = array_map('str_getcsv', file('public://data/IBLI_unit_premium_rates.csv'));
+
+  // Hide redundant columns.
+  foreach ($csv as &$row) {
+    unset($row[0]);
+    unset($row[1]);
+    unset($row[2]);
+    unset($row[3]);
+    unset($row[4]);
+    // Fix indices.
+    $row = array_values($row);
+  }
+
+  $raw_header = array_slice($csv, 0, 2);
+  $header = $raw_header[0];
+  $rows = array_slice($csv, 2);
+
+  $periods = array_filter($header);
+  unset($periods[0]);
+
+  $rates = array();
+  $id = array_search("IBLI_ID", $header);
+  foreach ($rows as $row) {
+    $rates[$row[$id]] = array();
+    foreach ($periods as $rate_10_column => $period) {
+      // The first column is "10rate" column, so we take the next column.
+      $rates[$row[$id]][$period]  = $row[$rate_10_column + 1];
+    }
+  }
+
+  $jsonRates = json_encode($rates);
+
+  $path = file_default_scheme() . '://data';
+  file_prepare_directory($path, FILE_CREATE_DIRECTORY);
+
+  $fp = fopen ($path . '/rates.json', 'w');
+  fwrite($fp, $jsonRates);
+  fclose($fp);
 }

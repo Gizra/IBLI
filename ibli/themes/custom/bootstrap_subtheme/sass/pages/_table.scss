@@ -1,0 +1,20 @@
+table th.toggle-hideable {
+  transform: rotate(75deg);
+  transition: 0.5s;
+  text-align: center;
+
+  a {
+    display: block;
+    margin-left: -75px;
+  }
+
+  &.active {
+    transform: none;
+    margin-top: 0;
+
+
+    a {
+      margin-left: 0;
+    }
+  }
+}

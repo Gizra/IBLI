@@ -1,0 +1,4 @@
+name = IBLI Data
+core = 7.x
+package = IBLI
+features[features_api][] = api:2

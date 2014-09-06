@@ -1,0 +1,32 @@
+<?php
+/**
+ * @file
+ * Drupal needs this blank file.
+ */
+
+/**
+ * Implements hook_cron().
+ *
+ * Stores a list of files locally, to avoid loading data from remote sources.
+ */
+function ibli_data_cron() {
+  $urls = array (
+    'IBLI_unit_premium_rates.csv' => 'https://raw.githubusercontent.com/Gizra/IBLI/master/dataProcessing/IBLI_unit_premium_rates.csv',
+    'zCumNDVI_Percentile.csv' => 'https://raw.githubusercontent.com/Gizra/IBLI/master/dataProcessing/zCumNDVI_Percentile.csv',
+    'KenyaEthiopia_IBLIunits_July2014.geojson' => 'https://raw.githubusercontent.com/Gizra/IBLI/master/dataProcessing/shapefiles/IBLIunits/KenyaEthiopia_IBLIunits_July2014.geojson',
+  );
+
+  $path = file_default_scheme() . '://data';
+  file_prepare_directory($path, FILE_CREATE_DIRECTORY);
+
+  foreach ($urls as $file_name => $url) {
+    $fp = fopen ($path . '/' . $file_name, 'w');
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 50);
+    curl_setopt($ch, CURLOPT_FILE, $fp);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_exec($ch);
+    curl_close($ch);
+    fclose($fp);
+  }
+}

@@ -5001,8 +5001,7 @@ body.front {
   /* 1. Nav tabs */
   /* 2. Nav pills */
   /* ===== Recent Works ===== */
-  /* ===== Thumbnails ===== */
-  /* ===== Map ===== */ }
+  /* ===== Thumbnails ===== */ }
   body.front .main-container {
     margin-top: 0; }
   body.front #wrap,
@@ -5258,45 +5257,6 @@ body.front {
   body.front .ibli-on-the-ground .thumbnail .caption .rating i {
     color: #F7C41F;
     font-size: 18px; }
-  body.front .browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0; }
-  body.front .angular-leaflet-map {
-    width: 1140px;
-    height: 600px;
-    margin: auto; }
-    body.front .angular-leaflet-map .leaflet-top,
-    body.front .angular-leaflet-map .leaflet-bottom {
-      z-index: 999; }
-      body.front .angular-leaflet-map .leaflet-top .legend,
-      body.front .angular-leaflet-map .leaflet-bottom .legend {
-        font: 14px/16px Arial, Helvetica, sans-serif;
-        background: rgba(255, 255, 255, 0.9);
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        border-radius: 5px;
-        padding: 6px 8px;
-        line-height: 18px;
-        color: #555;
-        min-width: 130px; }
-        body.front .angular-leaflet-map .leaflet-top .legend i,
-        body.front .angular-leaflet-map .leaflet-bottom .legend i {
-          width: 16px;
-          height: 16px;
-          float: left;
-          margin-right: 8px;
-          opacity: 0.7; }
-      body.front .angular-leaflet-map .leaflet-top hover-info.leaflet-control,
-      body.front .angular-leaflet-map .leaflet-bottom hover-info.leaflet-control {
-        font: 14px/16px Arial, Helvetica, sans-serif;
-        background: rgba(255, 255, 255, 0.9);
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        border-radius: 5px;
-        padding: 6px 8px;
-        line-height: 18px;
-        color: #555;
-        min-width: 130px; }
 
 /* ===== Homepage Welcome =====*/
 .homepage-welcome iframe {
@@ -5731,6 +5691,54 @@ fieldset[disabled] .btn-amethyst.active {
 
 .top-zero {
   margin-top: 0; }
+
+/* ===== Map ===== */
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0; }
+
+.angular-leaflet-map {
+  width: 1140px;
+  height: 600px;
+  margin: auto;
+  /* Hiding the marker icon from the map in the homepage. */ }
+  .angular-leaflet-map .leaflet-top,
+  .angular-leaflet-map .leaflet-bottom {
+    z-index: 999; }
+    .angular-leaflet-map .leaflet-top .legend,
+    .angular-leaflet-map .leaflet-bottom .legend {
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      padding: 6px 8px;
+      line-height: 18px;
+      color: #555;
+      min-width: 130px; }
+      .angular-leaflet-map .leaflet-top .legend i,
+      .angular-leaflet-map .leaflet-bottom .legend i {
+        width: 16px;
+        height: 16px;
+        float: left;
+        margin-right: 8px;
+        opacity: 0.7; }
+    .angular-leaflet-map .leaflet-top hover-info.leaflet-control,
+    .angular-leaflet-map .leaflet-bottom hover-info.leaflet-control {
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      padding: 6px 8px;
+      line-height: 18px;
+      color: #555;
+      min-width: 130px; }
+  .angular-leaflet-map img.leaflet-marker-icon.leaflet-zoom-animated.leaflet-clickable,
+  .angular-leaflet-map img.leaflet-marker-shadow.leaflet-zoom-animated {
+    display: none !important; }
+  .angular-leaflet-map .leaflet-popup {
+    bottom: 0 !important; }
 
 .panel-ibli-partners .row {
   margin-bottom: 10px; }

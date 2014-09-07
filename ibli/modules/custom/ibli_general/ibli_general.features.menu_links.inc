@@ -133,21 +133,21 @@ function ibli_general_menu_default_menu_links() {
     'weight' => -48,
     'customized' => 1,
   );
-  // Exported menu link: menu-ibli-main-menu_partners:<front>
-  $menu_links['menu-ibli-main-menu_partners:<front>'] = array(
+  // Exported menu link: menu-ibli-main-menu_partners:partners
+  $menu_links['menu-ibli-main-menu_partners:partners'] = array(
     'menu_name' => 'menu-ibli-main-menu',
-    'link_path' => '<front>',
-    'router_path' => '',
+    'link_path' => 'partners',
+    'router_path' => 'partners',
     'link_title' => 'Partners',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'menu-ibli-main-menu_partners:<front>',
+      'identifier' => 'menu-ibli-main-menu_partners:partners',
     ),
     'module' => 'menu',
     'hidden' => 0,
-    'external' => 1,
+    'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
     'weight' => -50,

@@ -2,12 +2,6 @@
 <div class="panel-display panel-ibli-partners clearfix">
 
   <div class="row">
-    <div class="col-md-12">
-      <h1><?php print t('Partners'); ?></h1>
-    </div>
-  </div>
-
-  <div class="row">
     <div class="col-md-4">
       <div class="media">
         <a href="#">

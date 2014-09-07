@@ -368,7 +368,7 @@ ENDIF ; END OF DEBUG MODE
         ;; First Cummulate for full seasones 
         CUMULATE_Z_PER_DIVISION  ,csvDataPath , startYearData , nImagesYear , periodLag , startPeriodLong , numberPeriodsLong , startPeriodShort , numberPeriodsShort,''
         ;; For the current seasone - cummulate only for what you've got
-        ;;CUMULATE_Z_PER_DIVISION  ,csvDataPath , startYearData , nImagesYear , periodLag , startPeriodLong , max([curWIY/2-7,1]) , startPeriodShort , max([curWIY/2-28,1]),'_ADDITION'
+        CUMULATE_Z_PER_DIVISION  ,csvDataPath , startYearData , nImagesYear , periodLag , startPeriodLong , max([curWIY/2-7,1]) , startPeriodShort , max([curWIY/2-28,1]),'_ADDITION'
         zCum_Percentile , csvDataPath
 
         print , SYSTIME(0)+'> - - - Copying CSV Files to MATLAB Folder - - - '

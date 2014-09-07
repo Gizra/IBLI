@@ -22,8 +22,6 @@ function ibli_page_premium_rates_content_type_render($subtype, $conf, $args, $co
 
   // Hide redundant columns.
   foreach ($csv as &$row) {
-    unset($row[3]);
-    unset($row[4]);
     unset($row[5]);
     // Fix indices.
     $row = array_values($row);
@@ -45,9 +43,9 @@ function ibli_page_premium_rates_content_type_render($subtype, $conf, $args, $co
       $index++;
     }
 
-    if ($index > 2) {
+    if ($index > 4) {
       // The first rate is on the 4th cell. Each block has 5 rates.
-      $group_id = floor(($index - 3) / 5) + 1;
+      $group_id = floor(($index - 5) / 5) + 1;
 
       $active = $group_id == 1 ? 'active' : '';
       $header[] = array(
@@ -67,13 +65,16 @@ function ibli_page_premium_rates_content_type_render($subtype, $conf, $args, $co
       $cell = ucwords(strtolower($cell));
 
       // The first rate is on the 4th cell.
-      if ($index < 3) {
+      if ($index < 5) {
         continue;
       }
 
       // Each block has 5 rates.
-      $group_id = floor(($index - 3) / 5) + 1;
+      $group_id = floor(($index - 5) / 5) + 1;
       $class = $group_id > 1 ? 'hidden' : '';
+      if (is_numeric($cell) ) {
+        $cell = number_format($cell*100, 2, '.', '').'%';
+      }
       $cell = array('data' => "<span class=\"$class\">$cell</span>", 'class' => array('hideable', 'group-' . $group_id));
     }
   }

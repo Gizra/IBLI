@@ -118,6 +118,10 @@ projects[bootstrap][version] = "3.0"
 
 ; Libraries
 
+libraries[tcpdf][type] = "libraries"
+libraries[tcpdf][download][type] = "get"
+libraries[tcpdf][download][url] = "http://downloads.sourceforge.net/project/tcpdf/tcpdf_6_0_093.zip?r=&ts=1410174074&use_mirror=garr"
+
 libraries[tinymce][type] = "libraries"
 libraries[tinymce][download][type] = "get"
 libraries[tinymce][download][url] = "http://download.moxiecode.com/tinymce/tinymce_3.5.10.zip"

@@ -5,6 +5,86 @@
  */
 
 /**
+ * Implements hook_menu().
+ */
+function ibli_data_menu() {
+  $items = array();
+
+  // Add our own autocomplete callback to pass also the group and
+  // vocabulary info.
+  $items['pim/save-pdf'] = array(
+    'title' => 'Create PDF from map',
+    'access arguments' => array('access content'),
+    'page callback' => 'ibli_data_save_pdf',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Saves the image of the map as a PDF file.
+ *
+ * @return string.
+ */
+function ibli_data_save_pdf() {
+  if (isset($_POST['map']) && isset($_POST['period'])) {
+    $map = $_POST['map'];
+    $title = $_POST['period'];
+    $map_width = $_POST['map_width'];
+    $map_height = $_POST['map_height'];
+
+    // Include the main TCPDF library (search for installation path).
+    $tcpdf_library = libraries_get_path('tcpdf') . '/tcpdf.php';
+    include $tcpdf_library;
+
+    // Create new PDF document.
+    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+
+    // Set document information.
+    $pdf->SetCreator(PDF_CREATOR);
+    $pdf->SetAuthor('IBLI');
+    $pdf->SetTitle($title);
+
+    // set default header data
+    $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
+
+    // Set margins.
+    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+    $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+    $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+
+
+    // Set auto page breaks.
+    $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+
+    // Set image scale factor.
+    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+    // -------------------------------------------------------------------
+
+    list($type, $data) = explode(';', $map);
+    list(, $data)      = explode(',', $data);
+    $data = base64_decode($data);
+
+    file_put_contents('sites/default/files/data/tmp.jpg', $data);
+
+    // The '@' character is used to indicate that follows an image data stream and not an image file name.
+    $pdf->Image('sites/default/files/data/tmp.jpg');
+
+    $pdf_path = 'sites/default/files/data/' . $title . '.pdf';
+
+    $pdf->SetXY(110, 200);
+
+    // Save the PDF file.
+    $pdf->Output($pdf_path , 'F');
+
+    print $pdf_path;
+  }
+}
+
+/**
  * Implements hook_cron().
  *
  * Stores a list of files locally, to avoid loading data from remote sources.
@@ -35,8 +115,7 @@ function ibli_data_cron() {
 }
 
 /**
- * Creates a json file containing all the Premium rates for all the proviences.
- *
+ * Creates a json file containing all the Premium rates for all the provinces.
  */
 function _ibli_data_prepare_rates() {
   $csv = array_map('str_getcsv', file('public://data/IBLI_unit_premium_rates.csv'));

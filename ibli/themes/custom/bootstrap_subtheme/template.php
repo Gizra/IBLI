@@ -41,9 +41,10 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
   drupal_add_js(libraries_get_path('angular-leaflet-directive') . '/dist/angular-leaflet-directive.min.js');
   drupal_add_js(libraries_get_path('Leaflet.awesome-markers') . '/dist/leaflet.awesome-markers.min.js');
   drupal_add_js(libraries_get_path('ibli-map') . '/dist/ibli-map.js');
-  drupal_add_js('https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-image/v0.0.4/leaflet-image.js', array('type' => 'external'));
   drupal_add_css(libraries_get_path('leaflet') . '/dist/leaflet.css');
   drupal_add_css(libraries_get_path('Leaflet.awesome-markers') . '/dist/leaflet.awesome-markers.css');
+  // Custom leaflet-image library, Changed because of markers CORS failure.
+  drupal_add_js(drupal_get_path('theme', 'bootstrap_subtheme') . '/js/leaflet-image.js');
 
   // Setting for holding the path to map data files.
   $setting = array(

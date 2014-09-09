@@ -5299,8 +5299,10 @@ table th.toggle-hideable {
 .past-index-map .btn-save,
 .past-index-map #spinner {
   margin-top: 15px; }
-.past-index-map #spinner {
-  display: none; }
+.past-index-map #spinner,
+.past-index-map #download_link {
+  display: none;
+  font-size: 22px; }
 
 /* ===== General ===== */
 html, body {

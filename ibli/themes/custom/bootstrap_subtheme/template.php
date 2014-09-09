@@ -31,15 +31,10 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
   $node = node_load(key($results['node']));
   $render = node_view($node);
   $variables['contact_address'] = render($render);
-  
+
   // Add a awesome icons css
   drupal_add_css('http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', array('type' => 'external'));
-}
 
-/**
- * Preprocess IBLI homepage.
- */
-function bootstrap_subtheme_preprocess_ibli_homepage(&$variables) {
   // Add required libraries and CSS for the map.
   drupal_add_js(libraries_get_path('angular') . '/angular.min.js');
   drupal_add_js(libraries_get_path('leaflet') . '/dist/leaflet.js');
@@ -48,6 +43,8 @@ function bootstrap_subtheme_preprocess_ibli_homepage(&$variables) {
   drupal_add_js(libraries_get_path('ibli-map') . '/dist/ibli-map.js');
   drupal_add_css(libraries_get_path('leaflet') . '/dist/leaflet.css');
   drupal_add_css(libraries_get_path('Leaflet.awesome-markers') . '/dist/leaflet.awesome-markers.css');
+  // Custom leaflet-image library, Changed because of markers CORS failure.
+  drupal_add_js(drupal_get_path('theme', 'bootstrap_subtheme') . '/js/leaflet-image.js');
 
   // Setting for holding the path to map data files.
   $setting = array(

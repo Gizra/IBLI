@@ -154,24 +154,45 @@ function ibli_general_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'menu-ibli-main-menu_about-us:<nolink>',
   );
-  // Exported menu link: menu-ibli-main-menu_past-index-maps:<front>
-  $menu_links['menu-ibli-main-menu_past-index-maps:<front>'] = array(
+  // Exported menu link: menu-ibli-main-menu_past-index-maps:pim
+  $menu_links['menu-ibli-main-menu_past-index-maps:pim'] = array(
     'menu_name' => 'menu-ibli-main-menu',
-    'link_path' => '<front>',
-    'router_path' => '',
+    'link_path' => 'pim',
+    'router_path' => 'pim',
     'link_title' => 'Past Index Maps',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'menu-ibli-main-menu_past-index-maps:<front>',
+      'identifier' => 'menu-ibli-main-menu_past-index-maps:pim',
     ),
     'module' => 'menu',
     'hidden' => 0,
-    'external' => 1,
+    'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
     'weight' => -49,
+    'customized' => 1,
+    'parent_identifier' => 'menu-ibli-main-menu_information:<nolink>',
+  );
+  // Exported menu link: menu-ibli-main-menu_premiums-table:premium-rates
+  $menu_links['menu-ibli-main-menu_premiums-table:premium-rates'] = array(
+    'menu_name' => 'menu-ibli-main-menu',
+    'link_path' => 'premium-rates',
+    'router_path' => 'premium-rates',
+    'link_title' => 'Premiums Table',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+      'identifier' => 'menu-ibli-main-menu_premiums-table:premium-rates',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -48,
     'customized' => 1,
     'parent_identifier' => 'menu-ibli-main-menu_information:<nolink>',
   );
@@ -202,6 +223,7 @@ function ibli_general_menu_default_menu_links() {
   t('Information');
   t('Partners');
   t('Past Index Maps');
+  t('Premiums Table');
   t('What is IBLI?');
 
 

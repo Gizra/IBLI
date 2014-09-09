@@ -1,3 +1,8 @@
+<div ng-app="ibliApp">
+  <div ng-controller="MainCtrl" period-list="false">
+    <leaflet center="center" markers="markers" defaults="defaults" tiles="tiles" geojson="geojson" controls="controls" maxbounds="maxbounds"></leaflet>
+  </div>
+</div>
 
 <div class="panel-display panel-ibli-homepage clearfix" <?php if (!empty($css_id)) { print 'id="' . $css_id . '"'; } ?>>
 

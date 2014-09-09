@@ -113,16 +113,6 @@
   </div>
 </header>
 
-<?php if (drupal_is_front_page()): ?>
-  <!---------------------------------------------------------------------------------->
-  <div ng-app="ibliApp">
-    <div ng-controller="MainCtrl">
-      <leaflet center="center" markers="markers" defaults="defaults" tiles="tiles" geojson="geojson" controls="controls" maxbounds="maxbounds"></leaflet>
-    </div>
-  </div>
-  <!---------------------------------------------------------------------------------->
-<?php endif; ?>
-
 <div class="main-container container">
 
   <header role="banner" id="page-header">

@@ -10,8 +10,7 @@
 function ibli_data_menu() {
   $items = array();
 
-  // Add our own autocomplete callback to pass also the group and
-  // vocabulary info.
+  // Saves a PDF file of the current map.
   $items['pim/save-pdf'] = array(
     'title' => 'Create PDF from map',
     'access arguments' => array('access content'),
@@ -66,13 +65,15 @@ function ibli_data_save_pdf() {
 
     $png_image = $path . DIRECTORY_SEPARATOR . $title . '.png';
 
+    // Save image temporarily, Will be deleted after saved to PDF.
     $fp = fopen ($png_image, 'wr');
     fwrite($fp, $data);
     fclose($fp);
 
-    // The '@' character is used to indicate that follows an image data stream and not an image file name.
+    // Adding the image to the PDF.
     $pdf->Image($png_image, 0, 0, $map_width, $map_height, 'PNG', '', 'top-left', false);
 
+    // Adding timestamp to the name of the file, So we don't override another user's file.
     $date = new DateTime();
 
     $pdf_path = $path . DIRECTORY_SEPARATOR . $title . '-' . $date->getTimestamp() . '.pdf';
@@ -86,7 +87,7 @@ function ibli_data_save_pdf() {
     // Prepare path to send to browser.
     $pdf_path = str_replace('public://','sites/default/files/', $pdf_path);
 
-    // Send the PDF file path.
+    // Send the PDF file path to the ng-app.
     print $pdf_path;
   }
 }

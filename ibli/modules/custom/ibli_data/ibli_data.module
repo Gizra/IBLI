@@ -76,7 +76,9 @@ function ibli_data_save_pdf() {
     // The '@' character is used to indicate that follows an image data stream and not an image file name.
     $pdf->Image($png_image, 0, 0, $map_width, $map_height, 'PNG', '', 'top-left', false);
 
-    $pdf_path = 'sites/default/files/' . $title . '.pdf';
+    $date = new DateTime();
+
+    $pdf_path = 'sites/default/files/' . $title . '-' . $date->getTimestamp() . '.pdf';
 
     // Save the PDF file.
     $pdf->Output($pdf_path , 'F');

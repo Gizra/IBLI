@@ -43,7 +43,7 @@
     <div class="col-md-4">
       <div class="media">
         <a href="#">
-          <img class="img-responsive" src="http://placehold.it/350x150" alt="<?php print t('ILRI') ?>>" />
+          <img class="img-responsive" src="<?php print variable_get('ibli_images_path'); ?>/ilri.png" alt="<?php print t('ILRI') ?>>" />
         </a>
       </div>
     </div>

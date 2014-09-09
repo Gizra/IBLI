@@ -5297,11 +5297,10 @@ table th.toggle-hideable {
       margin-left: 0; }
 
 .past-index-map .btn-save,
-.past-index-map #spinner {
-  margin-top: 15px; }
 .past-index-map #spinner,
 .past-index-map #download_link {
-  display: none;
+  margin-top: 15px; }
+.past-index-map #download_link {
   font-size: 22px; }
 
 /* ===== General ===== */

@@ -1,13 +1,12 @@
 .past-index-map {
 
   .btn-save,
-  #spinner {
+  #spinner,
+  #download_link {
     margin-top: 15px;
   }
 
-  #spinner,
   #download_link {
-    display: none;
     font-size: 22px;
   }
 }

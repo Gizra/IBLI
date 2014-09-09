@@ -5296,6 +5296,12 @@ table th.toggle-hideable {
     table th.toggle-hideable.active a {
       margin-left: 0; }
 
+.past-index-map .btn-save,
+.past-index-map #spinner {
+  margin-top: 15px; }
+.past-index-map #spinner {
+  display: none; }
+
 /* ===== General ===== */
 html, body {
   font-family: 'Lato', sans-serif;

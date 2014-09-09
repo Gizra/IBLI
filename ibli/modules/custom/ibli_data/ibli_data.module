@@ -26,7 +26,8 @@ function ibli_data_menu() {
 /**
  * Saves the image of the map as a PDF file.
  *
- * @return string.
+ * @print string.
+ * PDF file path.
  */
 function ibli_data_save_pdf() {
   if (isset($_POST['map']) && isset($_POST['period'])) {
@@ -34,6 +35,8 @@ function ibli_data_save_pdf() {
     $title = $_POST['period'];
     $map_width = $_POST['map_width'];
     $map_height = $_POST['map_height'];
+    $path = file_default_scheme() . '://pdf';
+    file_prepare_directory($path, FILE_CREATE_DIRECTORY);
 
     // Include the main TCPDF library.
     $tcpdf_library = libraries_get_path('tcpdf') . '/tcpdf.php';
@@ -53,38 +56,35 @@ function ibli_data_save_pdf() {
     // Set image scale factor.
     $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-    // -------------------------------------------------------------------
-
     // Add a page.
     $pdf->AddPage();
 
-    $pdf->SetXY(110, 200);
-
-    // -------------------------------------------------------------------
-
+    // Get the data and save the PNG image.
     list($type, $data) = explode(';', $map);
     list(, $data)      = explode(',', $data);
     $data = base64_decode($data);
 
-    $png_image = 'sites/default/files/' . $title . '.png';
+    $png_image = $path . DIRECTORY_SEPARATOR . $title . '.png';
 
-    file_put_contents($png_image, $data);
-
-    // Set JPEG quality.
-    $pdf->setJPEGQuality(100);
+    $fp = fopen ($png_image, 'wr');
+    fwrite($fp, $data);
+    fclose($fp);
 
     // The '@' character is used to indicate that follows an image data stream and not an image file name.
     $pdf->Image($png_image, 0, 0, $map_width, $map_height, 'PNG', '', 'top-left', false);
 
     $date = new DateTime();
 
-    $pdf_path = 'sites/default/files/' . $title . '-' . $date->getTimestamp() . '.pdf';
+    $pdf_path = $path . DIRECTORY_SEPARATOR . $title . '-' . $date->getTimestamp() . '.pdf';
 
     // Save the PDF file.
     $pdf->Output($pdf_path , 'F');
 
     // Delete the saved image.
     drupal_unlink($png_image);
+
+    // Prepare path to send to browser.
+    $pdf_path = str_replace('public://','sites/default/files/', $pdf_path);
 
     // Send the PDF file path.
     print $pdf_path;

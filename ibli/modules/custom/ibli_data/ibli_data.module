@@ -25,71 +25,82 @@ function ibli_data_menu() {
 /**
  * Saves the image of the map as a PDF file.
  *
- * @print string.
+ * @return string.
  * PDF file path.
  */
 function ibli_data_save_pdf() {
-  if (isset($_POST['map']) && isset($_POST['period'])) {
-    $map = $_POST['map'];
-    $title = $_POST['period'];
-    $map_width = $_POST['map_width'];
-    $map_height = $_POST['map_height'];
-    $path = file_default_scheme() . '://pdf';
-    file_prepare_directory($path, FILE_CREATE_DIRECTORY);
-
-    // Include the main TCPDF library.
-    $tcpdf_library = libraries_get_path('tcpdf') . '/tcpdf.php';
-    include $tcpdf_library;
-
-    // Determine page layout according to the map dimensions.
-    $pagelayout = array($map_width, $map_height);
-
-    $pdf = new TCPDF('L', 'px', $pagelayout, true, 'UTF-8', false);
-
-    // Set margins.
-    $pdf->SetMargins(0, 0, 0);
-
-    // Set auto page breaks.
-    $pdf->SetAutoPageBreak(false, 0);
-
-    // Set image scale factor.
-    $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
-    // Add a page.
-    $pdf->AddPage();
-
-    // Get the data and save the PNG image.
-    list($type, $data) = explode(';', $map);
-    list(, $data)      = explode(',', $data);
-    $data = base64_decode($data);
-
-    $png_image = $path . DIRECTORY_SEPARATOR . $title . '.png';
-
-    // Save image temporarily, Will be deleted after saved to PDF.
-    $fp = fopen ($png_image, 'wr');
-    fwrite($fp, $data);
-    fclose($fp);
-
-    // Adding the image to the PDF.
-    $pdf->Image($png_image, 0, 0, $map_width, $map_height, 'PNG', '', 'top-left', false);
-
-    // Adding timestamp to the name of the file, So we don't override another user's file.
-    $date = new DateTime();
-
-    $pdf_path = $path . DIRECTORY_SEPARATOR . $title . '-' . $date->getTimestamp() . '.pdf';
-
-    // Save the PDF file.
-    $pdf->Output($pdf_path , 'F');
-
-    // Delete the saved image.
-    drupal_unlink($png_image);
-
-    // Prepare path to send to browser.
-    $pdf_path = str_replace('public://','sites/default/files/', $pdf_path);
-
-    // Send the PDF file path to the ng-app.
-    print $pdf_path;
+  if(!ibli_data_save_pdf_access()) {
+    return FALSE;
   }
+  $map = $_POST['map'];
+  $title = $_POST['period'];
+  $map_width = $_POST['map_width'];
+  $map_height = $_POST['map_height'];
+  $path = file_default_scheme() . '://pdf';
+  file_prepare_directory($path, FILE_CREATE_DIRECTORY);
+
+  // Include the main TCPDF library.
+  $tcpdf_library = libraries_get_path('tcpdf') . '/tcpdf.php';
+  include $tcpdf_library;
+
+  // Determine page layout according to the map dimensions.
+  $pagelayout = array($map_width, $map_height);
+
+  $pdf = new TCPDF('L', 'px', $pagelayout, TRUE, 'UTF-8', FALSE);
+
+  // Set margins.
+  $pdf->SetMargins(0, 0, 0);
+
+  // Set auto page breaks.
+  $pdf->SetAutoPageBreak(FALSE, 0);
+
+  // Set image scale factor.
+  $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+  // Add a page.
+  $pdf->AddPage();
+
+  // Get the data and save the PNG image.
+  list($type, $data) = explode(';', $map);
+  list(, $data)      = explode(',', $data);
+  $data = base64_decode($data);
+
+  $png_image = $path . DIRECTORY_SEPARATOR . $title . '.png';
+
+  // Save image temporarily, Will be deleted after saved to PDF.
+  $fp = fopen ($png_image, 'wr');
+  fwrite($fp, $data);
+  fclose($fp);
+
+  // Adding the image to the PDF.
+  $pdf->Image($png_image, 0, 0, $map_width, $map_height, 'PNG', '', 'top-left', FALSE);
+
+  // Adding timestamp to the name of the file, So we don't override another user's file.
+  $date = new DateTime();
+
+  $pdf_path = $path . DIRECTORY_SEPARATOR . $title . '-' . $date->getTimestamp() . '.pdf';
+
+  // Save the PDF file.
+  $pdf->Output($pdf_path , 'F');
+
+  // Delete the saved image.
+  drupal_unlink($png_image);
+
+  // Prepare path to send to browser.
+  $pdf_path = str_replace('public://','sites/default/files/', $pdf_path);
+
+  // Send the PDF file path to the ng-app.
+  print $pdf_path;
+}
+
+/**
+ * Checks access to the PDF save
+ * And that all necessary params are posted.
+ *
+ * @return bool.
+ */
+function ibli_data_save_pdf_access() {
+  return user_access('access content') && !empty($_POST['map']) && !empty($_POST['period']) && !empty($_POST['map_width']) && !empty($_POST['map_height']);
 }
 
 /**

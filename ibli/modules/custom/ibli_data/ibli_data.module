@@ -35,40 +35,28 @@ function ibli_data_save_pdf() {
     $map_width = $_POST['map_width'];
     $map_height = $_POST['map_height'];
 
-    // Include the main TCPDF library (search for installation path).
+    // Include the main TCPDF library.
     $tcpdf_library = libraries_get_path('tcpdf') . '/tcpdf.php';
     include $tcpdf_library;
 
-    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    // Determine page layout according to the map dimensions.
+    $pagelayout = array($map_width, $map_height);
 
-    // set header and footer fonts
-    $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-    $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+    $pdf = new TCPDF('L', 'px', $pagelayout, true, 'UTF-8', false);
 
-    // set default monospaced font
-    $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+    // Set margins.
+    $pdf->SetMargins(0, 0, 0);
 
-    // set margins
-    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+    // Set auto page breaks.
+    $pdf->SetAutoPageBreak(false, 0);
 
-    // set auto page breaks
-    $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-
-    // set image scale factor
+    // Set image scale factor.
     $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
     // -------------------------------------------------------------------
 
-    // add a page
+    // Add a page.
     $pdf->AddPage();
-
-
-    // Image method signature:
-    // Image($file, $x='', $y='', $w=0, $h=0, $type='', $link='', $align='', $resize=false, $dpi=300, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox=false, $hidden=false, $fitonpage=false)
-
-    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    // Stretching, position and alignment example
 
     $pdf->SetXY(110, 200);
 
@@ -78,52 +66,27 @@ function ibli_data_save_pdf() {
     list(, $data)      = explode(',', $data);
     $data = base64_decode($data);
 
-    $png_image = 'sites/default/files/data/' . $title . '.png';
-    $jpg_image = 'sites/default/files/data/' . $title . '.jpg';
+    $png_image = 'sites/default/files/' . $title . '.png';
 
     file_put_contents($png_image, $data);
 
-    ibli_data_convert_image($png_image, $jpg_image, 100);
-
-    // set JPEG quality
+    // Set JPEG quality.
     $pdf->setJPEGQuality(100);
 
     // The '@' character is used to indicate that follows an image data stream and not an image file name.
-    $pdf->Image($jpg_image, 0, 0, 595, 400, 'JPEG', '', 'top-left');
+    $pdf->Image($png_image, 0, 0, $map_width, $map_height, 'PNG', '', 'top-left', false);
 
-    $pdf_path = 'sites/default/files/data/' . $title . '.pdf';
+    $pdf_path = 'sites/default/files/' . $title . '.pdf';
 
     // Save the PDF file.
     $pdf->Output($pdf_path , 'F');
 
+    // Delete the saved image.
     drupal_unlink($png_image);
-    drupal_unlink($jpg_image);
 
+    // Send the PDF file path.
     print $pdf_path;
   }
-}
-
-function ibli_data_convert_image($originalImage, $outputImage, $quality)
-{
-  // jpg, png, gif or bmp?
-  $exploded = explode('.',$originalImage);
-  $ext = $exploded[count($exploded) - 1];
-
-  if (preg_match('/jpg|jpeg/i',$ext))
-    $imageTmp=imagecreatefromjpeg($originalImage);
-  else if (preg_match('/png/i',$ext))
-    $imageTmp=imagecreatefrompng($originalImage);
-  else if (preg_match('/gif/i',$ext))
-    $imageTmp=imagecreatefromgif($originalImage);
-  else if (preg_match('/bmp/i',$ext))
-    $imageTmp=imagecreatefrombmp($originalImage);
-  else
-    return 0;
-
-  // quality is a value from 0 (worst) to 100 (best)
-  imagejpeg($imageTmp, $outputImage, $quality);
-  imagedestroy($imageTmp);
-  return 1;
 }
 
 /**

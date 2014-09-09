@@ -31,7 +31,7 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
   $node = node_load(key($results['node']));
   $render = node_view($node);
   $variables['contact_address'] = render($render);
-  
+
   // Add a awesome icons css
   drupal_add_css('http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', array('type' => 'external'));
 

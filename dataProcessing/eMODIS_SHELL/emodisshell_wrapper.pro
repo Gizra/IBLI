@@ -31,6 +31,7 @@ WHILE(1) DO BEGIN
 CALDAT,SYSTIME(/JULIAN),Month,Day,Year,Hour ; Get the current date.
 print, 'ok5'
 print,settingsFilePath
+print,'log_'+strtrim(string(Day,1))+'_'+strtrim(string(Month,1))+'_'+strtrim(string(Year,1))+'_'+strtrim(string(Hour,1))
 spawn , 'idl -rt=emodisshell.sav -args "'+settingsFilePath+'">log_'+strtrim(string(Day,1))+'_'+strtrim(string(Month,1))+'_'+strtrim(string(Year,1))+'_'+strtrim(string(Hour,1))
 
 

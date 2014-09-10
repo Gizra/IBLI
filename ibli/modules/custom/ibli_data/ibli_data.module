@@ -44,12 +44,25 @@ function ibli_data_save_pdf() {
   include $tcpdf_library;
 
   // Determine page layout according to the map dimensions.
-  $pagelayout = array($map_width, $map_height);
+  $pagelayout = array($map_width + 40, $map_height + 120);
 
   $pdf = new TCPDF('L', 'px', $pagelayout, TRUE, 'UTF-8', FALSE);
 
+  // Add title to the document.
+  $year = substr($title, 0, 4);
+  $season = preg_match('/S/i', $title) ? 'Short season' : 'Long season';
+  $pdf_title = 'Vegetation index for ' . $year . ', ' . $season;
+  $pdf->SetTitle($pdf_title);
+
+  // Set default header data.
+  $pdf->SetHeaderData('', 0, $pdf_title);
+
+  // Set header and footer fonts.
+  $pdf->setHeaderFont(Array('courier', '', 18));
+
   // Set margins.
-  $pdf->SetMargins(0, 0, 0);
+  $pdf->SetMargins(40, 20, 20);
+  $pdf->SetHeaderMargin(40);
 
   // Set auto page breaks.
   $pdf->SetAutoPageBreak(FALSE, 0);
@@ -73,7 +86,7 @@ function ibli_data_save_pdf() {
   fclose($fp);
 
   // Adding the image to the PDF.
-  $pdf->Image($png_image, 0, 0, $map_width, $map_height, 'PNG', '', 'top-left', FALSE);
+  $pdf->Image($png_image, 20, 80, $map_width, $map_height, 'PNG', '', 'top-left', FALSE);
 
   // Adding timestamp to the name of the file, So we don't override another user's file.
   $date = new DateTime();

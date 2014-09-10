@@ -5303,6 +5303,32 @@ table th.toggle-hideable {
 .past-index-map #download_link {
   font-size: 22px; }
 
+.main-container .company,
+.main-container .logos {
+  text-align: center;
+  padding: 25px 100px;
+  text-transform: uppercase;
+  border-bottom: 2px dashed #515151;
+  margin: 0 100px; }
+  .main-container .company h1,
+  .main-container .logos h1 {
+    font-weight: bold; }
+  .main-container .company .address,
+  .main-container .logos .address {
+    font-size: 16px; }
+  .main-container .company .img-responsive,
+  .main-container .logos .img-responsive {
+    display: inline-block; }
+  .main-container .company.logos,
+  .main-container .logos.logos {
+    border-bottom: 0 none; }
+    .main-container .company.logos .img-wrapper,
+    .main-container .logos.logos .img-wrapper {
+      border: 1px solid #515151;
+      height: 230px;
+      display: table-cell;
+      vertical-align: middle; }
+
 /* ===== General ===== */
 html, body {
   font-family: 'Lato', sans-serif;

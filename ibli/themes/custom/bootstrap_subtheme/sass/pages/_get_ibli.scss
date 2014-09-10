@@ -1,0 +1,34 @@
+.main-container {
+
+  .company,
+  .logos {
+    text-align: center;
+    padding: 25px 100px;
+    text-transform: uppercase;
+    border-bottom: 2px dashed #515151;
+    margin: 0 100px;
+
+    h1 {
+      font-weight: bold;
+    }
+
+    .address {
+      font-size: 16px;
+    }
+
+    .img-responsive {
+      display: inline-block;
+    }
+
+    &.logos {
+      border-bottom: 0 none;
+
+      .img-wrapper {
+        border: 1px solid #515151;
+        height: 230px;
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+  }
+}

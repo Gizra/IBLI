@@ -1,10 +1,11 @@
-@import "_mixins.scss";
+@import "mixins.scss";
 @import "../../../../libraries/bootstrap_sass/vendor/assets/stylesheets/bootstrap.scss";
-@import "pages/_homepage.scss";
-@import "pages/_node.scss";
-@import "pages/_publications.scss";
-@import "pages/_table.scss";
-@import "pages/_past_index_map";
+@import "pages/homepage.scss";
+@import "pages/node.scss";
+@import "pages/publications.scss";
+@import "pages/table.scss";
+@import "pages/past_index_map";
+@import "pages/get_ibli";
 
 /* ===== General ===== */
 

@@ -2,6 +2,23 @@ PRO eModisShell_Wrapper , settingsFilePath
 
 
 ;; This is a wrapper to emodisshell , it makes sure the code runs each day at midnight and manages the log files.
+tempsettingsFilePath = command_line_args(count=nparams)
+IF (nparams GE 1) THEN BEGIN
+settingsFilePath = tempsettingsFilePath
+ENDIF
+
+IF ((nparams LT 1) and (settingsFilePath EQ '')) THEN BEGIN
+  print, 'Please Enter a valid file'
+  STOP
+ENDIF
+
+IF FILE_TEST(settingsFilePath) EQ 0 THEN BEGIN
+    print , 'Could not find the settings File in the path specified . . . '
+    STOP
+ENDIF
+
+
+
 
 WHILE(1) DO BEGIN
 

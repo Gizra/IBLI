@@ -45,7 +45,7 @@ class IbliPageNodes extends IbliMigration {
     }
     $content = file_get_contents($file);
     // Fixing images path.
-    $content = str_replace('<img src="', '<img src="' . $base_url . DIRECTORY_SEPARATOR . variable_get('ibli_images_path'), $content);
+    $content = str_replace('<img src="', '<img src="' . $base_url . '/' . variable_get('ibli_images_path'), $content);
     $row->body = $content;
 
     if (!empty($row->field_image)) {

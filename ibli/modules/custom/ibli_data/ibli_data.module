@@ -44,7 +44,7 @@ function ibli_data_save_pdf() {
   include $tcpdf_library;
 
   // Determine page layout according to the map dimensions.
-  $pagelayout = array($map_width + 40, $map_height + 100);
+  $pagelayout = array($map_width + 40, $map_height + 80);
 
   $pdf = new TCPDF('L', 'px', $pagelayout, TRUE, 'UTF-8', FALSE);
 

@@ -225,7 +225,10 @@ function ibli_general_default_page_manager_pages() {
   $page->admin_title = 'Past Index Maps';
   $page->admin_description = '';
   $page->path = 'pim';
-  $page->access = array();
+  $page->access = array(
+    'type' => 'none',
+    'settings' => NULL,
+  );
   $page->menu = array();
   $page->arguments = array();
   $page->conf = array(

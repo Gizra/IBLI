@@ -392,3 +392,24 @@ body.front {
     float: right;
   }
 }
+
+/* ======== Payout box on map =======*/
+
+#payouts-sales-periods {
+  background: #fdfdfd;
+  padding: 10px;
+  opacity: 0.95;
+
+  p {
+    font-weight: bold;
+    margin: 0;
+
+    span {
+      font-weight: normal;
+    }
+
+    &.sales {
+      margin-top: 10px;
+    }
+  }
+}

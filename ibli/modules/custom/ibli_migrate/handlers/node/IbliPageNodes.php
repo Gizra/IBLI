@@ -33,7 +33,6 @@ class IbliPageNodes extends IbliMigration {
    * Get body content from HTML.
    */
   public function prepareRow($row) {
-    global $base_url;
     parent::prepareRow($row);
 
     // Fetch the body from a file stored under
@@ -45,7 +44,7 @@ class IbliPageNodes extends IbliMigration {
     }
     $content = file_get_contents($file);
     // Fixing images path.
-    $content = str_replace('<img src="', '<img src="' . $base_url . '/' . variable_get('ibli_images_path'), $content);
+    $content = str_replace('<img src="', '<img src="../' . variable_get('ibli_images_path'), $content);
     $row->body = $content;
 
     if (!empty($row->field_image)) {

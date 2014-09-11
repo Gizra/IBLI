@@ -93,21 +93,21 @@ function ibli_general_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'menu-ibli-main-menu_about-us:<nolink>',
   );
-  // Exported menu link: menu-ibli-main-menu_get-ibli:<front>
-  $menu_links['menu-ibli-main-menu_get-ibli:<front>'] = array(
+  // Exported menu link: menu-ibli-main-menu_get-ibli:node/20
+  $menu_links['menu-ibli-main-menu_get-ibli:node/20'] = array(
     'menu_name' => 'menu-ibli-main-menu',
-    'link_path' => '<front>',
-    'router_path' => '',
+    'link_path' => 'node/20',
+    'router_path' => 'node/%',
     'link_title' => 'Get IBLI',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'menu-ibli-main-menu_get-ibli:<front>',
+      'identifier' => 'menu-ibli-main-menu_get-ibli:node/20',
     ),
     'module' => 'menu',
     'hidden' => 0,
-    'external' => 1,
+    'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
     'weight' => -49,

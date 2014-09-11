@@ -42,7 +42,10 @@ class IbliPageNodes extends IbliMigration {
       drupal_set_message('cannot find ' . $file);
       return;
     }
-    $row->body = file_get_contents($file);
+    $content = file_get_contents($file);
+    // Fixing images path.
+    $content = str_replace('<img src="', '<img src="../' . variable_get('ibli_images_path'), $content);
+    $row->body = $content;
 
     if (!empty($row->field_image)) {
       // Remove the "public://" from image paths.

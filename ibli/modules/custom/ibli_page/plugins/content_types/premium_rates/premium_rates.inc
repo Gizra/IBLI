@@ -78,7 +78,7 @@ function ibli_page_premium_rates_content_type_render($subtype, $conf, $args, $co
       $group_id = floor(($index - 4) / 5) + 1;
       $class = $group_id > 1 ? 'hidden' : '';
       // Convert the title "rate" to "trigger".
-      $cell = preg_match('/rate/i', $cell) ? str_replace('rate', 'trigger', $cell) : $cell;
+      $cell = preg_match('/rate/i', $cell) ? str_replace('rate', ' trigger', $cell) : $cell;
       // Convert value of the cell to %.
       $cell = is_numeric($cell) ? $cell = number_format($cell*100, 2, '.', '').'%' : $cell;
       // Add "premium" class to the 15rate column.

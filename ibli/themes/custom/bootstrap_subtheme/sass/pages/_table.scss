@@ -1,10 +1,10 @@
-table {
+table.table {
 
-  thead {
+  > thead {
 
-    tr {
+    > tr {
 
-      th.toggle-hideable {
+      > th.toggle-hideable {
         transform: rotate(75deg);
         text-align: center;
 
@@ -26,20 +26,24 @@ table {
     }
   }
 
-  tbody {
+  > tbody {
 
-    tr {
+    > tr {
 
-      td.premium {
-        padding: 0;
+      > td {
+        padding: 8px 7px;
 
-        span {
-          padding: 8px;
-          display: block;
-        }
+        &.premium {
+          padding: 0;
 
-        span {
-          background-color: #FFFFED;
+          span {
+            padding: 8px;
+            display: block;
+          }
+
+          span {
+            background-color: #FFFFED;
+          }
         }
       }
     }

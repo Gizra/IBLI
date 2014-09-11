@@ -50,6 +50,7 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
   $setting = array(
     'ibli_general' => array(
       'iblimap_library_path' => libraries_get_path('ibli-map') . '/dist',
+      'iblimap_images_path' => variable_get('ibli_images_path'),
     ),
   );
   drupal_add_js($setting, array('type' => 'setting'));

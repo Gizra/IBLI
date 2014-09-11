@@ -64,6 +64,8 @@ FOR i=0, nDivisions-1, 1L DO BEGIN
   zCumNDVIdataPrecentile(where((zCumNDVIdata2 LT precentiles(j))and(zCumNDVIdata2 GE precentiles(j-1))))=j+1
   endfor
   zCumNDVIdataPrecentile(where(zCumNDVIdata2 GE precentiles(n_elements(precentiles)-1)))=n_elements(precentiles)+1
+  zCumNDVIdataPrecentile = UINT(zCumNDVIdataPrecentile)
+  first2Columns = UINT(first2Columns)
   writeline = STRJOIN(STRCOMPRESS(first2Columns,/REMOVE_ALL),',')+','+STRJOIN(STRCOMPRESS(zCumNDVIdataPrecentile,/REMOVE_ALL),',')
   
   printf, W, writeline

@@ -5325,7 +5325,7 @@ table th.toggle-hideable {
     .main-container .company.logos .img-wrapper,
     .main-container .logos.logos .img-wrapper {
       border: 1px solid #515151;
-      height: 230px;
+      height: 180px;
       display: table-cell;
       vertical-align: middle; }
 

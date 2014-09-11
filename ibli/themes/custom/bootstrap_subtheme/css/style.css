@@ -5334,9 +5334,8 @@ table.table > tbody > tr > td {
     .main-container .company.logos .img-wrapper,
     .main-container .logos.logos .img-wrapper {
       border: 1px solid #515151;
-      height: 230px;
-      display: table-cell;
-      vertical-align: middle; }
+      height: 200px;
+      line-height: 190px; }
 
 /* ===== General ===== */
 html, body {

@@ -5263,6 +5263,19 @@ body.front {
   margin-left: 5px;
   float: right; }
 
+/* ======== Payout box on map =======*/
+#payouts-sales-periods {
+  background: #FCFCFC;
+  padding: 10px;
+  opacity: 0.90; }
+  #payouts-sales-periods p {
+    font-weight: bold;
+    margin: 0; }
+    #payouts-sales-periods p span {
+      font-weight: normal; }
+    #payouts-sales-periods p.sales {
+      margin-top: 10px; }
+
 body.node-type-page .what-is-ibli .main-image {
   background: url(../images/what_is_ibli.png) no-repeat;
   width: 100%;

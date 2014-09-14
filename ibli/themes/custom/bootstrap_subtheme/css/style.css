@@ -5305,12 +5305,19 @@ table.table > tbody > tr > td {
     table.table > tbody > tr > td.premium span {
       background-color: #FFFFED; }
 
-.past-index-map .btn-save,
-.past-index-map #spinner,
-.past-index-map #download_link {
-  margin-top: 15px; }
-.past-index-map #download_link {
-  font-size: 22px; }
+.past-index-map > div {
+  position: relative; }
+  .past-index-map > div .period-select {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 10000; }
+  .past-index-map > div .btn-save,
+  .past-index-map > div #spinner,
+  .past-index-map > div #download_link {
+    margin-top: 15px; }
+  .past-index-map > div #download_link {
+    font-size: 22px; }
 
 .main-container .company,
 .main-container .logos {

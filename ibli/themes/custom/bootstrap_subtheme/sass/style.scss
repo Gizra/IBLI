@@ -552,6 +552,7 @@ fieldset[disabled] .btn-amethyst.active {
     bottom: 0 !important;
 
     .calculator-form {
+      margin-top: 4px;
 
       .input-group {
         width: 100%;
@@ -578,8 +579,14 @@ fieldset[disabled] .btn-amethyst.active {
           width: 100%;
           margin-bottom: 5px;
           float: right;
+          padding: 0 0 0 5px;
+          height: 28px;
         }
       }
+    }
+
+    .calculated-sum {
+      margin-top: 7px;
     }
   }
 }

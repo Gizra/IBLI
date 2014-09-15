@@ -5800,22 +5800,28 @@ fieldset[disabled] .btn-amethyst.active {
     display: none !important; }
   .angular-leaflet-map .leaflet-popup {
     bottom: 0 !important; }
-    .angular-leaflet-map .leaflet-popup .calculator-form .input-group {
-      width: 100%; }
-      .angular-leaflet-map .leaflet-popup .calculator-form .input-group .input-group-addon {
-        border: 0 none;
-        background: none;
-        padding: 12px 25px; }
-        .angular-leaflet-map .leaflet-popup .calculator-form .input-group .input-group-addon.cow {
-          background: url("../images/cow.png") 0 0 no-repeat; }
-        .angular-leaflet-map .leaflet-popup .calculator-form .input-group .input-group-addon.camel {
-          background: url("../images/camel.png") 0 0 no-repeat; }
-        .angular-leaflet-map .leaflet-popup .calculator-form .input-group .input-group-addon.goat {
-          background: url("../images/goat.png") 0 0 no-repeat; }
-      .angular-leaflet-map .leaflet-popup .calculator-form .input-group input {
-        width: 100%;
-        margin-bottom: 5px;
-        float: right; }
+    .angular-leaflet-map .leaflet-popup .calculator-form {
+      margin-top: 4px; }
+      .angular-leaflet-map .leaflet-popup .calculator-form .input-group {
+        width: 100%; }
+        .angular-leaflet-map .leaflet-popup .calculator-form .input-group .input-group-addon {
+          border: 0 none;
+          background: none;
+          padding: 12px 25px; }
+          .angular-leaflet-map .leaflet-popup .calculator-form .input-group .input-group-addon.cow {
+            background: url("../images/cow.png") 0 0 no-repeat; }
+          .angular-leaflet-map .leaflet-popup .calculator-form .input-group .input-group-addon.camel {
+            background: url("../images/camel.png") 0 0 no-repeat; }
+          .angular-leaflet-map .leaflet-popup .calculator-form .input-group .input-group-addon.goat {
+            background: url("../images/goat.png") 0 0 no-repeat; }
+        .angular-leaflet-map .leaflet-popup .calculator-form .input-group input {
+          width: 100%;
+          margin-bottom: 5px;
+          float: right;
+          padding: 0 0 0 5px;
+          height: 28px; }
+    .angular-leaflet-map .leaflet-popup .calculated-sum {
+      margin-top: 7px; }
 
 .panel-ibli-partners .row {
   margin-bottom: 10px; }

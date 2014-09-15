@@ -5807,21 +5807,23 @@ fieldset[disabled] .btn-amethyst.active {
         .angular-leaflet-map .leaflet-popup .calculator-form .input-group .input-group-addon {
           border: 0 none;
           background: none;
-          padding: 12px 25px; }
+          padding: 20px 17px; }
           .angular-leaflet-map .leaflet-popup .calculator-form .input-group .input-group-addon.cow {
             background: url("../images/cow.png") 0 0 no-repeat; }
           .angular-leaflet-map .leaflet-popup .calculator-form .input-group .input-group-addon.camel {
             background: url("../images/camel.png") 0 0 no-repeat; }
-          .angular-leaflet-map .leaflet-popup .calculator-form .input-group .input-group-addon.goat {
-            background: url("../images/goat.png") 0 0 no-repeat; }
+          .angular-leaflet-map .leaflet-popup .calculator-form .input-group .input-group-addon.sheep {
+            background: url("../images/sheep.png") 0 0 no-repeat; }
         .angular-leaflet-map .leaflet-popup .calculator-form .input-group input {
           width: 100%;
           margin-bottom: 5px;
           float: right;
           padding: 0 0 0 5px;
-          height: 28px; }
+          height: 28px;
+          font-size: 10px; }
     .angular-leaflet-map .leaflet-popup .calculated-sum {
-      margin-top: 7px; }
+      margin-top: 7px;
+      font-size: 11px; }
 
 .panel-ibli-partners .row {
   margin-bottom: 10px; }

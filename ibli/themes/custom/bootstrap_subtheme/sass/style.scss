@@ -560,7 +560,7 @@ fieldset[disabled] .btn-amethyst.active {
         .input-group-addon {
           border: 0 none;
           background: none;
-          padding: 12px 25px;
+          padding: 20px 17px;
 
           &.cow {
             background: url("../images/cow.png") 0 0 no-repeat;
@@ -570,8 +570,8 @@ fieldset[disabled] .btn-amethyst.active {
             background: url("../images/camel.png") 0 0 no-repeat;
           }
 
-          &.goat {
-            background: url("../images/goat.png") 0 0 no-repeat;
+          &.sheep {
+            background: url("../images/sheep.png") 0 0 no-repeat;
           }
         }
 
@@ -581,12 +581,14 @@ fieldset[disabled] .btn-amethyst.active {
           float: right;
           padding: 0 0 0 5px;
           height: 28px;
+          font-size: 10px;
         }
       }
     }
 
     .calculated-sum {
       margin-top: 7px;
+      font-size: 11px;
     }
   }
 }

@@ -550,6 +550,37 @@ fieldset[disabled] .btn-amethyst.active {
 
   .leaflet-popup {
     bottom: 0 !important;
+
+    .calculator-form {
+
+      .input-group {
+        width: 100%;
+
+        .input-group-addon {
+          border: 0 none;
+          background: none;
+          padding: 12px 25px;
+
+          &.cow {
+            background: url("../images/cow.png") 0 0 no-repeat;
+          }
+
+          &.camel {
+            background: url("../images/camel.png") 0 0 no-repeat;
+          }
+
+          &.goat {
+            background: url("../images/goat.png") 0 0 no-repeat;
+          }
+        }
+
+        input {
+          width: 100%;
+          margin-bottom: 5px;
+          float: right;
+        }
+      }
+    }
   }
 }
 

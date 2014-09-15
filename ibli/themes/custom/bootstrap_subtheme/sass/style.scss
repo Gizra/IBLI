@@ -550,6 +550,46 @@ fieldset[disabled] .btn-amethyst.active {
 
   .leaflet-popup {
     bottom: 0 !important;
+
+    .calculator-form {
+      margin-top: 4px;
+
+      .input-group {
+        width: 100%;
+
+        .input-group-addon {
+          border: 0 none;
+          background: none;
+          padding: 20px 17px;
+
+          &.cow {
+            background: url("../images/cow.png") 0 0 no-repeat;
+          }
+
+          &.camel {
+            background: url("../images/camel.png") 0 0 no-repeat;
+          }
+
+          &.sheep {
+            background: url("../images/sheep.png") 0 0 no-repeat;
+          }
+        }
+
+        input {
+          width: 100%;
+          margin-bottom: 5px;
+          float: right;
+          padding: 0 0 0 5px;
+          height: 28px;
+          font-size: 10px;
+        }
+      }
+    }
+
+    .calculated-sum {
+      margin-top: 7px;
+      font-size: 11px;
+    }
   }
 }
 

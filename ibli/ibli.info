@@ -6,6 +6,7 @@ core = 7.x
 ; Core
 dependencies[] = block
 dependencies[] = color
+dependencies[] = contact
 dependencies[] = contextual
 dependencies[] = help
 dependencies[] = image
@@ -45,6 +46,8 @@ dependencies[] = inline_entity_form
 dependencies[] = jquery_update
 dependencies[] = job_scheduler
 dependencies[] = libraries
+dependencies[] = mailchimp
+dependencies[] = mailchimp_lists
 dependencies[] = message
 dependencies[] = message_notify
 dependencies[] = message_subscribe
@@ -63,7 +66,11 @@ dependencies[] = views_content
 dependencies[] = wysiwyg
 
 ; Custom modules
+dependencies[] = ibli_data
 dependencies[] = ibli_general
+dependencies[] = ibli_homepage
 dependencies[] = ibli_migrate
+dependencies[] = ibli_page
+dependencies[] = ibli_publications
 dependencies[] = page_element
 dependencies[] = ibli_news

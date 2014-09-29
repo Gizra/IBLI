@@ -113,16 +113,6 @@
   </div>
 </header>
 
-<?php if (drupal_is_front_page()): ?>
-  <!---------------------------------------------------------------------------------->
-  <div ng-app="ibliApp">
-    <div ng-controller="MainCtrl">
-      <leaflet center="kenya" defaults="defaults" tiles="tiles" geojson="geojson" controls="controls" legend="legend"></leaflet>
-    </div>
-  </div>
-  <!---------------------------------------------------------------------------------->
-<?php endif; ?>
-
 <div class="main-container container">
 
   <header role="banner" id="page-header">
@@ -149,7 +139,7 @@
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
       <?php if (!empty($title)): ?>
-        <h1 class="page-header"><?php print $title; ?></h1>
+        <h2 class="page-header"><?php print $title; ?></h2>
       <?php endif; ?>
       <?php print render($title_suffix); ?>
       <?php print $messages; ?>
@@ -197,28 +187,16 @@
           <p><?php print t('Stay in touch with us:'); ?></p>
           <ul>
             <li>
-              <a href="#"><i class="fa fa-twitter"></i></a>
+              <a href="https://twitter.com/IBLI_Kenya"><i class="fa fa-twitter"></i></a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-facebook"></i></a>
+              <a href="https://twitter.com/IBLI_Ethiopia"><i class="fa fa-twitter"></i></a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-pinterest"></i></a>
+              <a href="https://www.facebook.com/pages/Index-Based-Livestock-Insurance-Kenya-and-Ethiopia/1408317826105114"><i class="fa fa-facebook"></i></a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-youtube"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-github"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-linkedin"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-vk"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-google-plus"></i></a>
+              <a href="https://www.youtube.com/channel/UCLcdSaDIcb6VHq3GflfQL0w"><i class="fa fa-youtube"></i></a>
             </li>
             <li>
               <a href="https://www.flickr.com/photos/ilri/sets/72157623247974374/"><i class="fa fa-flickr"></i></a>

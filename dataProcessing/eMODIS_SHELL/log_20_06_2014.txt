@@ -1,0 +1,89 @@
+WorkingFolder
+/var/www/data/
+SUBSET
+[ 5350  ,  7140   , 3350, 6150]
+map_info 
+ {Geographic Lat/Lon, 1.0000, 1.0000, 33.90955, 5.77128, 2.4130000000e-003, 2.4130000000e-003, WGS-84, units=Degrees}
+adminFile 
+ /opt/IBLI/dataProcessing/eMODIS_SHELL/newDIV/supportRasters/divisionID_K+E.img
+  startYearData 
+ 2001
+  nImagesYear 
+ 36     
+  periodLag   
+  1   
+  startPeriodLong 
+ 7 
+  numberPeriodsLong 
+ 21
+  startPeriodShort 
+ 28 
+  numberPeriodsShort 
+ 15 
+Fri Jun 20 11:10:23 2014 - - - - Beginning Chain - - - - 
+Fri Jun 20 11:10:23 2014 - - - - Checking For Repository Fullnes - - - - 
+Archive:  /var/www/data/RAW/east0304.zip
+  inflating: /var/www/data/RAW/ea1903.tfw  
+  inflating: /var/www/data/RAW/ea1903.tif  
+  inflating: /var/www/data/RAW/ea2003.tfw  
+  inflating: /var/www/data/RAW/ea2003.tif  
+  inflating: /var/www/data/RAW/ea2103.tfw  
+  inflating: /var/www/data/RAW/ea2103.tif  
+  inflating: /var/www/data/RAW/ea2203.tfw  
+  inflating: /var/www/data/RAW/ea2203.tif  
+  inflating: /var/www/data/RAW/ea2303.tfw  
+  inflating: /var/www/data/RAW/ea2303.tif  
+  inflating: /var/www/data/RAW/ea2403.tfw  
+  inflating: /var/www/data/RAW/ea2403.tif  
+Archive:  /var/www/data/RAW/east0305.zip
+  inflating: /var/www/data/RAW/ea2503.tfw  
+  inflating: /var/www/data/RAW/ea2503.tif  
+  inflating: /var/www/data/RAW/ea2603.tfw  
+  inflating: /var/www/data/RAW/ea2603.tif  
+  inflating: /var/www/data/RAW/ea2703.tfw  
+  inflating: /var/www/data/RAW/ea2703.tif  
+  inflating: /var/www/data/RAW/ea2803.tfw  
+  inflating: /var/www/data/RAW/ea2803.tif  
+  inflating: /var/www/data/RAW/ea2903.tfw  
+  inflating: /var/www/data/RAW/ea2903.tif  
+  inflating: /var/www/data/RAW/ea3003.tfw  
+  inflating: /var/www/data/RAW/ea3003.tif  
+Archive:  /var/www/data/RAW/east0306.zip
+  inflating: /var/www/data/RAW/ea3103.tfw  
+  inflating: /var/www/data/RAW/ea3103.tif  
+  inflating: /var/www/data/RAW/ea3203.tfw  
+  inflating: /var/www/data/RAW/ea3203.tif  
+  inflating: /var/www/data/RAW/ea3303.tfw  
+  inflating: /var/www/data/RAW/ea3303.tif  
+  inflating: /var/www/data/RAW/ea3403.tfw  
+  inflating: /var/www/data/RAW/ea3403.tif  
+  inflating: /var/www/data/RAW/ea3503.tfw  
+  inflating: /var/www/data/RAW/ea3503.tif  
+  inflating: /var/www/data/RAW/ea3603.tfw  
+  inflating: /var/www/data/RAW/ea3603.tif  
+Archive:  /var/www/data/RAW/east0307.zip
+  inflating: /var/www/data/RAW/ea3703.tfw  
+  inflating: /var/www/data/RAW/ea3703.tif  
+  inflating: /var/www/data/RAW/ea3803.tfw  
+  inflating: /var/www/data/RAW/ea3803.tif  
+  inflating: /var/www/data/RAW/ea3903.tfw  
+  inflating: /var/www/data/RAW/ea3903.tif  
+  inflating: /var/www/data/RAW/ea4003.tfw  
+  inflating: /var/www/data/RAW/ea4003.tif  
+  inflating: /var/www/data/RAW/ea4103.tfw  
+  inflating: /var/www/data/RAW/ea4103.tif  
+  inflating: /var/www/data/RAW/ea4203.tfw  
+  inflating: /var/www/data/RAW/ea4203.tif  
+Archive:  /var/www/data/RAW/east0308.zip
+  inflating: /var/www/data/RAW/ea4303.tfw  
+  inflating: /var/www/data/RAW/ea4303.tif  
+  inflating: /var/www/data/RAW/ea4403.tfw  
+  inflating: /var/www/data/RAW/ea4403.tif  
+  inflating: /var/www/data/RAW/ea4503.tfw  
+  inflating: /var/www/data/RAW/ea4503.tif  
+  inflating: /var/www/data/RAW/ea4603.tfw  
+  inflating: /var/www/data/RAW/ea4603.tif  
+  inflating: /var/www/data/RAW/ea4703.tfw  
+  inflating: /var/www/data/RAW/ea4703.tif  
+  inflating: /var/www/data/RAW/ea4803.tfw  
+  inflating: /var/www/data/RAW/ea4803.tif  

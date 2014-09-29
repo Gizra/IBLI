@@ -23,7 +23,7 @@
 
 
 
-PRO CUMULATE_Z_PER_DIVISION  ,dataPath , startYearData , nImagesYear , periodLag , startPeriodLong , numberPeriodsLong , startPeriodShort , numberPeriodsShort
+PRO CUMULATE_Z_PER_DIVISION  ,dataPath , startYearData , nImagesYear , periodLag , startPeriodLong , numberPeriodsLong , startPeriodShort , numberPeriodsShort,ext
 
 STARTTIME = SYSTIME(1)
 
@@ -81,7 +81,7 @@ FOR season=0,nSeasons-1,1L DO BEGIN
 ENDFOR
 
 ; Write the output to a CSV-file
-outFile = dataPath+'/zCumNDVI_aggregated_eMODIS.csv'
+outFile = dataPath+'/zCumNDVI_aggregated_eMODIS'+ext+'.csv'
 
 IF FILE_TEST(outFile) eq 1 THEN FILE_DELETE, outFile
 OPENW, W1, outFile, /GET_LUN, width=2000                        ; set width to get all data in one row

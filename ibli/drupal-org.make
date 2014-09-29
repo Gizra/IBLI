@@ -64,6 +64,9 @@ projects[libraries][version] = "2.2"
 projects[mailsystem][version] = 2.34
 projects[mailsystem][subdir] = "contrib"
 
+projects[mailchimp][subdir] = "contrib"
+projects[mailchimp][version] = 2.12
+
 projects[message][subdir] = "contrib"
 projects[message][version] = "1.9"
 
@@ -127,6 +130,10 @@ projects[bootstrap][version] = "3.0"
 
 ; Libraries
 
+libraries[tcpdf][type] = "libraries"
+libraries[tcpdf][download][type] = "get"
+libraries[tcpdf][download][url] = "http://downloads.sourceforge.net/project/tcpdf/tcpdf_6_0_093.zip?r=&ts=1410174074&use_mirror=garr"
+
 libraries[tinymce][type] = "libraries"
 libraries[tinymce][download][type] = "get"
 libraries[tinymce][download][url] = "http://download.moxiecode.com/tinymce/tinymce_3.5.10.zip"
@@ -134,3 +141,7 @@ libraries[tinymce][download][url] = "http://download.moxiecode.com/tinymce/tinym
 libraries[bootstrap_sass][download][type] = "file"
 libraries[bootstrap_sass][type] = "libraries"
 libraries[bootstrap_sass][download][url] = "https://github.com/twbs/bootstrap-sass/archive/v3.1.1.zip"
+
+libraries[mailchimp][download][type] = "file"
+libraries[mailchimp][type] = "libraries"
+libraries[mailchimp][download][url] = "http://apidocs.mailchimp.com/api/downloads/mailchimp-api-class.zip"

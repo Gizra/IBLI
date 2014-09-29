@@ -104,6 +104,12 @@ ENDIF ELSE BEGIN
     WorkingFolder=dataStruct.WorkingFolder 
 ENDELSE
 
+;IF NOT(tag_exist(dataStruct,'MatlabFolder')) THEN BEGIN
+    ;print, 'Check your settings file to be in the format requested . . . (Seems like the MATLAB was not defined)'
+    ;STOP
+;ENDIF ELSE BEGIN
+    ;WorkingFolder=dataStruct.WorkingFolder 
+;ENDELSE
 
 
 IF NOT(tag_exist(dataStruct,'SUBSET')) THEN BEGIN
@@ -185,6 +191,7 @@ Year=Year-2000
 Print ,  SYSTIME(0)+' - - - - Beginning Chain - - - - ' ;
 Print ,  SYSTIME(0)+' - - - - Checking For Repository Fullnes - - - - ' ;
 
+
 ;; Step 0.1 : Go from beginning till date and make sure repository is complete - - ;;
  FOR Y=1,Year DO BEGIN 
  maxM=12
@@ -203,6 +210,7 @@ Print ,  SYSTIME(0)+' - - - - Checking For Repository Fullnes - - - - ' ;
   
   IF (TokFile NE 1) THEN BEGIN ; If you see that one of the files in a month is missing download and extract the entire month bulk zip 
 
+  
     ; - - - Download Zip File 
   oUrl = OBJ_NEW('IDLnetUrl')
   oUrl->SetProperty, CALLBACK_FUNCTION ='Url_Callback'
@@ -255,11 +263,15 @@ Print , SYSTIME(0)+' > - - - - Updating Last Month New NDVI data - -' ;
 
 ;; Step 0.2 :  Update month back from now
 
+IF (1) THEN BEGIN
+
 curWIY = 6*Month-4+2*((Day-3)/10-1); // WIY = Week In Year
  FOR k=0,5  DO BEGIN ;- REMEMBER TO RETURN !!!!!!!!!!! 04/06/2014
 ;FOR k=0,-1  DO BEGIN ; ; ; - - - - REMEMBER TO TAKE BACK TO 9 - - - - ; ; ;
 
 Print, SYSTIME(0)+'> - - - Updating : ' + string(k) + ' / 5  - - ' ;
+ 
+ 
  
  toUpdateMonth = curWIY-2*k
  IF toUpdateMonth LE 0 THEN BEGIN
@@ -272,6 +284,16 @@ Print, SYSTIME(0)+'> - - - Updating : ' + string(k) + ' / 5  - - ' ;
   
  ySTR = STRCOMPRESS(string(toUpdateYear),/REMOVE_ALL)
  mSTR = STRCOMPRESS(string(toUpdateMonth),/REMOVE_ALL)
+ outputPath = rawDataPath+'/'+'20'+ySTR+STRMID('0'+mSTR, 1,2, /REVERSE_OFFSET)+'.img'
+ 
+ If k EQ 0 THEN BEGIN
+ IF FILE_TEST(outputPath) THEN BEGIN
+  print, 'Repository Doesnt need update ... process STOPED'
+  STOP
+ ENDIF
+ ENDIF
+ 
+ 
   oUrl = OBJ_NEW('IDLnetUrl')
   oUrl->SetProperty, CALLBACK_FUNCTION ='Url_Callback'
   oUrl->SetProperty, VERBOSE = 0
@@ -286,7 +308,7 @@ Print, SYSTIME(0)+'> - - - Updating : ' + string(k) + ' / 5  - - ' ;
   IF FILE_TEST(rawDataPath+'/ea'+mSTR+ySTR+'m.tif') THEN BEGIN
         
         NDVIimage = read_tiff(rawDataPath+'/ea'+mSTR+ySTR+'m.tif',SUB_RECT=SUBSET)
-        OPENW, W1, rawDataPath+'/'+'20'+ySTR+STRMID('0'+mSTR, 1,2, /REVERSE_OFFSET)+'.img', /GET_LUN
+        OPENW, W1, outputPath, /GET_LUN
         WRITEU, W1, NDVIimage
         FREE_LUN, W1
        
@@ -348,12 +370,30 @@ print, SYSTIME(0)+' > - - - Finished Stacking Temporal Layers - - - ';
 
         print, SYSTIME(0)+'> - - - Calculating IFTemporal Mean,STD,zNDVI and Diagnostics per pixel - - - ';
         
-        print,ZNORMBIL_8BIT(procDataPath+'/eMODIS_FEWS_Kenya.bil', SUBSET(2), SUBSET(3), N_ELEMENTS(fileList), 10, 1, 1, N_ELEMENTS(fileList), 0, 100, 200, 5, 102)
+        print,ZNORMBIL_8BIT(procDataPath+'/eMODIS_FEWS_Kenya.bil', SUBSET(2), SUBSET(3), N_ELEMENTS(fileList), 10, 1, 1, 396, 0, 100, 200, 5, 102)
         
+        ;;396
+
+ENDIF ; END OF DEBUG MODE
 
         print , SYSTIME(0)+'> - - - Begin zScore aggregation per division - - - '
         AGGREGATE_Z , 'eMODIS',WorkingFolder,adminFile,SUBSET(3),SUBSET(2),N_ELEMENTS(fileList),bandList
-        CUMULATE_Z_PER_DIVISION  ,csvDataPath , startYearData , nImagesYear , periodLag , startPeriodLong , numberPeriodsLong , startPeriodShort , numberPeriodsShort
+        
+        ;; First Cummulate for full seasones 
+        CUMULATE_Z_PER_DIVISION  ,csvDataPath , startYearData , nImagesYear , periodLag , startPeriodLong , numberPeriodsLong , startPeriodShort , numberPeriodsShort,''
+        ;; For the current seasone - cummulate only for what you've got
+        CUMULATE_Z_PER_DIVISION  ,csvDataPath , startYearData , nImagesYear , periodLag , startPeriodLong , max([curWIY/2-7,1]) , startPeriodShort , max([curWIY/2-28,1]),'_ADDITION'
+        zCum_Percentile , csvDataPath
+
+        print , SYSTIME(0)+'> - - - Copying CSV Files to MATLAB Folder - - - '
+        print,'cp -R ' + csvDataPath+'/zCumNDVI_aggregated_eMODIS.csv ' +'/opt/IBLI/dataProcessing/IBLIMatlab/z-scoring_first_CalibratedSeries/zCumNDVI_aggregated_eMODIS.csv'
+        spawn , 'cp -R ' + csvDataPath+'/zCumNDVI_aggregated_eMODIS.csv ' +'/opt/IBLI/dataProcessing/IBLIMatlab/z-scoring_first_CalibratedSeries/zCumNDVI_aggregated_eMODIS.csv'
+        
+        print , SYSTIME(0)+'> - - - Starting Premium Calculation using MATLAB  - - - '
+        spawn , '/usr/local/MATLAB/R2014a/bin/matlab -r "cd /opt/IBLI/dataProcessing/IBLIMatlab/ ; genLRLDrate ; exit"'
+        spawn , '/usr/local/MATLAB/R2014a/bin/matlab -r "cd /opt/IBLI/dataProcessing/IBLIMatlab/ ; genSRSDrate ; exit"'
+        print , SYSTIME(0)+'> - - - Completed Process : new Premium Values are now available '
+        STOP
 END
  
  

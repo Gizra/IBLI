@@ -125,13 +125,18 @@ function ibli_standard_install() {
   // Allow visitor account creation with administrative approval.
   variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
 
-  // Enable default permissions for system roles.
+  // Enable default permissions for anonymous users.
   $permissions = array(
     'access content',
-    // "View user profiles" is for viewing the task_assignee field.
-    'access user profiles',
-    filter_permission_name($filtered_html_format),
+    'access site-wide contact form',
   );
+
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, $permissions);
+
+  // Enable default permissions for system roles.
+  // "View user profiles" is for viewing the task_assignee field.
+  $permissions[] = 'access user profiles';
+  $permissions[] = filter_permission_name($filtered_html_format);
 
   // Add content permissions.
   foreach (array_keys(node_type_get_types()) as $content_type) {

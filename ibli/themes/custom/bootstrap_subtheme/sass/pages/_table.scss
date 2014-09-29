@@ -1,0 +1,51 @@
+table.table {
+
+  > thead {
+
+    > tr {
+
+      > th.toggle-hideable {
+        transform: rotate(75deg);
+        text-align: center;
+
+        a {
+          display: block;
+          margin-left: -75px;
+        }
+
+        &.active {
+          transform: none;
+          margin-top: 0;
+
+
+          a {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+
+  > tbody {
+
+    > tr {
+
+      > td {
+        padding: 8px 7px;
+
+        &.premium {
+          padding: 0;
+
+          span {
+            padding: 8px;
+            display: block;
+          }
+
+          span {
+            background-color: #FFFFED;
+          }
+        }
+      }
+    }
+  }
+}

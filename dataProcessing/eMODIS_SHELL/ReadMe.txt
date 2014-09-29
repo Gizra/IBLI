@@ -75,5 +75,20 @@ idl -vm=emodisshell.sav -args "config.txt"
 
 For any issue i available in gitHub or by email : mike_brv@hotmail.com
 
+- - - - - - - - - - - - - - - -  15.06.2014 - - - - - - - - - - - - - - - 
+
+How to run the shell ?
+
+
+1. enter the server (41.204.190.27)
+2. go to : "/opt/IBLI/dataProcessing/eMODIS_SHELL/"
+3. type : idl -rt=emodisshell.sav -args "config_0905.txt">log.txt
+
+the "config_0905.txt" is the config file and log.txt is the log file to which the output of the code will be written.
+
+4. the code should run now.
+
+
+
 
 

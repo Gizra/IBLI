@@ -1,3 +1,8 @@
+<div ng-app="ibliApp">
+  <div ng-controller="MainCtrl" period-list="false">
+    <leaflet center="center" markers="markers" defaults="defaults" tiles="tiles" geojson="geojson" controls="controls" maxbounds="maxbounds"></leaflet>
+  </div>
+</div>
 
 <div class="panel-display panel-ibli-homepage clearfix" <?php if (!empty($css_id)) { print 'id="' . $css_id . '"'; } ?>>
 
@@ -15,7 +20,9 @@
           <span class="title">Welcome to IBLI</span><span class="decoration"></span><span class="decoration"></span><span class="decoration"></span>
         </h2>
       </div>
-      <?php print $content['left']; ?>
+      <div class="homepage-welcome">
+        <?php print $content['left']; ?>
+      </div>
     </div>
 
     <div class="panel-panel panel-col-right col-xs-4 col-sm-4 col-md-4 col-lg-4">

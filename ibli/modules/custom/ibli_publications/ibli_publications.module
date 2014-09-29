@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the IBLI Publications feature.
+ */
+
+include_once 'ibli_publications.features.inc';

@@ -1,0 +1,57 @@
+WorkingFolder
+/var/www/data/
+SUBSET
+[ 5300  ,  7200   , 3400, 4300]
+map_info 
+ {Geographic Lat/Lon, 1.0000, 1.0000, 33.7889, 5.6265, 2.4130000000e-003, 2.4130000000e-003, WGS-84, units=Degrees}
+adminFile 
+ /opt/IBLI/dataProcessing/eMODIS_SHELL/divisionID.img
+  startYearData 
+ 2001
+  nImagesYear 
+ 36     
+  periodLag   
+  1   
+  startPeriodLong 
+ 7 
+  numberPeriodsLong 
+ 21
+  startPeriodShort 
+ 28 
+  numberPeriodsShort 
+ 15 
+Wed Jun 18 09:01:37 2014 - - - - Beginning Chain - - - - 
+Wed Jun 18 09:01:37 2014 - - - - Checking For Repository Fullnes - - - - 
+Wed Jun 18 09:01:37 2014 >  - - - - The Repository is up to date - - - - 
+Wed Jun 18 09:01:37 2014 > - - - - Updating Last Month New NDVI data - -
+Wed Jun 18 09:01:37 2014> - - - Copying CSV Files to MATLAB Folder - - - 
+cp -R /var/www/data/CSV/zCumNDVI_aggregated_eMODIS.csv /opt/IBLI/dataProcessing/IBLIMatlab/z-scoring_first_CalibratedSeries/zCumNDVI_aggregated_eMODIS.csv
+Wed Jun 18 09:01:37 2014> - - - Starting Premium Calculation using MATLAB  - - - 
+[?1h=
+                            < M A T L A B (R) >
+                  Copyright 1984-2014 The MathWorks, Inc.
+                    R2014a (8.3.0.532) 64-bit (glnxa64)
+                             February 11, 2014
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+
+i =
+
+     1
+
+[Warning: Matrix is singular, close to singular or badly scaled. Results may be
+inaccurate. RCOND = NaN.] 
+[> In sar_panel at 212
+  In genLRLDrate at 87] 
+[Warning: Matrix is singular, close to singular or badly scaled. Results may be
+inaccurate. RCOND = NaN.] 
+[> In sar_panel at 213
+  In genLRLDrate at 87] 
+>> 
+>> 
+>> 
+>> 
+>> 

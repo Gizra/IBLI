@@ -1,0 +1,336 @@
+WorkingFolder
+/var/www/data/
+SUBSET
+[ 5350  ,  7140   , 3350, 6150]
+map_info 
+ {Geographic Lat/Lon, 1.0000, 1.0000, 33.90955, 5.77128, 2.4130000000e-003, 2.4130000000e-003, WGS-84, units=Degrees}
+adminFile 
+ /opt/IBLI/dataProcessing/eMODIS_SHELL/newDIV/supportRasters/divisionID_K+E.img
+  startYearData 
+ 2001
+  nImagesYear 
+ 36     
+  periodLag   
+  1   
+  startPeriodLong 
+ 7 
+  numberPeriodsLong 
+ 21
+  startPeriodShort 
+ 28 
+  numberPeriodsShort 
+ 15 
+Thu Jun 19 15:48:11 2014 - - - - Beginning Chain - - - - 
+Thu Jun 19 15:48:11 2014 - - - - Checking For Repository Fullnes - - - - 
+Archive:  /var/www/data/RAW/east0104.zip
+  inflating: /var/www/data/RAW/ea1901.tfw  
+  inflating: /var/www/data/RAW/ea1901.tif  
+  inflating: /var/www/data/RAW/ea2001.tfw  
+  inflating: /var/www/data/RAW/ea2001.tif  
+  inflating: /var/www/data/RAW/ea2101.tfw  
+  inflating: /var/www/data/RAW/ea2101.tif  
+  inflating: /var/www/data/RAW/ea2201.tfw  
+  inflating: /var/www/data/RAW/ea2201.tif  
+  inflating: /var/www/data/RAW/ea2301.tfw  
+  inflating: /var/www/data/RAW/ea2301.tif  
+  inflating: /var/www/data/RAW/ea2401.tfw  
+  inflating: /var/www/data/RAW/ea2401.tif  
+Archive:  /var/www/data/RAW/east0105.zip
+  inflating: /var/www/data/RAW/ea2501.tfw  
+  inflating: /var/www/data/RAW/ea2501.tif  
+  inflating: /var/www/data/RAW/ea2601.tfw  
+  inflating: /var/www/data/RAW/ea2601.tif  
+  inflating: /var/www/data/RAW/ea2701.tfw  
+  inflating: /var/www/data/RAW/ea2701.tif  
+  inflating: /var/www/data/RAW/ea2801.tfw  
+  inflating: /var/www/data/RAW/ea2801.tif  
+  inflating: /var/www/data/RAW/ea2901.tfw  
+  inflating: /var/www/data/RAW/ea2901.tif  
+  inflating: /var/www/data/RAW/ea3001.tfw  
+  inflating: /var/www/data/RAW/ea3001.tif  
+Archive:  /var/www/data/RAW/east0106.zip
+  inflating: /var/www/data/RAW/ea3101.tfw  
+  inflating: /var/www/data/RAW/ea3101.tif  
+  inflating: /var/www/data/RAW/ea3201.tfw  
+  inflating: /var/www/data/RAW/ea3201.tif  
+  inflating: /var/www/data/RAW/ea3301.tfw  
+  inflating: /var/www/data/RAW/ea3301.tif  
+  inflating: /var/www/data/RAW/ea3401.tfw  
+  inflating: /var/www/data/RAW/ea3401.tif  
+  inflating: /var/www/data/RAW/ea3501.tfw  
+  inflating: /var/www/data/RAW/ea3501.tif  
+  inflating: /var/www/data/RAW/ea3601.tfw  
+  inflating: /var/www/data/RAW/ea3601.tif  
+Archive:  /var/www/data/RAW/east0107.zip
+  inflating: /var/www/data/RAW/ea3701.tfw  
+  inflating: /var/www/data/RAW/ea3701.tif  
+  inflating: /var/www/data/RAW/ea3801.tfw  
+  inflating: /var/www/data/RAW/ea3801.tif  
+  inflating: /var/www/data/RAW/ea3901.tfw  
+  inflating: /var/www/data/RAW/ea3901.tif  
+  inflating: /var/www/data/RAW/ea4001.tfw  
+  inflating: /var/www/data/RAW/ea4001.tif  
+  inflating: /var/www/data/RAW/ea4101.tfw  
+  inflating: /var/www/data/RAW/ea4101.tif  
+  inflating: /var/www/data/RAW/ea4201.tfw  
+  inflating: /var/www/data/RAW/ea4201.tif  
+Archive:  /var/www/data/RAW/east0108.zip
+  inflating: /var/www/data/RAW/ea4301.tfw  
+  inflating: /var/www/data/RAW/ea4301.tif  
+  inflating: /var/www/data/RAW/ea4401.tfw  
+  inflating: /var/www/data/RAW/ea4401.tif  
+  inflating: /var/www/data/RAW/ea4501.tfw  
+  inflating: /var/www/data/RAW/ea4501.tif  
+  inflating: /var/www/data/RAW/ea4601.tfw  
+  inflating: /var/www/data/RAW/ea4601.tif  
+  inflating: /var/www/data/RAW/ea4701.tfw  
+  inflating: /var/www/data/RAW/ea4701.tif  
+  inflating: /var/www/data/RAW/ea4801.tfw  
+  inflating: /var/www/data/RAW/ea4801.tif  
+Archive:  /var/www/data/RAW/east0109.zip
+  inflating: /var/www/data/RAW/ea4901.tfw  
+  inflating: /var/www/data/RAW/ea4901.tif  
+  inflating: /var/www/data/RAW/ea5001.tfw  
+  inflating: /var/www/data/RAW/ea5001.tif  
+  inflating: /var/www/data/RAW/ea5101.tfw  
+  inflating: /var/www/data/RAW/ea5101.tif  
+  inflating: /var/www/data/RAW/ea5201.tfw  
+  inflating: /var/www/data/RAW/ea5201.tif  
+  inflating: /var/www/data/RAW/ea5301.tfw  
+  inflating: /var/www/data/RAW/ea5301.tif  
+  inflating: /var/www/data/RAW/ea5401.tfw  
+  inflating: /var/www/data/RAW/ea5401.tif  
+Archive:  /var/www/data/RAW/east0110.zip
+  inflating: /var/www/data/RAW/ea5501.tfw  
+  inflating: /var/www/data/RAW/ea5501.tif  
+  inflating: /var/www/data/RAW/ea5601.tfw  
+  inflating: /var/www/data/RAW/ea5601.tif  
+  inflating: /var/www/data/RAW/ea5701.tfw  
+  inflating: /var/www/data/RAW/ea5701.tif  
+  inflating: /var/www/data/RAW/ea5801.tfw  
+  inflating: /var/www/data/RAW/ea5801.tif  
+  inflating: /var/www/data/RAW/ea5901.tfw  
+  inflating: /var/www/data/RAW/ea5901.tif  
+  inflating: /var/www/data/RAW/ea6001.tfw  
+  inflating: /var/www/data/RAW/ea6001.tif  
+Archive:  /var/www/data/RAW/east0111.zip
+  inflating: /var/www/data/RAW/ea6101.tfw  
+  inflating: /var/www/data/RAW/ea6101.tif  
+  inflating: /var/www/data/RAW/ea6201.tfw  
+  inflating: /var/www/data/RAW/ea6201.tif  
+  inflating: /var/www/data/RAW/ea6301.tfw  
+  inflating: /var/www/data/RAW/ea6301.tif  
+  inflating: /var/www/data/RAW/ea6401.tfw  
+  inflating: /var/www/data/RAW/ea6401.tif  
+  inflating: /var/www/data/RAW/ea6501.tfw  
+  inflating: /var/www/data/RAW/ea6501.tif  
+  inflating: /var/www/data/RAW/ea6601.tfw  
+  inflating: /var/www/data/RAW/ea6601.tif  
+Archive:  /var/www/data/RAW/east0112.zip
+  inflating: /var/www/data/RAW/ea6701.tfw  
+  inflating: /var/www/data/RAW/ea6701.tif  
+  inflating: /var/www/data/RAW/ea6801.tfw  
+  inflating: /var/www/data/RAW/ea6801.tif  
+  inflating: /var/www/data/RAW/ea6901.tfw  
+  inflating: /var/www/data/RAW/ea6901.tif  
+  inflating: /var/www/data/RAW/ea7001.tfw  
+  inflating: /var/www/data/RAW/ea7001.tif  
+  inflating: /var/www/data/RAW/ea7101.tfw  
+  inflating: /var/www/data/RAW/ea7101.tif  
+  inflating: /var/www/data/RAW/ea7201.tfw  
+  inflating: /var/www/data/RAW/ea7201.tif  
+Archive:  /var/www/data/RAW/east0201.zip
+  inflating: /var/www/data/RAW/ea102.tfw  
+  inflating: /var/www/data/RAW/ea102.tif  
+  inflating: /var/www/data/RAW/ea202.tfw  
+  inflating: /var/www/data/RAW/ea202.tif  
+  inflating: /var/www/data/RAW/ea302.tfw  
+  inflating: /var/www/data/RAW/ea302.tif  
+  inflating: /var/www/data/RAW/ea402.tfw  
+  inflating: /var/www/data/RAW/ea402.tif  
+  inflating: /var/www/data/RAW/ea502.tfw  
+  inflating: /var/www/data/RAW/ea502.tif  
+  inflating: /var/www/data/RAW/ea602.tfw  
+  inflating: /var/www/data/RAW/ea602.tif  
+Archive:  /var/www/data/RAW/east0202.zip
+  inflating: /var/www/data/RAW/ea1002.tfw  
+  inflating: /var/www/data/RAW/ea1002.tif  
+  inflating: /var/www/data/RAW/ea1102.tfw  
+  inflating: /var/www/data/RAW/ea1102.tif  
+  inflating: /var/www/data/RAW/ea1202.tfw  
+  inflating: /var/www/data/RAW/ea1202.tif  
+  inflating: /var/www/data/RAW/ea702.tfw  
+  inflating: /var/www/data/RAW/ea702.tif  
+  inflating: /var/www/data/RAW/ea802.tfw  
+  inflating: /var/www/data/RAW/ea802.tif  
+  inflating: /var/www/data/RAW/ea902.tfw  
+  inflating: /var/www/data/RAW/ea902.tif  
+Archive:  /var/www/data/RAW/east0203.zip
+  inflating: /var/www/data/RAW/ea1302.tfw  
+  inflating: /var/www/data/RAW/ea1302.tif  
+  inflating: /var/www/data/RAW/ea1402.tfw  
+  inflating: /var/www/data/RAW/ea1402.tif  
+  inflating: /var/www/data/RAW/ea1502.tfw  
+  inflating: /var/www/data/RAW/ea1502.tif  
+  inflating: /var/www/data/RAW/ea1602.tfw  
+  inflating: /var/www/data/RAW/ea1602.tif  
+  inflating: /var/www/data/RAW/ea1702.tfw  
+  inflating: /var/www/data/RAW/ea1702.tif  
+  inflating: /var/www/data/RAW/ea1802.tfw  
+  inflating: /var/www/data/RAW/ea1802.tif  
+Archive:  /var/www/data/RAW/east0204.zip
+  inflating: /var/www/data/RAW/ea1902.tfw  
+  inflating: /var/www/data/RAW/ea1902.tif  
+  inflating: /var/www/data/RAW/ea2002.tfw  
+  inflating: /var/www/data/RAW/ea2002.tif  
+  inflating: /var/www/data/RAW/ea2102.tfw  
+  inflating: /var/www/data/RAW/ea2102.tif  
+  inflating: /var/www/data/RAW/ea2202.tfw  
+  inflating: /var/www/data/RAW/ea2202.tif  
+  inflating: /var/www/data/RAW/ea2302.tfw  
+  inflating: /var/www/data/RAW/ea2302.tif  
+  inflating: /var/www/data/RAW/ea2402.tfw  
+  inflating: /var/www/data/RAW/ea2402.tif  
+Archive:  /var/www/data/RAW/east0205.zip
+  inflating: /var/www/data/RAW/ea2502.tfw  
+  inflating: /var/www/data/RAW/ea2502.tif  
+  inflating: /var/www/data/RAW/ea2602.tfw  
+  inflating: /var/www/data/RAW/ea2602.tif  
+  inflating: /var/www/data/RAW/ea2702.tfw  
+  inflating: /var/www/data/RAW/ea2702.tif  
+  inflating: /var/www/data/RAW/ea2802.tfw  
+  inflating: /var/www/data/RAW/ea2802.tif  
+  inflating: /var/www/data/RAW/ea2902.tfw  
+  inflating: /var/www/data/RAW/ea2902.tif  
+  inflating: /var/www/data/RAW/ea3002.tfw  
+  inflating: /var/www/data/RAW/ea3002.tif  
+Archive:  /var/www/data/RAW/east0206.zip
+  inflating: /var/www/data/RAW/ea3102.tfw  
+  inflating: /var/www/data/RAW/ea3102.tif  
+  inflating: /var/www/data/RAW/ea3202.tfw  
+  inflating: /var/www/data/RAW/ea3202.tif  
+  inflating: /var/www/data/RAW/ea3302.tfw  
+  inflating: /var/www/data/RAW/ea3302.tif  
+  inflating: /var/www/data/RAW/ea3402.tfw  
+  inflating: /var/www/data/RAW/ea3402.tif  
+  inflating: /var/www/data/RAW/ea3502.tfw  
+  inflating: /var/www/data/RAW/ea3502.tif  
+  inflating: /var/www/data/RAW/ea3602.tfw  
+  inflating: /var/www/data/RAW/ea3602.tif  
+Archive:  /var/www/data/RAW/east0207.zip
+  inflating: /var/www/data/RAW/ea3702.tfw  
+  inflating: /var/www/data/RAW/ea3702.tif  
+  inflating: /var/www/data/RAW/ea3802.tfw  
+  inflating: /var/www/data/RAW/ea3802.tif  
+  inflating: /var/www/data/RAW/ea3902.tfw  
+  inflating: /var/www/data/RAW/ea3902.tif  
+  inflating: /var/www/data/RAW/ea4002.tfw  
+  inflating: /var/www/data/RAW/ea4002.tif  
+  inflating: /var/www/data/RAW/ea4102.tfw  
+  inflating: /var/www/data/RAW/ea4102.tif  
+  inflating: /var/www/data/RAW/ea4202.tfw  
+  inflating: /var/www/data/RAW/ea4202.tif  
+Archive:  /var/www/data/RAW/east0208.zip
+  inflating: /var/www/data/RAW/ea4302.tfw  
+  inflating: /var/www/data/RAW/ea4302.tif  
+  inflating: /var/www/data/RAW/ea4402.tfw  
+  inflating: /var/www/data/RAW/ea4402.tif  
+  inflating: /var/www/data/RAW/ea4502.tfw  
+  inflating: /var/www/data/RAW/ea4502.tif  
+  inflating: /var/www/data/RAW/ea4602.tfw  
+  inflating: /var/www/data/RAW/ea4602.tif  
+  inflating: /var/www/data/RAW/ea4702.tfw  
+  inflating: /var/www/data/RAW/ea4702.tif  
+  inflating: /var/www/data/RAW/ea4802.tfw  
+  inflating: /var/www/data/RAW/ea4802.tif  
+Archive:  /var/www/data/RAW/east0209.zip
+  inflating: /var/www/data/RAW/ea4902.tfw  
+  inflating: /var/www/data/RAW/ea4902.tif  
+  inflating: /var/www/data/RAW/ea5002.tfw  
+  inflating: /var/www/data/RAW/ea5002.tif  
+  inflating: /var/www/data/RAW/ea5102.tfw  
+  inflating: /var/www/data/RAW/ea5102.tif  
+  inflating: /var/www/data/RAW/ea5202.tfw  
+  inflating: /var/www/data/RAW/ea5202.tif  
+  inflating: /var/www/data/RAW/ea5302.tfw  
+  inflating: /var/www/data/RAW/ea5302.tif  
+  inflating: /var/www/data/RAW/ea5402.tfw  
+  inflating: /var/www/data/RAW/ea5402.tif  
+Archive:  /var/www/data/RAW/east0210.zip
+  inflating: /var/www/data/RAW/ea5502.tfw  
+  inflating: /var/www/data/RAW/ea5502.tif  
+  inflating: /var/www/data/RAW/ea5602.tfw  
+  inflating: /var/www/data/RAW/ea5602.tif  
+  inflating: /var/www/data/RAW/ea5702.tfw  
+  inflating: /var/www/data/RAW/ea5702.tif  
+  inflating: /var/www/data/RAW/ea5802.tfw  
+  inflating: /var/www/data/RAW/ea5802.tif  
+  inflating: /var/www/data/RAW/ea5902.tfw  
+  inflating: /var/www/data/RAW/ea5902.tif  
+  inflating: /var/www/data/RAW/ea6002.tfw  
+  inflating: /var/www/data/RAW/ea6002.tif  
+Archive:  /var/www/data/RAW/east0211.zip
+  inflating: /var/www/data/RAW/ea6102.tfw  
+  inflating: /var/www/data/RAW/ea6102.tif  
+  inflating: /var/www/data/RAW/ea6202.tfw  
+  inflating: /var/www/data/RAW/ea6202.tif  
+  inflating: /var/www/data/RAW/ea6302.tfw  
+  inflating: /var/www/data/RAW/ea6302.tif  
+  inflating: /var/www/data/RAW/ea6402.tfw  
+  inflating: /var/www/data/RAW/ea6402.tif  
+  inflating: /var/www/data/RAW/ea6502.tfw  
+  inflating: /var/www/data/RAW/ea6502.tif  
+  inflating: /var/www/data/RAW/ea6602.tfw  
+  inflating: /var/www/data/RAW/ea6602.tif  
+Archive:  /var/www/data/RAW/east0212.zip
+  inflating: /var/www/data/RAW/ea6702.tfw  
+  inflating: /var/www/data/RAW/ea6702.tif  
+  inflating: /var/www/data/RAW/ea6802.tfw  
+  inflating: /var/www/data/RAW/ea6802.tif  
+  inflating: /var/www/data/RAW/ea6902.tfw  
+  inflating: /var/www/data/RAW/ea6902.tif  
+  inflating: /var/www/data/RAW/ea7002.tfw  
+  inflating: /var/www/data/RAW/ea7002.tif  
+  inflating: /var/www/data/RAW/ea7102.tfw  
+  inflating: /var/www/data/RAW/ea7102.tif  
+  inflating: /var/www/data/RAW/ea7202.tfw  
+  inflating: /var/www/data/RAW/ea7202.tif  
+Archive:  /var/www/data/RAW/east0301.zip
+  inflating: /var/www/data/RAW/ea103.tfw  
+  inflating: /var/www/data/RAW/ea103.tif  
+  inflating: /var/www/data/RAW/ea203.tfw  
+  inflating: /var/www/data/RAW/ea203.tif  
+  inflating: /var/www/data/RAW/ea303.tfw  
+  inflating: /var/www/data/RAW/ea303.tif  
+  inflating: /var/www/data/RAW/ea403.tfw  
+  inflating: /var/www/data/RAW/ea403.tif  
+  inflating: /var/www/data/RAW/ea503.tfw  
+  inflating: /var/www/data/RAW/ea503.tif  
+  inflating: /var/www/data/RAW/ea603.tfw  
+  inflating: /var/www/data/RAW/ea603.tif  
+Archive:  /var/www/data/RAW/east0302.zip
+  inflating: /var/www/data/RAW/ea1003.tfw  
+  inflating: /var/www/data/RAW/ea1003.tif  
+  inflating: /var/www/data/RAW/ea1103.tfw  
+  inflating: /var/www/data/RAW/ea1103.tif  
+  inflating: /var/www/data/RAW/ea1203.tfw  
+  inflating: /var/www/data/RAW/ea1203.tif  
+  inflating: /var/www/data/RAW/ea703.tfw  
+  inflating: /var/www/data/RAW/ea703.tif  
+  inflating: /var/www/data/RAW/ea803.tfw  
+  inflating: /var/www/data/RAW/ea803.tif  
+  inflating: /var/www/data/RAW/ea903.tfw  
+  inflating: /var/www/data/RAW/ea903.tif  
+Archive:  /var/www/data/RAW/east0303.zip
+  inflating: /var/www/data/RAW/ea1303.tfw  
+  inflating: /var/www/data/RAW/ea1303.tif  
+  inflating: /var/www/data/RAW/ea1403.tfw  
+  inflating: /var/www/data/RAW/ea1403.tif  
+  inflating: /var/www/data/RAW/ea1503.tfw  
+  inflating: /var/www/data/RAW/ea1503.tif  
+  inflating: /var/www/data/RAW/ea1603.tfw  
+  inflating: /var/www/data/RAW/ea1603.tif  
+  inflating: /var/www/data/RAW/ea1703.tfw  
+  inflating: /var/www/data/RAW/ea1703.tif  
+  inflating: /var/www/data/RAW/ea1803.tfw  
+  inflating: /var/www/data/RAW/ea1803.tif  

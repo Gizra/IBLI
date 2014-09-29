@@ -5811,7 +5811,8 @@ fieldset[disabled] .btn-amethyst.active {
           float: right;
           padding: 0 0 0 5px;
           height: 28px;
-          font-size: 10px; }
+          font-size: 10px;
+          min-width: 100px; }
     .angular-leaflet-map .leaflet-popup .calculated-sum {
       margin-top: 7px;
       font-size: 11px; }

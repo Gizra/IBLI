@@ -5331,30 +5331,22 @@ table.table > tbody > tr > td {
   .past-index-map > div #download_link {
     font-size: 22px; }
 
-.main-container .company,
-.main-container .logos {
+.main-container .company {
   text-align: center;
   padding: 25px 100px;
   text-transform: uppercase;
   border-bottom: 2px dashed #515151;
   margin: 0 100px; }
-  .main-container .company h1,
-  .main-container .logos h1 {
+  .main-container .company h1 {
     font-weight: bold; }
-  .main-container .company .address,
-  .main-container .logos .address {
-    font-size: 16px; }
-  .main-container .company .img-responsive,
-  .main-container .logos .img-responsive {
-    display: inline-block; }
-  .main-container .company.logos,
-  .main-container .logos.logos {
-    border-bottom: 0 none; }
-    .main-container .company.logos .img-wrapper,
-    .main-container .logos.logos .img-wrapper {
+    .main-container .company h1 .img-responsive {
+      display: inline-block;
       border: 1px solid #515151;
-      height: 200px;
-      line-height: 190px; }
+      padding: 5px; }
+  .main-container .company .address {
+    font-size: 16px; }
+  .main-container .company:last-child {
+    border-bottom: none; }
 
 /* ===== General ===== */
 html, body {

@@ -1,7 +1,6 @@
 .main-container {
 
-  .company,
-  .logos {
+  .company {
     text-align: center;
     padding: 25px 100px;
     text-transform: uppercase;
@@ -10,24 +9,20 @@
 
     h1 {
       font-weight: bold;
+
+      .img-responsive {
+        display: inline-block;
+        border: 1px solid #515151;
+        padding: 5px;
+      }
     }
 
     .address {
       font-size: 16px;
     }
 
-    .img-responsive {
-      display: inline-block;
-    }
-
-    &.logos {
-      border-bottom: 0 none;
-
-      .img-wrapper {
-        border: 1px solid #515151;
-        height: 200px;
-        line-height: 190px;
-      }
+    &:last-child {
+      border-bottom: none;
     }
   }
 }

@@ -16,7 +16,7 @@ function ibli_news_feeds_importer_default() {
   $feeds_importer->id = 'news';
   $feeds_importer->config = array(
     'name' => 'News',
-    'description' => 'Show 3 last news nods',
+    'description' => 'Import news feed from XML file',
     'fetcher' => array(
       'plugin_key' => 'FeedsHTTPFetcher',
       'config' => array(
@@ -30,11 +30,11 @@ function ibli_news_feeds_importer_default() {
       'plugin_key' => 'FeedsXPathParserXML',
       'config' => array(
         'sources' => array(
-          'xpathparser:0' => 'link',
-          'xpathparser:1' => 'title',
-          'xpathparser:2' => 'description',
-          'xpathparser:3' => 'link',
-          'xpathparser:4' => 'pubDate',
+          'xpathparser:0' => '//item//link',
+          'xpathparser:1' => '//item//title',
+          'xpathparser:2' => '//item//description',
+          'xpathparser:3' => '//item//link',
+          'xpathparser:4' => '//item//pubDate',
         ),
         'rawXML' => array(
           'xpathparser:0' => 0,
@@ -43,7 +43,7 @@ function ibli_news_feeds_importer_default() {
           'xpathparser:3' => 0,
           'xpathparser:4' => 0,
         ),
-        'context' => '//channel/item',
+        'context' => '//rss//channel',
         'exp' => array(
           'errors' => 0,
           'tidy' => 0,
@@ -99,7 +99,7 @@ function ibli_news_feeds_importer_default() {
         'bundle' => 'news',
       ),
     ),
-    'content_type' => 'news',
+    'content_type' => '',
     'update' => 0,
     'import_period' => '1800',
     'expire_period' => 3600,

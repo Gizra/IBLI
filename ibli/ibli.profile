@@ -55,9 +55,8 @@ function ibli_set_variables() {
   }
 }
 
-
 /**
- * Task callback; Import Ibli News Feeds.
+ * Task callback; Import IBLI News Feeds.
  */
 function ibli_import_feeds() {
   // Setting the feed and import him.

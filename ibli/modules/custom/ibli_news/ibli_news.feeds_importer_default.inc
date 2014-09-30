@@ -34,7 +34,7 @@ function ibli_news_feeds_importer_default() {
       'plugin_key' => 'FeedsNodeProcessor',
       'config' => array(
         'expire' => '-1',
-        'author' => '1',
+        'author' => '0',
         'authorize' => 1,
         'mappings' => array(
           0 => array(
@@ -63,7 +63,7 @@ function ibli_news_feeds_importer_default() {
             'unique' => FALSE,
           ),
         ),
-        'update_existing' => '0',
+        'update_existing' => '2',
         'input_format' => 'filtered_html',
         'skip_hash_check' => 0,
         'bundle' => 'news',

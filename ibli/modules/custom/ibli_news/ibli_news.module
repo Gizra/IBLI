@@ -22,27 +22,24 @@ function ibli_news_get_news() {
   }
 
   // Get news IDs.
-  $news = array_keys($result['node']);
-  $news_nodes = node_load_multiple($news);
+  $news_nodes = node_load_multiple(array_keys($result['node']));
 
-  $html = NULL;
+  $news_items = array();
   foreach ($news_nodes as $node) {
     $wrapper = entity_metadata_wrapper('node', $node);
 
-    $description = $wrapper->body->value->value();
-    if (strlen($description) >= 100) {
-      $description =  substr($description, 0, 100) . "...";
-    }
+    $description = strip_tags($wrapper->body->value->value());
+    $description = truncate_utf8($description, 100, TRUE, TRUE);
+
 
     $news_items[] = array(
       'link' => $wrapper->field_link->value(),
       'title' => $wrapper->label(),
-      'date' => date('D, d M Y G:i:s P', $wrapper->field_publish_date->value()),
+      'date' => format_interval($wrapper->field_publish_date->value(), 2),
       'description' => $description,
     );
-    $html .= theme('ibli_news', array('news_items' => $news_items));
   }
-  return $html;
+  return theme('ibli_news', array('news_items' => $news_items));
 }
 
 /**

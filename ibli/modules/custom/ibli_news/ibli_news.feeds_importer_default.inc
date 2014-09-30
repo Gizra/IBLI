@@ -16,7 +16,7 @@ function ibli_news_feeds_importer_default() {
   $feeds_importer->id = 'news';
   $feeds_importer->config = array(
     'name' => 'News',
-    'description' => 'Import news feed from XML file',
+    'description' => 'Import news feed from RSS.',
     'fetcher' => array(
       'plugin_key' => 'FeedsHTTPFetcher',
       'config' => array(
@@ -27,38 +27,8 @@ function ibli_news_feeds_importer_default() {
       ),
     ),
     'parser' => array(
-      'plugin_key' => 'FeedsXPathParserXML',
-      'config' => array(
-        'sources' => array(
-          'xpathparser:0' => '//item//link',
-          'xpathparser:1' => '//item//title',
-          'xpathparser:2' => '//item//description',
-          'xpathparser:3' => '//item//link',
-          'xpathparser:4' => '//item//pubDate',
-        ),
-        'rawXML' => array(
-          'xpathparser:0' => 0,
-          'xpathparser:1' => 0,
-          'xpathparser:2' => 0,
-          'xpathparser:3' => 0,
-          'xpathparser:4' => 0,
-        ),
-        'context' => '//rss//channel',
-        'exp' => array(
-          'errors' => 0,
-          'tidy' => 0,
-          'tidy_encoding' => 'UTF8',
-          'debug' => array(
-            'context' => 0,
-            'xpathparser:0' => 0,
-            'xpathparser:1' => 0,
-            'xpathparser:2' => 0,
-            'xpathparser:3' => 0,
-            'xpathparser:4' => 0,
-          ),
-        ),
-        'allow_override' => 1,
-      ),
+      'plugin_key' => 'FeedsSyndicationParser',
+      'config' => array(),
     ),
     'processor' => array(
       'plugin_key' => 'FeedsNodeProcessor',
@@ -68,33 +38,33 @@ function ibli_news_feeds_importer_default() {
         'authorize' => 1,
         'mappings' => array(
           0 => array(
-            'source' => 'xpathparser:0',
+            'source' => 'guid',
             'target' => 'guid',
             'unique' => 1,
           ),
           1 => array(
-            'source' => 'xpathparser:1',
+            'source' => 'title',
             'target' => 'title',
             'unique' => FALSE,
           ),
           2 => array(
-            'source' => 'xpathparser:2',
+            'source' => 'description',
             'target' => 'body',
             'unique' => FALSE,
           ),
           3 => array(
-            'source' => 'xpathparser:3',
+            'source' => 'url',
             'target' => 'field_link',
             'unique' => FALSE,
           ),
           4 => array(
-            'source' => 'xpathparser:4',
+            'source' => 'timestamp',
             'target' => 'field_publish_date:start',
             'unique' => FALSE,
           ),
         ),
         'update_existing' => '0',
-        'input_format' => 'plain_text',
+        'input_format' => 'filtered_html',
         'skip_hash_check' => 0,
         'bundle' => 'news',
       ),

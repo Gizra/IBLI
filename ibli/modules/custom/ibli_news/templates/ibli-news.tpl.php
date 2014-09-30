@@ -3,7 +3,7 @@
     <a class="pull-left" href="#">
     </a>
     <div class="media-body">
-      <a href="<?php print $item['link']; ?>>"><?php print $item['title']; ?>></a>
+      <a href="<?php print $item['link']; ?>" target="_blank"><?php print $item['title']; ?></a>
       <br />
       <span class="text-muted"><?php print $item['date']; ?></span>
       <p><?php print $item['description']; ?> </p>

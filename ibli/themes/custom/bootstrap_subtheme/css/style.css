@@ -5387,13 +5387,18 @@ header.navbar {
       color: #515151; }
 
 /* ===== Colorbox ==== */
-#colorbox, #colorbox div {
+#colorbox {
   overflow: visible !important;
-  border-radius: 0 !important; }
-  #colorbox #cboxWrapper, #colorbox div #cboxWrapper {
+  border-radius: 0 !important;
+  margin: 0;
+  background: white; }
+  #colorbox #cboxWrapper {
     border-radius: 0; }
-    #colorbox #cboxWrapper #cboxLoadedContent, #colorbox div #cboxWrapper #cboxLoadedContent {
+    #colorbox #cboxWrapper #cboxLoadedContent {
       height: 110% !important; }
+    #colorbox #cboxWrapper button#cboxClose {
+      top: -15px;
+      right: -14px; }
 
 /* ===== Footer ===== */
 footer {

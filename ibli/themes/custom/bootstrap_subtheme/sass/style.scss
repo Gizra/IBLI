@@ -82,6 +82,27 @@ header.navbar {
   }
 }
 
+/* ===== Colorbox ==== */
+#colorbox {
+  overflow: visible !important;
+  border-radius: 0 !important;
+  margin: 0;
+  background: white;
+
+  #cboxWrapper {
+    border-radius: 0;
+
+    #cboxLoadedContent {
+      height: 110% !important;
+    }
+
+    button#cboxClose {
+      top: -15px;
+      right: -14px;
+    }
+  }
+}
+
 /* ===== Footer ===== */
 
 footer {

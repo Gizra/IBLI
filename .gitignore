@@ -40,9 +40,9 @@ Thumbs.db
 # Garmentbox #
 #############
 ibli/modules/contrib
-ibli/1/modules
 ibli/themes/contrib
 ibli/libraries
+ibli/1
 www
 install.sh
 

@@ -12,7 +12,9 @@
         <div class="thumbnail">
           <a href="<?php print $page['video_url'] ?>" class="<?php print $page['colorbox_class'] ?>">
             <?php print $page['image']; ?>
-            <div class="play-video"></div>
+            <?php if($page['colorbox_class']) : ?>
+              <div class="play-video"></div>
+            <?php endif; ?>
             <div class="caption">
               <p><?php print $page['title']; ?></p>
             </div>

@@ -69,7 +69,7 @@ function ibli_news_feeds_importer_default() {
         'bundle' => 'news',
       ),
     ),
-    'content_type' => '',
+    'content_type' => 'news_feed_importer',
     'update' => 0,
     'import_period' => '1800',
     'expire_period' => 3600,

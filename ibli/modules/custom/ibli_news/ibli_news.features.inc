@@ -29,6 +29,14 @@ function ibli_news_node_info() {
       'title_label' => t('Title'),
       'help' => '',
     ),
+    'news_feed_importer' => array(
+      'name' => t('News feed importer'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
   );
   drupal_alter('node_info', $items);
   return $items;

@@ -7,6 +7,7 @@ dependencies[] = migrate_extras
 
 ; Migrate
 files[] = includes/ibli_migrate.migrate.entity.inc
+files[] = handlers/node/IbliNewsFeedImporterNodes.php
 files[] = handlers/node/IbliPageNodes.php
 files[] = handlers/node/IbliPageElementNodes.php
 files[] = handlers/node/IbliPublicationNodes.php

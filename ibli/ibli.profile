@@ -25,11 +25,6 @@ function ibli_install_tasks() {
     'display' => FALSE,
   );
 
-  $tasks['ibli_import_feeds'] = array(
-    'display_name' => st('Import Feeds'),
-    'display' => FALSE,
-  );
-
   return $tasks;
 }
 
@@ -53,24 +48,4 @@ function ibli_set_variables() {
   foreach ($variables as $key => $value) {
     variable_set($key, $value);
   }
-}
-
-/**
- * Task callback; Import IBLI News Feeds.
- */
-function ibli_import_feeds() {
-  // Setting the feed and import him.
-  $config = array(
-    'FeedsHTTPFetcher' => array(
-      'source' => 'http://livestockinsurance.wordpress.com/feed/',
-    ),
-  );
-  $source = feeds_source('news');
-  $source->addConfig($config);
-  $source->save();
-  $source->import();
-
-  // Add to schedule, make sure importer is scheduled, too.
-  $source->schedule();
-  $source->importer->schedule();
 }

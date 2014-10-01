@@ -46,11 +46,20 @@ function ibli_homepage_ibli_on_the_ground_content_type_render($subtype, $conf, $
       'style_name' => 'ibli_on_the_ground_thumbnail',
     );
 
+    // If there's no Youtube video with the node, Remove "colorbox" class and prevent default anchor behavior.
+    $video_url = 'javascript://';
+    $colorbox_load = '';
+    if ($wrapper->field_youtube_video->value()) {
+      $video_url = $wrapper->field_youtube_video->value() . '?width=640&height=360&iframe=true';
+      $colorbox_load = 'colorbox-load';
+    }
+
     $variables['nodequeue'][] = array(
       'title' => $node->title,
       'url' => url('node/' . $node->nid),
       'image' => theme('image_style', $image_vars),
-      'video_url' => $wrapper->field_youtube_video->value(),
+      'video_url' =>  $video_url,
+      'colorbox_class' => $colorbox_load,
     );
   }
 

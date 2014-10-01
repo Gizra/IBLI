@@ -10,6 +10,7 @@ class IbliPageNodes extends IbliMigration {
   public $csvColumns = array(
     array('field_image', 'Image'),
     array('show_in_ground', 'Show In IBLI On The Ground'),
+    array('field_youtube_video', 'Youtube video'),
   );
 
   public function __construct() {
@@ -21,6 +22,9 @@ class IbliPageNodes extends IbliMigration {
 
     // Map image.
     $this->addFieldMapping('field_image', 'field_image');
+
+    // Map video.
+    $this->addFieldMapping('field_youtube_video', 'field_youtube_video');
     $this
       ->addFieldMapping('field_image:file_replace')
       ->defaultValue(FILE_EXISTS_REPLACE);

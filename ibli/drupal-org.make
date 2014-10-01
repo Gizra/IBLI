@@ -11,6 +11,9 @@ projects[admin_views][version] = "1.3"
 projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.4"
 
+projects[colorbox][subdir] = "contrib"
+projects[colorbox][version] = "2.8"
+
 projects[countries][subdir] = "contrib"
 projects[countries][version] = "2.3"
 
@@ -128,6 +131,10 @@ projects[bootstrap][subdir] = "contrib"
 projects[bootstrap][version] = "3.0"
 
 ; Libraries
+
+libraries[colorbox][download][type] = "file"
+libraries[colorbox][type] = "libraries"
+libraries[colorbox][download][url] = "https://github.com/jackmoore/colorbox/archive/1.x.zip"
 
 libraries[tcpdf][type] = "libraries"
 libraries[tcpdf][download][type] = "get"

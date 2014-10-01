@@ -26,6 +26,7 @@ dependencies[] = rdf
 dependencies[] = admin_menu_toolbar
 dependencies[] = admin_views
 dependencies[] = ctools
+dependencies[] = colorbox
 dependencies[] = countries
 dependencies[] = date
 dependencies[] = date_popup

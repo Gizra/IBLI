@@ -10,8 +10,8 @@
     <?php foreach ($nodequeue as $page): ?>
       <div class="col-md-3 col-sm-6">
         <div class="thumbnail">
-          <a href="<?php print $page['url']; ?>"><?php print $page['image']; ?></a>
-          <div class="visit"><a href="<?php print $page['url']; ?>"><i class="fa fa-question-circle"></i> <?php print t('More details...'); ?></a></div>
+          <a href="<?php print $page['video_url'] ?>?width=500&height=500&iframe=true" class="colorbox-load"><?php print $page['image']; ?></a>
+          <div class="visit"><?php print t('Play video'); ?></div>
           <div class="caption">
             <p><a href="<?php print $page['url']; ?>"><?php print $page['title']; ?></a></p>
           </div>

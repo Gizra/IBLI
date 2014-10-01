@@ -50,6 +50,7 @@ function ibli_homepage_ibli_on_the_ground_content_type_render($subtype, $conf, $
       'title' => $node->title,
       'url' => url('node/' . $node->nid),
       'image' => theme('image_style', $image_vars),
+      'video_url' => $wrapper->field_youtube_video->value(),
     );
   }
 

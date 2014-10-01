@@ -31,11 +31,10 @@ function ibli_news_get_news() {
     $description = strip_tags($wrapper->body->value->value());
     $description = truncate_utf8($description, 100, TRUE, TRUE);
 
-
     $news_items[] = array(
       'link' => $wrapper->field_link->value(),
       'title' => $wrapper->label(),
-      'date' => format_interval($wrapper->field_publish_date->value(), 2),
+      'date' => format_date($wrapper->field_publish_date->value(), 'short'),
       'description' => $description,
     );
   }

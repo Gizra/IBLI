@@ -93,17 +93,17 @@ function ibli_general_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'menu-ibli-main-menu_about-us:<nolink>',
   );
-  // Exported menu link: menu-ibli-main-menu_get-ibli:node/20
-  $menu_links['menu-ibli-main-menu_get-ibli:node/20'] = array(
+  // Exported menu link: menu-ibli-main-menu_get-ibli:node/31
+  $menu_links['menu-ibli-main-menu_get-ibli:node/31'] = array(
     'menu_name' => 'menu-ibli-main-menu',
-    'link_path' => 'node/20',
+    'link_path' => 'node/31',
     'router_path' => 'node/%',
     'link_title' => 'Get IBLI',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'menu-ibli-main-menu_get-ibli:node/20',
+      'identifier' => 'menu-ibli-main-menu_get-ibli:node/31',
     ),
     'module' => 'menu',
     'hidden' => 0,
@@ -196,14 +196,17 @@ function ibli_general_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'menu-ibli-main-menu_information:<nolink>',
   );
-  // Exported menu link: menu-ibli-main-menu_what-is-ibli:node/5
-  $menu_links['menu-ibli-main-menu_what-is-ibli:node/5'] = array(
+  // Exported menu link: menu-ibli-main-menu_what-is-ibli:node/16
+  $menu_links['menu-ibli-main-menu_what-is-ibli:node/16'] = array(
     'menu_name' => 'menu-ibli-main-menu',
-    'link_path' => 'node/5',
+    'link_path' => 'node/16',
     'router_path' => 'node/%',
     'link_title' => 'What is IBLI?',
     'options' => array(
-      'identifier' => 'menu-ibli-main-menu_what-is-ibli:node/5',
+      'identifier' => 'menu-ibli-main-menu_what-is-ibli:node/16',
+      'attributes' => array(
+        'title' => '',
+      ),
     ),
     'module' => 'menu',
     'hidden' => 0,

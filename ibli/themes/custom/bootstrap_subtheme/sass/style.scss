@@ -82,6 +82,20 @@ header.navbar {
   }
 }
 
+/* ===== Colorbox ==== */
+#colorbox, #colorbox div {
+  overflow: visible !important;
+  border-radius: 0 !important;
+
+  #cboxWrapper {
+    border-radius: 0;
+
+    #cboxLoadedContent {
+      height: 110% !important;
+    }
+  }
+}
+
 /* ===== Footer ===== */
 
 footer {

@@ -38,6 +38,7 @@ features[page_manager_pages][] = contact_us
 features[page_manager_pages][] = partners
 features[page_manager_pages][] = past_index_maps
 features[variable][] = colorbox_load
+features[variable][] = colorbox_style
 features[variable][] = field_bundle_settings_node__page
 features[variable][] = language_content_type_page
 features[variable][] = mailchimp_api_key

@@ -5386,6 +5386,15 @@ header.navbar {
       background-color: #EEEEEE;
       color: #515151; }
 
+/* ===== Colorbox ==== */
+#colorbox, #colorbox div {
+  overflow: visible !important;
+  border-radius: 0 !important; }
+  #colorbox #cboxWrapper, #colorbox div #cboxWrapper {
+    border-radius: 0; }
+    #colorbox #cboxWrapper #cboxLoadedContent, #colorbox div #cboxWrapper #cboxLoadedContent {
+      height: 110% !important; }
+
 /* ===== Footer ===== */
 footer {
   margin-top: 60px;

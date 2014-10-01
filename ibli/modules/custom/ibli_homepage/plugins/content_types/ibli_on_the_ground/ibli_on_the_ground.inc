@@ -50,7 +50,7 @@ function ibli_homepage_ibli_on_the_ground_content_type_render($subtype, $conf, $
     $video_url = 'javascript://';
     $colorbox_load = '';
     if ($wrapper->field_youtube_video->value()) {
-      $video_url = $wrapper->field_youtube_video->value() . '?width=640&height=360&iframe=true';
+      $video_url = $wrapper->field_youtube_video->value() . '?width=640&height=380&iframe=true';
       $colorbox_load = 'colorbox-load';
     }
 

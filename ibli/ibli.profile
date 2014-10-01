@@ -19,6 +19,7 @@ function ibli_form_install_configure_form_alter(&$form, $form_state) {
  */
 function ibli_install_tasks() {
   $tasks = array();
+
   $tasks['ibli_set_variables'] = array(
     'display_name' => st('Set Variables'),
     'display' => FALSE,

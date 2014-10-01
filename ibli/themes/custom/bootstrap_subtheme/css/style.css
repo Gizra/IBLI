@@ -5471,6 +5471,11 @@ footer {
   margin-top: 0px;
   overflow: inherit; }
 
+#news {
+  overflow: auto;
+  width: 360px;
+  height: 360px; }
+
 /* ===== Buttons ===== */
 .btn {
   border-radius: 0; }

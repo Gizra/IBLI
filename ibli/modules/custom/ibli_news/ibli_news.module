@@ -1,0 +1,57 @@
+<?php
+/**
+ * @file
+ * Code for the IBLI News feature.
+ */
+
+include_once 'ibli_news.features.inc';
+
+
+function ibli_news_get_news() {
+
+  $query= new EntityFieldQuery();
+
+  // Get all the news
+  $result = $query->entityCondition('entity_type', 'node')
+                  ->entityCondition('bundle', 'news')
+                  ->propertyCondition('status', NODE_PUBLISHED)
+                  ->execute();
+
+  if(!isset($result['node'])) {
+    return;
+  }
+
+  // Get news IDs.
+  $news_nodes = node_load_multiple(array_keys($result['node']));
+
+  $news_items = array();
+  foreach ($news_nodes as $node) {
+    $wrapper = entity_metadata_wrapper('node', $node);
+
+    $description = strip_tags($wrapper->body->value->value());
+    $description = truncate_utf8($description, 100, TRUE, TRUE);
+
+    $news_items[] = array(
+      'link' => $wrapper->field_link->value(),
+      'title' => $wrapper->label(),
+      'date' => format_date($wrapper->field_publish_date->value(), 'short'),
+      'description' => $description,
+    );
+  }
+  return theme('ibli_news', array('news_items' => $news_items));
+}
+
+/**
+ * Delegated hook_theme().
+ */
+function ibli_news_theme() {
+  return array(
+    'ibli_news' =>   array(
+      'variables' => array(
+        'news_items' => NULL,
+      ),
+      'path' => drupal_get_path('module', 'ibli_news') .'/templates',
+      'template' => 'ibli-news',
+    ),
+  );
+}

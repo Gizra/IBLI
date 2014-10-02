@@ -6,8 +6,7 @@
 
 class IbliWebformNodes extends IbliMigration {
   protected $csvColumns = array(
-    array('id', 'ID'),
-    array('title', 'Title'),
+    array('confirmation', 'Confirmation'),
   );
 
   protected $entityType = 'node';
@@ -24,17 +23,17 @@ class IbliWebformNodes extends IbliMigration {
     $webform_record = array(
       'nid' => $entity->nid,
       'next_serial' => 1,
-      'confirmation' => '',
+      'confirmation' => $row->confirmation,
       'confirmation_format' => 'filtered_html',
       // Redirect to the quest's module after the webform submit.
-      'redirect_url' => 'node/' . $wrapper->field_module->getIdentifier(),
+      'redirect_url' => '<none>',
       'status' => 1,
       'block' => 0,
-      'allow_draft' => 1,
+      'allow_draft' => 0,
       'auto_save' => 0,
       'submit_notice' => 1,
-      'submit_text' => '',
-      'submit_limit' => 1,
+      'submit_text' => 'OK',
+      'submit_limit' => -1,
       'submit_interval' => -1,
       'total_submit_limit' => -1,
       'total_submit_interval' => -1,
@@ -56,7 +55,9 @@ class IbliWebformNodes extends IbliMigration {
     db_insert('webform')->fields($webform_record)->execute();
 
     // Set the webform roles.
-    $role = user_role_load_by_name('authenticated user');
-    db_insert('webform_roles')->fields(array('nid' => $entity->nid, 'rid' => $role->rid))->execute();
+    $role1 = user_role_load_by_name('anonymous user');
+    $role2 = user_role_load_by_name('authenticated user');
+    db_insert('webform_roles')->fields(array('nid' => $entity->nid, 'rid' => $role1->rid))->execute();
+    db_insert('webform_roles')->fields(array('nid' => $entity->nid, 'rid' => $role2->rid))->execute();
   }
 }

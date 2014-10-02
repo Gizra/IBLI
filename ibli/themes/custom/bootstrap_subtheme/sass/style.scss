@@ -208,20 +208,29 @@ footer {
   }
 }
 
-#partners {
+.page-partners {
 
-  .media:first-child {
-    margin: 0;
-  }
+  .row {
+    margin-bottom: 70px;
 
-  .media-object {
-    height: 88px;
-    width: 136px;
-  }
+    .media {
+      display: inline-block;
+      white-space: nowrap;
+      width: 100%;
+      text-align: center;
+      margin: 16px 0;
 
-  .media {
-    margin-top: 0px;
-    overflow: inherit;
+      .helper {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+      }
+
+      .media-object {
+        max-width: 220px;
+        vertical-align: middle;
+      }
+    }
   }
 }
 
@@ -618,12 +627,5 @@ fieldset[disabled] .btn-amethyst.active {
       margin-top: 7px;
       font-size: 11px;
     }
-  }
-}
-
-.panel-ibli-partners {
-
-  .row {
-    margin-bottom: 10px;
   }
 }

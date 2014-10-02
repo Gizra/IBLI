@@ -5471,14 +5471,21 @@ footer {
       -webkit-transition: color 0.1s;
       -moz-transition: color 0.1s; }
 
-#partners .media:first-child {
-  margin: 0; }
-#partners .media-object {
-  height: 88px;
-  width: 136px; }
-#partners .media {
-  margin-top: 0px;
-  overflow: inherit; }
+.page-partners .row {
+  margin-bottom: 70px; }
+  .page-partners .row .media {
+    display: inline-block;
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+    margin: 16px 0; }
+    .page-partners .row .media .helper {
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle; }
+    .page-partners .row .media .media-object {
+      max-width: 220px;
+      vertical-align: middle; }
 
 #news {
   overflow: auto;
@@ -5830,8 +5837,5 @@ fieldset[disabled] .btn-amethyst.active {
     .angular-leaflet-map .leaflet-popup .calculated-sum {
       margin-top: 7px;
       font-size: 11px; }
-
-.panel-ibli-partners .row {
-  margin-bottom: 10px; }
 
 /*# sourceMappingURL=style.css.map */

@@ -7,9 +7,12 @@ dependencies[] = migrate_extras
 
 ; Migrate
 files[] = includes/ibli_migrate.migrate.entity.inc
+files[] = includes/IbliBaseMigration.php
 files[] = includes/webform_component.inc
+
 files[] = handlers/node/IbliNewsFeedImporterNodes.php
 files[] = handlers/node/IbliPageNodes.php
 files[] = handlers/node/IbliPageElementNodes.php
 files[] = handlers/node/IbliPublicationNodes.php
+files[] = handlers/node/IbliWebformNodes.php
 files[] = handlers/webform_component/IbliSubscriptionWebform.php

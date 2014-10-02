@@ -23,6 +23,9 @@ class IbliSubscriptionWebform extends IbliMigration {
   public function __construct() {
     parent::__construct();
 
+    $this->dependencies = array(
+      'IbliWebformNodes',
+    );
 
     $this->description = t('Import @bundle nodes from CSV file.', array('@bundle' => $this->bundle));
 
@@ -50,6 +53,10 @@ class IbliSubscriptionWebform extends IbliMigration {
       'required',
     );
     $this->addSimpleMappings($field_names);
+
+    $this
+      ->addFieldMapping('nid', 'nid')
+      ->sourceMigration('IbliWebformNodes');
 
     $this
       ->addFieldMapping('pid')

@@ -15,6 +15,7 @@ function ibli_migrate_migrate_api() {
     'IbliPageNodes',
     'IbliPageElementNodes',
     'IbliPublicationNodes',
+    'IbliWebformNodes',
     'IbliSubscriptionWebform',
   );
 

@@ -211,18 +211,11 @@
         <div class="headline"><h3><?php print t('Subscribe'); ?></h3></div>
         <div class="content">
           <p><?php print t('Enter your email or mobile phone number to receive updates about IBLI'); ?></p>
-          <form class="form" role="form">
-            <div class="row">
-              <div class="col-sm-8">
-                <div class="input-group">
-                  <input type="email" class="form-control" id="subscribe-email" placeholder="Enter email">
-                  <span class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><?php print t('OK'); ?></button>
-                  </span>
-                </div>
-              </div>
+          <div class="row">
+            <div class="col-sm-8">
+              <?php print $subscription_box ?>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>

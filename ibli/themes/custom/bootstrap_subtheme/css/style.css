@@ -5418,9 +5418,14 @@ footer {
     footer .headline h3 {
       text-transform: uppercase;
       font-weight: 100; }
+  footer .form-control {
+    float: left;
+    width: 79%; }
   footer .btn-default {
     color: #fff;
-    background: none; }
+    background: none;
+    float: left;
+    height: 34px; }
     footer .btn-default:hover {
       color: #3E7A8C;
       background: #fff;

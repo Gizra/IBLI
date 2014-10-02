@@ -41,3 +41,36 @@ function ibli_general_form_contact_site_form_alter(&$form, &$form_state) {
     'class' => array('btn-green'),
   );
 }
+
+/**
+ * Implements hook_form_alter().
+ */
+function ibli_general_form_alter(&$form, &$form_state, $form_id)
+{
+  if(preg_match('/webform_client_form/i', $form_id))
+  {
+    $form['#validate'][]='ibli_general_form_validate';
+    return $form;
+  }
+}
+
+/**
+ * Custom validation to Email/phone submission.
+ */
+function ibli_general_form_validate($form, &$form_state) {
+  $field_value = $form_state['values']['submitted']['email_phone'];
+  // Checking if the submitted value is an International phone number.
+  if(preg_match('[^\+[0-9]]', trim($field_value))) {
+    // Then we let the form pass and don't do anything.
+    return TRUE;
+  }
+  // Checking if the submitted value is an email address.
+  elseif (valid_email_address($field_value)) {
+    // Then we have to send an email to the user.
+    //webform_submission_send_mail();
+    return TRUE;
+  }
+  else {
+    form_set_error('email_phone', t('Email address is invalid/ Phone number should contain country code.(+000)'));
+  }
+}

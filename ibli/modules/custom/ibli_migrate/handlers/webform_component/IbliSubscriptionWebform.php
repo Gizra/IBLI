@@ -5,7 +5,7 @@
  * IbliSubscriptionWebform
  */
 
-class IbliSubscriptionWebform extends IbliMigration {
+class IbliSubscriptionWebform extends IbliBaseMigration {
   protected $csvColumns = array(
     array('id', 'ID'),
     array('nid', 'Subscription'),
@@ -72,13 +72,12 @@ class IbliSubscriptionWebform extends IbliMigration {
   public function prepareRow($row) {
     parent::prepareRow($row);
 
-    $row->form_key = $row->nid . '_' . $row->id . '_' . $row->type;
+    $row->form_key = 'email_phone';
   }
 
   public function prepare($entity, $row) {
     // Default component settings.
     $settings = array(
-      'wrapper_classes' => 'input-group',
       'css_classes' => 'form-control',
     );
 

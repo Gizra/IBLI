@@ -5841,6 +5841,14 @@ fieldset[disabled] .btn-amethyst.active {
           min-width: 100px; }
     .angular-leaflet-map .leaflet-popup .calculated-sum {
       margin-top: 7px;
-      font-size: 11px; }
+      font-size: 11px;
+      text-align: right; }
+      .angular-leaflet-map .leaflet-popup .calculated-sum .insurer {
+        margin: 9px 5px 0 0;
+        float: left;
+      }
+      .angular-leaflet-map .leaflet-popup .calculated-sum .sum {
+        font-size:30px;
+      }
 
 /*# sourceMappingURL=style.css.map */

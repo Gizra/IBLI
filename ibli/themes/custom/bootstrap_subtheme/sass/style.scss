@@ -1,9 +1,11 @@
-@import "_mixins.scss";
+@import "mixins.scss";
 @import "../../../../libraries/bootstrap_sass/vendor/assets/stylesheets/bootstrap.scss";
-@import "pages/_homepage.scss";
-@import "pages/_node.scss";
-@import "pages/_publications.scss";
-@import "pages/_table.scss";
+@import "pages/homepage.scss";
+@import "pages/node.scss";
+@import "pages/publications.scss";
+@import "pages/table.scss";
+@import "pages/past_index_map";
+@import "pages/get_ibli";
 
 /* ===== General ===== */
 
@@ -76,6 +78,27 @@ header.navbar {
           }
         }
       }
+    }
+  }
+}
+
+/* ===== Colorbox ==== */
+#colorbox {
+  overflow: visible !important;
+  border-radius: 0 !important;
+  margin: 0;
+  background: white;
+
+  #cboxWrapper {
+    border-radius: 0;
+
+    #cboxLoadedContent {
+      height: 110% !important;
+    }
+
+    button#cboxClose {
+      top: -15px;
+      right: -14px;
     }
   }
 }
@@ -185,21 +208,36 @@ footer {
   }
 }
 
-#partners {
+.page-partners {
 
-  .media:first-child {
-    margin: 0;
-  }
+  .row {
+    margin-bottom: 70px;
 
-  .media-object {
-    height: 88px;
-    width: 136px;
-  }
+    .media {
+      display: inline-block;
+      white-space: nowrap;
+      width: 100%;
+      text-align: center;
+      margin: 16px 0;
 
-  .media {
-    margin-top: 0px;
-    overflow: inherit;
+      .helper {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+      }
+
+      .media-object {
+        max-width: 220px;
+        vertical-align: middle;
+      }
+    }
   }
+}
+
+#news {
+  overflow: auto;
+  width: 360px;
+  height: 360px;
 }
 
 /* ===== Buttons ===== */
@@ -489,4 +527,115 @@ fieldset[disabled] .btn-amethyst.active {
 
 .top-zero {
   margin-top: 0;
+}
+
+/* ===== Map ===== */
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+.angular-leaflet-map {
+  width: 1140px;
+  height: 600px;
+  margin: auto;
+
+  .leaflet-top,
+  .leaflet-bottom {
+    z-index: 999;
+
+    .legend {
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      background: rgba(255,255,255, 0.9);
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      padding: 6px 8px;
+      line-height: 18px;
+      color: #555;
+      min-width: 130px;
+
+      i {
+        width: 16px;
+        height: 16px;
+        float: left;
+        margin-right: 8px;
+        opacity: 0.7;
+      }
+    }
+
+    hover-info.leaflet-control {
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      background: rgba(255,255,255, 0.9);
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      padding: 6px 8px;
+      line-height: 18px;
+      color: #555;
+      min-width: 130px;
+    }
+  }
+
+  /* Hiding the marker icon from the map in the homepage. */
+  img.leaflet-marker-icon.leaflet-zoom-animated.leaflet-clickable,
+  img.leaflet-marker-shadow.leaflet-zoom-animated {
+    display: none !important;
+  }
+
+  .leaflet-popup {
+    bottom: 0 !important;
+
+    .calculator-form {
+      margin-top: 4px;
+
+      .input-group {
+        width: 100%;
+
+        .input-group-addon {
+          border: 0 none;
+          background: none;
+          padding: 20px 17px;
+
+          &.cow {
+            background: url("../images/cow.png") 0 0 no-repeat;
+          }
+
+          &.camel {
+            background: url("../images/camel.png") 0 0 no-repeat;
+          }
+
+          &.goat {
+            background: url("../images/goat.png") 0 0 no-repeat;
+          }
+        }
+
+        input {
+          width: 100%;
+          margin-bottom: 5px;
+          float: right;
+          padding: 0 0 0 5px;
+          height: 28px;
+          font-size: 10px;
+          min-width: 100px;
+        }
+      }
+    }
+
+    .calculated-sum {
+      margin-top: 7px;
+      font-size: 11px;
+      text-align: right;
+
+      .insurer {
+        margin: 9px 5px 0 0;
+        float: left;
+      }
+
+      .sum {
+        font-size:30px;
+      }
+    }
+  }
 }

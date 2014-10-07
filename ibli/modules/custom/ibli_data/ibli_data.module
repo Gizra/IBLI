@@ -5,6 +5,118 @@
  */
 
 /**
+ * Implements hook_menu().
+ */
+function ibli_data_menu() {
+  $items = array();
+
+  // Saves a PDF file of the current map.
+  $items['pim/save-pdf'] = array(
+    'title' => 'Create PDF from map',
+    'access arguments' => array('access content'),
+    'page callback' => 'ibli_data_save_pdf',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Saves the image of the map as a PDF file.
+ *
+ * @return string.
+ * PDF file path.
+ */
+function ibli_data_save_pdf() {
+  if(!ibli_data_save_pdf_access()) {
+    return FALSE;
+  }
+  $map = $_POST['map'];
+  $title = $_POST['period'];
+  $map_width = $_POST['map_width'];
+  $map_height = $_POST['map_height'];
+  $path = file_default_scheme() . '://pdf';
+  file_prepare_directory($path, FILE_CREATE_DIRECTORY);
+
+  // Include the main TCPDF library.
+  $tcpdf_library = libraries_get_path('tcpdf') . '/tcpdf.php';
+  include $tcpdf_library;
+
+  // Determine page layout according to the map dimensions.
+  $pagelayout = array($map_width + 40, $map_height + 80);
+
+  $pdf = new TCPDF('L', 'px', $pagelayout, TRUE, 'UTF-8', FALSE);
+
+  // Add title to the document.
+  $year = substr($title, 0, 4);
+  $season = preg_match('/S/i', $title) ? 'Short season' : 'Long season';
+  $pdf_title = 'Vegetation index for ' . $year . ', ' . $season;
+  $pdf->SetTitle($pdf_title);
+
+  // Set default header data.
+  $pdf->SetHeaderData('', 0, $pdf_title);
+
+  // Set header and footer fonts.
+  $pdf->setHeaderFont(Array('courier', '', 24));
+
+  // Set margins.
+  $pdf->SetMargins(20, 40, 20);
+  $pdf->SetHeaderMargin(10);
+
+  // Set auto page breaks.
+  $pdf->SetAutoPageBreak(FALSE, 0);
+
+  // Set image scale factor.
+  $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+  // Add a page.
+  $pdf->AddPage();
+
+  // Get the data and save the PNG image.
+  list($type, $data) = explode(';', $map);
+  list(, $data)      = explode(',', $data);
+  $data = base64_decode($data);
+
+  $png_image = $path . DIRECTORY_SEPARATOR . $title . '.png';
+
+  // Save image temporarily, Will be deleted after saved to PDF.
+  $fp = fopen ($png_image, 'wr');
+  fwrite($fp, $data);
+  fclose($fp);
+
+  // Adding the image to the PDF.
+  $pdf->Image($png_image, 20, 60, $map_width, $map_height, 'PNG', '', 'top-left', FALSE);
+
+  // Adding timestamp to the name of the file, So we don't override another user's file.
+  $date = new DateTime();
+
+  $pdf_path = $path . DIRECTORY_SEPARATOR . $title . '-' . $date->getTimestamp() . '.pdf';
+
+  // Save the PDF file.
+  $pdf->Output($pdf_path , 'F');
+
+  // Delete the saved image.
+  drupal_unlink($png_image);
+
+  // Prepare path to send to browser.
+  $pdf_path = str_replace('public://','sites/default/files/', $pdf_path);
+
+  // Send the PDF file path to the ng-app.
+  print $pdf_path;
+}
+
+/**
+ * Checks access to the PDF save
+ * And that all necessary params are posted.
+ *
+ * @return bool.
+ */
+function ibli_data_save_pdf_access() {
+  return user_access('access content') && !empty($_POST['map']) && !empty($_POST['period']) && !empty($_POST['map_width']) && !empty($_POST['map_height']);
+}
+
+/**
  * Implements hook_cron().
  *
  * Stores a list of files locally, to avoid loading data from remote sources.
@@ -29,4 +141,51 @@ function ibli_data_cron() {
     curl_close($ch);
     fclose($fp);
   }
+
+  // Create a json file for Premium rates "15rate".
+  _ibli_data_prepare_rates();
+}
+
+/**
+ * Creates a json file containing all the Premium rates for all the provinces.
+ */
+function _ibli_data_prepare_rates() {
+  $csv = array_map('str_getcsv', file('public://data/IBLI_unit_premium_rates.csv'));
+
+  // Hide redundant columns.
+  foreach ($csv as &$row) {
+    unset($row[0]);
+    unset($row[1]);
+    unset($row[2]);
+    unset($row[3]);
+    unset($row[4]);
+    // Fix indices.
+    $row = array_values($row);
+  }
+
+  $raw_header = array_slice($csv, 0, 2);
+  $header = $raw_header[0];
+  $rows = array_slice($csv, 2);
+
+  $periods = array_filter($header);
+  unset($periods[0]);
+
+  $rates = array();
+  $id = array_search("IBLI_ID", $header);
+  foreach ($rows as $row) {
+    $rates[$row[$id]] = array();
+    foreach ($periods as $rate_10_column => $period) {
+      // The first column is "10rate" column, so we take the next column.
+      $rates[$row[$id]][$period]  = $row[$rate_10_column + 1];
+    }
+  }
+
+  $jsonRates = json_encode($rates);
+
+  $path = file_default_scheme() . '://data';
+  file_prepare_directory($path, FILE_CREATE_DIRECTORY);
+
+  $fp = fopen ($path . '/rates.json', 'w');
+  fwrite($fp, $jsonRates);
+  fclose($fp);
 }

@@ -191,6 +191,7 @@ Year=Year-2000
 Print ,  SYSTIME(0)+' - - - - Beginning Chain - - - - ' ;
 Print ,  SYSTIME(0)+' - - - - Checking For Repository Fullnes - - - - ' ;
 
+
 ;; Step 0.1 : Go from beginning till date and make sure repository is complete - - ;;
  FOR Y=1,Year DO BEGIN 
  maxM=12
@@ -209,6 +210,7 @@ Print ,  SYSTIME(0)+' - - - - Checking For Repository Fullnes - - - - ' ;
   
   IF (TokFile NE 1) THEN BEGIN ; If you see that one of the files in a month is missing download and extract the entire month bulk zip 
 
+  
     ; - - - Download Zip File 
   oUrl = OBJ_NEW('IDLnetUrl')
   oUrl->SetProperty, CALLBACK_FUNCTION ='Url_Callback'
@@ -269,6 +271,8 @@ curWIY = 6*Month-4+2*((Day-3)/10-1); // WIY = Week In Year
 
 Print, SYSTIME(0)+'> - - - Updating : ' + string(k) + ' / 5  - - ' ;
  
+ 
+ 
  toUpdateMonth = curWIY-2*k
  IF toUpdateMonth LE 0 THEN BEGIN
     toUpdateMonth= toUpdateMonth+72
@@ -280,6 +284,16 @@ Print, SYSTIME(0)+'> - - - Updating : ' + string(k) + ' / 5  - - ' ;
   
  ySTR = STRCOMPRESS(string(toUpdateYear),/REMOVE_ALL)
  mSTR = STRCOMPRESS(string(toUpdateMonth),/REMOVE_ALL)
+ outputPath = rawDataPath+'/'+'20'+ySTR+STRMID('0'+mSTR, 1,2, /REVERSE_OFFSET)+'.img'
+ 
+ If k EQ 0 THEN BEGIN
+ IF FILE_TEST(outputPath) THEN BEGIN
+  print, 'Repository Doesnt need update ... process STOPED'
+  STOP
+ ENDIF
+ ENDIF
+ 
+ 
   oUrl = OBJ_NEW('IDLnetUrl')
   oUrl->SetProperty, CALLBACK_FUNCTION ='Url_Callback'
   oUrl->SetProperty, VERBOSE = 0
@@ -294,7 +308,7 @@ Print, SYSTIME(0)+'> - - - Updating : ' + string(k) + ' / 5  - - ' ;
   IF FILE_TEST(rawDataPath+'/ea'+mSTR+ySTR+'m.tif') THEN BEGIN
         
         NDVIimage = read_tiff(rawDataPath+'/ea'+mSTR+ySTR+'m.tif',SUB_RECT=SUBSET)
-        OPENW, W1, rawDataPath+'/'+'20'+ySTR+STRMID('0'+mSTR, 1,2, /REVERSE_OFFSET)+'.img', /GET_LUN
+        OPENW, W1, outputPath, /GET_LUN
         WRITEU, W1, NDVIimage
         FREE_LUN, W1
        
@@ -368,7 +382,7 @@ ENDIF ; END OF DEBUG MODE
         ;; First Cummulate for full seasones 
         CUMULATE_Z_PER_DIVISION  ,csvDataPath , startYearData , nImagesYear , periodLag , startPeriodLong , numberPeriodsLong , startPeriodShort , numberPeriodsShort,''
         ;; For the current seasone - cummulate only for what you've got
-        ;;CUMULATE_Z_PER_DIVISION  ,csvDataPath , startYearData , nImagesYear , periodLag , startPeriodLong , max([curWIY/2-7,1]) , startPeriodShort , max([curWIY/2-28,1]),'_ADDITION'
+        CUMULATE_Z_PER_DIVISION  ,csvDataPath , startYearData , nImagesYear , periodLag , startPeriodLong , max([curWIY/2-7,1]) , startPeriodShort , max([curWIY/2-28,1]),'_ADDITION'
         zCum_Percentile , csvDataPath
 
         print , SYSTIME(0)+'> - - - Copying CSV Files to MATLAB Folder - - - '

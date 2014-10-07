@@ -1,20 +1,51 @@
-table th.toggle-hideable {
-  transform: rotate(75deg);
-  transition: 0.5s;
-  text-align: center;
+table.table {
 
-  a {
-    display: block;
-    margin-left: -75px;
+  > thead {
+
+    > tr {
+
+      > th.toggle-hideable {
+        transform: rotate(75deg);
+        text-align: center;
+
+        a {
+          display: block;
+          margin-left: -75px;
+        }
+
+        &.active {
+          transform: none;
+          margin-top: 0;
+
+
+          a {
+            margin-left: 0;
+          }
+        }
+      }
+    }
   }
 
-  &.active {
-    transform: none;
-    margin-top: 0;
+  > tbody {
 
+    > tr {
 
-    a {
-      margin-left: 0;
+      > td {
+        padding: 8px 7px;
+
+        &.premium {
+          padding: 0;
+
+          span {
+            padding: 8px;
+            display: block;
+          }
+
+          span {
+            background-color: #FFFFED;
+          }
+        }
+      }
     }
   }
 }

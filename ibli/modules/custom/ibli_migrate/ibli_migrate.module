@@ -11,6 +11,7 @@
 function ibli_migrate_migrate_api() {
   $class_names = array(
     // Nodes.
+    'IbliNewsFeedImporterNodes',
     'IbliPageNodes',
     'IbliPageElementNodes',
     'IbliPublicationNodes',

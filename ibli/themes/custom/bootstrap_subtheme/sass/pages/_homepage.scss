@@ -311,31 +311,24 @@ body.front {
   .thumbnail {
     position: relative;
   }
-  .thumbnail .visit {
+  .thumbnail .play-video {
     position: absolute;
+    background: url("../images/play_video.png") 0 0 no-repeat;
     opacity: 0;
-    width: 100%;
+    width: 45px;
+    height: 45px;
     text-align: center;
-    top: 80px;
+    top: 57px;
+    left: 42%;
     transition: all 0.3s;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
   }
-  .thumbnail:hover .visit {
+  .thumbnail:hover .play-video {
     opacity: 1;
     transition: all 0.3s;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
-  }
-  .thumbnail .visit a {
-    color: #FFF;
-    text-transform: uppercase;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 10px 20px;
-  }
-  .thumbnail .visit a:hover {
-    color: #FFF;
-    text-decoration: none;
   }
 
 
@@ -381,56 +374,6 @@ body.front {
       font-size: 18px;
     }
   }
-
-  /* ===== Map ===== */
-
-  .browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
-  }
-
-  .angular-leaflet-map {
-    width: 1140px;
-    height: 600px;
-    margin: auto;
-
-    .leaflet-top,
-    .leaflet-bottom {
-      z-index: 999;
-
-      .legend {
-        font: 14px/16px Arial, Helvetica, sans-serif;
-        background: rgba(255,255,255, 0.9);
-        box-shadow: 0 0 15px rgba(0,0,0,0.2);
-        border-radius: 5px;
-        padding: 6px 8px;
-        line-height: 18px;
-        color: #555;
-        min-width: 130px;
-
-        i {
-          width: 16px;
-          height: 16px;
-          float: left;
-          margin-right: 8px;
-          opacity: 0.7;
-        }
-      }
-
-      hover-info.leaflet-control {
-        font: 14px/16px Arial, Helvetica, sans-serif;
-        background: rgba(255,255,255, 0.9);
-        box-shadow: 0 0 15px rgba(0,0,0,0.2);
-        border-radius: 5px;
-        padding: 6px 8px;
-        line-height: 18px;
-        color: #555;
-        min-width: 130px;
-      }
-    }
-  }
 }
 
 /* ===== Homepage Welcome =====*/
@@ -440,5 +383,26 @@ body.front {
   iframe {
     margin-left: 5px;
     float: right;
+  }
+}
+
+/* ======== Payout box on map =======*/
+
+#payouts-sales-periods {
+  background: #FCFCFC;
+  padding: 10px;
+  opacity: 0.90;
+
+  p {
+    font-weight: bold;
+    margin: 0;
+
+    span {
+      font-weight: normal;
+    }
+
+    &.sales {
+      margin-top: 10px;
+    }
   }
 }

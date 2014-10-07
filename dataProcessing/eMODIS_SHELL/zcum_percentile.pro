@@ -6,12 +6,13 @@ PRO zCum_Percentile , dataPath
 
 ; - - Define Input Output
 inFile=dataPath+'/zCumNDVI_aggregated_eMODIS.csv'
+inFile_add=dataPath+'/zCumNDVI_aggregated_eMODIS_ADDITION.csv'
 outFile=dataPath+'/zCumNDVI_Percentile.csv'
 
 
 ; - - Read Relevant CSV files.
 csvdata =  READ_ASCII(inFile,data_start=2,delimiter=',',HEADER=firstLine)
-
+csvdata_addition = READ_ASCII(inFile_add,data_start=2,delimiter=',',HEADER=firstLine_add)
 
 
 ; - - Combine Channel lists
@@ -23,11 +24,23 @@ bndList = bndListCor
 ENDIF
 
 
+bndList2 = strsplit(firstLine_add(1,*),',',/EXTRACT)
+bndList2 = bndList2(2:N_ELEMENTS(bndList2)-1) ; get band list
+bndListCor = strreplace(bndList2,'.00','') ; remove '.00' side effect from the band time if exists
+IF (N_ELEMENTS(bndListCor) GT 1) THEN BEGIN
+bndList2 = bndListCor
+ENDIF
+
+
+
+
+
+
 nDivisions = size(csvdata.FIELD01)
 nTimes = nDivisions(1)
+nDivisions = size(csvdata_addition.FIELD01)
+nTimes_add = nDivisions(1) 
 nDivisions = nDivisions(2)
- 
-
 
 
 IF FILE_TEST(outFile) eq 1 THEN FILE_DELETE, outFile
@@ -35,20 +48,24 @@ IF FILE_TEST(outFile) eq 1 THEN FILE_DELETE, outFile
 
 OPENW, W, outFile, /GET_LUN, width=2000                        ; set width to get all data in one row
 PRINTF,W, ';percentile of cummulated Z-scored aggregated data for eMODIS of Kenyan divisions'
-PRINTF,W, 'adminID, pixels,'+STRJOIN(bndList,',')
+PRINTF,W, 'IBLI_UNIT_ID ,'+STRJOIN(bndList2,',')
 
 
 FOR i=0, nDivisions-1, 1L DO BEGIN
   coData = csvdata.FIELD01(*,i)
-  first2Columns = coData(0:1)
+  first2Columns = coData(0)
+  coData2 = csvdata_addition.FIELD01(*,i)
   zCumNDVIdata = coData(2:nTimes-1)
+  zCumNDVIdata2 = [coData(2:nTimes-1),coData2(nTimes:nTimes_add-1)]
   precentiles = percentiles(zCumNDVIdata,value=[0.15,0.30,0.45,0.65])
-  zCumNDVIdataPrecentile = zCumNDVIdata
-  zCumNDVIdataPrecentile(where(zCumNDVIdata LT precentiles(0)))=1
+  zCumNDVIdataPrecentile = zCumNDVIdata2
+  zCumNDVIdataPrecentile(where(zCumNDVIdata2 LT precentiles(0)))=1
   for j=1,n_elements(precentiles)-1 do begin
-  zCumNDVIdataPrecentile(where((zCumNDVIdata LT precentiles(j))and(zCumNDVIdata GE precentiles(j-1))))=j+1
+  zCumNDVIdataPrecentile(where((zCumNDVIdata2 LT precentiles(j))and(zCumNDVIdata2 GE precentiles(j-1))))=j+1
   endfor
-  zCumNDVIdataPrecentile(where(zCumNDVIdata GE precentiles(n_elements(precentiles)-1)))=n_elements(precentiles)+1
+  zCumNDVIdataPrecentile(where(zCumNDVIdata2 GE precentiles(n_elements(precentiles)-1)))=n_elements(precentiles)+1
+  zCumNDVIdataPrecentile = UINT(zCumNDVIdataPrecentile)
+  first2Columns = UINT(first2Columns)
   writeline = STRJOIN(STRCOMPRESS(first2Columns,/REMOVE_ALL),',')+','+STRJOIN(STRCOMPRESS(zCumNDVIdataPrecentile,/REMOVE_ALL),',')
   
   printf, W, writeline

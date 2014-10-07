@@ -23,7 +23,6 @@ function ibli_page_premium_rates_content_type_render($subtype, $conf, $args, $co
   // Hide redundant columns.
   foreach ($csv as &$row) {
     unset($row[3]);
-    unset($row[4]);
     unset($row[5]);
     // Fix indices.
     $row = array_values($row);
@@ -38,16 +37,17 @@ function ibli_page_premium_rates_content_type_render($subtype, $conf, $args, $co
   $columns = count($raw_header);
   for ($index = 0; $index < $columns; $index++) {
     $colspan = 1;
-    $title = $raw_header[$index];
+    // Convert the title IBLI_UNIT to UNIT.
+    $title = preg_match('/IBLI/i', $raw_header[$index]) ? substr($raw_header[$index], -4) : $raw_header[$index];
     // Convert empty titles into a colspan of the last non-empty title.
     while ($index < $columns - 1 && !$raw_header[$index + 1]) {
       $colspan++;
       $index++;
     }
 
-    if ($index > 2) {
+    if ($index > 3) {
       // The first rate is on the 4th cell. Each block has 5 rates.
-      $group_id = floor(($index - 3) / 5) + 1;
+      $group_id = floor(($index - 5) / 5) + 1;
 
       $active = $group_id == 1 ? 'active' : '';
       $header[] = array(
@@ -61,20 +61,30 @@ function ibli_page_premium_rates_content_type_render($subtype, $conf, $args, $co
     }
   }
 
+  // Premium class
+  $premium_class = '';
+
   // Add a unique "colgroup" class to the rates sections.
   foreach ($rows as &$row) {
     foreach ($row as $index => &$cell) {
       $cell = ucwords(strtolower($cell));
 
       // The first rate is on the 4th cell.
-      if ($index < 3) {
+      if ($index < 4) {
         continue;
       }
 
       // Each block has 5 rates.
-      $group_id = floor(($index - 3) / 5) + 1;
+      $group_id = floor(($index - 4) / 5) + 1;
       $class = $group_id > 1 ? 'hidden' : '';
-      $cell = array('data' => "<span class=\"$class\">$cell</span>", 'class' => array('hideable', 'group-' . $group_id));
+      // Convert the title "rate" to "trigger".
+      $cell = preg_match('/rate/i', $cell) ? str_replace('rate', ' trigger', $cell) : $cell;
+      // Convert value of the cell to %.
+      $cell = is_numeric($cell) ? $cell = number_format($cell*100, 2, '.', '').'%' : $cell;
+      // Add "premium" class to the 15rate column.
+      $premium_class = ($index - 4) % 5 == 1 ? 'premium' : '';
+
+      $cell = array('data' => "<span class=\"$class\">$cell</span>", 'class' => array('hideable', 'group-' . $group_id, $premium_class));
     }
   }
 

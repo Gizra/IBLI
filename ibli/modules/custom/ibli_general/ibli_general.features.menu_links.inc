@@ -93,21 +93,21 @@ function ibli_general_menu_default_menu_links() {
     'customized' => 1,
     'parent_identifier' => 'menu-ibli-main-menu_about-us:<nolink>',
   );
-  // Exported menu link: menu-ibli-main-menu_get-ibli:<front>
-  $menu_links['menu-ibli-main-menu_get-ibli:<front>'] = array(
+  // Exported menu link: menu-ibli-main-menu_get-ibli:node/31
+  $menu_links['menu-ibli-main-menu_get-ibli:node/31'] = array(
     'menu_name' => 'menu-ibli-main-menu',
-    'link_path' => '<front>',
-    'router_path' => '',
+    'link_path' => 'node/31',
+    'router_path' => 'node/%',
     'link_title' => 'Get IBLI',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'menu-ibli-main-menu_get-ibli:<front>',
+      'identifier' => 'menu-ibli-main-menu_get-ibli:node/31',
     ),
     'module' => 'menu',
     'hidden' => 0,
-    'external' => 1,
+    'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
     'weight' => -49,
@@ -133,42 +133,42 @@ function ibli_general_menu_default_menu_links() {
     'weight' => -48,
     'customized' => 1,
   );
-  // Exported menu link: menu-ibli-main-menu_partners:<front>
-  $menu_links['menu-ibli-main-menu_partners:<front>'] = array(
+  // Exported menu link: menu-ibli-main-menu_partners:partners
+  $menu_links['menu-ibli-main-menu_partners:partners'] = array(
     'menu_name' => 'menu-ibli-main-menu',
-    'link_path' => '<front>',
-    'router_path' => '',
+    'link_path' => 'partners',
+    'router_path' => 'partners',
     'link_title' => 'Partners',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'menu-ibli-main-menu_partners:<front>',
+      'identifier' => 'menu-ibli-main-menu_partners:partners',
     ),
     'module' => 'menu',
     'hidden' => 0,
-    'external' => 1,
+    'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
     'weight' => -50,
     'customized' => 1,
     'parent_identifier' => 'menu-ibli-main-menu_about-us:<nolink>',
   );
-  // Exported menu link: menu-ibli-main-menu_past-index-maps:<front>
-  $menu_links['menu-ibli-main-menu_past-index-maps:<front>'] = array(
+  // Exported menu link: menu-ibli-main-menu_past-index-maps:pim
+  $menu_links['menu-ibli-main-menu_past-index-maps:pim'] = array(
     'menu_name' => 'menu-ibli-main-menu',
-    'link_path' => '<front>',
-    'router_path' => '',
+    'link_path' => 'pim',
+    'router_path' => 'pim',
     'link_title' => 'Past Index Maps',
     'options' => array(
       'attributes' => array(
         'title' => '',
       ),
-      'identifier' => 'menu-ibli-main-menu_past-index-maps:<front>',
+      'identifier' => 'menu-ibli-main-menu_past-index-maps:pim',
     ),
     'module' => 'menu',
     'hidden' => 0,
-    'external' => 1,
+    'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
     'weight' => -49,
@@ -179,7 +179,7 @@ function ibli_general_menu_default_menu_links() {
   $menu_links['menu-ibli-main-menu_premiums-table:premium-rates'] = array(
     'menu_name' => 'menu-ibli-main-menu',
     'link_path' => 'premium-rates',
-    'router_path' => '',
+    'router_path' => 'premium-rates',
     'link_title' => 'Premiums Table',
     'options' => array(
       'attributes' => array(
@@ -189,21 +189,24 @@ function ibli_general_menu_default_menu_links() {
     ),
     'module' => 'menu',
     'hidden' => 0,
-    'external' => 1,
+    'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
     'weight' => -48,
     'customized' => 1,
     'parent_identifier' => 'menu-ibli-main-menu_information:<nolink>',
   );
-  // Exported menu link: menu-ibli-main-menu_what-is-ibli:node/5
-  $menu_links['menu-ibli-main-menu_what-is-ibli:node/5'] = array(
+  // Exported menu link: menu-ibli-main-menu_what-is-ibli:node/16
+  $menu_links['menu-ibli-main-menu_what-is-ibli:node/16'] = array(
     'menu_name' => 'menu-ibli-main-menu',
-    'link_path' => 'node/5',
+    'link_path' => 'node/16',
     'router_path' => 'node/%',
     'link_title' => 'What is IBLI?',
     'options' => array(
-      'identifier' => 'menu-ibli-main-menu_what-is-ibli:node/5',
+      'identifier' => 'menu-ibli-main-menu_what-is-ibli:node/16',
+      'attributes' => array(
+        'title' => '',
+      ),
     ),
     'module' => 'menu',
     'hidden' => 0,

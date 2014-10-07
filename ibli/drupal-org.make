@@ -51,6 +51,9 @@ projects[field_collection][version] = "1.0-beta5"
 projects[flag][subdir] = "contrib"
 projects[flag][version] = "2.2"
 
+projects[google_analytics][subdir] = "contrib"
+projects[google_analytics][version] = "2.0"
+
 projects[inline_entity_form][subdir] = "contrib"
 projects[inline_entity_form][version] = "1.5"
 

@@ -25,6 +25,8 @@ function ibli_install() {
   variable_set('menu_main_links_source', 'menu-ibli-main-menu');
   // Remove the user menu from the navigation bar.
   variable_set('menu_secondary_links_source', FALSE);
+  // Google Analytics Tracking ID.
+  //variable_set('web_proberty_id', 'UA-55497584-1');
 
   // Set required date API variables.
   // See date_api_status().

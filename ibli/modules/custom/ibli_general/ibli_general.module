@@ -67,10 +67,27 @@ function ibli_general_form_validate($form, &$form_state) {
   // Checking if the submitted value is an email address.
   elseif (valid_email_address($field_value)) {
     // Then we have to send an email to the user.
-    //webform_submission_send_mail();
+    drupal_mail('ibli_general', 'webform_client_form', $field_value, '', array('from' => 'ibliwebsystem@cgiar.org'));
+
     return TRUE;
   }
   else {
     form_set_error('email_phone', t('Email address is invalid/ Phone number should contain country code.(+000)'));
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function ibli_general_mail($key, &$message, $params) {
+  // The key allows for a module to define multiple mails. This
+  // key needs to be the same as the first parameter in drupal_mail() above
+  if($key ==  'webform_client_form') {
+    $message['from'] = $params['from'];
+    $message['subject'] = t('IBLI subscription');
+    // Each element of the body array becomes a new line in the email.
+    // Adding an empty string to the body array adds an extra line in the email
+    $message['body'][] = '';
+    $message['body'][] = t('Thank you for signing up for updates about Index-Based Livestock Insurance (IBLI). We will be in touch soon.');
   }
 }

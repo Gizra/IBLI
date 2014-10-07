@@ -626,6 +626,16 @@ fieldset[disabled] .btn-amethyst.active {
     .calculated-sum {
       margin-top: 7px;
       font-size: 11px;
+      text-align: right;
+
+      .insurer {
+        margin: 9px 5px 0 0;
+        float: left;
+      }
+
+      .sum {
+        font-size:30px;
+      }
     }
   }
 }

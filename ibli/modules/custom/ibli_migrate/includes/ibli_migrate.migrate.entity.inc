@@ -5,7 +5,7 @@
  * Populate distribution with some content.
  */
 
-abstract class IbliMigration extends Migration {
+abstract class IbliMigration extends IbliBaseMigration {
 
   public function __construct() {
     parent::__construct();

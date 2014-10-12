@@ -21,7 +21,7 @@ projects[date][subdir] = "contrib"
 projects[date][version] = "2.8"
 
 projects[devel][subdir] = "contrib"
-projects[devel][version] = "1.4"
+projects[devel][version] = "1.5"
 
 projects[entity][subdir] = "contrib"
 projects[entity][version] = "1.5"
@@ -50,6 +50,9 @@ projects[field_collection][version] = "1.0-beta5"
 
 projects[flag][subdir] = "contrib"
 projects[flag][version] = "2.2"
+
+projects[google_analytics][subdir] = "contrib"
+projects[google_analytics][version] = "2.0"
 
 projects[inline_entity_form][subdir] = "contrib"
 projects[inline_entity_form][version] = "1.5"
@@ -121,6 +124,9 @@ projects[views][version] = "3.8"
 
 projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.2"
+
+projects[webform][subdir] = "contrib"
+projects[webform][version] = "4.1"
 
 projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][version] = "2.2"

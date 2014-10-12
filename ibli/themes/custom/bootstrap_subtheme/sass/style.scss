@@ -131,14 +131,21 @@ footer {
     }
   }
 
+  .form-control {
+    float: left;
+    width: 79%;
+  }
+
   .btn-default {
     color: #fff;
     background: none;
+    float: left;
+    height: 34px;
 
     &:hover {
+      float: left;
       color: #3E7A8C;
       background: #fff;
-      font-weight: bold;
       border: 1px solid #fff;
     }
   }

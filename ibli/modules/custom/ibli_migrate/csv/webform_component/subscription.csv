@@ -1,0 +1,2 @@
+ID,Subscription,Type,Label,Weight,Value,Required,Settings
+1,1,textfield,Email address or phone.,1,,1,

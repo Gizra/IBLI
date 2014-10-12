@@ -72,7 +72,7 @@ function ibli_general_form_validate($form, &$form_state) {
     return TRUE;
   }
   else {
-    form_set_error('email_phone', t('Email address is invalid/ Phone number should contain country code.(+000)'));
+    form_set_error('email_phone', t('Email address is invalid / Phone number should contain country code.(+000)'));
   }
 }
 
@@ -84,6 +84,9 @@ function ibli_general_mail($key, &$message, $params) {
   // key needs to be the same as the first parameter in drupal_mail() above
   if($key ==  'webform_client_form') {
     $message['from'] = $params['from'];
+    $message['headers']['From'] = $params['from'];
+    $message['headers']['Sender'] = $params['from'];
+    $message['headers']['Return-Path'] = $params['from'];
     $message['subject'] = t('IBLI subscription');
     // Each element of the body array becomes a new line in the email.
     // Adding an empty string to the body array adds an extra line in the email

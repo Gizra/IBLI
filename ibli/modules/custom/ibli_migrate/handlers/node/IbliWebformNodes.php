@@ -30,7 +30,7 @@ class IbliWebformNodes extends IbliMigration {
       'auto_save' => 0,
       'submit_notice' => 1,
       'submit_text' => 'OK',
-      'submit_limit' => 1,
+      'submit_limit' => -1,
       'submit_interval' => -1,
       'total_submit_limit' => -1,
       'total_submit_interval' => -1,

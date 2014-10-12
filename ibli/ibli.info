@@ -65,6 +65,7 @@ dependencies[] = token
 dependencies[] = views
 dependencies[] = views_bulk_operations
 dependencies[] = views_content
+dependencies[] = webform
 dependencies[] = wysiwyg
 
 ; Custom modules

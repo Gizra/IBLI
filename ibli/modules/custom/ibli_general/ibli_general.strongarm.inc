@@ -114,6 +114,13 @@ function ibli_general_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'node_submitted_webform';
+  $strongarm->value = 0;
+  $export['node_submitted_webform'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'site_name';
   $strongarm->value = 'IBLI';
   $export['site_name'] = $strongarm;
@@ -147,6 +154,13 @@ function ibli_general_strongarm() {
     'favicon_upload' => '',
   );
   $export['theme_settings'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'webform_default_from_address';
+  $strongarm->value = 'ibliwebsystem@cgiar.org';
+  $export['webform_default_from_address'] = $strongarm;
 
   return $export;
 }

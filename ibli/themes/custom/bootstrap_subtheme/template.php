@@ -32,6 +32,21 @@ function bootstrap_subtheme_preprocess_page(&$variables) {
   $render = node_view($node);
   $variables['contact_address'] = render($render);
 
+  // Get contact address for footer.
+  $query = new EntityFieldQuery();
+  $results = $query
+    ->entityCondition('entity_type', 'node')
+    ->propertyCondition('type','webform')
+    ->execute();
+
+  if (empty($results['node'])) {
+    return;
+  }
+
+  $node = node_load(key($results['node']));
+  $render = node_view($node);
+  $variables['subscription_box'] = render($render);
+
   // Add a awesome icons css
   drupal_add_css('http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', array('type' => 'external'));
 

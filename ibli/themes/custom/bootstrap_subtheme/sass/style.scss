@@ -143,9 +143,9 @@ footer {
     height: 34px;
 
     &:hover {
+      float: left;
       color: #3E7A8C;
       background: #fff;
-      font-weight: bold;
       border: 1px solid #fff;
     }
   }

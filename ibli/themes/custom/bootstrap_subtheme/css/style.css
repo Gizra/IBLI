@@ -5427,9 +5427,9 @@ footer {
     float: left;
     height: 34px; }
     footer .btn-default:hover {
+      float: left;
       color: #3E7A8C;
       background: #fff;
-      font-weight: bold;
       border: 1px solid #fff; }
   footer .form-control {
     border: white; }
@@ -5845,10 +5845,8 @@ fieldset[disabled] .btn-amethyst.active {
       text-align: right; }
       .angular-leaflet-map .leaflet-popup .calculated-sum .insurer {
         margin: 9px 5px 0 0;
-        float: left;
-      }
+        float: left; }
       .angular-leaflet-map .leaflet-popup .calculated-sum .sum {
-        font-size:30px;
-      }
+        font-size: 30px; }
 
 /*# sourceMappingURL=style.css.map */

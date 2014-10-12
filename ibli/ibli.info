@@ -43,6 +43,7 @@ dependencies[] = feeds_xpathparser
 dependencies[] = feeds_tamper
 dependencies[] = feeds_tamper_ui
 dependencies[] = flag
+dependencies[] = googleanalytics
 dependencies[] = inline_entity_form
 dependencies[] = jquery_update
 dependencies[] = job_scheduler

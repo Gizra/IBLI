@@ -88,6 +88,46 @@ function ibli_data_save_pdf() {
   // Adding the image to the PDF.
   $pdf->Image($png_image, 20, 60, $map_width, $map_height, 'PNG', '', 'top-left', FALSE);
 
+  // Add a page without a header.
+  $pdf->setPrintHeader(false);
+  $pdf->AddPage();
+
+  $pdf->SetFont('helvetica', '', 14);
+
+  // Add color explaining table.
+
+  $tbl = <<<EOD
+  <table cellspacing="0" cellpadding="10" border="1">
+    <tr>
+      <th style="width:15%; text-align: center; font-weight: bold;">Color</th>
+      <th style="width:85%; text-align: center; font-weight: bold;">Meaning</th>
+    </tr>
+    <tr>
+      <td style="color:#00AA00; text-align: center; vertical-align: middle;">Green</td>
+      <td>Good forage availability that represents above 65 percentile over a long period. This is above normal and stable forage condition.</td>
+    </tr>
+    <tr>
+      <td style="color:#DDDD00; text-align: center; vertical-align: middle;">Yellow</td>
+      <td>Forage condition falls between 45 to 65 percentiles. The forage situation is positive but consistently worsening.</td>
+    </tr>
+    <tr>
+      <td style="color:#BB5500; text-align: center; vertical-align: middle;">Orange</td>
+      <td>Forage condition is between 30 and 45 percentile. The division in question is under considerable stress but not yet serious.</td>
+    </tr>
+    <tr>
+      <td style="color:#AA0000; text-align: center; vertical-align: middle;">Red</td>
+      <td>Forage condition is between 15 – 30 percentiles. Drought situation is serious but not yet classified as severe. Indemnity payout will not be triggered.</td>
+    </tr>
+    <tr>
+      <td style="color:#000000; text-align: center; vertical-align: middle;">Black</td>
+      <td>Severe drought condition. Forage condition represents worst 15 percentile. Indemnity payout will be triggered if conditions persist throughout the season up to the potential payout period.</td>
+    </tr>
+  </table>
+EOD;
+
+  $pdf->writeHTML($tbl, true, false, false, false, '');
+
+
   // Adding timestamp to the name of the file, So we don't override another user's file.
   $date = new DateTime();
 

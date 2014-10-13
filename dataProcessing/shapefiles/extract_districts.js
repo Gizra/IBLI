@@ -1,5 +1,4 @@
 var fs = require('fs')
-var t = require('turf')
 
 var UNITS_FILE = './IBLIunits/KenyaEthiopia_IBLIunits_July2014.geojson';
 
